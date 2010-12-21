@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="IsSharedSizeScopeDemo.MultipleGrids"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="200" d:DesignWidth="300" Background="White">
+
+    <!-- When IsSharedSizeScope is true, any grids below this scope will share row and column sizes for the same groups -->
+    <StackPanel x:Name="Container" Margin="5" Grid.IsSharedSizeScope="False">
+
+        <StackPanel Orientation="Horizontal">
+            <Button x:Name="SetFalse" Content="Shared Size = False" Click="SetFalse_Click" />
+            <Button x:Name="SetTrue" Content="Shared Size = True" Click="SetTrue_Click" Margin="10 0 0 0" />
+        </StackPanel>
+            
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 10 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition SharedSizeGroup="Row1" />
+                <RowDefinition SharedSizeGroup="Row2" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="Column1" />
+                <ColumnDefinition SharedSizeGroup="Column2" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Background="LightGray" Text="Short 1" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Background="LightBlue" Text="Short 2" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Background="LightYellow" Text="Small Font 1" FontSize="8" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Background="Bisque" Text="Small Font 2" FontSize="8" />
+        </Grid>
+
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0 10 0 0">
+            <Grid.RowDefinitions>
+                <RowDefinition SharedSizeGroup="Row1" />
+                <RowDefinition SharedSizeGroup="Row2" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition SharedSizeGroup="Column1" />
+                <ColumnDefinition SharedSizeGroup="Column2" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Row="0" Grid.Column="0" Background="LightGray" Text="This is long sentence 1" />
+            <TextBlock Grid.Row="1" Grid.Column="0" Background="LightBlue" Text="Long Sentence 2" />
+            <TextBlock Grid.Row="0" Grid.Column="1" Background="LightYellow" Text="Big Font 1" FontSize="20" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Background="Bisque" Text="Big Font 2" FontSize="24" />
+        </Grid>
+    </StackPanel>
+</UserControl>

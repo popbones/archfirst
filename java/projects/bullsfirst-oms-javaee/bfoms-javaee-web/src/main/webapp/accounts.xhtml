@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<ui:composition
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    template="/WEB-INF/templates/template-2column.xhtml">
+
+    <!-- Turn off global messages and title -->
+    <ui:param name="showGlobalMessages" value="false"/>
+    <ui:param name="hideTitle" value="true"/>
+
+    <ui:define name="title">
+        #{messages['bf.accounts']}
+    </ui:define>
+
+</ui:composition>

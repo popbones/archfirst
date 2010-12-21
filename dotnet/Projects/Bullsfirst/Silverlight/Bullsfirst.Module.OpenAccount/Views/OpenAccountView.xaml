@@ -1,0 +1,95 @@
+﻿<UserControl
+    x:Class="Bullsfirst.Module.OpenAccount.Views.OpenAccountView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
+    mc:Ignorable="d"
+    d:DesignHeight="500" d:DesignWidth="950">
+
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="740" />
+            <ColumnDefinition Width="200" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" Margin="20">
+
+            <TextBlock Text="Open an Account" Style="{StaticResource Header1}" />
+
+            <TextBlock Margin="0 6 0 6" TextWrapping="Wrap" FontSize="13">
+                All fields below are required. Please don't enter real personal information,
+                since this is just a demo!
+            </TextBlock>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="First Name" Target="{Binding ElementName=firstName}" Style="{StaticResource WideFormLabel}" />
+                <TextBox x:Name="firstName" Style="{StaticResource WideFormTextBox}"
+                    Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    <i:Interaction.Behaviors>
+                        <helpers:TextChangedBahvior />
+                    </i:Interaction.Behaviors>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="Last Name" Target="{Binding ElementName=lastName}" Style="{StaticResource WideFormLabel}" />
+                <TextBox x:Name="lastName" Style="{StaticResource WideFormTextBox}"
+                    Text="{Binding Path=LastName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    <i:Interaction.Behaviors>
+                        <helpers:TextChangedBahvior />
+                    </i:Interaction.Behaviors>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="Username" Target="{Binding ElementName=username}" Style="{StaticResource WideFormLabel}" />
+                <TextBox x:Name="username" Style="{StaticResource WideFormTextBox}"
+                    Text="{Binding Path=Username, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    <i:Interaction.Behaviors>
+                        <helpers:TextChangedBahvior />
+                    </i:Interaction.Behaviors>
+                </TextBox>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="Password" Target="{Binding ElementName=password}" Style="{StaticResource WideFormLabel}" />
+                <PasswordBox x:Name="password" Style="{StaticResource WideFormPasswordBox}"
+                    Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    <i:Interaction.Behaviors>
+                        <helpers:PasswordChangedBahvior />
+                    </i:Interaction.Behaviors>
+                </PasswordBox>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="Confirm Password" Target="{Binding ElementName=confirmPassword}" Style="{StaticResource WideFormLabel}" />
+                <PasswordBox x:Name="confirmPassword" Style="{StaticResource WideFormPasswordBox}"
+                    Password="{Binding Path=ConfirmPassword, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    <i:Interaction.Behaviors>
+                        <helpers:PasswordChangedBahvior />
+                    </i:Interaction.Behaviors>
+                </PasswordBox>
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource TallFormRow}">
+                <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
+                <Button Content="Open Account" Style="{StaticResource FormButton}" Command="{Binding OpenAccountCommand}" />
+                <Button Content="Cancel" Style="{StaticResource FormButton}" Command="{Binding CancelCommand}" />
+            </StackPanel>
+
+            <!-- Do not wrap in TallFormRow, the StackPanel disables TextWrapping -->
+            <TextBlock Text="{Binding Path=StatusMessage}" Margin="130 10 100 0" TextWrapping="Wrap" Foreground="Red" />
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Margin="20">
+            <TextBlock Text="Questions?" FontSize="20" Margin="0 0 0 10" />
+            <TextBlock Margin="0 6 0 6" FontSize="13">
+                Call 1-800-123-NO-BS
+            </TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

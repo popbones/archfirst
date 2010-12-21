@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence
+    xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+                        http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+    version="2.0">
+
+    <persistence-unit name="bfoms" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>org.archfirst.bfoms.domain.security.Person</class>
+        <class>org.archfirst.bfoms.domain.security.Role</class>
+        <class>org.archfirst.bfoms.domain.security.User</class>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLInnoDBDialect" />
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver" />
+            <property name="hibernate.connection.username" value="bfoms_javaee" />
+            <property name="hibernate.connection.password" value="bfoms_javaee" />
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/bfoms_javaee" />
+        </properties>
+    </persistence-unit>
+
+</persistence>

@@ -1,0 +1,9 @@
+#Mon Nov 08 11:34:04 EST 2010
+activeProfiles=arquillian-glassfish-embedded-3
+eclipse.preferences.version=1
+fullBuildGoals=process-test-resources
+includeModules=false
+resolveWorkspaceProjects=true
+resourceFilterGoals=process-resources resources\:testResources
+skipCompilerPlugin=true
+version=1

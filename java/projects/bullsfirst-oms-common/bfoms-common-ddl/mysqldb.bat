@@ -1,0 +1,1 @@
+mysql --database bfoms_javaee --user bfoms_javaee --password

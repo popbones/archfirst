@@ -1,0 +1,41 @@
+﻿<UserControl
+    x:Class="Bullsfirst.Module.Home.Views.LoginView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="200">
+    
+    <StackPanel x:Name="LayoutRoot" Background="White">
+        <sdk:Label Content="Username" Target="{Binding ElementName=username}" Style="{StaticResource NarrowFormLabel}" />
+        <TextBox x:Name="username" Style="{StaticResource NarrowFormTextBox}"
+            Text="{Binding Path=Username, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <helpers:TextChangedBahvior />
+            </i:Interaction.Behaviors>
+        </TextBox>
+
+        <sdk:Label Content="Password" Target="{Binding ElementName=password}" Style="{StaticResource NarrowFormLabel}" />
+        <PasswordBox x:Name="password" Style="{StaticResource NarrowFormPasswordBox}"
+            Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            <i:Interaction.Behaviors>
+                <helpers:PasswordChangedBahvior />
+            </i:Interaction.Behaviors>
+        </PasswordBox>
+
+        <StackPanel Style="{StaticResource TallFormRow}">
+            <Button Content="Login" Style="{StaticResource FormButton}" Command="{Binding LoginCommand}" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource TallFormRow}">
+            <HyperlinkButton Content="Open an Account"  Command="{Binding OpenAccountCommand}" />
+        </StackPanel>
+
+        <!-- Do not wrap in TallFormRow, the StackPanel disables TextWrapping -->
+        <TextBlock Text="{Binding Path=StatusMessage}" Margin="0 10 0 0" TextWrapping="Wrap" Foreground="Red" />
+    </StackPanel>
+</UserControl>

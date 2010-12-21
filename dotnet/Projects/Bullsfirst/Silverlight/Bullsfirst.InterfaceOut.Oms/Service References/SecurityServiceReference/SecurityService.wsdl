@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://archfirst.org/bfoms/securityservice.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="SecurityService" targetNamespace="http://archfirst.org/bfoms/securityservice.wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/bfoms-javaee/SecurityService?xsd=1" namespace="http://archfirst.org/bfoms/securityservice.wsdl" />
+    </xsd:schema>
+  </types>
+  <message name="RegisterUser">
+    <part name="parameters" element="tns:RegisterUser" />
+  </message>
+  <message name="RegisterUserResponse">
+    <part name="parameters" element="tns:RegisterUserResponse" />
+  </message>
+  <message name="UsernameExistsException">
+    <part name="fault" element="tns:UsernameExistsException" />
+  </message>
+  <message name="AuthenticateUser">
+    <part name="parameters" element="tns:AuthenticateUser" />
+  </message>
+  <message name="AuthenticateUserResponse">
+    <part name="parameters" element="tns:AuthenticateUserResponse" />
+  </message>
+  <portType name="SecurityWebService">
+    <operation name="RegisterUser">
+      <input wsam:Action="RegisterUser" message="tns:RegisterUser" />
+      <output wsam:Action="http://archfirst.org/bfoms/securityservice.wsdl/SecurityWebService/RegisterUserResponse" message="tns:RegisterUserResponse" />
+      <fault wsam:Action="http://archfirst.org/bfoms/securityservice.wsdl/SecurityWebService/RegisterUser/Fault/UsernameExistsException" name="UsernameExistsException" message="tns:UsernameExistsException" />
+    </operation>
+    <operation name="AuthenticateUser">
+      <input wsam:Action="AuthenticateUser" message="tns:AuthenticateUser" />
+      <output wsam:Action="http://archfirst.org/bfoms/securityservice.wsdl/SecurityWebService/AuthenticateUserResponse" message="tns:AuthenticateUserResponse" />
+    </operation>
+  </portType>
+  <binding name="SecurityWebServicePortBinding" type="tns:SecurityWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="RegisterUser">
+      <soap:operation soapAction="RegisterUser" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+      <fault name="UsernameExistsException">
+        <soap:fault use="literal" name="UsernameExistsException" namespace="" />
+      </fault>
+    </operation>
+    <operation name="AuthenticateUser">
+      <soap:operation soapAction="AuthenticateUser" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="SecurityService">
+    <port name="SecurityWebServicePort" binding="tns:SecurityWebServicePortBinding">
+      <soap:address location="http://localhost:8080/bfoms-javaee/SecurityService" />
+    </port>
+  </service>
+</definitions>

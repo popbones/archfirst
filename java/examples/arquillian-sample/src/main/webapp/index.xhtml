@@ -1,0 +1,37 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+<h:head>
+    <title>Arquillian Sample</title>
+    <style>
+        label span {
+          float: left;
+          width: 4em;
+        }
+    </style>
+</h:head>
+
+<h:body>
+
+    <h:form>
+        <label for="farenheit"><span>Farenheit:</span></label>
+        <h:inputText id="farenheit" required="true" value="#{tempConvPm.farenheit}" />
+        <h:commandButton value="Convert" action="#{tempConvPm.convertToCelsius}" />
+        <h:outputText value="#{tempConvPm.celsiusResult}" />
+    </h:form>
+
+    <h:form>
+        <label for="celsius"><span>Celsius:</span></label>
+        <h:inputText id="celsius" required="true" value="#{tempConvPm.celsius}" />
+        <h:commandButton value="Convert" action="#{tempConvPm.convertToFarenheit}" />
+        <h:outputText value="#{tempConvPm.farenheitResult}" />
+    </h:form>
+
+</h:body>
+
+</html>

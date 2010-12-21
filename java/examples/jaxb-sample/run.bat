@@ -1,0 +1,1 @@
+java -cp target\jaxb-sample-1.0-SNAPSHOT.jar org.archfirst.jaxbsample.JaxbSample

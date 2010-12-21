@@ -1,0 +1,16 @@
+﻿<Window x:Class="IsSharedSizeScopeDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:local="clr-namespace:IsSharedSizeScopeDemo"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <TabControl>
+            <TabItem Header="Multiple Grids">
+                <local:MultipleGrids />
+            </TabItem>
+            <TabItem Header="Items Control">
+                <local:ItemsControlExample />
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

@@ -1,0 +1,17 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="SecurityWebServicePortBinding" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:8080/bfoms-javaee/SecurityService"
+                binding="basicHttpBinding" bindingConfiguration="SecurityWebServicePortBinding"
+                contract="SecurityServiceReference.SecurityWebService" name="SecurityWebServicePort" />
+        </client>
+    </system.serviceModel>
+</configuration>
