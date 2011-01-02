@@ -14,6 +14,11 @@
         <!-- Explicitly declare source encoding to avoid Maven warning -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <org.hibernate.version>3.6.0.Final</org.hibernate.version>
+        <org.hibernate-tools.version>3.2.4.GA</org.hibernate-tools.version>
+        <org.slf4j.version>1.6.1</org.slf4j.version>
+        <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+
         <!-- Package versions -->
         <org.archfirst.afcommon.version>1.0-SNAPSHOT</org.archfirst.afcommon.version>
     </properties>
@@ -22,15 +27,15 @@
         <dependencies>
 
             <dependency>
-                <groupId>javax.validation</groupId>
-                <artifactId>validation-api</artifactId>
-                <version>1.0.0.GA</version>
-            </dependency>
-
-            <dependency>
                 <groupId>javax.inject</groupId>
                 <artifactId>javax.inject</artifactId>
                 <version>1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>javax.validation</groupId>
+                <artifactId>validation-api</artifactId>
+                <version>1.0.0.GA</version>
             </dependency>
 
             <dependency>
@@ -46,9 +51,39 @@
             </dependency>
 
             <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${org.hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${org.hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-tools</artifactId>
+                <version>${org.hibernate-tools.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.hibernate.java-persistence</groupId>
                 <artifactId>jpa-api</artifactId>
                 <version>2.0-cr-1</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${org.slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-log4j12</artifactId>
+                <version>${org.slf4j.version}</version>
             </dependency>
 
             <dependency>

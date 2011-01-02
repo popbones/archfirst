@@ -21,18 +21,23 @@
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-annotations</artifactId>
-            <version>3.3.1.GA</version>
+            <artifactId>hibernate-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
-            <version>3.3.2.GA</version>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-tools</artifactId>
-            <version>3.2.3.GA</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
         </dependency>
     </dependencies>
 
@@ -70,11 +75,6 @@
     </build>
 
     <repositories>
-        <repository>
-            <id>jboss.org</id>
-            <name>jboss.org</name>
-            <url>http://repository.jboss.com/maven2</url>
-        </repository>
         <!-- Needed for javax.transaction:jta:jar:1.0.1B -->
         <repository>
             <id>maven2-repository.dev.java.net</id>

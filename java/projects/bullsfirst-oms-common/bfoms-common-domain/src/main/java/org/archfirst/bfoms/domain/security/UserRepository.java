@@ -17,19 +17,16 @@ package org.archfirst.bfoms.domain.security;
 
 import java.util.List;
 
-import javax.persistence.EntityManager;
 import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceContext;
+
+import org.archfirst.common.domain.BaseRepository;
 
 /**
  * UserRepository
  *
  * @author Naresh Bhatia
  */
-public class UserRepository {
-
-    @PersistenceContext
-    private EntityManager entityManager;
+public class UserRepository extends BaseRepository {
 
     public User findUser(String username) {
 
@@ -44,9 +41,5 @@ public class UserRepository {
             return users.get(0);
         else
             throw new NonUniqueResultException();
-    }
-    
-    public void persistUser(User user) {
-        entityManager.persist(user);
     }
 }

@@ -14,11 +14,6 @@
     <packaging>jar</packaging>
     <name>Bullsfirst OMS Common - Specifications</name>
 
-    <properties>
-        <org.hibernate.version>3.6.0.Final</org.hibernate.version>
-        <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>hsqldb</groupId>
@@ -75,7 +70,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
-            <version>1.6.1</version>
+            <version>${org.slf4j.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

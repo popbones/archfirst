@@ -44,7 +44,7 @@ public class SecurityService {
         Person person = new Person(
                 request.getFirstName(), request.getLastName());
         User user = new User(request.getUsername(), passwordHash, person);
-        userRepository.persistUser(user);      
+        userRepository.persist(user);      
     }
     
     // ----- Queries and Read-Only Operations -----

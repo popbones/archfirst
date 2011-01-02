@@ -13,19 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.domain.trading;
+package org.archfirst.bfoms.domain.account.position;
+
+import org.archfirst.common.money.Money;
 
 /**
- * BaseAccount
+ * Leaf level position - has no children
  *
- * @author Naresh
+ * @author Naresh Bhatia
  */
-public class BaseAccount {
+public class CashPosition extends Position {
+    
+    public static final String POSITION_NAME = "Cash";
+
     // ----- Constructors -----
+    public CashPosition(Money marketValue) {
+        this.name = POSITION_NAME;
+        this.marketValue = marketValue;
+    }
 
     // ----- Commands -----
+    @Override
+    public void calculate() {
+    }
 
-    // ----- Queries and Read-Only Operations -----
-
-    // ----- Getters and Setters -----
+    // ----- Getters -----
+    public String getType() {
+        return "CashPosition";
+    }
 }
