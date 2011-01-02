@@ -71,6 +71,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Windows.Controls, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Windows.Controls.Data, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Controls.Data.Input, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Windows.Controls.Toolkit, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
@@ -113,6 +114,10 @@
       <Project>{D6401855-8A3C-4584-9039-8A0241B2C279}</Project>
       <Name>Bullsfirst.InterfaceOut.Oms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.Module.Accounts\Bullsfirst.Module.Accounts.csproj">
+      <Project>{6D08ED03-5600-4495-AC16-3989BBFA536B}</Project>
+      <Name>Bullsfirst.Module.Accounts</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bullsfirst.Module.Home\Bullsfirst.Module.Home.csproj">
       <Project>{E686E68C-1AF7-42D6-A9A9-FF32F1449F9F}</Project>
       <Name>Bullsfirst.Module.Home</Name>
@@ -124,6 +129,26 @@
     <ProjectReference Include="..\Bullsfirst.Module.OpenAccount\Bullsfirst.Module.OpenAccount.csproj">
       <Project>{2EE93985-CEC8-4C67-9DEE-68E6C4B66B1D}</Project>
       <Name>Bullsfirst.Module.OpenAccount</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.Module.Orders\Bullsfirst.Module.Orders.csproj">
+      <Project>{284AE4EC-1715-4C63-89A9-694EAEAC4C32}</Project>
+      <Name>Bullsfirst.Module.Orders</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.Module.Positions\Bullsfirst.Module.Positions.csproj">
+      <Project>{6BBD30EA-CD51-4CE7-B1CA-602AE23D4AD1}</Project>
+      <Name>Bullsfirst.Module.Positions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.Module.Trade\Bullsfirst.Module.Trade.csproj">
+      <Project>{9198D61E-40FE-4D57-AF79-0B3A36E80DE5}</Project>
+      <Name>Bullsfirst.Module.Trade</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.Module.TransactionHistory\Bullsfirst.Module.TransactionHistory.csproj">
+      <Project>{4630F66E-E485-4BAA-BC7C-E7009A334706}</Project>
+      <Name>Bullsfirst.Module.TransactionHistory</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.Module.Transfer\Bullsfirst.Module.Transfer.csproj">
+      <Project>{ED807742-7A74-4F7E-9AB3-688322D44DE9}</Project>
+      <Name>Bullsfirst.Module.Transfer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

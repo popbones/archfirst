@@ -21,7 +21,17 @@
         <sdk:TabControl
             Margin="0 1 0 0" BorderThickness="0 1 0 0" Background="White"
             prism:RegionManager.RegionName="LoggedInUserRegion">
-            <sdk:TabItem Header="Accounts" />
+            <prism:TabControlRegionAdapter.ItemContainerStyle>
+                <Style TargetType="sdk:TabItem">
+                    <Setter Property="HeaderTemplate">
+                        <Setter.Value>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding ViewTitle}" />
+                            </DataTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </prism:TabControlRegionAdapter.ItemContainerStyle>
         </sdk:TabControl>
     </Grid>
 </UserControl>

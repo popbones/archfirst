@@ -12,14 +12,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
+using Bullsfirst.Module.Accounts;
 using Bullsfirst.Module.Home;
 using Bullsfirst.Module.LoggedInUserShell;
 using Bullsfirst.Module.OpenAccount;
+using Bullsfirst.Module.Orders;
+using Bullsfirst.Module.Positions;
+using Bullsfirst.Module.Trade;
+using Bullsfirst.Module.TransactionHistory;
+using Bullsfirst.Module.Transfer;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions;
 using Microsoft.Practices.Prism.Regions;
@@ -41,6 +46,12 @@ namespace Bullsfirst
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(HomeModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OpenAccountModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(LoggedInUserShellModule).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AccountsModule).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(PositionsModule).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(TradeModule).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OrdersModule).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(TransactionHistoryModule).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(TransferModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SecurityWebServiceClient).Assembly));
         }
 
