@@ -16,7 +16,7 @@
 
         <arquillian.version>1.0.0.Alpha4</arquillian.version>
         <glassfish.version>3.1-b09</glassfish.version>
-        <jbossas.version>6.0.0.20100721-M4</jbossas.version>
+        <jbossas.version>6.0.0.Final</jbossas.version>
 
         <glassfish.home>${env.GLASSFISH_HOME}</glassfish.home>
     </properties>
