@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.domain.account.transaction;
+package org.archfirst.bfoms.domain.account.brokerage;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
@@ -23,7 +23,7 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
-import org.archfirst.bfoms.domain.account.brokerage.Lot;
+import org.archfirst.bfoms.domain.account.SecuritiesTransfer;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.quantity.DecimalQuantity;

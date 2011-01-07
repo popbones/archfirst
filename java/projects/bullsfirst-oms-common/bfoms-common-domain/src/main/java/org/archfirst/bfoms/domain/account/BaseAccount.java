@@ -32,7 +32,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 
 import org.archfirst.bfoms.domain.account.brokerage.Allocatable;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountRepository;
-import org.archfirst.bfoms.domain.account.transaction.SecuritiesTransfer;
 import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.pricing.PricingService;
 import org.archfirst.bfoms.domain.util.Constants;

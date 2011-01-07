@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.domain.account.transaction;
+package org.archfirst.bfoms.domain.account;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -29,10 +29,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.archfirst.bfoms.domain.account.BaseAccount;
-import org.archfirst.bfoms.domain.account.Transfer;
 import org.archfirst.bfoms.domain.account.brokerage.Allocatable;
 import org.archfirst.bfoms.domain.account.brokerage.Lot;
+import org.archfirst.bfoms.domain.account.brokerage.TransferAllocation;
 import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.money.Money;
