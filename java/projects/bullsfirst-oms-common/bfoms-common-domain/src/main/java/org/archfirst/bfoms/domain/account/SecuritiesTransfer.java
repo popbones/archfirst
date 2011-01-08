@@ -15,23 +15,15 @@
  */
 package org.archfirst.bfoms.domain.account;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.archfirst.bfoms.domain.account.brokerage.Allocatable;
-import org.archfirst.bfoms.domain.account.brokerage.Lot;
-import org.archfirst.bfoms.domain.account.brokerage.TransferAllocation;
 import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.money.Money;
@@ -44,12 +36,14 @@ import org.joda.time.DateTime;
  * @author Naresh Bhatia
  */
 @Entity
-public class SecuritiesTransfer extends Transfer implements Allocatable {
+public class SecuritiesTransfer extends Transaction {
     private static final long serialVersionUID = 1L;
+
+    private static final String TYPE = "Transfer";
 
     private Instrument instrument;
     private DecimalQuantity quantity;
-    private Set<TransferAllocation> allocations = new HashSet<TransferAllocation>();
+    private BaseAccount otherAccount;
 
     // ----- Constructors -----
     protected SecuritiesTransfer() {
@@ -57,26 +51,22 @@ public class SecuritiesTransfer extends Transfer implements Allocatable {
 
     public SecuritiesTransfer(
             DateTime creationTime,
-            BaseAccount otherAccount,
             Instrument instrument,
-            DecimalQuantity quantity) {
-        super(creationTime, otherAccount);
+            DecimalQuantity quantity,
+            BaseAccount otherAccount) {
+        super(creationTime);
         this.instrument = instrument;
         this.quantity = quantity;
-    }
-
-    // ----- Commands -----
-    @Override
-    public void allocate(DecimalQuantity quantity, Lot lot) {
-        this.addAllocation(new TransferAllocation(quantity, lot));
-    }
-
-    private void addAllocation(TransferAllocation allocation) {
-        allocations.add(allocation);
-        allocation.setTransfer(this);
+        this.otherAccount = otherAccount;
     }
 
     // ----- Getters and Setters -----
+    @Override
+    @Transient
+    public String getType() {
+        return TYPE;
+    }
+
     @NotNull
     @ManyToOne
     public Instrument getInstrument() {
@@ -101,12 +91,13 @@ public class SecuritiesTransfer extends Transfer implements Allocatable {
         this.quantity = quantity;
     }
 
-    @OneToMany(mappedBy="transfer", cascade=CascadeType.ALL)
-    public Set<TransferAllocation> getAllocations() {
-        return allocations;
+    @NotNull
+    @ManyToOne
+    public BaseAccount getOtherAccount() {
+        return otherAccount;
     }
-    private void setAllocations(Set<TransferAllocation> allocations) {
-        this.allocations = allocations;
+    private void setOtherAccount(BaseAccount otherAccount) {
+        this.otherAccount = otherAccount;
     }
 
     @Override

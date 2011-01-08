@@ -36,6 +36,7 @@ public class CashTransfer extends Transfer {
     private static final long serialVersionUID = 1L;
 
     private Money amount;
+    private BaseAccount otherAccount;
     
     // ----- Constructors -----
     protected CashTransfer() {
@@ -43,8 +44,8 @@ public class CashTransfer extends Transfer {
 
     public CashTransfer(
             DateTime creationTime,
-            BaseAccount otherAccount,
-            Money amount) {
+            Money amount,
+            BaseAccount otherAccount) {
         super(creationTime, otherAccount);
         this.amount = amount;
     }
