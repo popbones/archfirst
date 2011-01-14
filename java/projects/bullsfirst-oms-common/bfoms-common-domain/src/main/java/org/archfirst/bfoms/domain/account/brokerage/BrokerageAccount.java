@@ -30,7 +30,10 @@ import javax.persistence.Transient;
 
 import org.archfirst.bfoms.domain.account.AccountStatus;
 import org.archfirst.bfoms.domain.account.BaseAccount;
+import org.archfirst.bfoms.domain.account.CashTransfer;
 import org.archfirst.bfoms.domain.account.OwnershipType;
+import org.archfirst.bfoms.domain.account.SecuritiesTransfer;
+import org.archfirst.bfoms.domain.account.Transaction;
 import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCompliance;
@@ -75,28 +78,31 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     // ----- Commands -----
+    /* @see org.archfirst.bfoms.domain.account.BaseAccount#transferCash(org.archfirst.bfoms.domain.account.CashTransfer) */
     @Override
-    protected void deposit(Money amount) {
-        cashPosition = cashPosition.plus(amount);
+    public void transferCash(CashTransfer transfer) {
+        cashPosition = cashPosition.plus(transfer.getAmount());
+        this.addTransaction(transfer);
     }
 
+    /* @see org.archfirst.bfoms.domain.account.BaseAccount#transferSecurities(org.archfirst.bfoms.domain.account.SecuritiesTransfer) */
     @Override
-    protected void withdraw(Money amount) {
-        cashPosition = cashPosition.minus(amount);
+    public void transferSecurities(SecuritiesTransfer transfer) {
     }
 
-    @Override
-    protected void deposit(
+    private void depositSecurities(
             Instrument instrument,
             DecimalQuantity quantity,
             Money pricePaidPerShare,
-            Allocatable allocatable,
+            Transaction transaction,
             BrokerageAccountRepository accountRepository) {
+
+        // Find lots for the specified instrument
         List<Lot> lots =
             accountRepository.findActiveLots(this, instrument);
-        DecimalQuantity quantityLeftToDeposit = quantity;
 
-        // First deposit to lots that have negative quantity
+        // First deposit to lots that have negative quantity (unusual case)
+        DecimalQuantity quantityLeftToDeposit = quantity;
         for (Lot lot : lots) {
             DecimalQuantity lotQuantity = lot.getQuantity();
             if (lotQuantity.isMinus()) {
@@ -110,6 +116,7 @@ public class BrokerageAccount extends BaseAccount {
             }
         }
 
+        // Put the remaining quantity in a new lot
         if (quantityLeftToDeposit.isPlus()) {
             this.createLot(
                     instrument,
@@ -120,14 +127,17 @@ public class BrokerageAccount extends BaseAccount {
         }
     }
 
-    @Override
-    protected void withdraw(
+    private void withdrawSecurities(
             Instrument instrument,
             DecimalQuantity quantity,
-            Allocatable allocatable,
+            Transaction transaction,
             BrokerageAccountRepository accountRepository) {
+
+        // Find lots for the specified instrument
         List<Lot> lots =
             accountRepository.findActiveLots(this, instrument);
+
+        // Withdraw specified quantity from available lots
         DecimalQuantity quantityLeftToWithdraw = quantity;
         for (Lot lot : lots) {
             DecimalQuantity lotQuantity = lot.getQuantity();
@@ -144,9 +154,11 @@ public class BrokerageAccount extends BaseAccount {
                 break;
             }
         }
+
+        // If some quantity remains (unusual case), just create a lot with
+        // negative quantity. This case can happen if a long standing sell
+        // order gets executed.
         if (quantityLeftToWithdraw.isPlus()) {
-            // This should ideally not happen, but it could if a long standing
-            // sell order gets executed. Just create a lot with negative quantity.
             this.createLot(
                     instrument,
                     quantityLeftToWithdraw.negate(),
@@ -406,11 +418,15 @@ public class BrokerageAccount extends BaseAccount {
     private void setLots(Set<Lot> lots) {
         this.lots = lots;
     }
-    
+     
     private void addLot(Lot lot, BrokerageAccountRepository accountRepository) {
         lot.setAccount(this);
         accountRepository.persist(lot);
         accountRepository.flush(); // get lot id before adding to set
         lots.add(lot);
+    }
+
+    private interface AllocationFactory {
+        Allocation createAllocation();
     }
 }

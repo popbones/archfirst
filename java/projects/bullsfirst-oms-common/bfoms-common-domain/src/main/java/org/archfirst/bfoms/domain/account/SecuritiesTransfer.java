@@ -43,6 +43,7 @@ public class SecuritiesTransfer extends Transaction {
 
     private Instrument instrument;
     private DecimalQuantity quantity;
+    private Money pricePaidPerShare;
     private BaseAccount otherAccount;
 
     // ----- Constructors -----
@@ -53,6 +54,7 @@ public class SecuritiesTransfer extends Transaction {
             DateTime creationTime,
             Instrument instrument,
             DecimalQuantity quantity,
+            Money pricePaidPerShare,
             BaseAccount otherAccount) {
         super(creationTime);
         this.instrument = instrument;
@@ -65,6 +67,13 @@ public class SecuritiesTransfer extends Transaction {
     @Transient
     public String getType() {
         return TYPE;
+    }
+
+    @Override
+    @Transient
+    public Money getAmount() {
+        // A securities transfer does not involve money
+        return new Money("0.00");
     }
 
     @NotNull
@@ -91,6 +100,25 @@ public class SecuritiesTransfer extends Transaction {
         this.quantity = quantity;
     }
 
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name="amount",
+            column = @Column(
+                    name="price_paid_amount",
+                    precision=Constants.MONEY_PRECISION,
+                    scale=Constants.MONEY_SCALE)),
+        @AttributeOverride(name="currency",
+            column = @Column(
+                    name="price_paid_currency",
+                    length=Money.CURRENCY_LENGTH))
+     })
+    public Money getPricePaidPerShare() {
+        return pricePaidPerShare;
+    }
+    public void setPricePaidPerShare(Money pricePaidPerShare) {
+        this.pricePaidPerShare = pricePaidPerShare;
+    }
+
     @NotNull
     @ManyToOne
     public BaseAccount getOtherAccount() {
@@ -107,14 +135,7 @@ public class SecuritiesTransfer extends Transaction {
         builder.append("Transfer ");
         builder.append(quantity.abs()).append(" shares of ").append(instrument);
         builder.append(quantity.isPlus() ? " from " : " to ");
-        builder.append(getOtherAccount().getName());
+        builder.append(otherAccount.getName());
         return builder.toString();
-    }
-
-    @Override
-    @Transient
-    public Money getAmount() {
-        // A securities transfer does not involve money
-        return new Money("0.00");
     }
 }

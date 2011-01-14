@@ -17,7 +17,9 @@ package org.archfirst.bfoms.domain.account;
 
 import javax.inject.Inject;
 
+import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
 
 /**
@@ -36,19 +38,33 @@ public class AccountService {
             BaseAccount fromAccount,
             BaseAccount toAccount) {
         
-        // Transfer cash
-        fromAccount.withdraw(amount);
-        toAccount.deposit(amount);
-        
-        // Record a transaction in each account
         DateTime now = new DateTime();
-        CashTransfer fromTransfer = new CashTransfer(now, toAccount, amount.negate());
-        CashTransfer toTransfer = new CashTransfer(now, fromAccount, amount);
+        CashTransfer fromTransfer = new CashTransfer(now, amount.negate(), toAccount);
+        CashTransfer toTransfer = new CashTransfer(now, amount, fromAccount);
         accountRepository.persist(fromTransfer);
         accountRepository.persist(toTransfer);
         accountRepository.flush(); // get object ids before adding to set
-        fromAccount.addTransaction(fromTransfer);
-        toAccount.addTransaction(toTransfer);
+        fromAccount.transferCash(fromTransfer);
+        toAccount.transferCash(toTransfer);
+    }
+
+    public void transferSecurities(
+            Instrument instrument,
+            DecimalQuantity quantity,
+            Money pricePaidPerShare,
+            BaseAccount fromAccount,
+            BaseAccount toAccount) {
+        
+        DateTime now = new DateTime();
+        SecuritiesTransfer fromTransfer = new SecuritiesTransfer(
+                now, instrument, quantity.negate(), pricePaidPerShare, toAccount);
+        SecuritiesTransfer toTransfer = new SecuritiesTransfer(
+                now, instrument, quantity, pricePaidPerShare, fromAccount);
+        accountRepository.persist(fromTransfer);
+        accountRepository.persist(toTransfer);
+        accountRepository.flush(); // get object ids before adding to set
+        fromAccount.transferSecurities(fromTransfer);
+        toAccount.transferSecurities(toTransfer);
     }
 
     // ----- Queries and Read-Only Operations -----

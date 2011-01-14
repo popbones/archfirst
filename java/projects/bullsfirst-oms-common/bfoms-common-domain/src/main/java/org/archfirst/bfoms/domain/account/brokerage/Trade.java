@@ -47,7 +47,7 @@ import org.joda.time.DateTime;
  * @author Naresh Bhatia
  */
 @Entity
-public class Trade extends Transaction implements Allocatable {
+public class Trade extends Transaction {
     private static final long serialVersionUID = 1L;
     private static final String TYPE = "Trade";
     
@@ -81,7 +81,6 @@ public class Trade extends Transaction implements Allocatable {
     }
 
     // ----- Commands -----
-    @Override
     public void allocate(DecimalQuantity quantity, Lot lot) {
         this.addAllocation(new TradeAllocation(quantity, lot));
     }

@@ -20,7 +20,9 @@ import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.money.Money;
@@ -32,8 +34,10 @@ import org.joda.time.DateTime;
  * @author Naresh Bhatia
  */
 @Entity
-public class CashTransfer extends Transfer {
+public class CashTransfer extends Transaction {
     private static final long serialVersionUID = 1L;
+
+    private static final String TYPE = "Transfer";
 
     private Money amount;
     private BaseAccount otherAccount;
@@ -46,11 +50,18 @@ public class CashTransfer extends Transfer {
             DateTime creationTime,
             Money amount,
             BaseAccount otherAccount) {
-        super(creationTime, otherAccount);
+        super(creationTime);
         this.amount = amount;
+        this.otherAccount = otherAccount;
     }
 
     // ----- Getters and Setters -----
+    @Override
+    @Transient
+    public String getType() {
+        return TYPE;
+    }
+
     @Embedded
     @AttributeOverrides({
         @AttributeOverride(name="amount",
@@ -70,13 +81,22 @@ public class CashTransfer extends Transfer {
         this.amount = amount;
     }
 
+    @NotNull
+    @ManyToOne
+    public BaseAccount getOtherAccount() {
+        return otherAccount;
+    }
+    private void setOtherAccount(BaseAccount otherAccount) {
+        this.otherAccount = otherAccount;
+    }
+
     @Override
     @Transient
     public String getDescription() {
         StringBuilder builder = new StringBuilder();
         builder.append("Transfer ");
         builder.append(amount.isPlus() ? "from " : "to ");
-        builder.append(getOtherAccount().getName());
+        builder.append(otherAccount.getName());
         return builder.toString();
     }
 }

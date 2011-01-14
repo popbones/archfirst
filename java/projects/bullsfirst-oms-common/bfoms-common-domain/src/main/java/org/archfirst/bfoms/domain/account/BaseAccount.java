@@ -30,7 +30,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
-import org.archfirst.bfoms.domain.account.brokerage.Allocatable;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountRepository;
 import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.pricing.PricingService;
@@ -40,7 +39,6 @@ import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 
 /**
  * BaseAccount
@@ -75,58 +73,9 @@ public abstract class BaseAccount extends DomainEntity {
         this.name = newName;
     }
     
-    protected abstract void deposit(Money amount);
+    public abstract void transferCash(CashTransfer transfer);
 
-    /**
-     * Withdraw will allow overdrawing of the account. Any checking of
-     * available cash must be done by the caller based on the use case.
-     * @param amount
-     */
-    protected abstract void withdraw(Money amount);
-
-    public void transferSecurities(
-            Instrument instrument,
-            DecimalQuantity quantity,
-            Money pricePaidPerShare,
-            BaseAccount toAccount,
-            BrokerageAccountRepository accountRepository) {
-        DateTime now = new DateTime();
-        SecuritiesTransfer withdrawal = new SecuritiesTransfer(
-                now,
-                toAccount,
-                instrument,
-                quantity.negate());
-        SecuritiesTransfer deposit = new SecuritiesTransfer(
-                now,
-                this,
-                instrument,
-                quantity);
-        this.withdraw(instrument, quantity, withdrawal, accountRepository);
-        toAccount.deposit(instrument, quantity, pricePaidPerShare, deposit, accountRepository);
-        this.addTransaction(withdrawal);
-        toAccount.addTransaction(deposit);
-    }
-
-    protected abstract void deposit(
-            Instrument instrument,
-            DecimalQuantity quantity,
-            Money pricePaidPerShare,
-            Allocatable allocatable,
-            BrokerageAccountRepository accountRepository);
-
-    /**
-     * Withdraw will allow overdrawing of the account. Any checking of
-     * available securities must be done by the caller based on the use case.
-     * @param instrument
-     * @param quantity
-     * @param allocatable
-     * @param accountRepository
-     */
-    protected abstract void withdraw(
-            Instrument instrument,
-            DecimalQuantity quantity,
-            Allocatable allocatable,
-            BrokerageAccountRepository accountRepository);
+    public abstract void transferSecurities(SecuritiesTransfer transfer);
 
     // ----- Queries and Read-Only Operations -----
     public abstract boolean isCashAvailable(
