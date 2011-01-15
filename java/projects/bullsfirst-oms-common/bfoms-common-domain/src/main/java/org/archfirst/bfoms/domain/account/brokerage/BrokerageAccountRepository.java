@@ -58,6 +58,10 @@ public class BrokerageAccountRepository extends BaseAccountRepository {
 
         return accounts;
     }
+    
+    public BrokerageAccount findAccount(Long id) {
+        return entityManager.find(BrokerageAccount.class, id);
+    }
 
     public List<BrokerageAccountPermission> findPermissionsForAccount(
             User user,

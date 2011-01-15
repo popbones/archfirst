@@ -33,16 +33,22 @@ public class BrokerageAccountService extends BaseAccountService {
     @Inject private UserRepository userRepository;
 
     // ----- Commands -----
-    public void openNewAccount(String username, String accountName) {
+    public Long openNewAccount(String username, String accountName) {
 
         User user = getUser(username);
-        brokerageAccountFactory.createIndividualAccountWithFullAccess(
+        BrokerageAccount account =
+            brokerageAccountFactory.createIndividualAccountWithFullAccess(
                 accountName,
                 user.getPerson(),
                 user);
+        return account.getId();
     }
 
     // ----- Queries and Read-Only Operations -----
+    public BrokerageAccount findAccount(Long id) {
+        return brokerageAccountRepository.findAccount(id);
+    }
+    
     private User getUser(String username) {
         return userRepository.findUser(username);
     }
