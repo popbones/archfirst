@@ -23,14 +23,14 @@ import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
 
 /**
- * AccountService
+ * BaseAccountService
  *
  * @author Naresh Bhatia
  */
-public class AccountService {
+public class BaseAccountService {
     
     @Inject
-    private AccountRepository accountRepository;
+    private BaseAccountRepository baseAccountRepository;
 
     // ----- Commands -----
     public void transferCash(
@@ -41,9 +41,9 @@ public class AccountService {
         DateTime now = new DateTime();
         CashTransfer fromTransfer = new CashTransfer(now, amount.negate(), toAccount);
         CashTransfer toTransfer = new CashTransfer(now, amount, fromAccount);
-        accountRepository.persist(fromTransfer);
-        accountRepository.persist(toTransfer);
-        accountRepository.flush(); // get object ids before adding to set
+        baseAccountRepository.persist(fromTransfer);
+        baseAccountRepository.persist(toTransfer);
+        baseAccountRepository.flush(); // get object ids before adding to set
         fromAccount.transferCash(fromTransfer);
         toAccount.transferCash(toTransfer);
     }
@@ -60,9 +60,9 @@ public class AccountService {
                 now, instrument, quantity.negate(), pricePaidPerShare, toAccount);
         SecuritiesTransfer toTransfer = new SecuritiesTransfer(
                 now, instrument, quantity, pricePaidPerShare, fromAccount);
-        accountRepository.persist(fromTransfer);
-        accountRepository.persist(toTransfer);
-        accountRepository.flush(); // get object ids before adding to set
+        baseAccountRepository.persist(fromTransfer);
+        baseAccountRepository.persist(toTransfer);
+        baseAccountRepository.flush(); // get object ids before adding to set
         fromAccount.transferSecurities(fromTransfer);
         toAccount.transferSecurities(toTransfer);
     }

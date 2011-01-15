@@ -119,8 +119,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
                     new Execution(
                             new DateTime(),
                             executionReport.getLastQty(),
-                            executionReport.getLastPrice()),
-                    accountRepository);
+                            executionReport.getLastPrice()));
             // Check if leaves quantity is matching, i.e ExecutionReport is
             // coming in the right sequence
             if (!this.getLeavesQty().eq(executionReport.getLeavesQty())) {
@@ -322,7 +321,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
         parameters = {
             @Parameter (
                 name  = "enumClass",
-                value = "org.archfirst.bfoms.domain.trading.order.OrderSide")
+                value = "org.archfirst.bfoms.domain.account.brokerage.order.OrderSide")
             }
         )
     @Column(nullable = false, length=Constants.ENUM_COLUMN_LENGTH)
@@ -364,7 +363,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
         parameters = {
             @Parameter (
                 name  = "enumClass",
-                value = "org.archfirst.bfoms.domain.trading.order.OrderType")
+                value = "org.archfirst.bfoms.domain.account.brokerage.order.OrderType")
             }
         )
     @Column(nullable = false, length=Constants.ENUM_COLUMN_LENGTH)
@@ -400,7 +399,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
         parameters = {
             @Parameter (
                 name  = "enumClass",
-                value = "org.archfirst.bfoms.domain.trading.order.OrderTerm")
+                value = "org.archfirst.bfoms.domain.account.brokerage.order.OrderTerm")
             }
         )
     @Column(nullable = false, length=Constants.ENUM_COLUMN_LENGTH)
@@ -424,7 +423,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
         parameters = {
             @Parameter (
                 name  = "enumClass",
-                value = "org.archfirst.bfoms.domain.trading.order.OrderStatus")
+                value = "org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus")
             }
         )
     @Column(nullable = false, length=Constants.ENUM_COLUMN_LENGTH)
@@ -452,10 +451,8 @@ public class Order extends DomainEntity implements Comparable<Order> {
         this.executions = executions;
     }
 
-    private void addExecution(Execution execution, BrokerageAccountRepository accountRepository) {
-        execution.setOrder(this);
-        accountRepository.persist(execution);
-        accountRepository.flush(); // get execution id before adding to set
+    private void addExecution(Execution execution) {
         executions.add(execution);
+        execution.setOrder(this);
     }
 }

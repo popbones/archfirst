@@ -15,12 +15,17 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.archfirst.bfoms.domain.account.position.LotPosition;
@@ -48,6 +53,7 @@ public class Lot extends DomainEntity {
     private DecimalQuantity quantity;
     private Money pricePaidPerShare;
     private BrokerageAccount account;
+    private Set<Allocation> allocations = new HashSet<Allocation>();
 
     // ----- Constructors -----
     private Lot() {
@@ -79,15 +85,21 @@ public class Lot extends DomainEntity {
     }
     
     // ----- Commands -----
-    // Allow access only from Account
+    // Allow access only from BrokerageAccount
     void buy(DecimalQuantity quantityToBuy, Money pricePaidPerShare) {
         quantity = quantity.plus(quantityToBuy);
         this.pricePaidPerShare = pricePaidPerShare;
     }
 
-    // Allow access only from Account
+    // Allow access only from BrokerageAccount
     void sell(DecimalQuantity quantityToSell) {
         quantity = quantity.minus(quantityToSell);
+    }
+
+    // Allow access only from BrokerageAccount
+    void addAllocation(Allocation allocation) {
+        this.allocations.add(allocation);
+        allocation.setLot(this);
     }
 
     // ----- Queries and Read-Only Operations -----
@@ -152,5 +164,13 @@ public class Lot extends DomainEntity {
     // Allow access only from AccountFactory
     void setAccount(BrokerageAccount account) {
         this.account = account;
+    }
+
+    @OneToMany(mappedBy="lot",  cascade=CascadeType.ALL)
+    public Set<Allocation> getAllocations() {
+        return allocations;
+    }
+    private void setAllocations(Set<Allocation> allocations) {
+        this.allocations = allocations;
     }
 }

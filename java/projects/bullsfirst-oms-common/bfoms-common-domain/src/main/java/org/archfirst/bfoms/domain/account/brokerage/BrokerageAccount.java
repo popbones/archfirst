@@ -33,7 +33,6 @@ import org.archfirst.bfoms.domain.account.BaseAccount;
 import org.archfirst.bfoms.domain.account.CashTransfer;
 import org.archfirst.bfoms.domain.account.OwnershipType;
 import org.archfirst.bfoms.domain.account.SecuritiesTransfer;
-import org.archfirst.bfoms.domain.account.Transaction;
 import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCompliance;
@@ -64,6 +63,9 @@ public class BrokerageAccount extends BaseAccount {
     private Money cashPosition = new Money("0.00");
     private Set<Order> orders = new HashSet<Order>();
     private Set<Lot> lots = new HashSet<Lot>();
+    
+    @Transient
+    private BrokerageAccountRepository brokerageAccountRepository;
 
     // ----- Constructors -----
     private BrokerageAccount() {
@@ -78,28 +80,38 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     // ----- Commands -----
-    /* @see org.archfirst.bfoms.domain.account.BaseAccount#transferCash(org.archfirst.bfoms.domain.account.CashTransfer) */
     @Override
     public void transferCash(CashTransfer transfer) {
         cashPosition = cashPosition.plus(transfer.getAmount());
         this.addTransaction(transfer);
     }
-
-    /* @see org.archfirst.bfoms.domain.account.BaseAccount#transferSecurities(org.archfirst.bfoms.domain.account.SecuritiesTransfer) */
+    
     @Override
     public void transferSecurities(SecuritiesTransfer transfer) {
+        if (transfer.getQuantity().isPlus()) {
+            depositSecurities(
+                    transfer.getInstrument(),
+                    transfer.getQuantity(),
+                    transfer.getPricePaidPerShare(),
+                    new SecuritiesTransferAllocationFactory(brokerageAccountRepository, transfer));
+        }
+        else {
+            withdrawSecurities(    
+                transfer.getInstrument(),
+                transfer.getQuantity(),
+                new SecuritiesTransferAllocationFactory(brokerageAccountRepository, transfer));
+        }
     }
 
     private void depositSecurities(
             Instrument instrument,
             DecimalQuantity quantity,
             Money pricePaidPerShare,
-            Transaction transaction,
-            BrokerageAccountRepository accountRepository) {
+            AllocationFactory factory) {
 
         // Find lots for the specified instrument
         List<Lot> lots =
-            accountRepository.findActiveLots(this, instrument);
+            brokerageAccountRepository.findActiveLots(this, instrument);
 
         // First deposit to lots that have negative quantity (unusual case)
         DecimalQuantity quantityLeftToDeposit = quantity;
@@ -108,7 +120,7 @@ public class BrokerageAccount extends BaseAccount {
             if (lotQuantity.isMinus()) {
                 DecimalQuantity depositQuantity = lotQuantity.negate();
                 lot.buy(depositQuantity, pricePaidPerShare);
-                allocatable.allocate(depositQuantity, lot);
+                lot.addAllocation(factory.createAllocation(depositQuantity));
                 quantityLeftToDeposit = quantityLeftToDeposit.minus(depositQuantity);
                 if (quantityLeftToDeposit.isZero()) {
                     break;
@@ -118,24 +130,22 @@ public class BrokerageAccount extends BaseAccount {
 
         // Put the remaining quantity in a new lot
         if (quantityLeftToDeposit.isPlus()) {
-            this.createLot(
-                    instrument,
-                    quantityLeftToDeposit,
-                    pricePaidPerShare,
-                    allocatable,
-                    accountRepository);
+            Lot lot = new Lot(
+                new DateTime(), instrument, quantityLeftToDeposit, pricePaidPerShare);
+            brokerageAccountRepository.persistAndFlush(lot);
+            this.addLot(lot);
+            lot.addAllocation(factory.createAllocation(quantityLeftToDeposit));
         }
     }
 
     private void withdrawSecurities(
             Instrument instrument,
             DecimalQuantity quantity,
-            Transaction transaction,
-            BrokerageAccountRepository accountRepository) {
+            AllocationFactory factory) {
 
         // Find lots for the specified instrument
         List<Lot> lots =
-            accountRepository.findActiveLots(this, instrument);
+            brokerageAccountRepository.findActiveLots(this, instrument);
 
         // Withdraw specified quantity from available lots
         DecimalQuantity quantityLeftToWithdraw = quantity;
@@ -148,7 +158,7 @@ public class BrokerageAccount extends BaseAccount {
                 (lotQuantity.gteq(quantityLeftToWithdraw)) ?
                         quantityLeftToWithdraw : lotQuantity;
             lot.sell(withdrawQuantity);
-            allocatable.allocate(withdrawQuantity.negate(), lot);
+            lot.addAllocation(factory.createAllocation(withdrawQuantity.negate()));
             quantityLeftToWithdraw = quantityLeftToWithdraw.minus(withdrawQuantity);
             if (quantityLeftToWithdraw.isZero()) {
                 break;
@@ -159,68 +169,52 @@ public class BrokerageAccount extends BaseAccount {
         // negative quantity. This case can happen if a long standing sell
         // order gets executed.
         if (quantityLeftToWithdraw.isPlus()) {
-            this.createLot(
+            Lot lot = new Lot(
+                    new DateTime(),
                     instrument,
                     quantityLeftToWithdraw.negate(),
-                    new Money("0.00"),
-                    allocatable,
-                    accountRepository);
+                    new Money("0.00"));
+                brokerageAccountRepository.persistAndFlush(lot);
+                this.addLot(lot);
+                lot.addAllocation(factory.createAllocation(quantityLeftToWithdraw));
         }
     }
     
-    private void createLot(
-            Instrument instrument,
-            DecimalQuantity quantity,
-            Money pricePaidPerShare,
-            Allocatable allocatable,
-            BrokerageAccountRepository accountRepository) {
-        Lot lot = new Lot(
-                new DateTime(),
-                instrument,
-                quantity,
-                pricePaidPerShare);
-        this.addLot(lot, accountRepository);
-        allocatable.allocate(quantity, lot);
-    }
-
-    public void placeOrder(Order order, BrokerageAccountRepository accountRepository) {
+    public void placeOrder(Order order) {
         order.setCreationTime(new DateTime());
-        this.addOrder(order, accountRepository);
+        brokerageAccountRepository.persistAndFlush(order);
+        this.addOrder(order);
     }
     
-    public void processExecutionReport(
-            ExecutionReport executionReport, BrokerageAccountRepository accountRepository) {
+    public void processExecutionReport(ExecutionReport executionReport) {
         Order order =
-            accountRepository.findOrder(executionReport.getClientOrderId());
-        Trade trade = order.processExecutionReport(executionReport, accountRepository);
+            brokerageAccountRepository.findOrder(executionReport.getClientOrderId());
+        Trade trade = order.processExecutionReport(executionReport, brokerageAccountRepository);
         if (trade != null) {
             if (trade.getSide() == OrderSide.Buy) {
-                this.withdraw(
-                        trade.getAmount().negate());
-                this.deposit(
+                cashPosition = cashPosition.minus(
+                        trade.getAmount().negate()); // trade.amount is negative
+                depositSecurities(
                         trade.getInstrument(),
                         trade.getQuantity(),
                         trade.getPricePerShare(),
-                        trade,
-                        accountRepository);
+                        new TradeAllocationFactory(brokerageAccountRepository, trade));
             }
             else {
-                this.withdraw(
+                cashPosition = cashPosition.plus(
+                        trade.getAmount()); // trade.amount is positive
+                withdrawSecurities(    
                         trade.getInstrument(),
                         trade.getQuantity(),
-                        trade,
-                        accountRepository);
-                this.deposit(
-                        trade.getAmount());
+                        new TradeAllocationFactory(brokerageAccountRepository, trade));
             }
             this.addTransaction(trade);
         }
     }
 
     // ----- Queries and Read-Only Operations -----
-    public AccountPosition calculatePosition(
-            BrokerageAccountRepository accountRepository, PricingService pricingService) {
-        List<Lot> lots = accountRepository.findActiveLots(this);
+    public AccountPosition calculatePosition(PricingService pricingService) {
+        List<Lot> lots = brokerageAccountRepository.findActiveLots(this);
         AccountPosition accountPosition = this.assemblePosition(lots, pricingService);
         accountPosition.calculate();
         return accountPosition;
@@ -254,19 +248,16 @@ public class BrokerageAccount extends BaseAccount {
     @Override
     public boolean isCashAvailable(
             Money amount,
-            BrokerageAccountRepository accountRepository,
             PricingService pricingService) {
-        return amount.lteq(
-                calculateCashAvailable(accountRepository, pricingService));
+        return amount.lteq(calculateCashAvailable(pricingService));
     }
     
-    public Money calculateCashAvailable(
-            BrokerageAccountRepository accountRepository, PricingService pricingService) {
+    public Money calculateCashAvailable(PricingService pricingService) {
 
         Money cashAvailable = cashPosition;
         
         // Reduce cash available by estimated cost of buy orders
-        List<Order> orders = accountRepository.findActiveBuyOrders(this);
+        List<Order> orders = brokerageAccountRepository.findActiveBuyOrders(this);
         for (Order order : orders) {
             OrderEstimate orderEstimate =
                 order.calculateOrderEstimate(pricingService);
@@ -281,21 +272,18 @@ public class BrokerageAccount extends BaseAccount {
     @Override
     public boolean isSecurityAvailable(
             Instrument instrument,
-            DecimalQuantity quantity,
-            BrokerageAccountRepository accountRepository) {
-        return quantity.lteq(
-                calculateSecurityAvailable(instrument, accountRepository));
+            DecimalQuantity quantity) {
+        return quantity.lteq(calculateSecurityAvailable(instrument));
     }
     
-    public DecimalQuantity calculateSecurityAvailable(
-            Instrument instrument, BrokerageAccountRepository accountRepository) {
+    public DecimalQuantity calculateSecurityAvailable(Instrument instrument) {
 
         DecimalQuantity securityAvailable =
-            accountRepository.getNumberOfShares(this, instrument);
+            brokerageAccountRepository.getNumberOfShares(this, instrument);
 
         // Reduce security available by estimated quantity of sell orders
         List<Order> orders =
-            accountRepository.findActiveSellOrders(this, instrument);
+            brokerageAccountRepository.findActiveSellOrders(this, instrument);
         for (Order order : orders) {
             securityAvailable = securityAvailable.minus(order.getQuantity());
         }
@@ -305,7 +293,6 @@ public class BrokerageAccount extends BaseAccount {
 
     public OrderEstimate calculateOrderEstimate(
             Order order,
-            BrokerageAccountRepository accountRepository,
             PricingService pricingService) {
 
         OrderEstimate orderEstimate = order.calculateOrderEstimate(pricingService);
@@ -313,8 +300,8 @@ public class BrokerageAccount extends BaseAccount {
         // Determine account level compliance
         if (orderEstimate.getCompliance() == null) {
             OrderCompliance compliance = (order.getSide() == OrderSide.Buy) ?
-                    calculateBuyOrderCompliance(order, accountRepository, pricingService) :
-                    calculateSellOrderCompliance(order, accountRepository);
+                    calculateBuyOrderCompliance(order, pricingService) :
+                    calculateSellOrderCompliance(order);
             orderEstimate.setCompliance(compliance);
         }
 
@@ -323,25 +310,22 @@ public class BrokerageAccount extends BaseAccount {
     
     private OrderCompliance calculateBuyOrderCompliance(
             Order order,
-            BrokerageAccountRepository accountRepository,
             PricingService pricingService) {
 
         // Check if sufficient cash is available
         OrderEstimate orderEstimate = order.calculateOrderEstimate(pricingService);
         return isCashAvailable(
                 orderEstimate.getEstimatedValueInclFees(),
-                accountRepository,
                 pricingService) ?
                     OrderCompliance.Compliant :
                     OrderCompliance.InsufficientFunds;
     }
 
-    private OrderCompliance calculateSellOrderCompliance(
-            Order order, BrokerageAccountRepository accountRepository) {
+    private OrderCompliance calculateSellOrderCompliance(Order order) {
 
         // Check if sufficient securities are available
         return isSecurityAvailable(
-                order.getInstrument(), order.getQuantity(), accountRepository) ?
+                order.getInstrument(), order.getQuantity()) ?
                 OrderCompliance.Compliant : OrderCompliance.InsufficientQuantity;
     }
 
@@ -366,7 +350,7 @@ public class BrokerageAccount extends BaseAccount {
         parameters = {
             @Parameter (
                 name  = "enumClass",
-                value = "org.archfirst.bfoms.domain.trading.OwnershipType")
+                value = "org.archfirst.bfoms.domain.account.OwnershipType")
             }
     )
     @Column(length=Constants.ENUM_COLUMN_LENGTH)
@@ -404,14 +388,12 @@ public class BrokerageAccount extends BaseAccount {
         this.orders = orders;
     }
 
-    private void addOrder(Order order, BrokerageAccountRepository accountRepository) {
-        order.setAccount(this);
-        accountRepository.persist(order);
-        accountRepository.flush(); // get order id before adding to set
+    private void addOrder(Order order) {
         orders.add(order);
+        order.setAccount(this);
     }
 
-    @OneToMany(mappedBy="account",  cascade=CascadeType.ALL)
+    @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
     public Set<Lot> getLots() {
         return lots;
     }
@@ -419,14 +401,66 @@ public class BrokerageAccount extends BaseAccount {
         this.lots = lots;
     }
      
-    private void addLot(Lot lot, BrokerageAccountRepository accountRepository) {
-        lot.setAccount(this);
-        accountRepository.persist(lot);
-        accountRepository.flush(); // get lot id before adding to set
+    private void addLot(Lot lot) {
         lots.add(lot);
+        lot.setAccount(this);
     }
 
-    private interface AllocationFactory {
-        Allocation createAllocation();
+    public void setBrokerageAccountRepository(
+            BrokerageAccountRepository brokerageAccountRepository) {
+        this.brokerageAccountRepository = brokerageAccountRepository;
+    }
+
+    // ----- AllocationFactory -----
+
+    private abstract class AllocationFactory {
+        
+        protected BrokerageAccountRepository accountRepository;
+        
+        public AllocationFactory(BrokerageAccountRepository accountRepository) {
+            this.accountRepository = accountRepository;
+        }
+        
+        public abstract Allocation createAllocation(DecimalQuantity quantity);
+    }
+    
+    private class SecuritiesTransferAllocationFactory extends AllocationFactory {
+        
+        private SecuritiesTransfer transfer;
+        
+        public SecuritiesTransferAllocationFactory(
+                BrokerageAccountRepository accountRepository,
+                SecuritiesTransfer transfer) {
+            super(accountRepository);
+            this.transfer = transfer;
+        }
+
+        @Override
+        public Allocation createAllocation(DecimalQuantity quantity) {
+            SecuritiesTransferAllocation allocation =
+                new SecuritiesTransferAllocation(quantity, transfer);
+            accountRepository.persistAndFlush(allocation);
+            return allocation;
+        }
+    }
+    
+    private class TradeAllocationFactory extends AllocationFactory {
+        
+        private Trade trade;
+        
+        public TradeAllocationFactory(
+                BrokerageAccountRepository accountRepository,
+                Trade trade) {
+            super(accountRepository);
+            this.trade = trade;
+        }
+
+        @Override
+        public Allocation createAllocation(DecimalQuantity quantity) {
+            TradeAllocation allocation =
+                new TradeAllocation(quantity, trade);
+            accountRepository.persistAndFlush(allocation);
+            return allocation;
+        }
     }
 }

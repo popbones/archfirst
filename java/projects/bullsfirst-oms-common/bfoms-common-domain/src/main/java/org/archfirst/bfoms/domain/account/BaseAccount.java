@@ -30,7 +30,6 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
-import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountRepository;
 import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.pricing.PricingService;
 import org.archfirst.bfoms.domain.util.Constants;
@@ -80,13 +79,11 @@ public abstract class BaseAccount extends DomainEntity {
     // ----- Queries and Read-Only Operations -----
     public abstract boolean isCashAvailable(
             Money amount,
-            BrokerageAccountRepository accountRepository,
             PricingService pricingService);
 
     public abstract boolean isSecurityAvailable(
             Instrument instrument,
-            DecimalQuantity quantity,
-            BrokerageAccountRepository accountRepository);
+            DecimalQuantity quantity);
 
     // ----- Getters and Setters -----
     @NotNull
@@ -104,7 +101,7 @@ public abstract class BaseAccount extends DomainEntity {
         parameters = {
             @Parameter (
                 name  = "enumClass",
-                value = "org.archfirst.bfoms.domain.trading.AccountStatus")
+                value = "org.archfirst.bfoms.domain.account.AccountStatus")
             }
     )
     @Column(length=Constants.ENUM_COLUMN_LENGTH)
@@ -129,14 +126,9 @@ public abstract class BaseAccount extends DomainEntity {
         this.accountParties = accountParties;
     }
 
-    // Allow access from AccountFactory
-    void addAccountParty(
-            AccountParty accountParty,
-            BrokerageAccountRepository accountRepository) {
-        accountParty.setAccount(this);
-        accountRepository.persist(accountParty);
-        accountRepository.flush(); // get party id before adding to set
+    public void addAccountParty(AccountParty accountParty) {
         accountParties.add(accountParty);
+        accountParty.setAccount(this);
     }
 
     @OneToMany(mappedBy="account",  cascade=CascadeType.ALL)

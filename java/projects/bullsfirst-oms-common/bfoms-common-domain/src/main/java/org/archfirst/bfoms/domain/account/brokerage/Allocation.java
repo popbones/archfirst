@@ -15,17 +15,70 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
+import static javax.persistence.InheritanceType.JOINED;
+
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
+import javax.persistence.Column;
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.Inheritance;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+
+import org.archfirst.bfoms.domain.util.Constants;
+import org.archfirst.common.domain.DomainEntity;
+import org.archfirst.common.quantity.DecimalQuantity;
+
 /**
  * Allocation
  *
  * @author Naresh Bhatia
  */
-public class Allocation {
+@XmlAccessorType(XmlAccessType.FIELD)
+@Entity
+@Inheritance(strategy=JOINED)
+public abstract class Allocation extends DomainEntity {
+    private static final long serialVersionUID = 1L;
+
+    private DecimalQuantity quantity;
+    private Lot lot;
+    
     // ----- Constructors -----
+    public Allocation() {
+    }
+
+    public Allocation(DecimalQuantity quantity) {
+        this.quantity = quantity;
+    }
 
     // ----- Commands -----
 
     // ----- Queries and Read-Only Operations -----
 
     // ----- Getters and Setters -----
+    @NotNull
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name="value",
+            column = @Column(
+                    name="quantity",
+                    precision=Constants.QUANTITY_PRECISION,
+                    scale=Constants.QUANTITY_SCALE))})
+    public DecimalQuantity getQuantity() {
+        return quantity;
+    }
+    private void setQuantity(DecimalQuantity quantity) {
+        this.quantity = quantity;
+    }
+
+    @ManyToOne
+    public Lot getLot() {
+        return lot;
+    }
+    public void setLot(Lot lot) {
+        this.lot = lot;
+    }
 }

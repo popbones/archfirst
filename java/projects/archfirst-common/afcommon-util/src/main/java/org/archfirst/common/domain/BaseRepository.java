@@ -33,6 +33,11 @@ public class BaseRepository {
         entityManager.persist(object);
     }
 
+    public void persistAndFlush(Object object) {
+        entityManager.persist(object);
+        entityManager.flush();
+    }
+
     public void flush() {
         entityManager.flush();
     }

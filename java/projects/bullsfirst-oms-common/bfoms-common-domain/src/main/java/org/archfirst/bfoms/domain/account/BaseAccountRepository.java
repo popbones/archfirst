@@ -18,9 +18,9 @@ package org.archfirst.bfoms.domain.account;
 import org.archfirst.common.domain.BaseRepository;
 
 /**
- * AccountRepository
+ * BaseAccountRepository
  *
  * @author Naresh Bhatia
  */
-public class AccountRepository extends BaseRepository {
+public class BaseAccountRepository extends BaseRepository {
 }

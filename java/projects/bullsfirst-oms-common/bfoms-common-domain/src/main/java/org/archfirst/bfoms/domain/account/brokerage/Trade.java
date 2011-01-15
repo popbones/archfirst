@@ -15,17 +15,12 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
@@ -57,7 +52,6 @@ public class Trade extends Transaction {
     private Money totalPrice;
     private Money fees;
     private Order order;
-    private Set<TradeAllocation> allocations = new HashSet<TradeAllocation>();
 
     // ----- Constructors -----
     protected Trade() {
@@ -81,14 +75,6 @@ public class Trade extends Transaction {
     }
 
     // ----- Commands -----
-    public void allocate(DecimalQuantity quantity, Lot lot) {
-        this.addAllocation(new TradeAllocation(quantity, lot));
-    }
-
-    private void addAllocation(TradeAllocation allocation) {
-        allocations.add(allocation);
-        allocation.setTrade(this);
-    }
 
     // ----- Queries and Read-Only Operations -----
     @Transient
@@ -103,7 +89,7 @@ public class Trade extends Transaction {
         parameters = {
             @Parameter (
                 name  = "enumClass",
-                value = "org.archfirst.bfoms.domain.trading.order.OrderSide")
+                value = "org.archfirst.bfoms.domain.account.brokerage.order.OrderSide")
             }
         )
     @Column(nullable = false, length=Constants.ENUM_COLUMN_LENGTH)
@@ -184,14 +170,6 @@ public class Trade extends Transaction {
     }
     private void setOrder(Order order) {
         this.order = order;
-    }
-
-    @OneToMany(mappedBy="trade", cascade=CascadeType.ALL)
-    public Set<TradeAllocation> getAllocations() {
-        return allocations;
-    }
-    private void setAllocations(Set<TradeAllocation> allocations) {
-        this.allocations = allocations;
     }
 
     @Override

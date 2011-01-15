@@ -18,35 +18,35 @@ package org.archfirst.bfoms.domain.account.brokerage;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+import org.archfirst.bfoms.domain.account.SecuritiesTransfer;
 import org.archfirst.common.quantity.DecimalQuantity;
 
 /**
- * TradeAllocation
+ * SecuritiesTransferAllocation
  *
  * @author Naresh Bhatia
  */
 @Entity
-public class TradeAllocation extends Allocation {
+public class SecuritiesTransferAllocation extends Allocation {
     private static final long serialVersionUID = 1L;
 
-    private Trade trade;
+    private SecuritiesTransfer transfer;
 
     // ----- Constructors -----
-    public TradeAllocation() {
+    public SecuritiesTransferAllocation() {
     }
 
-    public TradeAllocation(DecimalQuantity quantity, Trade trade) {
+    public SecuritiesTransferAllocation(DecimalQuantity quantity, SecuritiesTransfer transfer) {
         super(quantity);
-        this.trade = trade;
+        this.transfer = transfer;
     }
 
     // ----- Getters and Setters -----
     @ManyToOne
-    public Trade getTrade() {
-        return trade;
+    public SecuritiesTransfer getTransfer() {
+        return transfer;
     }
-    // Allow access to Trade
-    void setTrade(Trade trade) {
-        this.trade = trade;
+    public void setTransfer(SecuritiesTransfer transfer) {
+        this.transfer = transfer;
     }
 }

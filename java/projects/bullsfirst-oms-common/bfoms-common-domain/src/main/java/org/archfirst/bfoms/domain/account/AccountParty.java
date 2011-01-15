@@ -92,7 +92,7 @@ public class AccountParty extends DomainEntity {
         parameters = {
             @Parameter (
                 name  = "enumClass",
-                value = "org.archfirst.bfoms.domain.trading.AccountRole")
+                value = "org.archfirst.bfoms.domain.account.AccountRole")
             }
     )
     @Column(length=Constants.ENUM_COLUMN_LENGTH)
