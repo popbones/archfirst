@@ -46,7 +46,11 @@ public class BrokerageAccountService extends BaseAccountService {
 
     // ----- Queries and Read-Only Operations -----
     public BrokerageAccount findAccount(Long id) {
-        return brokerageAccountRepository.findAccount(id);
+        BrokerageAccount account = brokerageAccountRepository.findAccount(id);
+        if (account != null) {
+            brokerageAccountFactory.injectDependencies(account);
+        }
+        return account;
     }
     
     private User getUser(String username) {

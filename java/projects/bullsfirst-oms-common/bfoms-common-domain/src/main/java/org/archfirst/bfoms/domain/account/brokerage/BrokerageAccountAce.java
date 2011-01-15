@@ -45,11 +45,11 @@ public class BrokerageAccountAce extends AccessControlEntry<BrokerageAccount, Br
     }
 
     @Type(
-        type = "org.archfirst.hibernate.util.GenericEnumUserType",
+        type = "org.archfirst.common.hibernate.GenericEnumUserType",
         parameters = {
             @Parameter (
                 name  = "enumClass",
-                value = "org.archfirst.bullsfirst.domain.account.AccountPermission")
+                value = "org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountPermission")
             }
     )
     @Column(length=Constants.ENUM_COLUMN_LENGTH)

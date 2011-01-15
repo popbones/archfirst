@@ -20,6 +20,8 @@
     <bean class="org.archfirst.bfoms.domain.pricing.PricingService" />
     <bean class="org.archfirst.bfoms.domain.security.SecurityService" />
     <bean class="org.archfirst.bfoms.domain.security.UserRepository" />
+    <bean class="org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountFactory" />
     <bean class="org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountRepository" />
+    <bean class="org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService" />
 
 </beans>

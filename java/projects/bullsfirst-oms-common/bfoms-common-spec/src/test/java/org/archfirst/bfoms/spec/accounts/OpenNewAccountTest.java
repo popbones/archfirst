@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.spec.account;
+package org.archfirst.bfoms.spec.accounts;
 
 import javax.inject.Inject;
 

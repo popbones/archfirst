@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.spec.account;
+package org.archfirst.bfoms.spec.accounts;
 
+import org.archfirst.common.springtest.AbstractTransactionalSpecTest;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
@@ -23,5 +24,5 @@ import org.springframework.test.context.ContextConfiguration;
  * @author Naresh Bhatia
  */
 @ContextConfiguration(locations={"classpath:/org/archfirst/bfoms/spec/applicationContext.xml"})
-public class AccountsTest {
+public class AccountsTest extends AbstractTransactionalSpecTest {
 }
