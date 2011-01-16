@@ -41,4 +41,8 @@ public class Constants {
 
     // Gain can fit this format: xxxx.12 (2 fractional digits)
     public static final int GAIN_SCALE = 2;
+
+    // Cash instrument constants
+    public static final String CASH_INSTRUMENT_SYMBOL = "CASH";
+    public static final String CASH_INSTRUMENT_NAME = "Cash";
 }

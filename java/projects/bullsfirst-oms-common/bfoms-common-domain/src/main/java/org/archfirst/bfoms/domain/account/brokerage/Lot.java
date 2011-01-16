@@ -28,10 +28,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import org.archfirst.bfoms.domain.account.position.LotPosition;
-import org.archfirst.bfoms.domain.account.position.Position;
 import org.archfirst.bfoms.domain.pricing.Instrument;
-import org.archfirst.bfoms.domain.pricing.PricingService;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
@@ -71,19 +68,6 @@ public class Lot extends DomainEntity {
         this.pricePaidPerShare = pricePaidPerShare;
     }
 
-    // ----- Factories -----
-    // Allow access only from Account
-    Position assemblePosition(PricingService pricingService) {
-        return new LotPosition(
-                id,
-                creationTime,
-                instrument.getName(),
-                instrument.getSymbol(),
-                quantity,
-                pricingService.getMarketPrice(instrument),
-                pricePaidPerShare);
-    }
-    
     // ----- Commands -----
     // Allow access only from BrokerageAccount
     void buy(DecimalQuantity quantityToBuy, Money pricePaidPerShare) {

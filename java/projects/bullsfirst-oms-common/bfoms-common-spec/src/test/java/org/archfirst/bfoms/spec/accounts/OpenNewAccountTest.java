@@ -17,9 +17,11 @@ package org.archfirst.bfoms.spec.accounts;
 
 import javax.inject.Inject;
 
+import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
 import org.archfirst.bfoms.domain.security.RegistrationRequest;
 import org.archfirst.bfoms.domain.security.SecurityService;
+import org.archfirst.common.money.Money;
 import org.archfirst.common.springtest.AbstractTransactionalSpecTest;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -37,14 +39,15 @@ public class OpenNewAccountTest extends AbstractTransactionalSpecTest {
     private static String PASSWORD = "cool";
     private static String ACCOUNT_NAME = "Brokerage Account";
     
-    @Inject private SecurityService securityService;
     @Inject private BrokerageAccountService brokerageAccountService;
+    @Inject private SecurityService securityService;
 
-    public void openNewAccount() throws Exception {
+    public Money openNewAccount() throws Exception {
         securityService.registerUser(
                 new RegistrationRequest(FIRST_NAME, LAST_NAME, USERNAME, PASSWORD));
         Long accountId =
             brokerageAccountService.openNewAccount(USERNAME, ACCOUNT_NAME);
-        brokerageAccountService.findAccount(accountId);
+        BrokerageAccount account = brokerageAccountService.findAccount(accountId);
+        return account.getCashPosition();
     }
 }

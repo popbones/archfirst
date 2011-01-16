@@ -15,6 +15,7 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,9 +39,6 @@ import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCompliance;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
-import org.archfirst.bfoms.domain.account.position.AccountPosition;
-import org.archfirst.bfoms.domain.account.position.CashPosition;
-import org.archfirst.bfoms.domain.account.position.InstrumentPosition;
 import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.pricing.PricingService;
 import org.archfirst.bfoms.domain.util.Constants;
@@ -213,38 +211,33 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     // ----- Queries and Read-Only Operations -----
-    public AccountPosition calculatePosition(PricingService pricingService) {
+    public List<Position> getPositions(PricingService pricingService) {
+        
         List<Lot> lots = brokerageAccountRepository.findActiveLots(this);
-        AccountPosition accountPosition = this.assemblePosition(lots, pricingService);
-        accountPosition.calculate();
-        return accountPosition;
-    }
-    
-    private AccountPosition assemblePosition(
-            List<Lot> lots, PricingService pricingService) {
-        AccountPosition accountPosition = new AccountPosition(id, name);
-        Instrument instrument = null;
-        InstrumentPosition instrumentPosition = null;
+        
+        // Add lot positions
+        List<Position> positions = new ArrayList<Position>();
         for (Lot lot : lots) {
-            // If there is a change in instrument, then create a new instumentPosition
-            if (instrument==null || !instrument.equals(lot.getInstrument())) {
-                instrument = lot.getInstrument();
-                instrumentPosition = new InstrumentPosition(
-                        instrument.getName(),
-                        instrument.getSymbol(),
-                        pricingService.getMarketPrice(instrument));
-                accountPosition.addChild(instrumentPosition);
-            }
-            
-            instrumentPosition.addChild(lot.assemblePosition(pricingService));
+            Position position = new Position(this.id, this.name);
+            position.setLotPosition(
+                    lot.getInstrument().getSymbol(),
+                    lot.getInstrument().getName(),
+                    lot.getId(),
+                    lot.getCreationTime(),
+                    lot.getQuantity(),
+                    pricingService.getMarketPrice(lot.getInstrument()),
+                    lot.getPricePaidPerShare());
+            positions.add(position);
         }
         
-        // Lastly add a cash position
-        accountPosition.addChild(new CashPosition(cashPosition));
+        // Add cash position
+        Position position = new Position(this.id, this.name);
+        position.setCashPosition(this.cashPosition);
+        positions.add(position);
         
-        return accountPosition;
+        return positions;
     }
-
+    
     @Override
     public boolean isCashAvailable(
             Money amount,
