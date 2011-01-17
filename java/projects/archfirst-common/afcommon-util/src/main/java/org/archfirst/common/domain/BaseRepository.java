@@ -23,7 +23,7 @@ import javax.persistence.PersistenceContext;
  *
  * @author Naresh Bhatia
  */
-public class BaseRepository {
+public abstract class BaseRepository {
 
     @PersistenceContext
     protected EntityManager entityManager;

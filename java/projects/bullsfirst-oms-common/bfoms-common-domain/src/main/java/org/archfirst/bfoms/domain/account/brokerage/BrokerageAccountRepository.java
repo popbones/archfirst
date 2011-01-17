@@ -20,7 +20,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.archfirst.bfoms.domain.account.BaseAccountRepository;
 import org.archfirst.bfoms.domain.account.Transaction;
 import org.archfirst.bfoms.domain.account.TransactionCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
@@ -29,6 +28,7 @@ import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.security.User;
+import org.archfirst.common.domain.BaseRepository;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.hibernate.Criteria;
 import org.hibernate.FetchMode;
@@ -40,7 +40,7 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Naresh Bhatia
  */
-public class BrokerageAccountRepository extends BaseAccountRepository {
+public class BrokerageAccountRepository extends BaseRepository {
 
     // ----- BrokerageAccount Methods -----
     public List<BrokerageAccount> findAccountsWithPermission(

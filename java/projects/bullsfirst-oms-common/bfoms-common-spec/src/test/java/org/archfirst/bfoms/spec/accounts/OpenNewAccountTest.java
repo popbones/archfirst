@@ -15,39 +15,20 @@
  */
 package org.archfirst.bfoms.spec.accounts;
 
-import javax.inject.Inject;
-
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
-import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
-import org.archfirst.bfoms.domain.security.RegistrationRequest;
-import org.archfirst.bfoms.domain.security.SecurityService;
 import org.archfirst.common.money.Money;
-import org.archfirst.common.springtest.AbstractTransactionalSpecTest;
-import org.springframework.test.context.ContextConfiguration;
 
 /**
  * OpenNewAccountTest
  *
  * @author Naresh Bhatia
  */
-@ContextConfiguration(locations={"classpath:/org/archfirst/bfoms/spec/applicationContext.xml"})
-public class OpenNewAccountTest extends AbstractTransactionalSpecTest {
-
-    private static String FIRST_NAME = "John";
-    private static String LAST_NAME = "Smith";
-    private static String USERNAME = "jsmith";
-    private static String PASSWORD = "cool";
-    private static String ACCOUNT_NAME = "Brokerage Account";
-    
-    @Inject private BrokerageAccountService brokerageAccountService;
-    @Inject private SecurityService securityService;
+public class OpenNewAccountTest extends BaseAccountsTest {
 
     public Money openNewAccount() throws Exception {
-        securityService.registerUser(
-                new RegistrationRequest(FIRST_NAME, LAST_NAME, USERNAME, PASSWORD));
-        Long accountId =
-            brokerageAccountService.openNewAccount(USERNAME, ACCOUNT_NAME);
-        BrokerageAccount account = brokerageAccountService.findAccount(accountId);
+        this.createUser1();
+        this.createBrokerageAccount1();
+        BrokerageAccount account = brokerageAccountService.findAccount(brokerageAccount1Id);
         return account.getCashPosition();
     }
 }

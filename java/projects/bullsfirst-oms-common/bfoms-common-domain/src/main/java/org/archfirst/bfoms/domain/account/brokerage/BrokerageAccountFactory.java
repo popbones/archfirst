@@ -102,14 +102,23 @@ public class BrokerageAccountFactory {
             new BrokerageAccountAce(recipient, account, BrokerageAccountPermission.Transfer)); 
     }
 
+    // ----- Object Creation Via Repositories  -----
+    public BrokerageAccount findAccount(Long id) {
+        BrokerageAccount account = brokerageAccountRepository.findAccount(id);
+        if (account != null) {
+            this.injectDependencies(account);
+        }
+        return account;
+    }
+
     // ----- Injection Helpers -----
-    public void injectDependencies(Set<BrokerageAccount> accounts) {
+    private void injectDependencies(Set<BrokerageAccount> accounts) {
         for (BrokerageAccount account : accounts) {
             this.injectDependencies(account);
         }
     }
     
-    public void injectDependencies(BrokerageAccount account) {
+    private void injectDependencies(BrokerageAccount account) {
         account.setBrokerageAccountRepository(brokerageAccountRepository);
     }
 }

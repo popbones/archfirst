@@ -63,7 +63,6 @@ public abstract class Transaction extends DomainEntity {
     public BaseAccount getAccount() {
         return account;
     }
-    // Allow access to BaseAccount
     public void setAccount(BaseAccount account) {
         this.account = account;
     }

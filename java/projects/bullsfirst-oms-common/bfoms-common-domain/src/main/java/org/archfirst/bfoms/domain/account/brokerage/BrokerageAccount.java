@@ -99,6 +99,7 @@ public class BrokerageAccount extends BaseAccount {
                 transfer.getQuantity(),
                 new SecuritiesTransferAllocationFactory(brokerageAccountRepository, transfer));
         }
+        this.addTransaction(transfer);
     }
 
     private void depositSecurities(

@@ -17,7 +17,6 @@ package org.archfirst.bfoms.domain.account.brokerage;
 
 import javax.inject.Inject;
 
-import org.archfirst.bfoms.domain.account.BaseAccountService;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.bfoms.domain.security.UserRepository;
 
@@ -26,10 +25,9 @@ import org.archfirst.bfoms.domain.security.UserRepository;
  *
  * @author Naresh Bhatia
  */
-public class BrokerageAccountService extends BaseAccountService {
+public class BrokerageAccountService {
     
     @Inject private BrokerageAccountFactory brokerageAccountFactory;
-    @Inject private BrokerageAccountRepository brokerageAccountRepository;
     @Inject private UserRepository userRepository;
 
     // ----- Commands -----
@@ -46,11 +44,7 @@ public class BrokerageAccountService extends BaseAccountService {
 
     // ----- Queries and Read-Only Operations -----
     public BrokerageAccount findAccount(Long id) {
-        BrokerageAccount account = brokerageAccountRepository.findAccount(id);
-        if (account != null) {
-            brokerageAccountFactory.injectDependencies(account);
-        }
-        return account;
+        return brokerageAccountFactory.findAccount(id);
     }
     
     private User getUser(String username) {

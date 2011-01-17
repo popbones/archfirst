@@ -1,0 +1,20 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+<head>
+    <title>Transfer Cash</title>
+    <link href="../../concordion.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <h1>Transfer Cash - External to Brokerage</h1>
+
+    <p>
+        Given a newly opened brokerage account,
+        when $<span concordion:set="#amount">100.00</span> is transfered
+        to it from an external account, the cash position of the brokerage
+        account becomes <span concordion:assertEquals="transfer(#amount)">$100.00</span>. 
+    </p>
+
+</body>
+</html>
