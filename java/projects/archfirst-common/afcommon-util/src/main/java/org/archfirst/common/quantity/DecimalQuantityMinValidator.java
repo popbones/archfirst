@@ -23,7 +23,7 @@ import javax.validation.ConstraintValidatorContext;
 /**
  * Minimum validator for DecimalQuantit.
  *
- * @author naresh
+ * @author Naresh Bhatia
  */
 public class DecimalQuantityMinValidator
 implements ConstraintValidator<DecimalQuantityMin, DecimalQuantity> {

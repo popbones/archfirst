@@ -15,17 +15,33 @@
  */
 package org.archfirst.bfoms.domain.account.external;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * ExternalAccountParams
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "ExternalAccountParams")
 public class ExternalAccountParams {
+
+    @XmlElement(name = "Name", required = true)
     private String name;
+
+    @XmlElement(name = "RoutingNumber", required = true)
     private String routingNumber;
+
+    @XmlElement(name = "AccountNumber", required = true)
     private String accountNumber;
 
     // ----- Constructors -----
+    public ExternalAccountParams() {
+    }
+
     public ExternalAccountParams(
             String name,
             String routingNumber,

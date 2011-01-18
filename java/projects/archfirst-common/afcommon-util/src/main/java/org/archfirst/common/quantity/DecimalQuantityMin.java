@@ -24,6 +24,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
 import javax.validation.Constraint;
+import javax.validation.Payload;
 
 /**
  * Constraint definition for the minimum value of a DecimalQuantity.
@@ -36,13 +37,16 @@ import javax.validation.Constraint;
 @Retention(RUNTIME)
 public @interface DecimalQuantityMin {
 
-    String message() default "{validator.min}";
+    String message() default "{javax.validation.constraints.Min.message}";
     
     Class<?>[] groups() default {};
+    
+    Class<? extends Payload>[] payload() default {};
 
     /**
     * The <code>String</code> representation of the minimum value according to
-    * the <code>BigDecimal</code> string representation
+    * the <code>BigDecimal</code> string representation. Will be used as the
+    * constraint parameter, e.g. @DecimalQuantityMin(value="1.00")
     * 
     * @return value the element must be higher or equal to
     */

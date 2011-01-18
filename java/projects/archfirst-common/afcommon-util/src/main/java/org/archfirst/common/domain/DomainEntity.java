@@ -57,6 +57,9 @@ public abstract class DomainEntity implements Serializable {
         if (!this.getClass().equals(other.getClass())) {
             return false;
         }
+        if (this.id == null) {
+            return false;
+        }
         final DomainEntity that = (DomainEntity)other;
         return this.id.equals(that.getId());
     }
@@ -68,7 +71,8 @@ public abstract class DomainEntity implements Serializable {
      */
     @Override
     public int hashCode() {
-        return this.id.hashCode();
+        // Make sure we don't cause a NullPointerException
+        return (this.id != null) ? this.id.hashCode() : super.hashCode();
     }
 
     // ----- Getters and Setters -----

@@ -244,6 +244,8 @@ public class BrokerageAccountRepository extends BaseRepository {
 
     // ----- Transaction Methods -----
     public List<Transaction> findTransactions(TransactionCriteria criteria) {
+        
+        /*
         Session session = (Session)entityManager.getDelegate();
         Criteria transactionCriteria = session.createCriteria(Transaction.class);
 
@@ -261,6 +263,17 @@ public class BrokerageAccountRepository extends BaseRepository {
 
         @SuppressWarnings("unchecked")
         List<Transaction> transactions = (List<Transaction>)transactionCriteria.list();
+        */
+        
+        @SuppressWarnings("unchecked")
+        List<Transaction> transactions = entityManager.createQuery(
+                "select t from Transaction t")
+            .getResultList();
+        
+        for (Transaction transaction : transactions) {
+            System.out.println("----> findTransactions: " + transaction.getCreationTime() + ": " + transaction.getDescription());
+        }
+
 
         return transactions;
     }
