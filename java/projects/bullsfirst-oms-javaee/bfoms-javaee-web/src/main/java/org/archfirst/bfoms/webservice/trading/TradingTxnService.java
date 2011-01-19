@@ -23,6 +23,7 @@ import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.account.BaseAccountService;
 import org.archfirst.bfoms.domain.account.Transaction;
+import org.archfirst.bfoms.domain.account.TransactionCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
 import org.archfirst.bfoms.domain.account.external.ExternalAccount;
@@ -64,6 +65,8 @@ public class TradingTxnService {
         
     // ----- Queries and Read-Only Operations -----
     public List<Transaction> getTransactions(Long accountId) {
-        return brokerageAccountService.findTransactions(accountId);
+        TransactionCriteria criteria = new TransactionCriteria();
+        criteria.setAccountId(accountId);
+        return baseAccountService.findTransactions(criteria);
     }
 }

@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import org.archfirst.bfoms.domain.account.Transaction;
-import org.archfirst.bfoms.domain.account.TransactionCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
@@ -240,41 +238,5 @@ public class BrokerageAccountRepository extends BaseRepository {
         }
 
         return numberOfShares;
-    }
-
-    // ----- Transaction Methods -----
-    public List<Transaction> findTransactions(TransactionCriteria criteria) {
-        
-        /*
-        Session session = (Session)entityManager.getDelegate();
-        Criteria transactionCriteria = session.createCriteria(Transaction.class);
-
-        if (criteria.getAccount() != null) {
-            transactionCriteria.add(Restrictions.eq("account", criteria.getAccount()));
-        }
-
-        if (criteria.getFromDate() != null) {
-            transactionCriteria.add(Restrictions.ge("creationTime", criteria.getFromDate().toDateTimeAtStartOfDay()));
-        }
-
-        if (criteria.getToDate() != null) {
-            transactionCriteria.add(Restrictions.lt("creationTime", criteria.getToDate().plusDays(1).toDateTimeAtStartOfDay()));
-        }
-
-        @SuppressWarnings("unchecked")
-        List<Transaction> transactions = (List<Transaction>)transactionCriteria.list();
-        */
-        
-        @SuppressWarnings("unchecked")
-        List<Transaction> transactions = entityManager.createQuery(
-                "select t from Transaction t")
-            .getResultList();
-        
-        for (Transaction transaction : transactions) {
-            System.out.println("----> findTransactions: " + transaction.getCreationTime() + ": " + transaction.getDescription());
-        }
-
-
-        return transactions;
     }
 }

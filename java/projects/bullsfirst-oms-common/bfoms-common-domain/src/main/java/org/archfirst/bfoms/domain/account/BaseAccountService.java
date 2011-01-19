@@ -15,6 +15,8 @@
  */
 package org.archfirst.bfoms.domain.account;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.pricing.Instrument;
@@ -68,4 +70,7 @@ public class BaseAccountService {
     }
 
     // ----- Queries and Read-Only Operations -----
+    public List<Transaction> findTransactions(TransactionCriteria criteria) {
+        return baseAccountRepository.findTransactions(criteria);
+    }
 }

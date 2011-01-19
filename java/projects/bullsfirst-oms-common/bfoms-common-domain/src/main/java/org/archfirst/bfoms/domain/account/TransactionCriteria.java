@@ -23,7 +23,7 @@ import org.joda.time.LocalDate;
  * @author Naresh Bhatia
  */
 public class TransactionCriteria {
-    private BaseAccount account;
+    private Long accountId;
     private LocalDate fromDate;
     private LocalDate toDate;
 
@@ -32,17 +32,17 @@ public class TransactionCriteria {
      * Clear all the criteria
      */
     public void clear() {
-        account = null;
+        accountId = null;
         fromDate = null;
         toDate = null;
     }
 
     // ----- Getters and Setters -----
-    public BaseAccount getAccount() {
-        return account;
+    public Long getAccountId() {
+        return accountId;
     }
-    public void setAccount(BaseAccount account) {
-        this.account = account;
+    public void setAccountId(Long accountId) {
+        this.accountId = accountId;
     }
 
     public LocalDate getFromDate() {

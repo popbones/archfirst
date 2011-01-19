@@ -15,7 +15,12 @@
  */
 package org.archfirst.bfoms.domain.account;
 
+import java.util.List;
+
 import org.archfirst.common.domain.BaseRepository;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 
 /**
  * BaseAccountRepository
@@ -23,4 +28,28 @@ import org.archfirst.common.domain.BaseRepository;
  * @author Naresh Bhatia
  */
 public class BaseAccountRepository extends BaseRepository {
+
+    // ----- Transaction Methods -----
+    public List<Transaction> findTransactions(TransactionCriteria criteria) {
+        
+        Session session = ((org.hibernate.ejb.EntityManagerImpl)em.getDelegate()).getSession(); 
+        Criteria transactionCriteria = session.createCriteria(Transaction.class);
+
+        if (criteria.getAccountId() != null) {
+            transactionCriteria.add(Restrictions.eq("account.id", criteria.getAccountId()));
+        }
+
+        if (criteria.getFromDate() != null) {
+            transactionCriteria.add(Restrictions.ge("creationTime", criteria.getFromDate().toDateTimeAtStartOfDay()));
+        }
+
+        if (criteria.getToDate() != null) {
+            transactionCriteria.add(Restrictions.lt("creationTime", criteria.getToDate().plusDays(1).toDateTimeAtStartOfDay()));
+        }
+
+        @SuppressWarnings("unchecked")
+        List<Transaction> transactions = (List<Transaction>)transactionCriteria.list();
+
+        return transactions;
+    }
 }

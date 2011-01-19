@@ -15,12 +15,8 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
-import java.util.List;
-
 import javax.inject.Inject;
 
-import org.archfirst.bfoms.domain.account.Transaction;
-import org.archfirst.bfoms.domain.account.TransactionCriteria;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.bfoms.domain.security.UserRepository;
 
@@ -52,12 +48,6 @@ public class BrokerageAccountService {
         return brokerageAccountFactory.findAccount(id);
     }
     
-    public List<Transaction> findTransactions(Long accountId) {
-        TransactionCriteria criteria = new TransactionCriteria();
-        criteria.setAccount(findAccount(accountId));
-        return brokerageAccountRepository.findTransactions(criteria);
-    }
-
     private User getUser(String username) {
         return userRepository.findUser(username);
     }
