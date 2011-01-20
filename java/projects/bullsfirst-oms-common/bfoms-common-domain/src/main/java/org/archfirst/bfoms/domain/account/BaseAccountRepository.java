@@ -17,10 +17,12 @@ package org.archfirst.bfoms.domain.account;
 
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
+
 import org.archfirst.common.domain.BaseRepository;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
  * BaseAccountRepository
@@ -32,24 +34,26 @@ public class BaseAccountRepository extends BaseRepository {
     // ----- Transaction Methods -----
     public List<Transaction> findTransactions(TransactionCriteria criteria) {
         
-        Session session = ((org.hibernate.ejb.EntityManagerImpl)em.getDelegate()).getSession(); 
-        Criteria transactionCriteria = session.createCriteria(Transaction.class);
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Transaction> query = builder.createQuery(Transaction.class);
 
+        // select * from Transaction
+        Root<Transaction> _transaction = query.from(Transaction.class);
+        
+        // where accountId = criteria.getAccountId()
         if (criteria.getAccountId() != null) {
-            transactionCriteria.add(Restrictions.eq("account.id", criteria.getAccountId()));
+            Path<BaseAccount> _account = _transaction.get(Transaction_.account);
+            Path<Long> _accountId = _account.get(BaseAccount_.id);
+            query.where(builder.equal(_accountId, criteria.getAccountId()));
         }
 
         if (criteria.getFromDate() != null) {
-            transactionCriteria.add(Restrictions.ge("creationTime", criteria.getFromDate().toDateTimeAtStartOfDay()));
         }
 
         if (criteria.getToDate() != null) {
-            transactionCriteria.add(Restrictions.lt("creationTime", criteria.getToDate().plusDays(1).toDateTimeAtStartOfDay()));
         }
-
-        @SuppressWarnings("unchecked")
-        List<Transaction> transactions = (List<Transaction>)transactionCriteria.list();
-
-        return transactions;
+       
+        // Execute the query
+        return entityManager.createQuery(query).getResultList();
     }
 }

@@ -17,6 +17,7 @@ package org.archfirst.bfoms.spec.accounts.transfers;
 
 import java.math.BigDecimal;
 
+import org.archfirst.bfoms.domain.account.TransactionCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
 import org.archfirst.bfoms.domain.account.external.ExternalAccount;
 import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
@@ -43,6 +44,9 @@ public class TransferCashExternalToBrokerageTest extends BaseAccountsTest {
             brokerageAccountService.findAccount(brokerageAccount1Id);
         this.baseAccountService.transferCash(
                 new Money(amount), fromAccount, toAccount);
+        TransactionCriteria criteria = new TransactionCriteria();
+        criteria.setAccountId(brokerageAccount1Id);
+        this.baseAccountService.findTransactions(criteria);
         return toAccount.getCashPosition();
     }
 }
