@@ -28,6 +28,7 @@ import org.archfirst.bfoms.domain.security.UserRepository;
 public class ExternalAccountService {
 
     @Inject private ExternalAccountFactory externalAccountFactory;
+    @Inject private ExternalAccountRepository externalAccountRepository;
     @Inject private UserRepository userRepository;
     
     // ----- Commands -----
@@ -40,7 +41,7 @@ public class ExternalAccountService {
 
     // ----- Queries and Read-Only Operations -----
     public ExternalAccount findAccount(Long id) {
-        return externalAccountFactory.findAccount(id);
+        return externalAccountRepository.findAccount(id);
     }
     
     private User getUser(String username) {

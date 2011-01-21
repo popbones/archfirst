@@ -45,7 +45,7 @@ public class BrokerageAccountService {
 
     // ----- Queries and Read-Only Operations -----
     public BrokerageAccount findAccount(Long id) {
-        return brokerageAccountFactory.findAccount(id);
+        return brokerageAccountRepository.findAccount(id);
     }
     
     private User getUser(String username) {

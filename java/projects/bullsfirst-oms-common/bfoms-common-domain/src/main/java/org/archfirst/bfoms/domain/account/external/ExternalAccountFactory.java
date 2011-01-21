@@ -35,7 +35,6 @@ public class ExternalAccountFactory {
     @Inject
     private ExternalAccountRepository externalAccountRepository;
     
-    // ----- Factories -----
     /**
      * Creates a new external account with full access to the specified user.
      * 
@@ -54,10 +53,5 @@ public class ExternalAccountFactory {
                 permissionRecipient, account, ExternalAccountPermission.FullAccess)); 
         logger.debug("{} created", account.getName());
         return account;
-    }
-
-    // ----- Object Creation Via Repositories  -----
-    public ExternalAccount findAccount(Long id) {
-        return externalAccountRepository.findAccount(id);
     }
 }

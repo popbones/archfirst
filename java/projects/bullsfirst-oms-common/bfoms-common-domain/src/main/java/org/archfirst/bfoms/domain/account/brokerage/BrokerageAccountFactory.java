@@ -15,8 +15,6 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
-import java.util.Set;
-
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.account.AccountParty;
@@ -38,10 +36,9 @@ public class BrokerageAccountFactory {
     private static final Logger logger =
         LoggerFactory.getLogger(BrokerageAccountFactory.class);
 
-    @Inject
-    private BrokerageAccountRepository brokerageAccountRepository;
+    @Inject private BrokerageAccountRepository brokerageAccountRepository;
+    @Inject private BrokerageAccountInjector brokerageAccountInjector;
     
-    // ----- Factories -----
     /**
      * Creates a new individual account for the specified person and
      * grants full access to the specified user.
@@ -72,7 +69,7 @@ public class BrokerageAccountFactory {
                 AccountStatus.Active,
                 OwnershipType.Individual,
                 new Money("0.00"));
-        this.injectDependencies(account);
+        brokerageAccountInjector.injectDependencies(account);
         brokerageAccountRepository.persistAndFlush(account);
         
         // Add AccountParty
@@ -100,25 +97,5 @@ public class BrokerageAccountFactory {
             new BrokerageAccountAce(recipient, account, BrokerageAccountPermission.Trade)); 
         brokerageAccountRepository.persist(
             new BrokerageAccountAce(recipient, account, BrokerageAccountPermission.Transfer)); 
-    }
-
-    // ----- Object Creation Via Repositories  -----
-    public BrokerageAccount findAccount(Long id) {
-        BrokerageAccount account = brokerageAccountRepository.findAccount(id);
-        if (account != null) {
-            this.injectDependencies(account);
-        }
-        return account;
-    }
-
-    // ----- Injection Helpers -----
-    private void injectDependencies(Set<BrokerageAccount> accounts) {
-        for (BrokerageAccount account : accounts) {
-            this.injectDependencies(account);
-        }
-    }
-    
-    private void injectDependencies(BrokerageAccount account) {
-        account.setBrokerageAccountRepository(brokerageAccountRepository);
     }
 }

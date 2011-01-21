@@ -70,6 +70,10 @@ public class BaseAccountService {
     }
 
     // ----- Queries and Read-Only Operations -----
+    public BaseAccount findAccount(Long id) {
+        return baseAccountRepository.findAccount(id);
+    }
+    
     public List<Transaction> findTransactions(TransactionCriteria criteria) {
         return baseAccountRepository.findTransactions(criteria);
     }

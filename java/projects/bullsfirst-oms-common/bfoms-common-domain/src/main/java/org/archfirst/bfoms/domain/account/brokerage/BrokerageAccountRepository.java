@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.inject.Inject;
+
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
@@ -40,6 +42,8 @@ import org.hibernate.criterion.Restrictions;
  */
 public class BrokerageAccountRepository extends BaseRepository {
 
+    @Inject private BrokerageAccountInjector brokerageAccountInjector;
+    
     // ----- BrokerageAccount Methods -----
     public List<BrokerageAccount> findAccountsWithPermission(
             User user,
@@ -54,11 +58,17 @@ public class BrokerageAccountRepository extends BaseRepository {
             .setParameter("permission", permission)
             .getResultList();
 
+        brokerageAccountInjector.injectDependencies(accounts);
+        
         return accounts;
     }
     
     public BrokerageAccount findAccount(Long id) {
-        return entityManager.find(BrokerageAccount.class, id);
+        BrokerageAccount account = entityManager.find(BrokerageAccount.class, id);
+        if (account != null) {
+            brokerageAccountInjector.injectDependencies(account);
+        }
+        return account;
     }
 
     public List<BrokerageAccountPermission> findPermissionsForAccount(
@@ -84,6 +94,9 @@ public class BrokerageAccountRepository extends BaseRepository {
                 "where o.id = :id")
             .setParameter("id", orderId)
             .getSingleResult();
+        if (account != null) {
+            brokerageAccountInjector.injectDependencies(account);
+        }
         return account;
     }
 

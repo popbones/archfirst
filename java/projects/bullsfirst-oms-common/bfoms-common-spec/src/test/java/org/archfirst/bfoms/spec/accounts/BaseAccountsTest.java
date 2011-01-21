@@ -15,14 +15,20 @@
  */
 package org.archfirst.bfoms.spec.accounts;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.account.BaseAccountService;
+import org.archfirst.bfoms.domain.account.CashTransfer;
+import org.archfirst.bfoms.domain.account.Transaction;
+import org.archfirst.bfoms.domain.account.TransactionCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountService;
 import org.archfirst.bfoms.domain.security.RegistrationRequest;
 import org.archfirst.bfoms.domain.security.SecurityService;
+import org.archfirst.common.money.Money;
 import org.archfirst.common.springtest.AbstractTransactionalSpecTest;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -51,22 +57,45 @@ public abstract class BaseAccountsTest extends AbstractTransactionalSpecTest  {
     protected Long brokerageAccount1Id;
     protected Long externalAccount1Id;
     
-    public void createUser1() throws Exception {
+    protected void createUser1() throws Exception {
         securityService.registerUser(
                 new RegistrationRequest(FIRST_NAME1, LAST_NAME1, USERNAME1, PASSWORD1));
     }
 
-    public void createBrokerageAccount1() throws Exception {
+    protected void createBrokerageAccount1() throws Exception {
         brokerageAccount1Id = brokerageAccountService.openNewAccount(
                 USERNAME1, BROKERAGE_ACCOUNT_NAME1);
     }
 
-    public void createExternalAccount1() throws Exception {
+    protected void createExternalAccount1() throws Exception {
         ExternalAccountParams params = new ExternalAccountParams(
                 EXTERNAL_ACCOUNT_NAME1,
                 EXTERNAL_ROUTING_NUMBER1,
                 EXTERNAL_ACCOUNT_NUMBER1);
         externalAccount1Id = externalAccountService.addExternalAccount(
                 USERNAME1, params);
+    }
+
+    /**
+     * Gets the CashTransfer amount for the specified account. Assumes
+     * only on transaction on the account and that transaction being a
+     * CashTransfer.
+     */
+    protected Money getCashTransferAmount(Long accountId) throws Exception {
+        TransactionCriteria criteria = new TransactionCriteria();
+        criteria.setAccountId(accountId);
+
+        List<Transaction> transactions =
+            this.baseAccountService.findTransactions(criteria);
+        if (transactions.size() != 1) {
+            throw new Exception("Expected 1 transaction, found " + transactions.size());
+        }
+
+        Transaction transaction = transactions.get(0);
+        if (!CashTransfer.class.isInstance(transaction)) {
+            throw new Exception("Did not find a CashTransfer");
+        }
+        
+        return ((CashTransfer)transaction).getAmount();
     }
 }

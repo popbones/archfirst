@@ -17,11 +17,14 @@ package org.archfirst.bfoms.domain.account;
 
 import java.util.List;
 
+import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
+import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
+import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountInjector;
 import org.archfirst.common.domain.BaseRepository;
 
 /**
@@ -30,6 +33,17 @@ import org.archfirst.common.domain.BaseRepository;
  * @author Naresh Bhatia
  */
 public class BaseAccountRepository extends BaseRepository {
+
+    @Inject private BrokerageAccountInjector brokerageAccountInjector;
+    
+    // ----- BaseAccount Methods -----
+    public BaseAccount findAccount(Long id) {
+        BaseAccount account = entityManager.find(BaseAccount.class, id);
+        if (BrokerageAccount.class.isInstance(account)) {
+            brokerageAccountInjector.injectDependencies((BrokerageAccount)account);
+        }
+        return account;
+    }
 
     // ----- Transaction Methods -----
     public List<Transaction> findTransactions(TransactionCriteria criteria) {

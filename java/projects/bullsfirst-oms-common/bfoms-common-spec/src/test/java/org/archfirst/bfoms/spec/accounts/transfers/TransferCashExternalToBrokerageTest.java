@@ -17,9 +17,8 @@ package org.archfirst.bfoms.spec.accounts.transfers;
 
 import java.math.BigDecimal;
 
-import org.archfirst.bfoms.domain.account.TransactionCriteria;
+import org.archfirst.bfoms.domain.account.BaseAccount;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
-import org.archfirst.bfoms.domain.account.external.ExternalAccount;
 import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
 import org.archfirst.common.money.Money;
 
@@ -30,23 +29,35 @@ import org.archfirst.common.money.Money;
  */
 public class TransferCashExternalToBrokerageTest extends BaseAccountsTest {
 
-    public Money transfer(BigDecimal amount) throws Exception {
+    public void transfer(BigDecimal amount) throws Exception {
 
         // Create accounts
         this.createUser1();
         this.createBrokerageAccount1();
         this.createExternalAccount1();
 
+        // Get the accounts as base accounts
+        BaseAccount fromAccount =
+            baseAccountService.findAccount(externalAccount1Id);
+        BaseAccount toAccount =
+            baseAccountService.findAccount(brokerageAccount1Id);
+
         // Transfer cash
-        ExternalAccount fromAccount =
-            externalAccountService.findAccount(externalAccount1Id);
-        BrokerageAccount toAccount =
-            brokerageAccountService.findAccount(brokerageAccount1Id);
         this.baseAccountService.transferCash(
                 new Money(amount), fromAccount, toAccount);
-        TransactionCriteria criteria = new TransactionCriteria();
-        criteria.setAccountId(brokerageAccount1Id);
-        this.baseAccountService.findTransactions(criteria);
-        return toAccount.getCashPosition();
+    }
+    
+    public Money getBrokerageAccountCashPosition() {
+        BrokerageAccount account =
+            brokerageAccountService.findAccount(brokerageAccount1Id);
+        return account.getCashPosition();
+    }
+    
+    public Money getExternalAccountCashTransferAmount() throws Exception {
+        return getCashTransferAmount(this.externalAccount1Id);
+    }
+
+    public Money getBrokerageAccountCashTransferAmount() throws Exception {
+        return getCashTransferAmount(this.brokerageAccount1Id);
     }
 }
