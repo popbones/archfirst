@@ -40,7 +40,7 @@ public class DecimalQuantityMinTest {
         "must be greater than or equal to 1.00";
 
     @BeforeClass
-    public static void setUp() {
+    public void setUp() {
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
@@ -58,7 +58,7 @@ public class DecimalQuantityMinTest {
             constraintViolations.iterator().next().getMessage(),
             VIOLATION_MESSAGE);
     }
-    
+
     @Test
     public void testOrderIsCorrectSize()
     {
@@ -69,11 +69,11 @@ public class DecimalQuantityMinTest {
 
         Assert.assertEquals(constraintViolations.size(), 0);
     }
-    
+
     public class Order {
-        
+
         private DecimalQuantity quantity;
-        
+
         public Order(DecimalQuantity quantity) {
             this.quantity = quantity;
         }
