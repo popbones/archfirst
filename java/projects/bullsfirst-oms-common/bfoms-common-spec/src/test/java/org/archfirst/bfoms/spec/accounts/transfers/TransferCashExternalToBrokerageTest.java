@@ -16,8 +16,11 @@
 package org.archfirst.bfoms.spec.accounts.transfers;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-import org.archfirst.bfoms.domain.account.BaseAccount;
+import org.archfirst.bfoms.domain.account.CashTransfer;
+import org.archfirst.bfoms.domain.account.Transaction;
+import org.archfirst.bfoms.domain.account.TransactionCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
 import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
 import org.archfirst.common.money.Money;
@@ -36,15 +39,9 @@ public class TransferCashExternalToBrokerageTest extends BaseAccountsTest {
         this.createBrokerageAccount1();
         this.createExternalAccount1();
 
-        // Get the accounts as base accounts
-        BaseAccount fromAccount =
-            baseAccountService.findAccount(externalAccount1Id);
-        BaseAccount toAccount =
-            baseAccountService.findAccount(brokerageAccount1Id);
-
         // Transfer cash
         this.baseAccountService.transferCash(
-                new Money(amount), fromAccount, toAccount);
+                new Money(amount), externalAccount1Id, brokerageAccount1Id);
     }
     
     public Money getBrokerageAccountCashPosition() {
@@ -59,5 +56,28 @@ public class TransferCashExternalToBrokerageTest extends BaseAccountsTest {
 
     public Money getBrokerageAccountCashTransferAmount() throws Exception {
         return getCashTransferAmount(this.brokerageAccount1Id);
+    }
+
+    /**
+     * Gets the CashTransfer amount for the specified account. Assumes
+     * only one transaction on the account and that transaction being a
+     * CashTransfer.
+     */
+    private Money getCashTransferAmount(Long accountId) throws Exception {
+        TransactionCriteria criteria = new TransactionCriteria();
+        criteria.setAccountId(accountId);
+
+        List<Transaction> transactions =
+            this.baseAccountService.findTransactions(criteria);
+        if (transactions.size() != 1) {
+            throw new Exception("Expected 1 transaction, found " + transactions.size());
+        }
+
+        Transaction transaction = transactions.get(0);
+        if (!CashTransfer.class.isInstance(transaction)) {
+            throw new Exception("Did not find a CashTransfer");
+        }
+        
+        return ((CashTransfer)transaction).getAmount();
     }
 }

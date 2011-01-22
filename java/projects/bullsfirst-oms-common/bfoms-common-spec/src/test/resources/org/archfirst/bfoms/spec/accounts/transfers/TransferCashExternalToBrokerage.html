@@ -11,15 +11,18 @@
 
     <p>
         When $<span concordion:execute="transfer(#TEXT)">100.00</span> is transfered
-        from an external account to a newly opened brokerage account, the cash position
-        in the brokerage account becomes
-        <span concordion:assertEquals="getBrokerageAccountCashPosition()">$100.00</span>.
-        In addition a cash transfer of
-        <span concordion:assertEquals="getExternalAccountCashTransferAmount()">($100.00)</span>
-        is recorded on the external account
-        and a cash transfer of
-        <span concordion:assertEquals="getBrokerageAccountCashTransferAmount()">$100.00</span>
-        is recorded on the brokerage account.
+        from an external account to a newly opened brokerage account, the following
+        actions take place:
+        <ul>
+            <li>the cash position in the brokerage account is increased to
+                <span concordion:assertEquals="getBrokerageAccountCashPosition()">$100.00</span></li>
+            <li>a cash transfer of
+                <span concordion:assertEquals="getExternalAccountCashTransferAmount()">($100.00)</span>
+                is recorded on the external account</li>
+            <li>a cash transfer of
+                <span concordion:assertEquals="getBrokerageAccountCashTransferAmount()">$100.00</span>
+                is recorded on the brokerage account</li>
+        </ul>
     </p>
 
 </body>

@@ -37,6 +37,17 @@ public class BaseAccountService {
     // ----- Commands -----
     public void transferCash(
             Money amount,
+            Long fromAccountId,
+            Long toAccountId) {
+
+        this.transferCash(
+                amount,
+                this.findAccount(fromAccountId),
+                this.findAccount(toAccountId));
+    }
+    
+    public void transferCash(
+            Money amount,
             BaseAccount fromAccount,
             BaseAccount toAccount) {
         
