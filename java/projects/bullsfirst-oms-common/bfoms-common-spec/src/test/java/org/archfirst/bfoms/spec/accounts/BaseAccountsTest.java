@@ -39,6 +39,7 @@ public abstract class BaseAccountsTest extends AbstractTransactionalSpecTest  {
     private static String USERNAME1 = "jsmith";
     private static String PASSWORD1 = "cool";
     private static String BROKERAGE_ACCOUNT_NAME1 = "Brokerage Account 1";
+    private static String BROKERAGE_ACCOUNT_NAME2 = "Brokerage Account 2";
     private static String EXTERNAL_ACCOUNT_NAME1 = "External Account 1";
     private static String EXTERNAL_ROUTING_NUMBER1 = "011000123";
     private static String EXTERNAL_ACCOUNT_NUMBER1 = "0157-8965-2278";
@@ -49,6 +50,7 @@ public abstract class BaseAccountsTest extends AbstractTransactionalSpecTest  {
     @Inject protected SecurityService securityService;
     
     protected Long brokerageAccount1Id;
+    protected Long brokerageAccount2Id;
     protected Long externalAccount1Id;
     
     protected void createUser1() throws Exception {
@@ -56,12 +58,17 @@ public abstract class BaseAccountsTest extends AbstractTransactionalSpecTest  {
                 new RegistrationRequest(FIRST_NAME1, LAST_NAME1, USERNAME1, PASSWORD1));
     }
 
-    protected void createBrokerageAccount1() throws Exception {
+    protected void createBrokerageAccount1() {
         brokerageAccount1Id = brokerageAccountService.openNewAccount(
                 USERNAME1, BROKERAGE_ACCOUNT_NAME1);
     }
 
-    protected void createExternalAccount1() throws Exception {
+    protected void createBrokerageAccount2() {
+        brokerageAccount2Id = brokerageAccountService.openNewAccount(
+                USERNAME1, BROKERAGE_ACCOUNT_NAME2);
+    }
+
+    protected void createExternalAccount1() {
         ExternalAccountParams params = new ExternalAccountParams(
                 EXTERNAL_ACCOUNT_NAME1,
                 EXTERNAL_ROUTING_NUMBER1,

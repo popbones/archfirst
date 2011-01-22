@@ -9,14 +9,17 @@
 
     <h1>Transfer Cash - Brokerage to External</h1>
 
-    <p>
-        Given a brokerage account with a cash position of
-        $<span concordion:execute="setBrokerageAccountCashPosition(#TEXT)">1000.00</span>,<br/>
-        when $<span concordion:execute="transfer(#TEXT)">100.00</span> is
-        transfered from this account to an external account,<br/>
-        the cash position in the brokerage account is decreased to
-        <span concordion:assertEquals="getBrokerageAccountCashPosition()">$900.00</span>
-    </p>
+    <div class="example">
+        <h2>Example</h2>
+        <p>
+            Given a brokerage account with a cash position of
+            $<span concordion:execute="setBrokerageAccountCashPosition(#TEXT)">1000.00</span>,<br/>
+            when $<span concordion:execute="transfer(#TEXT)">100.00</span> is
+            transfered from this account to an external account,<br/>
+            the cash position in the brokerage account is decreased to
+            <span concordion:assertEquals="getBrokerageAccountCashPosition()">$900.00</span>
+        </p>
+    </div>
 
 </body>
 </html>

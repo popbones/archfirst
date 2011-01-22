@@ -13,22 +13,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.spec.accounts;
+package org.archfirst.bfoms.spec.accounts.accountcreation;
+
+import java.math.BigDecimal;
 
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
+import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
 import org.archfirst.common.money.Money;
 
 /**
- * OpenNewAccountTest
+ * CreateExternalAccountTest
  *
  * @author Naresh Bhatia
  */
-public class OpenNewAccountTest extends BaseAccountsTest {
+public class CreateExternalAccountTest extends BaseAccountsTest {
 
-    public Money openNewAccount() throws Exception {
+    public void transfer(BigDecimal amount) throws Exception {
+
+        // Create accounts
         this.createUser1();
         this.createBrokerageAccount1();
-        BrokerageAccount account = brokerageAccountService.findAccount(brokerageAccount1Id);
+        this.createExternalAccount1();
+
+        // Transfer cash
+        this.baseAccountService.transferCash(
+                new Money(amount), externalAccount1Id, brokerageAccount1Id);
+    }
+    
+    public Money getBrokerageAccountCashPosition() {
+        BrokerageAccount account =
+            brokerageAccountService.findAccount(brokerageAccount1Id);
         return account.getCashPosition();
     }
 }
