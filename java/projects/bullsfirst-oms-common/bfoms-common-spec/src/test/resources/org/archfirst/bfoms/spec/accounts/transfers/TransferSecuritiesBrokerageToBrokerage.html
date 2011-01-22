@@ -1,0 +1,28 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+<head>
+    <title>Transfer Securities</title>
+    <link href="../../concordion.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <h1>Transfer Securities - Brokerage to Brokerage</h1>
+
+    <div class="example">
+        <h2>Example</h2>
+        <p>
+            Given two brokerage accounts with
+            <span concordion:set="#symbol">APPL</span> positions of
+            <span concordion:execute="setBrokerageAccount1InstrumentPosition(#symbol, #TEXT)">1000</span> and
+            <span concordion:execute="setBrokerageAccount2InstrumentPosition(#symbol, #TEXT)">2000</span> shares respectively,<br/>
+            when <span concordion:execute="transfer(#symbol, #TEXT)">500</span> shares
+            are transfered from account 1 to account 2,<br/>
+            the new positions in the two accounts become
+            <span concordion:assertEquals="getBrokerageAccount1InstrumentPosition(#symbol)">500</span> and
+            <span concordion:assertEquals="getBrokerageAccount2InstrumentPosition(#symbol)">2500</span> shares respectively.
+        </p>
+    </div>
+
+</body>
+</html>

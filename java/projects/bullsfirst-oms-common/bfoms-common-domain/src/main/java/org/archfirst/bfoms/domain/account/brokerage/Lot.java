@@ -29,6 +29,7 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.archfirst.bfoms.domain.util.Constants;
+import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -85,6 +86,15 @@ public class Lot extends DomainEntity {
     }
 
     // ----- Queries and Read-Only Operations -----
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("[").append(DateTimeUtil.toStringTimestamp(creationTime)).append("] ");
+        builder.append(quantity).append(" shares of ");
+        builder.append(symbol).append(" @ ");
+        builder.append(pricePaidPerShare);
+        return builder.toString();
+    }
 
     // ----- Getters and Setters -----
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")

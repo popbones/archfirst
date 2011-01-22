@@ -1,0 +1,26 @@
+<html xmlns:concordion="http://www.concordion.org/2007/concordion">
+
+<head>
+    <title>Transfer Securities</title>
+    <link href="../../concordion.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <h1>Transfer Securities - Brokerage to External</h1>
+
+    <div class="example">
+        <h2>Example</h2>
+        <p>
+            Given a brokerage account having
+            <span concordion:set="#quantity">1000</span> shares of
+            <span concordion:set="#symbol">APPL</span><span concordion:execute="setBrokerageAccountInstrumentPosition(#symbol, #quantity)"></span>,<br/>
+            when <span concordion:execute="transfer(#symbol, #TEXT)">100</span> shares
+            are transfered to an external account,<br/>
+            <span concordion:assertEquals="getBrokerageAccountInstrumentPosition(#symbol)">900</span>
+            are left in the brokerage account.
+        </p>
+    </div>
+
+</body>
+</html>

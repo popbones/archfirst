@@ -96,7 +96,7 @@ public class BrokerageAccount extends BaseAccount {
         else {
             withdrawSecurities(    
                 transfer.getSymbol(),
-                transfer.getQuantity(),
+                transfer.getQuantity().negate(),
                 new SecuritiesTransferAllocationFactory(brokerageAccountRepository, transfer));
         }
         this.addTransaction(transfer);

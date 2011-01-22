@@ -25,6 +25,7 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.archfirst.bfoms.domain.util.Constants;
+import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
@@ -58,7 +59,19 @@ public class SecuritiesTransfer extends Transaction {
         super(creationTime);
         this.symbol = symbol;
         this.quantity = quantity;
+        this.pricePaidPerShare = pricePaidPerShare;
         this.otherAccount = otherAccount;
+    }
+
+    // ----- Queries and Read-Only Operations -----
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Transfer ").append(quantity).append(" shares of ");
+        builder.append(symbol).append(" @ ");
+        builder.append(pricePaidPerShare);
+        builder.append(" to ").append(otherAccount.getName());
+        return builder.toString();
     }
 
     // ----- Getters and Setters -----
