@@ -22,8 +22,7 @@ import org.archfirst.bfoms.domain.account.AccountStatus;
 import org.archfirst.bfoms.domain.account.BaseAccount;
 import org.archfirst.bfoms.domain.account.CashTransfer;
 import org.archfirst.bfoms.domain.account.SecuritiesTransfer;
-import org.archfirst.bfoms.domain.pricing.Instrument;
-import org.archfirst.bfoms.domain.pricing.PricingService;
+import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 
@@ -66,14 +65,14 @@ public class ExternalAccount extends BaseAccount {
     @Override
     public boolean isCashAvailable(
             Money amount,
-            PricingService pricingService) {
+            MarketDataService marketDataService) {
         // Let external agency worry about whether the cash is available
         return true;
     }
 
     @Override
     public boolean isSecurityAvailable(
-            Instrument instrument,
+            String symbol,
             DecimalQuantity quantity) {
         // Let external agency worry about whether the security is available
         return true;

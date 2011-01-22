@@ -28,7 +28,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
-import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
@@ -46,7 +45,7 @@ public class Lot extends DomainEntity {
     private static final long serialVersionUID = 1L;
     
     private DateTime creationTime;
-    private Instrument instrument;
+    private String symbol;
     private DecimalQuantity quantity;
     private Money pricePaidPerShare;
     private BrokerageAccount account;
@@ -56,14 +55,13 @@ public class Lot extends DomainEntity {
     private Lot() {
     }
     
-    // Allow access only from AccountFactory
-    Lot(
+    public Lot(
             DateTime creationTime,
-            Instrument instrument,
+            String symbol,
             DecimalQuantity quantity,
             Money pricePaidPerShare) {
         this.creationTime = creationTime;
-        this.instrument = instrument;
+        this.symbol = symbol;
         this.quantity = quantity;
         this.pricePaidPerShare = pricePaidPerShare;
     }
@@ -99,12 +97,12 @@ public class Lot extends DomainEntity {
     }
 
     @NotNull
-    @ManyToOne
-    public Instrument getInstrument() {
-        return instrument;
+    @Column(nullable = false)
+    public String getSymbol() {
+        return symbol;
     }
-    private void setInstrument(Instrument instrument) {
-        this.instrument = instrument;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     @NotNull

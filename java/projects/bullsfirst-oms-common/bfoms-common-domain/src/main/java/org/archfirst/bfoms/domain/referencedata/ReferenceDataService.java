@@ -1,5 +1,5 @@
 /**
- * Copyright 2010 Archfirst
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,17 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.interfaceout.exchange;
-
-import java.util.List;
-
-import org.archfirst.bfoms.domain.marketdata.MarketPrice;
+package org.archfirst.bfoms.domain.referencedata;
 
 /**
- * Adapter for getting market prices from the exchange
+ * ReferenceDataService
  *
  * @author Naresh Bhatia
  */
-public interface PricingAdapter {
-    List<MarketPrice> getMarketPrices();
+public interface ReferenceDataService {
+    Instrument getInstrument(String symbol);
 }

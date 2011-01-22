@@ -15,6 +15,8 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.security.User;
@@ -48,6 +50,10 @@ public class BrokerageAccountService {
         return brokerageAccountRepository.findAccount(id);
     }
     
+    public List<Lot> findActiveLots(Long accountId) {
+        return brokerageAccountRepository.findActiveLots(findAccount(accountId));
+    }
+
     private User getUser(String username) {
         return userRepository.findUser(username);
     }

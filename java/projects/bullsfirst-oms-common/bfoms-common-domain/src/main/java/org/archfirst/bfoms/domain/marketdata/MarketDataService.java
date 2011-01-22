@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.domain.pricing;
-
-import java.util.Map;
+package org.archfirst.bfoms.domain.marketdata;
 
 import org.archfirst.common.money.Money;
 
@@ -24,23 +22,11 @@ import org.archfirst.common.money.Money;
  *
  * @author Naresh Bhatia
  */
-public class PricingService {
+public interface MarketDataService {
     
     // ----- Commands -----
-    public void updateMarketPrice(MarketPrice marketPrice) {
-    }
+    void updateMarketPrice(MarketPrice marketPrice);
 
     // ----- Queries and Read-Only Operations -----
-    public Money getMarketPrice(Instrument instrument) {
-        return null;
-    }
-
-    // ----- Getters and Setters -----
-    private Map<Instrument, MarketPrice> getPriceMap() {
-        return null;
-    }
-
-    // ----- Initializer -----
-    private void initPriceMap() {
-    }
+    Money getMarketPrice(String symbol);
 }

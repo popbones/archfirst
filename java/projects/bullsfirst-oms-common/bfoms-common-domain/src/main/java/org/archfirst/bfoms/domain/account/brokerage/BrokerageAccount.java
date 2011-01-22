@@ -39,8 +39,8 @@ import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCompliance;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
-import org.archfirst.bfoms.domain.pricing.Instrument;
-import org.archfirst.bfoms.domain.pricing.PricingService;
+import org.archfirst.bfoms.domain.marketdata.MarketDataService;
+import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -88,14 +88,14 @@ public class BrokerageAccount extends BaseAccount {
     public void transferSecurities(SecuritiesTransfer transfer) {
         if (transfer.getQuantity().isPlus()) {
             depositSecurities(
-                    transfer.getInstrument(),
+                    transfer.getSymbol(),
                     transfer.getQuantity(),
                     transfer.getPricePaidPerShare(),
                     new SecuritiesTransferAllocationFactory(brokerageAccountRepository, transfer));
         }
         else {
             withdrawSecurities(    
-                transfer.getInstrument(),
+                transfer.getSymbol(),
                 transfer.getQuantity(),
                 new SecuritiesTransferAllocationFactory(brokerageAccountRepository, transfer));
         }
@@ -103,14 +103,14 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     private void depositSecurities(
-            Instrument instrument,
+            String symbol,
             DecimalQuantity quantity,
             Money pricePaidPerShare,
             AllocationFactory factory) {
 
         // Find lots for the specified instrument
         List<Lot> lots =
-            brokerageAccountRepository.findActiveLots(this, instrument);
+            brokerageAccountRepository.findActiveLots(this, symbol);
 
         // First deposit to lots that have negative quantity (unusual case)
         DecimalQuantity quantityLeftToDeposit = quantity;
@@ -130,7 +130,7 @@ public class BrokerageAccount extends BaseAccount {
         // Put the remaining quantity in a new lot
         if (quantityLeftToDeposit.isPlus()) {
             Lot lot = new Lot(
-                new DateTime(), instrument, quantityLeftToDeposit, pricePaidPerShare);
+                new DateTime(), symbol, quantityLeftToDeposit, pricePaidPerShare);
             brokerageAccountRepository.persistAndFlush(lot);
             this.addLot(lot);
             lot.addAllocation(factory.createAllocation(quantityLeftToDeposit));
@@ -138,13 +138,13 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     private void withdrawSecurities(
-            Instrument instrument,
+            String symbol,
             DecimalQuantity quantity,
             AllocationFactory factory) {
 
         // Find lots for the specified instrument
         List<Lot> lots =
-            brokerageAccountRepository.findActiveLots(this, instrument);
+            brokerageAccountRepository.findActiveLots(this, symbol);
 
         // Withdraw specified quantity from available lots
         DecimalQuantity quantityLeftToWithdraw = quantity;
@@ -170,7 +170,7 @@ public class BrokerageAccount extends BaseAccount {
         if (quantityLeftToWithdraw.isPlus()) {
             Lot lot = new Lot(
                     new DateTime(),
-                    instrument,
+                    symbol,
                     quantityLeftToWithdraw.negate(),
                     new Money("0.00"));
                 brokerageAccountRepository.persistAndFlush(lot);
@@ -194,7 +194,7 @@ public class BrokerageAccount extends BaseAccount {
                 cashPosition = cashPosition.minus(
                         trade.getAmount().negate()); // trade.amount is negative
                 depositSecurities(
-                        trade.getInstrument(),
+                        trade.getSymbol(),
                         trade.getQuantity(),
                         trade.getPricePerShare(),
                         new TradeAllocationFactory(brokerageAccountRepository, trade));
@@ -203,7 +203,7 @@ public class BrokerageAccount extends BaseAccount {
                 cashPosition = cashPosition.plus(
                         trade.getAmount()); // trade.amount is positive
                 withdrawSecurities(    
-                        trade.getInstrument(),
+                        trade.getSymbol(),
                         trade.getQuantity(),
                         new TradeAllocationFactory(brokerageAccountRepository, trade));
             }
@@ -212,7 +212,9 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     // ----- Queries and Read-Only Operations -----
-    public List<Position> getPositions(PricingService pricingService) {
+    public List<Position> getPositions(
+            ReferenceDataService referenceDataService,
+            MarketDataService marketDataService) {
         
         List<Lot> lots = brokerageAccountRepository.findActiveLots(this);
         
@@ -221,12 +223,12 @@ public class BrokerageAccount extends BaseAccount {
         for (Lot lot : lots) {
             Position position = new Position(this.id, this.name);
             position.setLotPosition(
-                    lot.getInstrument().getSymbol(),
-                    lot.getInstrument().getName(),
+                    lot.getSymbol(),
+                    referenceDataService.getInstrument(lot.getSymbol()).getName(),
                     lot.getId(),
                     lot.getCreationTime(),
                     lot.getQuantity(),
-                    pricingService.getMarketPrice(lot.getInstrument()),
+                    marketDataService.getMarketPrice(lot.getSymbol()),
                     lot.getPricePaidPerShare());
             positions.add(position);
         }
@@ -242,11 +244,11 @@ public class BrokerageAccount extends BaseAccount {
     @Override
     public boolean isCashAvailable(
             Money amount,
-            PricingService pricingService) {
-        return amount.lteq(calculateCashAvailable(pricingService));
+            MarketDataService marketDataService) {
+        return amount.lteq(calculateCashAvailable(marketDataService));
     }
     
-    public Money calculateCashAvailable(PricingService pricingService) {
+    public Money calculateCashAvailable(MarketDataService pricingService) {
 
         Money cashAvailable = cashPosition;
         
@@ -265,19 +267,19 @@ public class BrokerageAccount extends BaseAccount {
 
     @Override
     public boolean isSecurityAvailable(
-            Instrument instrument,
+            String symbol,
             DecimalQuantity quantity) {
-        return quantity.lteq(calculateSecurityAvailable(instrument));
+        return quantity.lteq(calculateSecurityAvailable(symbol));
     }
     
-    public DecimalQuantity calculateSecurityAvailable(Instrument instrument) {
+    public DecimalQuantity calculateSecurityAvailable(String symbol) {
 
         DecimalQuantity securityAvailable =
-            brokerageAccountRepository.getNumberOfShares(this, instrument);
+            brokerageAccountRepository.getNumberOfShares(this, symbol);
 
         // Reduce security available by estimated quantity of sell orders
         List<Order> orders =
-            brokerageAccountRepository.findActiveSellOrders(this, instrument);
+            brokerageAccountRepository.findActiveSellOrders(this, symbol);
         for (Order order : orders) {
             securityAvailable = securityAvailable.minus(order.getQuantity());
         }
@@ -287,14 +289,14 @@ public class BrokerageAccount extends BaseAccount {
 
     public OrderEstimate calculateOrderEstimate(
             Order order,
-            PricingService pricingService) {
+            MarketDataService marketDataService) {
 
-        OrderEstimate orderEstimate = order.calculateOrderEstimate(pricingService);
+        OrderEstimate orderEstimate = order.calculateOrderEstimate(marketDataService);
 
         // Determine account level compliance
         if (orderEstimate.getCompliance() == null) {
             OrderCompliance compliance = (order.getSide() == OrderSide.Buy) ?
-                    calculateBuyOrderCompliance(order, pricingService) :
+                    calculateBuyOrderCompliance(order, marketDataService) :
                     calculateSellOrderCompliance(order);
             orderEstimate.setCompliance(compliance);
         }
@@ -304,13 +306,13 @@ public class BrokerageAccount extends BaseAccount {
     
     private OrderCompliance calculateBuyOrderCompliance(
             Order order,
-            PricingService pricingService) {
+            MarketDataService marketDataService) {
 
         // Check if sufficient cash is available
-        OrderEstimate orderEstimate = order.calculateOrderEstimate(pricingService);
+        OrderEstimate orderEstimate = order.calculateOrderEstimate(marketDataService);
         return isCashAvailable(
                 orderEstimate.getEstimatedValueInclFees(),
-                pricingService) ?
+                marketDataService) ?
                     OrderCompliance.Compliant :
                     OrderCompliance.InsufficientFunds;
     }
@@ -319,7 +321,7 @@ public class BrokerageAccount extends BaseAccount {
 
         // Check if sufficient securities are available
         return isSecurityAvailable(
-                order.getInstrument(), order.getQuantity()) ?
+                order.getSymbol(), order.getQuantity()) ?
                 OrderCompliance.Compliant : OrderCompliance.InsufficientQuantity;
     }
 

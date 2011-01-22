@@ -33,8 +33,7 @@ import javax.validation.constraints.NotNull;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountRepository;
 import org.archfirst.bfoms.domain.account.brokerage.Trade;
-import org.archfirst.bfoms.domain.pricing.Instrument;
-import org.archfirst.bfoms.domain.pricing.PricingService;
+import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.bfoms.interfaceout.exchange.ExchangeAdapter;
 import org.archfirst.common.datetime.DateTimeUtil;
@@ -59,7 +58,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
     
     private DateTime creationTime;
     private OrderSide side;
-    private Instrument instrument;
+    private String symbol;
     private DecimalQuantity quantity;
     private OrderType type;
     private Money limitPrice;
@@ -75,14 +74,14 @@ public class Order extends DomainEntity implements Comparable<Order> {
     
     public Order(
             OrderSide side,
-            Instrument instrument,
+            String symbol,
             DecimalQuantity quantity,
             OrderType type,
             Money limitPrice,
             OrderTerm term,
             boolean allOrNone) {
         this.side = side;
-        this.instrument = instrument;
+        this.symbol = symbol;
         this.quantity = quantity;
         this.type = type;
         this.limitPrice = limitPrice;
@@ -136,7 +135,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
             trade = new Trade(
                     new DateTime(),
                     this.side,
-                    this.instrument,
+                    this.symbol,
                     this.getCumQty(),
                     this.getTotalPriceOfExecutions(),
                     this.getFees(),
@@ -213,10 +212,10 @@ public class Order extends DomainEntity implements Comparable<Order> {
     /**
      * Returns estimated price and compliance of the order.
      * 
-     * @param pricingService
+     * @param marketDataService
      * @return
      */
-    public OrderEstimate calculateOrderEstimate(PricingService pricingService) {
+    public OrderEstimate calculateOrderEstimate(MarketDataService marketDataService) {
 
         // Perform order level compliance
         if (type == OrderType.Limit && limitPrice == null) {
@@ -225,7 +224,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
         
         // Calculate estimated values
         Money unitPrice = (type == OrderType.Market) ?
-                pricingService.getMarketPrice(instrument) : limitPrice;
+                marketDataService.getMarketPrice(symbol) : limitPrice;
         Money estimatedValue = unitPrice.times(quantity).scaleToCurrency();
         Money fees = getFees();
         Money estimatedValueInclFees = (side==OrderSide.Buy) ?
@@ -293,7 +292,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
         builder.append(DateTimeUtil.toStringTimestamp(creationTime)).append(" ");
         builder.append(id).append(": ");
         builder.append(side).append(" ");
-        builder.append(instrument);
+        builder.append(symbol);
         builder.append(", quantity=").append(quantity);
         builder.append(", cumQy=").append(this.getCumQty());
         builder.append(", orderType=").append(type);
@@ -333,12 +332,12 @@ public class Order extends DomainEntity implements Comparable<Order> {
     }
 
     @NotNull
-    @ManyToOne
-    public Instrument getInstrument() {
-        return instrument;
+    @Column(nullable = false)
+    public String getSymbol() {
+        return symbol;
     }
-    private void setInstrument(Instrument instrument) {
-        this.instrument = instrument;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     @NotNull

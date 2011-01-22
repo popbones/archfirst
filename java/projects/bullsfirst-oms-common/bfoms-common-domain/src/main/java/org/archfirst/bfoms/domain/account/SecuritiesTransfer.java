@@ -24,7 +24,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
-import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -41,7 +40,7 @@ public class SecuritiesTransfer extends Transaction {
 
     private static final String TYPE = "Transfer";
 
-    private Instrument instrument;
+    private String symbol;
     private DecimalQuantity quantity;
     private Money pricePaidPerShare;
     private BaseAccount otherAccount;
@@ -52,12 +51,12 @@ public class SecuritiesTransfer extends Transaction {
 
     public SecuritiesTransfer(
             DateTime creationTime,
-            Instrument instrument,
+            String symbol,
             DecimalQuantity quantity,
             Money pricePaidPerShare,
             BaseAccount otherAccount) {
         super(creationTime);
-        this.instrument = instrument;
+        this.symbol = symbol;
         this.quantity = quantity;
         this.otherAccount = otherAccount;
     }
@@ -77,12 +76,12 @@ public class SecuritiesTransfer extends Transaction {
     }
 
     @NotNull
-    @ManyToOne
-    public Instrument getInstrument() {
-        return instrument;
+    @Column(nullable = false)
+    public String getSymbol() {
+        return symbol;
     }
-    private void setInstrument(Instrument instrument) {
-        this.instrument = instrument;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     @NotNull
@@ -133,7 +132,7 @@ public class SecuritiesTransfer extends Transaction {
     public String getDescription() {
         StringBuilder builder = new StringBuilder();
         builder.append("Transfer ");
-        builder.append(quantity.abs()).append(" shares of ").append(instrument);
+        builder.append(quantity.abs()).append(" shares of ").append(symbol);
         builder.append(quantity.isPlus() ? " from " : " to ");
         builder.append(otherAccount.getName());
         return builder.toString();

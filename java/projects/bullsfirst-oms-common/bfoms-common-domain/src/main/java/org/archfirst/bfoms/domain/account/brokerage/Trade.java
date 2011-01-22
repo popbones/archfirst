@@ -27,7 +27,6 @@ import javax.validation.constraints.NotNull;
 import org.archfirst.bfoms.domain.account.Transaction;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
-import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -47,7 +46,7 @@ public class Trade extends Transaction {
     private static final String TYPE = "Trade";
     
     private OrderSide side;
-    private Instrument instrument;
+    private String symbol;
     private DecimalQuantity quantity;
     private Money totalPrice;
     private Money fees;
@@ -60,14 +59,14 @@ public class Trade extends Transaction {
     public Trade(
             DateTime creationTime,
             OrderSide side,
-            Instrument instrument,
+            String symbol,
             DecimalQuantity quantity,
             Money totalPrice,
             Money fees,
             Order order) {
         super(creationTime);
         this.side = side;
-        this.instrument = instrument;
+        this.symbol = symbol;
         this.quantity = quantity;
         this.totalPrice = totalPrice;
         this.fees = fees;
@@ -101,12 +100,12 @@ public class Trade extends Transaction {
     }
 
     @NotNull
-    @ManyToOne
-    public Instrument getInstrument() {
-        return instrument;
+    @Column(nullable = false)
+    public String getSymbol() {
+        return symbol;
     }
-    private void setInstrument(Instrument instrument) {
-        this.instrument = instrument;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     @NotNull
@@ -184,7 +183,7 @@ public class Trade extends Transaction {
         StringBuilder builder = new StringBuilder();
         builder.append((side==OrderSide.Buy) ? "Bought " : "Sold ");
         builder.append(quantity).append(" shares of ");
-        builder.append(instrument).append(" @ ");
+        builder.append(symbol).append(" @ ");
         builder.append(getPricePerShare());
         return builder.toString();
     }

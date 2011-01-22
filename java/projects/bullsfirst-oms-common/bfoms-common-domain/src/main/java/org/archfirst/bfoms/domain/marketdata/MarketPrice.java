@@ -13,14 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.domain.pricing;
+package org.archfirst.bfoms.domain.marketdata;
 
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.archfirst.bfoms.domain.util.Constants;
@@ -39,18 +38,18 @@ import org.joda.time.DateTime;
 public class MarketPrice extends DomainEntity {
     private static final long serialVersionUID = 1L;
 
-    private DateTime effective;
-    private Instrument instrument;
+    private String symbol;
     private Money price;
+    private DateTime effective;
 
     // ----- Constructors -----
     private MarketPrice() {
     }
 
-    public MarketPrice(DateTime effective, Instrument instrument, Money price) {
-        this.effective = effective;
-        this.instrument = instrument;
+    public MarketPrice(String symbol, Money price, DateTime effective) {
+        this.symbol = symbol;
         this.price = price;
+        this.effective = effective;
     }
 
     // ----- Commands -----
@@ -67,20 +66,20 @@ public class MarketPrice extends DomainEntity {
     /**
      * Returns this object as a set of properties. For example:
      * <code>
-     *     effective=2009-01-02T09:00:00.000-04:00
      *     instrument=AAPL 
      *     price=1.0645
      *     currency=USD
+     *     effective=2009-01-02T09:00:00.000-04:00
      * </code>
      * 
      * @return this object as a set of properties
      */
     public String toProperties() {
         StringBuilder builder = new StringBuilder();
-        builder.append("effective=").append(effective.toString()).append("\n");
-        builder.append("instrument=").append(instrument).append("\n");
+        builder.append("symbol=").append(symbol).append("\n");
         builder.append("price=").append(price.getAmount()).append("\n");
         builder.append("currency=").append(price.getCurrency()).append("\n");
+        builder.append("effective=").append(effective.toString()).append("\n");
         return builder.toString();
     }
 
@@ -88,7 +87,7 @@ public class MarketPrice extends DomainEntity {
     public String toString() {
         StringBuilder builder = new StringBuilder();
         builder.append("[").append(DateTimeUtil.toStringTimestamp(effective)).append("] ");
-        builder.append(instrument).append(": ");
+        builder.append(symbol).append(": ");
         builder.append(price);
         return builder.toString();
     }
@@ -104,12 +103,12 @@ public class MarketPrice extends DomainEntity {
     }
 
     @NotNull
-    @ManyToOne
-    public Instrument getInstrument() {
-        return instrument;
+    @Column(nullable = false)
+    public String getSymbol() {
+        return symbol;
     }
-    private void setInstrument(Instrument instrument) {
-        this.instrument = instrument;
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
     }
 
     @Embedded

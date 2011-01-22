@@ -30,8 +30,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 
-import org.archfirst.bfoms.domain.pricing.Instrument;
-import org.archfirst.bfoms.domain.pricing.PricingService;
+import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
@@ -79,10 +78,10 @@ public abstract class BaseAccount extends DomainEntity {
     // ----- Queries and Read-Only Operations -----
     public abstract boolean isCashAvailable(
             Money amount,
-            PricingService pricingService);
+            MarketDataService marketDataService);
 
     public abstract boolean isSecurityAvailable(
-            Instrument instrument,
+            String symbol,
             DecimalQuantity quantity);
 
     // ----- Getters and Setters -----

@@ -19,7 +19,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
@@ -62,7 +61,22 @@ public class BaseAccountService {
     }
 
     public void transferSecurities(
-            Instrument instrument,
+            String symbol,
+            DecimalQuantity quantity,
+            Money pricePaidPerShare,
+            Long fromAccountId,
+            Long toAccountId) {
+        
+        this.transferSecurities(
+                symbol,
+                quantity,
+                pricePaidPerShare,
+                this.findAccount(fromAccountId),
+                this.findAccount(toAccountId));
+    }
+        
+    public void transferSecurities(
+            String symbol,
             DecimalQuantity quantity,
             Money pricePaidPerShare,
             BaseAccount fromAccount,
@@ -70,9 +84,9 @@ public class BaseAccountService {
         
         DateTime now = new DateTime();
         SecuritiesTransfer fromTransfer = new SecuritiesTransfer(
-                now, instrument, quantity.negate(), pricePaidPerShare, toAccount);
+                now, symbol, quantity.negate(), pricePaidPerShare, toAccount);
         SecuritiesTransfer toTransfer = new SecuritiesTransfer(
-                now, instrument, quantity, pricePaidPerShare, fromAccount);
+                now, symbol, quantity, pricePaidPerShare, fromAccount);
         baseAccountRepository.persist(fromTransfer);
         baseAccountRepository.persist(toTransfer);
         baseAccountRepository.flush(); // get object ids before adding to set

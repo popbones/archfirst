@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.domain.pricing;
+package org.archfirst.bfoms.domain.referencedata;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,7 +25,7 @@ import org.archfirst.common.domain.DomainEntity;
 /**
  * Instrument
  *
- * @author naresh
+ * @author Naresh Bhatia
  */
 @Entity
 @Table(uniqueConstraints = {

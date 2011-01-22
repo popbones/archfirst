@@ -26,7 +26,6 @@ import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
-import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.common.domain.BaseRepository;
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -182,12 +181,12 @@ public class BrokerageAccountRepository extends BaseRepository {
     }
 
     public List<Order> findActiveSellOrders(
-            BrokerageAccount account, Instrument instrument) {
+            BrokerageAccount account, String symbol) {
 
         OrderCriteria criteria = new OrderCriteria();
 
         criteria.setAccountId(account.getId());
-        criteria.setSymbol(instrument.getSymbol());
+        criteria.setSymbol(symbol);
 
         List<OrderSide> sides = new ArrayList<OrderSide>();
         sides.add(OrderSide.Sell);
@@ -210,18 +209,17 @@ public class BrokerageAccountRepository extends BaseRepository {
     }
 
     // ----- Lot Methods -----
-    public List<Lot> findActiveLots(BrokerageAccount account, Instrument instrument) {
+    public List<Lot> findActiveLots(BrokerageAccount account, String symbol) {
         @SuppressWarnings("unchecked")
         List<Lot> lots = entityManager.createQuery(
                 "select l from Lot l " +
                 "join l.account a " +
-                "join l.instrument i " +
                 "where a = :account " +
-                "and i = :instrument " +
+                "and l.symbol = :symbol " +
                 "and l.quantity <> 0 " +
                 "order by l.creationTime")
             .setParameter("account", account)
-            .setParameter("instrument", instrument)
+            .setParameter("symbol", symbol)
             .getResultList();
         return lots;
     }
@@ -231,21 +229,20 @@ public class BrokerageAccountRepository extends BaseRepository {
         List<Lot> lots = entityManager.createQuery(
                 "select l from Lot l " +
                 "join l.account a " +
-                "join l.instrument i " +
                 "where a = :account " +
                 "and l.quantity <> 0 " +
-                "order by l.instrument, l.creationTime")
+                "order by l.symbol, l.creationTime")
             .setParameter("account", account)
             .getResultList();
         return lots;
     }
 
     public DecimalQuantity getNumberOfShares(
-            BrokerageAccount account, Instrument instrument) {
+            BrokerageAccount account, String symbol) {
         
         DecimalQuantity numberOfShares = DecimalQuantity.ZERO;
         
-        List<Lot> lots = findActiveLots(account, instrument);
+        List<Lot> lots = findActiveLots(account, symbol);
         for (Lot lot : lots) {
             numberOfShares = numberOfShares.plus(lot.getQuantity());
         }

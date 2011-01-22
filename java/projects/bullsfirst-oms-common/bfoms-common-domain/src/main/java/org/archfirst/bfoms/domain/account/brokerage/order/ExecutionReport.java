@@ -15,7 +15,6 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage.order;
 
-import org.archfirst.bfoms.domain.pricing.Instrument;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 
@@ -31,7 +30,7 @@ public class ExecutionReport {
     private final Long clientOrderId;
     private final OrderStatus orderStatus;
     private final OrderSide side;
-    private final Instrument instrument;
+    private final String symbol;
     private final DecimalQuantity lastQty;
     private final DecimalQuantity leavesQty;
     private final DecimalQuantity cumQty;
@@ -55,7 +54,7 @@ public class ExecutionReport {
             Long clientOrderId,
             OrderStatus orderStatus,
             OrderSide side,
-            Instrument instrument,
+            String symbol,
             DecimalQuantity lastQty,
             DecimalQuantity leavesQty,
             DecimalQuantity cumQty,
@@ -67,7 +66,7 @@ public class ExecutionReport {
         this.clientOrderId = clientOrderId;
         this.orderStatus = orderStatus;
         this.side = side;
-        this.instrument = instrument;
+        this.symbol = symbol;
         this.lastQty = lastQty;
         this.leavesQty = leavesQty;
         this.cumQty = cumQty;
@@ -94,8 +93,8 @@ public class ExecutionReport {
     public OrderSide getSide() {
         return side;
     }
-    public Instrument getInstrument() {
-        return instrument;
+    public String getSymbol() {
+        return symbol;
     }
     public DecimalQuantity getLastQty() {
         return lastQty;

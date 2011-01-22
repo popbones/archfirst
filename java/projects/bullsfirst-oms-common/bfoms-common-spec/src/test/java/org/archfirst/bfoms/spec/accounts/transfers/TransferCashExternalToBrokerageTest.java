@@ -24,6 +24,7 @@ import org.archfirst.bfoms.domain.account.TransactionCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
 import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
 import org.archfirst.common.money.Money;
+import org.testng.Assert;
 
 /**
  * TransferCashExternalToBrokerage
@@ -69,14 +70,10 @@ public class TransferCashExternalToBrokerageTest extends BaseAccountsTest {
 
         List<Transaction> transactions =
             this.baseAccountService.findTransactions(criteria);
-        if (transactions.size() != 1) {
-            throw new Exception("Expected 1 transaction, found " + transactions.size());
-        }
+        Assert.assertEquals(transactions.size(), 1);
 
         Transaction transaction = transactions.get(0);
-        if (!CashTransfer.class.isInstance(transaction)) {
-            throw new Exception("Did not find a CashTransfer");
-        }
+        Assert.assertTrue(CashTransfer.class.isInstance(transaction));
         
         return ((CashTransfer)transaction).getAmount();
     }
