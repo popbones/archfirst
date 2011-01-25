@@ -41,6 +41,7 @@ import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
+import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -212,6 +213,32 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     // ----- Queries and Read-Only Operations -----
+    public AccountSummary getAccountSummary(
+            User user,
+            ReferenceDataService referenceDataService,
+            MarketDataService marketDataService) {
+        
+        List<Position> positions =
+            this.getPositions(referenceDataService, marketDataService);
+        Money marketValue = new Money();
+        for (Position position : positions) {
+            marketValue = marketValue.plus(position.getMarketValue());
+        }
+        
+        List<BrokerageAccountPermission> permissions =
+            brokerageAccountRepository.findPermissionsForAccount(user, this);
+        
+        return new AccountSummary(
+                this.id,
+                this.name,
+                this.cashPosition,
+                marketValue,
+                permissions.contains(BrokerageAccountPermission.Edit),
+                permissions.contains(BrokerageAccountPermission.Trade),
+                permissions.contains(BrokerageAccountPermission.Transfer),
+                positions);
+    }
+
     public List<Position> getPositions(
             ReferenceDataService referenceDataService,
             MarketDataService marketDataService) {
@@ -324,7 +351,6 @@ public class BrokerageAccount extends BaseAccount {
                 order.getSymbol(), order.getQuantity()) ?
                 OrderCompliance.Compliant : OrderCompliance.InsufficientQuantity;
     }
-
 
     @Transient
     public String getDisplayString() {

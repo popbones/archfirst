@@ -19,9 +19,10 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.archfirst.bfoms.domain.marketdata.MarketDataService;
+import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.bfoms.domain.security.UserRepository;
-import org.archfirst.common.money.Money;
 
 /**
  * BrokerageAccountService
@@ -32,6 +33,8 @@ public class BrokerageAccountService {
     
     @Inject private BrokerageAccountFactory brokerageAccountFactory;
     @Inject private BrokerageAccountRepository brokerageAccountRepository;
+    @Inject private MarketDataService marketDataService;
+    @Inject private ReferenceDataService referenceDataService;
     @Inject private UserRepository userRepository;
 
     // ----- Commands -----
@@ -56,23 +59,10 @@ public class BrokerageAccountService {
     }
 
     public AccountSummary getAccountSummary(String username, Long accountId) {
-        
         BrokerageAccount account = this.findAccount(accountId);
-
-        List<BrokerageAccountPermission> permissions =
-            this.findPermissionsForAccount(username, account);
-        
-        return new AccountSummary(
-                account.getId(),
-                account.getName(),
-                account.getCashPosition(),
-                accountPosition.getMarketValue(), Money.class),
-                permissions.contains(BrokerageAccountPermission.Edit),
-                permissions.contains(BrokerageAccountPermission.Trade),
-                permissions.contains(BrokerageAccountPermission.Transfer),
-                account.getPositions(referenceDataService, marketDataService));
+        return account.getAccountSummary(
+                getUser(username), referenceDataService, marketDataService);
     }
-    
     
     private User getUser(String username) {
         return userRepository.findUser(username);
