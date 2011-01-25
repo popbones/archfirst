@@ -21,6 +21,7 @@ import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.bfoms.domain.security.UserRepository;
+import org.archfirst.common.money.Money;
 
 /**
  * BrokerageAccountService
@@ -54,6 +55,25 @@ public class BrokerageAccountService {
         return brokerageAccountRepository.findActiveLots(findAccount(accountId));
     }
 
+    public AccountSummary getAccountSummary(String username, Long accountId) {
+        
+        BrokerageAccount account = this.findAccount(accountId);
+
+        List<BrokerageAccountPermission> permissions =
+            this.findPermissionsForAccount(username, account);
+        
+        return new AccountSummary(
+                account.getId(),
+                account.getName(),
+                account.getCashPosition(),
+                accountPosition.getMarketValue(), Money.class),
+                permissions.contains(BrokerageAccountPermission.Edit),
+                permissions.contains(BrokerageAccountPermission.Trade),
+                permissions.contains(BrokerageAccountPermission.Transfer),
+                account.getPositions(referenceDataService, marketDataService));
+    }
+    
+    
     private User getUser(String username) {
         return userRepository.findUser(username);
     }

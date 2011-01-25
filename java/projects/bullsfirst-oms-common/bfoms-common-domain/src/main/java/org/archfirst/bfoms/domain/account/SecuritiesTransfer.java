@@ -25,7 +25,6 @@ import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.archfirst.bfoms.domain.util.Constants;
-import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
