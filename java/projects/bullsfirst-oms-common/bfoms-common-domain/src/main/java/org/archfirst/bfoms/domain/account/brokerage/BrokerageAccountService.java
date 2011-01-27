@@ -19,6 +19,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
+import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
 import org.archfirst.bfoms.domain.security.User;
@@ -49,6 +51,14 @@ public class BrokerageAccountService {
         return account.getId();
     }
 
+    public Long placeOrder(Long accountId, Order order) {
+        return this.findAccount(accountId).placeOrder(order);
+    }
+    
+    public void processExecutionReport(Long accountId, ExecutionReport executionReport) {
+        this.findAccount(accountId).processExecutionReport(executionReport);
+    }
+    
     // ----- Queries and Read-Only Operations -----
     public BrokerageAccount findAccount(Long id) {
         return brokerageAccountRepository.findAccount(id);

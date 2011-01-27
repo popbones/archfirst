@@ -38,15 +38,6 @@ public class ExecutionReport {
     private final Money weightedAvgPrice;
 
     // ----- Constructors -----
-    /**
-     * Constructs an ExecutionReport
-     * 
-     * @param type
-     * @param order
-     * @param execution is optional. For example, an execution report of type
-     * New simply acknowledges a new order - there is no execution associated
-     * with this report.
-     */
     public ExecutionReport(
             ExecutionReportType type,
             String exchangeOrderId,
@@ -72,6 +63,63 @@ public class ExecutionReport {
         this.cumQty = cumQty;
         this.lastPrice = lastPrice;
         this.weightedAvgPrice = weightedAvgPrice;
+    }
+
+    // ----- Factory Methods -----
+    public static ExecutionReport createNewType(
+            Order order) {
+        return new ExecutionReport(
+                ExecutionReportType.New,
+                null,
+                null,
+                order.getId(),
+                OrderStatus.New,
+                order.getSide(),
+                order.getSymbol(),
+                null,
+                null,
+                null,
+                null,
+                null);
+    }
+    
+    public static ExecutionReport createTradeType(
+            Order order,
+            OrderStatus newStatus,
+            DecimalQuantity quantity,
+            Money price) {
+        return new ExecutionReport(
+                ExecutionReportType.Trade,
+                null,
+                null,
+                order.getId(),
+                newStatus,
+                order.getSide(),
+                order.getSymbol(),
+                quantity,
+                order.getLeavesQty().minus(quantity),
+                null,
+                price,
+                null);
+    }
+    
+    // ----- Queries and Read-Only Operations -----
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("type=").append(type);
+        builder.append(", exchangeOrderId=").append(exchangeOrderId);
+        builder.append(", executionId=").append(executionId);
+        builder.append(", clientOrderId=").append(clientOrderId);
+        builder.append(", orderStatus=").append(orderStatus);
+        builder.append(", side=").append(side);
+        builder.append(", symbol=").append(symbol);
+        builder.append(", lastQty=").append(lastQty);
+        builder.append(", leavesQty=").append(leavesQty);
+        builder.append(", cumQty=").append(cumQty);
+        builder.append(", lastPrice=").append(lastPrice);
+        builder.append(", weightedAvgPrice=").append(weightedAvgPrice);
+        return builder.toString();
     }
 
     // ----- Getters -----

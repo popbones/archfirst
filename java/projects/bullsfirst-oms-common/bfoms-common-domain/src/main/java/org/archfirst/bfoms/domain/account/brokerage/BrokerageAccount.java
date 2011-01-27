@@ -180,10 +180,11 @@ public class BrokerageAccount extends BaseAccount {
         }
     }
     
-    public void placeOrder(Order order) {
+    public Long placeOrder(Order order) {
         order.setCreationTime(new DateTime());
         brokerageAccountRepository.persistAndFlush(order);
         this.addOrder(order);
+        return order.getId();
     }
     
     public void processExecutionReport(ExecutionReport executionReport) {
@@ -191,6 +192,7 @@ public class BrokerageAccount extends BaseAccount {
             brokerageAccountRepository.findOrder(executionReport.getClientOrderId());
         Trade trade = order.processExecutionReport(executionReport, brokerageAccountRepository);
         if (trade != null) {
+            this.addTransaction(trade);
             if (trade.getSide() == OrderSide.Buy) {
                 cashPosition = cashPosition.minus(
                         trade.getAmount().negate()); // trade.amount is negative
@@ -208,7 +210,6 @@ public class BrokerageAccount extends BaseAccount {
                         trade.getQuantity(),
                         new TradeAllocationFactory(brokerageAccountRepository, trade));
             }
-            this.addTransaction(trade);
         }
     }
 
