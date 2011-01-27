@@ -39,4 +39,5 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
+    <bean class="org.archfirst.bfoms.spec.mocks.MockPricingAdapter" />
 </beans>

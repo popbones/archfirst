@@ -251,7 +251,7 @@ public class BrokerageAccount extends BaseAccount {
             Position position = new Position(this.id, this.name);
             position.setLotPosition(
                     lot.getSymbol(),
-                    referenceDataService.getInstrument(lot.getSymbol()).getName(),
+                    referenceDataService.lookup(lot.getSymbol()).getName(),
                     lot.getId(),
                     lot.getCreationTime(),
                     lot.getQuantity(),

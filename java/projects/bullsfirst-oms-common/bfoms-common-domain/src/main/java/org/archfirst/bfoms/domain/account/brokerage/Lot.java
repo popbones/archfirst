@@ -15,6 +15,7 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -89,7 +90,10 @@ public class Lot extends DomainEntity {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append("[").append(DateTimeUtil.toStringTimestamp(creationTime)).append("] ");
+        builder.append("[");
+        builder.append(DateTimeUtil.toStringTimestamp(creationTime));
+        builder.append(" - Lot ").append(id);
+        builder.append("] ");
         builder.append(quantity).append(" shares of ");
         builder.append(symbol).append(" @ ");
         builder.append(pricePaidPerShare);
@@ -164,5 +168,22 @@ public class Lot extends DomainEntity {
     }
     private void setAllocations(Set<Allocation> allocations) {
         this.allocations = allocations;
+    }
+    
+    // ----- Comparators -----
+    public static class CreationTimeComparator implements Comparator<Lot> {
+
+        @Override
+        public int compare(Lot lot1, Lot lot2) {
+
+            if (lot1 == null) {
+                return -1;
+            }
+            else if (lot2 == null) {
+                return 1;
+            }
+            
+            return lot1.getCreationTime().compareTo(lot2.getCreationTime());
+        }
     }
 }
