@@ -45,7 +45,8 @@ public class LotWithdrawalTradeTest extends BaseAccountsTest {
     
     public void transferIn(String symbol, BigDecimal quantity, BigDecimal price) {
         this.baseAccountService.transferSecurities(
-                symbol, new DecimalQuantity(quantity), new Money(price),
+                USERNAME1, symbol,
+                new DecimalQuantity(quantity), new Money(price),
                 externalAccount1Id, brokerageAccount1Id);
     }
 
@@ -60,7 +61,7 @@ public class LotWithdrawalTradeTest extends BaseAccountsTest {
                 null,
                 OrderTerm.GoodTilCanceled,
                 false);
-        this.brokerageAccountService.placeOrder(brokerageAccount1Id, order);
+        this.brokerageAccountService.placeOrder(USERNAME1, brokerageAccount1Id, order);
         
         // Acknowledge the order
         ExecutionReport executionReport = ExecutionReport.createNewType(order);

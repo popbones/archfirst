@@ -22,14 +22,13 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.account.BaseAccountService;
-import org.archfirst.bfoms.domain.account.Transaction;
-import org.archfirst.bfoms.domain.account.TransactionCriteria;
-import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
+import org.archfirst.bfoms.domain.account.brokerage.AccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
-import org.archfirst.bfoms.domain.account.external.ExternalAccount;
+import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountService;
 import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.DecimalQuantity;
 
 /**
  * TradingTxnService
@@ -53,20 +52,37 @@ public class TradingTxnService {
     }
 
     public void transferCash(
+            String username,
             BigDecimal amount,
             Long fromAccountId,
             Long toAccountId) {
-        ExternalAccount fromAccount =
-            externalAccountService.findAccount(fromAccountId);
-        BrokerageAccount toAccount =
-            brokerageAccountService.findAccount(toAccountId);
-        baseAccountService.transferCash(new Money(amount), fromAccount, toAccount);
+        baseAccountService.transferCash(
+                username, new Money(amount), fromAccountId, toAccountId);
     }
         
+    public void transferSecurities(
+            String username,
+            String symbol,
+            BigDecimal quantity,
+            BigDecimal pricePaidPerShare,
+            Long fromAccountId,
+            Long toAccountId) {
+        baseAccountService.transferSecurities(
+                username,
+                symbol,
+                new DecimalQuantity(quantity),
+                new Money(pricePaidPerShare),
+                fromAccountId,
+                toAccountId);
+    }
+        
+    public Long placeOrder(String username, Long brokerageAccountId, Order order) {
+        return this.brokerageAccountService.placeOrder(
+                username, brokerageAccountId, order);
+    }
+    
     // ----- Queries and Read-Only Operations -----
-    public List<Transaction> getTransactions(Long accountId) {
-        TransactionCriteria criteria = new TransactionCriteria();
-        criteria.setAccountId(accountId);
-        return baseAccountService.findTransactions(criteria);
+    public List<AccountSummary> getBrokerageAccountSummaries(String username) {
+        return this.brokerageAccountService.getAccountSummaries(username);
     }
 }

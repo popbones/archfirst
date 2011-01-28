@@ -44,7 +44,8 @@ public class LotCreationTradeTest extends BaseAccountsTest {
         
         // Add cash to brokerage account so we can buy securities
         this.baseAccountService.transferCash(
-                new Money("10000"), externalAccount1Id, brokerageAccount1Id);
+                USERNAME1, new Money("10000"),
+                externalAccount1Id, brokerageAccount1Id);
     }
     
     public List<Lot> buy(String symbol, BigDecimal quantity, BigDecimal pricePaidPerShare) {
@@ -58,7 +59,8 @@ public class LotCreationTradeTest extends BaseAccountsTest {
                 null,
                 OrderTerm.GoodTilCanceled,
                 false);
-        this.brokerageAccountService.placeOrder(brokerageAccount1Id, order);
+        this.brokerageAccountService.placeOrder(
+                USERNAME1, brokerageAccount1Id, order);
         
         // Acknowledge the order
         ExecutionReport executionReport = ExecutionReport.createNewType(order);

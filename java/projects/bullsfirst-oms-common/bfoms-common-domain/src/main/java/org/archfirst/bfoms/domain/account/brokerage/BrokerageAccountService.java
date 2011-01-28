@@ -15,6 +15,7 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -23,6 +24,7 @@ import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
+import org.archfirst.bfoms.domain.security.AuthorizationException;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.bfoms.domain.security.UserRepository;
 
@@ -51,8 +53,13 @@ public class BrokerageAccountService {
         return account.getId();
     }
 
-    public Long placeOrder(Long accountId, Order order) {
-        return this.findAccount(accountId).placeOrder(order);
+    public Long placeOrder(String username, Long accountId, Order order) {
+
+        // Check authorization on account
+        BrokerageAccount account =  checkAccountAuthorization(
+                getUser(username), accountId, BrokerageAccountPermission.Trade);
+
+        return account.placeOrder(order);
     }
     
     public void processExecutionReport(Long accountId, ExecutionReport executionReport) {
@@ -68,10 +75,52 @@ public class BrokerageAccountService {
         return brokerageAccountRepository.findActiveLots(findAccount(accountId));
     }
 
+    public List<AccountSummary> getAccountSummaries(String username) {
+        
+        User user = getUser(username);
+        
+        // Get a list of viewable accounts
+        List<BrokerageAccount> viewableAccounts =
+            brokerageAccountRepository.findAccountsWithPermission(
+                    user, BrokerageAccountPermission.View);
+
+        // Calculate account summaries
+        List<AccountSummary> accountSummaries = new ArrayList<AccountSummary>();
+        for (BrokerageAccount account : viewableAccounts) {
+            accountSummaries.add(account.getAccountSummary(
+                    user, referenceDataService, marketDataService));
+        }
+
+        return accountSummaries;
+    }
+    
     public AccountSummary getAccountSummary(String username, Long accountId) {
         BrokerageAccount account = this.findAccount(accountId);
         return account.getAccountSummary(
                 getUser(username), referenceDataService, marketDataService);
+    }
+    
+    // ----- Helpers -----
+    private BrokerageAccount checkAccountAuthorization(
+            User user,
+            long accountId,
+            BrokerageAccountPermission requiredPermission) {
+        
+        BrokerageAccount account = brokerageAccountRepository.findAccount(accountId);
+        checkAccountAuthorizationHelper(user, account, requiredPermission);
+        return account;
+    }
+    
+    private void checkAccountAuthorizationHelper(
+            User user,
+            BrokerageAccount account,
+            BrokerageAccountPermission requiredPermission) {
+
+        List<BrokerageAccountPermission> permissions =
+            brokerageAccountRepository.findPermissionsForAccount(user, account);
+        if (!permissions.contains(requiredPermission)) {
+            throw new AuthorizationException();
+        }
     }
     
     private User getUser(String username) {

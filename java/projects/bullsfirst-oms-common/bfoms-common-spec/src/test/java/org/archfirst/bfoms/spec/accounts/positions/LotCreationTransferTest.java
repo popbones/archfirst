@@ -39,7 +39,7 @@ public class LotCreationTransferTest extends BaseAccountsTest {
     
     public List<Lot> transfer(String symbol, BigDecimal quantity) {
         this.baseAccountService.transferSecurities(
-                symbol, new DecimalQuantity(quantity), new Money(),
+                USERNAME1, symbol, new DecimalQuantity(quantity), new Money(),
                 externalAccount1Id, brokerageAccount1Id);
         
         List<Lot> lots =

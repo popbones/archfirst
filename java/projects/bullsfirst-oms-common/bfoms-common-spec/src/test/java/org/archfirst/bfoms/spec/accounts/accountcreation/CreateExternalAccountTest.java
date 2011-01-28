@@ -37,7 +37,8 @@ public class CreateExternalAccountTest extends BaseAccountsTest {
 
         // Transfer cash
         this.baseAccountService.transferCash(
-                new Money(amount), externalAccount1Id, brokerageAccount1Id);
+                USERNAME1, new Money(amount),
+                externalAccount1Id, brokerageAccount1Id);
     }
     
     public Money getBrokerageAccountCashPosition() {

@@ -37,7 +37,8 @@ public class TransferCashBrokerageToBrokerageTest extends BaseAccountsTest {
 
         // Set cash position
         this.baseAccountService.transferCash(
-                new Money(amount), this.externalAccount1Id, this.brokerageAccount1Id);
+                USERNAME1, new Money(amount),
+                this.externalAccount1Id, this.brokerageAccount1Id);
     }
 
     public void setBrokerageAccount2CashPosition(BigDecimal amount) {
@@ -47,12 +48,14 @@ public class TransferCashBrokerageToBrokerageTest extends BaseAccountsTest {
 
         // Set cash position
         this.baseAccountService.transferCash(
-                new Money(amount), this.externalAccount1Id, this.brokerageAccount2Id);
+                USERNAME1, new Money(amount),
+                this.externalAccount1Id, this.brokerageAccount2Id);
     }
 
     public void transfer(BigDecimal amount) {
         this.baseAccountService.transferCash(
-                new Money(amount), brokerageAccount1Id, brokerageAccount2Id);
+                USERNAME1, new Money(amount),
+                brokerageAccount1Id, brokerageAccount2Id);
     }
     
     public Money getBrokerageAccount1CashPosition() {

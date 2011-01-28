@@ -39,7 +39,7 @@ public class TransferSecuritiesBrokerageToBrokerageTest extends BaseAccountsTest
 
         // Set instrument position
         this.baseAccountService.transferSecurities(
-                symbol, new DecimalQuantity(quantity), new Money(),
+                USERNAME1, symbol, new DecimalQuantity(quantity), new Money(),
                 this.externalAccount1Id, this.brokerageAccount1Id);
     }
 
@@ -50,13 +50,13 @@ public class TransferSecuritiesBrokerageToBrokerageTest extends BaseAccountsTest
 
         // Set instrument position
         this.baseAccountService.transferSecurities(
-                symbol, new DecimalQuantity(quantity), new Money(),
+                USERNAME1, symbol, new DecimalQuantity(quantity), new Money(),
                 this.externalAccount1Id, this.brokerageAccount2Id);
     }
 
     public void transfer(String symbol, int quantity) {
         this.baseAccountService.transferSecurities(
-                symbol, new DecimalQuantity(quantity), new Money(),
+                USERNAME1, symbol, new DecimalQuantity(quantity), new Money(),
                 this.brokerageAccount1Id, this.brokerageAccount2Id);
     }
     

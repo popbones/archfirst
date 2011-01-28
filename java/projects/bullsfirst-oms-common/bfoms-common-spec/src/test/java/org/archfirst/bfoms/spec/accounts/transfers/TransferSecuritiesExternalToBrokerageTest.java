@@ -47,7 +47,7 @@ public class TransferSecuritiesExternalToBrokerageTest extends BaseAccountsTest 
 
         // Transfer securities
         this.baseAccountService.transferSecurities(
-                symbol, new DecimalQuantity(quantity), new Money(),
+                USERNAME1, symbol, new DecimalQuantity(quantity), new Money(),
                 externalAccount1Id, brokerageAccount1Id);
         
         // Get lot for brokerage account

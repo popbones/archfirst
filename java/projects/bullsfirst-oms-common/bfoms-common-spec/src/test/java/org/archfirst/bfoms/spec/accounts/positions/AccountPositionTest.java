@@ -47,12 +47,14 @@ public class AccountPositionTest extends BaseAccountsTest {
     
     public void transferCash(BigDecimal amount) {
         this.baseAccountService.transferCash(
-                new Money(amount), externalAccount1Id, brokerageAccount1Id);
+                USERNAME1, new Money(amount),
+                externalAccount1Id, brokerageAccount1Id);
     }
 
     public void transferSecurities(String symbol, BigDecimal quantity, BigDecimal price) {
         this.baseAccountService.transferSecurities(
-                symbol, new DecimalQuantity(quantity), new Money(price),
+                USERNAME1, symbol,
+                new DecimalQuantity(quantity), new Money(price),
                 externalAccount1Id, brokerageAccount1Id);
     }
     

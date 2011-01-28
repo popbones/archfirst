@@ -22,8 +22,10 @@ import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.WebServiceContext;
 
-import org.archfirst.bfoms.domain.account.Transaction;
+import org.archfirst.bfoms.domain.account.brokerage.AccountSummary;
+import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 
 /**
@@ -34,26 +36,22 @@ import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 @WebService(targetNamespace = "http://archfirst.org/bfoms/tradingservice.wsdl", serviceName = "TradingService")
 public class TradingWebService {
 
-    @Inject
-    private TradingTxnService tradingTxnService;
+    @Inject private TradingTxnService tradingTxnService;
+    @Inject private WebServiceContext wsContext;
     
     // ----- Commands -----
     @WebMethod(operationName = "OpenNewAccount", action = "OpenNewAccount")
     public Long openNewAccount(
-            @WebParam(name = "Username")
-            String username,
             @WebParam(name = "AccountName")
             String accountName) {
-        return tradingTxnService.openNewAccount(username, accountName);
+        return tradingTxnService.openNewAccount(getUsername(), accountName);
     }
 
     @WebMethod(operationName = "AddExternalAccount", action = "AddExternalAccount")
     public Long addExternalAccount(
-            @WebParam(name = "Username")
-            String username,
             @WebParam(name = "ExternalAccountParams")
             ExternalAccountParams params) {
-        return tradingTxnService.addExternalAccount(username, params);
+        return tradingTxnService.addExternalAccount(getUsername(), params);
     }
 
     @WebMethod(operationName = "TransferCash", action = "TransferCash")
@@ -64,14 +62,44 @@ public class TradingWebService {
             Long fromAccountId,
             @WebParam(name = "ToAccountId")
             Long toAccountId) {
-        tradingTxnService.transferCash(amount, fromAccountId, toAccountId);
+        tradingTxnService.transferCash(getUsername(), amount, fromAccountId, toAccountId);
     }
 
+    @WebMethod(operationName = "TransferSecurities", action = "TransferSecurities")
+    public void transferSecurities(
+            @WebParam(name = "Symbol")
+            String symbol,
+            @WebParam(name = "Quantity")
+            BigDecimal quantity,
+            @WebParam(name = "PricePaidPerShare")
+            BigDecimal pricePaidPerShare,
+            @WebParam(name = "FromAccountId")
+            Long fromAccountId,
+            @WebParam(name = "ToAccountId")
+            Long toAccountId) {
+        tradingTxnService.transferSecurities(
+                getUsername(), symbol, quantity, pricePaidPerShare,
+                fromAccountId, toAccountId);
+    }
+
+    @WebMethod(operationName = "PlaceOrder", action = "PlaceOrder")
+    public Long placeOrder(
+            @WebParam(name = "BrokerageAccountId")
+            Long brokerageAccountId,
+            @WebParam(name = "Order")
+            Order order) {
+        return tradingTxnService.placeOrder(
+                getUsername(), brokerageAccountId, order);
+    }
+    
     // ----- Queries and Read-Only Operations -----
-    @WebMethod(operationName = "GetTransactions", action = "GetTransactions")
-    public List<Transaction> getTransactions(
-            @WebParam(name = "AccountId")
-            Long accountId) {
-        return tradingTxnService.getTransactions(accountId);
+    @WebMethod(operationName = "GetBrokerageAccountSummaries", action = "GetBrokerageAccountSummaries")
+    public List<AccountSummary> getBrokerageAccountSummaries() {
+        return this.tradingTxnService.getBrokerageAccountSummaries(getUsername());
+    }
+
+    // ----- Helper Methods -----
+    private String getUsername() {
+        return wsContext.getUserPrincipal().getName();
     }
 }

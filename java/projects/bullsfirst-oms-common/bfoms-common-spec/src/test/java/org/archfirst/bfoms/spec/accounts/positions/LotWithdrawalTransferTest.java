@@ -39,13 +39,14 @@ public class LotWithdrawalTransferTest extends BaseAccountsTest {
     
     public void transferIn(String symbol, BigDecimal quantity, BigDecimal price) {
         this.baseAccountService.transferSecurities(
-                symbol, new DecimalQuantity(quantity), new Money(price),
+                USERNAME1, symbol,
+                new DecimalQuantity(quantity), new Money(price),
                 externalAccount1Id, brokerageAccount1Id);
     }
 
     public List<Lot> transferOut(String symbol, BigDecimal quantity) {
         this.baseAccountService.transferSecurities(
-                symbol, new DecimalQuantity(quantity), new Money(),
+                USERNAME1, symbol, new DecimalQuantity(quantity), new Money(),
                 brokerageAccount1Id, externalAccount1Id);
         
         List<Lot> lots =

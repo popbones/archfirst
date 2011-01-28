@@ -35,20 +35,26 @@ public class BaseAccountService {
 
     // ----- Commands -----
     public void transferCash(
+            String username,
             Money amount,
             Long fromAccountId,
             Long toAccountId) {
 
         this.transferCash(
+                username,
                 amount,
                 this.findAccount(fromAccountId),
                 this.findAccount(toAccountId));
     }
     
     public void transferCash(
+            String username,
             Money amount,
             BaseAccount fromAccount,
             BaseAccount toAccount) {
+        
+        // Check authorization on from account
+        // TODO: This needs to be done
         
         DateTime now = new DateTime();
         CashTransfer fromTransfer = new CashTransfer(now, amount.negate(), toAccount);
@@ -61,6 +67,7 @@ public class BaseAccountService {
     }
 
     public void transferSecurities(
+            String username,
             String symbol,
             DecimalQuantity quantity,
             Money pricePaidPerShare,
@@ -68,6 +75,7 @@ public class BaseAccountService {
             Long toAccountId) {
         
         this.transferSecurities(
+                username,
                 symbol,
                 quantity,
                 pricePaidPerShare,
@@ -76,11 +84,15 @@ public class BaseAccountService {
     }
         
     public void transferSecurities(
+            String username,
             String symbol,
             DecimalQuantity quantity,
             Money pricePaidPerShare,
             BaseAccount fromAccount,
             BaseAccount toAccount) {
+        
+        // Check authorization on from account
+        // TODO: This needs to be done
         
         DateTime now = new DateTime();
         SecuritiesTransfer fromTransfer = new SecuritiesTransfer(
