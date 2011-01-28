@@ -34,15 +34,15 @@ import org.springframework.test.context.ContextConfiguration;
 @ContextConfiguration(locations={"classpath:/org/archfirst/bfoms/spec/applicationContext.xml"})
 public abstract class BaseAccountsTest extends AbstractTransactionalSpecTest  {
 
-    private static String FIRST_NAME1 = "John";
-    private static String LAST_NAME1 = "Smith";
-    private static String USERNAME1 = "jsmith";
-    private static String PASSWORD1 = "cool";
-    private static String BROKERAGE_ACCOUNT_NAME1 = "Brokerage Account 1";
-    private static String BROKERAGE_ACCOUNT_NAME2 = "Brokerage Account 2";
-    private static String EXTERNAL_ACCOUNT_NAME1 = "External Account 1";
-    private static String EXTERNAL_ROUTING_NUMBER1 = "011000123";
-    private static String EXTERNAL_ACCOUNT_NUMBER1 = "0157-8965-2278";
+    protected static String FIRST_NAME1 = "John";
+    protected static String LAST_NAME1 = "Smith";
+    protected static String USERNAME1 = "jsmith";
+    protected static String PASSWORD1 = "cool";
+    protected static String BROKERAGE_ACCOUNT_NAME1 = "Brokerage Account 1";
+    protected static String BROKERAGE_ACCOUNT_NAME2 = "Brokerage Account 2";
+    protected static String EXTERNAL_ACCOUNT_NAME1 = "External Account 1";
+    protected static String EXTERNAL_ROUTING_NUMBER1 = "011000123";
+    protected static String EXTERNAL_ACCOUNT_NUMBER1 = "0157-8965-2278";
     
     @Inject protected BaseAccountService baseAccountService;
     @Inject protected BrokerageAccountService brokerageAccountService;
