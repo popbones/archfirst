@@ -40,6 +40,11 @@ public class ReferenceDataService {
      */
     private volatile Map<String, Instrument> instrumentMap;
 
+    // ----- Commands -----
+    synchronized public void addInstrument(Instrument instrument) {
+        getInstrumentMap().put(instrument.getSymbol(), instrument);
+    }
+    
     // ----- Queries and Read-Only Operations -----
     public Instrument lookup(String symbol) {
         return getInstrumentMap().get(symbol);

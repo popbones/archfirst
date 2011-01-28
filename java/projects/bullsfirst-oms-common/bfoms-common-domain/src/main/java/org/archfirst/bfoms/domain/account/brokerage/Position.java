@@ -15,6 +15,7 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
+import java.util.Comparator;
 import java.util.List;
 
 import org.archfirst.bfoms.domain.util.Constants;
@@ -174,5 +175,28 @@ public class Position {
     }
     public List<Position> getChildren() {
         return children;
+    }
+    
+    // ----- Comparators -----
+    public static class LotCreationTimeComparator implements Comparator<Position> {
+
+        @Override
+        public int compare(Position position1, Position position2) {
+
+            if (position1 == null) {
+                return -1;
+            }
+            else if (position2 == null) {
+                return 1;
+            }
+            else if (position1.getLotCreationTime() == null) {
+                return -1;
+            }
+            else if (position2.getLotCreationTime() == null) {
+                return 1;
+            }
+            
+            return position1.getLotCreationTime().compareTo(position2.getLotCreationTime());
+        }
     }
 }

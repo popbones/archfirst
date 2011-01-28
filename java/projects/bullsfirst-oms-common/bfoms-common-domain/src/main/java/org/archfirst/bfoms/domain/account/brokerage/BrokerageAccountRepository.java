@@ -50,7 +50,7 @@ public class BrokerageAccountRepository extends BaseRepository {
 
         @SuppressWarnings("unchecked")
         List<BrokerageAccount> accounts = entityManager.createQuery(
-                "select ace.target from AccountAce ace " +
+                "select ace.target from BrokerageAccountAce ace " +
                 "where ace.recipient = :recipient " +
                 "and ace.permission = :permission")
             .setParameter("recipient", user)
@@ -76,7 +76,7 @@ public class BrokerageAccountRepository extends BaseRepository {
 
         @SuppressWarnings("unchecked")
         List<BrokerageAccountPermission> permissions = entityManager.createQuery(
-                "select ace.permission from AccountAce ace " +
+                "select ace.permission from BrokerageAccountAce ace " +
                 "where ace.recipient = :recipient " +
                 "and ace.target = :target")
             .setParameter("recipient", user)

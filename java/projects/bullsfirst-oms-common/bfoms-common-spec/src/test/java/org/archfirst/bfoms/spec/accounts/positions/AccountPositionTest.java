@@ -16,21 +16,23 @@
 package org.archfirst.bfoms.spec.accounts.positions;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 import org.archfirst.bfoms.domain.account.brokerage.AccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.Position;
+import org.archfirst.bfoms.domain.marketdata.MarketPrice;
+import org.archfirst.bfoms.domain.referencedata.Instrument;
 import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
-import org.concordion.api.ExpectedToFail;
+import org.joda.time.DateTime;
 
 /**
  * AccountPositionTest
  *
  * @author Naresh Bhatia
  */
-@ExpectedToFail
 public class AccountPositionTest extends BaseAccountsTest {
     
     private AccountSummary accountSummary;
@@ -39,6 +41,8 @@ public class AccountPositionTest extends BaseAccountsTest {
         this.createUser1();
         this.createBrokerageAccount1();
         this.createExternalAccount1();
+        this.referenceDataService.addInstrument(
+                new Instrument("CSCO", "Cisco Systems, Inc.", "NASDAQ"));
     }
     
     public void transferCash(BigDecimal amount) {
@@ -53,12 +57,19 @@ public class AccountPositionTest extends BaseAccountsTest {
     }
     
     public void setMarketPrice(String symbol, BigDecimal price) {
-        
+        marketDataService.updateMarketPrice(
+                new MarketPrice(symbol, new Money(price), new DateTime()));
     }
     
     public List<Position> getPositions() {
         accountSummary = this.brokerageAccountService.getAccountSummary(
-                USERNAME1, externalAccount1Id);
-        return accountSummary.getPositions();
+                USERNAME1, brokerageAccount1Id);
+        List<Position> positions = accountSummary.getPositions(); 
+        Collections.sort(positions, new Position.LotCreationTimeComparator());
+        return positions;
+    }
+    
+    public Money getMarketValue() {
+        return accountSummary.getMarketValue();
     }
 }

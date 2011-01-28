@@ -36,6 +36,16 @@ public class Instrument extends DomainEntity implements Comparable <Instrument> 
     private String name;
     private String exchange;
 
+    // ----- Constructors -----
+    public Instrument() {
+    }
+    
+    public Instrument(String symbol, String name, String exchange) {
+        this.symbol = symbol;
+        this.name = name;
+        this.exchange = exchange;
+    }
+
     // ----- Queries and Read-Only Operations -----
     @Override
     public boolean equals(Object object) {

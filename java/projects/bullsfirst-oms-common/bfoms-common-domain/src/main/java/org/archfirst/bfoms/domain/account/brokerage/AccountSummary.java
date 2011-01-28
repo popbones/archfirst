@@ -38,7 +38,7 @@ import org.archfirst.common.money.Money;
     "editPermission",
     "tradePermission",
     "transferPermission",
-    "accountPosition"
+    "positions"
 })
 public class AccountSummary {
 
