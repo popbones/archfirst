@@ -151,6 +151,7 @@
         <module>bfoms-common-domain</module>
         <module>bfoms-common-ddl</module>
         <module>bfoms-common-spec</module>
+        <module>bfoms-interfaceout-exchange</module>
     </modules>
 
     <repositories>

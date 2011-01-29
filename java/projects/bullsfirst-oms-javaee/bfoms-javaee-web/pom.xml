@@ -33,6 +33,10 @@
             <artifactId>bfoms-common-domain</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.archfirst</groupId>
+            <artifactId>bfoms-interfaceout-exchange</artifactId>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate.java-persistence</groupId>
             <artifactId>jpa-api</artifactId>
             <scope>provided</scope>
