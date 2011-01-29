@@ -18,6 +18,7 @@ package org.archfirst.bfoms.webservice.trading;
 import java.math.BigDecimal;
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -37,7 +38,7 @@ import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 public class TradingWebService {
 
     @Inject private TradingTxnService tradingTxnService;
-    @Inject private WebServiceContext wsContext;
+    @Resource private WebServiceContext wsContext;
     
     // ----- Commands -----
     @WebMethod(operationName = "OpenNewAccount", action = "OpenNewAccount")
