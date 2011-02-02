@@ -24,7 +24,7 @@ import javax.inject.Inject;
 import org.archfirst.bfoms.domain.account.BaseAccountService;
 import org.archfirst.bfoms.domain.account.brokerage.AccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
-import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountService;
 import org.archfirst.common.money.Money;
@@ -53,32 +53,32 @@ public class TradingTxnService {
 
     public void transferCash(
             String username,
-            BigDecimal amount,
+            Money amount,
             Long fromAccountId,
             Long toAccountId) {
         baseAccountService.transferCash(
-                username, new Money(amount), fromAccountId, toAccountId);
+                username, amount, fromAccountId, toAccountId);
     }
         
     public void transferSecurities(
             String username,
             String symbol,
             BigDecimal quantity,
-            BigDecimal pricePaidPerShare,
+            Money pricePaidPerShare,
             Long fromAccountId,
             Long toAccountId) {
         baseAccountService.transferSecurities(
                 username,
                 symbol,
                 new DecimalQuantity(quantity),
-                new Money(pricePaidPerShare),
+                pricePaidPerShare,
                 fromAccountId,
                 toAccountId);
     }
         
-    public Long placeOrder(String username, Long brokerageAccountId, Order order) {
+    public Long placeOrder(String username, Long brokerageAccountId, OrderParams params) {
         return this.brokerageAccountService.placeOrder(
-                username, brokerageAccountId, order);
+                username, brokerageAccountId, params);
     }
     
     // ----- Queries and Read-Only Operations -----

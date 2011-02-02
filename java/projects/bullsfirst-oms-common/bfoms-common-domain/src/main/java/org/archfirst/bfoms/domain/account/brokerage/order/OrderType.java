@@ -19,13 +19,21 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * OrderType
  *
  * @author Naresh Bhatia
  */
+@XmlType(name = "OrderType")
+@XmlEnum
 public enum OrderType {
+    @XmlEnumValue("Market")
     Market("MARKET", "Market"),
+    @XmlEnumValue("Limit")
     Limit("LIMIT", "Limit");
     
     private final String identifier;

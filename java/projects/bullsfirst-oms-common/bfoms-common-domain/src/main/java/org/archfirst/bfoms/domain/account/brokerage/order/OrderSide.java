@@ -19,13 +19,21 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * OrderSide
  *
  * @author Naresh Bhatia
  */
+@XmlType(name = "OrderSide")
+@XmlEnum
 public enum OrderSide {
+    @XmlEnumValue("Buy")
     Buy("BUY", "Buy"),
+    @XmlEnumValue("Sell")
     Sell("SELL", "Sell");
     
     private final String identifier;

@@ -89,6 +89,16 @@ public class Order extends DomainEntity implements Comparable<Order> {
         this.allOrNone = allOrNone;
     }
 
+    public Order(OrderParams params) {
+        this.side = params.getSide();
+        this.symbol = params.getSymbol();
+        this.quantity = new DecimalQuantity(params.getQuantity());
+        this.type = params.getType();
+        this.limitPrice = params.getLimitPrice();
+        this.term = params.getTerm();
+        this.allOrNone = params.isAllOrNone();
+    }
+
     // ----- Commands -----
     /**
      * Processes the specified execution report and returns a trade if the

@@ -19,13 +19,21 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * OrderTerm
  *
  * @author Naresh Bhatia
  */
+@XmlType(name = "OrderTerm")
+@XmlEnum
 public enum OrderTerm {
+    @XmlEnumValue("GoodForTheDay")
     GoodForTheDay("GFD", "Good For The Day"),
+    @XmlEnumValue("GoodTilCanceled")
     GoodTilCanceled("GTC", "Good 'til Canceled");
     
     private final String identifier;

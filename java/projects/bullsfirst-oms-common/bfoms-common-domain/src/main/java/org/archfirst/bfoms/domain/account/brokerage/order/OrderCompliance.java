@@ -19,16 +19,27 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * OrderCompliance
  * 
  * @author Naresh Bhatia
  */
+@XmlType(name = "OrderCompliance")
+@XmlEnum
 public enum OrderCompliance {
+    @XmlEnumValue("Compliant")
     Compliant("COMPLNT", "Compliant"),
+    @XmlEnumValue("NonCompliant")
     NonCompliant("NON_COMPLNT", "Non Compliant"),
+    @XmlEnumValue("LimitOrderWithNoLimitPrice")
     LimitOrderWithNoLimitPrice("NOLMTPRC", "Limit Order With No Limit Price"),
+    @XmlEnumValue("InsufficientFunds")
     InsufficientFunds("INSFFUND", "Insufficient Funds"),
+    @XmlEnumValue("InsufficientQuantity")
     InsufficientQuantity("INSFQTY", "Insufficient Quantity");
     
     private final String identifier;

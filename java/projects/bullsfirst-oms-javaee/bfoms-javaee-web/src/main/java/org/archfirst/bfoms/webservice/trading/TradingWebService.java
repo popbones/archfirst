@@ -26,8 +26,9 @@ import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 
 import org.archfirst.bfoms.domain.account.brokerage.AccountSummary;
-import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
+import org.archfirst.common.money.Money;
 
 /**
  * TradingWebService
@@ -58,7 +59,7 @@ public class TradingWebService {
     @WebMethod(operationName = "TransferCash", action = "TransferCash")
     public void transferCash(
             @WebParam(name = "Amount")
-            BigDecimal amount,
+            Money amount,
             @WebParam(name = "FromAccountId")
             Long fromAccountId,
             @WebParam(name = "ToAccountId")
@@ -73,7 +74,7 @@ public class TradingWebService {
             @WebParam(name = "Quantity")
             BigDecimal quantity,
             @WebParam(name = "PricePaidPerShare")
-            BigDecimal pricePaidPerShare,
+            Money pricePaidPerShare,
             @WebParam(name = "FromAccountId")
             Long fromAccountId,
             @WebParam(name = "ToAccountId")
@@ -87,10 +88,10 @@ public class TradingWebService {
     public Long placeOrder(
             @WebParam(name = "BrokerageAccountId")
             Long brokerageAccountId,
-            @WebParam(name = "Order")
-            Order order) {
+            @WebParam(name = "OrderParams")
+            OrderParams orderParams) {
         return tradingTxnService.placeOrder(
-                getUsername(), brokerageAccountId, order);
+                getUsername(), brokerageAccountId, orderParams);
     }
     
     // ----- Queries and Read-Only Operations -----

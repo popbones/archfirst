@@ -22,6 +22,7 @@ import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
 import org.archfirst.bfoms.domain.security.AuthorizationException;
@@ -53,13 +54,13 @@ public class BrokerageAccountService {
         return account.getId();
     }
 
-    public Long placeOrder(String username, Long accountId, Order order) {
+    public Long placeOrder(String username, Long accountId, OrderParams params) {
 
         // Check authorization on account
         BrokerageAccount account =  checkAccountAuthorization(
                 getUser(username), accountId, BrokerageAccountPermission.Trade);
 
-        return account.placeOrder(order);
+        return account.placeOrder(params);
     }
     
     public void processExecutionReport(Long accountId, ExecutionReport executionReport) {
@@ -75,6 +76,10 @@ public class BrokerageAccountService {
         return brokerageAccountRepository.findActiveLots(findAccount(accountId));
     }
 
+    public Order findOrder(Long id) {
+        return brokerageAccountRepository.findOrder(id);
+    }
+    
     public List<AccountSummary> getAccountSummaries(String username) {
         
         User user = getUser(username);

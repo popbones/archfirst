@@ -38,6 +38,7 @@ import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCompliance;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
@@ -180,7 +181,8 @@ public class BrokerageAccount extends BaseAccount {
         }
     }
     
-    public Long placeOrder(Order order) {
+    public Long placeOrder(OrderParams params) {
+        Order order = new Order(params);
         order.setCreationTime(new DateTime());
         brokerageAccountRepository.persistAndFlush(order);
         this.addOrder(order);

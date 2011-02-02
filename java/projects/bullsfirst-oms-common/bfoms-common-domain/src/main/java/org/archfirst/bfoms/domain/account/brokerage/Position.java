@@ -18,6 +18,10 @@ package org.archfirst.bfoms.domain.account.brokerage;
 import java.util.Comparator;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
@@ -30,20 +34,49 @@ import org.joda.time.DateTime;
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Position {
+
+    @XmlElement(name = "AccountId", required = true)
     private Long accountId;
+
+    @XmlElement(name = "AccountName", required = true)
     private String accountName;
+
+    @XmlElement(name = "InstrumentSymbol", required = true)
     private String instrumentSymbol;
+
+    @XmlElement(name = "InstrumentName", required = true)
     private String instrumentName;
+
+    @XmlElement(name = "LotId", required = true)
     private Long lotId;
+
+    @XmlElement(name = "LotCreationTime", required = true)
     private DateTime lotCreationTime;
+
+    @XmlElement(name = "Quantity", required = true)
     private DecimalQuantity quantity;
+
+    @XmlElement(name = "LastTrade", required = true)
     private Money lastTrade;
+
+    @XmlElement(name = "MarketValue", required = true)
     private Money marketValue;
+
+    @XmlElement(name = "PricePaid", required = true)
     private Money pricePaid;
+
+    @XmlElement(name = "TotalCost", required = true)
     private Money totalCost;
+
+    @XmlElement(name = "Gain", required = true)
     private Money gain;
+
+    @XmlElement(name = "GainPercent", required = true)
     private Percentage gainPercent;
+
+    @XmlElement(name = "Child", required = true)
     private List<Position> children;
 
     // ----- Constructors -----

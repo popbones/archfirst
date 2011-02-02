@@ -26,6 +26,10 @@ import java.util.Currency;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.archfirst.common.quantity.Percentage;
@@ -168,6 +172,7 @@ import org.archfirst.common.quantity.Percentage;
  * }
  * </PRE>
  */
+@XmlAccessorType(XmlAccessType.FIELD)
 @Embeddable
 public final class Money implements Comparable<Money>, Serializable {
     private static final long serialVersionUID = 1L;
@@ -182,9 +187,12 @@ public final class Money implements Comparable<Money>, Serializable {
     private static RoundingMode roundingMode = RoundingMode.HALF_UP;
 
     /** The money amount. Never null. */
+    @XmlElement(name = "Amount", required = true)
     private BigDecimal amount;
 
     /** The currency of the money, such as US Dollars or Euros. Never null. */
+    @XmlElement(name = "Currency", required = true)
+    @XmlJavaTypeAdapter(CurrencyAdapter.class)
     private Currency currency;
 
     /**

@@ -56,7 +56,7 @@ public class AccountSummary {
     protected boolean tradePermission;
     @XmlElement(name = "TransferPermission")
     protected boolean transferPermission;
-    @XmlElement(name = "Positions", required = true)
+    @XmlElement(name = "Position", required = true)
     protected List<Position> positions;
 
     // ----- Constructors -----

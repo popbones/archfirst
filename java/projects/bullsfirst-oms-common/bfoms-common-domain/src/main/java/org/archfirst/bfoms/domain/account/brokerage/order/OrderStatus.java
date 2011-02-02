@@ -19,18 +19,31 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.xml.bind.annotation.XmlEnum;
+import javax.xml.bind.annotation.XmlEnumValue;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  * OrderStatus
  *
  * @author Naresh Bhatia
  */
+@XmlType(name = "OrderStatus")
+@XmlEnum
 public enum OrderStatus {
+    @XmlEnumValue("PendingNew")
     PendingNew("PENDNEW", "Pending New"),
+    @XmlEnumValue("New")
     New("NEW", "New"),
+    @XmlEnumValue("PartiallyFilled")
     PartiallyFilled("PARTFILD", "Partially Filled"),
+    @XmlEnumValue("Filled")
     Filled("FILLED", "Filled"),
+    @XmlEnumValue("PendingCancel")
     PendingCancel("PENDCNCL", "Pending Cancel"),
+    @XmlEnumValue("Canceled")
     Canceled("CNCLD", "Canceled"),
+    @XmlEnumValue("DoneForDay")
     DoneForDay("DFD", "Done For Day");
 
     private final String identifier;

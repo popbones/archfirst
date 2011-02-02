@@ -22,6 +22,7 @@ import java.util.List;
 import org.archfirst.bfoms.domain.account.brokerage.Lot;
 import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderTerm;
@@ -53,15 +54,17 @@ public class LotWithdrawalTradeTest extends BaseAccountsTest {
     public List<Lot> sell(String symbol, BigDecimal quantity) {
         
         // Place the order
-        Order order = new Order(
-                OrderSide.Sell,
+        OrderParams orderParams = new OrderParams(
+                OrderSide.Buy,
                 symbol,
-                new DecimalQuantity(quantity),
+                quantity,
                 OrderType.Market,
                 null,
                 OrderTerm.GoodTilCanceled,
                 false);
-        this.brokerageAccountService.placeOrder(USERNAME1, brokerageAccount1Id, order);
+        Long orderId = this.brokerageAccountService.placeOrder(
+                USERNAME1, brokerageAccount1Id, orderParams);
+        Order order = this.brokerageAccountService.findOrder(orderId);
         
         // Acknowledge the order
         ExecutionReport executionReport = ExecutionReport.createNewType(order);
