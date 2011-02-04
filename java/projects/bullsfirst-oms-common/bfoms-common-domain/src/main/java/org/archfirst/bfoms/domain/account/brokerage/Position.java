@@ -21,12 +21,16 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.archfirst.bfoms.domain.util.Constants;
+import org.archfirst.common.datetime.DateTimeAdapter;
 import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
+import org.archfirst.common.quantity.DecimalQuantityAdapter;
 import org.archfirst.common.quantity.Percentage;
+import org.archfirst.common.quantity.PercentageAdapter;
 import org.joda.time.DateTime;
 
 /**
@@ -35,6 +39,7 @@ import org.joda.time.DateTime;
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+//@XmlSeeAlso({DecimalQuantity.class, Percentage.class})
 public class Position {
 
     @XmlElement(name = "AccountId", required = true)
@@ -53,9 +58,11 @@ public class Position {
     private Long lotId;
 
     @XmlElement(name = "LotCreationTime", required = true)
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
     private DateTime lotCreationTime;
 
     @XmlElement(name = "Quantity", required = true)
+    @XmlJavaTypeAdapter(DecimalQuantityAdapter.class)
     private DecimalQuantity quantity;
 
     @XmlElement(name = "LastTrade", required = true)
@@ -74,6 +81,7 @@ public class Position {
     private Money gain;
 
     @XmlElement(name = "GainPercent", required = true)
+    @XmlJavaTypeAdapter(PercentageAdapter.class)
     private Percentage gainPercent;
 
     @XmlElement(name = "Child", required = true)

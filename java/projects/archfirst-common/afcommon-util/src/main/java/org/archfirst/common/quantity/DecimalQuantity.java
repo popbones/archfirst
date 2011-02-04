@@ -21,9 +21,6 @@ import java.math.RoundingMode;
 
 import javax.persistence.Embeddable;
 import javax.persistence.Transient;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * A decimal quantity.
@@ -38,9 +35,6 @@ import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
  * 
  * @author Naresh Bhatia
  */
-
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlJavaTypeAdapter(value=DecimalQuantityAdapter.class)
 @Embeddable
 public class DecimalQuantity implements Comparable<DecimalQuantity>, Serializable {
     private static final long serialVersionUID = 1L;
