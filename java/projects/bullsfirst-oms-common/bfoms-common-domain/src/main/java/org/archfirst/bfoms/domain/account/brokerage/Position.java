@@ -21,6 +21,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.archfirst.bfoms.domain.util.Constants;
@@ -39,7 +40,7 @@ import org.joda.time.DateTime;
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-//@XmlSeeAlso({DecimalQuantity.class, Percentage.class})
+@XmlSeeAlso({DecimalQuantity.class, Percentage.class})
 public class Position {
 
     @XmlElement(name = "AccountId", required = true)
