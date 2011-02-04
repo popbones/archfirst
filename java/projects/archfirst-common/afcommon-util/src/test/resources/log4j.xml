@@ -43,7 +43,7 @@
   <!-- ******************************************************************* -->
   <!-- Low Level Loggers                                                   -->
   <!-- ******************************************************************* -->
-  <logger name="org.archfirst.common.springtest.TraceTestExecutionListener">
+  <logger name="org.archfirst.common">
     <level value="trace"/>
   </logger>
 

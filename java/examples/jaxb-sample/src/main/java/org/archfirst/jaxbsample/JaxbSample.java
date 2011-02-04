@@ -24,14 +24,14 @@ import javax.xml.bind.Marshaller;
 
 public class JaxbSample {
 
-    public static void main(String args[]) throws JAXBException
-    {
+    public static void main(String args[]) throws JAXBException {
+
         // Create an account
         BrokerageAccount account =
             new BrokerageAccount(1000L, "John's Brokerage Account", 1000.00);
         Order order = new Order(101L, "Buy", "GOOG", 1000);
         account.addOrder(order);
- 
+
         // Write it out as XML
         JAXBContext jaxbContext = JAXBContext.newInstance(BrokerageAccount.class);
         StringWriter writer = new StringWriter();

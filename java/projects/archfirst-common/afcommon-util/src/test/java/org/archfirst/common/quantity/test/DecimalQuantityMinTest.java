@@ -46,8 +46,7 @@ public class DecimalQuantityMinTest {
     }
 
     @Test
-    public void testOrderIsTooSmall()
-    {
+    public void testOrderIsTooSmall() {
         Order order = new Order(new DecimalQuantity());
 
         Set<ConstraintViolation<Order>> constraintViolations =
@@ -60,8 +59,7 @@ public class DecimalQuantityMinTest {
     }
 
     @Test
-    public void testOrderIsCorrectSize()
-    {
+    public void testOrderIsCorrectSize() {
         Order order = new Order(new DecimalQuantity("1"));
 
         Set<ConstraintViolation<Order>> constraintViolations =

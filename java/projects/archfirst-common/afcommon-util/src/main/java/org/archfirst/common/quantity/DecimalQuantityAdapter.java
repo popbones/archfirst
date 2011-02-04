@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.common.money;
+package org.archfirst.common.quantity;
 
-import java.util.Currency;
+import java.math.BigDecimal;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
- * CurrencyAdapter
+ * DecimalQuantityAdapter
  *
  * @author Naresh Bhatia
  */
-public class CurrencyAdapter extends XmlAdapter<String, Currency> {
+public class DecimalQuantityAdapter extends XmlAdapter<BigDecimal, DecimalQuantity> {
     
-    public Currency unmarshal(String val) throws Exception {
-        return Currency.getInstance(val);
+    public DecimalQuantity unmarshal(BigDecimal val) throws Exception {
+        return new DecimalQuantity(val);
     }
     
-    public String marshal(Currency val) throws Exception {
-        return val.toString();
+    public BigDecimal marshal(DecimalQuantity val) throws Exception {
+        return val.getValue();
     }
 }

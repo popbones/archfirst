@@ -49,6 +49,8 @@ import org.archfirst.common.quantity.DecimalQuantity;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * BrokerageAccount
@@ -58,6 +60,8 @@ import org.joda.time.DateTime;
 @Entity
 public class BrokerageAccount extends BaseAccount {
     private static final long serialVersionUID = 1L;
+    private static final Logger logger =
+        LoggerFactory.getLogger(BrokerageAccountFactory.class);
     
     private OwnershipType ownershipType = OwnershipType.Individual;
     private Money cashPosition = new Money("0.00");
@@ -190,6 +194,7 @@ public class BrokerageAccount extends BaseAccount {
     }
     
     public void processExecutionReport(ExecutionReport executionReport) {
+        logger.debug("Processing ExecutionReport: {}", executionReport);
         Order order =
             brokerageAccountRepository.findOrder(executionReport.getClientOrderId());
         Trade trade = order.processExecutionReport(executionReport, brokerageAccountRepository);

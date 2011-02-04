@@ -55,7 +55,7 @@ public class LotWithdrawalTradeTest extends BaseAccountsTest {
         
         // Place the order
         OrderParams orderParams = new OrderParams(
-                OrderSide.Buy,
+                OrderSide.Sell,
                 symbol,
                 quantity,
                 OrderType.Market,

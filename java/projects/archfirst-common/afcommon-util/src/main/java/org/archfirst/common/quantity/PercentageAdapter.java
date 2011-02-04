@@ -13,24 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.common.money;
+package org.archfirst.common.quantity;
 
-import java.util.Currency;
+import java.math.BigDecimal;
 
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 
 /**
- * CurrencyAdapter
+ * PercentageAdapter
  *
  * @author Naresh Bhatia
  */
-public class CurrencyAdapter extends XmlAdapter<String, Currency> {
+public class PercentageAdapter extends XmlAdapter<BigDecimal, Percentage> {
     
-    public Currency unmarshal(String val) throws Exception {
-        return Currency.getInstance(val);
+    public Percentage unmarshal(BigDecimal val) throws Exception {
+        return new Percentage(val, BigDecimal.ONE, 2);
     }
     
-    public String marshal(Currency val) throws Exception {
-        return val.toString();
+    public BigDecimal marshal(Percentage val) throws Exception {
+        return val.getValue();
     }
 }
