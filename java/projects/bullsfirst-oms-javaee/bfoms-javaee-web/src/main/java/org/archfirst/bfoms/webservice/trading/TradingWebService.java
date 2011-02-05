@@ -22,6 +22,7 @@ import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 
@@ -95,6 +96,7 @@ public class TradingWebService {
     }
     
     // ----- Queries and Read-Only Operations -----
+    @WebResult(name = "AccountSummary")
     @WebMethod(operationName = "GetBrokerageAccountSummaries", action = "GetBrokerageAccountSummaries")
     public List<AccountSummary> getBrokerageAccountSummaries() {
         return this.tradingTxnService.getBrokerageAccountSummaries(getUsername());
