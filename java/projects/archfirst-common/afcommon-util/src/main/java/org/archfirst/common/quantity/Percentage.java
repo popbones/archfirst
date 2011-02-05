@@ -21,6 +21,7 @@ import java.math.RoundingMode;
 import java.text.NumberFormat;
 
 import javax.persistence.Embeddable;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 /**
  * A way to express how large or small one quantity is relative to another
@@ -28,6 +29,7 @@ import javax.persistence.Embeddable;
  *
  * @author Naresh Bhatia
  */
+@XmlJavaTypeAdapter(PercentageAdapter.class)
 @Embeddable
 public class Percentage implements Comparable<Percentage>, Serializable {
     private static final long serialVersionUID = 1L;

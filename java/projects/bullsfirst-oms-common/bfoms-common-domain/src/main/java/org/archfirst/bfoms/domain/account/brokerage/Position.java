@@ -29,9 +29,7 @@ import org.archfirst.common.datetime.DateTimeAdapter;
 import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
-import org.archfirst.common.quantity.DecimalQuantityAdapter;
 import org.archfirst.common.quantity.Percentage;
-import org.archfirst.common.quantity.PercentageAdapter;
 import org.joda.time.DateTime;
 
 /**
@@ -63,7 +61,6 @@ public class Position {
     private DateTime lotCreationTime;
 
     @XmlElement(name = "Quantity", required = true)
-    @XmlJavaTypeAdapter(DecimalQuantityAdapter.class)
     private DecimalQuantity quantity;
 
     @XmlElement(name = "LastTrade", required = true)
@@ -82,7 +79,6 @@ public class Position {
     private Money gain;
 
     @XmlElement(name = "GainPercent", required = true)
-    @XmlJavaTypeAdapter(PercentageAdapter.class)
     private Percentage gainPercent;
 
     @XmlElement(name = "Child", required = true)

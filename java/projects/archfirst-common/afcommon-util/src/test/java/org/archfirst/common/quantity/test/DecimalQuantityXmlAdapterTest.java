@@ -25,10 +25,8 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.archfirst.common.quantity.DecimalQuantity;
-import org.archfirst.common.quantity.DecimalQuantityAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.testng.Assert;
@@ -72,8 +70,7 @@ public class DecimalQuantityXmlAdapterTest {
     @XmlRootElement(name = "Order")
     public static class Order {
 
-        @XmlElement(name = "Quantity")
-        @XmlJavaTypeAdapter(DecimalQuantityAdapter.class)
+        @XmlElement(name = "Quantity", required = true)
         private DecimalQuantity quantity;
 
         public Order() {
