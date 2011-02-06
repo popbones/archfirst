@@ -16,11 +16,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Security;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
 using Bullsfirst.Module.Home.Interfaces;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
@@ -37,12 +39,14 @@ namespace Bullsfirst.Module.Home.ViewModels
         public LoginViewModel(
             ILoggerFacade logger,
             IRegionManager regionManager,
+            IEventAggregator eventAggregator,
             ISecurityServiceAsync securityService,
             UserContext userContext)
         {
             logger.Log("LoginViewModel.LoginViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
             _securityService = securityService;
             _securityService.AuthenticateUserCompleted += new EventHandler<AuthenticateUserCompletedEventArgs>(AuthenticateUserCallback);
             this.UserContext = userContext;
@@ -88,7 +92,9 @@ namespace Bullsfirst.Module.Home.ViewModels
 
                 // Erase password from screen
                 this.Password = null;
-                
+
+                // Send UserLoggedInEvent and switch to LoggedInUserView
+                _eventAggregator.GetEvent<UserLoggedInEvent>().Publish(Empty.Value);
                 _regionManager.RequestNavigate(RegionNames.MainRegion, new Uri(ViewNames.LoggedInUserView, UriKind.Relative));
             }
             else
@@ -168,6 +174,7 @@ namespace Bullsfirst.Module.Home.ViewModels
 
         private ILoggerFacade _logger;
         private IRegionManager _regionManager;
+        private IEventAggregator _eventAggregator;
         private ISecurityServiceAsync _securityService;
 
         public UserContext UserContext { get; set; }

@@ -16,11 +16,13 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Security;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
 using Bullsfirst.Module.OpenAccount.Interfaces;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
@@ -37,13 +39,17 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         public OpenAccountViewModel(
             ILoggerFacade logger,
             IRegionManager regionManager,
+            IEventAggregator eventAggregator,
             ISecurityServiceAsync securityService,
+            //ITradingServiceAsync tradingService,
             UserContext userContext)
         {
             logger.Log("OpenAccountViewModel.OpenAccountViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
             _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
             _securityService = securityService;
+            //_tradingService = tradingService;
             _securityService.RegisterUserCompleted += new EventHandler<AsyncCompletedEventArgs>(RegisterUserCallback);
             this.UserContext = userContext;
             OpenAccountCommand = new DelegateCommand<object>(this.OpenAccountExecute, this.CanOpenAccountExecute);
@@ -95,6 +101,8 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
 
                 this.ClearForm();
 
+                // Send UserLoggedInEvent and switch to LoggedInUserView
+                _eventAggregator.GetEvent<UserLoggedInEvent>().Publish(Empty.Value);
                 _regionManager.RequestNavigate(RegionNames.MainRegion, new Uri(ViewNames.LoggedInUserView, UriKind.Relative));
             }
         }
@@ -202,7 +210,9 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
 
         private ILoggerFacade _logger;
         private IRegionManager _regionManager;
+        private IEventAggregator _eventAggregator;
         private ISecurityServiceAsync _securityService;
+        //private ITradingServiceAsync _tradingService;
 
         public UserContext UserContext { get; set; }
 

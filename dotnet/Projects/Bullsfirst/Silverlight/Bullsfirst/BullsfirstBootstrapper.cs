@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using Archfirst.Framework.PrismHelpers;
@@ -25,6 +26,7 @@ using Bullsfirst.Module.Positions;
 using Bullsfirst.Module.Trade;
 using Bullsfirst.Module.TransactionHistory;
 using Bullsfirst.Module.Transfer;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions;
 using Microsoft.Practices.Prism.Regions;
@@ -75,5 +77,11 @@ namespace Bullsfirst
             base.InitializeShell();
             Application.Current.RootVisual = (UIElement)this.Shell;
         }
+    }
+
+    [Export(typeof(IEventAggregator))]
+    [PartCreationPolicy(CreationPolicy.Shared)]
+    public class MefEventAggregator : EventAggregator
+    {
     }
 }
