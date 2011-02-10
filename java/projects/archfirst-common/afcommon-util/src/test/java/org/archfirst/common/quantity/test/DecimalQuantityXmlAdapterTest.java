@@ -15,6 +15,7 @@
  */
 package org.archfirst.common.quantity.test;
 
+import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import org.archfirst.common.jaxb.DefaultSchemaOutputResolver;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +44,7 @@ public class DecimalQuantityXmlAdapterTest {
         LoggerFactory.getLogger(DecimalQuantityXmlAdapterTest.class);
 
     @Test
-    public void testOrderMarshalUnmarshal() throws JAXBException {
+    public void testOrderMarshalUnmarshal() throws JAXBException, IOException {
 
         // Create an order
         Order order = new Order(new DecimalQuantity("10.2"));
@@ -55,6 +57,9 @@ public class DecimalQuantityXmlAdapterTest {
         marshaller.marshal(order, writer);
         String orderString = writer.toString();
         logger.debug("Order converted to XML:\n" + orderString);
+
+        // Write out the schema (for debugging purposes)
+        jaxbContext.generateSchema(new DefaultSchemaOutputResolver("target"));
 
         // Read it from XML
         Order orderRead =
