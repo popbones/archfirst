@@ -20,6 +20,7 @@ import java.math.BigDecimal;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 import org.archfirst.common.money.Money;
 
@@ -29,6 +30,7 @@ import org.archfirst.common.money.Money;
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "OrderParams")
 public class OrderParams {
 
     @XmlElement(name = "Side", required = true)

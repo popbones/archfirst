@@ -44,6 +44,7 @@ public class TradingWebService {
     
     // ----- Commands -----
     @WebMethod(operationName = "OpenNewAccount", action = "OpenNewAccount")
+    @WebResult(name = "AccountId")
     public Long openNewAccount(
             @WebParam(name = "AccountName")
             String accountName) {
@@ -51,6 +52,7 @@ public class TradingWebService {
     }
 
     @WebMethod(operationName = "AddExternalAccount", action = "AddExternalAccount")
+    @WebResult(name = "AccountId")
     public Long addExternalAccount(
             @WebParam(name = "ExternalAccountParams")
             ExternalAccountParams params) {
@@ -86,6 +88,7 @@ public class TradingWebService {
     }
 
     @WebMethod(operationName = "PlaceOrder", action = "PlaceOrder")
+    @WebResult(name = "OrderId")
     public Long placeOrder(
             @WebParam(name = "BrokerageAccountId")
             Long brokerageAccountId,
@@ -96,8 +99,8 @@ public class TradingWebService {
     }
     
     // ----- Queries and Read-Only Operations -----
-    @WebResult(name = "AccountSummary")
     @WebMethod(operationName = "GetBrokerageAccountSummaries", action = "GetBrokerageAccountSummaries")
+    @WebResult(name = "AccountSummary")
     public List<AccountSummary> getBrokerageAccountSummaries() {
         return this.tradingTxnService.getBrokerageAccountSummaries(getUsername());
     }

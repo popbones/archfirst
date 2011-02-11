@@ -29,6 +29,7 @@ import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -173,6 +174,7 @@ import org.archfirst.common.quantity.Percentage;
  * </PRE>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Money")
 @Embeddable
 public final class Money implements Comparable<Money>, Serializable {
     private static final long serialVersionUID = 1L;
