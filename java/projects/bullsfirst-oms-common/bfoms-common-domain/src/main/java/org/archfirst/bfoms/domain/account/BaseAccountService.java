@@ -34,6 +34,10 @@ public class BaseAccountService {
     private BaseAccountRepository baseAccountRepository;
 
     // ----- Commands -----
+    /**
+     * Transfer cash from the specified account to the specified account.
+     * Amount should always be positive.
+     */
     public void transferCash(
             String username,
             Money amount,
@@ -47,6 +51,10 @@ public class BaseAccountService {
                 this.findAccount(toAccountId));
     }
     
+    /**
+     * Transfer cash from the specified account to the specified account.
+     * Amount should always be positive.
+     */
     public void transferCash(
             String username,
             Money amount,
@@ -66,6 +74,10 @@ public class BaseAccountService {
         toAccount.transferCash(toTransfer);
     }
 
+    /**
+     * Transfer securities from the specified account to the specified account.
+     * Quantity should always be positive.
+     */
     public void transferSecurities(
             String username,
             String symbol,
@@ -83,6 +95,10 @@ public class BaseAccountService {
                 this.findAccount(toAccountId));
     }
         
+    /**
+     * Transfer securities from the specified account to the specified account.
+     * Quantity should always be positive.
+     */
     public void transferSecurities(
             String username,
             String symbol,

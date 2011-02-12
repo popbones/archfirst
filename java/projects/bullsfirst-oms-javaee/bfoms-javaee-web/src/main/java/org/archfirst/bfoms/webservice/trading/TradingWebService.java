@@ -107,6 +107,9 @@ public class TradingWebService {
 
     // ----- Helper Methods -----
     private String getUsername() {
-        return wsContext.getUserPrincipal().getName();
+        // TODO: Switch to real implementation after we can send the username
+        // token in the SOAP header.
+        // return wsContext.getUserPrincipal().getName();
+        return "jhorner";
     }
 }

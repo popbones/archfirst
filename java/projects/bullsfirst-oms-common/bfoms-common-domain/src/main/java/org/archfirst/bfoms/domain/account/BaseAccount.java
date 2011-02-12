@@ -71,8 +71,16 @@ public abstract class BaseAccount extends DomainEntity {
         this.name = newName;
     }
     
+    /**
+     * Transfer cash from this account. Direction of transfer is determined
+     * by the sign of transfer.amount.
+     */
     public abstract void transferCash(CashTransfer transfer);
 
+    /**
+     * Transfer securities from this account. Direction of transfer is determined
+     * by the sign of transfer.quantity.
+     */
     public abstract void transferSecurities(SecuritiesTransfer transfer);
 
     // ----- Queries and Read-Only Operations -----
