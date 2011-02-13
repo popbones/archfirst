@@ -17,14 +17,17 @@ package org.archfirst.bfoms.webservice.trading;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.inject.Inject;
+import javax.jws.HandlerChain;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
+import javax.xml.ws.handler.MessageContext;
 
 import org.archfirst.bfoms.domain.account.brokerage.AccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
@@ -37,6 +40,7 @@ import org.archfirst.common.money.Money;
  * @author Naresh Bhatia
  */
 @WebService(targetNamespace = "http://archfirst.org/bfoms/tradingservice.wsdl", serviceName = "TradingService")
+@HandlerChain(file = "handler-chain.xml")
 public class TradingWebService {
 
     @Inject private TradingTxnService tradingTxnService;
@@ -106,10 +110,14 @@ public class TradingWebService {
     }
 
     // ----- Helper Methods -----
+    private static final String USERNAME_KEY = "username";
+    
     private String getUsername() {
-        // TODO: Switch to real implementation after we can send the username
-        // token in the SOAP header.
-        // return wsContext.getUserPrincipal().getName();
-        return "jhorner";
+        MessageContext msgContext = wsContext.getMessageContext();
+        @SuppressWarnings("unchecked")
+        Map<String, List<String>> http_headers =
+            (Map<String, List<String>>)msgContext.get(MessageContext.HTTP_REQUEST_HEADERS);
+        List<String> usernameList = http_headers.get(USERNAME_KEY);
+        return usernameList.get(0);
     }
 }

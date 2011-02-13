@@ -64,8 +64,16 @@ namespace Bullsfirst.InterfaceOut.Oms.Security
 
         public object BeforeSendRequest(ref Message request, System.ServiceModel.IClientChannel channel)
         {
-            request.Headers.Add(MessageHeader.CreateHeader("username", "", _userContext.Credentials.Username));
-            request.Headers.Add(MessageHeader.CreateHeader("password", "", _userContext.Credentials.Password));
+            // Add username and password to HTTP headers
+            HttpRequestMessageProperty httpRequestMessage = new HttpRequestMessageProperty();
+            httpRequestMessage.Headers["username"] = _userContext.Credentials.Username;
+            httpRequestMessage.Headers["password"] = _userContext.Credentials.Password;
+            request.Properties.Add(HttpRequestMessageProperty.Name, httpRequestMessage);
+
+            // Add username and password to SOAP headers
+            // request.Headers.Add(MessageHeader.CreateHeader("username", "", _userContext.Credentials.Username));
+            // request.Headers.Add(MessageHeader.CreateHeader("password", "", _userContext.Credentials.Password));
+
             return null;
         }
 
