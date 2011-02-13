@@ -4,7 +4,7 @@
   <xs:element name="AuthenticateUserResponse" type="tns:AuthenticateUserResponse" />
   <xs:element name="RegisterUser" type="tns:RegisterUser" />
   <xs:element name="RegisterUserResponse" type="tns:RegisterUserResponse" />
-  <xs:element name="RegistrationRequest" type="tns:registrationRequest" />
+  <xs:element name="RegistrationRequest" type="tns:RegistrationRequest" />
   <xs:element name="UsernameExistsException" type="tns:UsernameExistsException" />
   <xs:complexType name="AuthenticateUser">
     <xs:sequence>
@@ -32,10 +32,10 @@
   </xs:complexType>
   <xs:complexType name="RegisterUser">
     <xs:sequence>
-      <xs:element minOccurs="0" name="RegistrationRequest" type="tns:registrationRequest" />
+      <xs:element minOccurs="0" name="RegistrationRequest" type="tns:RegistrationRequest" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="registrationRequest">
+  <xs:complexType name="RegistrationRequest">
     <xs:sequence>
       <xs:element name="FirstName" type="xs:string" />
       <xs:element name="LastName" type="xs:string" />

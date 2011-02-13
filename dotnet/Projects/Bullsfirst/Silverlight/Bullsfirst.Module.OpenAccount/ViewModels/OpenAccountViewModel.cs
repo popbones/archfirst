@@ -77,7 +77,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
 
         private void OpenAccountExecute(object dummyObject)
         {
-            registrationRequest registrationRequest = new registrationRequest()
+            RegistrationRequest registrationRequest = new RegistrationRequest()
             {
                 FirstName = FirstName,
                 LastName = LastName,
