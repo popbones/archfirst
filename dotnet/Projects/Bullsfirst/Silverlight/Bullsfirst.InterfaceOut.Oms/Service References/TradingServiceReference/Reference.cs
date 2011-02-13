@@ -13,6 +13,7 @@
 // 
 using System;
 using System.ComponentModel.Composition;
+using Bullsfirst.InterfaceOut.Oms.Security;
 
 namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     
@@ -1593,5 +1594,10 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class TradingWebServiceClient : ITradingServiceAsync
     {
+        [ImportingConstructor]
+        public TradingWebServiceClient(AuthenticationBehavior authenticationBehavior)
+        {
+            this.Endpoint.Behaviors.Add(authenticationBehavior);
+        }
     }
 }
