@@ -17,6 +17,7 @@ using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Security;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.LoggedInUserShell.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -37,12 +38,16 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
             ILoggerFacade logger,
             IRegionManager regionManager,
             IEventAggregator eventAggregator,
+            ITradingServiceAsync tradingService,
             UserContext userContext)
         {
             logger.Log("LoggedInUserViewModel.LoggedInUserViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
+            _tradingService = tradingService;
+            _tradingService.GetBrokerageAccountSummariesCompleted +=
+                new EventHandler<GetBrokerageAccountSummariesCompletedEventArgs>(GetBrokerageAccountSummariesCallback);
             this.UserContext = userContext;
             SignOutCommand = new DelegateCommand<object>(this.SignOutExecute);
             SubscribeToEvents();
@@ -74,6 +79,16 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
 
         public void OnUserLoggedIn(Empty empty)
         {
+            _tradingService.GetBrokerageAccountSummariesAsync();
+        }
+
+        private void GetBrokerageAccountSummariesCallback(object sender, GetBrokerageAccountSummariesCompletedEventArgs e)
+        {
+            if (e.Result == null) return;
+
+            foreach (AccountSummary summary in e.Result)
+            {
+            }
         }
 
         public void OnUserLoggedOut(Empty empty)
@@ -88,6 +103,7 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         private ILoggerFacade _logger;
         private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
+        private ITradingServiceAsync _tradingService;
 
         public UserContext UserContext { get; set; }
 

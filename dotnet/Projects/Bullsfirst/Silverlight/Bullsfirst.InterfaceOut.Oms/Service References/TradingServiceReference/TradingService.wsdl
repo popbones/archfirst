@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://archfirst.org/bfoms/tradingservice.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="TradingService" targetNamespace="http://archfirst.org/bfoms/tradingservice.wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://localhost:8080/bfoms-javaee/TradingService?xsd=1" namespace="http://archfirst.org/bfoms/tradingservice.wsdl" />
+    </xsd:schema>
+  </types>
+  <message name="OpenNewAccount">
+    <part name="parameters" element="tns:OpenNewAccount" />
+  </message>
+  <message name="OpenNewAccountResponse">
+    <part name="parameters" element="tns:OpenNewAccountResponse" />
+  </message>
+  <message name="AddExternalAccount">
+    <part name="parameters" element="tns:AddExternalAccount" />
+  </message>
+  <message name="AddExternalAccountResponse">
+    <part name="parameters" element="tns:AddExternalAccountResponse" />
+  </message>
+  <message name="TransferCash">
+    <part name="parameters" element="tns:TransferCash" />
+  </message>
+  <message name="TransferCashResponse">
+    <part name="parameters" element="tns:TransferCashResponse" />
+  </message>
+  <message name="TransferSecurities">
+    <part name="parameters" element="tns:TransferSecurities" />
+  </message>
+  <message name="TransferSecuritiesResponse">
+    <part name="parameters" element="tns:TransferSecuritiesResponse" />
+  </message>
+  <message name="PlaceOrder">
+    <part name="parameters" element="tns:PlaceOrder" />
+  </message>
+  <message name="PlaceOrderResponse">
+    <part name="parameters" element="tns:PlaceOrderResponse" />
+  </message>
+  <message name="GetBrokerageAccountSummaries">
+    <part name="parameters" element="tns:GetBrokerageAccountSummaries" />
+  </message>
+  <message name="GetBrokerageAccountSummariesResponse">
+    <part name="parameters" element="tns:GetBrokerageAccountSummariesResponse" />
+  </message>
+  <portType name="TradingWebService">
+    <operation name="OpenNewAccount">
+      <input wsam:Action="OpenNewAccount" message="tns:OpenNewAccount" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/OpenNewAccountResponse" message="tns:OpenNewAccountResponse" />
+    </operation>
+    <operation name="AddExternalAccount">
+      <input wsam:Action="AddExternalAccount" message="tns:AddExternalAccount" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/AddExternalAccountResponse" message="tns:AddExternalAccountResponse" />
+    </operation>
+    <operation name="TransferCash">
+      <input wsam:Action="TransferCash" message="tns:TransferCash" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/TransferCashResponse" message="tns:TransferCashResponse" />
+    </operation>
+    <operation name="TransferSecurities">
+      <input wsam:Action="TransferSecurities" message="tns:TransferSecurities" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/TransferSecuritiesResponse" message="tns:TransferSecuritiesResponse" />
+    </operation>
+    <operation name="PlaceOrder">
+      <input wsam:Action="PlaceOrder" message="tns:PlaceOrder" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderResponse" message="tns:PlaceOrderResponse" />
+    </operation>
+    <operation name="GetBrokerageAccountSummaries">
+      <input wsam:Action="GetBrokerageAccountSummaries" message="tns:GetBrokerageAccountSummaries" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetBrokerageAccountSummariesResponse" message="tns:GetBrokerageAccountSummariesResponse" />
+    </operation>
+  </portType>
+  <binding name="TradingWebServicePortBinding" type="tns:TradingWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="OpenNewAccount">
+      <soap:operation soapAction="OpenNewAccount" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="AddExternalAccount">
+      <soap:operation soapAction="AddExternalAccount" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="TransferCash">
+      <soap:operation soapAction="TransferCash" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="TransferSecurities">
+      <soap:operation soapAction="TransferSecurities" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="PlaceOrder">
+      <soap:operation soapAction="PlaceOrder" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetBrokerageAccountSummaries">
+      <soap:operation soapAction="GetBrokerageAccountSummaries" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="TradingService">
+    <port name="TradingWebServicePort" binding="tns:TradingWebServicePortBinding">
+      <soap:address location="http://localhost:8080/bfoms-javaee/TradingService" />
+    </port>
+  </service>
+</definitions>

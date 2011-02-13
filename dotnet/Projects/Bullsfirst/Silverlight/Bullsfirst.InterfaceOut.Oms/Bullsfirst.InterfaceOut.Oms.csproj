@@ -68,6 +68,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\TradingServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -83,9 +88,32 @@
     <None Include="Service References\SecurityServiceReference\SecurityService.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.AddExternalAccountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetBrokerageAccountSummariesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OpenNewAccountResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferCashResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferSecuritiesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TradingServiceReference\TradingService.wsdl" />
+    <None Include="Service References\TradingServiceReference\TradingService.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\SecurityServiceReference\" />
+    <WCFMetadataStorage Include="Service References\TradingServiceReference\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\SecurityServiceReference\configuration91.svcinfo" />
@@ -95,6 +123,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\SecurityServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TradingServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TradingServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TradingServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
