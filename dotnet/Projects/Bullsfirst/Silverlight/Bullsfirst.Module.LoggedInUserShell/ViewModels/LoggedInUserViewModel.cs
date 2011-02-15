@@ -16,7 +16,7 @@ using System;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
-using Bullsfirst.InterfaceOut.Oms.Security;
+using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.LoggedInUserShell.Interfaces;
 using Microsoft.Practices.Prism.Commands;
@@ -86,8 +86,10 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         {
             if (e.Result == null) return;
 
+            UserContext.AccountSummaries.Clear();
             foreach (AccountSummary summary in e.Result)
             {
+                UserContext.AccountSummaries.Add(summary);
             }
         }
 

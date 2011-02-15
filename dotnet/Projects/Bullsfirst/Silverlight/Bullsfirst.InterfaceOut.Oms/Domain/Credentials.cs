@@ -13,7 +13,7 @@
  * limitations under the License.
  */
 
-namespace Bullsfirst.InterfaceOut.Oms.Security
+namespace Bullsfirst.InterfaceOut.Oms.Domain
 {
     public class Credentials
     {

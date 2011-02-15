@@ -23,8 +23,8 @@
         <TextBlock Grid.Row="0" Text="Accounts" Style="{StaticResource Header1}" />
         <sdk:DataGrid
             Grid.Row="1"
-            ItemsSource="{Binding Path=AccountSummaries}"
-            AutoGenerateColumns="False"
+            ItemsSource="{Binding Path=UserContext.AccountSummaries}"
+            AutoGenerateColumns="True"
             HorizontalAlignment="Left"
             RowHeight="32"
             IsReadOnly="True">

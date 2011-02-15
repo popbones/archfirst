@@ -18,7 +18,7 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
-using Bullsfirst.InterfaceOut.Oms.Security;
+using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
 using Bullsfirst.Module.OpenAccount.Interfaces;
 using Microsoft.Practices.Prism.Commands;

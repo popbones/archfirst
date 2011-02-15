@@ -62,8 +62,8 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthenticationBehavior.cs" />
-    <Compile Include="Security\Credentials.cs" />
-    <Compile Include="Security\UserContext.cs" />
+    <Compile Include="Domain\Credentials.cs" />
+    <Compile Include="Domain\UserContext.cs" />
     <Compile Include="Service References\SecurityServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

@@ -12,10 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 
-namespace Bullsfirst.InterfaceOut.Oms.Security
+namespace Bullsfirst.InterfaceOut.Oms.Domain
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.Shared)]
@@ -23,11 +25,13 @@ namespace Bullsfirst.InterfaceOut.Oms.Security
     {
         public User User { get; set; }
         public Credentials Credentials { get; set; }
+        public ObservableCollection<AccountSummary> AccountSummaries { get; set; }
 
         public UserContext()
         {
             User = new User();
             Credentials = new Credentials();
+            AccountSummaries = new ObservableCollection<AccountSummary>();
         }
 
         public void InitUser(User other)

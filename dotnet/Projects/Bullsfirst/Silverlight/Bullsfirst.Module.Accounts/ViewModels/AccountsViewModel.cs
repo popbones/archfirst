@@ -13,7 +13,9 @@
  * limitations under the License.
  */
 using System.ComponentModel.Composition;
+using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.Module.Accounts.Interfaces;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.ViewModel;
 
 namespace Bullsfirst.Module.Accounts.ViewModels
@@ -22,7 +24,23 @@ namespace Bullsfirst.Module.Accounts.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class AccountsViewModel : NotificationObject, IAccountsViewModel
     {
+        #region Construction
+
+        [ImportingConstructor]
+        public AccountsViewModel(
+            ILoggerFacade logger,
+            UserContext userContext)
+        {
+            logger.Log("AccountsViewModel.AccountsViewModel()", Category.Debug, Priority.Low);
+            _logger = logger;
+            this.UserContext = userContext;
+        }
+
+        #endregion
         #region Members
+
+        private ILoggerFacade _logger;
+        public UserContext UserContext { get; set; }
 
         public string ViewTitle
         {
