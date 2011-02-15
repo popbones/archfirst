@@ -24,10 +24,40 @@
         <sdk:DataGrid
             Grid.Row="1"
             ItemsSource="{Binding Path=UserContext.AccountSummaries}"
-            AutoGenerateColumns="True"
+            AutoGenerateColumns="False"
             HorizontalAlignment="Left"
             RowHeight="32"
             IsReadOnly="True">
+            <sdk:DataGrid.Columns>
+                <sdk:DataGridTemplateColumn
+                    Header="Name"
+                    SortMemberPath="Name">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=Name}" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+                <sdk:DataGridTextColumn
+                    Header="Account #"
+                    Binding="{Binding Path=Id}" />
+                <sdk:DataGridTextColumn
+                    Header="Market Value"
+                    Binding="{Binding Path=MarketValue, Converter={StaticResource MoneyConverter}}"
+                    SortMemberPath="MarketValue.Amount" />
+                <sdk:DataGridTextColumn
+                    Header="Cash"
+                    Binding="{Binding Path=CashPosition, Converter={StaticResource MoneyConverter}}"
+                    SortMemberPath="CashPosition.Amount" />
+                <sdk:DataGridTemplateColumn
+                    Header="Actions">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Path=EditPermission}" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+            </sdk:DataGrid.Columns>
         </sdk:DataGrid>
 
         <StackPanel Grid.Row="2" Margin="0 20 0 0" Orientation="Horizontal">

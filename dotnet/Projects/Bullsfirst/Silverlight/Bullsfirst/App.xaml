@@ -3,8 +3,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
     xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
+    xmlns:converters="clr-namespace:Bullsfirst.InterfaceOut.Oms.Converters;assembly=Bullsfirst.InterfaceOut.Oms"
     x:Class="Bullsfirst.App">
     <Application.Resources>
+
+        <!-- Resources -->
+        <converters:MoneyConverter x:Key="MoneyConverter" />
 
         <!-- Header Styles -->
         <Style x:Key="Header1" TargetType="TextBlock">
