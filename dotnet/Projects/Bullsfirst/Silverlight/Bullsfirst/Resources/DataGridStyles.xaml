@@ -5,124 +5,82 @@
     xmlns:primitives="clr-namespace:System.Windows.Controls.Primitives;assembly=System.Windows.Controls.Data"
     xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows">
 
-    <!-- Based on http://www.codeproject.com/KB/silverlight/SilverlightGlassGridHdr.aspx -->
-    
+    <LinearGradientBrush x:Key="HeaderBackgroundBrush" StartPoint="0.5,0.0" EndPoint="0.5,1.0">
+        <GradientStop Color="#FFFFF9E4" Offset="0" />
+        <GradientStop Color="#FFFFCC33" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="HeaderMouseOverBackgoundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FFFFF9E4" Offset="0" />
+        <GradientStop Color="#FFFCD65A" Offset="1" />
+    </LinearGradientBrush>
+    <LinearGradientBrush x:Key="HeaderPressedBackgroundBrush" StartPoint="0,0" EndPoint="0,1">
+        <GradientStop Color="#FFFCD65A" Offset="0" />
+        <GradientStop Color="#FFFFF9E4" Offset="1" />
+    </LinearGradientBrush>
+
     <Style x:Key="DataGridStyle"  TargetType="sdk:DataGrid">
+        
+        <Setter Property="BorderThickness" Value="0" />
+
         <Setter Property="RowBackground" Value="#FFFFFF" />
-        <Setter Property="AlternatingRowBackground" Value="#EBEBED" />
-        <Setter Property="RowHeight" Value="18" />
-        <Setter Property="GridLinesVisibility" Value="All"/>
+        <Setter Property="AlternatingRowBackground" Value="#F5F4F4" />
+
         <Setter Property="HeadersVisibility" Value="Column" />
-        <Setter Property="HorizontalGridLinesBrush" Value="#A0A0A0" />
-        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
-        <Setter Property="SelectionMode" Value="Single" />
-        <Setter Property="CanUserReorderColumns" Value="False" />
-        <Setter Property="CanUserResizeColumns" Value="False" />
-        <Setter Property="CanUserSortColumns" Value="True" />
-        <Setter Property="AutoGenerateColumns" Value="True" />
-        <Setter Property="RowDetailsVisibilityMode" Value="VisibleWhenSelected" />
+        <Setter Property="ColumnHeaderHeight" Value="32" />
+        <Setter Property="RowHeight" Value="28" />
+
+        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="HorizontalGridLinesBrush" Value="#CCCCCC" />
+
     </Style >
 
-    <Style TargetType="primitives:DataGridColumnHeader" 
-                   x:Key="DataGridHeaderGlassEffect" >
-        <Setter Property="FontSize" Value="11"/>
-        <Setter Property="Foreground" Value="#EEEEEE"/>
+    <Style x:Key="DataGridColumnHeaderStyle" TargetType="primitives:DataGridColumnHeader">
+        <Setter Property="FontFamily" Value="Trebuchet MS" />
+        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Foreground" Value="#996600"/>
+        <Setter Property="SeparatorBrush" Value="Transparent" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="primitives:DataGridColumnHeader">
                     <Grid Name="Root">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
                         <Grid.ColumnDefinitions>
+                            <!-- Header Text -->
                             <ColumnDefinition Width="Auto" />
+                            <!-- Sort Icon -->
                             <ColumnDefinition Width="*" />
+                            <!-- Seperator -->
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
 
-                        <Rectangle x:Name="BackgroundRectangle" Stretch="Fill" 
-                            Fill="#FF679800" Grid.ColumnSpan="2" 
-                            Grid.RowSpan="2"  />
-                        <Border BorderBrush="Transparent" 
-                                BorderThickness="1,1,1,1" 
-                                Grid.ColumnSpan="3" Grid.RowSpan="3">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="0.5*"/>
-                                    <RowDefinition Height="0.5*"/>
-                                </Grid.RowDefinitions>
-                                <!--dark-->
-                                <Border HorizontalAlignment="Stretch" 
-                                   Margin="0,0,0,0" x:Name="dark" 
-                                   Width="Auto" Grid.ColumnSpan="3" 
-                                   Grid.RowSpan="3" 
-                                   Background="#66000000" 
-                                   Opacity="0"/>
-                                <!--glow-->
-                                <Border Opacity="0"
-                                 HorizontalAlignment="Stretch" x:Name="glow" 
-                                 Width="Auto" Grid.RowSpan="2" 
-                                 Grid.ColumnSpan="3">
-                                    <Border.Background>
-                                        <RadialGradientBrush>
-                                            <RadialGradientBrush.RelativeTransform>
-                                                <TransformGroup>
-                                                    <ScaleTransform ScaleX="1.7" 
-                                                       ScaleY="2.2"/>
-                                                    <SkewTransform AngleX="0" 
-                                                       AngleY="0"/>
-                                                    <RotateTransform Angle="0"/>
-                                                    <TranslateTransform X="-0.3" 
-                                                       Y="-0.1"/>
-                                                </TransformGroup>
-                                            </RadialGradientBrush.RelativeTransform>
-                                            <GradientStop Color="#B2FFFFFF" 
-                                               Offset="0"/>
-                                            <GradientStop Color="#00FFFFFF" 
-                                               Offset="1"/>
-                                        </RadialGradientBrush>
-                                    </Border.Background>
-                                </Border>
-                                <!--shine-->
-                                <Border HorizontalAlignment="Stretch" 
-                                         Margin="0,0,0,0" x:Name="shine" 
-                                         Width="Auto" 
-                                         Grid.ColumnSpan="3">
-                                    <Border.Background>
-                                        <LinearGradientBrush EndPoint="0.5,0.9" 
-                                                StartPoint="0.5,0.1">
-                                            <GradientStop Color="#99FFFFFF" 
-                                                Offset="0"/>
-                                            <GradientStop Color="#33FFFFFF" 
-                                                Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Border.Background>
-                                </Border>
-                            </Grid>
-                        </Border>
-                        <ContentPresenter x:Name="HeaderText" 
-                          Grid.RowSpan="2" 
-                          Content="{TemplateBinding Content}" 
-                          Cursor="{TemplateBinding Cursor}" 
-                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
-                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
-                          Margin="{TemplateBinding Padding}" />
-                        <Rectangle Name="VerticalSeparator" 
-                           Grid.RowSpan="2" Grid.Column="2" 
-                           Width="1" VerticalAlignment="Stretch" 
-                           Fill="{TemplateBinding SeparatorBrush}" 
-                           Visibility="{TemplateBinding SeparatorVisibility}" />
-                        <Path Grid.RowSpan="2" Name="SortIcon" 
-                          RenderTransformOrigin=".5,.5" 
-                          HorizontalAlignment="Left" 
-                          VerticalAlignment="Center" Opacity="0" 
-                          Grid.Column="1" Stretch="Uniform" 
-                          Width="8" Data="F1 M -3,3 L 3,3 L 0,0 Z ">
+                        <!--Fill all columns with background color -->
+                        <Rectangle
+                            x:Name="BackgroundRectangle"
+                            Stretch="Fill" 
+                            Fill="{StaticResource HeaderBackgroundBrush}"
+                            Grid.ColumnSpan="3" />
+
+                        <!-- Header Text -->
+                        <ContentPresenter
+                            x:Name="HeaderText"
+                            Grid.Column="0"
+                            Content="{TemplateBinding Content}"
+                            Cursor="{TemplateBinding Cursor}"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            Margin="{TemplateBinding Padding}" />
+
+                        <!-- Sort Icon -->
+                        <Path
+                            Name="SortIcon"
+                            Grid.Column="1"
+                            RenderTransformOrigin=".5,.5"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center" Opacity="0"
+                            Stretch="Uniform"
+                            Width="8" Data="F1 M -3,3 L 3,3 L 0,0 Z ">
                             <Path.Fill>
-                                <SolidColorBrush Color="#FFFFFFFF" />
+                                <SolidColorBrush Color="#996600" />
                             </Path.Fill>
                             <Path.RenderTransform>
                                 <TransformGroup>
@@ -130,7 +88,19 @@
                                 </TransformGroup>
                             </Path.RenderTransform>
                         </Path>
+
+                        <!-- Seperator -->
+                        <Rectangle
+                            Name="VerticalSeparator" 
+                            Grid.Column="2" 
+                            Width="1"
+                            VerticalAlignment="Stretch" 
+                            Fill="{TemplateBinding SeparatorBrush}" 
+                            Visibility="{TemplateBinding SeparatorVisibility}" />
+                        
                         <vsm:VisualStateManager.VisualStateGroups>
+
+                            <!-- Sort States -->
                             <vsm:VisualStateGroup x:Name="SortStates" >
                                 <vsm:VisualStateGroup.Transitions>
                                     <vsm:VisualTransition GeneratedDuration="00:00:0.1" />
@@ -155,43 +125,26 @@
                                     </Storyboard>
                                 </vsm:VisualState>
                             </vsm:VisualStateGroup>
+
+                            <!-- Normal, MouseOver and Pressed States -->
                             <vsm:VisualStateGroup x:Name="CommonStates">
-                                <vsm:VisualState x:Name="Normal"/>
+
+                                <vsm:VisualState x:Name="Normal">
+                                </vsm:VisualState>
+
                                 <vsm:VisualState x:Name="MouseOver">
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames 
-                                          BeginTime="00:00:00" 
-                                          Storyboard.TargetName="glow" 
-                                          Storyboard.TargetProperty="(UIElement.Opacity)">
-                                            <SplineDoubleKeyFrame
-                                               KeyTime="00:00:00.4000000" Value="1"/>
-                                        </DoubleAnimationUsingKeyFrames>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="BackgroundRectangle"
+                                            Storyboard.TargetProperty="Fill" To="{StaticResource HeaderMouseOverBackgoundBrush}" />
                                     </Storyboard>
                                 </vsm:VisualState>
+
                                 <vsm:VisualState x:Name="Pressed">
                                     <Storyboard>
-                                        <DoubleAnimationUsingKeyFrames 
-                                              Storyboard.TargetName="shine" 
-                                              Storyboard.TargetProperty="Opacity">
-                                            <SplineDoubleKeyFrame KeyTime="0" Value="0"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <DoubleAnimationUsingKeyFrames BeginTime="00:00:00" 
-                                          Storyboard.TargetName="dark" 
-                                          Storyboard.TargetProperty="(UIElement.Opacity)">
-                                            <SplineDoubleKeyFrame 
-                                              KeyTime="00:00:00.0000000" Value="1"/>
-                                        </DoubleAnimationUsingKeyFrames>
-                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" 
-                                               Duration="00:00:00.0010000" 
-                                               Storyboard.TargetName="glow" 
-                                               Storyboard.TargetProperty=
-                                                  "(UIElement.Visibility)">
-                                            <DiscreteObjectKeyFrame KeyTime="00:00:00">
-                                                <DiscreteObjectKeyFrame.Value>
-                                                    <Visibility>Collapsed</Visibility>
-                                                </DiscreteObjectKeyFrame.Value>
-                                            </DiscreteObjectKeyFrame>
-                                        </ObjectAnimationUsingKeyFrames>
+                                        <ColorAnimation
+                                            Storyboard.TargetName="BackgroundRectangle"
+                                            Storyboard.TargetProperty="Fill" To="{StaticResource HeaderPressedBackgroundBrush}" />
                                     </Storyboard>
                                 </vsm:VisualState>
                             </vsm:VisualStateGroup>
