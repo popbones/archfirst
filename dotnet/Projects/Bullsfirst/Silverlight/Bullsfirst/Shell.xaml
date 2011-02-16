@@ -49,8 +49,9 @@
                        Text="This is a demo application. All data displayed is fictitious." />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Foreground="#676767" FontSize="11"
-                       Text="Copyright 2010" />
-                <HyperlinkButton Content="Archfirst"  NavigateUri="http://www.archfirst.org" />
+                    Text="Copyright 2010" />
+                <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                    Content="Archfirst" TargetName="_blank"  NavigateUri="http://www.archfirst.org" />
             </StackPanel>
         </StackPanel>
     </Grid>

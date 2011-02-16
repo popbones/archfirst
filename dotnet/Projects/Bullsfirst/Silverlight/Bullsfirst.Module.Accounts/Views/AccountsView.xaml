@@ -27,7 +27,9 @@
             AutoGenerateColumns="False"
             HorizontalAlignment="Left"
             RowHeight="32"
-            IsReadOnly="True">
+            IsReadOnly="True"
+            Style="{StaticResource DataGridStyle}"
+            ColumnHeaderStyle="{StaticResource DataGridHeaderGlassEffect}">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTemplateColumn
                     Header="Name"
@@ -62,7 +64,8 @@
 
         <StackPanel Grid.Row="2" Margin="0 20 0 0" Orientation="Horizontal">
             <Image Source="/Bullsfirst.Infrastructure;component/Images/BULLet.gif" Stretch="None" />
-            <HyperlinkButton Content="New Account..."  Command="{Binding OpenAccountCommand}" />
+            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                Content="New Account..."  Command="{Binding OpenAccountCommand}" />
             <TextBlock
                 Text="{Binding Path=StatusMessage}"
                 Margin="20 0 0 0"

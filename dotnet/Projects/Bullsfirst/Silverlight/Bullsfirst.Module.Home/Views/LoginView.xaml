@@ -32,7 +32,8 @@
         </StackPanel>
 
         <StackPanel Style="{StaticResource TallFormRow}">
-            <HyperlinkButton Content="Open an Account"  Command="{Binding OpenAccountCommand}" />
+            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                Content="Open an Account" Command="{Binding OpenAccountCommand}" />
         </StackPanel>
 
         <!-- Do not wrap in TallFormRow, the StackPanel disables TextWrapping -->

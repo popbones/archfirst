@@ -15,7 +15,8 @@
             <TextBlock xml:space="preserve"> </TextBlock>
             <TextBlock Text="{Binding UserContext.User.LastName}" />
             <TextBlock xml:space="preserve"> |</TextBlock>
-            <HyperlinkButton Content="Sign Out" Command="{Binding SignOutCommand}" />
+            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                Content="Sign Out" Command="{Binding SignOutCommand}" />
         </StackPanel>
 
         <sdk:TabControl
