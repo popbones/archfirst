@@ -20,7 +20,7 @@
 
     <Style x:Key="DataGridStyle"  TargetType="sdk:DataGrid">
         
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="0 1 0 0" />
 
         <Setter Property="RowBackground" Value="#FFFFFF" />
         <Setter Property="AlternatingRowBackground" Value="#F5F4F4" />
@@ -102,10 +102,13 @@
 
                             <!-- Sort States -->
                             <vsm:VisualStateGroup x:Name="SortStates" >
+
                                 <vsm:VisualStateGroup.Transitions>
                                     <vsm:VisualTransition GeneratedDuration="00:00:0.1" />
                                 </vsm:VisualStateGroup.Transitions>
+
                                 <vsm:VisualState x:Name="Unsorted" />
+
                                 <vsm:VisualState x:Name="SortAscending">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="SortIcon" 
@@ -113,6 +116,7 @@
                                            Duration="0" To="1.0" />
                                     </Storyboard>
                                 </vsm:VisualState>
+
                                 <vsm:VisualState x:Name="SortDescending">
                                     <Storyboard>
                                         <DoubleAnimation Storyboard.TargetName="SortIcon" 
@@ -134,17 +138,25 @@
 
                                 <vsm:VisualState x:Name="MouseOver">
                                     <Storyboard>
-                                        <ColorAnimation
+                                        <ObjectAnimationUsingKeyFrames
                                             Storyboard.TargetName="BackgroundRectangle"
-                                            Storyboard.TargetProperty="Fill" To="{StaticResource HeaderMouseOverBackgoundBrush}" />
+                                            Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame
+                                                KeyTime="0:0:0"
+                                                Value="{StaticResource HeaderMouseOverBackgoundBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </vsm:VisualState>
 
                                 <vsm:VisualState x:Name="Pressed">
                                     <Storyboard>
-                                        <ColorAnimation
+                                        <ObjectAnimationUsingKeyFrames
                                             Storyboard.TargetName="BackgroundRectangle"
-                                            Storyboard.TargetProperty="Fill" To="{StaticResource HeaderPressedBackgroundBrush}" />
+                                            Storyboard.TargetProperty="Fill">
+                                            <DiscreteObjectKeyFrame
+                                                KeyTime="0:0:0"
+                                                Value="{StaticResource HeaderPressedBackgroundBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </vsm:VisualState>
                             </vsm:VisualStateGroup>
