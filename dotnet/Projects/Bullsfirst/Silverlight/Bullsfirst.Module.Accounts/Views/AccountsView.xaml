@@ -33,6 +33,7 @@
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTemplateColumn
                     Header="Name"
+                    CellStyle="{StaticResource LeftAlignedCellStyle}"
                     SortMemberPath="Name">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
@@ -42,17 +43,25 @@
                 </sdk:DataGridTemplateColumn>
                 <sdk:DataGridTextColumn
                     Header="Account #"
-                    Binding="{Binding Path=Id}" />
+                    Binding="{Binding Path=Id}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}" />
                 <sdk:DataGridTextColumn
                     Header="Market Value"
                     Binding="{Binding Path=MarketValue, Converter={StaticResource MoneyConverter}}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="MarketValue.Amount" />
                 <sdk:DataGridTextColumn
                     Header="Cash"
                     Binding="{Binding Path=CashPosition, Converter={StaticResource MoneyConverter}}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="CashPosition.Amount" />
                 <sdk:DataGridTemplateColumn
-                    Header="Actions">
+                    Header="Actions"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding Path=EditPermission}" />

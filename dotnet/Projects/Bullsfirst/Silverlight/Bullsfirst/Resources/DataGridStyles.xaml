@@ -22,8 +22,8 @@
         
         <Setter Property="BorderThickness" Value="0 1 0 0" />
 
-        <Setter Property="RowBackground" Value="#FFFFFF" />
-        <Setter Property="AlternatingRowBackground" Value="#F5F4F4" />
+        <Setter Property="RowBackground" Value="Transparent" />
+        <Setter Property="AlternatingRowBackground" Value="#AAF5F4F4" />
 
         <Setter Property="HeadersVisibility" Value="Column" />
         <Setter Property="ColumnHeaderHeight" Value="32" />
@@ -46,9 +46,9 @@
                     <Grid Name="Root">
                         <Grid.ColumnDefinitions>
                             <!-- Header Text -->
-                            <ColumnDefinition Width="Auto" />
-                            <!-- Sort Icon -->
                             <ColumnDefinition Width="*" />
+                            <!-- Sort Icon -->
+                            <ColumnDefinition Width="Auto" />
                             <!-- Seperator -->
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
@@ -161,6 +161,74 @@
                                 </vsm:VisualState>
                             </vsm:VisualStateGroup>
                         </vsm:VisualStateManager.VisualStateGroups>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Center Aligned DataGridColumnHeader Style-->
+    <Style x:Key="CenterAlignedColumnHeaderStyle"
+           TargetType="primitives:DataGridColumnHeader"
+           BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+    </Style>
+
+    <!-- Right Aligned DataGridColumnHeader Style-->
+    <Style x:Key="RightAlignedColumnHeaderStyle"
+           TargetType="primitives:DataGridColumnHeader"
+           BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+    </Style>
+
+    <!-- DataGridElement Styles -->
+    <Style x:Key="DataGridElementStyle" TargetType="FrameworkElement">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="7 0 7 0" />
+    </Style>
+    <Style x:Key="LeftAlignedElementStyle" TargetType="FrameworkElement" BasedOn="{StaticResource DataGridElementStyle}">
+        <Setter Property="HorizontalAlignment" Value="Left" />
+    </Style>
+    <Style x:Key="CenterAlignedElementStyle" TargetType="FrameworkElement" BasedOn="{StaticResource DataGridElementStyle}">
+        <Setter Property="HorizontalAlignment" Value="Center" />
+    </Style>
+    <Style x:Key="RightAlignedElementStyle" TargetType="FrameworkElement" BasedOn="{StaticResource DataGridElementStyle}">
+        <Setter Property="HorizontalAlignment" Value="Right" />
+    </Style>
+
+    <!-- Left Aligned DataGridCell Style -->
+    <Style x:Key="LeftAlignedCellStyle" TargetType="sdk:DataGridCell">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="sdk:DataGridCell">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter Style="{StaticResource LeftAlignedElementStyle}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Center Aligned DataGridCell Style -->
+    <Style x:Key="CenterAlignedCellStyle" TargetType="sdk:DataGridCell">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="sdk:DataGridCell">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter Style="{StaticResource CenterAlignedElementStyle}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Right Aligned DataGridCell Style -->
+    <Style x:Key="RightAlignedCellStyle" TargetType="sdk:DataGridCell">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="sdk:DataGridCell">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter Style="{StaticResource RightAlignedElementStyle}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
