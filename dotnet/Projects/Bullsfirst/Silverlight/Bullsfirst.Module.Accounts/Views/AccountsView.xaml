@@ -38,7 +38,10 @@
                     SortMemberPath="Name">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=Name}" />
+                            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                                Content="{Binding Path=Name}"
+                                Command="{Binding SelectAccountCommand, Source={StaticResource ViewModel}}"
+                                CommandParameter="{Binding}" />
                         </DataTemplate>
                     </sdk:DataGridTemplateColumn.CellTemplate>
                 </sdk:DataGridTemplateColumn>

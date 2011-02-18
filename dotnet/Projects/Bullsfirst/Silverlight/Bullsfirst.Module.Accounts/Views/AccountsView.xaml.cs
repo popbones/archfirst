@@ -24,16 +24,18 @@ namespace Bullsfirst.Module.Accounts.Views
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AccountsView : UserControl
     {
-        public AccountsView()
+        /// <summary>
+        /// Importing constructor is the easiest way to add the ViewModel as a resource.
+        /// This is needed to fire commands from the DataGridTemplateColumn in the XAML
+        /// file for this view. See http://compositewpf.codeplex.com/discussions/246631.
+        /// </summary>
+        [ImportingConstructor]
+        public AccountsView(IAccountsViewModel viewModel)
         {
             Debug.WriteLine("[Debug] AccountsView.AccountsView()");
+            this.DataContext = viewModel;
+            this.Resources.Add("ViewModel", viewModel);
             InitializeComponent();
-        }
-
-        [Import]
-        public IAccountsViewModel ViewModel
-        {
-            set { this.DataContext = value; }
         }
     }
 }

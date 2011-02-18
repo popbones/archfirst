@@ -15,6 +15,7 @@
 using System.ComponentModel.Composition;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.Module.Accounts.Interfaces;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.ViewModel;
 
@@ -34,9 +35,22 @@ namespace Bullsfirst.Module.Accounts.ViewModels
             logger.Log("AccountsViewModel.AccountsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
             this.UserContext = userContext;
+            SelectAccountCommand = new DelegateCommand<object>(this.SelectAccountExecute);
         }
 
         #endregion
+
+        #region SelectAccountCommand
+
+        public DelegateCommand<object> SelectAccountCommand { get; set; }
+
+        private void SelectAccountExecute(object dummyObject)
+        {
+            // Debug.WriteLine("---------> " + ((AccountSummary)dummyObject).Name);
+        }
+
+        #endregion
+
         #region Members
 
         private ILoggerFacade _logger;
