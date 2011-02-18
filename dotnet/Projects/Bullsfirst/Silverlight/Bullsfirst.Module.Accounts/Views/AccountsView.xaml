@@ -29,7 +29,8 @@
             RowHeight="32"
             IsReadOnly="True"
             Style="{StaticResource DataGridStyle}"
-            ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}">
+            ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+            RowStyle="{StaticResource DataGridRowStyle}">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTemplateColumn
                     Header="Name"

@@ -9,6 +9,7 @@
                 <ResourceDictionary Source="Resources/Converters.xaml" />
                 <ResourceDictionary Source="Resources/GeneralStyles.xaml" />
                 <ResourceDictionary Source="Resources/DataGridStyles.xaml" />
+                <ResourceDictionary Source="Resources/DataGridRowStyle.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

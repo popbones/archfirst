@@ -18,7 +18,7 @@
         <GradientStop Color="#FFFFF9E4" Offset="1" />
     </LinearGradientBrush>
 
-    <Style x:Key="DataGridStyle"  TargetType="sdk:DataGrid">
+    <Style x:Key="DataGridStyle" TargetType="sdk:DataGrid">
         
         <Setter Property="BorderThickness" Value="0 1 0 0" />
 
