@@ -28,12 +28,13 @@ namespace Bullsfirst.InterfaceOut.Oms.Converters
         /// <summary>
         /// Used to modify data as it is bound from the source object to the control.
         /// Converts Money to a string
+        /// Note that we are ignoring Money.Currency completely.
         /// </summary>
         public object Convert(
             object value, Type targetType, object parameter, CultureInfo culture)
         {
             Money money = value as Money;
-            return (money == null) ? null : String.Format("{0:0.00}", money.Amount);
+            return (money == null) ? null : money.Amount.ToString("C");
         }
 
         /// <summary>

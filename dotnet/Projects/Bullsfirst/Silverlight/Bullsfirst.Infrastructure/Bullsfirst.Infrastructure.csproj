@@ -62,13 +62,14 @@
     <Compile Include="ViewNames.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\BULLet.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Archfirst.Framework\Archfirst.Framework.csproj">
       <Project>{07801AC6-D680-424B-AA1D-8B27A2229A67}</Project>
       <Name>Archfirst.Framework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\bullet.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

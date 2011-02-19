@@ -20,6 +20,7 @@ using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.OpenAccount.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
@@ -41,7 +42,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
             IRegionManager regionManager,
             IEventAggregator eventAggregator,
             ISecurityServiceAsync securityService,
-            //ITradingServiceAsync tradingService,
+            ITradingServiceAsync tradingService,
             UserContext userContext)
         {
             logger.Log("OpenAccountViewModel.OpenAccountViewModel()", Category.Debug, Priority.Low);
@@ -49,8 +50,9 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _securityService = securityService;
-            //_tradingService = tradingService;
+            _tradingService = tradingService;
             _securityService.RegisterUserCompleted += new EventHandler<AsyncCompletedEventArgs>(RegisterUserCallback);
+            _tradingService.OpenNewAccountCompleted += new EventHandler<OpenNewAccountCompletedEventArgs>(OpenNewAccountCallback);
             this.UserContext = userContext;
             OpenAccountCommand = new DelegateCommand<object>(this.OpenAccountExecute, this.CanOpenAccountExecute);
             CancelCommand = new DelegateCommand<object>(this.CancelExecute);
@@ -96,10 +98,26 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
             else
             {
                 this.StatusMessage = null;
+
+                // Initialize UserContext
                 this.UserContext.InitUser(Username, FirstName, LastName);
                 this.UserContext.InitCredentials(Username, Password);
-
                 this.ClearForm();
+
+                // Open an account for the newly registered user
+                _tradingService.OpenNewAccountAsync("Brokerage Account");
+            }
+        }
+
+        private void OpenNewAccountCallback(object sender, OpenNewAccountCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                this.StatusMessage = null;
 
                 // Send UserLoggedInEvent and switch to LoggedInUserView
                 _eventAggregator.GetEvent<UserLoggedInEvent>().Publish(Empty.Value);
@@ -212,7 +230,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private ISecurityServiceAsync _securityService;
-        //private ITradingServiceAsync _tradingService;
+        private ITradingServiceAsync _tradingService;
 
         public UserContext UserContext { get; set; }
 

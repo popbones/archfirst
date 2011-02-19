@@ -35,7 +35,31 @@ namespace Bullsfirst.Module.Accounts.ViewModels
             logger.Log("AccountsViewModel.AccountsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
             this.UserContext = userContext;
+            CreateAccountCommand = new DelegateCommand<object>(this.CreateAccountExecute);
+            EditAccountCommand = new DelegateCommand<object>(this.EditAccountExecute);
             SelectAccountCommand = new DelegateCommand<object>(this.SelectAccountExecute);
+        }
+
+        #endregion
+
+        #region CreateAccountCommand
+
+        public DelegateCommand<object> CreateAccountCommand { get; set; }
+
+        private void CreateAccountExecute(object dummyObject)
+        {
+            // Debug.WriteLine("---------> Create Account");
+        }
+
+        #endregion
+
+        #region EditAccountCommand
+
+        public DelegateCommand<object> EditAccountCommand { get; set; }
+
+        private void EditAccountExecute(object dummyObject)
+        {
+            // Debug.WriteLine("---------> Edit Account: " + ((AccountSummary)dummyObject).Name);
         }
 
         #endregion
