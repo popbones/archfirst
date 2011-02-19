@@ -78,12 +78,14 @@
       <xs:element name="InstrumentSymbol" type="xs:string" />
       <xs:element name="InstrumentName" type="xs:string" />
       <xs:element name="LotId" type="xs:long" />
-      <xs:element name="LotCreationTime" type="xs:anySimpleType" />
+      <xs:element name="LotCreationTime" type="xs:dateTime" />
+      <xs:element name="Quantity" type="xs:decimal" />
       <xs:element name="LastTrade" type="tns:Money" />
       <xs:element name="MarketValue" type="tns:Money" />
       <xs:element name="PricePaid" type="tns:Money" />
       <xs:element name="TotalCost" type="tns:Money" />
       <xs:element name="Gain" type="tns:Money" />
+      <xs:element name="GainPercent" type="xs:decimal" />
       <xs:element maxOccurs="unbounded" name="Child" type="tns:Position" />
     </xs:sequence>
   </xs:complexType>

@@ -175,7 +175,9 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         private long lotIdField;
         
-        private string lotCreationTimeField;
+        private System.DateTime lotCreationTimeField;
+        
+        private decimal quantityField;
         
         private Money lastTradeField;
         
@@ -186,6 +188,8 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         private Money totalCostField;
         
         private Money gainField;
+        
+        private decimal gainPercentField;
         
         private Position[] childField;
         
@@ -251,7 +255,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public string LotCreationTime {
+        public System.DateTime LotCreationTime {
             get {
                 return this.lotCreationTimeField;
             }
@@ -263,6 +267,18 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public decimal Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+                this.RaisePropertyChanged("Quantity");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
         public Money LastTrade {
             get {
                 return this.lastTradeField;
@@ -274,7 +290,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
         public Money MarketValue {
             get {
                 return this.marketValueField;
@@ -286,7 +302,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
         public Money PricePaid {
             get {
                 return this.pricePaidField;
@@ -298,7 +314,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
         public Money TotalCost {
             get {
                 return this.totalCostField;
@@ -310,7 +326,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
         public Money Gain {
             get {
                 return this.gainField;
@@ -322,7 +338,19 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Child", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=11)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=12)]
+        public decimal GainPercent {
+            get {
+                return this.gainPercentField;
+            }
+            set {
+                this.gainPercentField = value;
+                this.RaisePropertyChanged("GainPercent");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute("Child", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=13)]
         public Position[] Child {
             get {
                 return this.childField;
