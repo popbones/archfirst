@@ -68,7 +68,11 @@
                     CellStyle="{StaticResource CenterAlignedCellStyle}">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="{Binding Path=EditPermission}" />
+                            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                                Content="Edit"
+                                Visibility="{Binding Path=EditPermission, Converter={StaticResource bool2VisibilityConverter}}"
+                                Command="{Binding EditAccountCommand, Source={StaticResource ViewModel}}"
+                                CommandParameter="{Binding}" />
                         </DataTemplate>
                     </sdk:DataGridTemplateColumn.CellTemplate>
                 </sdk:DataGridTemplateColumn>

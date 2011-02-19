@@ -29,7 +29,8 @@ namespace Bullsfirst.InterfaceOut.Oms.Converters
         /// Used to modify data as it is bound from the source object to the control.
         /// Converts Money to a string
         /// </summary>
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public object Convert(
+            object value, Type targetType, object parameter, CultureInfo culture)
         {
             Money money = value as Money;
             return (money == null) ? null : String.Format("{0:0.00}", money.Amount);
@@ -47,7 +48,8 @@ namespace Bullsfirst.InterfaceOut.Oms.Converters
         /// exceptions that are thrown by methods that the ConvertBack method calls, are treated
         /// as run-time errors. Handle anticipated problems by returning DependencyProperty.UnsetValue."
         /// </summary>
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value, Type targetType, object parameter, CultureInfo culture)
         {
             decimal amount;
             bool success = decimal.TryParse((string)value, out amount);

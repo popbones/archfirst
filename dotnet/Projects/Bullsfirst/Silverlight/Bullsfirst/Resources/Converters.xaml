@@ -1,8 +1,10 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:converters="clr-namespace:Bullsfirst.InterfaceOut.Oms.Converters;assembly=Bullsfirst.InterfaceOut.Oms">
+    xmlns:fmwkConverters="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
+    xmlns:omsConverters="clr-namespace:Bullsfirst.InterfaceOut.Oms.Converters;assembly=Bullsfirst.InterfaceOut.Oms">
 
-    <converters:MoneyConverter x:Key="MoneyConverter" />
+    <fmwkConverters:BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+    <omsConverters:MoneyConverter x:Key="MoneyConverter" />
 
 </ResourceDictionary>
