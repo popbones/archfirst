@@ -29,6 +29,7 @@ import org.archfirst.common.datetime.DateTimeAdapter;
 import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
+import org.archfirst.common.quantity.Percentage;
 import org.joda.time.DateTime;
 
 /**
@@ -59,9 +60,8 @@ public class Position {
     @XmlJavaTypeAdapter(DateTimeAdapter.class)
     private DateTime lotCreationTime;
 
-// TODO: Uncomment when JAXB starts working in GlassFish
-//    @XmlElement(name = "Quantity", required = true)
-//    private DecimalQuantity quantity;
+    @XmlElement(name = "Quantity", required = true)
+    private DecimalQuantity quantity;
 
     @XmlElement(name = "LastTrade", required = true)
     private Money lastTrade;
@@ -78,9 +78,8 @@ public class Position {
     @XmlElement(name = "Gain", required = true)
     private Money gain;
 
-// TODO: Uncomment when JAXB starts working in GlassFish
-//    @XmlElement(name = "GainPercent", required = true)
-//    private Percentage gainPercent;
+    @XmlElement(name = "GainPercent", required = true)
+    private Percentage gainPercent;
 
     @XmlElement(name = "Child", required = true)
     private List<Position> children;
@@ -113,7 +112,7 @@ public class Position {
         this.instrumentName = instrumentName;
         this.lotId = lotId;
         this.lotCreationTime = lotCreationTime;
-//        this.quantity = quantity;
+        this.quantity = quantity;
         this.lastTrade = lastTrade;
         this.pricePaid = pricePaid;
         
@@ -121,7 +120,7 @@ public class Position {
         this.marketValue = lastTrade.times(quantity).scaleToCurrency();
         this.totalCost = pricePaid.times(quantity).scaleToCurrency();
         this.gain = marketValue.minus(totalCost);
-//        this.gainPercent = gain.getPercentage(totalCost, Constants.GAIN_SCALE);
+        this.gainPercent = gain.getPercentage(totalCost, Constants.GAIN_SCALE);
     }
     
     public void addChild(Position position) {
@@ -140,13 +139,13 @@ public class Position {
         if (lotCreationTime != null) {
             builder.append(", lotCreationTime=").append(DateTimeUtil.toStringTimestamp(lotCreationTime)).append(",");
         }
-//        builder.append(", quantity=").append(quantity);
+        builder.append(", quantity=").append(quantity);
         builder.append(", lastTrade=").append(lastTrade);
         builder.append(", marketValue=").append(marketValue);
         builder.append(", pricePaid=").append(pricePaid);
         builder.append(", totalCost=").append(totalCost);
         builder.append(", gain=").append(gain);
-//        builder.append(", gainPercent=").append(gainPercent);
+        builder.append(", gainPercent=").append(gainPercent);
         return builder.toString();
     }
     
@@ -191,9 +190,9 @@ public class Position {
     public DateTime getLotCreationTime() {
         return lotCreationTime;
     }
-//    public DecimalQuantity getQuantity() {
-//        return quantity;
-//    }
+    public DecimalQuantity getQuantity() {
+        return quantity;
+    }
     public Money getLastTrade() {
         return lastTrade;
     }
@@ -209,9 +208,9 @@ public class Position {
     public Money getGain() {
         return gain;
     }
-//    public Percentage getGainPercent() {
-//        return gainPercent;
-//    }
+    public Percentage getGainPercent() {
+        return gainPercent;
+    }
     public List<Position> getChildren() {
         return children;
     }

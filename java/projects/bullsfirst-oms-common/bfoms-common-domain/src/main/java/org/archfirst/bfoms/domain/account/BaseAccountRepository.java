@@ -24,7 +24,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
-import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountInjector;
+import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountRepository;
 import org.archfirst.common.domain.BaseRepository;
 
 /**
@@ -34,13 +34,13 @@ import org.archfirst.common.domain.BaseRepository;
  */
 public class BaseAccountRepository extends BaseRepository {
 
-    @Inject private BrokerageAccountInjector brokerageAccountInjector;
+    @Inject private BrokerageAccountRepository brokerageAccountRepository;
     
     // ----- BaseAccount Methods -----
     public BaseAccount findAccount(Long id) {
         BaseAccount account = entityManager.find(BaseAccount.class, id);
         if (BrokerageAccount.class.isInstance(account)) {
-            brokerageAccountInjector.injectDependencies((BrokerageAccount)account);
+            brokerageAccountRepository.injectDependencies((BrokerageAccount)account);
         }
         return account;
     }

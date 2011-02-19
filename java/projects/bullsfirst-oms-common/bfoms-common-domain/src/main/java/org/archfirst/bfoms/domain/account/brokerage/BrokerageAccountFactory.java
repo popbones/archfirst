@@ -37,7 +37,6 @@ public class BrokerageAccountFactory {
         LoggerFactory.getLogger(BrokerageAccountFactory.class);
 
     @Inject private BrokerageAccountRepository brokerageAccountRepository;
-    @Inject private BrokerageAccountInjector brokerageAccountInjector;
     
     /**
      * Creates a new individual account for the specified person and
@@ -69,7 +68,7 @@ public class BrokerageAccountFactory {
                 AccountStatus.Active,
                 OwnershipType.Individual,
                 new Money("0.00"));
-        brokerageAccountInjector.injectDependencies(account);
+        brokerageAccountRepository.injectDependencies(account);
         brokerageAccountRepository.persistAndFlush(account);
         
         // Add AccountParty

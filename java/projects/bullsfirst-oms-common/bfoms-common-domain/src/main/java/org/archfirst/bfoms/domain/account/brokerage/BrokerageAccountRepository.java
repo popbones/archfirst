@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
-import javax.inject.Inject;
-
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
@@ -41,8 +39,6 @@ import org.hibernate.criterion.Restrictions;
  */
 public class BrokerageAccountRepository extends BaseRepository {
 
-    @Inject private BrokerageAccountInjector brokerageAccountInjector;
-    
     // ----- BrokerageAccount Methods -----
     public List<BrokerageAccount> findAccountsWithPermission(
             User user,
@@ -57,7 +53,7 @@ public class BrokerageAccountRepository extends BaseRepository {
             .setParameter("permission", permission)
             .getResultList();
 
-        brokerageAccountInjector.injectDependencies(accounts);
+        this.injectDependencies(accounts);
         
         return accounts;
     }
@@ -65,7 +61,7 @@ public class BrokerageAccountRepository extends BaseRepository {
     public BrokerageAccount findAccount(Long id) {
         BrokerageAccount account = entityManager.find(BrokerageAccount.class, id);
         if (account != null) {
-            brokerageAccountInjector.injectDependencies(account);
+            this.injectDependencies(account);
         }
         return account;
     }
@@ -94,7 +90,7 @@ public class BrokerageAccountRepository extends BaseRepository {
             .setParameter("id", orderId)
             .getSingleResult();
         if (account != null) {
-            brokerageAccountInjector.injectDependencies(account);
+            this.injectDependencies(account);
         }
         return account;
     }
@@ -248,5 +244,16 @@ public class BrokerageAccountRepository extends BaseRepository {
         }
 
         return numberOfShares;
+    }
+
+    // ----- Helper Methods -----
+    public void injectDependencies(List<BrokerageAccount> accounts) {
+        for (BrokerageAccount account : accounts) {
+            account.setBrokerageAccountRepository(this);
+        }
+    }
+    
+    public void injectDependencies(BrokerageAccount account) {
+        account.setBrokerageAccountRepository(this);
     }
 }

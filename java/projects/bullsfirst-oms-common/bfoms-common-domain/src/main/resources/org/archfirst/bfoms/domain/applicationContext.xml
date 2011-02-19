@@ -22,7 +22,6 @@
     <bean class="org.archfirst.bfoms.domain.account.BaseAccountRepository" />
     <bean class="org.archfirst.bfoms.domain.account.BaseAccountService" />
     <bean class="org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountFactory" />
-    <bean class="org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountInjector" />
     <bean class="org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountRepository" />
     <bean class="org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService" />
     <bean class="org.archfirst.bfoms.domain.account.external.ExternalAccountFactory" />
