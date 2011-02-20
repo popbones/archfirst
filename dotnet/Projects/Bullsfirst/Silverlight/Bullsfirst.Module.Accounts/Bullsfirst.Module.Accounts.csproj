@@ -78,6 +78,9 @@
     <Compile Include="Views\CreateNewAccountPopup.xaml.cs">
       <DependentUpon>CreateNewAccountPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\EditAccountPopup.xaml.cs">
+      <DependentUpon>EditAccountPopup.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Archfirst.Framework\Archfirst.Framework.csproj">
@@ -99,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CreateNewAccountPopup.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditAccountPopup.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

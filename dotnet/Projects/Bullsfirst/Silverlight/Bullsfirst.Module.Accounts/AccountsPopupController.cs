@@ -25,18 +25,14 @@ namespace Bullsfirst.Module.Accounts
     [PartCreationPolicy(CreationPolicy.Shared)]
     public class AccountsPopupController
     {
-        #region Construction
-
         [ImportingConstructor]
         public AccountsPopupController(IEventAggregator eventAggregator)
         {
             eventAggregator.GetEvent<CreateAccountRequestEvent>().Subscribe(
                 OnCreateAccountRequest, ThreadOption.UIThread, true);
+            eventAggregator.GetEvent<EditAccountRequestEvent>().Subscribe(
+                OnEditAccountRequest, ThreadOption.UIThread, true);
         }
-
-        #endregion
-
-        #region OnCreateAccountRequest
 
         private void OnCreateAccountRequest(CreateAccountRequest request)
         {
@@ -44,6 +40,10 @@ namespace Bullsfirst.Module.Accounts
             popup.Show();         
         }
 
-        #endregion
+        private void OnEditAccountRequest(EditAccountRequest request)
+        {
+            EditAccountPopup popup = new EditAccountPopup(request);
+            popup.Show();
+        }
     }
 }

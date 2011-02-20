@@ -17,6 +17,8 @@ using Microsoft.Practices.Prism.Events;
 
 namespace Bullsfirst.Module.Accounts
 {
+    #region CreateAccountRequestEvent
+
     public class CreateAccountRequestEvent : CompositePresentationEvent<CreateAccountRequest>
     {
     }
@@ -31,4 +33,28 @@ namespace Bullsfirst.Module.Accounts
         public bool Result { get; set; }
         public string AccountName { get; set; }
     }
+
+    #endregion
+
+    #region EditAccountRequestEvent
+
+    public class EditAccountRequestEvent : CompositePresentationEvent<EditAccountRequest>
+    {
+    }
+
+    public class EditAccountRequest
+    {
+        public long AccountId { get; set; }
+        public string CurrentAccountName { get; set; }
+        public Action<EditAccountResponse> ResponseHandler { get; set; }
+    }
+
+    public class EditAccountResponse
+    {
+        public bool Result { get; set; }
+        public long AccountId { get; set; }
+        public string NewAccountName { get; set; }
+    }
+
+    #endregion
 }

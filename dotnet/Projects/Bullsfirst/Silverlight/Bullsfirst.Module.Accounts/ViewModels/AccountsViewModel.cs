@@ -59,7 +59,7 @@ namespace Bullsfirst.Module.Accounts.ViewModels
 
         private void CreateAccountExecute(object dummyObject)
         {
-            // Send CreateAccountRequestEvent to popup CreateNewAccount dialog
+            // Send CreateAccountRequestEvent to create the CreateNewAccount dialog
             CreateAccountRequest request =
                 new CreateAccountRequest { ResponseHandler = CreateAccountResponseHandler };
             _eventAggregator.GetEvent<CreateAccountRequestEvent>().Publish(request);
@@ -96,7 +96,23 @@ namespace Bullsfirst.Module.Accounts.ViewModels
 
         private void EditAccountExecute(object dummyObject)
         {
-            // Debug.WriteLine("---------> Edit Account: " + ((AccountSummary)dummyObject).Name);
+            // Send EditAccountRequestEvent to create the EditAccount dialog
+            EditAccountRequest request =
+                new EditAccountRequest
+                {
+                    AccountId = ((AccountSummary)dummyObject).Id,
+                    CurrentAccountName = ((AccountSummary)dummyObject).Name,
+                    ResponseHandler = EditAccountResponseHandler
+                };
+            _eventAggregator.GetEvent<EditAccountRequestEvent>().Publish(request);
+        }
+
+        private void EditAccountResponseHandler(EditAccountResponse response)
+        {
+            if (response.Result == false) return;
+
+            // Change name of the requested account
+            // _tradingService.ChangeAccountNameAsync(response.AccountId, response.NewAccountName);
         }
 
         #endregion
