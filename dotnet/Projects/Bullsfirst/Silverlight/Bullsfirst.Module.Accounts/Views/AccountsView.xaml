@@ -15,13 +15,14 @@
             <!-- Title row -->
             <RowDefinition Height="Auto" />
             <!-- Account summaries grid -->
-            <!-- Don't set Height=Auto. This enables vertical scroll bar if necessary -->
-            <RowDefinition />
+            <!-- Height="Auto" disables the vertical scroll bar, but then New Account link follows right after -->
+            <RowDefinition Height="Auto" />
             <!-- New account row -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Accounts" Style="{StaticResource Header1}" />
+
         <sdk:DataGrid
             Grid.Row="1"
             ItemsSource="{Binding Path=UserContext.AccountSummaries}"

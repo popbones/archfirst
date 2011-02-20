@@ -12,20 +12,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using Archfirst.Framework.Helpers;
+using System;
 using Microsoft.Practices.Prism.Events;
 
-namespace Bullsfirst.Infrastructure
+namespace Bullsfirst.Module.Accounts
 {
-    public class UserLoggedInEvent : CompositePresentationEvent<Empty>
+    public class CreateAccountRequestEvent : CompositePresentationEvent<CreateAccountRequest>
     {
     }
 
-    public class UserLoggedOutEvent : CompositePresentationEvent<Empty>
+    public class CreateAccountRequest
     {
+        public Action<CreateAccountResponse> ResponseHandler { get; set; }
     }
 
-    public class AccountCreatedEvent : CompositePresentationEvent<Empty>
+    public class CreateAccountResponse
     {
+        public bool Result { get; set; }
+        public string AccountName { get; set; }
     }
 }

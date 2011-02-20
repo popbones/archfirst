@@ -56,8 +56,9 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         private void SubscribeToEvents()
         {
             // Don't use strong reference to delegate
-            _eventAggregator.GetEvent<UserLoggedInEvent>().Subscribe(OnUserLoggedIn, ThreadOption.UIThread);
-            _eventAggregator.GetEvent<UserLoggedOutEvent>().Subscribe(OnUserLoggedOut, ThreadOption.UIThread);
+            _eventAggregator.GetEvent<UserLoggedInEvent>().Subscribe(OnUserLoggedIn, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<UserLoggedOutEvent>().Subscribe(OnUserLoggedOut, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<AccountCreatedEvent>().Subscribe(OnAccountCreated, ThreadOption.UIThread, true);
         }
 
         #endregion
@@ -79,6 +80,25 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
 
         public void OnUserLoggedIn(Empty empty)
         {
+            UpdateAccountSummaries();
+        }
+
+        private void OnAccountCreated(Empty empty)
+        {
+            UpdateAccountSummaries();
+        }
+
+        public void OnUserLoggedOut(Empty empty)
+        {
+            this.UserContext.Reset();
+        }
+
+        #endregion
+
+        #region UpdateAccountSummaries
+
+        private void UpdateAccountSummaries()
+        {
             _tradingService.GetBrokerageAccountSummariesAsync();
         }
 
@@ -91,11 +111,6 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
             {
                 UserContext.AccountSummaries.Add(summary);
             }
-        }
-
-        public void OnUserLoggedOut(Empty empty)
-        {
-            this.UserContext.Reset();
         }
 
         #endregion

@@ -51,9 +51,10 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
             _eventAggregator = eventAggregator;
             _securityService = securityService;
             _tradingService = tradingService;
+            this.UserContext = userContext;
+
             _securityService.RegisterUserCompleted += new EventHandler<AsyncCompletedEventArgs>(RegisterUserCallback);
             _tradingService.OpenNewAccountCompleted += new EventHandler<OpenNewAccountCompletedEventArgs>(OpenNewAccountCallback);
-            this.UserContext = userContext;
             OpenAccountCommand = new DelegateCommand<object>(this.OpenAccountExecute, this.CanOpenAccountExecute);
             CancelCommand = new DelegateCommand<object>(this.CancelExecute);
             this.PropertyChanged += this.OnPropertyChanged;

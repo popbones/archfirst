@@ -12,10 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System;
 using System.ComponentModel.Composition;
+using Archfirst.Framework.Helpers;
+using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Accounts.Interfaces;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.ViewModel;
 
@@ -30,11 +35,17 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         [ImportingConstructor]
         public AccountsViewModel(
             ILoggerFacade logger,
+            IEventAggregator eventAggregator,
+            ITradingServiceAsync tradingService,
             UserContext userContext)
         {
             logger.Log("AccountsViewModel.AccountsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _eventAggregator = eventAggregator;
+            _tradingService = tradingService;
             this.UserContext = userContext;
+
+            _tradingService.OpenNewAccountCompleted += new EventHandler<OpenNewAccountCompletedEventArgs>(OpenNewAccountCallback);
             CreateAccountCommand = new DelegateCommand<object>(this.CreateAccountExecute);
             EditAccountCommand = new DelegateCommand<object>(this.EditAccountExecute);
             SelectAccountCommand = new DelegateCommand<object>(this.SelectAccountExecute);
@@ -48,7 +59,33 @@ namespace Bullsfirst.Module.Accounts.ViewModels
 
         private void CreateAccountExecute(object dummyObject)
         {
-            // Debug.WriteLine("---------> Create Account");
+            // Send CreateAccountRequestEvent to popup CreateNewAccount dialog
+            CreateAccountRequest request =
+                new CreateAccountRequest { ResponseHandler = CreateAccountResponseHandler };
+            _eventAggregator.GetEvent<CreateAccountRequestEvent>().Publish(request);
+        }
+
+        private void CreateAccountResponseHandler(CreateAccountResponse response)
+        {
+            if (response.Result == false) return;
+
+            // Open the requested account
+            _tradingService.OpenNewAccountAsync(response.AccountName);
+        }
+
+        private void OpenNewAccountCallback(object sender, OpenNewAccountCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                this.StatusMessage = null;
+
+                // Send AccountCreatedEvent
+                _eventAggregator.GetEvent<AccountCreatedEvent>().Publish(Empty.Value);
+            }
         }
 
         #endregion
@@ -78,11 +115,24 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IEventAggregator _eventAggregator;
+        private ITradingServiceAsync _tradingService;
         public UserContext UserContext { get; set; }
 
         public string ViewTitle
         {
             get { return "Accounts"; }
+        }
+
+        private string _statusMessage;
+        public string StatusMessage
+        {
+            get { return _statusMessage; }
+            set
+            {
+                _statusMessage = value;
+                this.RaisePropertyChanged("StatusMessage");
+            }
         }
 
         #endregion

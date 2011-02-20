@@ -25,6 +25,9 @@ namespace Bullsfirst.Module.Accounts
         [Import]
         public ILoggerFacade Logger;
 
+        [Import]
+        public AccountsPopupController controller;  // Ensures controller creation
+
         public void Initialize()
         {
             Logger.Log("AccountsModule.Initialize()", Category.Debug, Priority.Low);
