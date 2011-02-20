@@ -15,6 +15,7 @@
             <!-- Title row -->
             <RowDefinition Height="Auto" />
             <!-- Account summaries grid -->
+            <!-- Don't set Height=Auto. This enables vertical scroll bar if necessary -->
             <RowDefinition />
             <!-- New account row -->
             <RowDefinition Height="Auto" />
