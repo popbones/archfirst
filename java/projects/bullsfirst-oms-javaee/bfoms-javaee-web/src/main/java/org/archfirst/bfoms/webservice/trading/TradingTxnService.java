@@ -51,6 +51,10 @@ public class TradingTxnService {
         return externalAccountService.addExternalAccount(username, params);
     }
 
+    public void changeAccountName(Long accountId, String newName) {
+        baseAccountService.changeAccountName(accountId, newName);
+    }
+    
     public void transferCash(
             String username,
             Money amount,

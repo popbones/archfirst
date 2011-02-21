@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 using System;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
@@ -46,6 +47,7 @@ namespace Bullsfirst.Module.Accounts.ViewModels
             this.UserContext = userContext;
 
             _tradingService.OpenNewAccountCompleted += new EventHandler<OpenNewAccountCompletedEventArgs>(OpenNewAccountCallback);
+            _tradingService.ChangeAccountNameCompleted += new EventHandler<AsyncCompletedEventArgs>(ChangeAccountNameCallback);
             CreateAccountCommand = new DelegateCommand<object>(this.CreateAccountExecute);
             EditAccountCommand = new DelegateCommand<object>(this.EditAccountExecute);
             SelectAccountCommand = new DelegateCommand<object>(this.SelectAccountExecute);
@@ -112,7 +114,22 @@ namespace Bullsfirst.Module.Accounts.ViewModels
             if (response.Result == false) return;
 
             // Change name of the requested account
-            // _tradingService.ChangeAccountNameAsync(response.AccountId, response.NewAccountName);
+            _tradingService.ChangeAccountNameAsync(response.AccountId, response.NewAccountName);
+        }
+
+        private void ChangeAccountNameCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                this.StatusMessage = null;
+
+                // Send AccountUpdatedEvent
+                _eventAggregator.GetEvent<AccountUpdatedEvent>().Publish(Empty.Value);
+            }
         }
 
         #endregion

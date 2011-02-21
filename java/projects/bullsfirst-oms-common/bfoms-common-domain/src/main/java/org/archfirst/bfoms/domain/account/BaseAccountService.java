@@ -34,6 +34,10 @@ public class BaseAccountService {
     private BaseAccountRepository baseAccountRepository;
 
     // ----- Commands -----
+    public void changeAccountName(Long accountId, String newName) {
+        this.findAccount(accountId).changeName(newName);
+    }
+    
     /**
      * Transfer cash from the specified account to the specified account.
      * Amount should always be positive.

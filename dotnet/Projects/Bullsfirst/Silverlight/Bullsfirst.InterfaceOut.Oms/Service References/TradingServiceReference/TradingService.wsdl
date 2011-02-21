@@ -41,6 +41,12 @@
   <message name="GetBrokerageAccountSummariesResponse">
     <part name="parameters" element="tns:GetBrokerageAccountSummariesResponse" />
   </message>
+  <message name="ChangeAccountName">
+    <part name="parameters" element="tns:ChangeAccountName" />
+  </message>
+  <message name="ChangeAccountNameResponse">
+    <part name="parameters" element="tns:ChangeAccountNameResponse" />
+  </message>
   <portType name="TradingWebService">
     <operation name="OpenNewAccount">
       <input wsam:Action="OpenNewAccount" message="tns:OpenNewAccount" />
@@ -65,6 +71,10 @@
     <operation name="GetBrokerageAccountSummaries">
       <input wsam:Action="GetBrokerageAccountSummaries" message="tns:GetBrokerageAccountSummaries" />
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetBrokerageAccountSummariesResponse" message="tns:GetBrokerageAccountSummariesResponse" />
+    </operation>
+    <operation name="ChangeAccountName">
+      <input wsam:Action="ChangeAccountName" message="tns:ChangeAccountName" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/ChangeAccountNameResponse" message="tns:ChangeAccountNameResponse" />
     </operation>
   </portType>
   <binding name="TradingWebServicePortBinding" type="tns:TradingWebService">
@@ -116,6 +126,15 @@
     </operation>
     <operation name="GetBrokerageAccountSummaries">
       <soap:operation soapAction="GetBrokerageAccountSummaries" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="ChangeAccountName">
+      <soap:operation soapAction="ChangeAccountName" />
       <input>
         <soap:body use="literal" />
       </input>

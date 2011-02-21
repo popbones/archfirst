@@ -29,8 +29,7 @@ namespace Bullsfirst.Infrastructure
     {
     }
 
-    // The payload provides the accountId
-    public class AccountUpdatedEvent : CompositePresentationEvent<long>
+    public class AccountUpdatedEvent : CompositePresentationEvent<Empty>
     {
     }
 }

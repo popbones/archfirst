@@ -94,7 +94,7 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
             UpdateAccountSummaries();
         }
 
-        private void OnAccountUpdated(long accountId)
+        private void OnAccountUpdated(Empty empty)
         {
             UpdateAccountSummaries();
         }

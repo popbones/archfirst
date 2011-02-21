@@ -63,6 +63,15 @@ public class TradingWebService {
         return tradingTxnService.addExternalAccount(getUsername(), params);
     }
 
+    @WebMethod(operationName = "ChangeAccountName", action = "ChangeAccountName")
+    public void changeAccountName(
+            @WebParam(name = "AccountId")
+            Long accountId,
+            @WebParam(name = "NewName")
+            String newName) {
+        tradingTxnService.changeAccountName(accountId, newName);
+    }
+    
     @WebMethod(operationName = "TransferCash", action = "TransferCash")
     public void transferCash(
             @WebParam(name = "Amount")

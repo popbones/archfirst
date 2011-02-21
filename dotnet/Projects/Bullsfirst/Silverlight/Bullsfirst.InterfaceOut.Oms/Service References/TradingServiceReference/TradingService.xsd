@@ -2,6 +2,8 @@
 <xs:schema xmlns:tns="http://archfirst.org/bfoms/tradingservice.wsdl" targetNamespace="http://archfirst.org/bfoms/tradingservice.wsdl" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="AddExternalAccount" type="tns:AddExternalAccount" />
   <xs:element name="AddExternalAccountResponse" type="tns:AddExternalAccountResponse" />
+  <xs:element name="ChangeAccountName" type="tns:ChangeAccountName" />
+  <xs:element name="ChangeAccountNameResponse" type="tns:ChangeAccountNameResponse" />
   <xs:element name="ExternalAccountParams" type="tns:ExternalAccountParams" />
   <xs:element name="GetBrokerageAccountSummaries" type="tns:GetBrokerageAccountSummaries" />
   <xs:element name="GetBrokerageAccountSummariesResponse" type="tns:GetBrokerageAccountSummariesResponse" />
@@ -13,6 +15,15 @@
   <xs:element name="TransferCashResponse" type="tns:TransferCashResponse" />
   <xs:element name="TransferSecurities" type="tns:TransferSecurities" />
   <xs:element name="TransferSecuritiesResponse" type="tns:TransferSecuritiesResponse" />
+  <xs:complexType name="ChangeAccountName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:long" />
+      <xs:element minOccurs="0" name="NewName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeAccountNameResponse">
+    <xs:sequence />
+  </xs:complexType>
   <xs:complexType name="TransferSecurities">
     <xs:sequence>
       <xs:element minOccurs="0" name="Symbol" type="xs:string" />

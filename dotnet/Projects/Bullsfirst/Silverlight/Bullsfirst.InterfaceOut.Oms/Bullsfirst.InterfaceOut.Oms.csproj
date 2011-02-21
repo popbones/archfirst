@@ -93,6 +93,9 @@
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.AddExternalAccountResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetBrokerageAccountSummariesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
