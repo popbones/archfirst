@@ -23,6 +23,7 @@ using Bullsfirst.Module.Accounts.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 
 namespace Bullsfirst.Module.Accounts.ViewModels
@@ -36,12 +37,14 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         [ImportingConstructor]
         public AccountsViewModel(
             ILoggerFacade logger,
+            IRegionManager regionManager,
             IEventAggregator eventAggregator,
             ITradingServiceAsync tradingService,
             UserContext userContext)
         {
             logger.Log("AccountsViewModel.AccountsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _tradingService = tradingService;
             this.UserContext = userContext;
@@ -140,7 +143,8 @@ namespace Bullsfirst.Module.Accounts.ViewModels
 
         private void SelectAccountExecute(object dummyObject)
         {
-            // Debug.WriteLine("---------> " + ((AccountSummary)dummyObject).Name);
+            UserContext.SelectedAccount = (AccountSummary)dummyObject;
+            _regionManager.RequestNavigate(RegionNames.LoggedInUserRegion, new Uri(ViewNames.PositionsView, UriKind.Relative));
         }
 
         #endregion
@@ -148,6 +152,7 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private ITradingServiceAsync _tradingService;
         public UserContext UserContext { get; set; }

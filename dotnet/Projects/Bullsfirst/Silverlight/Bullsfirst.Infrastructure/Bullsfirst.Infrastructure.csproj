@@ -56,6 +56,9 @@
     <Reference Include="System.Windows.Browser" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AccountSelector.xaml.cs">
+      <DependentUpon>AccountSelector.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Events.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -67,7 +70,12 @@
       <Name>Archfirst.Framework</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Page Include="Controls\AccountSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\bullet.jpg" />
   </ItemGroup>

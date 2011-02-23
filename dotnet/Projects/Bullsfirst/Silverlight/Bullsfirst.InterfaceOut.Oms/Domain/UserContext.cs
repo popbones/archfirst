@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
@@ -21,12 +22,8 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
 {
     [Export]
     [PartCreationPolicy(CreationPolicy.Shared)]
-    public class UserContext
+    public class UserContext : INotifyPropertyChanged
     {
-        public User User { get; set; }
-        public Credentials Credentials { get; set; }
-        public ObservableCollection<AccountSummary> AccountSummaries { get; set; }
-
         public UserContext()
         {
             User = new User();
@@ -56,6 +53,80 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
         {
             this.InitUser(new User());
             this.InitCredentials(null, null);
+            AccountSummaries.Clear();
+            SelectedAccount = null;
         }
+
+        public AccountSummary FindAccount(long id)
+        {
+            AccountSummary result = null;
+            for (int index = 0; index < AccountSummaries.Count; index++)
+            {
+                if (AccountSummaries[index].Id == id)
+                {
+                    result = AccountSummaries[index];
+                    break;
+                }
+            }
+
+            return result;
+        }
+
+        public void InitializeAccountSummaries(AccountSummary[] summaries)
+        {
+            if (summaries == null) return;
+
+            // Remember currently selected account
+            long currentlySelectedAccount = (SelectedAccount != null) ? SelectedAccount.Id : 0;
+
+            AccountSummaries.Clear();
+            foreach (AccountSummary summary in summaries)
+            {
+                AccountSummaries.Add(summary);
+            }
+
+            // Restore currently selected account (with the new instance of AccountSummary)
+            if (currentlySelectedAccount != 0)
+            {
+                SelectedAccount = FindAccount(currentlySelectedAccount);
+            }
+            if (SelectedAccount == null && AccountSummaries.Count != 0)
+            {
+                SelectedAccount = AccountSummaries[0];
+            }
+        }
+
+        #region INotifyPropertyChanged
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void RaisePropertyChanged(string propertyName)
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        #endregion
+
+        #region Members
+
+        public User User { get; set; }
+        public Credentials Credentials { get; set; }
+        public ObservableCollection<AccountSummary> AccountSummaries { get; set; }
+
+        private AccountSummary _selectedAccount;
+        public AccountSummary SelectedAccount
+        {
+            get { return _selectedAccount; }
+            set
+            {
+                _selectedAccount = value;
+                this.RaisePropertyChanged("SelectedAccount");
+            }
+        }
+
+        #endregion
     }
 }

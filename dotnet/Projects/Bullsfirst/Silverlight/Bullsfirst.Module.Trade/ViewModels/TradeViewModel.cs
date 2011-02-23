@@ -13,7 +13,10 @@
  * limitations under the License.
  */
 using System.ComponentModel.Composition;
+using Bullsfirst.InterfaceOut.Oms.Domain;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Trade.Interfaces;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.ViewModel;
 
 namespace Bullsfirst.Module.Trade.ViewModels
@@ -22,7 +25,24 @@ namespace Bullsfirst.Module.Trade.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class TradeViewModel : NotificationObject, ITradeViewModel
     {
+        #region Construction
+
+        [ImportingConstructor]
+        public TradeViewModel(
+            ILoggerFacade logger,
+            UserContext userContext)
+        {
+            logger.Log("TradeViewModel.TradeViewModel()", Category.Debug, Priority.Low);
+            _logger = logger;
+            this.UserContext = userContext;
+        }
+
+        #endregion
+
         #region Members
+
+        private ILoggerFacade _logger;
+        public UserContext UserContext { get; set; }
 
         public string ViewTitle
         {

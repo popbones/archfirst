@@ -1,4 +1,4 @@
-﻿/* Copyright 2010 Archfirst
+﻿/* Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,15 +12,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System.Diagnostics;
+using System.Windows.Controls;
 
-namespace Bullsfirst.Infrastructure
+namespace Bullsfirst.Infrastructure.Controls
 {
-    public class ViewNames
+    public partial class AccountSelector : UserControl
     {
-        public const string HomeView = "HomeView";
-        public const string OpenAccountView = "OpenAccountView";
-        public const string LoggedInUserView = "LoggedInUserView";
-        public const string AccountsView = "AccountsView";
-        public const string PositionsView = "PositionsView";
+        public AccountSelector()
+        {
+            Debug.WriteLine("[Debug] AccountSelector.AccountSelector()");
+            InitializeComponent();
+        }
     }
 }

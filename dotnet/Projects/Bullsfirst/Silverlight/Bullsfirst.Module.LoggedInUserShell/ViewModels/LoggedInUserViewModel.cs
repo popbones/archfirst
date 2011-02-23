@@ -110,13 +110,7 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
 
         private void GetBrokerageAccountSummariesCallback(object sender, GetBrokerageAccountSummariesCompletedEventArgs e)
         {
-            if (e.Result == null) return;
-
-            UserContext.AccountSummaries.Clear();
-            foreach (AccountSummary summary in e.Result)
-            {
-                UserContext.AccountSummaries.Add(summary);
-            }
+            UserContext.InitializeAccountSummaries(e.Result);
         }
 
         #endregion
