@@ -28,7 +28,9 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
         {
             User = new User();
             Credentials = new Credentials();
-            AccountSummaries = new ObservableCollection<AccountSummary>();
+            BrokerageAccountSummaries = new ObservableCollection<BrokerageAccountSummary>();
+            ExternalAccountSummaries = new ObservableCollection<ExternalAccountSummary>();
+            BaseAccountDisplayObjects = new ObservableCollection<BaseAccountDisplayObject>();
         }
 
         public void InitUser(User other)
@@ -53,18 +55,20 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
         {
             this.InitUser(new User());
             this.InitCredentials(null, null);
-            AccountSummaries.Clear();
+            BrokerageAccountSummaries.Clear();
+            ExternalAccountSummaries.Clear();
+            BaseAccountDisplayObjects.Clear();
             SelectedAccount = null;
         }
 
-        public AccountSummary FindAccount(long id)
+        public BrokerageAccountSummary FindBrokerageAccount(long id)
         {
-            AccountSummary result = null;
-            for (int index = 0; index < AccountSummaries.Count; index++)
+            BrokerageAccountSummary result = null;
+            foreach (BrokerageAccountSummary summary in BrokerageAccountSummaries)
             {
-                if (AccountSummaries[index].Id == id)
+                if (summary.Id == id)
                 {
-                    result = AccountSummaries[index];
+                    result = summary;
                     break;
                 }
             }
@@ -72,27 +76,51 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
             return result;
         }
 
-        public void InitializeAccountSummaries(AccountSummary[] summaries)
+        public void InitializeBrokerageAccountSummaries(BrokerageAccountSummary[] summaries)
         {
             if (summaries == null) return;
 
             // Remember currently selected account
             long currentlySelectedAccount = (SelectedAccount != null) ? SelectedAccount.Id : 0;
 
-            AccountSummaries.Clear();
-            foreach (AccountSummary summary in summaries)
+            BrokerageAccountSummaries.Clear();
+            foreach (BrokerageAccountSummary summary in summaries)
             {
-                AccountSummaries.Add(summary);
+                BrokerageAccountSummaries.Add(summary);
             }
 
             // Restore currently selected account (with the new instance of AccountSummary)
             if (currentlySelectedAccount != 0)
             {
-                SelectedAccount = FindAccount(currentlySelectedAccount);
+                SelectedAccount = FindBrokerageAccount(currentlySelectedAccount);
             }
-            if (SelectedAccount == null && AccountSummaries.Count != 0)
+            if (SelectedAccount == null && BrokerageAccountSummaries.Count != 0)
             {
-                SelectedAccount = AccountSummaries[0];
+                SelectedAccount = BrokerageAccountSummaries[0];
+            }
+        }
+
+        public void InitializeExternalAccountSummaries(ExternalAccountSummary[] summaries)
+        {
+            if (summaries == null) return;
+
+            ExternalAccountSummaries.Clear();
+            foreach (ExternalAccountSummary summary in summaries)
+            {
+                ExternalAccountSummaries.Add(summary);
+            }
+        }
+
+        public void InitializeBaseAccountDisplayObjects()
+        {
+            BaseAccountDisplayObjects.Clear();
+            foreach (BrokerageAccountSummary summary in BrokerageAccountSummaries)
+            {
+                BaseAccountDisplayObjects.Add(new BaseAccountDisplayObject(summary));
+            }
+            foreach (ExternalAccountSummary summary in ExternalAccountSummaries)
+            {
+                BaseAccountDisplayObjects.Add(new BaseAccountDisplayObject(summary));
             }
         }
 
@@ -114,10 +142,12 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
 
         public User User { get; set; }
         public Credentials Credentials { get; set; }
-        public ObservableCollection<AccountSummary> AccountSummaries { get; set; }
+        public ObservableCollection<BrokerageAccountSummary> BrokerageAccountSummaries { get; set; }
+        public ObservableCollection<ExternalAccountSummary> ExternalAccountSummaries { get; set; }
+        public ObservableCollection<BaseAccountDisplayObject> BaseAccountDisplayObjects { get; set; }
 
-        private AccountSummary _selectedAccount;
-        public AccountSummary SelectedAccount
+        private BrokerageAccountSummary _selectedAccount;
+        public BrokerageAccountSummary SelectedAccount
         {
             get { return _selectedAccount; }
             set

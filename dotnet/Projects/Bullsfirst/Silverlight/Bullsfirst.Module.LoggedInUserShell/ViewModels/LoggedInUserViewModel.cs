@@ -48,6 +48,8 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
             _tradingService = tradingService;
             _tradingService.GetBrokerageAccountSummariesCompleted +=
                 new EventHandler<GetBrokerageAccountSummariesCompletedEventArgs>(GetBrokerageAccountSummariesCallback);
+            _tradingService.GetExternalAccountSummariesCompleted +=
+                new EventHandler<GetExternalAccountSummariesCompletedEventArgs>(GetExternalAccountSummariesCallback);
             this.UserContext = userContext;
             SignOutCommand = new DelegateCommand<object>(this.SignOutExecute);
             SubscribeToEvents();
@@ -110,7 +112,14 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
 
         private void GetBrokerageAccountSummariesCallback(object sender, GetBrokerageAccountSummariesCompletedEventArgs e)
         {
-            UserContext.InitializeAccountSummaries(e.Result);
+            UserContext.InitializeBrokerageAccountSummaries(e.Result);
+            _tradingService.GetExternalAccountSummariesAsync();
+        }
+
+        private void GetExternalAccountSummariesCallback(object sender, GetExternalAccountSummariesCompletedEventArgs e)
+        {
+            UserContext.InitializeExternalAccountSummaries(e.Result);
+            UserContext.InitializeBaseAccountDisplayObjects();
         }
 
         #endregion

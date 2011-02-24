@@ -9,7 +9,7 @@
 
     <Grid x:Name="LayoutRoot" Background="White">
         <ComboBox
-            ItemsSource="{Binding UserContext.AccountSummaries}"
+            ItemsSource="{Binding UserContext.BrokerageAccountSummaries}"
             SelectedItem="{Binding UserContext.SelectedAccount, Mode=TwoWay}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>

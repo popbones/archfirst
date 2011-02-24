@@ -4,10 +4,93 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
+    xmlns:local="clr-namespace:Bullsfirst.Module.Transfer.ViewModels"
     mc:Ignorable="d"
     d:DesignHeight="500" d:DesignWidth="950">
 
-    <Grid x:Name="LayoutRoot" Background="White">
+    <UserControl.Resources>
+        <local:TransferKindBooleanConverter x:Key="transferKindBooleanConverter" />
+        <local:TransferKindCashVisibilityConverter x:Key="transferKindCashVisibilityConverter" />
+        <local:TransferKindSecuritiesVisibilityConverter x:Key="transferKindSecuritiesVisibilityConverter" />
+    </UserControl.Resources>
+
+    <StackPanel x:Name="LayoutRoot" Background="White" Margin="20">
+
         <TextBlock Text="Transfer" Style="{StaticResource Header1}" />
-    </Grid>
+
+        <StackPanel Style="{StaticResource FormRow}">
+            <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
+            <RadioButton GroupName="TransferKindGroup" Content="Cash" Style="{StaticResource WideFormRadioButton}"
+                         IsChecked="{Binding Path=TransferKind, Mode=TwoWay, Converter={StaticResource transferKindBooleanConverter}, ConverterParameter=Cash}" />
+            <RadioButton GroupName="TransferKindGroup" Content="Securities" Style="{StaticResource WideFormRadioButton}"
+                         IsChecked="{Binding Path=TransferKind, Mode=TwoWay, Converter={StaticResource transferKindBooleanConverter}, ConverterParameter=Securities}" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource FormRow}">
+            <sdk:Label Content="From" Target="{Binding ElementName=from}" Style="{StaticResource WideFormLabel}" />
+            <ComboBox x:Name="from" Style="{StaticResource WideFormComboBox}"
+                ItemsSource="{Binding UserContext.BaseAccountDisplayObjects}"
+                SelectedItem="{Binding FromAccount, Mode=TwoWay}"
+                DisplayMemberPath="DisplayString" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource FormRow}">
+            <sdk:Label Content="To" Target="{Binding ElementName=to}" Style="{StaticResource WideFormLabel}" />
+            <ComboBox x:Name="to" Style="{StaticResource WideFormComboBox}"
+                ItemsSource="{Binding UserContext.BaseAccountDisplayObjects}"
+                SelectedItem="{Binding ToAccount, Mode=TwoWay}"
+                DisplayMemberPath="DisplayString" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindCashVisibilityConverter}}">
+            <sdk:Label Content="Amount" Target="{Binding ElementName=amount}" Style="{StaticResource WideFormLabel}" />
+            <TextBox x:Name="amount" Style="{StaticResource WideFormTextBox}"
+                     Text="{Binding Path=Amount, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">
+            <sdk:Label Content="Symbol" Target="{Binding ElementName=symbol}" Style="{StaticResource WideFormLabel}" />
+            <TextBox x:Name="symbol" Style="{StaticResource WideFormTextBox}"
+                     Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">
+            <sdk:Label Content="Quantity" Target="{Binding ElementName=quantity}" Style="{StaticResource WideFormLabel}" />
+            <TextBox x:Name="quantity" Style="{StaticResource WideFormTextBox}"
+                     Text="{Binding Path=Quantity, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">
+            <sdk:Label Content="Price Paid Per Share" Target="{Binding ElementName=pricePaid}" Style="{StaticResource WideFormLabel}" />
+            <TextBox x:Name="pricePaid" Style="{StaticResource WideFormTextBox}"
+                     Text="{Binding Path=PricePaidPerShare, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource TallFormRow}">
+            <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
+            <Button Content="Transfer" Style="{StaticResource FormButton}" Command="{Binding TransferCommand}" />
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource TallFormRow}">
+            <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
+            <TextBlock Text="{Binding Path=StatusMessage}" Style="{StaticResource WideStatusMessage}" />
+        </StackPanel>
+
+        <!--
+        <BulletDecorator>
+            <BulletDecorator.Bullet>
+                <Image Source="/Bullsfirst.Infrastructure.Common;component/Images/BULLet.gif" Stretch="None" />
+            </BulletDecorator.Bullet>
+            <TextBlock Style="{StaticResource Bullet}">
+                    <Hyperlink Command="{Binding AddExternalAccountCommand}">
+                        <TextBlock Text="Add an external account..." />
+                    </Hyperlink>
+                </TextBlock>
+        </BulletDecorator>
+        -->
+
+    </StackPanel>
 </UserControl>

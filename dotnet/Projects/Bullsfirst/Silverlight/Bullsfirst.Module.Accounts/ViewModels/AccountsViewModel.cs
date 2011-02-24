@@ -105,8 +105,8 @@ namespace Bullsfirst.Module.Accounts.ViewModels
             EditAccountRequest request =
                 new EditAccountRequest
                 {
-                    AccountId = ((AccountSummary)dummyObject).Id,
-                    CurrentAccountName = ((AccountSummary)dummyObject).Name,
+                    AccountId = ((BrokerageAccountSummary)dummyObject).Id,
+                    CurrentAccountName = ((BrokerageAccountSummary)dummyObject).Name,
                     ResponseHandler = EditAccountResponseHandler
                 };
             _eventAggregator.GetEvent<EditAccountRequestEvent>().Publish(request);
@@ -143,7 +143,7 @@ namespace Bullsfirst.Module.Accounts.ViewModels
 
         private void SelectAccountExecute(object dummyObject)
         {
-            UserContext.SelectedAccount = (AccountSummary)dummyObject;
+            UserContext.SelectedAccount = (BrokerageAccountSummary)dummyObject;
             _regionManager.RequestNavigate(RegionNames.LoggedInUserRegion, new Uri(ViewNames.PositionsView, UriKind.Relative));
         }
 

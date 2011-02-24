@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Converters\MoneyConverter.cs" />
+    <Compile Include="Domain\BaseAccountDisplayObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthenticationBehavior.cs" />
     <Compile Include="Domain\Credentials.cs" />
@@ -97,6 +98,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetBrokerageAccountSummariesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OpenNewAccountResponse.datasource">

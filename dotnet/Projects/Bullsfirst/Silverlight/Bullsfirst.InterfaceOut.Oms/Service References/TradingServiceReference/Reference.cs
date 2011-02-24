@@ -33,13 +33,23 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="AddExternalAccount", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/AddExternalAccou" +
             "ntResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginAddExternalAccount(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.AddExternalAccountRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.AddExternalAccountResponse EndAddExternalAccount(System.IAsyncResult result);
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="ChangeAccountName", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/ChangeAccountNam" +
+            "eResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
+        System.IAsyncResult BeginChangeAccountName(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse EndChangeAccountName(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="TransferCash", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/TransferCashResp" +
             "onse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginTransferCash(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferCashRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferCashResponse EndTransferCash(System.IAsyncResult result);
@@ -47,6 +57,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="TransferSecurities", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/TransferSecuriti" +
             "esResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginTransferSecurities(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferSecuritiesRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferSecuritiesResponse EndTransferSecurities(System.IAsyncResult result);
@@ -54,6 +65,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="PlaceOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderRespon" +
             "se")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse EndPlaceOrder(System.IAsyncResult result);
@@ -61,16 +73,18 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetBrokerageAccountSummaries", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetBrokerageAcco" +
             "untSummariesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginGetBrokerageAccountSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetBrokerageAccountSummariesRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetBrokerageAccountSummariesResponse EndGetBrokerageAccountSummaries(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="ChangeAccountName", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/ChangeAccountNam" +
-            "eResponse")]
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetExternalAccountSummaries", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetExternalAccou" +
+            "ntSummariesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        System.IAsyncResult BeginChangeAccountName(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest request, System.AsyncCallback callback, object asyncState);
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
+        System.IAsyncResult BeginGetExternalAccountSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesRequest request, System.AsyncCallback callback, object asyncState);
         
-        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse EndChangeAccountName(System.IAsyncResult result);
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesResponse EndGetExternalAccountSummaries(System.IAsyncResult result);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -424,26 +438,16 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     }
     
     /// <remarks/>
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(BrokerageAccountSummary))]
+    [System.Xml.Serialization.XmlIncludeAttribute(typeof(ExternalAccountSummary))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public partial class AccountSummary : object, System.ComponentModel.INotifyPropertyChanged {
+    public abstract partial class BaseAccountSummary : object, System.ComponentModel.INotifyPropertyChanged {
         
         private long idField;
         
         private string nameField;
-        
-        private Money cashPositionField;
-        
-        private Money marketValueField;
-        
-        private bool editPermissionField;
-        
-        private bool tradePermissionField;
-        
-        private bool transferPermissionField;
-        
-        private Position[] positionField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
@@ -469,8 +473,36 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             }
         }
         
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
+    public partial class BrokerageAccountSummary : BaseAccountSummary {
+        
+        private Money cashPositionField;
+        
+        private Money marketValueField;
+        
+        private bool editPermissionField;
+        
+        private bool tradePermissionField;
+        
+        private bool transferPermissionField;
+        
+        private Position[] positionField;
+        
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
         public Money CashPosition {
             get {
                 return this.cashPositionField;
@@ -482,7 +514,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
         public Money MarketValue {
             get {
                 return this.marketValueField;
@@ -494,7 +526,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
         public bool EditPermission {
             get {
                 return this.editPermissionField;
@@ -506,7 +538,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
         public bool TradePermission {
             get {
                 return this.tradePermissionField;
@@ -518,7 +550,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
         public bool TransferPermission {
             get {
                 return this.transferPermissionField;
@@ -530,7 +562,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Position", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute("Position", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
         public Position[] Position {
             get {
                 return this.positionField;
@@ -540,13 +572,39 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
                 this.RaisePropertyChanged("Position");
             }
         }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
+    public partial class ExternalAccountSummary : BaseAccountSummary {
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        private string routingNumberField;
         
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+        private string accountNumberField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public string RoutingNumber {
+            get {
+                return this.routingNumberField;
+            }
+            set {
+                this.routingNumberField = value;
+                this.RaisePropertyChanged("RoutingNumber");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string AccountNumber {
+            get {
+                return this.accountNumberField;
+            }
+            set {
+                this.accountNumberField = value;
+                this.RaisePropertyChanged("AccountNumber");
             }
         }
     }
@@ -740,6 +798,39 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ChangeAccountName", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class ChangeAccountNameRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long AccountId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string NewName;
+        
+        public ChangeAccountNameRequest() {
+        }
+        
+        public ChangeAccountNameRequest(long AccountId, string NewName) {
+            this.AccountId = AccountId;
+            this.NewName = NewName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="ChangeAccountNameResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class ChangeAccountNameResponse {
+        
+        public ChangeAccountNameResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="TransferCash", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
     public partial class TransferCashRequest {
         
@@ -881,47 +972,42 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     public partial class GetBrokerageAccountSummariesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute("AccountSummary", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public AccountSummary[] AccountSummary;
+        [System.Xml.Serialization.XmlElementAttribute("BrokerageAccountSummary", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public BrokerageAccountSummary[] BrokerageAccountSummary;
         
         public GetBrokerageAccountSummariesResponse() {
         }
         
-        public GetBrokerageAccountSummariesResponse(AccountSummary[] AccountSummary) {
-            this.AccountSummary = AccountSummary;
+        public GetBrokerageAccountSummariesResponse(BrokerageAccountSummary[] BrokerageAccountSummary) {
+            this.BrokerageAccountSummary = BrokerageAccountSummary;
         }
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ChangeAccountName", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class ChangeAccountNameRequest {
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetExternalAccountSummaries", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class GetExternalAccountSummariesRequest {
+        
+        public GetExternalAccountSummariesRequest() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetExternalAccountSummariesResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class GetExternalAccountSummariesResponse {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public long AccountId;
+        [System.Xml.Serialization.XmlElementAttribute("ExternalAccountSummary", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ExternalAccountSummary[] ExternalAccountSummary;
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string NewName;
-        
-        public ChangeAccountNameRequest() {
+        public GetExternalAccountSummariesResponse() {
         }
         
-        public ChangeAccountNameRequest(long AccountId, string NewName) {
-            this.AccountId = AccountId;
-            this.NewName = NewName;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="ChangeAccountNameResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class ChangeAccountNameResponse {
-        
-        public ChangeAccountNameResponse() {
+        public GetExternalAccountSummariesResponse(ExternalAccountSummary[] ExternalAccountSummary) {
+            this.ExternalAccountSummary = ExternalAccountSummary;
         }
     }
     
@@ -997,10 +1083,29 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             this.results = results;
         }
         
-        public AccountSummary[] Result {
+        public BrokerageAccountSummary[] Result {
             get {
                 base.RaiseExceptionIfNecessary();
-                return ((AccountSummary[])(this.results[0]));
+                return ((BrokerageAccountSummary[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetExternalAccountSummariesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetExternalAccountSummariesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public ExternalAccountSummary[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((ExternalAccountSummary[])(this.results[0]));
             }
         }
     }
@@ -1020,6 +1125,12 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         private EndOperationDelegate onEndAddExternalAccountDelegate;
         
         private System.Threading.SendOrPostCallback onAddExternalAccountCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginChangeAccountNameDelegate;
+        
+        private EndOperationDelegate onEndChangeAccountNameDelegate;
+        
+        private System.Threading.SendOrPostCallback onChangeAccountNameCompletedDelegate;
         
         private BeginOperationDelegate onBeginTransferCashDelegate;
         
@@ -1045,11 +1156,11 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         private System.Threading.SendOrPostCallback onGetBrokerageAccountSummariesCompletedDelegate;
         
-        private BeginOperationDelegate onBeginChangeAccountNameDelegate;
+        private BeginOperationDelegate onBeginGetExternalAccountSummariesDelegate;
         
-        private EndOperationDelegate onEndChangeAccountNameDelegate;
+        private EndOperationDelegate onEndGetExternalAccountSummariesDelegate;
         
-        private System.Threading.SendOrPostCallback onChangeAccountNameCompletedDelegate;
+        private System.Threading.SendOrPostCallback onGetExternalAccountSummariesCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -1108,6 +1219,8 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         public event System.EventHandler<AddExternalAccountCompletedEventArgs> AddExternalAccountCompleted;
         
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ChangeAccountNameCompleted;
+        
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> TransferCashCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> TransferSecuritiesCompleted;
@@ -1116,7 +1229,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         public event System.EventHandler<GetBrokerageAccountSummariesCompletedEventArgs> GetBrokerageAccountSummariesCompleted;
         
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> ChangeAccountNameCompleted;
+        public event System.EventHandler<GetExternalAccountSummariesCompletedEventArgs> GetExternalAccountSummariesCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -1238,6 +1351,66 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             }
             base.InvokeAsync(this.onBeginAddExternalAccountDelegate, new object[] {
                         ExternalAccountParams}, this.onEndAddExternalAccountDelegate, this.onAddExternalAccountCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginChangeAccountName(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginChangeAccountName(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginChangeAccountName(long AccountId, string NewName, System.AsyncCallback callback, object asyncState) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest();
+            inValue.AccountId = AccountId;
+            inValue.NewName = NewName;
+            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginChangeAccountName(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndChangeAccountName(System.IAsyncResult result) {
+            return base.Channel.EndChangeAccountName(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private void EndChangeAccountName(System.IAsyncResult result) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndChangeAccountName(result);
+        }
+        
+        private System.IAsyncResult OnBeginChangeAccountName(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            long AccountId = ((long)(inValues[0]));
+            string NewName = ((string)(inValues[1]));
+            return this.BeginChangeAccountName(AccountId, NewName, callback, asyncState);
+        }
+        
+        private object[] OnEndChangeAccountName(System.IAsyncResult result) {
+            this.EndChangeAccountName(result);
+            return null;
+        }
+        
+        private void OnChangeAccountNameCompleted(object state) {
+            if ((this.ChangeAccountNameCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.ChangeAccountNameCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void ChangeAccountNameAsync(long AccountId, string NewName) {
+            this.ChangeAccountNameAsync(AccountId, NewName, null);
+        }
+        
+        public void ChangeAccountNameAsync(long AccountId, string NewName, object userState) {
+            if ((this.onBeginChangeAccountNameDelegate == null)) {
+                this.onBeginChangeAccountNameDelegate = new BeginOperationDelegate(this.OnBeginChangeAccountName);
+            }
+            if ((this.onEndChangeAccountNameDelegate == null)) {
+                this.onEndChangeAccountNameDelegate = new EndOperationDelegate(this.OnEndChangeAccountName);
+            }
+            if ((this.onChangeAccountNameCompletedDelegate == null)) {
+                this.onChangeAccountNameCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnChangeAccountNameCompleted);
+            }
+            base.InvokeAsync(this.onBeginChangeAccountNameDelegate, new object[] {
+                        AccountId,
+                        NewName}, this.onEndChangeAccountNameDelegate, this.onChangeAccountNameCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -1451,9 +1624,9 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private AccountSummary[] EndGetBrokerageAccountSummaries(System.IAsyncResult result) {
+        private BrokerageAccountSummary[] EndGetBrokerageAccountSummaries(System.IAsyncResult result) {
             Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetBrokerageAccountSummariesResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndGetBrokerageAccountSummaries(result);
-            return retVal.AccountSummary;
+            return retVal.BrokerageAccountSummary;
         }
         
         private System.IAsyncResult OnBeginGetBrokerageAccountSummaries(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -1461,7 +1634,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         private object[] OnEndGetBrokerageAccountSummaries(System.IAsyncResult result) {
-            AccountSummary[] retVal = this.EndGetBrokerageAccountSummaries(result);
+            BrokerageAccountSummary[] retVal = this.EndGetBrokerageAccountSummaries(result);
             return new object[] {
                     retVal};
         }
@@ -1491,63 +1664,59 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginChangeAccountName(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginChangeAccountName(request, callback, asyncState);
+        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginGetExternalAccountSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetExternalAccountSummaries(request, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private System.IAsyncResult BeginChangeAccountName(long AccountId, string NewName, System.AsyncCallback callback, object asyncState) {
-            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest();
-            inValue.AccountId = AccountId;
-            inValue.NewName = NewName;
-            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginChangeAccountName(inValue, callback, asyncState);
+        private System.IAsyncResult BeginGetExternalAccountSummaries(System.AsyncCallback callback, object asyncState) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesRequest();
+            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginGetExternalAccountSummaries(inValue, callback, asyncState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndChangeAccountName(System.IAsyncResult result) {
-            return base.Channel.EndChangeAccountName(result);
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndGetExternalAccountSummaries(System.IAsyncResult result) {
+            return base.Channel.EndGetExternalAccountSummaries(result);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private void EndChangeAccountName(System.IAsyncResult result) {
-            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndChangeAccountName(result);
+        private ExternalAccountSummary[] EndGetExternalAccountSummaries(System.IAsyncResult result) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndGetExternalAccountSummaries(result);
+            return retVal.ExternalAccountSummary;
         }
         
-        private System.IAsyncResult OnBeginChangeAccountName(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            long AccountId = ((long)(inValues[0]));
-            string NewName = ((string)(inValues[1]));
-            return this.BeginChangeAccountName(AccountId, NewName, callback, asyncState);
+        private System.IAsyncResult OnBeginGetExternalAccountSummaries(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            return this.BeginGetExternalAccountSummaries(callback, asyncState);
         }
         
-        private object[] OnEndChangeAccountName(System.IAsyncResult result) {
-            this.EndChangeAccountName(result);
-            return null;
+        private object[] OnEndGetExternalAccountSummaries(System.IAsyncResult result) {
+            ExternalAccountSummary[] retVal = this.EndGetExternalAccountSummaries(result);
+            return new object[] {
+                    retVal};
         }
         
-        private void OnChangeAccountNameCompleted(object state) {
-            if ((this.ChangeAccountNameCompleted != null)) {
+        private void OnGetExternalAccountSummariesCompleted(object state) {
+            if ((this.GetExternalAccountSummariesCompleted != null)) {
                 InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.ChangeAccountNameCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+                this.GetExternalAccountSummariesCompleted(this, new GetExternalAccountSummariesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
             }
         }
         
-        public void ChangeAccountNameAsync(long AccountId, string NewName) {
-            this.ChangeAccountNameAsync(AccountId, NewName, null);
+        public void GetExternalAccountSummariesAsync() {
+            this.GetExternalAccountSummariesAsync(null);
         }
         
-        public void ChangeAccountNameAsync(long AccountId, string NewName, object userState) {
-            if ((this.onBeginChangeAccountNameDelegate == null)) {
-                this.onBeginChangeAccountNameDelegate = new BeginOperationDelegate(this.OnBeginChangeAccountName);
+        public void GetExternalAccountSummariesAsync(object userState) {
+            if ((this.onBeginGetExternalAccountSummariesDelegate == null)) {
+                this.onBeginGetExternalAccountSummariesDelegate = new BeginOperationDelegate(this.OnBeginGetExternalAccountSummaries);
             }
-            if ((this.onEndChangeAccountNameDelegate == null)) {
-                this.onEndChangeAccountNameDelegate = new EndOperationDelegate(this.OnEndChangeAccountName);
+            if ((this.onEndGetExternalAccountSummariesDelegate == null)) {
+                this.onEndGetExternalAccountSummariesDelegate = new EndOperationDelegate(this.OnEndGetExternalAccountSummaries);
             }
-            if ((this.onChangeAccountNameCompletedDelegate == null)) {
-                this.onChangeAccountNameCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnChangeAccountNameCompleted);
+            if ((this.onGetExternalAccountSummariesCompletedDelegate == null)) {
+                this.onGetExternalAccountSummariesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetExternalAccountSummariesCompleted);
             }
-            base.InvokeAsync(this.onBeginChangeAccountNameDelegate, new object[] {
-                        AccountId,
-                        NewName}, this.onEndChangeAccountNameDelegate, this.onChangeAccountNameCompletedDelegate, userState);
+            base.InvokeAsync(this.onBeginGetExternalAccountSummariesDelegate, null, this.onEndGetExternalAccountSummariesDelegate, this.onGetExternalAccountSummariesCompletedDelegate, userState);
         }
         
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
@@ -1652,6 +1821,19 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
                 return _result;
             }
             
+            public System.IAsyncResult BeginChangeAccountName(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("ChangeAccountName", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse EndChangeAccountName(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse)(base.EndInvoke("ChangeAccountName", _args, result)));
+                return _result;
+            }
+            
             public System.IAsyncResult BeginTransferCash(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferCashRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
@@ -1704,16 +1886,16 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
                 return _result;
             }
             
-            public System.IAsyncResult BeginChangeAccountName(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest request, System.AsyncCallback callback, object asyncState) {
+            public System.IAsyncResult BeginGetExternalAccountSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("ChangeAccountName", _args, callback, asyncState);
+                System.IAsyncResult _result = base.BeginInvoke("GetExternalAccountSummaries", _args, callback, asyncState);
                 return _result;
             }
             
-            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse EndChangeAccountName(System.IAsyncResult result) {
+            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesResponse EndGetExternalAccountSummaries(System.IAsyncResult result) {
                 object[] _args = new object[0];
-                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse)(base.EndInvoke("ChangeAccountName", _args, result)));
+                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesResponse)(base.EndInvoke("GetExternalAccountSummaries", _args, result)));
                 return _result;
             }
         }
@@ -1730,6 +1912,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             long FromAccountId, long ToAccountId);
         void PlaceOrderAsync(long BrokerageAccountId, OrderParams OrderParams);
         void GetBrokerageAccountSummariesAsync();
+        void GetExternalAccountSummariesAsync();
 
         event EventHandler<OpenNewAccountCompletedEventArgs> OpenNewAccountCompleted;
         event EventHandler<AddExternalAccountCompletedEventArgs> AddExternalAccountCompleted;
@@ -1738,6 +1921,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         event EventHandler<AsyncCompletedEventArgs> TransferSecuritiesCompleted;
         event EventHandler<PlaceOrderCompletedEventArgs> PlaceOrderCompleted;
         event EventHandler<GetBrokerageAccountSummariesCompletedEventArgs> GetBrokerageAccountSummariesCompleted;
+        event EventHandler<GetExternalAccountSummariesCompletedEventArgs> GetExternalAccountSummariesCompleted;
         event EventHandler<AsyncCompletedEventArgs> OpenCompleted;
         event EventHandler<AsyncCompletedEventArgs> CloseCompleted;
     }

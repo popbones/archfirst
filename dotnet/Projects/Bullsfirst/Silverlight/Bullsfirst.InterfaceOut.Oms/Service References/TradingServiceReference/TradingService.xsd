@@ -7,6 +7,8 @@
   <xs:element name="ExternalAccountParams" type="tns:ExternalAccountParams" />
   <xs:element name="GetBrokerageAccountSummaries" type="tns:GetBrokerageAccountSummaries" />
   <xs:element name="GetBrokerageAccountSummariesResponse" type="tns:GetBrokerageAccountSummariesResponse" />
+  <xs:element name="GetExternalAccountSummaries" type="tns:GetExternalAccountSummaries" />
+  <xs:element name="GetExternalAccountSummariesResponse" type="tns:GetExternalAccountSummariesResponse" />
   <xs:element name="OpenNewAccount" type="tns:OpenNewAccount" />
   <xs:element name="OpenNewAccountResponse" type="tns:OpenNewAccountResponse" />
   <xs:element name="PlaceOrder" type="tns:PlaceOrder" />
@@ -15,6 +17,30 @@
   <xs:element name="TransferCashResponse" type="tns:TransferCashResponse" />
   <xs:element name="TransferSecurities" type="tns:TransferSecurities" />
   <xs:element name="TransferSecuritiesResponse" type="tns:TransferSecuritiesResponse" />
+  <xs:complexType name="GetExternalAccountSummaries">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="GetExternalAccountSummariesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ExternalAccountSummary" type="tns:ExternalAccountSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExternalAccountSummary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseAccountSummary">
+        <xs:sequence>
+          <xs:element name="RoutingNumber" type="xs:string" />
+          <xs:element name="AccountNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseAccountSummary" abstract="true">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:long" />
+      <xs:element name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="ChangeAccountName">
     <xs:sequence>
       <xs:element minOccurs="0" name="AccountId" type="xs:long" />
@@ -67,20 +93,22 @@
   </xs:complexType>
   <xs:complexType name="GetBrokerageAccountSummariesResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="AccountSummary" type="tns:AccountSummary" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BrokerageAccountSummary" type="tns:BrokerageAccountSummary" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="AccountSummary">
-    <xs:sequence>
-      <xs:element name="Id" type="xs:long" />
-      <xs:element name="Name" type="xs:string" />
-      <xs:element name="CashPosition" type="tns:Money" />
-      <xs:element name="MarketValue" type="tns:Money" />
-      <xs:element name="EditPermission" type="xs:boolean" />
-      <xs:element name="TradePermission" type="xs:boolean" />
-      <xs:element name="TransferPermission" type="xs:boolean" />
-      <xs:element maxOccurs="unbounded" name="Position" type="tns:Position" />
-    </xs:sequence>
+  <xs:complexType name="BrokerageAccountSummary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseAccountSummary">
+        <xs:sequence>
+          <xs:element name="CashPosition" type="tns:Money" />
+          <xs:element name="MarketValue" type="tns:Money" />
+          <xs:element name="EditPermission" type="xs:boolean" />
+          <xs:element name="TradePermission" type="xs:boolean" />
+          <xs:element name="TransferPermission" type="xs:boolean" />
+          <xs:element maxOccurs="unbounded" name="Position" type="tns:Position" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Position">
     <xs:sequence>
