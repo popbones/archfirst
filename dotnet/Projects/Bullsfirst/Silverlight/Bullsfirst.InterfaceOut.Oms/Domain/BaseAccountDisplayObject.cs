@@ -24,6 +24,7 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
             this.Id = summary.Id;
             this.DisplayString = String.Format("{0} - {1} | {2}",
                 summary.Name, summary.Id, summary.CashPosition.Amount.ToString("C"));
+            AccountSummary = summary;
         }
 
         public BaseAccountDisplayObject(ExternalAccountSummary summary)
@@ -31,9 +32,11 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
             this.Id = summary.Id;
             this.DisplayString = String.Format("{0} - {1} (External)",
                 summary.Name, summary.AccountNumber);
+            AccountSummary = summary;
         }
 
         public long Id { get; set; }
         public string DisplayString { get; set; }
+        public BaseAccountSummary AccountSummary { get; set; }
     }
 }

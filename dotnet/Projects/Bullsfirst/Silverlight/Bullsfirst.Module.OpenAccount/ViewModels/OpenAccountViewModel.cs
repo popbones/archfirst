@@ -122,7 +122,9 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
 
                 // Send UserLoggedInEvent and switch to LoggedInUserView
                 _eventAggregator.GetEvent<UserLoggedInEvent>().Publish(Empty.Value);
-                _regionManager.RequestNavigate(RegionNames.MainRegion, new Uri(ViewNames.LoggedInUserView, UriKind.Relative));
+                _regionManager.RequestNavigate(
+                    RegionNames.MainRegion,
+                    new Uri(ViewNames.LoggedInUserView, UriKind.Relative));
             }
         }
 
@@ -135,7 +137,9 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         private void CancelExecute(object dummyObject)
         {
             this.ClearForm();
-            _regionManager.RequestNavigate(RegionNames.MainRegion, new Uri(ViewNames.HomeView, UriKind.Relative));
+            _regionManager.RequestNavigate(
+                RegionNames.MainRegion,
+                new Uri(ViewNames.HomeView, UriKind.Relative));
         }
 
         #endregion

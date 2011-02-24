@@ -74,7 +74,9 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         {
             // Send UserLoggedOutEvent and switch to HomeView
             _eventAggregator.GetEvent<UserLoggedOutEvent>().Publish(Empty.Value);
-            _regionManager.RequestNavigate(RegionNames.MainRegion, new Uri(ViewNames.HomeView, UriKind.Relative));
+            _regionManager.RequestNavigate(
+                RegionNames.MainRegion,
+                new Uri(ViewNames.HomeView, UriKind.Relative));
         }
 
         #endregion

@@ -144,7 +144,9 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         private void SelectAccountExecute(object dummyObject)
         {
             UserContext.SelectedAccount = (BrokerageAccountSummary)dummyObject;
-            _regionManager.RequestNavigate(RegionNames.LoggedInUserRegion, new Uri(ViewNames.PositionsView, UriKind.Relative));
+            _regionManager.RequestNavigate(
+                RegionNames.LoggedInUserRegion,
+                new Uri(ViewNames.PositionsView, UriKind.Relative));
         }
 
         #endregion

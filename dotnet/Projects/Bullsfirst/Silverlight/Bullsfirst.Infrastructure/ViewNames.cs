@@ -17,10 +17,14 @@ namespace Bullsfirst.Infrastructure
 {
     public class ViewNames
     {
-        public const string HomeView = "HomeView";
-        public const string OpenAccountView = "OpenAccountView";
-        public const string LoggedInUserView = "LoggedInUserView";
         public const string AccountsView = "AccountsView";
+        public const string HomeView = "HomeView";
+        public const string LoggedInUserView = "LoggedInUserView";
+        public const string OpenAccountView = "OpenAccountView";
+        public const string OrdersView = "OrdersView";
         public const string PositionsView = "PositionsView";
+        public const string TradeView = "TradeView";
+        public const string TransactionHistoryView = "TransactionHistoryView";
+        public const string TransferView = "TransferView";
     }
 }
