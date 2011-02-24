@@ -17,26 +17,23 @@ using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 
 namespace Bullsfirst.InterfaceOut.Oms.Domain
 {
-    public class BaseAccountDisplayObject
+    public class BaseAccountWrapper
     {
-        public BaseAccountDisplayObject(BrokerageAccountSummary summary)
+        public BaseAccountWrapper(BrokerageAccountSummary summary)
         {
-            this.Id = summary.Id;
+            AccountSummary = summary;
             this.DisplayString = String.Format("{0} - {1} | {2}",
                 summary.Name, summary.Id, summary.CashPosition.Amount.ToString("C"));
-            AccountSummary = summary;
         }
 
-        public BaseAccountDisplayObject(ExternalAccountSummary summary)
+        public BaseAccountWrapper(ExternalAccountSummary summary)
         {
-            this.Id = summary.Id;
+            AccountSummary = summary;
             this.DisplayString = String.Format("{0} - {1} (External)",
                 summary.Name, summary.AccountNumber);
-            AccountSummary = summary;
         }
 
-        public long Id { get; set; }
-        public string DisplayString { get; set; }
         public BaseAccountSummary AccountSummary { get; set; }
+        public string DisplayString { get; set; }
     }
 }

@@ -72,8 +72,8 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             {
                 _tradingService.TransferCashAsync(
                     new Money { Amount = Amount, Currency = "USD" },
-                    FromAccount.Id,
-                    ToAccount.Id);
+                    FromAccount.AccountSummary.Id,
+                    ToAccount.AccountSummary.Id);
             }
             else
             {
@@ -81,8 +81,8 @@ namespace Bullsfirst.Module.Transfer.ViewModels
                     Symbol,
                     Quantity,
                     new Money { Amount = PricePaidPerShare, Currency = "USD" },
-                    FromAccount.Id,
-                    ToAccount.Id);
+                    FromAccount.AccountSummary.Id,
+                    ToAccount.AccountSummary.Id);
             }
         }
 
@@ -199,8 +199,8 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             }
         }
 
-        private BaseAccountDisplayObject _fromAccount;
-        public BaseAccountDisplayObject FromAccount
+        private BaseAccountWrapper _fromAccount;
+        public BaseAccountWrapper FromAccount
         {
             get { return _fromAccount; }
             set
@@ -210,8 +210,8 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             }
         }
 
-        private BaseAccountDisplayObject _toAccount;
-        public BaseAccountDisplayObject ToAccount
+        private BaseAccountWrapper _toAccount;
+        public BaseAccountWrapper ToAccount
         {
             get { return _toAccount; }
             set

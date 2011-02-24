@@ -30,7 +30,7 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
             Credentials = new Credentials();
             BrokerageAccountSummaries = new ObservableCollection<BrokerageAccountSummary>();
             ExternalAccountSummaries = new ObservableCollection<ExternalAccountSummary>();
-            BaseAccountDisplayObjects = new ObservableCollection<BaseAccountDisplayObject>();
+            BaseAccountWrappers = new ObservableCollection<BaseAccountWrapper>();
         }
 
         public void InitUser(User other)
@@ -57,7 +57,7 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
             this.InitCredentials(null, null);
             BrokerageAccountSummaries.Clear();
             ExternalAccountSummaries.Clear();
-            BaseAccountDisplayObjects.Clear();
+            BaseAccountWrappers.Clear();
             SelectedAccount = null;
         }
 
@@ -111,16 +111,16 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
             }
         }
 
-        public void InitializeBaseAccountDisplayObjects()
+        public void InitializeBaseAccountWrappers()
         {
-            BaseAccountDisplayObjects.Clear();
+            BaseAccountWrappers.Clear();
             foreach (BrokerageAccountSummary summary in BrokerageAccountSummaries)
             {
-                BaseAccountDisplayObjects.Add(new BaseAccountDisplayObject(summary));
+                BaseAccountWrappers.Add(new BaseAccountWrapper(summary));
             }
             foreach (ExternalAccountSummary summary in ExternalAccountSummaries)
             {
-                BaseAccountDisplayObjects.Add(new BaseAccountDisplayObject(summary));
+                BaseAccountWrappers.Add(new BaseAccountWrapper(summary));
             }
         }
 
@@ -144,7 +144,7 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
         public Credentials Credentials { get; set; }
         public ObservableCollection<BrokerageAccountSummary> BrokerageAccountSummaries { get; set; }
         public ObservableCollection<ExternalAccountSummary> ExternalAccountSummaries { get; set; }
-        public ObservableCollection<BaseAccountDisplayObject> BaseAccountDisplayObjects { get; set; }
+        public ObservableCollection<BaseAccountWrapper> BaseAccountWrappers { get; set; }
 
         private BrokerageAccountSummary _selectedAccount;
         public BrokerageAccountSummary SelectedAccount

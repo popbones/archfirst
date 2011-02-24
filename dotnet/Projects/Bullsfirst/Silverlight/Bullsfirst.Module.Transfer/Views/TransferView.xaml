@@ -32,7 +32,7 @@
         <StackPanel Style="{StaticResource FormRow}">
             <sdk:Label Content="From" Target="{Binding ElementName=from}" Style="{StaticResource WideFormLabel}" />
             <ComboBox x:Name="from" Style="{StaticResource WideFormComboBox}"
-                ItemsSource="{Binding UserContext.BaseAccountDisplayObjects}"
+                ItemsSource="{Binding UserContext.BaseAccountWrappers}"
                 SelectedItem="{Binding FromAccount, Mode=TwoWay}"
                 DisplayMemberPath="DisplayString" />
         </StackPanel>
@@ -40,7 +40,7 @@
         <StackPanel Style="{StaticResource FormRow}">
             <sdk:Label Content="To" Target="{Binding ElementName=to}" Style="{StaticResource WideFormLabel}" />
             <ComboBox x:Name="to" Style="{StaticResource WideFormComboBox}"
-                ItemsSource="{Binding UserContext.BaseAccountDisplayObjects}"
+                ItemsSource="{Binding UserContext.BaseAccountWrappers}"
                 SelectedItem="{Binding ToAccount, Mode=TwoWay}"
                 DisplayMemberPath="DisplayString" />
         </StackPanel>

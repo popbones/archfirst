@@ -121,7 +121,7 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         private void GetExternalAccountSummariesCallback(object sender, GetExternalAccountSummariesCompletedEventArgs e)
         {
             UserContext.InitializeExternalAccountSummaries(e.Result);
-            UserContext.InitializeBaseAccountDisplayObjects();
+            UserContext.InitializeBaseAccountWrappers();
         }
 
         #endregion
