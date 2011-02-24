@@ -16,6 +16,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Windows.Controls;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
@@ -53,6 +54,14 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             _tradingService.TransferCashCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             _tradingService.TransferSecuritiesCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             TransferCommand = new DelegateCommand<object>(this.TransferExecute, this.CanTransferExecute);
+            this.PropertyChanged += this.OnPropertyChanged;
+            this.Validate();
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.Validate();
+            this.TransferCommand.RaiseCanExecuteChanged();
         }
 
         #endregion
@@ -157,6 +166,46 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         // fires before this[string columnName] is fired by the IDataErrorInfo interface
         private void Validate()
         {
+            if (FromAccount == null)
+                this["FromAccount"] = "Please select the account to transfer from";
+            else
+                this.ClearError("FromAccount");
+
+            if (ToAccount == null)
+                this["ToAccount"] = "Please select the account to transfer to";
+            else
+                this.ClearError("ToAccount");
+
+            if (TransferKind == TransferKind.Cash)
+            {
+                if (Amount <= 0)
+                    this["Amount"] = "Please enter the amount to transfer";
+                else
+                    this.ClearError("Amount");
+
+                this.ClearError("Symbol");
+                this.ClearError("Quantity");
+                this.ClearError("PricePaidPerShare");
+            }
+            else
+            {
+                this.ClearError("Amount");
+
+                if (string.IsNullOrEmpty(this.Symbol) || this.Symbol.Trim().Length == 0)
+                    this["Symbol"] = "Please enter a security to transfer";
+                else
+                    this.ClearError("Symbol");
+
+                if (Quantity <= 0)
+                    this["Quantity"] = "Please enter the quantity to transfer";
+                else
+                    this.ClearError("Quantity");
+
+                if (PricePaidPerShare <= 0)
+                    this["PricePaidPerShare"] = "Please enter the price paid per share";
+                else
+                    this.ClearError("PricePaidPerShare");
+            }
         }
 
         private void ClearError(string columnName)
