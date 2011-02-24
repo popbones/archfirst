@@ -221,7 +221,8 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     // ----- Queries and Read-Only Operations -----
-    public AccountSummary getAccountSummary(
+    @Transient
+    public BrokerageAccountSummary getAccountSummary(
             User user,
             ReferenceDataService referenceDataService,
             MarketDataService marketDataService) {
@@ -236,7 +237,7 @@ public class BrokerageAccount extends BaseAccount {
         List<BrokerageAccountPermission> permissions =
             brokerageAccountRepository.findPermissionsForAccount(user, this);
         
-        return new AccountSummary(
+        return new BrokerageAccountSummary(
                 this.id,
                 this.name,
                 this.cashPosition,
@@ -247,6 +248,7 @@ public class BrokerageAccount extends BaseAccount {
                 positions);
     }
 
+    @Transient
     public List<Position> getPositions(
             ReferenceDataService referenceDataService,
             MarketDataService marketDataService) {

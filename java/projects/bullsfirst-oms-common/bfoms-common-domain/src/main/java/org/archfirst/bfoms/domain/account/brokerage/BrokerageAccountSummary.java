@@ -22,30 +22,18 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.archfirst.bfoms.domain.account.BaseAccountSummary;
 import org.archfirst.common.money.Money;
 
 /**
- * AccountSummary
+ * BrokerageAccountSummary
  *
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AccountSummary", propOrder = {
-    "id",
-    "name",
-    "cashPosition",
-    "marketValue",
-    "editPermission",
-    "tradePermission",
-    "transferPermission",
-    "positions"
-})
-public class AccountSummary {
+@XmlType(name = "BrokerageAccountSummary")
+public class BrokerageAccountSummary extends BaseAccountSummary {
 
-    @XmlElement(name = "Id")
-    protected long id;
-    @XmlElement(name = "Name", required = true)
-    protected String name;
     @XmlElement(name = "CashPosition", required = true)
     protected Money cashPosition;
     @XmlElement(name = "MarketValue", required = true)
@@ -60,10 +48,10 @@ public class AccountSummary {
     protected List<Position> positions;
 
     // ----- Constructors -----
-    public AccountSummary() {
+    public BrokerageAccountSummary() {
     }
 
-    public AccountSummary(
+    public BrokerageAccountSummary(
             long id,
             String name,
             Money cashPosition,
@@ -72,8 +60,7 @@ public class AccountSummary {
             boolean tradePermission,
             boolean transferPermission,
             List<Position> positions) {
-        this.id = id;
-        this.name = name;
+        super(id, name);
         this.cashPosition = cashPosition;
         this.marketValue = marketValue;
         this.editPermission = editPermission;
@@ -83,20 +70,6 @@ public class AccountSummary {
     }
 
     // ----- Getters and Setters -----
-    public long getId() {
-        return id;
-    }
-    public void setId(long value) {
-        this.id = value;
-    }
-
-    public String getName() {
-        return name;
-    }
-    public void setName(String value) {
-        this.name = value;
-    }
-
     public Money getCashPosition() {
         return cashPosition;
     }

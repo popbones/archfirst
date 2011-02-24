@@ -62,6 +62,15 @@ public class ExternalAccount extends BaseAccount {
     }
 
     // ----- Queries and Read-Only Operations -----
+    @Transient
+    public ExternalAccountSummary getAccountSummary() {
+        return new ExternalAccountSummary(
+                this.id,
+                this.name,
+                this.routingNumber,
+                this.accountNumber);
+    }
+    
     @Override
     public boolean isCashAvailable(
             Money amount,

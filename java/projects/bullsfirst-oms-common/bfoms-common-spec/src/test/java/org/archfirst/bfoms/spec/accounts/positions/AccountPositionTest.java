@@ -19,7 +19,7 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 
-import org.archfirst.bfoms.domain.account.brokerage.AccountSummary;
+import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.Position;
 import org.archfirst.bfoms.domain.marketdata.MarketPrice;
 import org.archfirst.bfoms.domain.referencedata.Instrument;
@@ -35,7 +35,7 @@ import org.joda.time.DateTime;
  */
 public class AccountPositionTest extends BaseAccountsTest {
     
-    private AccountSummary accountSummary;
+    private BrokerageAccountSummary accountSummary;
     
     public void setup() throws Exception {
         this.createUser1();

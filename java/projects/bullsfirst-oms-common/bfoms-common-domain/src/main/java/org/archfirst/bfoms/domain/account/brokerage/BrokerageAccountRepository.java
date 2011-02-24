@@ -40,6 +40,14 @@ import org.hibernate.criterion.Restrictions;
 public class BrokerageAccountRepository extends BaseRepository {
 
     // ----- BrokerageAccount Methods -----
+    public BrokerageAccount findAccount(Long id) {
+        BrokerageAccount account = entityManager.find(BrokerageAccount.class, id);
+        if (account != null) {
+            this.injectDependencies(account);
+        }
+        return account;
+    }
+
     public List<BrokerageAccount> findAccountsWithPermission(
             User user,
             BrokerageAccountPermission permission) {
@@ -58,14 +66,6 @@ public class BrokerageAccountRepository extends BaseRepository {
         return accounts;
     }
     
-    public BrokerageAccount findAccount(Long id) {
-        BrokerageAccount account = entityManager.find(BrokerageAccount.class, id);
-        if (account != null) {
-            this.injectDependencies(account);
-        }
-        return account;
-    }
-
     public List<BrokerageAccountPermission> findPermissionsForAccount(
             User user,
             BrokerageAccount account) {

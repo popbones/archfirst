@@ -15,6 +15,9 @@
  */
 package org.archfirst.bfoms.domain.account.external;
 
+import java.util.List;
+
+import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.common.domain.BaseRepository;
 
 /**
@@ -26,5 +29,21 @@ public class ExternalAccountRepository extends BaseRepository {
 
     public ExternalAccount findAccount(Long id) {
         return entityManager.find(ExternalAccount.class, id);
+    }
+
+    public List<ExternalAccount> findAccountsWithPermission(
+            User user,
+            ExternalAccountPermission permission) {
+
+        @SuppressWarnings("unchecked")
+        List<ExternalAccount> accounts = entityManager.createQuery(
+                "select ace.target from ExternalAccountAce ace " +
+                "where ace.recipient = :recipient " +
+                "and ace.permission = :permission")
+            .setParameter("recipient", user)
+            .setParameter("permission", permission)
+            .getResultList();
+
+        return accounts;
     }
 }

@@ -15,6 +15,9 @@
  */
 package org.archfirst.bfoms.domain.account.external;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.security.User;
@@ -44,6 +47,25 @@ public class ExternalAccountService {
         return externalAccountRepository.findAccount(id);
     }
     
+    public List<ExternalAccountSummary> getAccountSummaries(String username) {
+        
+        User user = getUser(username);
+        
+        // Get a list of accessible accounts
+        List<ExternalAccount> accessibleAccounts =
+            externalAccountRepository.findAccountsWithPermission(
+                    user, ExternalAccountPermission.FullAccess);
+
+        // Create account summaries
+        List<ExternalAccountSummary> accountSummaries = new ArrayList<ExternalAccountSummary>();
+        for (ExternalAccount account : accessibleAccounts) {
+            accountSummaries.add(account.getAccountSummary());
+        }
+
+        return accountSummaries;
+    }
+
+    // ----- Helper Methods -----
     private User getUser(String username) {
         return userRepository.findUser(username);
     }

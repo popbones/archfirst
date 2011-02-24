@@ -80,7 +80,7 @@ public class BrokerageAccountService {
         return brokerageAccountRepository.findOrder(id);
     }
     
-    public List<AccountSummary> getAccountSummaries(String username) {
+    public List<BrokerageAccountSummary> getAccountSummaries(String username) {
         
         User user = getUser(username);
         
@@ -90,7 +90,7 @@ public class BrokerageAccountService {
                     user, BrokerageAccountPermission.View);
 
         // Calculate account summaries
-        List<AccountSummary> accountSummaries = new ArrayList<AccountSummary>();
+        List<BrokerageAccountSummary> accountSummaries = new ArrayList<BrokerageAccountSummary>();
         for (BrokerageAccount account : viewableAccounts) {
             accountSummaries.add(account.getAccountSummary(
                     user, referenceDataService, marketDataService));
@@ -99,7 +99,7 @@ public class BrokerageAccountService {
         return accountSummaries;
     }
     
-    public AccountSummary getAccountSummary(String username, Long accountId) {
+    public BrokerageAccountSummary getAccountSummary(String username, Long accountId) {
         BrokerageAccount account = this.findAccount(accountId);
         return account.getAccountSummary(
                 getUser(username), referenceDataService, marketDataService);
@@ -128,6 +128,7 @@ public class BrokerageAccountService {
         }
     }
     
+    // ----- Helper Methods -----
     private User getUser(String username) {
         return userRepository.findUser(username);
     }

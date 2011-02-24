@@ -29,9 +29,10 @@ import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 
-import org.archfirst.bfoms.domain.account.brokerage.AccountSummary;
+import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
+import org.archfirst.bfoms.domain.account.external.ExternalAccountSummary;
 import org.archfirst.common.money.Money;
 
 /**
@@ -113,9 +114,15 @@ public class TradingWebService {
     
     // ----- Queries and Read-Only Operations -----
     @WebMethod(operationName = "GetBrokerageAccountSummaries", action = "GetBrokerageAccountSummaries")
-    @WebResult(name = "AccountSummary")
-    public List<AccountSummary> getBrokerageAccountSummaries() {
+    @WebResult(name = "BrokerageAccountSummary")
+    public List<BrokerageAccountSummary> getBrokerageAccountSummaries() {
         return this.tradingTxnService.getBrokerageAccountSummaries(getUsername());
+    }
+
+    @WebMethod(operationName = "GetExternalAccountSummaries", action = "GetExternalAccountSummaries")
+    @WebResult(name = "ExternalAccountSummary")
+    public List<ExternalAccountSummary> getExternalAccountSummaries() {
+        return this.tradingTxnService.getExternalAccountSummaries(getUsername());
     }
 
     // ----- Helper Methods -----

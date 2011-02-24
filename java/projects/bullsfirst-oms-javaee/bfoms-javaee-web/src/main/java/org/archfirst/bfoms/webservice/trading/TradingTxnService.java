@@ -22,11 +22,12 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.account.BaseAccountService;
-import org.archfirst.bfoms.domain.account.brokerage.AccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
+import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountService;
+import org.archfirst.bfoms.domain.account.external.ExternalAccountSummary;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 
@@ -86,7 +87,11 @@ public class TradingTxnService {
     }
     
     // ----- Queries and Read-Only Operations -----
-    public List<AccountSummary> getBrokerageAccountSummaries(String username) {
+    public List<BrokerageAccountSummary> getBrokerageAccountSummaries(String username) {
         return this.brokerageAccountService.getAccountSummaries(username);
+    }
+
+    public List<ExternalAccountSummary> getExternalAccountSummaries(String username) {
+        return this.externalAccountService.getAccountSummaries(username);
     }
 }

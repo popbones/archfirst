@@ -19,6 +19,12 @@
   <message name="AddExternalAccountResponse">
     <part name="parameters" element="tns:AddExternalAccountResponse"/>
   </message>
+  <message name="ChangeAccountName">
+    <part name="parameters" element="tns:ChangeAccountName"/>
+  </message>
+  <message name="ChangeAccountNameResponse">
+    <part name="parameters" element="tns:ChangeAccountNameResponse"/>
+  </message>
   <message name="TransferCash">
     <part name="parameters" element="tns:TransferCash"/>
   </message>
@@ -43,11 +49,11 @@
   <message name="GetBrokerageAccountSummariesResponse">
     <part name="parameters" element="tns:GetBrokerageAccountSummariesResponse"/>
   </message>
-  <message name="ChangeAccountName">
-    <part name="parameters" element="tns:ChangeAccountName"/>
+  <message name="GetExternalAccountSummaries">
+    <part name="parameters" element="tns:GetExternalAccountSummaries"/>
   </message>
-  <message name="ChangeAccountNameResponse">
-    <part name="parameters" element="tns:ChangeAccountNameResponse"/>
+  <message name="GetExternalAccountSummariesResponse">
+    <part name="parameters" element="tns:GetExternalAccountSummariesResponse"/>
   </message>
   <portType name="TradingWebService">
     <operation name="OpenNewAccount">
@@ -57,6 +63,10 @@
     <operation name="AddExternalAccount">
       <input wsam:Action="AddExternalAccount" message="tns:AddExternalAccount"/>
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/AddExternalAccountResponse" message="tns:AddExternalAccountResponse"/>
+    </operation>
+    <operation name="ChangeAccountName">
+      <input wsam:Action="ChangeAccountName" message="tns:ChangeAccountName"/>
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/ChangeAccountNameResponse" message="tns:ChangeAccountNameResponse"/>
     </operation>
     <operation name="TransferCash">
       <input wsam:Action="TransferCash" message="tns:TransferCash"/>
@@ -74,9 +84,9 @@
       <input wsam:Action="GetBrokerageAccountSummaries" message="tns:GetBrokerageAccountSummaries"/>
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetBrokerageAccountSummariesResponse" message="tns:GetBrokerageAccountSummariesResponse"/>
     </operation>
-    <operation name="ChangeAccountName">
-      <input wsam:Action="ChangeAccountName" message="tns:ChangeAccountName"/>
-      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/ChangeAccountNameResponse" message="tns:ChangeAccountNameResponse"/>
+    <operation name="GetExternalAccountSummaries">
+      <input wsam:Action="GetExternalAccountSummaries" message="tns:GetExternalAccountSummaries"/>
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetExternalAccountSummariesResponse" message="tns:GetExternalAccountSummariesResponse"/>
     </operation>
   </portType>
   <binding name="TradingWebServicePortBinding" type="tns:TradingWebService">
@@ -92,6 +102,15 @@
     </operation>
     <operation name="AddExternalAccount">
       <soap:operation soapAction="AddExternalAccount"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="ChangeAccountName">
+      <soap:operation soapAction="ChangeAccountName"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -135,8 +154,8 @@
         <soap:body use="literal"/>
       </output>
     </operation>
-    <operation name="ChangeAccountName">
-      <soap:operation soapAction="ChangeAccountName"/>
+    <operation name="GetExternalAccountSummaries">
+      <soap:operation soapAction="GetExternalAccountSummaries"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -159,6 +178,8 @@
   <xs:element name="ExternalAccountParams" type="tns:ExternalAccountParams"/>
   <xs:element name="GetBrokerageAccountSummaries" type="tns:GetBrokerageAccountSummaries"/>
   <xs:element name="GetBrokerageAccountSummariesResponse" type="tns:GetBrokerageAccountSummariesResponse"/>
+  <xs:element name="GetExternalAccountSummaries" type="tns:GetExternalAccountSummaries"/>
+  <xs:element name="GetExternalAccountSummariesResponse" type="tns:GetExternalAccountSummariesResponse"/>
   <xs:element name="OpenNewAccount" type="tns:OpenNewAccount"/>
   <xs:element name="OpenNewAccountResponse" type="tns:OpenNewAccountResponse"/>
   <xs:element name="PlaceOrder" type="tns:PlaceOrder"/>
@@ -167,6 +188,30 @@
   <xs:element name="TransferCashResponse" type="tns:TransferCashResponse"/>
   <xs:element name="TransferSecurities" type="tns:TransferSecurities"/>
   <xs:element name="TransferSecuritiesResponse" type="tns:TransferSecuritiesResponse"/>
+  <xs:complexType name="GetExternalAccountSummaries">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="GetExternalAccountSummariesResponse">
+    <xs:sequence>
+      <xs:element name="ExternalAccountSummary" type="tns:ExternalAccountSummary" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExternalAccountSummary">
+    <xs:complexContent>
+      <xs:extension base="tns:BaseAccountSummary">
+        <xs:sequence>
+          <xs:element name="RoutingNumber" type="xs:string"/>
+          <xs:element name="AccountNumber" type="xs:string"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseAccountSummary" abstract="true">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:long"/>
+      <xs:element name="Name" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="ChangeAccountName">
     <xs:sequence>
       <xs:element name="AccountId" type="xs:long" minOccurs="0"/>
@@ -219,20 +264,22 @@
   </xs:complexType>
   <xs:complexType name="GetBrokerageAccountSummariesResponse">
     <xs:sequence>
-      <xs:element name="AccountSummary" type="tns:AccountSummary" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="BrokerageAccountSummary" type="tns:BrokerageAccountSummary" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="AccountSummary">
-    <xs:sequence>
-      <xs:element name="Id" type="xs:long"/>
-      <xs:element name="Name" type="xs:string"/>
-      <xs:element name="CashPosition" type="tns:Money"/>
-      <xs:element name="MarketValue" type="tns:Money"/>
-      <xs:element name="EditPermission" type="xs:boolean"/>
-      <xs:element name="TradePermission" type="xs:boolean"/>
-      <xs:element name="TransferPermission" type="xs:boolean"/>
-      <xs:element name="Position" type="tns:Position" maxOccurs="unbounded"/>
-    </xs:sequence>
+  <xs:complexType name="BrokerageAccountSummary">
+    <xs:complexContent>
+      <xs:extension base="tns:BaseAccountSummary">
+        <xs:sequence>
+          <xs:element name="CashPosition" type="tns:Money"/>
+          <xs:element name="MarketValue" type="tns:Money"/>
+          <xs:element name="EditPermission" type="xs:boolean"/>
+          <xs:element name="TradePermission" type="xs:boolean"/>
+          <xs:element name="TransferPermission" type="xs:boolean"/>
+          <xs:element name="Position" type="tns:Position" maxOccurs="unbounded"/>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
   </xs:complexType>
   <xs:complexType name="Position">
     <xs:sequence>
@@ -420,4 +467,12 @@
          <NewName>Day Trading Account</NewName>
       </trad:ChangeAccountName>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ChangeAccountName"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="ChangeAccountName"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="GetExternalAccountSummaries" name="GetExternalAccountSummaries" bindingOperationName="GetExternalAccountSummaries" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="username" value="jhorner"/>
+  &lt;con:entry key="password" value="cool"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://agni:8080/bfoms-javaee/TradingService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:trad="http://archfirst.org/bfoms/tradingservice.wsdl">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <trad:GetExternalAccountSummaries/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="GetExternalAccountSummaries"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
