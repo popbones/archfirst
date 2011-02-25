@@ -51,7 +51,9 @@ namespace Bullsfirst.Module.Transfer.ViewModels
 
             _tradingService.TransferCashCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             _tradingService.TransferSecuritiesCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
+            _tradingService.AddExternalAccountCompleted += new EventHandler<AddExternalAccountCompletedEventArgs>(AddExternalAccountCallback);
             TransferCommand = new DelegateCommand<object>(this.TransferExecute, this.CanTransferExecute);
+            AddExternalAccountCommand = new DelegateCommand<object>(this.AddExternalAccountExecute);
             this.PropertyChanged += this.OnPropertyChanged;
             this.ValidateAll();
         }
@@ -128,6 +130,42 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         #region AddExternalAccountCommand
 
         public DelegateCommand<object> AddExternalAccountCommand { get; set; }
+
+        private void AddExternalAccountExecute(object dummyObject)
+        {
+            // Send AddExternalAccountRequestEvent to create the CreateNewAccount dialog
+            AddExternalAccountRequest request =
+                new AddExternalAccountRequest { ResponseHandler = AddExternalAccountResponseHandler };
+            _eventAggregator.GetEvent<AddExternalAccountRequestEvent>().Publish(request);
+        }
+
+        private void AddExternalAccountResponseHandler(AddExternalAccountResponse response)
+        {
+            if (response.Result == false) return;
+
+            // Add the requested account
+            _tradingService.AddExternalAccountAsync(new ExternalAccountParams
+            {
+                Name = response.AccountName,
+                RoutingNumber = response.RoutingNumber,
+                AccountNumber = response.AccountNumber
+            });
+        }
+
+        private void AddExternalAccountCallback(object sender, AddExternalAccountCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                this.StatusMessage = null;
+
+                // Send AccountCreatedEvent
+                _eventAggregator.GetEvent<AccountCreatedEvent>().Publish(Empty.Value);
+            }
+        }
 
         #endregion
 

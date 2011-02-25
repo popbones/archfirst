@@ -1,4 +1,4 @@
-﻿/* Copyright 2010 Archfirst
+﻿/* Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -12,25 +12,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System.ComponentModel.Composition;
-using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.MefExtensions.Modularity;
-using Microsoft.Practices.Prism.Modularity;
+using System;
+using Microsoft.Practices.Prism.Events;
 
 namespace Bullsfirst.Module.Transfer
 {
-    [ModuleExport(typeof(TransferModule))]
-    public class TransferModule : IModule
+    public class AddExternalAccountRequestEvent : CompositePresentationEvent<AddExternalAccountRequest>
     {
-        [Import]
-        public ILoggerFacade Logger;
+    }
 
-        [Import]
-        public TransferPopupController controller;  // Ensures controller creation
+    public class AddExternalAccountRequest
+    {
+        public Action<AddExternalAccountResponse> ResponseHandler { get; set; }
+    }
 
-        public void Initialize()
-        {
-            Logger.Log("TransferModule.Initialize()", Category.Debug, Priority.Low);
-        }
+    public class AddExternalAccountResponse
+    {
+        public bool Result { get; set; }
+        public string AccountName { get; set; }
+        public string RoutingNumber { get; set; }
+        public string AccountNumber { get; set; }
     }
 }

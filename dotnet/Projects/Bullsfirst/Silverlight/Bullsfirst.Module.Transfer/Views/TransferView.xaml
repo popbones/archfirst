@@ -95,18 +95,11 @@
             <TextBlock Text="{Binding Path=StatusMessage}" Style="{StaticResource WideStatusMessage}" />
         </StackPanel>
 
-        <!--
-        <BulletDecorator>
-            <BulletDecorator.Bullet>
-                <Image Source="/Bullsfirst.Infrastructure.Common;component/Images/BULLet.gif" Stretch="None" />
-            </BulletDecorator.Bullet>
-            <TextBlock Style="{StaticResource Bullet}">
-                    <Hyperlink Command="{Binding AddExternalAccountCommand}">
-                        <TextBlock Text="Add an external account..." />
-                    </Hyperlink>
-                </TextBlock>
-        </BulletDecorator>
-        -->
+        <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
+            <Image Source="/Bullsfirst.Infrastructure;component/Images/bullet.jpg" Stretch="None" />
+            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                Content="Add an external account..."  Command="{Binding AddExternalAccountCommand}" />
+        </StackPanel>
 
     </StackPanel>
 </UserControl>
