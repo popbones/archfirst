@@ -1,0 +1,42 @@
+﻿<UserControl
+    x:Class="DataValidationSample.SampleView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:local="clr-namespace:DataValidationSample"
+    mc:Ignorable="d"
+    d:DesignHeight="200" d:DesignWidth="450">
+
+    <StackPanel x:Name="LayoutRoot" Margin="20">
+        <StackPanel Style="{StaticResource FormRow}">
+            <sdk:Label Content="Name" Target="{Binding ElementName=name}" Style="{StaticResource WideFormLabel}" />
+            <TextBox x:Name="name" Style="{StaticResource WideFormTextBox}"
+                     Text="{Binding Path=Name, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                <i:Interaction.Behaviors>
+                    <local:TextChangedBahvior />
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource FormRow}">
+            <sdk:Label Content="Age" Target="{Binding ElementName=age}" Style="{StaticResource WideFormLabel}" />
+            <TextBox x:Name="age" Style="{StaticResource WideFormTextBox}"
+                     Text="{Binding Path=Age, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                     BindingValidationError="age_BindingValidationError">
+                <i:Interaction.Behaviors>
+                    <local:TextChangedBahvior />
+                </i:Interaction.Behaviors>
+            </TextBox>
+        </StackPanel>
+
+        <StackPanel Style="{StaticResource TallFormRow}">
+            <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
+            <Button Content="Submit" Style="{StaticResource FormButton}" Command="{Binding SubmitCommand}" />
+        </StackPanel>
+
+        <TextBlock Text="{Binding Path=StatusMessage}" Margin="70 10 100 0" TextWrapping="Wrap" Foreground="Red" />
+    </StackPanel>
+</UserControl>
