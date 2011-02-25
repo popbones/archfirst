@@ -60,6 +60,7 @@
   <ItemGroup>
     <Compile Include="Helpers\Empty.cs" />
     <Compile Include="PrismHelpers\AutoPopulateExportedViewsBehavior.cs" />
+    <Compile Include="PrismHelpers\BaseDataValidator.cs" />
     <Compile Include="PrismHelpers\DebugLogger.cs" />
     <Compile Include="PrismHelpers\IViewRegionRegistration.cs" />
     <Compile Include="PrismHelpers\ViewExportAttribute.cs" />

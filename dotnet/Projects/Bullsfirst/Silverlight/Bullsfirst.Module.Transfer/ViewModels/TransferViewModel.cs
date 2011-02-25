@@ -13,11 +13,10 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Windows.Controls;
 using Archfirst.Framework.Helpers;
+using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
@@ -26,13 +25,12 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Prism.ViewModel;
 
 namespace Bullsfirst.Module.Transfer.ViewModels
 {
     [Export(typeof(ITransferViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class TransferViewModel : NotificationObject, ITransferViewModel, IDataErrorInfo
+    public class TransferViewModel : BaseDataValidator, ITransferViewModel
     {
         #region Construction
 
@@ -72,7 +70,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
 
         private bool CanTransferExecute(object dummyObject)
         {
-            return _errors.Count == 0;
+            return this.CanCommandExecute();
         }
 
         private void TransferExecute(object dummyObject)
@@ -134,32 +132,6 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         #endregion
 
         #region IDataErrorInfo implementation
-
-        // Map column name to error string
-        private readonly IDictionary<string, string> _errors = new Dictionary<string, string>();
-
-        public string Error
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                if (_errors.ContainsKey(columnName))
-                {
-                    return _errors[columnName];
-                }
-
-                return null;
-            }
-
-            set
-            {
-                _errors[columnName] = value;
-            }
-        }
 
         private void ValidateAll()
         {
@@ -231,14 +203,6 @@ namespace Bullsfirst.Module.Transfer.ViewModels
                     else
                         this.ClearError("PricePaidPerShare");
                     break;
-            }
-        }
-
-        private void ClearError(string columnName)
-        {
-            if (_errors.ContainsKey(columnName))
-            {
-                _errors.Remove(columnName);
             }
         }
 
