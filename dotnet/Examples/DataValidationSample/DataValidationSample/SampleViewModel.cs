@@ -12,16 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.ViewModel;
 
 namespace DataValidationSample
 {
-    public class SampleViewModel : NotificationObject, IDataErrorInfo
+    public class SampleViewModel : BaseDataValidator
     {
         #region Construction
 
@@ -47,8 +44,7 @@ namespace DataValidationSample
 
         private bool CanSubmitExecute(object dummyObject)
         {
-            Debug.WriteLine("[Debug] CanSubmitExecute: error count = " + _errors.Count);
-            return _errors.Count == 0;
+            return this.CanCommandExecute();
         }
 
         private void SubmitExecute(object dummyObject)
@@ -59,34 +55,6 @@ namespace DataValidationSample
         #endregion
 
         #region IDataErrorInfo implementation
-
-        // Map column name to error string
-        private readonly IDictionary<string, string> _errors = new Dictionary<string, string>();
-
-        public string Error
-        {
-            get { throw new NotImplementedException(); }
-        }
-
-        public string this[string columnName]
-        {
-            get
-            {
-                if (_errors.ContainsKey(columnName))
-                {
-                    Debug.WriteLine("[Debug] this[" + columnName + "] = " + _errors[columnName]);
-                    return _errors[columnName];
-                }
-
-                Debug.WriteLine("[Debug] this[" + columnName + "] = null");
-                return null;
-            }
-
-            set
-            {
-                _errors[columnName] = value;
-            }
-        }
 
         private void ValidateAll()
         {
@@ -112,14 +80,6 @@ namespace DataValidationSample
                     else
                         this.ClearError("Age");
                     break;
-            }
-        }
-
-        private void ClearError(string columnName)
-        {
-            if (_errors.ContainsKey(columnName))
-            {
-                _errors.Remove(columnName);
             }
         }
 

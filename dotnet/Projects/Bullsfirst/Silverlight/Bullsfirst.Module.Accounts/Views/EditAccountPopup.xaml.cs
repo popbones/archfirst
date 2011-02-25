@@ -121,9 +121,6 @@ namespace Bullsfirst.Module.Accounts.Views
             }
         }
 
-        // Validates all fields and updates _errors
-        // This approach was necessary because OnPropertyChanged (and hence LoginCommand.RaiseCanExecuteChanged)
-        // fires before this[string columnName] is fired by the IDataErrorInfo interface
         private void Validate()
         {
             if (string.IsNullOrEmpty(this.AccountName) || this.AccountName.Trim().Length == 0)

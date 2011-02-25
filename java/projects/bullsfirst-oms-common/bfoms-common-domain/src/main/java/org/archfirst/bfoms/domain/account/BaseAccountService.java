@@ -19,6 +19,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
@@ -32,6 +33,9 @@ public class BaseAccountService {
     
     @Inject
     private BaseAccountRepository baseAccountRepository;
+
+    @Inject
+    private MarketDataService marketDataService;
 
     // ----- Commands -----
     public void changeAccountName(Long accountId, String newName) {
@@ -68,6 +72,12 @@ public class BaseAccountService {
         // Check authorization on from account
         // TODO: This needs to be done
         
+        // Check if cash is available
+        if (!fromAccount.isCashAvailable(amount, marketDataService)) {
+            throw new InsufficientFundsException();
+        }
+
+        // Transfer the cash
         DateTime now = new DateTime();
         CashTransfer fromTransfer = new CashTransfer(now, amount.negate(), toAccount);
         CashTransfer toTransfer = new CashTransfer(now, amount, fromAccount);
@@ -114,6 +124,12 @@ public class BaseAccountService {
         // Check authorization on from account
         // TODO: This needs to be done
         
+        // Check if security is available
+        if (!fromAccount.isSecurityAvailable(symbol, quantity)) {
+            throw new InsufficientQuantityException();
+        }
+
+        // Transfer the security
         DateTime now = new DateTime();
         SecuritiesTransfer fromTransfer = new SecuritiesTransfer(
                 now, symbol, quantity.negate(), pricePaidPerShare, toAccount);

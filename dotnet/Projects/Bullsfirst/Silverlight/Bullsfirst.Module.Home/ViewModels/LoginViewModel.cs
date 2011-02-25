@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
+using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
@@ -25,13 +25,12 @@ using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.Regions;
-using Microsoft.Practices.Prism.ViewModel;
 
 namespace Bullsfirst.Module.Home.ViewModels
 {
     [Export(typeof(ILoginViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class LoginViewModel : NotificationObject, ILoginViewModel, IDataErrorInfo
+    public class LoginViewModel : BaseDataValidator, ILoginViewModel
     {
         #region Construction
 
@@ -53,12 +52,12 @@ namespace Bullsfirst.Module.Home.ViewModels
             LoginCommand = new DelegateCommand<object>(this.LoginExecute, this.CanLoginExecute);
             OpenAccountCommand = new DelegateCommand<object>(this.OpenAccountExecute);
             this.PropertyChanged += this.OnPropertyChanged;
-            this.Validate();
+            this.ValidateAll();
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.Validate();
+            this.Validate(e.PropertyName);
             this.LoginCommand.RaiseCanExecuteChanged();
         }
 
@@ -70,7 +69,7 @@ namespace Bullsfirst.Module.Home.ViewModels
 
         private bool CanLoginExecute(object dummyObject)
         {
-            return _errors.Count == 0;
+            return this.CanCommandExecute();
         }
 
         private void LoginExecute(object dummyObject)
@@ -122,53 +121,29 @@ namespace Bullsfirst.Module.Home.ViewModels
 
         #region IDataErrorInfo implementation
 
-        // Map column name to error string
-        private readonly IDictionary<string, string> _errors = new Dictionary<string, string>();
-
-        public string Error
+        private void ValidateAll()
         {
-            get { throw new NotImplementedException(); }
+            this.Validate("Username");
+            this.Validate("Password");
         }
 
-        public string this[string columnName]
+        private void Validate(string propertyName)
         {
-            get
+            switch (propertyName)
             {
-                if (_errors.ContainsKey(columnName))
-                {
-                    return _errors[columnName];
-                }
+                case "Username":
+                    if (string.IsNullOrEmpty(this.Username) || this.Username.Trim().Length == 0)
+                        this["Username"] = "Please enter your username";
+                    else
+                        this.ClearError("Username");
+                    break;
 
-                return null;
-            }
-
-            set
-            {
-                _errors[columnName] = value;
-            }
-        }
-
-        // Validates all fields and updates _errors
-        // This approach was necessary because OnPropertyChanged (and hence LoginCommand.RaiseCanExecuteChanged)
-        // fires before this[string columnName] is fired by the IDataErrorInfo interface
-        private void Validate()
-        {
-            if (string.IsNullOrEmpty(this.Username) || this.Username.Trim().Length == 0)
-                this["Username"] = "Please enter your username";
-            else
-                this.ClearError("Username");
-
-            if (string.IsNullOrEmpty(Password) || this.Password.Trim().Length == 0)
-                this["Password"] = "Please enter your password";
-            else
-                this.ClearError("Password");
-        }
-
-        private void ClearError(string columnName)
-        {
-            if (_errors.ContainsKey(columnName))
-            {
-                _errors.Remove(columnName);
+                case "Password":
+                    if (string.IsNullOrEmpty(Password) || this.Password.Trim().Length == 0)
+                        this["Password"] = "Please enter your password";
+                    else
+                        this.ClearError("Password");
+                    break;
             }
         }
 
