@@ -13,7 +13,7 @@
     <StackPanel x:Name="LayoutRoot" Background="White">
         <sdk:Label Content="Username" Target="{Binding ElementName=username}" Style="{StaticResource NarrowFormLabel}" />
         <TextBox x:Name="username" Style="{StaticResource NarrowFormTextBox}"
-            Text="{Binding Path=Username, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding Path=Username, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <helpers:TextChangedBahvior />
             </i:Interaction.Behaviors>
@@ -21,7 +21,7 @@
 
         <sdk:Label Content="Password" Target="{Binding ElementName=password}" Style="{StaticResource NarrowFormLabel}" />
         <PasswordBox x:Name="password" Style="{StaticResource NarrowFormPasswordBox}"
-            Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <helpers:PasswordChangedBahvior />
             </i:Interaction.Behaviors>

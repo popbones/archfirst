@@ -55,12 +55,12 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             _tradingService.TransferSecuritiesCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             TransferCommand = new DelegateCommand<object>(this.TransferExecute, this.CanTransferExecute);
             this.PropertyChanged += this.OnPropertyChanged;
-            this.Validate();
+            this.ValidateAll();
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            this.Validate();
+            this.Validate(e.PropertyName);
             this.TransferCommand.RaiseCanExecuteChanged();
         }
 
@@ -161,28 +161,14 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             }
         }
 
-        // Validates all fields and updates _errors
-        // This approach was necessary because OnPropertyChanged (and hence LoginCommand.RaiseCanExecuteChanged)
-        // fires before this[string columnName] is fired by the IDataErrorInfo interface
-        private void Validate()
+        private void ValidateAll()
         {
-            if (FromAccount == null)
-                this["FromAccount"] = "Please select the account to transfer from";
-            else
-                this.ClearError("FromAccount");
-
-            if (ToAccount == null)
-                this["ToAccount"] = "Please select the account to transfer to";
-            else
-                this.ClearError("ToAccount");
+            this.Validate("FromAccount");
+            this.Validate("ToAccount");
 
             if (TransferKind == TransferKind.Cash)
             {
-                if (Amount <= 0)
-                    this["Amount"] = "Please enter the amount to transfer";
-                else
-                    this.ClearError("Amount");
-
+                this.Validate("Amount");
                 this.ClearError("Symbol");
                 this.ClearError("Quantity");
                 this.ClearError("PricePaidPerShare");
@@ -190,21 +176,61 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             else
             {
                 this.ClearError("Amount");
+                this.Validate("Symbol");
+                this.Validate("Quantity");
+                this.Validate("PricePaidPerShare");
+            }
+        }
 
-                if (string.IsNullOrEmpty(this.Symbol) || this.Symbol.Trim().Length == 0)
-                    this["Symbol"] = "Please enter a security to transfer";
-                else
-                    this.ClearError("Symbol");
+        private void Validate(string propertyName)
+        {
+            switch (propertyName)
+            {
+                case "TransferKind":
+                    ValidateAll();
+                    break;
 
-                if (Quantity <= 0)
-                    this["Quantity"] = "Please enter the quantity to transfer";
-                else
-                    this.ClearError("Quantity");
+                case "FromAccount":
+                    if (FromAccount == null)
+                        this["FromAccount"] = "Please select the account to transfer from";
+                    else
+                        this.ClearError("FromAccount");
+                    break;
 
-                if (PricePaidPerShare <= 0)
-                    this["PricePaidPerShare"] = "Please enter the price paid per share";
-                else
-                    this.ClearError("PricePaidPerShare");
+                case "ToAccount":
+                    if (ToAccount == null)
+                        this["ToAccount"] = "Please select the account to transfer to";
+                    else
+                        this.ClearError("ToAccount");
+                    break;
+
+                case "Amount":
+                    if (Amount <= 0)
+                        this["Amount"] = "Please enter the amount to transfer";
+                    else
+                        this.ClearError("Amount");
+                    break;
+
+                case "Symbol":
+                    if (string.IsNullOrEmpty(this.Symbol) || this.Symbol.Trim().Length == 0)
+                        this["Symbol"] = "Please enter a security to transfer";
+                    else
+                        this.ClearError("Symbol");
+                    break;
+
+                case "Quantity":
+                    if (Quantity <= 0)
+                        this["Quantity"] = "Please enter the quantity to transfer";
+                    else
+                        this.ClearError("Quantity");
+                    break;
+
+                case "PricePaidPerShare":
+                    if (PricePaidPerShare <= 0)
+                        this["PricePaidPerShare"] = "Please enter the price paid per share";
+                    else
+                        this.ClearError("PricePaidPerShare");
+                    break;
             }
         }
 

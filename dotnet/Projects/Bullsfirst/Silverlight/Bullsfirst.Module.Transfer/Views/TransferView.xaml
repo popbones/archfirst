@@ -33,7 +33,7 @@
             <sdk:Label Content="From" Target="{Binding ElementName=from}" Style="{StaticResource WideFormLabel}" />
             <ComboBox x:Name="from" Style="{StaticResource WideFormComboBox}"
                 ItemsSource="{Binding UserContext.BaseAccountWrappers}"
-                SelectedItem="{Binding FromAccount, Mode=TwoWay}"
+                SelectedItem="{Binding FromAccount, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 DisplayMemberPath="DisplayString" />
         </StackPanel>
 
@@ -41,14 +41,14 @@
             <sdk:Label Content="To" Target="{Binding ElementName=to}" Style="{StaticResource WideFormLabel}" />
             <ComboBox x:Name="to" Style="{StaticResource WideFormComboBox}"
                 ItemsSource="{Binding UserContext.BaseAccountWrappers}"
-                SelectedItem="{Binding ToAccount, Mode=TwoWay}"
+                SelectedItem="{Binding ToAccount, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 DisplayMemberPath="DisplayString" />
         </StackPanel>
 
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindCashVisibilityConverter}}">
             <sdk:Label Content="Amount" Target="{Binding ElementName=amount}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="amount" Style="{StaticResource WideFormTextBox}"
-                     Text="{Binding Path=Amount, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                     Text="{Binding Path=Amount, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -58,7 +58,7 @@
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">
             <sdk:Label Content="Symbol" Target="{Binding ElementName=symbol}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="symbol" Style="{StaticResource WideFormTextBox}"
-                     Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                     Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -68,7 +68,7 @@
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">
             <sdk:Label Content="Quantity" Target="{Binding ElementName=quantity}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="quantity" Style="{StaticResource WideFormTextBox}"
-                     Text="{Binding Path=Quantity, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                     Text="{Binding Path=Quantity, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -78,7 +78,7 @@
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">
             <sdk:Label Content="Price Paid Per Share" Target="{Binding ElementName=pricePaid}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="pricePaid" Style="{StaticResource WideFormTextBox}"
-                     Text="{Binding Path=PricePaidPerShare, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                     Text="{Binding Path=PricePaidPerShare, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>

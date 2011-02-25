@@ -26,7 +26,7 @@
             Grid.Row="1"
             x:Name="accountNameTextBox"
             Style="{StaticResource NarrowFormTextBox}" HorizontalAlignment="Stretch" Width="auto"
-            Text="{Binding Path=AccountName, Mode=TwoWay, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding Path=AccountName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
             <i:Interaction.Behaviors>
                 <helpers:TextChangedBahvior />
             </i:Interaction.Behaviors>
