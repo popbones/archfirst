@@ -5,6 +5,12 @@
         <bindings>
             <basicHttpBinding>
                 <binding
+                    name="ReferenceDataWebServicePortBinding"
+                    maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+                <binding
                     name="SecurityWebServicePortBinding"
                     maxBufferSize="2147483647"
                     maxReceivedMessageSize="2147483647">
@@ -20,6 +26,12 @@
         </bindings>
 
         <client>
+            <endpoint
+                name="ReferenceDataWebServicePort"
+                address="http://localhost:8080/bfoms-javaee/ReferenceDataService"
+                binding="basicHttpBinding"
+                bindingConfiguration="ReferenceDataWebServicePortBinding"
+                contract="ReferenceDataServiceReference.ReferenceDataWebService" />
             <endpoint
                 name="SecurityWebServicePort"
                 address="http://localhost:8080/bfoms-javaee/SecurityService"

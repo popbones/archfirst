@@ -16,8 +16,8 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows.Controls;
 using Archfirst.Framework.PrismHelpers;
+using Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference;
 using Bullsfirst.Module.Transfer.Interfaces;
-using Bullsfirst.Module.Transfer.ViewModels;
 
 namespace Bullsfirst.Module.Transfer.Views
 {

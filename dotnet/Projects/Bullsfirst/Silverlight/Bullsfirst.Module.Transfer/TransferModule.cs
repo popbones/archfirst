@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 using System.ComponentModel.Composition;
+using Bullsfirst.InterfaceOut.Oms.Domain;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions.Modularity;
 using Microsoft.Practices.Prism.Modularity;
@@ -26,11 +27,15 @@ namespace Bullsfirst.Module.Transfer
         public ILoggerFacade Logger;
 
         [Import]
-        public TransferPopupController controller;  // Ensures controller creation
+        public TransferPopupController _controller;  // Ensures controller creation
+
+        [Import]
+        public ReferenceData _referenceData;
 
         public void Initialize()
         {
             Logger.Log("TransferModule.Initialize()", Category.Debug, Priority.Low);
+            _referenceData.Initialize();
         }
     }
 }

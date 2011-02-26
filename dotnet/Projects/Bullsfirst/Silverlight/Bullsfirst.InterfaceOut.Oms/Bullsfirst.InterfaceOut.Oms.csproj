@@ -62,10 +62,16 @@
   <ItemGroup>
     <Compile Include="Converters\MoneyConverter.cs" />
     <Compile Include="Domain\BaseAccountWrapper.cs" />
+    <Compile Include="Domain\ReferenceData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Security\AuthenticationBehavior.cs" />
     <Compile Include="Domain\Credentials.cs" />
     <Compile Include="Domain\UserContext.cs" />
+    <Compile Include="Service References\ReferenceDataServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\SecurityServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -81,6 +87,16 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\ReferenceDataServiceReference\Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference.GetInstrumentsResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ReferenceDataServiceReference\Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference.LookupResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ReferenceDataServiceReference\ReferenceDataService.wsdl" />
+    <None Include="Service References\ReferenceDataServiceReference\ReferenceDataService.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\SecurityServiceReference\Bullsfirst.InterfaceOut.Oms.SecurityServiceReference.AuthenticateUserResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -121,6 +137,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\ReferenceDataServiceReference\" />
     <WCFMetadataStorage Include="Service References\SecurityServiceReference\" />
     <WCFMetadataStorage Include="Service References\TradingServiceReference\" />
   </ItemGroup>
@@ -144,6 +161,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\TradingServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ReferenceDataServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ReferenceDataServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\ReferenceDataServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
