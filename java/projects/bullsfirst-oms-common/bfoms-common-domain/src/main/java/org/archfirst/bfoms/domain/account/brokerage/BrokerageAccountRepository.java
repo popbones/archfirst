@@ -20,20 +20,23 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Root;
+
+import org.archfirst.bfoms.domain.account.BaseAccount;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.Order_;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.common.domain.BaseRepository;
 import org.archfirst.common.quantity.DecimalQuantity;
-import org.hibernate.Criteria;
-import org.hibernate.FetchMode;
-import org.hibernate.Session;
-import org.hibernate.criterion.Restrictions;
 
 /**
- * AccountRepository
+ * BrokerageAccountRepository
  *
  * @author Naresh Bhatia
  */
@@ -102,25 +105,35 @@ public class BrokerageAccountRepository extends BaseRepository {
 
     public List<Order> findOrders(OrderCriteria criteria) {
 
-        Session session = (Session)entityManager.getDelegate();
+        CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Order> query = builder.createQuery(Order.class);
 
+        // select * from Order
+        Root<Order> _order = query.from(Order.class);
+        
+        // TODO
         // Create order criteria and eager fetch executions (because executions
         // are often needed along with orders) 
-        Criteria orderCriteria =
-            session.createCriteria(Order.class)
-            .setFetchMode("executions", FetchMode.JOIN);
+//        Criteria orderCriteria =
+//            session.createCriteria(Order.class)
+//            .setFetchMode("executions", FetchMode.JOIN);
 
 
+        // where accountId = criteria.getAccountId()
         if (criteria.getAccountId() != null) {
-            orderCriteria.createCriteria("account").add(
-                    Restrictions.eq("id", criteria.getAccountId()));
+            Path<BrokerageAccount> _account = _order.get(Order_.account);
+            Path<Long> _accountId = _account.get(BrokerageAccount_.id);
+            query.where(builder.equal(_accountId, criteria.getAccountId()));
         }
 
+        // where symbol = criteria.getSymbol()
         if (criteria.getSymbol() != null) {
-            orderCriteria.add(Restrictions.eq("symbol",
-                    criteria.getSymbol()));
+            query.where(builder.equal(
+                    _order.get(Order_.symbol), criteria.getSymbol()));
         }
 
+        // TODO
+/*        
         if (criteria.getOrderId() != null) {
             orderCriteria.add(Restrictions.eq("id",
                     criteria.getOrderId()));
@@ -145,9 +158,10 @@ public class BrokerageAccountRepository extends BaseRepository {
             orderCriteria.add(Restrictions.in("status",
                     criteria.getStatuses()));
         }
-
+*/
+        
         @SuppressWarnings("unchecked")
-        List<Order> orders = (List<Order>)orderCriteria.list();
+        List<Order> orders = entityManager.createQuery(query).getResultList();
         
         // Orders with multiple executions will be added to the above list multiple times
         // Filter out duplicates

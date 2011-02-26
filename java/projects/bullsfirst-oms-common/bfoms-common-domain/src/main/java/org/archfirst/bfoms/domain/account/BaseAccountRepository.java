@@ -61,9 +61,11 @@ public class BaseAccountRepository extends BaseRepository {
             query.where(builder.equal(_accountId, criteria.getAccountId()));
         }
 
+        // TODO
         if (criteria.getFromDate() != null) {
         }
 
+        // TODO
         if (criteria.getToDate() != null) {
         }
        
