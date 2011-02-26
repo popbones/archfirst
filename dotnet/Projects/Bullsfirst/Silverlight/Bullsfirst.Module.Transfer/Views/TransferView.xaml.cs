@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Windows.Controls;
 using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.Module.Transfer.Interfaces;
+using Bullsfirst.Module.Transfer.ViewModels;
 
 namespace Bullsfirst.Module.Transfer.Views
 {
@@ -28,12 +29,34 @@ namespace Bullsfirst.Module.Transfer.Views
         {
             Debug.WriteLine("[Debug] TransferView.TransferView()");
             InitializeComponent();
+            symbolField.ItemFilter += InstrumentFilter;
         }
 
         [Import]
         public ITransferViewModel ViewModel
         {
             set { this.DataContext = value; }
+        }
+
+        /// <summary>
+        /// Predicate used for filtering instruments for a given search string
+        /// </summary>
+        /// <param name="search">The string used for filtering</param>
+        /// <param name="value">The instrument that is being compared with the search parameter</param>
+        /// <returns></returns>
+        bool InstrumentFilter(string search, object value)
+        {
+            Instrument instrument = value as Instrument;
+            if (instrument != null)
+            {
+                search = search.ToUpper();
+                return (instrument.Symbol.ToUpper().Contains(search) ||
+                        instrument.Name.ToUpper().Contains(search));
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

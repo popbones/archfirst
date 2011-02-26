@@ -20,6 +20,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
+import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
@@ -31,11 +32,9 @@ import org.joda.time.DateTime;
  */
 public class BaseAccountService {
     
-    @Inject
-    private BaseAccountRepository baseAccountRepository;
-
-    @Inject
-    private MarketDataService marketDataService;
+    @Inject private BaseAccountRepository baseAccountRepository;
+    @Inject private ReferenceDataService referenceDataService;
+    @Inject private MarketDataService marketDataService;
 
     // ----- Commands -----
     public void changeAccountName(Long accountId, String newName) {
@@ -123,6 +122,11 @@ public class BaseAccountService {
         
         // Check authorization on from account
         // TODO: This needs to be done
+        
+        // Check if the symbol is valid
+        if (this.referenceDataService.lookup(symbol) == null) {
+            throw new InvalidSymbolException();
+        }
         
         // Check if security is available
         if (!fromAccount.isSecurityAvailable(symbol, quantity)) {

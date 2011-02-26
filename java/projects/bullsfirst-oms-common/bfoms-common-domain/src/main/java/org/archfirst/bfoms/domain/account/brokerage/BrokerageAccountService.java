@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.archfirst.bfoms.domain.account.InvalidSymbolException;
 import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
@@ -60,6 +61,11 @@ public class BrokerageAccountService {
         BrokerageAccount account =  checkAccountAuthorization(
                 getUser(username), accountId, BrokerageAccountPermission.Trade);
 
+        // Check if the symbol is valid
+        if (this.referenceDataService.lookup(params.getSymbol()) == null) {
+            throw new InvalidSymbolException();
+        }
+        
         return account.placeOrder(params);
     }
     

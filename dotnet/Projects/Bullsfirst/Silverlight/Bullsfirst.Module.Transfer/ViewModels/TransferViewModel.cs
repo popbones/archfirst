@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
@@ -48,6 +49,11 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             _eventAggregator = eventAggregator;
             _tradingService = tradingService;
             this.UserContext = userContext;
+            this.Instruments = new ObservableCollection<Instrument>();
+            this.Instruments.Add(new Instrument { Symbol = "AAPL", Name = "Apple Computers" });
+            this.Instruments.Add(new Instrument { Symbol = "DELL", Name = "Dell Computers" });
+            this.Instruments.Add(new Instrument { Symbol = "IBM", Name = "IBM Computers" });
+            this.Instruments.Add(new Instrument { Symbol = "CSCO", Name = "Cisco Inc." });
 
             _tradingService.TransferCashCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             _tradingService.TransferSecuritiesCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
@@ -254,6 +260,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         private ITradingServiceAsync _tradingService;
 
         public UserContext UserContext { get; set; }
+        public ObservableCollection<Instrument> Instruments { get; set; }
 
         public string ViewTitle
         {
@@ -354,5 +361,16 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         }
 
         #endregion
+    }
+
+    public class Instrument
+    {
+        public string Symbol { get; set; }
+        public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Symbol;
+        }
     }
 }
