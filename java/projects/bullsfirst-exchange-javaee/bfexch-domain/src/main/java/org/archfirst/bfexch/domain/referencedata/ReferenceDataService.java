@@ -29,7 +29,7 @@ import javax.inject.Inject;
  */
 public class ReferenceDataService {
 
-    @Inject private InstrumentRepository instrumentRepository;
+    @Inject private ReferenceDataRepository referenceDataRepository;
 
     /**
      * We will not synchronize the instrumentList or the instrumentMap
@@ -84,7 +84,7 @@ public class ReferenceDataService {
     }
 
     synchronized private void fetchInstruments() {
-        instrumentList = instrumentRepository.findAll();
+        instrumentList = referenceDataRepository.findAllInstruments();
         instrumentMap = new HashMap<String, Instrument>();
         for (Instrument instrument : instrumentList) {
             instrumentMap.put(instrument.getSymbol(), instrument);

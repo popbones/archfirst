@@ -20,13 +20,13 @@ import java.util.List;
 import org.archfirst.common.domain.BaseRepository;
 
 /**
- * InstrumentRepository
+ * ReferenceDataRepository
  *
  * @author Naresh Bhatia
  */
-public class InstrumentRepository extends BaseRepository {
+public class ReferenceDataRepository extends BaseRepository {
 
-    public List<Instrument> findAll() {
+    public List<Instrument> findAllInstruments() {
         return this.entityManager
             .createQuery("SELECT i FROM Instrument i", Instrument.class)
             .getResultList();
