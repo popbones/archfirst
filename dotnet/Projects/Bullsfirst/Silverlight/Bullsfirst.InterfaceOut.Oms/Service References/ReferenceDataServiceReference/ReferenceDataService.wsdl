@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://archfirst.org/bfoms/referencedataservice.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ReferenceDataService" targetNamespace="http://archfirst.org/bfoms/referencedataservice.wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/">
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://archfirst.org/bfexch/referencedataservice.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="ReferenceDataService" targetNamespace="http://archfirst.org/bfexch/referencedataservice.wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/">
   <types>
     <xsd:schema>
-      <xsd:import schemaLocation="http://localhost:8080/bfoms-javaee/ReferenceDataService?xsd=1" namespace="http://archfirst.org/bfoms/referencedataservice.wsdl" />
+      <xsd:import schemaLocation="http://localhost:8080/bfexch-javaee/ReferenceDataService?xsd=1" namespace="http://archfirst.org/bfexch/referencedataservice.wsdl" />
     </xsd:schema>
   </types>
   <message name="Lookup">
@@ -20,11 +20,11 @@
   <portType name="ReferenceDataWebService">
     <operation name="Lookup">
       <input wsam:Action="Lookup" message="tns:Lookup" />
-      <output wsam:Action="http://archfirst.org/bfoms/referencedataservice.wsdl/ReferenceDataWebService/LookupResponse" message="tns:LookupResponse" />
+      <output wsam:Action="http://archfirst.org/bfexch/referencedataservice.wsdl/ReferenceDataWebService/LookupResponse" message="tns:LookupResponse" />
     </operation>
     <operation name="GetInstruments">
       <input wsam:Action="GetInstruments" message="tns:GetInstruments" />
-      <output wsam:Action="http://archfirst.org/bfoms/referencedataservice.wsdl/ReferenceDataWebService/GetInstrumentsResponse" message="tns:GetInstrumentsResponse" />
+      <output wsam:Action="http://archfirst.org/bfexch/referencedataservice.wsdl/ReferenceDataWebService/GetInstrumentsResponse" message="tns:GetInstrumentsResponse" />
     </operation>
   </portType>
   <binding name="ReferenceDataWebServicePortBinding" type="tns:ReferenceDataWebService">
@@ -50,7 +50,7 @@
   </binding>
   <service name="ReferenceDataService">
     <port name="ReferenceDataWebServicePort" binding="tns:ReferenceDataWebServicePortBinding">
-      <soap:address location="http://localhost:8080/bfoms-javaee/ReferenceDataService" />
+      <soap:address location="http://localhost:8080/bfexch-javaee/ReferenceDataService" />
     </port>
   </service>
 </definitions>

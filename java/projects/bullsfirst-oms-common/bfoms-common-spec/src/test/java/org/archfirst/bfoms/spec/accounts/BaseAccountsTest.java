@@ -22,8 +22,6 @@ import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountService;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
-import org.archfirst.bfoms.domain.referencedata.Instrument;
-import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
 import org.archfirst.bfoms.domain.security.RegistrationRequest;
 import org.archfirst.bfoms.domain.security.SecurityService;
 import org.archfirst.common.springtest.AbstractTransactionalSpecTest;
@@ -51,19 +49,11 @@ public abstract class BaseAccountsTest extends AbstractTransactionalSpecTest  {
     @Inject protected BrokerageAccountService brokerageAccountService;
     @Inject protected ExternalAccountService externalAccountService;
     @Inject protected MarketDataService marketDataService;
-    @Inject protected ReferenceDataService referenceDataService;
     @Inject protected SecurityService securityService;
     
     protected Long brokerageAccount1Id;
     protected Long brokerageAccount2Id;
     protected Long externalAccount1Id;
-    
-    protected void initializeReferenceData() {
-        this.referenceDataService.addInstrument(
-                new Instrument("AAPL", "Apple Inc.", "NASDAQ"));
-        this.referenceDataService.addInstrument(
-                new Instrument("CSCO", "Cisco Systems, Inc.", "NASDAQ"));
-    }
     
     protected void createUser1() throws Exception {
         securityService.registerUser(

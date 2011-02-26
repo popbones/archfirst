@@ -15,18 +15,14 @@
  */
 package org.archfirst.bfoms.domain.marketdata;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
-import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.datetime.DateTimeUtil;
-import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
-import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
 /**
@@ -34,12 +30,18 @@ import org.joda.time.DateTime;
  *
  * @author Naresh Bhatia
  */
-@Entity
-public class MarketPrice extends DomainEntity {
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "MarketPrice")
+public class MarketPrice {
     private static final long serialVersionUID = 1L;
 
+    @XmlElement(name = "Symbol", required = true)
     private String symbol;
+
+    @XmlElement(name = "Price", required = true)
     private Money price;
+
+    @XmlElement(name = "Effective", required = true)
     private DateTime effective;
 
     // ----- Constructors -----
@@ -93,17 +95,7 @@ public class MarketPrice extends DomainEntity {
     }
 
     // ----- Getters and Setters -----
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
-    @Column(nullable = false)
-    public DateTime getEffective() {
-        return effective;
-    }
-    private void setEffective(DateTime effective) {
-        this.effective = effective;
-    }
-
     @NotNull
-    @Column(nullable = false)
     public String getSymbol() {
         return symbol;
     }
@@ -111,22 +103,17 @@ public class MarketPrice extends DomainEntity {
         this.symbol = symbol;
     }
 
-    @Embedded
-    @AttributeOverrides({
-        @AttributeOverride(name="amount",
-            column = @Column(
-                    name="price_amount",
-                    precision=Constants.PRICE_PRECISION,
-                    scale=Constants.PRICE_SCALE)),
-        @AttributeOverride(name="currency",
-            column = @Column(
-                    name="price_currency",
-                    length=Money.CURRENCY_LENGTH))
-     })
     public Money getPrice() {
         return price;
     }
     private void setPrice(Money price) {
         this.price = price;
+    }
+
+    public DateTime getEffective() {
+        return effective;
+    }
+    private void setEffective(DateTime effective) {
+        this.effective = effective;
     }
 }

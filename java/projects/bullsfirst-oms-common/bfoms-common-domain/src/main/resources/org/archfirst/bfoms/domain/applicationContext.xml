@@ -28,7 +28,6 @@
     <bean class="org.archfirst.bfoms.domain.account.external.ExternalAccountRepository" />
     <bean class="org.archfirst.bfoms.domain.account.external.ExternalAccountService" />
     <bean class="org.archfirst.bfoms.domain.marketdata.MarketDataService" />
-    <bean class="org.archfirst.bfoms.domain.referencedata.InstrumentRepository" />
     <bean class="org.archfirst.bfoms.domain.referencedata.ReferenceDataService" />
 
 </beans>

@@ -21,7 +21,6 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.archfirst.bfoms.interfaceout.exchange.MarketDataAdapter;
 import org.archfirst.common.money.Money;
 
 /**

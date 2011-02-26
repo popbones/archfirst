@@ -15,9 +15,6 @@
  */
 package org.archfirst.bfoms.domain.referencedata;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -30,12 +27,10 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Instrument")
-@Entity
 public class Instrument implements Comparable <Instrument> {
     private static final long serialVersionUID = 1L;
 
     @XmlElement(name = "Symbol", required = true)
-    @Id
     private String symbol;
 
     @XmlElement(name = "Name", required = true)
@@ -77,7 +72,6 @@ public class Instrument implements Comparable <Instrument> {
         return this.symbol.compareTo(other.getSymbol());
     }
     
-    @Transient
     public String getDisplayString() {
         StringBuilder builder = new StringBuilder();
         builder.append(symbol);

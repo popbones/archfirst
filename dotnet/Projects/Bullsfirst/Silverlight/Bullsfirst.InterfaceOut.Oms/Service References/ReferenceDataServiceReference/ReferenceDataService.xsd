@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<xs:schema xmlns:tns="http://archfirst.org/bfoms/referencedataservice.wsdl" targetNamespace="http://archfirst.org/bfoms/referencedataservice.wsdl" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema xmlns:tns="http://archfirst.org/bfexch/referencedataservice.wsdl" targetNamespace="http://archfirst.org/bfexch/referencedataservice.wsdl" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:element name="GetInstruments" type="tns:GetInstruments" />
   <xs:element name="GetInstrumentsResponse" type="tns:GetInstrumentsResponse" />
   <xs:element name="Lookup" type="tns:Lookup" />
   <xs:element name="LookupResponse" type="tns:LookupResponse" />
-  <xs:complexType name="GetInstruments">
-    <xs:sequence />
-  </xs:complexType>
-  <xs:complexType name="GetInstrumentsResponse">
+  <xs:complexType name="Lookup">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Instrument" type="tns:Instrument" />
+      <xs:element minOccurs="0" name="Symbol" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="LookupResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Instrument" type="tns:Instrument" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Instrument">
@@ -19,14 +21,12 @@
       <xs:element name="Exchange" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="Lookup">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Symbol" type="xs:string" />
-    </xs:sequence>
+  <xs:complexType name="GetInstruments">
+    <xs:sequence />
   </xs:complexType>
-  <xs:complexType name="LookupResponse">
+  <xs:complexType name="GetInstrumentsResponse">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Instrument" type="tns:Instrument" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Instrument" type="tns:Instrument" />
     </xs:sequence>
   </xs:complexType>
 </xs:schema>

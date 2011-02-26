@@ -37,7 +37,6 @@ public class AccountPositionTest extends BaseAccountsTest {
     private BrokerageAccountSummary accountSummary;
     
     public void setup() throws Exception {
-        this.initializeReferenceData();
         this.createUser1();
         this.createBrokerageAccount1();
         this.createExternalAccount1();

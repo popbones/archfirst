@@ -18,18 +18,18 @@ namespace Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://archfirst.org/bfoms/referencedataservice.wsdl", ConfigurationName="ReferenceDataServiceReference.ReferenceDataWebService")]
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://archfirst.org/bfexch/referencedataservice.wsdl", ConfigurationName="ReferenceDataServiceReference.ReferenceDataWebService")]
     public interface ReferenceDataWebService {
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="Lookup", ReplyAction="http://archfirst.org/bfoms/referencedataservice.wsdl/ReferenceDataWebService/Look" +
-            "upResponse")]
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="Lookup", ReplyAction="http://archfirst.org/bfexch/referencedataservice.wsdl/ReferenceDataWebService/Loo" +
+            "kupResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.IAsyncResult BeginLookup(Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference.LookupRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference.LookupResponse EndLookup(System.IAsyncResult result);
         
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetInstruments", ReplyAction="http://archfirst.org/bfoms/referencedataservice.wsdl/ReferenceDataWebService/GetI" +
-            "nstrumentsResponse")]
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetInstruments", ReplyAction="http://archfirst.org/bfexch/referencedataservice.wsdl/ReferenceDataWebService/Get" +
+            "InstrumentsResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
         System.IAsyncResult BeginGetInstruments(Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference.GetInstrumentsRequest request, System.AsyncCallback callback, object asyncState);
         
@@ -39,7 +39,7 @@ namespace Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference {
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/referencedataservice.wsdl")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfexch/referencedataservice.wsdl")]
     public partial class Instrument : object, System.ComponentModel.INotifyPropertyChanged {
         
         private string symbolField;
@@ -47,7 +47,7 @@ namespace Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference {
         private string nameField;
         
         private string exchangeField;
-
+        
         // Manually override so that AutoCompleteBox picks only the symbol when a dropdown is selected
         public override string ToString()
         {
@@ -103,10 +103,10 @@ namespace Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="Lookup", WrapperNamespace="http://archfirst.org/bfoms/referencedataservice.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="Lookup", WrapperNamespace="http://archfirst.org/bfexch/referencedataservice.wsdl", IsWrapped=true)]
     public partial class LookupRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/referencedataservice.wsdl", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfexch/referencedataservice.wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public string Symbol;
         
@@ -121,10 +121,10 @@ namespace Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="LookupResponse", WrapperNamespace="http://archfirst.org/bfoms/referencedataservice.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="LookupResponse", WrapperNamespace="http://archfirst.org/bfexch/referencedataservice.wsdl", IsWrapped=true)]
     public partial class LookupResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/referencedataservice.wsdl", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfexch/referencedataservice.wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference.Instrument Instrument;
         
@@ -139,7 +139,7 @@ namespace Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetInstruments", WrapperNamespace="http://archfirst.org/bfoms/referencedataservice.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetInstruments", WrapperNamespace="http://archfirst.org/bfexch/referencedataservice.wsdl", IsWrapped=true)]
     public partial class GetInstrumentsRequest {
         
         public GetInstrumentsRequest() {
@@ -149,10 +149,10 @@ namespace Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="GetInstrumentsResponse", WrapperNamespace="http://archfirst.org/bfoms/referencedataservice.wsdl", IsWrapped=true)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetInstrumentsResponse", WrapperNamespace="http://archfirst.org/bfexch/referencedataservice.wsdl", IsWrapped=true)]
     public partial class GetInstrumentsResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/referencedataservice.wsdl", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfexch/referencedataservice.wsdl", Order=0)]
         [System.Xml.Serialization.XmlElementAttribute("Instrument", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public Instrument[] Instrument;
         

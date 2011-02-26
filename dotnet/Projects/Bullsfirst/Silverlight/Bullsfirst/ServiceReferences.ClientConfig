@@ -28,7 +28,7 @@
         <client>
             <endpoint
                 name="ReferenceDataWebServicePort"
-                address="http://localhost:8080/bfoms-javaee/ReferenceDataService"
+                address="http://localhost:8080/bfexch-javaee/ReferenceDataService"
                 binding="basicHttpBinding"
                 bindingConfiguration="ReferenceDataWebServicePortBinding"
                 contract="ReferenceDataServiceReference.ReferenceDataWebService" />

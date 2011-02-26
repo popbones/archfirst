@@ -26,6 +26,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Root;
 
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.Order_;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;

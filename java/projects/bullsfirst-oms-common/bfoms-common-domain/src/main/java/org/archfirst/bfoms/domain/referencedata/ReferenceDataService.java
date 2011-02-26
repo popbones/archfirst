@@ -23,13 +23,14 @@ import javax.inject.Inject;
 
 /**
  * Provides security definition for all instruments. Keeps instruments in a
- * memory cache.
+ * memory cache. This cache is initialized on startup using an external reference
+ * data service (via ReferenceDataAdapter).
  *
  * @author Naresh Bhatia
  */
 public class ReferenceDataService {
 
-    @Inject private InstrumentRepository instrumentRepository;
+    @Inject private ReferenceDataAdapter referenceDataAdapter;
     
     /**
      * We will not synchronize the instrumentList or the instrumentMap
@@ -45,12 +46,6 @@ public class ReferenceDataService {
     /** Map from symbol to Instrument. */
     private volatile Map<String, Instrument> instrumentMap;
 
-    // ----- Commands -----
-    synchronized public void addInstrument(Instrument instrument) {
-        getInstrumentList().add(instrument);
-        getInstrumentMap().put(instrument.getSymbol(), instrument);
-    }
-    
     // ----- Queries and Read-Only Operations -----
     public List<Instrument> getInstruments() {
         return getInstrumentList();
@@ -84,7 +79,7 @@ public class ReferenceDataService {
     }
 
     synchronized private void fetchInstruments() {
-        instrumentList = instrumentRepository.findAll();
+        instrumentList = referenceDataAdapter.getInstruments();
         instrumentMap = new HashMap<String, Instrument>();
         for (Instrument instrument : instrumentList) {
             instrumentMap.put(instrument.getSymbol(), instrument);

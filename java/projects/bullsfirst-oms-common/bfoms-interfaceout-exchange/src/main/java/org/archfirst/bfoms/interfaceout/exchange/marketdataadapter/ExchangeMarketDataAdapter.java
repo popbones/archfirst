@@ -18,8 +18,8 @@ package org.archfirst.bfoms.interfaceout.exchange.marketdataadapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.archfirst.bfoms.domain.marketdata.MarketDataAdapter;
 import org.archfirst.bfoms.domain.marketdata.MarketPrice;
-import org.archfirst.bfoms.interfaceout.exchange.MarketDataAdapter;
 import org.archfirst.common.money.Money;
 import org.joda.time.DateTime;
 

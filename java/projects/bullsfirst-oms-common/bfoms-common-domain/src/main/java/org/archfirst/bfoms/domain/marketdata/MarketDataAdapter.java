@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Archfirst
+ * Copyright 2010 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,22 +13,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.domain.referencedata;
+package org.archfirst.bfoms.domain.marketdata;
 
 import java.util.List;
 
-import org.archfirst.common.domain.BaseRepository;
 
 /**
- * InstrumentRepository
+ * Adapter for getting market data from an external source
  *
  * @author Naresh Bhatia
  */
-public class InstrumentRepository extends BaseRepository {
+public interface MarketDataAdapter {
 
-    public List<Instrument> findAll() {
-        return this.entityManager
-            .createQuery("SELECT i FROM Instrument i", Instrument.class)
-            .getResultList();
-    }
+    List<MarketPrice> getMarketPrices();
+
 }

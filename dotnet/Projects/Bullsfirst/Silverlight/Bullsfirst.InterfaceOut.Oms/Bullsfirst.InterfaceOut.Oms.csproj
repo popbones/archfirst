@@ -135,6 +135,12 @@
     <None Include="Service References\TradingServiceReference\TradingService.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ReferenceDataServiceReference\configuration91.svcinfo" />
+    <None Include="Service References\ReferenceDataServiceReference\configuration.svcinfo" />
+    <None Include="Service References\ReferenceDataServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\ReferenceDataServiceReference\" />
@@ -161,18 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\TradingServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ReferenceDataServiceReference\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ReferenceDataServiceReference\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\ReferenceDataServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
