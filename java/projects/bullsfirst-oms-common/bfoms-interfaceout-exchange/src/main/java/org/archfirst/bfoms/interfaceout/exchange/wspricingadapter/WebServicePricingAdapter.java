@@ -35,7 +35,7 @@ public class WebServicePricingAdapter implements PricingAdapter {
 
         List<MarketPrice> marketPrices = new ArrayList<MarketPrice>();
         marketPrices.add(new MarketPrice("CSCO", new Money("20"), new DateTime()));
-        marketPrices.add(new MarketPrice("APPL", new Money("300"), new DateTime()));
+        marketPrices.add(new MarketPrice("AAPL", new Money("300"), new DateTime()));
         return marketPrices;
     }
 }

@@ -40,6 +40,8 @@ public class TransferSecuritiesExternalToBrokerageTest extends BaseAccountsTest 
 
     public void transfer(String symbol, BigDecimal quantity) throws Exception {
 
+        this.initializeReferenceData();
+
         // Create accounts
         this.createUser1();
         this.createBrokerageAccount1();

@@ -22,7 +22,6 @@ import java.util.List;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.Position;
 import org.archfirst.bfoms.domain.marketdata.MarketPrice;
-import org.archfirst.bfoms.domain.referencedata.Instrument;
 import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -38,11 +37,10 @@ public class AccountPositionTest extends BaseAccountsTest {
     private BrokerageAccountSummary accountSummary;
     
     public void setup() throws Exception {
+        this.initializeReferenceData();
         this.createUser1();
         this.createBrokerageAccount1();
         this.createExternalAccount1();
-        this.referenceDataService.addInstrument(
-                new Instrument("CSCO", "Cisco Systems, Inc.", "NASDAQ"));
     }
     
     public void transferCash(BigDecimal amount) {

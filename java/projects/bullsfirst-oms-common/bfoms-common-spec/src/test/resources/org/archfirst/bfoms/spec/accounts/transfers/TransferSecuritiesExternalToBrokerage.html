@@ -13,24 +13,24 @@
         <h2>Example</h2>
         <p>
             When <span concordion:set="#quantity">100</span> shares of
-            <span concordion:set="#symbol">APPL</span> are
+            <span concordion:set="#symbol">AAPL</span> are
             <span concordion:execute="transfer(#symbol, #quantity)">transfered</span>
             from an external account to a newly opened brokerage account,
             the following outcomes take place:
             <ul>
                 <li>a new lot of
-                    <span concordion:assertEquals="getBrokerageAccountLotSymbol()">APPL</span>
+                    <span concordion:assertEquals="getBrokerageAccountLotSymbol()">AAPL</span>
                     with quantity
                     <span concordion:assertEquals="getBrokerageAccountLotQuantity()">100</span>
                     is created in the brokerage account
                     </li>
                 <li>a securities transfer of
-                    <span concordion:assertEquals="getExternalAccountTransferSymbol()">APPL</span>
+                    <span concordion:assertEquals="getExternalAccountTransferSymbol()">AAPL</span>
                     with quantity
                     <span concordion:assertEquals="getExternalAccountTransferQuantity()">-100</span>
                     is recorded in the external account</li>
                 <li>a securities transfer of
-                    <span concordion:assertEquals="getBrokerageAccountTransferSymbol()">APPL</span>
+                    <span concordion:assertEquals="getBrokerageAccountTransferSymbol()">AAPL</span>
                     with quantity
                     <span concordion:assertEquals="getBrokerageAccountTransferQuantity()">100</span>
                     is recorded in the brokerage account</li>

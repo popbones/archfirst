@@ -32,6 +32,8 @@ public class TransferSecuritiesBrokerageToBrokerageTest extends BaseAccountsTest
     
     public void setBrokerageAccount1InstrumentPosition(String symbol, int quantity) throws Exception {
 
+        this.initializeReferenceData();
+
         // Create account
         this.createUser1();
         this.createBrokerageAccount1();

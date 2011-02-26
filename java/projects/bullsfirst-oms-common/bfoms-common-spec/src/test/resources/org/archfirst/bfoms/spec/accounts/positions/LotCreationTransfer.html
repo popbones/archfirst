@@ -19,7 +19,7 @@
         <p>
             <span concordion:execute="setup()"></span>
             When <span concordion:set="#quantity">100</span> shares of
-            <span concordion:set="#symbol">APPL</span> are transfered
+            <span concordion:set="#symbol">AAPL</span> are transfered
             from an external account to a newly opened brokerage account,
             the following lot is created:
         </p>
@@ -30,15 +30,15 @@
                 <th concordion:assertEquals="#lot.quantity">Quantity</th>
             </tr>
             <tr>
-                <td>APPL</td>
+                <td>AAPL</td>
                 <td>100</td>
             </tr>
         </table>
 
         <p>
             If we transfer another <span concordion:set="#quantity">200</span>
-            shares of <span concordion:set="#symbol">APPL</span> to the
-            brokerage account, the account will now have two lots of APPL
+            shares of <span concordion:set="#symbol">AAPL</span> to the
+            brokerage account, the account will now have two lots of AAPL
             as shown below:
         </p>
             
@@ -48,11 +48,11 @@
                 <th concordion:assertEquals="#lot.quantity">Quantity</th>
             </tr>
             <tr>
-                <td>APPL</td>
+                <td>AAPL</td>
                 <td>100</td>
             </tr>
             <tr>
-                <td>APPL</td>
+                <td>AAPL</td>
                 <td>200</td>
             </tr>
         </table>

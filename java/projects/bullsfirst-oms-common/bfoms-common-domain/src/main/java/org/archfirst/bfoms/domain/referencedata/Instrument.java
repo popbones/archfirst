@@ -16,24 +16,32 @@
 package org.archfirst.bfoms.domain.referencedata;
 
 import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.Id;
 import javax.persistence.Transient;
-import javax.persistence.UniqueConstraint;
-
-import org.archfirst.common.domain.DomainEntity;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Instrument
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Instrument")
 @Entity
-@Table(uniqueConstraints = {
-        @UniqueConstraint(columnNames={"symbol"})})
-public class Instrument extends DomainEntity implements Comparable <Instrument> {
+public class Instrument implements Comparable <Instrument> {
     private static final long serialVersionUID = 1L;
+
+    @XmlElement(name = "Symbol", required = true)
+    @Id
     private String symbol;
+
+    @XmlElement(name = "Name", required = true)
     private String name;
+
+    @XmlElement(name = "Exchange", required = true)
     private String exchange;
 
     // ----- Constructors -----

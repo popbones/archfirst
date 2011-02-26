@@ -117,8 +117,8 @@ public class BrokerageAccountRepository extends BaseRepository {
         }
 
         if (criteria.getSymbol() != null) {
-            orderCriteria.createCriteria("instrument").add(
-                    Restrictions.eq("symbol", criteria.getSymbol()));
+            orderCriteria.add(Restrictions.eq("symbol",
+                    criteria.getSymbol()));
         }
 
         if (criteria.getOrderId() != null) {

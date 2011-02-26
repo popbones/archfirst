@@ -14,7 +14,7 @@
         <p>
             Given a brokerage account having
             <span concordion:set="#quantity">1000</span> shares of
-            <span concordion:set="#symbol">APPL</span><span concordion:execute="setBrokerageAccountInstrumentPosition(#symbol, #quantity)"></span>,<br/>
+            <span concordion:set="#symbol">AAPL</span><span concordion:execute="setBrokerageAccountInstrumentPosition(#symbol, #quantity)"></span>,<br/>
             when <span concordion:execute="transfer(#symbol, #TEXT)">100</span> shares
             are transfered to an external account,<br/>
             <span concordion:assertEquals="getBrokerageAccountInstrumentPosition(#symbol)">900</span>

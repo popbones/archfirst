@@ -32,6 +32,7 @@ import org.archfirst.common.quantity.DecimalQuantity;
 public class LotWithdrawalTransferTest extends BaseAccountsTest {
     
     public void setup() throws Exception {
+        this.initializeReferenceData();
         this.createUser1();
         this.createBrokerageAccount1();
         this.createExternalAccount1();

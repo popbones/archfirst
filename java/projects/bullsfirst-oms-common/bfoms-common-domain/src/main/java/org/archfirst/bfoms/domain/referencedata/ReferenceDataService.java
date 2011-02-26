@@ -32,38 +32,59 @@ public class ReferenceDataService {
     @Inject private InstrumentRepository instrumentRepository;
     
     /**
-     * Map from symbol to Instrument. We will not synchronize this map
+     * We will not synchronize the instrumentList or the instrumentMap
      * because no structural changes (additions or deletions of mappings)
-     * are performed after initialization. Also this map is lazily initialized
-     * using <a href="http://en.wikipedia.org/wiki/Double-checked_locking">
+     * are performed after initialization. Also this data structures are
+     * lazily initialized using <a href="http://en.wikipedia.org/wiki/Double-checked_locking">
      * double-checked locking</a>.
      */
+    
+    /** List of Instruments. */
+    private volatile List<Instrument> instrumentList;
+
+    /** Map from symbol to Instrument. */
     private volatile Map<String, Instrument> instrumentMap;
 
     // ----- Commands -----
     synchronized public void addInstrument(Instrument instrument) {
+        getInstrumentList().add(instrument);
         getInstrumentMap().put(instrument.getSymbol(), instrument);
     }
     
     // ----- Queries and Read-Only Operations -----
+    public List<Instrument> getInstruments() {
+        return getInstrumentList();
+    }
+
     public Instrument lookup(String symbol) {
         return getInstrumentMap().get(symbol);
     }
     
     // ----- Getters and Setters -----
+    private List<Instrument> getInstrumentList() {
+        if (instrumentList == null) {
+            synchronized(this) {
+                if (instrumentList == null) {
+                    fetchInstruments();
+                }
+            }
+        }
+        return instrumentList;
+    }
+
     private Map<String, Instrument> getInstrumentMap() {
         if (instrumentMap == null) {
             synchronized(this) {
                 if (instrumentMap == null) {
-                    fetchInstrumentMap();
+                    fetchInstruments();
                 }
             }
         }
         return instrumentMap;
     }
 
-    synchronized private void fetchInstrumentMap() {
-        List<Instrument> instrumentList = instrumentRepository.findAll();
+    synchronized private void fetchInstruments() {
+        instrumentList = instrumentRepository.findAll();
         instrumentMap = new HashMap<String, Instrument>();
         for (Instrument instrument : instrumentList) {
             instrumentMap.put(instrument.getSymbol(), instrument);
