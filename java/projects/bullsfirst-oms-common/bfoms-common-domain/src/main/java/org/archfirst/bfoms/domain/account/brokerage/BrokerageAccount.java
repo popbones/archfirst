@@ -285,7 +285,7 @@ public class BrokerageAccount extends BaseAccount {
         return amount.lteq(calculateCashAvailable(marketDataService));
     }
     
-    public Money calculateCashAvailable(MarketDataService pricingService) {
+    public Money calculateCashAvailable(MarketDataService marketDataService) {
 
         Money cashAvailable = cashPosition;
         
@@ -293,7 +293,7 @@ public class BrokerageAccount extends BaseAccount {
         List<Order> orders = brokerageAccountRepository.findActiveBuyOrders(this);
         for (Order order : orders) {
             OrderEstimate orderEstimate =
-                order.calculateOrderEstimate(pricingService);
+                order.calculateOrderEstimate(marketDataService);
             cashAvailable =
                 cashAvailable.minus(orderEstimate.getEstimatedValueInclFees());
         }

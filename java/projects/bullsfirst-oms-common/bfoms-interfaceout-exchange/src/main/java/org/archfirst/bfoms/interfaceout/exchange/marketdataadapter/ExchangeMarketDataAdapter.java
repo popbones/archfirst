@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.interfaceout.exchange.wspricingadapter;
+package org.archfirst.bfoms.interfaceout.exchange.marketdataadapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.archfirst.bfoms.domain.marketdata.MarketPrice;
-import org.archfirst.bfoms.interfaceout.exchange.PricingAdapter;
+import org.archfirst.bfoms.interfaceout.exchange.MarketDataAdapter;
 import org.archfirst.common.money.Money;
 import org.joda.time.DateTime;
 
 /**
- * WebServicePricingAdapter
+ * ExchangeMarketDataAdapter
  *
  * @author Naresh Bhatia
  */
-public class WebServicePricingAdapter implements PricingAdapter {
+public class ExchangeMarketDataAdapter implements MarketDataAdapter {
 
     @Override
     public List<MarketPrice> getMarketPrices() {

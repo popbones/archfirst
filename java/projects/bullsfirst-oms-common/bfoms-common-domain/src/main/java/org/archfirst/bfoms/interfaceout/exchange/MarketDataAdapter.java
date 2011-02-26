@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Archfirst
+ * Copyright 2010 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,32 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.spec.mocks;
+package org.archfirst.bfoms.interfaceout.exchange;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.archfirst.bfoms.domain.marketdata.MarketPrice;
-import org.archfirst.bfoms.interfaceout.exchange.PricingAdapter;
-import org.archfirst.common.money.Money;
-import org.joda.time.DateTime;
 
 /**
- * MockPricingAdapter
+ * Adapter for getting market data from an external source
  *
  * @author Naresh Bhatia
  */
-public class MockPricingAdapter implements PricingAdapter {
-    
-    private List<MarketPrice> marketPrices =
-        new ArrayList<MarketPrice>();
-
-    public void addMarketPrice(String symbol, Money price) {
-        marketPrices.add(new MarketPrice(symbol, price, new DateTime()));
-    }
-    
-    @Override
-    public List<MarketPrice> getMarketPrices() {
-        return marketPrices;
-    }
+public interface MarketDataAdapter {
+    List<MarketPrice> getMarketPrices();
 }

@@ -21,19 +21,20 @@ import java.util.Map;
 
 import javax.inject.Inject;
 
-import org.archfirst.bfoms.interfaceout.exchange.PricingAdapter;
+import org.archfirst.bfoms.interfaceout.exchange.MarketDataAdapter;
 import org.archfirst.common.money.Money;
 
 /**
  * Provides market prices for all instruments. Keeps prices in a memory
- * cache. This cache is initialized on startup using the pricing adapter.
- * Prices can be updated by calling updateMarketPrice().
+ * cache. This cache is initialized on startup using an external market data
+ * service (via MarketDataAdapter). Prices can be later updated by calling
+ * updateMarketPrice().
  *
  * @author Naresh Bhatia
  */
 public class MarketDataService {
     
-    @Inject private PricingAdapter pricingAdapter;
+    @Inject private MarketDataAdapter marketDataAdapter;
     
     /**
      * Map from symbol to MarketPrice. We will not synchronize this map
@@ -69,7 +70,7 @@ public class MarketDataService {
     // ----- Initializer -----
     private void initPriceMap() {
         priceMap = new HashMap<String, MarketPrice>();
-        List<MarketPrice> marketPrices = pricingAdapter.getMarketPrices();
+        List<MarketPrice> marketPrices = marketDataAdapter.getMarketPrices();
         for (MarketPrice marketPrice : marketPrices) {
             priceMap.put(marketPrice.getSymbol(), marketPrice);
         }
