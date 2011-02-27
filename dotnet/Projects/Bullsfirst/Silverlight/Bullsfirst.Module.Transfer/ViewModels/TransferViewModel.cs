@@ -122,11 +122,11 @@ namespace Bullsfirst.Module.Transfer.ViewModels
                         (BrokerageAccountSummary)(FromAccount.AccountSummary);
                 }
 
-                // Send AccountUpdatedEvent and switch to transactions page
+                // Send AccountUpdatedEvent and switch to positions page
                 _eventAggregator.GetEvent<AccountUpdatedEvent>().Publish(Empty.Value);
                 _regionManager.RequestNavigate(
                     RegionNames.LoggedInUserRegion,
-                    new Uri(ViewNames.TransactionHistoryView, UriKind.Relative));
+                    new Uri(ViewNames.PositionsView, UriKind.Relative));
             }
         }
 
