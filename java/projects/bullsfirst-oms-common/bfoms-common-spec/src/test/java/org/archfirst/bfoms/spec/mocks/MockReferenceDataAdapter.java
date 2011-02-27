@@ -53,9 +53,4 @@ public class MockReferenceDataAdapter implements ReferenceDataAdapter {
     public List<Instrument> getInstruments() {
         return instrumentList;
     }
-
-    @Override
-    public Instrument lookup(String symbol) {
-        return instrumentMap.get(symbol);
-    }
 }

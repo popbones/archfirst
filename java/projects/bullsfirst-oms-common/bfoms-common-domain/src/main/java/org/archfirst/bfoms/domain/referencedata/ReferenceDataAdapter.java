@@ -26,5 +26,4 @@ public interface ReferenceDataAdapter {
 
     List<Instrument> getInstruments();
 
-    Instrument lookup(String symbol);
 }

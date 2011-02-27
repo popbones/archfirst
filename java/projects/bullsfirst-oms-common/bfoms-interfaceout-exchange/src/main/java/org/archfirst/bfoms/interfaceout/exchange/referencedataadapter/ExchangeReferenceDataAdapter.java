@@ -16,12 +16,11 @@
 package org.archfirst.bfoms.interfaceout.exchange.referencedataadapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.archfirst.bfoms.domain.referencedata.Instrument;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataAdapter;
+import org.archfirst.bfoms.interfaceout.exchange.referencedataadapter.client.ReferenceDataService;
 
 /**
  * ExchangeReferenceDataAdapter
@@ -30,32 +29,26 @@ import org.archfirst.bfoms.domain.referencedata.ReferenceDataAdapter;
  */
 public class ExchangeReferenceDataAdapter implements ReferenceDataAdapter {
 
-    /** List of Instruments. */
-    private volatile List<Instrument> instrumentList =
-        new ArrayList<Instrument>();
-
-    /** Map from symbol to Instrument. */
-    private volatile Map<String, Instrument> instrumentMap =
-        new HashMap<String, Instrument>();
-    
-    public ExchangeReferenceDataAdapter() {
-        this.addInstrument("AAPL", "Apple Inc.", "NASDAQ");
-        this.addInstrument("CSCO", "Cisco Systems, Inc.", "NASDAQ");
-    }
-    
-    public void addInstrument(String symbol, String name, String exchange) {
-        Instrument instrument = new Instrument(symbol, name, exchange);
-        instrumentList.add(instrument);
-        instrumentMap.put(symbol, instrument);
-    }
-
     @Override
     public List<Instrument> getInstruments() {
+        
+        ReferenceDataService service = new ReferenceDataService();
+        List<org.archfirst.bfoms.interfaceout.exchange.referencedataadapter.client.Instrument> wsInstruments =
+            service.getReferenceDataWebServicePort().getInstruments();
+
+        List<Instrument> instrumentList = new ArrayList<Instrument>();
+        for (org.archfirst.bfoms.interfaceout.exchange.referencedataadapter.client.Instrument wsInstrument : wsInstruments)
+            instrumentList.add(toDomainInstrument(wsInstrument));
         return instrumentList;
     }
-
-    @Override
-    public Instrument lookup(String symbol) {
-        return instrumentMap.get(symbol);
+    
+    private static final Instrument toDomainInstrument(
+            org.archfirst.bfoms.interfaceout.exchange.referencedataadapter.client.Instrument wsInstrument) {
+        
+        return new Instrument(
+                wsInstrument.getSymbol(),
+                wsInstrument.getName(),
+                wsInstrument.getExchange());
     }
+
 }

@@ -21,4 +21,64 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+
+        <profile>
+            <id>gen-referencedataservice-client</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>jaxws-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>wsimport</goal>
+                                </goals>
+                                <configuration>
+                                    <wsdlUrls>
+                                        <wsdlUrl>
+                                            http://localhost:8080/bfexch-javaee/ReferenceDataService?wsdl
+                                        </wsdlUrl>
+                                    </wsdlUrls>
+                                    <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
+                                    <packageName>org.archfirst.bfoms.interfaceout.exchange.referencedataadapter.client</packageName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <profile>
+            <id>gen-marketdataservice-client</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>jaxws-maven-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <goals>
+                                    <goal>wsimport</goal>
+                                </goals>
+                                <configuration>
+                                    <wsdlUrls>
+                                        <wsdlUrl>
+                                            http://localhost:8080/bfexch-javaee/MarketDataService?wsdl
+                                        </wsdlUrl>
+                                    </wsdlUrls>
+                                    <sourceDestDir>${basedir}/src/main/java</sourceDestDir>
+                                    <packageName>org.archfirst.bfoms.interfaceout.exchange.marketdataadapter.client</packageName>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+    </profiles>
+
 </project>

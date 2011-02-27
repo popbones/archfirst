@@ -16,10 +16,12 @@
 package org.archfirst.bfoms.interfaceout.exchange.marketdataadapter;
 
 import java.util.ArrayList;
+import java.util.Currency;
 import java.util.List;
 
 import org.archfirst.bfoms.domain.marketdata.MarketDataAdapter;
 import org.archfirst.bfoms.domain.marketdata.MarketPrice;
+import org.archfirst.bfoms.interfaceout.exchange.marketdataadapter.client.MarketDataService;
 import org.archfirst.common.money.Money;
 import org.joda.time.DateTime;
 
@@ -32,10 +34,26 @@ public class ExchangeMarketDataAdapter implements MarketDataAdapter {
 
     @Override
     public List<MarketPrice> getMarketPrices() {
+        
+        MarketDataService service = new MarketDataService();
+        List<org.archfirst.bfoms.interfaceout.exchange.marketdataadapter.client.MarketPrice> wsMarketPrices =
+            service.getMarketDataWebServicePort().getMarketPrices();
 
         List<MarketPrice> marketPrices = new ArrayList<MarketPrice>();
-        marketPrices.add(new MarketPrice("CSCO", new Money("20"), new DateTime()));
-        marketPrices.add(new MarketPrice("AAPL", new Money("300"), new DateTime()));
+        for (org.archfirst.bfoms.interfaceout.exchange.marketdataadapter.client.MarketPrice wsMarketPrice : wsMarketPrices) {
+            marketPrices.add(toDomainMarketPrice(wsMarketPrice));
+        }
         return marketPrices;
+    }
+
+    private static final MarketPrice toDomainMarketPrice(
+            org.archfirst.bfoms.interfaceout.exchange.marketdataadapter.client.MarketPrice wsMarketPrice) {
+
+        return new MarketPrice(
+                wsMarketPrice.getSymbol(),
+                new Money(
+                        wsMarketPrice.getPrice().getAmount(),
+                        Currency.getInstance(wsMarketPrice.getPrice().getCurrency())),
+                new DateTime(wsMarketPrice.getEffective().toGregorianCalendar()));
     }
 }
