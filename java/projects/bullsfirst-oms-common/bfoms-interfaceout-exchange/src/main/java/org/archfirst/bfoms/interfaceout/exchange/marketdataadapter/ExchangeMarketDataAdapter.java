@@ -24,6 +24,8 @@ import org.archfirst.bfoms.domain.marketdata.MarketPrice;
 import org.archfirst.bfoms.interfaceout.exchange.marketdataadapter.client.MarketDataService;
 import org.archfirst.common.money.Money;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ExchangeMarketDataAdapter
@@ -31,9 +33,12 @@ import org.joda.time.DateTime;
  * @author Naresh Bhatia
  */
 public class ExchangeMarketDataAdapter implements MarketDataAdapter {
+    private static final Logger logger =
+        LoggerFactory.getLogger(ExchangeMarketDataAdapter.class);
 
     @Override
     public List<MarketPrice> getMarketPrices() {
+        logger.debug("---> ExchangeMarketDataAdapter.getMarketPrices()");
         
         MarketDataService service = new MarketDataService();
         List<org.archfirst.bfoms.interfaceout.exchange.marketdataadapter.client.MarketPrice> wsMarketPrices =
@@ -43,6 +48,8 @@ public class ExchangeMarketDataAdapter implements MarketDataAdapter {
         for (org.archfirst.bfoms.interfaceout.exchange.marketdataadapter.client.MarketPrice wsMarketPrice : wsMarketPrices) {
             marketPrices.add(toDomainMarketPrice(wsMarketPrice));
         }
+
+        logger.debug("<--- ExchangeMarketDataAdapter.getMarketPrices()");
         return marketPrices;
     }
 

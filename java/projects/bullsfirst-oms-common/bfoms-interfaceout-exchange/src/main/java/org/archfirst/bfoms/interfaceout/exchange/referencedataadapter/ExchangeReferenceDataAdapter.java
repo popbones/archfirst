@@ -21,6 +21,8 @@ import java.util.List;
 import org.archfirst.bfoms.domain.referencedata.Instrument;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataAdapter;
 import org.archfirst.bfoms.interfaceout.exchange.referencedataadapter.client.ReferenceDataService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ExchangeReferenceDataAdapter
@@ -28,9 +30,12 @@ import org.archfirst.bfoms.interfaceout.exchange.referencedataadapter.client.Ref
  * @author Naresh Bhatia
  */
 public class ExchangeReferenceDataAdapter implements ReferenceDataAdapter {
+    private static final Logger logger =
+        LoggerFactory.getLogger(ExchangeReferenceDataAdapter.class);
 
     @Override
     public List<Instrument> getInstruments() {
+        logger.debug("---> ExchangeReferenceDataAdapter.getInstruments()");
         
         ReferenceDataService service = new ReferenceDataService();
         List<org.archfirst.bfoms.interfaceout.exchange.referencedataadapter.client.Instrument> wsInstruments =
@@ -39,6 +44,8 @@ public class ExchangeReferenceDataAdapter implements ReferenceDataAdapter {
         List<Instrument> instrumentList = new ArrayList<Instrument>();
         for (org.archfirst.bfoms.interfaceout.exchange.referencedataadapter.client.Instrument wsInstrument : wsInstruments)
             instrumentList.add(toDomainInstrument(wsInstrument));
+
+        logger.debug("<-- ExchangeReferenceDataAdapter.getInstruments()");
         return instrumentList;
     }
     

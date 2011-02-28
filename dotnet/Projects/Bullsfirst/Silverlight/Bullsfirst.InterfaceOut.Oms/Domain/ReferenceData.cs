@@ -15,6 +15,7 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference;
 
 namespace Bullsfirst.InterfaceOut.Oms.Domain
@@ -42,6 +43,7 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
 
         public void GetInstrumentsCallback(object sender, GetInstrumentsCompletedEventArgs e)
         {
+            Debug.WriteLine("[Debug] [{0}] ---> ReferenceData.GetInstrumentsCallback()", DateTime.Now);
             if (e.Error == null)
             {
                 // Initialize instruments
@@ -50,6 +52,7 @@ namespace Bullsfirst.InterfaceOut.Oms.Domain
                     Instruments.Add(instrument);
                 }
             }
+            Debug.WriteLine("[Debug] [{0}] <--- ReferenceData.GetInstrumentsCallback()", DateTime.Now);
         }
 
         private bool _isInitialized = false;

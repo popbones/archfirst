@@ -18,6 +18,8 @@ package org.archfirst.bfexch.domain.marketdata;
 import java.util.List;
 
 import org.archfirst.common.domain.BaseRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * MarketDataRepository
@@ -25,11 +27,16 @@ import org.archfirst.common.domain.BaseRepository;
  * @author Naresh
  */
 public class MarketDataRepository extends BaseRepository {
+    private static final Logger logger =
+        LoggerFactory.getLogger(MarketDataRepository.class);
 
     public List<MarketPrice> findAllMarketPrices() {
-        return this.entityManager
+        logger.debug("---> MarketDataRepository.findAllMarketPrices()");
+        List<MarketPrice> marketPrices = this.entityManager
             .createQuery("SELECT m FROM MarketPrice m", MarketPrice.class)
             .getResultList();
+        logger.debug("<--- MarketDataRepository.findAllMarketPrices()");
+        return marketPrices;
     }
     
     public MarketPrice findMarketPrice(String symbol) {

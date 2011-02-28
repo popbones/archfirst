@@ -18,6 +18,8 @@ package org.archfirst.bfexch.domain.referencedata;
 import java.util.List;
 
 import org.archfirst.common.domain.BaseRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * ReferenceDataRepository
@@ -25,10 +27,15 @@ import org.archfirst.common.domain.BaseRepository;
  * @author Naresh Bhatia
  */
 public class ReferenceDataRepository extends BaseRepository {
+    private static final Logger logger =
+        LoggerFactory.getLogger(ReferenceDataRepository.class);
 
     public List<Instrument> findAllInstruments() {
-        return this.entityManager
+        logger.debug("---> ReferenceDataRepository.findAllInstruments()");
+        List<Instrument> instruments = this.entityManager
             .createQuery("SELECT i FROM Instrument i", Instrument.class)
             .getResultList();
+        logger.debug("<--- ReferenceDataRepository.findAllInstruments()");
+        return instruments;
     }
 }
