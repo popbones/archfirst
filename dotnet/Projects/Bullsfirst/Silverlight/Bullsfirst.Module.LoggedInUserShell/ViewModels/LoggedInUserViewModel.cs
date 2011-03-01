@@ -114,14 +114,30 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
 
         private void GetBrokerageAccountSummariesCallback(object sender, GetBrokerageAccountSummariesCompletedEventArgs e)
         {
-            UserContext.InitializeBrokerageAccountSummaries(e.Result);
-            _tradingService.GetExternalAccountSummariesAsync();
+            if (e.Error != null)
+            {
+                // this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                // this.StatusMessage = null;
+                UserContext.InitializeBrokerageAccountSummaries(e.Result);
+                _tradingService.GetExternalAccountSummariesAsync();
+            }
         }
 
         private void GetExternalAccountSummariesCallback(object sender, GetExternalAccountSummariesCompletedEventArgs e)
         {
-            UserContext.InitializeExternalAccountSummaries(e.Result);
-            UserContext.InitializeBaseAccountWrappers();
+            if (e.Error != null)
+            {
+                // this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                // this.StatusMessage = null;
+                UserContext.InitializeExternalAccountSummaries(e.Result);
+                UserContext.InitializeBaseAccountWrappers();
+            }
         }
 
         #endregion

@@ -1,5 +1,4 @@
-﻿using System.ComponentModel.Composition;
-/* Copyright 2011 Archfirst
+﻿/* Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System.ComponentModel.Composition;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
@@ -66,10 +66,27 @@ namespace Bullsfirst.InterfaceOut.Oms.Security
         public object BeforeSendRequest(ref Message request, System.ServiceModel.IClientChannel channel)
         {
             // Add username and password to HTTP headers
-            HttpRequestMessageProperty httpRequestMessage = new HttpRequestMessageProperty();
-            httpRequestMessage.Headers["username"] = _userContext.Credentials.Username;
-            httpRequestMessage.Headers["password"] = _userContext.Credentials.Password;
-            request.Properties.Add(HttpRequestMessageProperty.Name, httpRequestMessage);
+            HttpRequestMessageProperty httpRequestMessage;
+            object httpRequestMessageObject;
+            if (request.Properties.TryGetValue(HttpRequestMessageProperty.Name, out httpRequestMessageObject))
+            {
+                httpRequestMessage = httpRequestMessageObject as HttpRequestMessageProperty;
+                if (string.IsNullOrEmpty(httpRequestMessage.Headers["username"]))
+                {
+                    httpRequestMessage.Headers["username"] = _userContext.Credentials.Username;
+                }
+                if (string.IsNullOrEmpty(httpRequestMessage.Headers["password"]))
+                {
+                    httpRequestMessage.Headers["password"] = _userContext.Credentials.Password;
+                }
+            }
+            else
+            {
+                httpRequestMessage = new HttpRequestMessageProperty();
+                httpRequestMessage.Headers["username"] = _userContext.Credentials.Username;
+                httpRequestMessage.Headers["password"] = _userContext.Credentials.Password;
+                request.Properties.Add(HttpRequestMessageProperty.Name, httpRequestMessage);
+            }
 
             // Add username and password to SOAP headers
             // request.Headers.Add(MessageHeader.CreateHeader("username", "", _userContext.Credentials.Username));
