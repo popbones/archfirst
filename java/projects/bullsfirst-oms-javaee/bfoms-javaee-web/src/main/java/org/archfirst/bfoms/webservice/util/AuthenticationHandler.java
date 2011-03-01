@@ -25,7 +25,10 @@ import javax.xml.ws.handler.soap.SOAPHandler;
 import javax.xml.ws.handler.soap.SOAPMessageContext;
 
 /**
- * AuthenticationHandler
+ * Authenticates incoming soap messages by picking up the username and password
+ * http headers and verifying against the credentials stored in the database.
+ * This handler is hooked into TradingWebService by specifying a handler chain.
+ * The handler-chain file is located in the resources folder.
  *
  * @author Naresh Bhatia
  */

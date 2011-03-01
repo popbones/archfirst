@@ -1,1 +1,1 @@
-mysql --database bfexch_javaee --user bfexch_javaee --password
+mysql --user=bfexch_javaee --password=bfexch_javaee bfexch_javaee
