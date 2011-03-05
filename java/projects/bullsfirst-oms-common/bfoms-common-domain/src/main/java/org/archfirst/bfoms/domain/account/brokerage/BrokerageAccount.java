@@ -255,11 +255,31 @@ public class BrokerageAccount extends BaseAccount {
         
         List<Lot> lots = brokerageAccountRepository.findActiveLots(this);
         
-        // Add lot positions
-        List<Position> positions = new ArrayList<Position>();
+        // Process lots into a hierarchy of instrument and lot positions
+                
+        // Create instrument positions that will be returned
+        List<Position> instrumentPositions = new ArrayList<Position>();
+        
+        // Now process lots, breaking them by instrument positions
+        String symbol = null;
+        Position instrumentPosition = null;
         for (Lot lot : lots) {
-            Position position = new Position(this.id, this.name);
-            position.setLotPosition(
+            // If there is a change in symbol, then create a new instumentPosition
+            if (symbol==null || !symbol.equals(lot.getSymbol())) {
+                symbol = lot.getSymbol();
+                instrumentPosition = new Position();
+                instrumentPosition.setInstrumentPosition(
+                        this.id,
+                        this.name,
+                        lot.getSymbol(),
+                        referenceDataService.lookup(lot.getSymbol()).getName(),
+                        marketDataService.getMarketPrice(lot.getSymbol()));
+                instrumentPositions.add(instrumentPosition);
+            }
+            Position lotPosition = new Position();
+            lotPosition.setLotPosition(
+                    this.id,
+                    this.name,
                     lot.getSymbol(),
                     referenceDataService.lookup(lot.getSymbol()).getName(),
                     lot.getId(),
@@ -267,15 +287,24 @@ public class BrokerageAccount extends BaseAccount {
                     lot.getQuantity(),
                     marketDataService.getMarketPrice(lot.getSymbol()),
                     lot.getPricePaidPerShare());
-            positions.add(position);
+            instrumentPosition.addChild(lotPosition);
         }
         
-        // Add cash position
-        Position position = new Position(this.id, this.name);
-        position.setCashPosition(this.cashPosition);
-        positions.add(position);
+        // Calculate instrument position values
+        for (Position position : instrumentPositions) {
+            position.calculateInstrumentPosition();
+        }
         
-        return positions;
+        
+        // Add cash position
+        Position cashPosition = new Position();
+        cashPosition.setCashPosition(
+                this.id,
+                this.name,
+                this.cashPosition);
+        instrumentPositions.add(cashPosition);
+        
+        return instrumentPositions;
     }
     
     @Override

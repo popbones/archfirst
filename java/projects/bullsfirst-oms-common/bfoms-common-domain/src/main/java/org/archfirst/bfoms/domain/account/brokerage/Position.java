@@ -15,6 +15,7 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
@@ -86,23 +87,23 @@ public class Position {
     @XmlElement(name = "Child", required = true)
     private List<Position> children;
 
-    // ----- Constructors -----
-    public Position() {
-    }
-
-    public Position(Long accountId, String accountName) {
+    // ----- Commands -----
+    public void setInstrumentPosition(
+            Long accountId,
+            String accountName,
+            String instrumentSymbol,
+            String instrumentName,
+            Money lastTrade) {
         this.accountId = accountId;
         this.accountName = accountName;
-    }
-
-    // ----- Commands -----
-    public void setCashPosition(Money marketValue) {
-        this.instrumentSymbol = Constants.CASH_INSTRUMENT_SYMBOL;
-        this.instrumentName = Constants.CASH_INSTRUMENT_NAME;
-        this.marketValue = marketValue;
+        this.instrumentSymbol = instrumentSymbol;
+        this.instrumentName = instrumentName;
+        this.lastTrade = lastTrade;
     }
     
     public void setLotPosition(
+            Long accountId,
+            String accountName,
             String instrumentSymbol,
             String instrumentName,
             Long lotId,
@@ -110,6 +111,8 @@ public class Position {
             DecimalQuantity quantity,
             Money lastTrade,
             Money pricePaid) {
+        this.accountId = accountId;
+        this.accountName = accountName;
         this.instrumentSymbol = instrumentSymbol;
         this.instrumentName = instrumentName;
         this.lotId = lotId;
@@ -125,7 +128,37 @@ public class Position {
         this.gainPercent = gain.getPercentage(totalCost, Constants.GAIN_SCALE);
     }
     
+    public void setCashPosition(
+            Long accountId,
+            String accountName,
+            Money marketValue) {
+        this.accountId = accountId;
+        this.accountName = accountName;
+        this.instrumentSymbol = Constants.CASH_INSTRUMENT_SYMBOL;
+        this.instrumentName = Constants.CASH_INSTRUMENT_NAME;
+        this.marketValue = marketValue;
+    }
+    
+    public void calculateInstrumentPosition() {
+        quantity = new DecimalQuantity();
+        totalCost = new Money("0.00");
+        
+        for (Position child : children) {
+            quantity = quantity.plus(child.getQuantity());
+            totalCost = totalCost.plus(child.getTotalCost());
+        }
+        
+        marketValue = lastTrade.times(quantity).scaleToCurrency();
+        pricePaid = totalCost.div(quantity, Constants.PRICE_SCALE);
+
+        gain = marketValue.minus(totalCost);
+        gainPercent = gain.getPercentage(totalCost, Constants.GAIN_SCALE);
+    }
+
     public void addChild(Position position) {
+        if (this.children == null) {
+            this.children = new ArrayList<Position>();
+        }
         this.children.add(position);
     }
     
