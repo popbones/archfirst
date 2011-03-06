@@ -46,7 +46,7 @@
                     CellStyle="{StaticResource CenterAlignedCellStyle}" />
                 <sdk:DataGridTextColumn
                     Header="Quantity"
-                    Binding="{Binding Path=Quantity}"
+                    Binding="{Binding Path=Quantity, Converter={StaticResource DecimalWipeZeroConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}" />
                 <sdk:DataGridTextColumn

@@ -6,6 +6,7 @@
 
     <fmwkConverters:BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
     <fmwkConverters:DecimalToPercentageConverter x:Key="DecimalToPercentageConverter" />
+    <fmwkConverters:DecimalWipeZeroConverter x:Key="DecimalWipeZeroConverter" />
     <omsConverters:MoneyConverter x:Key="MoneyConverter" />
 
 </ResourceDictionary>
