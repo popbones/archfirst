@@ -72,7 +72,7 @@
                         <DataTemplate>
                             <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
                                 Content="Edit"
-                                Visibility="{Binding Path=EditPermission, Converter={StaticResource bool2VisibilityConverter}}"
+                                Visibility="{Binding Path=EditPermission, Converter={StaticResource Bool2VisibilityConverter}}"
                                 Command="{Binding EditAccountCommand, Source={StaticResource ViewModel}}"
                                 CommandParameter="{Binding}" />
                         </DataTemplate>

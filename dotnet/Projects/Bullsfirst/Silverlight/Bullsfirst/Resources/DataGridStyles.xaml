@@ -68,7 +68,7 @@
                             Cursor="{TemplateBinding Cursor}"
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                            Margin="{TemplateBinding Padding}" />
+                            Margin="10 0 7 0" />
 
                         <!-- Sort Icon -->
                         <Path
@@ -165,6 +165,13 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+    </Style>
+
+    <!-- Left Aligned DataGridColumnHeader Style-->
+    <Style x:Key="LeftAlignedColumnHeaderStyle"
+           TargetType="primitives:DataGridColumnHeader"
+           BasedOn="{StaticResource DataGridColumnHeaderStyle}">
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
     </Style>
 
     <!-- Center Aligned DataGridColumnHeader Style-->

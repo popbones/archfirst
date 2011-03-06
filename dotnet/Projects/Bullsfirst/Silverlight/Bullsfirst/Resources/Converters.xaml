@@ -4,7 +4,8 @@
     xmlns:fmwkConverters="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
     xmlns:omsConverters="clr-namespace:Bullsfirst.InterfaceOut.Oms.Converters;assembly=Bullsfirst.InterfaceOut.Oms">
 
-    <fmwkConverters:BooleanToVisibilityConverter x:Key="bool2VisibilityConverter" />
+    <fmwkConverters:BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
+    <fmwkConverters:DecimalToPercentageConverter x:Key="DecimalToPercentageConverter" />
     <omsConverters:MoneyConverter x:Key="MoneyConverter" />
 
 </ResourceDictionary>
