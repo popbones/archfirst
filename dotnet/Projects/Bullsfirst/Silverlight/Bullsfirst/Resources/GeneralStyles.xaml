@@ -96,6 +96,7 @@
     </Style>
 
     <!-- PlusMinus ToggleButton Style -->
+    <!-- See http://stackoverflow.com/questions/5241052/silverlight-togglebutton-with-images -->
     <Style x:Key="PlusMinusToggleButtonStyle" TargetType="ToggleButton">
         <Setter Property="Template">
             <Setter.Value>
@@ -105,21 +106,25 @@
                             <VisualStateGroup x:Name="CheckStates">
                                 <VisualState x:Name="Unchecked">
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="UncheckedVisual" Storyboard.TargetProperty="Opacity" To="0" Duration="1" />
-                                        <DoubleAnimation Storyboard.TargetName="CheckedVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="UncheckedVisual" Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Checked">
                                     <Storyboard>
-                                        <DoubleAnimation Storyboard.TargetName="UncheckedVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
-                                        <DoubleAnimation Storyboard.TargetName="CheckedVisual" Storyboard.TargetProperty="Opacity" To="0" Duration="1" />
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CheckedVisual" Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <Grid>
-                            <Image x:Name="UncheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/plus.png" Stretch="None" />
-                            <Image x:Name="CheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/minus.png" Stretch="None" />
+                            <Image x:Name="UncheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/plus.png" Stretch="None" Opacity="0" />
+                            <Image x:Name="CheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/minus.png" Stretch="None" Opacity="0" />
                         </Grid>
                     </Grid>
                 </ControlTemplate>
