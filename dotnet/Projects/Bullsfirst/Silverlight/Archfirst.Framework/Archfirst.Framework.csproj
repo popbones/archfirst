@@ -52,6 +52,7 @@
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Controls.Data, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
@@ -68,6 +69,7 @@
     <Compile Include="SilverlightHelpers\BooleanToVisibilityConverter.cs" />
     <Compile Include="SilverlightHelpers\DecimalToPercentageConverter.cs" />
     <Compile Include="SilverlightHelpers\DecimalWipeZeroConverter.cs" />
+    <Compile Include="SilverlightHelpers\ExpandRowAction.cs" />
     <Compile Include="SilverlightHelpers\PasswordChangedBahvior.cs" />
     <Compile Include="SilverlightHelpers\TextChangedBahvior.cs" />
   </ItemGroup>

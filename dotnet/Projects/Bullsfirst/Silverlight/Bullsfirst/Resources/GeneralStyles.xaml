@@ -95,4 +95,36 @@
         <Setter Property="Foreground" Value="Red" />
     </Style>
 
+    <!-- PlusMinus ToggleButton Style -->
+    <Style x:Key="PlusMinusToggleButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="UncheckedVisual" Storyboard.TargetProperty="Opacity" To="0" Duration="1" />
+                                        <DoubleAnimation Storyboard.TargetName="CheckedVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimation Storyboard.TargetName="UncheckedVisual" Storyboard.TargetProperty="Opacity" To="1" Duration="0" />
+                                        <DoubleAnimation Storyboard.TargetName="CheckedVisual" Storyboard.TargetProperty="Opacity" To="0" Duration="1" />
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <Image x:Name="UncheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/plus.png" Stretch="None" />
+                            <Image x:Name="CheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/minus.png" Stretch="None" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

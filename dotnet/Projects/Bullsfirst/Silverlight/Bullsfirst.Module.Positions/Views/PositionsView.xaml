@@ -5,6 +5,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
     xmlns:infraControls="clr-namespace:Bullsfirst.Infrastructure.Controls;assembly=Bullsfirst.Infrastructure"
     mc:Ignorable="d"
     d:DesignHeight="500" d:DesignWidth="950">
@@ -26,7 +28,7 @@
         <sdk:DataGrid
             Grid.Row="1"
             ItemsSource="{Binding UserContext.SelectedAccount.Position}"
-            RowDetailsVisibilityMode="VisibleWhenSelected"
+            RowDetailsVisibilityMode="Collapsed"
             AutoGenerateColumns="False"
             HorizontalAlignment="Left"
             RowHeight="32"
@@ -35,6 +37,21 @@
             ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
             RowStyle="{StaticResource DataGridRowStyle}">
             <sdk:DataGrid.Columns>
+                <sdk:DataGridTemplateColumn
+                    HeaderStyle="{StaticResource LeftAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource LeftAlignedCellStyle}">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ToggleButton Style="{StaticResource PlusMinusToggleButtonStyle}">
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="Click">
+                                        <helpers:ExpandRowAction />
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </ToggleButton>
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
                 <sdk:DataGridTextColumn
                     Header="Name"
                     Binding="{Binding InstrumentName}"
@@ -81,7 +98,7 @@
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="Gain.Amount" />
                 <sdk:DataGridTextColumn
-                    Header="GainPercent"
+                    Header="Gain %"
                     Binding="{Binding GainPercent, Converter={StaticResource DecimalToPercentageConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}" />
