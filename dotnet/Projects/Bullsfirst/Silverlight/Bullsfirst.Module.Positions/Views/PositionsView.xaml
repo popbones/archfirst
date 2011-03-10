@@ -8,8 +8,13 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
     xmlns:infraControls="clr-namespace:Bullsfirst.Infrastructure.Controls;assembly=Bullsfirst.Infrastructure"
+    xmlns:local="clr-namespace:Bullsfirst.Module.Positions.Views"
     mc:Ignorable="d"
     d:DesignHeight="500" d:DesignWidth="950">
+    
+    <UserControl.Resources>
+        <local:ExpandCollapseVisibilityConverter x:Key="ExpandCollapseVisibilityConverter" />
+    </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" Background="White" Margin="20 10 20 10">
 
@@ -45,7 +50,8 @@
                     Width="30">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <ToggleButton Style="{StaticResource PlusMinusToggleButtonStyle}">
+                            <ToggleButton Style="{StaticResource ExpandCollapseButtonStyle}"
+                                          Visibility="{Binding Converter={StaticResource ExpandCollapseVisibilityConverter}}">
                                 <i:Interaction.Triggers>
                                     <i:EventTrigger EventName="Click">
                                         <helpers:ExpandRowAction />
@@ -127,7 +133,8 @@
                         CanUserReorderColumns="False"
                         CanUserResizeColumns="False"
                         HorizontalScrollBarVisibility="Hidden"
-                        Background="LightBlue">
+                        BorderThickness="0"
+                        RowStyle="{StaticResource DataGridRowStyle}">
                         <sdk:DataGrid.Columns>
                             <sdk:DataGridTextColumn
                                 Binding="{Binding LotCreationTime, Converter={StaticResource DateTimeToDateStringConverter}}"

@@ -95,9 +95,9 @@
         <Setter Property="Foreground" Value="Red" />
     </Style>
 
-    <!-- PlusMinus ToggleButton Style -->
+    <!-- Expand/Collapse Button Style -->
     <!-- See http://stackoverflow.com/questions/5241052/silverlight-togglebutton-with-images -->
-    <Style x:Key="PlusMinusToggleButtonStyle" TargetType="ToggleButton">
+    <Style x:Key="ExpandCollapseButtonStyle" TargetType="ToggleButton">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
