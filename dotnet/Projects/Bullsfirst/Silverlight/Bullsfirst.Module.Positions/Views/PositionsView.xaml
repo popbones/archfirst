@@ -74,48 +74,48 @@
                     Binding="{Binding InstrumentSymbol}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource CenterAlignedCellStyle}"
-                    Width="70" />
+                    Width="55" />
                 <sdk:DataGridTextColumn
                     Header="Quantity"
                     Binding="{Binding Quantity, Converter={StaticResource DecimalWipeZeroConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
-                    Width="75" />
+                    Width="60" />
                 <sdk:DataGridTextColumn
                     Header="Last Trade"
                     Binding="{Binding LastTrade, Converter={StaticResource MoneyConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="LastTrade.Amount"
-                    Width="85" />
+                    Width="75" />
                 <sdk:DataGridTextColumn
                     Header="Market Value"
                     Binding="{Binding MarketValue, Converter={StaticResource MoneyConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="MarketValue.Amount"
-                    Width="115" />
+                    Width="110" />
                 <sdk:DataGridTextColumn
                     Header="Price Paid"
                     Binding="{Binding PricePaid, Converter={StaticResource MoneyConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="PricePaid.Amount"
-                    Width="85" />
+                    Width="75" />
                 <sdk:DataGridTextColumn
                     Header="Total Cost"
                     Binding="{Binding TotalCost, Converter={StaticResource MoneyConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="TotalCost.Amount"
-                    Width="115" />
+                    Width="110" />
                 <sdk:DataGridTextColumn
                     Header="Gain"
                     Binding="{Binding Gain, Converter={StaticResource MoneyConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="Gain.Amount"
-                    Width="115" />
+                    Width="110" />
                 <sdk:DataGridTextColumn
                     Header="Gain %"
                     Binding="{Binding GainPercent, Converter={StaticResource DecimalToPercentageConverter}}"
@@ -126,7 +126,7 @@
                     Header="Actions"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource CenterAlignedCellStyle}"
-                    Width="80">
+                    Width="60">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -181,43 +181,43 @@
                             <sdk:DataGridTextColumn
                                 Binding="{Binding InstrumentSymbol}"
                                 CellStyle="{StaticResource CenterAlignedCellStyle}"
-                                Width="70" />
+                                Width="55" />
                             <sdk:DataGridTextColumn
                                 Binding="{Binding Quantity, Converter={StaticResource DecimalWipeZeroConverter}}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}"
-                                Width="75" />
+                                Width="60" />
                             <sdk:DataGridTextColumn
                                 Binding="{Binding LastTrade, Converter={StaticResource MoneyConverter}}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}"
                                 SortMemberPath="LastTrade.Amount"
-                                Width="85" />
+                                Width="75" />
                             <sdk:DataGridTextColumn
                                 Binding="{Binding MarketValue, Converter={StaticResource MoneyConverter}}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}"
                                 SortMemberPath="MarketValue.Amount"
-                                Width="115" />
+                                Width="110" />
                             <sdk:DataGridTextColumn
                                 Binding="{Binding PricePaid, Converter={StaticResource MoneyConverter}}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}"
                                 SortMemberPath="PricePaid.Amount"
-                                Width="85" />
+                                Width="75" />
                             <sdk:DataGridTextColumn
                                 Binding="{Binding TotalCost, Converter={StaticResource MoneyConverter}}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}"
                                 SortMemberPath="TotalCost.Amount"
-                                Width="115" />
+                                Width="110" />
                             <sdk:DataGridTextColumn
                                 Binding="{Binding Gain, Converter={StaticResource MoneyConverter}}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}"
                                 SortMemberPath="Gain.Amount"
-                                Width="115" />
+                                Width="110" />
                             <sdk:DataGridTextColumn
                                 Binding="{Binding GainPercent, Converter={StaticResource DecimalToPercentageConverter}}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}"
                                 Width="80" />
                             <sdk:DataGridTemplateColumn
                                 CellStyle="{StaticResource LeftAlignedCellStyle}"
-                                Width="80">
+                                Width="60">
                                 <sdk:DataGridTemplateColumn.CellTemplate>
                                     <DataTemplate>
                                     </DataTemplate>
