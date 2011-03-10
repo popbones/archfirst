@@ -36,6 +36,7 @@
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTemplateColumn
                     Header="Name"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource LeftAlignedCellStyle}"
                     SortMemberPath="Name">
                     <sdk:DataGridTemplateColumn.CellTemplate>

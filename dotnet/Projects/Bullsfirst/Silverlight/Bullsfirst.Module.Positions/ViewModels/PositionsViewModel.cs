@@ -13,8 +13,11 @@
  * limitations under the License.
  */
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using Bullsfirst.InterfaceOut.Oms.Domain;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Positions.Interfaces;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.ViewModel;
 
@@ -34,6 +37,32 @@ namespace Bullsfirst.Module.Positions.ViewModels
             logger.Log("PositionsViewModel.PositionsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
             this.UserContext = userContext;
+
+            BuyCommand = new DelegateCommand<object>(this.CreateBuyOrderExecute);
+            SellCommand = new DelegateCommand<object>(this.CreateSellOrderExecute);
+        }
+
+        #endregion
+
+        #region BuyCommand and SellCommand
+
+        public DelegateCommand<object> BuyCommand { get; set; }
+        public DelegateCommand<object> SellCommand { get; set; }
+
+        private void CreateBuyOrderExecute(object dummyObject)
+        {
+            CreateOrderExecute(dummyObject, OrderSide.Buy);
+        }
+
+        private void CreateSellOrderExecute(object dummyObject)
+        {
+            CreateOrderExecute(dummyObject, OrderSide.Sell);
+        }
+
+        private void CreateOrderExecute(object dummyObject, OrderSide side)
+        {
+            Position position = (Position)dummyObject;
+            Debug.WriteLine(side + " " + position.Quantity + " of " + position.InstrumentSymbol);
         }
 
         #endregion

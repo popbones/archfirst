@@ -64,6 +64,7 @@
     <Compile Include="PositionsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\PositionsViewModel.cs" />
+    <Compile Include="Views\BuySellVisibilityConverter.cs" />
     <Compile Include="Views\ExpandCollapseVisibilityConverter.cs" />
     <Compile Include="Views\PositionsView.xaml.cs">
       <DependentUpon>PositionsView.xaml</DependentUpon>

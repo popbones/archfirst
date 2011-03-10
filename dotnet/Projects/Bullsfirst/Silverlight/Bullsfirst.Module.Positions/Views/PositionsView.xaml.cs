@@ -24,16 +24,18 @@ namespace Bullsfirst.Module.Positions.Views
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class PositionsView : UserControl
     {
-        public PositionsView()
+        /// <summary>
+        /// Importing constructor is the easiest way to add the ViewModel as a resource.
+        /// This is needed to fire commands from the DataGridTemplateColumn in the XAML
+        /// file for this view. See http://compositewpf.codeplex.com/discussions/246631.
+        /// </summary>
+        [ImportingConstructor]
+        public PositionsView(IPositionsViewModel viewModel)
         {
             Debug.WriteLine("[Debug] PositionsView.PositionsView()");
+            this.DataContext = viewModel;
+            this.Resources.Add("ViewModel", viewModel);
             InitializeComponent();
-        }
-
-        [Import]
-        public IPositionsViewModel ViewModel
-        {
-            set { this.DataContext = value; }
         }
     }
 }

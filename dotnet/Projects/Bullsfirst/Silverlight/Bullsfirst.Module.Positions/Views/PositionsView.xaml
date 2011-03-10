@@ -14,6 +14,7 @@
     
     <UserControl.Resources>
         <local:ExpandCollapseVisibilityConverter x:Key="ExpandCollapseVisibilityConverter" />
+        <local:BuySellVisibilityConverter x:Key="BuySellVisibilityConverter" />
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" Background="White" Margin="20 10 20 10">
@@ -76,50 +77,70 @@
                 <sdk:DataGridTextColumn
                     Header="Quantity"
                     Binding="{Binding Quantity, Converter={StaticResource DecimalWipeZeroConverter}}"
-                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     Width="75" />
                 <sdk:DataGridTextColumn
                     Header="Last Trade"
                     Binding="{Binding LastTrade, Converter={StaticResource MoneyConverter}}"
-                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="LastTrade.Amount"
                     Width="85" />
                 <sdk:DataGridTextColumn
                     Header="Market Value"
                     Binding="{Binding MarketValue, Converter={StaticResource MoneyConverter}}"
-                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="MarketValue.Amount"
                     Width="115" />
                 <sdk:DataGridTextColumn
                     Header="Price Paid"
                     Binding="{Binding PricePaid, Converter={StaticResource MoneyConverter}}"
-                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="PricePaid.Amount"
                     Width="85" />
                 <sdk:DataGridTextColumn
                     Header="Total Cost"
                     Binding="{Binding TotalCost, Converter={StaticResource MoneyConverter}}"
-                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="TotalCost.Amount"
                     Width="115" />
                 <sdk:DataGridTextColumn
                     Header="Gain"
                     Binding="{Binding Gain, Converter={StaticResource MoneyConverter}}"
-                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="Gain.Amount"
                     Width="115" />
                 <sdk:DataGridTextColumn
                     Header="Gain %"
                     Binding="{Binding GainPercent, Converter={StaticResource DecimalToPercentageConverter}}"
-                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     Width="80" />
+                <sdk:DataGridTemplateColumn
+                    Header="Actions"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}"
+                    Width="80">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal" Visibility="{Binding Converter={StaticResource BuySellVisibilityConverter}}">
+                                <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                                    Content="Buy"
+                                    Command="{Binding BuyCommand, Source={StaticResource ViewModel}}"
+                                    CommandParameter="{Binding}" />
+                                <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                                    Content="Sell"
+                                    Command="{Binding SellCommand, Source={StaticResource ViewModel}}"
+                                    CommandParameter="{Binding}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
             </sdk:DataGrid.Columns>
             <sdk:DataGrid.RowDetailsTemplate>
                 <DataTemplate>
@@ -134,7 +155,9 @@
                         CanUserResizeColumns="False"
                         HorizontalScrollBarVisibility="Hidden"
                         BorderThickness="0"
-                        RowStyle="{StaticResource DataGridRowStyle}">
+                        RowStyle="{StaticResource DataGridRowStyle}"
+                        RowBackground="White"
+                        AlternatingRowBackground="White">
                         <sdk:DataGrid.Columns>
                             <sdk:DataGridTextColumn
                                 Binding="{Binding LotCreationTime, Converter={StaticResource DateTimeToDateStringConverter}}"
@@ -177,6 +200,14 @@
                                 Binding="{Binding GainPercent, Converter={StaticResource DecimalToPercentageConverter}}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}"
                                 Width="80" />
+                            <sdk:DataGridTemplateColumn
+                                CellStyle="{StaticResource LeftAlignedCellStyle}"
+                                Width="80">
+                                <sdk:DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                    </DataTemplate>
+                                </sdk:DataGridTemplateColumn.CellTemplate>
+                            </sdk:DataGridTemplateColumn>
                         </sdk:DataGrid.Columns>
                     </sdk:DataGrid>
                 </DataTemplate>
