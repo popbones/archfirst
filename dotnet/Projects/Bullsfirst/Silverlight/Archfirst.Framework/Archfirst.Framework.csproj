@@ -67,6 +67,7 @@
     <Compile Include="PrismHelpers\ViewExportAttribute.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SilverlightHelpers\BooleanToVisibilityConverter.cs" />
+    <Compile Include="SilverlightHelpers\DateTimeToDateStringConverter.cs" />
     <Compile Include="SilverlightHelpers\DecimalToPercentageConverter.cs" />
     <Compile Include="SilverlightHelpers\DecimalWipeZeroConverter.cs" />
     <Compile Include="SilverlightHelpers\ExpandRowAction.cs" />

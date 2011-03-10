@@ -29,7 +29,7 @@
         <Setter Property="ColumnHeaderHeight" Value="32" />
         <Setter Property="RowHeight" Value="28" />
 
-        <Setter Property="GridLinesVisibility" Value="Horizontal"/>
+        <Setter Property="GridLinesVisibility" Value="Horizontal" />
         <Setter Property="HorizontalGridLinesBrush" Value="#CCCCCC" />
 
     </Style >
@@ -210,6 +210,18 @@
                 <ControlTemplate TargetType="sdk:DataGridCell">
                     <Grid Background="{TemplateBinding Background}">
                         <ContentPresenter Style="{StaticResource LeftAlignedElementStyle}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="IndentedCellStyle" TargetType="sdk:DataGridCell">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="sdk:DataGridCell">
+                    <Grid Background="{TemplateBinding Background}">
+                        <ContentPresenter Style="{StaticResource LeftAlignedElementStyle}" Margin="40 0 7 0" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
