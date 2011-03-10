@@ -7,6 +7,7 @@
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
+    xmlns:bindings="clr-namespace:Archfirst.Framework.SilverlightMultiBinding;assembly=Archfirst.Framework"
     xmlns:infraControls="clr-namespace:Bullsfirst.Infrastructure.Controls;assembly=Bullsfirst.Infrastructure"
     xmlns:local="clr-namespace:Bullsfirst.Module.Positions.Views"
     mc:Ignorable="d"
@@ -128,7 +129,21 @@
                     Width="80">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal" Visibility="{Binding Converter={StaticResource BuySellVisibilityConverter}}">
+                            <StackPanel Orientation="Horizontal">
+                                <bindings:BindingUtil.MultiBindings>
+                                    <bindings:MultiBindings>
+                                        <bindings:MultiBinding
+                                            TargetProperty="Visibility"
+                                            Converter="{StaticResource BuySellVisibilityConverter}">
+                                            <bindings:MultiBinding.Bindings>
+                                                <bindings:BindingCollection>
+                                                    <Binding Path="UserContext.SelectedAccount" Source="{StaticResource ViewModel}" />
+                                                    <Binding />
+                                                </bindings:BindingCollection>
+                                            </bindings:MultiBinding.Bindings>
+                                        </bindings:MultiBinding>
+                                    </bindings:MultiBindings>
+                                </bindings:BindingUtil.MultiBindings>
                                 <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
                                     Content="Buy"
                                     Command="{Binding BuyCommand, Source={StaticResource ViewModel}}"

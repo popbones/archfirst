@@ -73,6 +73,10 @@
     <Compile Include="SilverlightHelpers\ExpandRowAction.cs" />
     <Compile Include="SilverlightHelpers\PasswordChangedBahvior.cs" />
     <Compile Include="SilverlightHelpers\TextChangedBahvior.cs" />
+    <Compile Include="SilverlightMultiBinding\BindingUtil.cs" />
+    <Compile Include="SilverlightMultiBinding\IMultiValueConverter.cs" />
+    <Compile Include="SilverlightMultiBinding\MultiBinding.cs" />
+    <Compile Include="SilverlightMultiBinding\MultiBindings.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />

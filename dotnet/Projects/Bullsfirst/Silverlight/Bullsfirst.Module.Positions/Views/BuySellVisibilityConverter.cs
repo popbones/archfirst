@@ -15,7 +15,7 @@
 using System;
 using System.Globalization;
 using System.Windows;
-using System.Windows.Data;
+using Archfirst.Framework.SilverlightMultiBinding;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 
 namespace Bullsfirst.Module.Positions.Views
@@ -23,19 +23,21 @@ namespace Bullsfirst.Module.Positions.Views
     /// <summary>
     /// Looks at Position to determine if it is tradable.
     /// </summary>
-    public class BuySellVisibilityConverter : IValueConverter
+    public class BuySellVisibilityConverter : IMultiValueConverter
     {
         /// <summary>
         /// Used to modify data as it is bound from the source object to the control.
         /// Converts Position to a Visibility
         /// </summary>
         public object Convert(
-            object value, Type targetType, object parameter, CultureInfo culture)
+            object[] values, Type targetType, object parameter, CultureInfo culture)
         {
             Visibility visibility = Visibility.Collapsed;
 
-            Position position = value as Position;
-            if (position != null &&
+            BrokerageAccountSummary summary = values[0] as BrokerageAccountSummary;
+            Position position = values[1] as Position;
+            if (summary != null && position != null &&
+                summary.TradePermission == true &&
                 (!position.InstrumentSymbol.Equals("CASH")))
             {
                 visibility = Visibility.Visible;
@@ -49,8 +51,8 @@ namespace Bullsfirst.Module.Positions.Views
         /// Converts Visibility to Position
         /// But this case never happens, so throw exception
         /// </summary>
-        public object ConvertBack(
-            object value, Type targetType, object parameter, CultureInfo culture)
+        public object[] ConvertBack(
+            object value, Type[] targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
