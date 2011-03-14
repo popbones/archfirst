@@ -16,7 +16,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using Archfirst.Framework.PrismHelpers;
-using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
+using Bullsfirst.InterfaceOut.Oms;
 using Bullsfirst.Module.Accounts;
 using Bullsfirst.Module.Home;
 using Bullsfirst.Module.LoggedInUserShell;
@@ -45,6 +45,7 @@ namespace Bullsfirst
             base.ConfigureAggregateCatalog();
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ViewExportAttribute).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(BullsfirstBootstrapper).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OmsModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(HomeModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OpenAccountModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(LoggedInUserShellModule).Assembly));
@@ -54,7 +55,6 @@ namespace Bullsfirst
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OrdersModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(TransactionHistoryModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(TransferModule).Assembly));
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SecurityWebServiceClient).Assembly));
         }
 
         protected override IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()

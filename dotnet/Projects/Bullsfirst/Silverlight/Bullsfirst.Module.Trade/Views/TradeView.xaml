@@ -47,13 +47,24 @@
         </StackPanel>
 
         <StackPanel Style="{StaticResource FormRow}">
-            <sdk:Label Content="Symbol" Target="{Binding ElementName=symbol}" Style="{StaticResource WideFormLabel}" />
-            <TextBox x:Name="symbol" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Path=OrderParams.Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
-                <i:Interaction.Behaviors>
-                    <helpers:TextChangedBahvior />
-                </i:Interaction.Behaviors>
-            </TextBox>
+            <sdk:Label Content="Symbol" Target="{Binding ElementName=symbolField}" Style="{StaticResource WideFormLabel}" />
+            <sdk:AutoCompleteBox x:Name="symbolField" TextBoxStyle="{StaticResource WideFormTextBox}"
+                Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                ItemsSource="{Binding Path=ReferenceData.Instruments}"
+                FilterMode="Custom">
+                <sdk:AutoCompleteBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Width="250">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="50" />
+                                <ColumnDefinition Width="200" />
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="{Binding Symbol}" />
+                            <TextBlock Grid.Column="1" Text="{Binding Name}" />
+                        </Grid>
+                    </DataTemplate>
+                </sdk:AutoCompleteBox.ItemTemplate>
+            </sdk:AutoCompleteBox>
             <TextBlock Text="Last Trade" Style="{StaticResource WideFormInfoBlock}"
                 Visibility="{Binding Path=LastTrade, Converter={StaticResource lastTradeToVisibilityConverter}}" />
             <TextBlock Text="{Binding Path=LastTrade}" Style="{StaticResource WideFormInfoBlock}"

@@ -16,6 +16,7 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows.Controls;
 using Archfirst.Framework.PrismHelpers;
+using Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference;
 using Bullsfirst.Module.Trade.Interfaces;
 
 namespace Bullsfirst.Module.Trade.Views
@@ -28,12 +29,34 @@ namespace Bullsfirst.Module.Trade.Views
         {
             Debug.WriteLine("[Debug] TradeView.TradeView()");
             InitializeComponent();
+            symbolField.ItemFilter += InstrumentFilter;
         }
 
         [Import]
         public ITradeViewModel ViewModel
         {
             set { this.DataContext = value; }
+        }
+
+        /// <summary>
+        /// Predicate used for filtering instruments for a given search string
+        /// </summary>
+        /// <param name="search">The string used for filtering</param>
+        /// <param name="value">The instrument that is being compared with the search parameter</param>
+        /// <returns></returns>
+        bool InstrumentFilter(string search, object value)
+        {
+            Instrument instrument = value as Instrument;
+            if (instrument != null)
+            {
+                search = search.ToUpper();
+                return (instrument.Symbol.ToUpper().Contains(search) ||
+                        instrument.Name.ToUpper().Contains(search));
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

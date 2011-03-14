@@ -30,11 +30,13 @@ namespace Bullsfirst.Module.Trade.ViewModels
         [ImportingConstructor]
         public TradeViewModel(
             ILoggerFacade logger,
-            UserContext userContext)
+            UserContext userContext,
+            ReferenceData referenceData)
         {
             logger.Log("TradeViewModel.TradeViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
             this.UserContext = userContext;
+            this.ReferenceData = referenceData;
         }
 
         #endregion
@@ -43,6 +45,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
 
         private ILoggerFacade _logger;
         public UserContext UserContext { get; set; }
+        public ReferenceData ReferenceData { get; set; }
 
         public string ViewTitle
         {
@@ -60,6 +63,17 @@ namespace Bullsfirst.Module.Trade.ViewModels
                     _lastTrade = value;
                     this.RaisePropertyChanged("LastTrade");
                 }
+            }
+        }
+
+        private string _symbol;
+        public string Symbol
+        {
+            get { return _symbol; }
+            set
+            {
+                _symbol = value;
+                this.RaisePropertyChanged("Symbol");
             }
         }
 
