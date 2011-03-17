@@ -50,13 +50,13 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _tradingService = tradingService;
+            _marketDataService = marketDataService;
             this.UserContext = userContext;
             this.ReferenceData = referenceData;
 
             _tradingService.TransferCashCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             _tradingService.TransferSecuritiesCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             _tradingService.AddExternalAccountCompleted += new EventHandler<AddExternalAccountCompletedEventArgs>(AddExternalAccountCallback);
-            _marketDataService = marketDataService;
             _marketDataService.GetMarketPriceCompleted +=
                 new EventHandler<InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs>(GetMarketPriceCallback);
             TransferCommand = new DelegateCommand<object>(this.TransferExecute, this.CanTransferExecute);

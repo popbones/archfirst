@@ -13,35 +13,81 @@
  * limitations under the License.
  */
 using System;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
+using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Trade.Interfaces;
+using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.ViewModel;
 
 namespace Bullsfirst.Module.Trade.ViewModels
 {
     [Export(typeof(ITradeViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]
-    public class TradeViewModel : NotificationObject, ITradeViewModel
+    public class TradeViewModel : BaseDataValidator, ITradeViewModel
     {
         #region Construction
 
         [ImportingConstructor]
         public TradeViewModel(
             ILoggerFacade logger,
+            IEventAggregator eventAggregator,
             Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync marketDataService,
             UserContext userContext,
             ReferenceData referenceData)
         {
             logger.Log("TradeViewModel.TradeViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _eventAggregator = eventAggregator;
             _marketDataService = marketDataService;
-            _marketDataService.GetMarketPriceCompleted +=
-                new EventHandler<InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs>(GetMarketPriceCallback);
             this.UserContext = userContext;
             this.ReferenceData = referenceData;
+
+            _marketDataService.GetMarketPriceCompleted +=
+                new EventHandler<InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs>(GetMarketPriceCallback);
+            PreviewOrderCommand = new DelegateCommand<object>(this.PreviewOrderExecute, this.CanPreviewOrderExecute);
+            this.PropertyChanged += this.OnPropertyChanged;
+            this.ValidateAll();
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            this.Validate(e.PropertyName);
+            this.PreviewOrderCommand.RaiseCanExecuteChanged();
+        }
+
+        #endregion
+
+        #region PreviewOrderCommand
+
+        public DelegateCommand<object> PreviewOrderCommand { get; set; }
+
+        private bool CanPreviewOrderExecute(object dummyObject)
+        {
+            return this.CanCommandExecute();
+        }
+
+        private void PreviewOrderExecute(object dummyObject)
+        {
+            // Send PreviewOrderRequestEvent to create the PreviewOrder dialog
+            PreviewOrderRequest request =
+                new PreviewOrderRequest {
+                    Symbol = Symbol,
+                    ResponseHandler = PreviewOrderResponseHandler
+                };
+            _eventAggregator.GetEvent<PreviewOrderRequestEvent>().Publish(request);
+        }
+
+        private void PreviewOrderResponseHandler(PreviewOrderResponse response)
+        {
+            if (response.Result == false) return;
+
+            // Place the order
+            Debug.WriteLine("---> Place order");
         }
 
         #endregion
@@ -62,11 +108,11 @@ namespace Bullsfirst.Module.Trade.ViewModels
         {
             if (e.Error != null)
             {
-                // this.StatusMessage = e.Error.Message;
+                this.StatusMessage = e.Error.Message;
             }
             else
             {
-                // this.StatusMessage = null;
+                this.StatusMessage = null;
                 LastTrade = new Money
                 {
                     Amount = e.Result.Price.Amount,
@@ -77,9 +123,25 @@ namespace Bullsfirst.Module.Trade.ViewModels
 
         #endregion
 
+        #region IDataErrorInfo implementation
+
+        private void ValidateAll()
+        {
+        }
+
+        private void Validate(string propertyName)
+        {
+            switch (propertyName)
+            {
+            }
+        }
+
+        #endregion
+
         #region Members
 
         private ILoggerFacade _logger;
+        private IEventAggregator _eventAggregator;
         private Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync _marketDataService;
         public UserContext UserContext { get; set; }
         public ReferenceData ReferenceData { get; set; }
@@ -111,6 +173,17 @@ namespace Bullsfirst.Module.Trade.ViewModels
                     _lastTrade = value;
                     this.RaisePropertyChanged("LastTrade");
                 }
+            }
+        }
+
+        private string _statusMessage;
+        public string StatusMessage
+        {
+            get { return _statusMessage; }
+            set
+            {
+                _statusMessage = value;
+                this.RaisePropertyChanged("StatusMessage");
             }
         }
 

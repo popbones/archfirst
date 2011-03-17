@@ -118,6 +118,7 @@
             <CheckBox x:Name="allOrNone" Content="All-or-none" Style="{StaticResource WideFormCheckBox}"
                       IsChecked="{Binding Path=OrderParams.AllOrNone, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         </StackPanel>
+        -->
 
         <StackPanel Style="{StaticResource TallFormRow}">
             <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
@@ -128,7 +129,6 @@
             <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
             <TextBlock Text="{Binding Path=StatusMessage}" Style="{StaticResource WideStatusMessage}" />
         </StackPanel>
-        -->
 
     </StackPanel>
 

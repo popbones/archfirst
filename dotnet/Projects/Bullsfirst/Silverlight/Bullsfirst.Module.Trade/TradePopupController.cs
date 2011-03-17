@@ -1,4 +1,4 @@
-﻿/* Copyright 2010 Archfirst
+﻿/* Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,24 +13,26 @@
  * limitations under the License.
  */
 using System.ComponentModel.Composition;
-using Microsoft.Practices.Prism.Logging;
-using Microsoft.Practices.Prism.MefExtensions.Modularity;
-using Microsoft.Practices.Prism.Modularity;
+using Bullsfirst.Module.Trade.Views;
+using Microsoft.Practices.Prism.Events;
 
 namespace Bullsfirst.Module.Trade
 {
-    [ModuleExport(typeof(TradeModule))]
-    public class TradeModule : IModule
+    [Export]
+    [PartCreationPolicy(CreationPolicy.Shared)]
+    public class TradePopupController
     {
-        [Import]
-        public ILoggerFacade Logger;
-
-        [Import]
-        public TradePopupController controller;  // Ensures controller creation
-
-        public void Initialize()
+        [ImportingConstructor]
+        public TradePopupController(IEventAggregator eventAggregator)
         {
-            Logger.Log("TradeModule.Initialize()", Category.Debug, Priority.Low);
+            eventAggregator.GetEvent<PreviewOrderRequestEvent>().Subscribe(
+                OnPreviewOrderRequest, ThreadOption.UIThread, true);
+        }
+
+        private void OnPreviewOrderRequest(PreviewOrderRequest request)
+        {
+            PreviewOrderPopup popup = new PreviewOrderPopup(request);
+            popup.Show();         
         }
     }
 }
