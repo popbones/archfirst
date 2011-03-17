@@ -67,7 +67,7 @@
             </sdk:AutoCompleteBox>
             <TextBlock Text="Last Trade" Style="{StaticResource WideFormInfoBlock}"
                 Visibility="{Binding Path=LastTrade, Converter={StaticResource lastTradeToVisibilityConverter}}" />
-            <TextBlock Text="{Binding Path=LastTrade}" Style="{StaticResource WideFormInfoBlock}"
+            <TextBlock Text="{Binding Path=LastTrade, Converter={StaticResource MoneyConverter}}" Style="{StaticResource WideFormInfoBlock}"
                 Visibility="{Binding Path=LastTrade, Converter={StaticResource lastTradeToVisibilityConverter}}" />
         </StackPanel>
 

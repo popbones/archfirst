@@ -5,12 +5,18 @@
         <bindings>
             <basicHttpBinding>
                 <binding
-                    name="ReferenceDataWebServicePortBinding"
+                    name="MarketDataWebServicePortBinding"
                     maxBufferSize="2147483647"
                     maxReceivedMessageSize="2147483647">
                     <security mode="None" />
                 </binding>
-                <binding
+              <binding
+                  name="ReferenceDataWebServicePortBinding"
+                  maxBufferSize="2147483647"
+                  maxReceivedMessageSize="2147483647">
+                <security mode="None" />
+              </binding>
+              <binding
                     name="SecurityWebServicePortBinding"
                     maxBufferSize="2147483647"
                     maxReceivedMessageSize="2147483647">
@@ -32,6 +38,12 @@
                 binding="basicHttpBinding"
                 bindingConfiguration="ReferenceDataWebServicePortBinding"
                 contract="ReferenceDataServiceReference.ReferenceDataWebService" />
+            <endpoint
+                name="MarketDataWebServicePort"
+                address="http://localhost:8080/bfexch-javaee/MarketDataService"
+                binding="basicHttpBinding"
+                bindingConfiguration="MarketDataWebServicePortBinding"
+                contract="MarketDataServiceReference.MarketDataWebService" />
             <endpoint
                 name="SecurityWebServicePort"
                 address="http://localhost:8080/bfoms-javaee/SecurityService"

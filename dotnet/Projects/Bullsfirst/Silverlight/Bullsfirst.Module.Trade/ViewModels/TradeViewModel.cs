@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System;
 using System.ComponentModel.Composition;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
@@ -30,11 +31,15 @@ namespace Bullsfirst.Module.Trade.ViewModels
         [ImportingConstructor]
         public TradeViewModel(
             ILoggerFacade logger,
+            Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync marketDataService,
             UserContext userContext,
             ReferenceData referenceData)
         {
             logger.Log("TradeViewModel.TradeViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _marketDataService = marketDataService;
+            _marketDataService.GetMarketPriceCompleted +=
+                new EventHandler<InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs>(GetMarketPriceCallback);
             this.UserContext = userContext;
             this.ReferenceData = referenceData;
         }
@@ -44,12 +49,46 @@ namespace Bullsfirst.Module.Trade.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync _marketDataService;
         public UserContext UserContext { get; set; }
         public ReferenceData ReferenceData { get; set; }
 
         public string ViewTitle
         {
             get { return "Trade"; }
+        }
+
+        private string _symbol;
+        public string Symbol
+        {
+            get { return _symbol; }
+            set
+            {
+                _symbol = value;
+                this.RaisePropertyChanged("Symbol");
+                if (_symbol.Length > 0)
+                    _marketDataService.GetMarketPriceAsync(_symbol);
+                else
+                    LastTrade = null;
+            }
+        }
+
+        private void GetMarketPriceCallback(
+            object sender,
+            Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                // this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                // this.StatusMessage = null;
+                LastTrade = new Money {
+                    Amount = e.Result.Price.Amount,
+                    Currency = e.Result.Price.Currency
+                };
+            }
         }
 
         private Money _lastTrade;
@@ -63,17 +102,6 @@ namespace Bullsfirst.Module.Trade.ViewModels
                     _lastTrade = value;
                     this.RaisePropertyChanged("LastTrade");
                 }
-            }
-        }
-
-        private string _symbol;
-        public string Symbol
-        {
-            get { return _symbol; }
-            set
-            {
-                _symbol = value;
-                this.RaisePropertyChanged("Symbol");
             }
         }
 

@@ -70,6 +70,11 @@
     <Compile Include="Security\AuthenticationBehavior.cs" />
     <Compile Include="Domain\Credentials.cs" />
     <Compile Include="Domain\UserContext.cs" />
+    <Compile Include="Service References\MarketDataServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\ReferenceDataServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -90,6 +95,16 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Service References\MarketDataServiceReference\Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MarketDataServiceReference\Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.GetMarketPricesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\MarketDataServiceReference\MarketDataService.wsdl" />
+    <None Include="Service References\MarketDataServiceReference\MarketDataService.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ReferenceDataServiceReference\Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference.GetInstrumentsResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -146,6 +161,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\MarketDataServiceReference\" />
     <WCFMetadataStorage Include="Service References\ReferenceDataServiceReference\" />
     <WCFMetadataStorage Include="Service References\SecurityServiceReference\" />
     <WCFMetadataStorage Include="Service References\TradingServiceReference\" />
@@ -170,6 +186,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\TradingServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MarketDataServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MarketDataServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\MarketDataServiceReference\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
