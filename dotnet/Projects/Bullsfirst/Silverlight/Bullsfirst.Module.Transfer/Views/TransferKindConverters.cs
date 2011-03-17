@@ -15,15 +15,10 @@
 using System;
 using System.Windows;
 using System.Windows.Data;
+using Bullsfirst.Module.Transfer.ViewModels;
 
-namespace Bullsfirst.Module.Transfer.ViewModels
+namespace Bullsfirst.Module.Transfer.Views
 {
-    public enum TransferKind
-    {
-        Cash,
-        Securities
-    }
-
     public class TransferKindBooleanConverter : IValueConverter
     {
         /// <summary>

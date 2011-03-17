@@ -41,6 +41,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             IRegionManager regionManager,
             IEventAggregator eventAggregator,
             ITradingServiceAsync tradingService,
+            Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync marketDataService,
             UserContext userContext,
             ReferenceData referenceData)
         {
@@ -55,6 +56,9 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             _tradingService.TransferCashCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             _tradingService.TransferSecuritiesCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             _tradingService.AddExternalAccountCompleted += new EventHandler<AddExternalAccountCompletedEventArgs>(AddExternalAccountCallback);
+            _marketDataService = marketDataService;
+            _marketDataService.GetMarketPriceCompleted +=
+                new EventHandler<InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs>(GetMarketPriceCallback);
             TransferCommand = new DelegateCommand<object>(this.TransferExecute, this.CanTransferExecute);
             AddExternalAccountCommand = new DelegateCommand<object>(this.AddExternalAccountExecute);
             this.PropertyChanged += this.OnPropertyChanged;
@@ -174,6 +178,37 @@ namespace Bullsfirst.Module.Transfer.ViewModels
 
         #endregion
 
+        #region UpdateLastTrade
+
+        public void UpdateLastTrade()
+        {
+            if (_symbol.Length > 0)
+                _marketDataService.GetMarketPriceAsync(_symbol);
+            else
+                LastTrade = null;
+        }
+
+        private void GetMarketPriceCallback(
+            object sender,
+            Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                // this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                // this.StatusMessage = null;
+                LastTrade = new Money
+                {
+                    Amount = e.Result.Price.Amount,
+                    Currency = e.Result.Price.Currency
+                };
+            }
+        }
+
+        #endregion
+
         #region IDataErrorInfo implementation
 
         private void ValidateAll()
@@ -257,6 +292,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private ITradingServiceAsync _tradingService;
+        private Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync _marketDataService;
 
         public UserContext UserContext { get; set; }
         public ReferenceData ReferenceData { get; set; }
@@ -323,6 +359,20 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             {
                 _symbol = value;
                 this.RaisePropertyChanged("Symbol");
+            }
+        }
+
+        private Money _lastTrade;
+        public Money LastTrade
+        {
+            get { return _lastTrade; }
+            set
+            {
+                if (_lastTrade != value)
+                {
+                    _lastTrade = value;
+                    this.RaisePropertyChanged("LastTrade");
+                }
             }
         }
 

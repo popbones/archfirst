@@ -35,6 +35,7 @@ namespace Bullsfirst.Module.Transfer.Views
         [Import]
         public ITransferViewModel ViewModel
         {
+            get { return (ITransferViewModel)this.DataContext; }
             set { this.DataContext = value; }
         }
 
@@ -57,6 +58,11 @@ namespace Bullsfirst.Module.Transfer.Views
             {
                 return false;
             }
+        }
+
+        private void symbolField_LostFocus(object sender, System.Windows.RoutedEventArgs e)
+        {
+            ViewModel.UpdateLastTrade();
         }
     }
 }

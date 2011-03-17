@@ -4,6 +4,7 @@
  */
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -97,8 +98,20 @@ namespace Archfirst.Framework.SilverlightMultiBinding
 
                 // bind the ConvertedValue of our MultiBinding instance to the target property
                 // of our targetElement
-                Binding binding = new Binding("ConvertedValue") { Source = relay };
+                Binding binding = new Binding("ConvertedValue") {
+                    Source = relay,
+                    // Mode = relay.Mode,
+                    TargetNullValue = relay.TargetNullValue
+                };
+                Debug.WriteLine("---> MultiBindings.Initialize - "
+                    + "targetType=" + targetType
+                    + ", targetProperty=" + targetProperty
+                    + ", targetElement=" + targetElement
+                    + ", targetDependencyProperty=" + targetDependencyProperty
+                    + ", dataContext=" + targetElement.DataContext
+                    );
                 targetElement.SetBinding(targetDependencyProperty, binding);
+                Debug.WriteLine("<--- MultiBindings.Initialize");
             }
 #endif
         }

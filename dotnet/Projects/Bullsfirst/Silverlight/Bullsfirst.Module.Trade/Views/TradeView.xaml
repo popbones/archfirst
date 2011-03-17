@@ -5,7 +5,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:infraControls="clr-namespace:Bullsfirst.Infrastructure.Controls;assembly=Bullsfirst.Infrastructure"
-    xmlns:local="clr-namespace:Bullsfirst.Module.Trade.ViewModels"
+    xmlns:local="clr-namespace:Bullsfirst.Module.Trade.Views"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
     xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
@@ -13,7 +13,6 @@
     d:DesignHeight="500" d:DesignWidth="950">
 
     <UserControl.Resources>
-        <local:LastTradeToVisibilityConverter x:Key="lastTradeToVisibilityConverter" />
         <!--
         <local:OrderTypeToVisibilityConverter x:Key="orderTypeToVisibilityConverter" />
 
@@ -51,7 +50,8 @@
             <sdk:AutoCompleteBox x:Name="symbolField" TextBoxStyle="{StaticResource WideFormTextBox}"
                 Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 ItemsSource="{Binding Path=ReferenceData.Instruments}"
-                FilterMode="Custom">
+                FilterMode="Custom"
+                LostFocus="symbolField_LostFocus">
                 <sdk:AutoCompleteBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="250">
@@ -66,9 +66,9 @@
                 </sdk:AutoCompleteBox.ItemTemplate>
             </sdk:AutoCompleteBox>
             <TextBlock Text="Last Trade" Style="{StaticResource WideFormInfoBlock}"
-                Visibility="{Binding Path=LastTrade, Converter={StaticResource lastTradeToVisibilityConverter}}" />
+                Visibility="{Binding Path=LastTrade, Converter={StaticResource ObjectToVisibilityConverter}}" />
             <TextBlock Text="{Binding Path=LastTrade, Converter={StaticResource MoneyConverter}}" Style="{StaticResource WideFormInfoBlock}"
-                Visibility="{Binding Path=LastTrade, Converter={StaticResource lastTradeToVisibilityConverter}}" />
+                Visibility="{Binding Path=LastTrade, Converter={StaticResource ObjectToVisibilityConverter}}" />
         </StackPanel>
 
         <!--

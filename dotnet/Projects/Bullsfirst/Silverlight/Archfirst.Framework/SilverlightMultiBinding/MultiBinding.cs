@@ -46,6 +46,30 @@ namespace Archfirst.Framework.SilverlightMultiBinding
 
         #endregion
 
+        #region TargetNullValue dependency property
+
+        public static readonly DependencyProperty TargetNullValueProperty =
+            DependencyProperty.Register("TargetNullValue", typeof(object), typeof(MultiBinding),
+                new PropertyMetadata(null, OnTargetNullValue));
+
+        /// <summary>
+        /// This dependency property is set to ???.
+        /// </summary>
+        public object TargetNullValue
+        {
+            get { return GetValue(ConvertedValueProperty); }
+            set { SetValue(ConvertedValueProperty, value); }
+        }
+
+        private static void OnTargetNullValue(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
+        {
+            MultiBinding relay = depObj as MultiBinding;
+            Debug.Assert(relay != null);
+            relay.OnPropertyChanged("TargetNullValue");
+        }
+
+        #endregion
+
         #region CLR properties
 
         /// <summary>

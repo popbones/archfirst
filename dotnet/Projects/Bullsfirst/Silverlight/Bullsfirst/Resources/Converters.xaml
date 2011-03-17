@@ -8,6 +8,7 @@
     <fmwkConverters:DecimalToPercentageConverter x:Key="DecimalToPercentageConverter" />
     <fmwkConverters:DecimalWipeZeroConverter x:Key="DecimalWipeZeroConverter" />
     <fmwkConverters:DateTimeToDateStringConverter x:Key="DateTimeToDateStringConverter" />
+    <fmwkConverters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
     <omsConverters:MoneyConverter x:Key="MoneyConverter" />
 
 </ResourceDictionary>

@@ -1,4 +1,4 @@
-﻿/* Copyright 2010 Archfirst
+﻿/* Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,10 +13,11 @@
  * limitations under the License.
  */
 
-namespace Bullsfirst.Module.Trade.Interfaces
+namespace Bullsfirst.Module.Transfer.ViewModels
 {
-    public interface ITradeViewModel
+    public enum TransferKind
     {
-        void UpdateLastTrade();
+        Cash,
+        Securities
     }
 }

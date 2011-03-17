@@ -17,5 +17,6 @@ namespace Bullsfirst.Module.Transfer.Interfaces
 {
     public interface ITransferViewModel
     {
+        void UpdateLastTrade();
     }
 }

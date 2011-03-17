@@ -7,7 +7,7 @@
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
-    xmlns:local="clr-namespace:Bullsfirst.Module.Transfer.ViewModels"
+    xmlns:local="clr-namespace:Bullsfirst.Module.Transfer.Views"
     mc:Ignorable="d"
     d:DesignHeight="500" d:DesignWidth="950">
 
@@ -60,7 +60,8 @@
             <sdk:AutoCompleteBox x:Name="symbolField" TextBoxStyle="{StaticResource WideFormTextBox}"
                 Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 ItemsSource="{Binding Path=ReferenceData.Instruments}"
-                FilterMode="Custom">
+                FilterMode="Custom"
+                LostFocus="symbolField_LostFocus">
                 <sdk:AutoCompleteBox.ItemTemplate>
                     <DataTemplate>
                         <Grid Width="250">
@@ -74,6 +75,10 @@
                     </DataTemplate>
                 </sdk:AutoCompleteBox.ItemTemplate>
             </sdk:AutoCompleteBox>
+            <TextBlock Text="Last Trade" Style="{StaticResource WideFormInfoBlock}"
+                Visibility="{Binding Path=LastTrade, Converter={StaticResource ObjectToVisibilityConverter}}" />
+            <TextBlock Text="{Binding Path=LastTrade, Converter={StaticResource MoneyConverter}}" Style="{StaticResource WideFormInfoBlock}"
+                Visibility="{Binding Path=LastTrade, Converter={StaticResource ObjectToVisibilityConverter}}" />
         </StackPanel>
 
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">

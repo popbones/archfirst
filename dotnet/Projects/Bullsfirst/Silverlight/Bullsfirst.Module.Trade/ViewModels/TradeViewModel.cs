@@ -46,6 +46,37 @@ namespace Bullsfirst.Module.Trade.ViewModels
 
         #endregion
 
+        #region UpdateLastTrade
+
+        public void UpdateLastTrade()
+        {
+            if (_symbol.Length > 0)
+                _marketDataService.GetMarketPriceAsync(_symbol);
+            else
+                LastTrade = null;
+        }
+
+        private void GetMarketPriceCallback(
+            object sender,
+            Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                // this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                // this.StatusMessage = null;
+                LastTrade = new Money
+                {
+                    Amount = e.Result.Price.Amount,
+                    Currency = e.Result.Price.Currency
+                };
+            }
+        }
+
+        #endregion
+
         #region Members
 
         private ILoggerFacade _logger;
@@ -66,28 +97,6 @@ namespace Bullsfirst.Module.Trade.ViewModels
             {
                 _symbol = value;
                 this.RaisePropertyChanged("Symbol");
-                if (_symbol.Length > 0)
-                    _marketDataService.GetMarketPriceAsync(_symbol);
-                else
-                    LastTrade = null;
-            }
-        }
-
-        private void GetMarketPriceCallback(
-            object sender,
-            Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs e)
-        {
-            if (e.Error != null)
-            {
-                // this.StatusMessage = e.Error.Message;
-            }
-            else
-            {
-                // this.StatusMessage = null;
-                LastTrade = new Money {
-                    Amount = e.Result.Price.Amount,
-                    Currency = e.Result.Price.Currency
-                };
             }
         }
 
