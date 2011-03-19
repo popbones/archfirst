@@ -23,9 +23,11 @@ import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderTerm;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderType;
+import org.archfirst.bfoms.domain.marketdata.MarketPrice;
 import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
+import org.joda.time.DateTime;
 
 /**
  * Sell Order Creation Test
@@ -47,6 +49,10 @@ public class SellOrderCreationTest extends BaseAccountsTest {
         this.baseAccountService.transferSecurities(
                 USERNAME1, symbol, new DecimalQuantity(quantity), pricePerShare,
                 externalAccount1Id, brokerageAccount1Id);
+
+        // getOrderEstimate() requires a market price to calculate sale amount
+        marketDataService.updateMarketPrice(
+                new MarketPrice(symbol, pricePerShare, new DateTime()));
     }
     
     public String sell(String symbol, BigDecimal quantity) {
