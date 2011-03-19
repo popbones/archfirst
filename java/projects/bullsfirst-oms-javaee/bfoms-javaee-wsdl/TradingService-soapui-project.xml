@@ -671,22 +671,8 @@
    <soapenv:Header/>
    <soapenv:Body>
       <trad:GetOrders>
-         <!--Optional:-->
          <OrderCriteria>
-            <!--Optional:-->
             <AccountId>2</AccountId>
-            <!--Optional:-->
-            <Symbol>?</Symbol>
-            <!--Optional:-->
-            <OrderId>?</OrderId>
-            <!--Optional:-->
-            <FromDate>?</FromDate>
-            <!--Optional:-->
-            <ToDate>?</ToDate>
-            <!--Zero or more repetitions:-->
-            <Side>?</Side>
-            <!--Zero or more repetitions:-->
-            <Status>?</Status>
          </OrderCriteria>
       </trad:GetOrders>
    </soapenv:Body>
