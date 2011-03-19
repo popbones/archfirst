@@ -13,16 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.spec.accounts.positions;
+package org.archfirst.bfoms.spec.accounts.trading;
 
 import org.archfirst.common.springtest.AbstractTransactionalSpecTest;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
- * Positions Test
+ * Trading Test
  *
  * @author Naresh Bhatia
  */
 @ContextConfiguration(locations={"classpath:/org/archfirst/bfoms/spec/applicationContext.xml"})
-public class PositionsTest extends AbstractTransactionalSpecTest {
+public class TradingTest extends AbstractTransactionalSpecTest {
 }
