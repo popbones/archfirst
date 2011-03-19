@@ -15,6 +15,11 @@
  */
 package org.archfirst.bfoms.domain.account.brokerage.order;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 import org.archfirst.common.money.Money;
 
 /**
@@ -22,13 +27,23 @@ import org.archfirst.common.money.Money;
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "OrderEstimate")
 public class OrderEstimate {
+
+    @XmlElement(name = "Compliance", required = true)
     private OrderCompliance compliance;
+    @XmlElement(name = "EstimatedValue", required = true)
     private Money estimatedValue;
+    @XmlElement(name = "Fees", required = true)
     private Money fees;
+    @XmlElement(name = "EstimatedValueInclFees", required = true)
     private Money estimatedValueInclFees;
 
     // ----- Constructors -----
+    public OrderEstimate() {
+    }
+    
     public OrderEstimate(OrderCompliance compliance) {
         this.compliance = compliance;
     }

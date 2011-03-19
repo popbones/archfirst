@@ -185,12 +185,20 @@ public class BrokerageAccount extends BaseAccount {
         }
     }
     
-    public Long placeOrder(OrderParams params) {
+    public Order placeOrder(OrderParams params, MarketDataService marketDataService) {
+        // Check compliance
         Order order = new Order(params);
+        OrderEstimate orderEstimate =
+            this.calculateOrderEstimate(order, marketDataService);
+        if (orderEstimate.getCompliance() != OrderCompliance.Compliant) {
+            throw new IllegalArgumentException("Order is not compliant with the account");
+        }
+
+        // Place order
         order.setCreationTime(new DateTime());
         brokerageAccountRepository.persistAndFlush(order);
         this.addOrder(order);
-        return order.getId();
+        return order;
     }
     
     public void processExecutionReport(ExecutionReport executionReport) {

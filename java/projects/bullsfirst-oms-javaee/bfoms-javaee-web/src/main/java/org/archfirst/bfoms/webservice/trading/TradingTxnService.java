@@ -24,6 +24,9 @@ import javax.inject.Inject;
 import org.archfirst.bfoms.domain.account.BaseAccountService;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountSummary;
+import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountService;
@@ -86,6 +89,10 @@ public class TradingTxnService {
                 username, brokerageAccountId, params);
     }
     
+    public void cancelOrder(String username, Long orderId) {
+        this.brokerageAccountService.cancelOrder(username, orderId);
+    }
+    
     // ----- Queries and Read-Only Operations -----
     public List<BrokerageAccountSummary> getBrokerageAccountSummaries(String username) {
         return this.brokerageAccountService.getAccountSummaries(username);
@@ -93,5 +100,17 @@ public class TradingTxnService {
 
     public List<ExternalAccountSummary> getExternalAccountSummaries(String username) {
         return this.externalAccountService.getAccountSummaries(username);
+    }
+
+    public List<Order> getOrders(String username, OrderCriteria criteria) {
+        return this.brokerageAccountService.getOrders(username, criteria);
+    }
+
+    public OrderEstimate getOrderEstimate(
+            String username,
+            Long brokerageAccountId,
+            OrderParams params) {
+        return this.brokerageAccountService.getOrderEstimate(
+                username, brokerageAccountId, params);
     }
 }

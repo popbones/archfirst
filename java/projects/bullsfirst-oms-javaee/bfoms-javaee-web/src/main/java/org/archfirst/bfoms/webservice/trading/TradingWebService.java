@@ -30,6 +30,9 @@ import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountSummary;
+import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountSummary;
@@ -112,6 +115,13 @@ public class TradingWebService {
                 getUsername(), brokerageAccountId, orderParams);
     }
     
+    @WebMethod(operationName = "CancelOrder", action = "CancelOrder")
+    public void cancelOrder(
+            @WebParam(name = "OrderId")
+            Long orderId) {
+        tradingTxnService.cancelOrder(getUsername(), orderId);
+    }
+    
     // ----- Queries and Read-Only Operations -----
     @WebMethod(operationName = "GetBrokerageAccountSummaries", action = "GetBrokerageAccountSummaries")
     @WebResult(name = "BrokerageAccountSummary")
@@ -123,6 +133,25 @@ public class TradingWebService {
     @WebResult(name = "ExternalAccountSummary")
     public List<ExternalAccountSummary> getExternalAccountSummaries() {
         return this.tradingTxnService.getExternalAccountSummaries(getUsername());
+    }
+
+    @WebMethod(operationName = "GetOrders", action = "GetOrders")
+    @WebResult(name = "Order")
+    public List<Order> getOrders(
+        @WebParam(name = "OrderCriteria")
+        OrderCriteria criteria) {
+        return this.tradingTxnService.getOrders(getUsername(), criteria);
+    }
+
+    @WebMethod(operationName = "GetOrderEstimate", action = "GetOrderEstimate")
+    @WebResult(name = "OrderEstimate")
+    public OrderEstimate getOrderEstimate(
+            @WebParam(name = "BrokerageAccountId")
+            Long brokerageAccountId,
+            @WebParam(name = "OrderParams")
+            OrderParams orderParams) {
+        return tradingTxnService.getOrderEstimate(
+                getUsername(), brokerageAccountId, orderParams);
     }
 
     // ----- Helper Methods -----

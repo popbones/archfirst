@@ -27,9 +27,11 @@ import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderTerm;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderType;
+import org.archfirst.bfoms.domain.marketdata.MarketPrice;
 import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
+import org.joda.time.DateTime;
 
 /**
  * LotWithdrawalTradeTest
@@ -53,6 +55,10 @@ public class LotWithdrawalTradeTest extends BaseAccountsTest {
 
     public List<Lot> sell(String symbol, BigDecimal quantity) {
         
+        // Make sure placeOrder() can get a market price for the symbol 
+        marketDataService.updateMarketPrice(
+                new MarketPrice(symbol, new Money("10"), new DateTime()));
+
         // Place the order
         OrderParams orderParams = new OrderParams(
                 OrderSide.Sell,

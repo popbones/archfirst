@@ -23,7 +23,10 @@ import javax.inject.Inject;
 import org.archfirst.bfoms.domain.account.InvalidSymbolException;
 import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
+import org.archfirst.bfoms.domain.exchange.ExchangeTradingService;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
 import org.archfirst.bfoms.domain.security.AuthorizationException;
@@ -41,6 +44,7 @@ public class BrokerageAccountService {
     @Inject private BrokerageAccountRepository brokerageAccountRepository;
     @Inject private MarketDataService marketDataService;
     @Inject private ReferenceDataService referenceDataService;
+    @Inject private ExchangeTradingService exchangeTradingService;
     @Inject private UserRepository userRepository;
 
     // ----- Commands -----
@@ -66,9 +70,27 @@ public class BrokerageAccountService {
             throw new InvalidSymbolException();
         }
         
-        return account.placeOrder(params);
+        // Place order
+        Order order = account.placeOrder(params, marketDataService);
+        exchangeTradingService.placeOrder(order);
+        return order.getId();
     }
     
+    public void cancelOrder(
+            String username,
+            Long orderId) {
+
+        // Check authorization on account
+        Order order = brokerageAccountRepository.findOrder(orderId);
+        checkAccountAuthorization(
+                getUser(username), order.getAccount().getId(), BrokerageAccountPermission.Trade);
+        
+        // Cancel order
+        order.cancel();
+        exchangeTradingService.cancelOrder(order);
+        
+    }
+
     public void processExecutionReport(Long accountId, ExecutionReport executionReport) {
         this.findAccount(accountId).processExecutionReport(executionReport);
     }
@@ -111,12 +133,35 @@ public class BrokerageAccountService {
                 getUser(username), referenceDataService, marketDataService);
     }
     
+    public List<Order> getOrders(String username, OrderCriteria criteria) {
+
+        // Check authorization on account
+        checkAccountAuthorization(
+                getUser(username), criteria.getAccountId(), BrokerageAccountPermission.View);
+
+        return brokerageAccountRepository.findOrders(criteria);
+    }
+
+    public OrderEstimate getOrderEstimate(
+            String username,
+            Long brokerageAccountId,
+            OrderParams params) {
+
+        // Check authorization on account
+        BrokerageAccount account =  checkAccountAuthorization(
+                getUser(username), brokerageAccountId, BrokerageAccountPermission.Trade);
+
+        return account.calculateOrderEstimate(new Order(params), marketDataService);
+    }
+
     // ----- Helpers -----
     private BrokerageAccount checkAccountAuthorization(
             User user,
-            long accountId,
+            Long accountId,
             BrokerageAccountPermission requiredPermission) {
         
+        if (accountId == null)
+            throw new AuthorizationException();
         BrokerageAccount account = brokerageAccountRepository.findAccount(accountId);
         checkAccountAuthorizationHelper(user, account, requiredPermission);
         return account;

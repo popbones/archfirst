@@ -22,6 +22,11 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.domain.DomainEntity;
@@ -36,13 +41,22 @@ import org.joda.time.DateTime;
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Execution")
 @Entity
 public class Execution extends DomainEntity {
     private static final long serialVersionUID = 1L;
 
+    @XmlElement(name = "CreationTime", required = true)
     private DateTime creationTime;
+
+    @XmlElement(name = "Quantity", required = true)
     private DecimalQuantity quantity;
+
+    @XmlElement(name = "Price", required = true)
     private Money price;
+
+    @XmlTransient
     private Order order;
 
     // ----- Constructors -----

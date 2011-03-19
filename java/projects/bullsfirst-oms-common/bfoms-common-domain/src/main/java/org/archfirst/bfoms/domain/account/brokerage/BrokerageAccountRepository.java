@@ -33,6 +33,8 @@ import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.common.domain.BaseRepository;
 import org.archfirst.common.quantity.DecimalQuantity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * BrokerageAccountRepository
@@ -40,6 +42,9 @@ import org.archfirst.common.quantity.DecimalQuantity;
  * @author Naresh Bhatia
  */
 public class BrokerageAccountRepository extends BaseRepository {
+
+    private static final Logger logger =
+        LoggerFactory.getLogger(BrokerageAccountRepository.class);
 
     // ----- BrokerageAccount Methods -----
     public BrokerageAccount findAccount(Long id) {
@@ -119,6 +124,7 @@ public class BrokerageAccountRepository extends BaseRepository {
 
 
         // where accountId = criteria.getAccountId()
+        logger.debug("---> criteria.getAccountId() = {}", criteria.getAccountId());
         if (criteria.getAccountId() != null) {
             Path<BrokerageAccount> _account = _order.get(Order_.account);
             Path<Long> _accountId = _account.get(BrokerageAccount_.id);
@@ -161,12 +167,15 @@ public class BrokerageAccountRepository extends BaseRepository {
         
         @SuppressWarnings("unchecked")
         List<Order> orders = entityManager.createQuery(query).getResultList();
+        logger.debug("---> Orders retrieved = {}", orders.size());
         
         // Orders with multiple executions will be added to the above list multiple times
         // Filter out duplicates
         Set<Order> distinctOrderSet = new TreeSet<Order>(orders);
         List<Order> distinctOrderList = new ArrayList<Order>(distinctOrderSet);
 
+        logger.debug("---> Orders retrieved = {}", distinctOrderList.size());
+        
         return distinctOrderList;
     }
 

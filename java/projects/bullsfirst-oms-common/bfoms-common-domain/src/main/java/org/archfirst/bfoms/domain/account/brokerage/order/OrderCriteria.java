@@ -18,6 +18,14 @@ package org.archfirst.bfoms.domain.account.brokerage.order;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.archfirst.common.datetime.LocalDateAdapter;
 import org.joda.time.LocalDate;
 
 /**
@@ -25,14 +33,34 @@ import org.joda.time.LocalDate;
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "OrderCriteria")
 public class OrderCriteria {
+
+    @XmlElement(name = "AccountId")
     private Long accountId;
+
+    @XmlElement(name = "Symbol")
     private String symbol;
+
+    @XmlElement(name = "OrderId")
     private Long orderId;
+
+    @XmlElement(name = "FromDate")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @XmlSchemaType(name="date")
     private LocalDate fromDate;
+
+    @XmlElement(name = "ToDate")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @XmlSchemaType(name="date")
     private LocalDate toDate;
+
     // selectManyCheckbox does not work with a Set, had to use List
+    @XmlElement(name = "Side")
     private List<OrderSide> sides = new ArrayList<OrderSide>();
+
+    @XmlElement(name = "Status")
     private List<OrderStatus> statuses = new ArrayList<OrderStatus>();
 
     // ----- Commands -----

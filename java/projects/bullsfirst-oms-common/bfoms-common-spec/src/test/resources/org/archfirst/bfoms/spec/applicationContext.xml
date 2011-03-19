@@ -41,4 +41,5 @@
 
     <bean class="org.archfirst.bfoms.spec.mocks.MockReferenceDataAdapter" />
     <bean class="org.archfirst.bfoms.spec.mocks.MockMarketDataAdapter" />
+    <bean class="org.archfirst.bfoms.spec.mocks.MockExchangeTradingService" />
 </beans>

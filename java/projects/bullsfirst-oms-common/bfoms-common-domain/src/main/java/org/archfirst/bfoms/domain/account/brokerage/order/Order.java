@@ -29,13 +29,20 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountRepository;
 import org.archfirst.bfoms.domain.account.brokerage.Trade;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.util.Constants;
-import org.archfirst.bfoms.interfaceout.exchange.ExchangeAdapter;
+import org.archfirst.common.datetime.DateTimeAdapter;
 import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
@@ -50,22 +57,47 @@ import org.joda.time.DateTime;
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Order")
 @Entity
 @Table(name="Orders") // Oracle gets confused with table named "Order"
 public class Order extends DomainEntity implements Comparable<Order> {
     private static final long serialVersionUID = 1L;
     private static final Money FIXED_FEE = new Money("10.00");
     
+    @XmlElement(name = "CreationTime", required = true)
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name="dateTime")
     private DateTime creationTime;
+
+    @XmlElement(name = "Side", required = true)
     private OrderSide side;
+
+    @XmlElement(name = "Symbol", required = true)
     private String symbol;
+
+    @XmlElement(name = "Quantity", required = true)
     private DecimalQuantity quantity;
+
+    @XmlElement(name = "OrderType", required = true)
     private OrderType type;
+
+    @XmlElement(name = "LimitPrice", required = true)
     private Money limitPrice;
+
+    @XmlElement(name = "Term", required = true)
     private OrderTerm term;
+
+    @XmlElement(name = "AllOrNone", required = true)
     private boolean allOrNone;
+
+    @XmlElement(name = "OrderStatus", required = true)
     private OrderStatus status = OrderStatus.PendingNew;
+
+    @XmlTransient
     private BrokerageAccount account;
+
+    @XmlElement(name = "Execution", required = true)
     private Set<Execution> executions = new HashSet<Execution>();
     
     // ----- Constructors -----
@@ -154,17 +186,15 @@ public class Order extends DomainEntity implements Comparable<Order> {
         return trade;
     }
     
-    public void cancel(ExchangeAdapter exchangeAdapter) {
+    public void cancel() {
         OrderStatus newStatus = OrderStatus.PendingCancel;
         if (isStatusChangeValid(newStatus)) {
-            exchangeAdapter.cancelOrder(this);
+            this.status = newStatus;
         }
         else {
             throw new IllegalArgumentException(
                     "Can't change status from " + this.status + " to " + newStatus);
         }
-        
-        this.status = OrderStatus.PendingCancel;
     }
 
     public void cancelRequestRejected(OrderStatus newStatus) {
