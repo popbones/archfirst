@@ -13,7 +13,7 @@
 
         <TextBlock
             Grid.Row="0"
-            Text="{Binding Request.Symbol}" />
+            Text="{Binding OrderParams.Symbol}" />
 
         <Button
             Grid.Row="1"

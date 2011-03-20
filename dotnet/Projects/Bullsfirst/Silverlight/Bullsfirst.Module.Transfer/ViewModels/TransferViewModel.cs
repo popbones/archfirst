@@ -87,7 +87,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             if (TransferKind == TransferKind.Cash)
             {
                 _tradingService.TransferCashAsync(
-                    new Money { Amount = Amount, Currency = "USD" },
+                    MoneyFactory.Create(Amount),
                     FromAccount.AccountSummary.Id,
                     ToAccount.AccountSummary.Id);
             }
@@ -96,7 +96,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
                 _tradingService.TransferSecuritiesAsync(
                     Symbol,
                     Quantity,
-                    new Money { Amount = PricePaidPerShare, Currency = "USD" },
+                    MoneyFactory.Create(PricePaidPerShare),
                     FromAccount.AccountSummary.Id,
                     ToAccount.AccountSummary.Id);
             }

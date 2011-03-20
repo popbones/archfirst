@@ -53,6 +53,24 @@
   <message name="GetExternalAccountSummariesResponse">
     <part name="parameters" element="tns:GetExternalAccountSummariesResponse" />
   </message>
+  <message name="GetOrders">
+    <part name="parameters" element="tns:GetOrders" />
+  </message>
+  <message name="GetOrdersResponse">
+    <part name="parameters" element="tns:GetOrdersResponse" />
+  </message>
+  <message name="CancelOrder">
+    <part name="parameters" element="tns:CancelOrder" />
+  </message>
+  <message name="CancelOrderResponse">
+    <part name="parameters" element="tns:CancelOrderResponse" />
+  </message>
+  <message name="GetOrderEstimate">
+    <part name="parameters" element="tns:GetOrderEstimate" />
+  </message>
+  <message name="GetOrderEstimateResponse">
+    <part name="parameters" element="tns:GetOrderEstimateResponse" />
+  </message>
   <portType name="TradingWebService">
     <operation name="OpenNewAccount">
       <input wsam:Action="OpenNewAccount" message="tns:OpenNewAccount" />
@@ -85,6 +103,18 @@
     <operation name="GetExternalAccountSummaries">
       <input wsam:Action="GetExternalAccountSummaries" message="tns:GetExternalAccountSummaries" />
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetExternalAccountSummariesResponse" message="tns:GetExternalAccountSummariesResponse" />
+    </operation>
+    <operation name="GetOrders">
+      <input wsam:Action="GetOrders" message="tns:GetOrders" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetOrdersResponse" message="tns:GetOrdersResponse" />
+    </operation>
+    <operation name="CancelOrder">
+      <input wsam:Action="CancelOrder" message="tns:CancelOrder" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderResponse" message="tns:CancelOrderResponse" />
+    </operation>
+    <operation name="GetOrderEstimate">
+      <input wsam:Action="GetOrderEstimate" message="tns:GetOrderEstimate" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetOrderEstimateResponse" message="tns:GetOrderEstimateResponse" />
     </operation>
   </portType>
   <binding name="TradingWebServicePortBinding" type="tns:TradingWebService">
@@ -154,6 +184,33 @@
     </operation>
     <operation name="GetExternalAccountSummaries">
       <soap:operation soapAction="GetExternalAccountSummaries" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetOrders">
+      <soap:operation soapAction="GetOrders" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="CancelOrder">
+      <soap:operation soapAction="CancelOrder" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetOrderEstimate">
+      <soap:operation soapAction="GetOrderEstimate" />
       <input>
         <soap:body use="literal" />
       </input>

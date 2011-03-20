@@ -12,31 +12,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-using System;
-using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
-using Microsoft.Practices.Prism.Events;
 
-namespace Bullsfirst.Module.Trade
+namespace Bullsfirst.InterfaceOut.Oms.Domain
 {
-    #region CreateAccountRequestEvent
-
-    public class PreviewOrderRequestEvent : CompositePresentationEvent<PreviewOrderRequest>
+    public static class MoneyFactory
     {
+        public static Money Create(decimal amount)
+        {
+            return new Money { Amount = amount, Currency = "USD" };
+        }
     }
-
-    public class PreviewOrderRequest
-    {
-        public UserContext UserContext { get; set; }
-        public OrderParams OrderParams { get; set; }
-        public OrderEstimate OrderEstimate { get; set; }
-        public Action<PreviewOrderResponse> ResponseHandler { get; set; }
-    }
-
-    public class PreviewOrderResponse
-    {
-        public bool Result { get; set; }
-    }
-
-    #endregion
 }

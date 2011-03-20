@@ -14,6 +14,7 @@
  */
 using System;
 using System.Windows.Controls;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Microsoft.Practices.Prism.Commands;
 
 namespace Bullsfirst.Module.Trade.Views
@@ -25,7 +26,9 @@ namespace Bullsfirst.Module.Trade.Views
         public PreviewOrderPopup(PreviewOrderRequest request)
         {
             InitializeComponent();
-            this.Request = request;
+            this.OrderParams = request.OrderParams;
+            this.OrderEstimate = request.OrderEstimate;
+            this.ResponseHandler = request.ResponseHandler;
             this.DataContext = this;
 
             PlaceOrderCommand = new DelegateCommand<object>(this.PlaceOrderExecute);
@@ -41,7 +44,7 @@ namespace Bullsfirst.Module.Trade.Views
         private void PlaceOrderExecute(object dummyObject)
         {
             this.DialogResult = true;
-            Request.ResponseHandler(new PreviewOrderResponse { Result = true });
+            ResponseHandler(new PreviewOrderResponse { Result = true });
         }
 
         #endregion
@@ -53,14 +56,16 @@ namespace Bullsfirst.Module.Trade.Views
         private void EditOrderExecute(object dummyObject)
         {
             this.DialogResult = false;
-            Request.ResponseHandler(new PreviewOrderResponse { Result = false });
+            ResponseHandler(new PreviewOrderResponse { Result = false });
         }
 
         #endregion
 
         #region Members
 
-        public PreviewOrderRequest Request { get; set; }
+        public OrderParams OrderParams { get; set; }
+        public OrderEstimate OrderEstimate { get; set; }
+        public Action<PreviewOrderResponse> ResponseHandler { get; set; }
 
         #endregion
     }

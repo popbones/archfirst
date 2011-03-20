@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Converters\MoneyConverter.cs" />
     <Compile Include="Domain\BaseAccountWrapper.cs" />
+    <Compile Include="Domain\MoneyFactory.cs" />
     <Compile Include="Domain\ReferenceData.cs" />
     <Compile Include="OmsModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,6 +129,9 @@
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.AddExternalAccountResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
@@ -135,6 +139,12 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetOrderEstimateResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetOrdersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OpenNewAccountResponse.datasource">

@@ -16,6 +16,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 
 namespace Bullsfirst.InterfaceOut.Oms.Converters
@@ -54,7 +55,7 @@ namespace Bullsfirst.InterfaceOut.Oms.Converters
         {
             decimal amount;
             bool success = decimal.TryParse((string)value, out amount);
-            return success ? new Money { Amount=amount, Currency="USD" } : DependencyProperty.UnsetValue;
+            return success ? MoneyFactory.Create(amount) : DependencyProperty.UnsetValue;
         }
     }
 }

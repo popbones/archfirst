@@ -15,24 +15,6 @@
     <UserControl.Resources>
         <!--
         <local:OrderTypeToVisibilityConverter x:Key="orderTypeToVisibilityConverter" />
-
-        <ObjectDataProvider x:Key="orderSideValues" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="acnt:OrderSide" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-
-        <ObjectDataProvider x:Key="orderTypeValues" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="acnt:OrderType" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-
-        <ObjectDataProvider x:Key="orderTermValues" ObjectType="{x:Type sys:Enum}" MethodName="GetValues">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="acnt:OrderTerm" />
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
         -->
     </UserControl.Resources>
 
@@ -73,10 +55,10 @@
 
         <!--
         <StackPanel Style="{StaticResource FormRow}">
-            <sdk:Label Content="Action" Target="{Binding ElementName=action}" Style="{StaticResource WideFormLabel}" />
-            <ComboBox x:Name="action" Style="{StaticResource WideFormComboBox}"
+            <sdk:Label Content="Action" Target="{Binding ElementName=actionField}" Style="{StaticResource WideFormLabel}" />
+            <ComboBox x:Name="actionField" Style="{StaticResource WideFormComboBox}"
                       ItemsSource="{Binding Source={StaticResource orderSideValues}}"
-                      SelectedItem="{Binding Path=OrderParams.Side, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                      SelectedItem="{Binding Path=Side, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
         </StackPanel>
 
         <StackPanel Style="{StaticResource FormRow}">

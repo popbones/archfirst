@@ -15,7 +15,6 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
@@ -37,6 +36,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
             ILoggerFacade logger,
             IEventAggregator eventAggregator,
             Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync marketDataService,
+            ITradingServiceAsync tradingService,
             UserContext userContext,
             ReferenceData referenceData)
         {
@@ -44,11 +44,14 @@ namespace Bullsfirst.Module.Trade.ViewModels
             _logger = logger;
             _eventAggregator = eventAggregator;
             _marketDataService = marketDataService;
+            _tradingService = tradingService;
             this.UserContext = userContext;
             this.ReferenceData = referenceData;
 
             _marketDataService.GetMarketPriceCompleted +=
                 new EventHandler<InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs>(GetMarketPriceCallback);
+            _tradingService.GetOrderEstimateCompleted +=
+                new EventHandler<GetOrderEstimateCompletedEventArgs>(GetOrderEstimateCallback);
             PreviewOrderCommand = new DelegateCommand<object>(this.PreviewOrderExecute, this.CanPreviewOrderExecute);
             this.PropertyChanged += this.OnPropertyChanged;
             this.ValidateAll();
@@ -73,13 +76,31 @@ namespace Bullsfirst.Module.Trade.ViewModels
 
         private void PreviewOrderExecute(object dummyObject)
         {
-            // Send PreviewOrderRequestEvent to create the PreviewOrder dialog
-            PreviewOrderRequest request =
-                new PreviewOrderRequest {
-                    Symbol = Symbol,
-                    ResponseHandler = PreviewOrderResponseHandler
-                };
-            _eventAggregator.GetEvent<PreviewOrderRequestEvent>().Publish(request);
+            // Before showing the preview order dialog, get an order estimate
+            _tradingService.GetOrderEstimateAsync(UserContext.SelectedAccount.Id, assembleOrderParams());
+        }
+
+        private void GetOrderEstimateCallback(object sender, GetOrderEstimateCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                this.StatusMessage = null;
+
+                // Send PreviewOrderRequestEvent to create the PreviewOrder dialog
+                PreviewOrderRequest request =
+                    new PreviewOrderRequest
+                    {
+                        UserContext = UserContext,
+                        OrderParams = assembleOrderParams(),
+                        OrderEstimate = e.Result,
+                        ResponseHandler = PreviewOrderResponseHandler
+                    };
+                _eventAggregator.GetEvent<PreviewOrderRequestEvent>().Publish(request);
+            }
         }
 
         private void PreviewOrderResponseHandler(PreviewOrderResponse response)
@@ -87,7 +108,33 @@ namespace Bullsfirst.Module.Trade.ViewModels
             if (response.Result == false) return;
 
             // Place the order
-            Debug.WriteLine("---> Place order");
+            _tradingService.PlaceOrderAsync(UserContext.SelectedAccount.Id, assembleOrderParams());
+        }
+
+        private void PlaceOrderCallback(object sender, PlaceOrderCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                this.StatusMessage = null;
+            }
+        }
+
+        private OrderParams assembleOrderParams()
+        {
+            return new OrderParams
+            {
+                Side = Side,
+                Symbol = Symbol,
+                Quantity = Quantity,
+                Type = Type,
+                LimitPrice = MoneyFactory.Create(LimitPrice),
+                Term = Term,
+                AllOrNone = AllOrNone
+            };
         }
 
         #endregion
@@ -143,12 +190,24 @@ namespace Bullsfirst.Module.Trade.ViewModels
         private ILoggerFacade _logger;
         private IEventAggregator _eventAggregator;
         private Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync _marketDataService;
+        private ITradingServiceAsync _tradingService;
         public UserContext UserContext { get; set; }
         public ReferenceData ReferenceData { get; set; }
 
         public string ViewTitle
         {
             get { return "Trade"; }
+        }
+
+        private OrderSide _side = OrderSide.Buy;
+        public OrderSide Side
+        {
+            get { return _side; }
+            set
+            {
+                _side = value;
+                RaisePropertyChanged("Side");
+            }
         }
 
         private string _symbol;
@@ -162,17 +221,69 @@ namespace Bullsfirst.Module.Trade.ViewModels
             }
         }
 
+        private decimal _quantity;
+        public decimal Quantity
+        {
+            get { return _quantity; }
+            set
+            {
+                _quantity = value;
+                RaisePropertyChanged("Quantity");
+            }
+        }
+
+        private OrderType _type = OrderType.Market;
+        public OrderType Type
+        {
+            get { return _type; }
+            set
+            {
+                _type = value;
+                RaisePropertyChanged("Type");
+            }
+        }
+
+        private decimal _limitPrice;
+        public decimal LimitPrice
+        {
+            get { return _limitPrice; }
+            set
+            {
+                _limitPrice = value;
+                RaisePropertyChanged("LimitPrice");
+            }
+        }
+
+        private OrderTerm _term = OrderTerm.GoodForTheDay;
+        public OrderTerm Term
+        {
+            get { return _term; }
+            set
+            {
+                _term = value;
+                RaisePropertyChanged("Term");
+            }
+        }
+
+        private bool _allOrNone = false;
+        public bool AllOrNone
+        {
+            get { return _allOrNone; }
+            set
+            {
+                _allOrNone = value;
+                RaisePropertyChanged("AllOrNone");
+            }
+        }
+
         private Money _lastTrade;
         public Money LastTrade
         {
             get { return _lastTrade; }
             set
             {
-                if (_lastTrade != value)
-                {
-                    _lastTrade = value;
-                    this.RaisePropertyChanged("LastTrade");
-                }
+                _lastTrade = value;
+                this.RaisePropertyChanged("LastTrade");
             }
         }
 
