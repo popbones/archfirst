@@ -70,6 +70,7 @@
     <Compile Include="SilverlightHelpers\DateTimeToDateStringConverter.cs" />
     <Compile Include="SilverlightHelpers\DecimalToPercentageConverter.cs" />
     <Compile Include="SilverlightHelpers\DecimalWipeZeroConverter.cs" />
+    <Compile Include="SilverlightHelpers\EnumConverter.cs" />
     <Compile Include="SilverlightHelpers\ExpandRowAction.cs" />
     <Compile Include="SilverlightHelpers\ObjectToVisibilityConverter.cs" />
     <Compile Include="SilverlightHelpers\PasswordChangedBahvior.cs" />

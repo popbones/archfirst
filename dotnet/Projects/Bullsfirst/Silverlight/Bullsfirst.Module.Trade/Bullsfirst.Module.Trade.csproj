@@ -69,6 +69,7 @@
     <Compile Include="TradeModule.cs" />
     <Compile Include="TradePopupController.cs" />
     <Compile Include="ViewModels\TradeViewModel.cs" />
+    <Compile Include="Views\OrderTypeToVisibilityConverter.cs" />
     <Compile Include="Views\PreviewOrderPopup.xaml.cs">
       <DependentUpon>PreviewOrderPopup.xaml</DependentUpon>
     </Compile>

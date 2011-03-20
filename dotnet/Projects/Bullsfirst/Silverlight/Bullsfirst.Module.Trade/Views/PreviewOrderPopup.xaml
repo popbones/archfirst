@@ -3,17 +3,89 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
     xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
-    Width="400" Height="300" 
+    xmlns:local="clr-namespace:Bullsfirst.Module.Trade.Views"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+    Width="500" Height="300" 
     Title="Preview Order">
+
+    <controls:ChildWindow.Resources>
+        <local:OrderTypeToVisibilityConverter x:Key="OrderTypeToVisibilityConverter" />
+    </controls:ChildWindow.Resources>
+
     <Grid x:Name="LayoutRoot" Margin="2">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <TextBlock
-            Grid.Row="0"
-            Text="{Binding OrderParams.Symbol}" />
+        <StackPanel>
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="Account:" Style="{StaticResource WideFormLabel}" />
+                <TextBlock Text="{Binding UserContext.SelectedAccount.Name}" Style="{StaticResource WideFormTextBlock}" />
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="Symbol:" Style="{StaticResource WideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Symbol}" Style="{StaticResource WideFormTextBlock}" />
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="Action:" Style="{StaticResource WideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Side}" Style="{StaticResource WideFormTextBlock}" />
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="Quantity:" Style="{StaticResource WideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Quantity}" Style="{StaticResource WideFormTextBlock}" />
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="OrderType:" Style="{StaticResource WideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Type}" Style="{StaticResource WideFormTextBlock}" />
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}" Visibility="{Binding Path=OrderParams.Type, Converter={StaticResource OrderTypeToVisibilityConverter}}">
+                <sdk:Label Content="Limit Price:" Style="{StaticResource WideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.LimitPrice, Converter={StaticResource MoneyConverter}}" Style="{StaticResource WideFormTextBlock}" />
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="Term:" Style="{StaticResource WideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Term}" Style="{StaticResource WideFormTextBlock}" />
+            </StackPanel>
+
+            <StackPanel Style="{StaticResource FormRow}">
+                <sdk:Label Content="All-or-none:" Style="{StaticResource WideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.AllOrNone}" Style="{StaticResource WideFormTextBlock}" />
+            </StackPanel>
+        </StackPanel>
+
+        <StackPanel HorizontalAlignment="Right">
+            <Border Style="{StaticResource InfoTableBorder}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Grid.Row="0"  Grid.Column="0"  Text="Summary" Grid.ColumnSpan="2" Style="{StaticResource InfoTableTitle}" />
+                    <TextBlock Grid.Row="1"  Grid.Column="0"  Text="Last Trade" Style="{StaticResource InfoTableCell}" />
+                    <TextBlock Grid.Row="1"  Grid.Column="1"  Text="{Binding LastTrade, Converter={StaticResource MoneyConverter}}" Style="{StaticResource InfoTableCell}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="2"  Grid.Column="0"  Text="Estimated Value" Style="{StaticResource InfoTableCell}"  />
+                    <TextBlock Grid.Row="2"  Grid.Column="1"  Text="{Binding OrderEstimate.EstimatedValue, Converter={StaticResource MoneyConverter}}" Style="{StaticResource InfoTableCell}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="3"  Grid.Column="0"  Text="Fees" Style="{StaticResource InfoTableCell}" />
+                    <TextBlock Grid.Row="3"  Grid.Column="1"  Text="{Binding OrderEstimate.Fees, Converter={StaticResource MoneyConverter}}" Style="{StaticResource InfoTableCell}" HorizontalAlignment="Right" />
+                    <TextBlock Grid.Row="4"  Grid.Column="0" Style="{StaticResource InfoTableCell}">Estimated Value<LineBreak />(including fees)</TextBlock>
+                    <TextBlock Grid.Row="4"  Grid.Column="1"  Text="{Binding OrderEstimate.EstimatedValueInclFees, Converter={StaticResource MoneyConverter}}" Style="{StaticResource InfoTableCell}" HorizontalAlignment="Right" />
+                </Grid>
+            </Border>
+        </StackPanel>
 
         <Button
             Grid.Row="1"

@@ -14,6 +14,7 @@
  */
 using System;
 using System.Windows.Controls;
+using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Microsoft.Practices.Prism.Commands;
 
@@ -26,7 +27,9 @@ namespace Bullsfirst.Module.Trade.Views
         public PreviewOrderPopup(PreviewOrderRequest request)
         {
             InitializeComponent();
+            this.UserContext = request.UserContext;
             this.OrderParams = request.OrderParams;
+            this.LastTrade = request.LastTrade;
             this.OrderEstimate = request.OrderEstimate;
             this.ResponseHandler = request.ResponseHandler;
             this.DataContext = this;
@@ -63,7 +66,9 @@ namespace Bullsfirst.Module.Trade.Views
 
         #region Members
 
+        public UserContext UserContext { get; set; }
         public OrderParams OrderParams { get; set; }
+        public Money LastTrade { get; set; }
         public OrderEstimate OrderEstimate { get; set; }
         public Action<PreviewOrderResponse> ResponseHandler { get; set; }
 

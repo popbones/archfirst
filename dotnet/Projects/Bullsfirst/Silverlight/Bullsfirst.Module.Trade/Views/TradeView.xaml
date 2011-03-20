@@ -13,9 +13,7 @@
     d:DesignHeight="500" d:DesignWidth="950">
 
     <UserControl.Resources>
-        <!--
-        <local:OrderTypeToVisibilityConverter x:Key="orderTypeToVisibilityConverter" />
-        -->
+        <local:OrderTypeToVisibilityConverter x:Key="OrderTypeToVisibilityConverter" />
     </UserControl.Resources>
 
     <StackPanel x:Name="LayoutRoot" Background="White" Margin="20 10 20 10">
@@ -53,18 +51,17 @@
                 Visibility="{Binding Path=LastTrade, Converter={StaticResource ObjectToVisibilityConverter}}" />
         </StackPanel>
 
-        <!--
         <StackPanel Style="{StaticResource FormRow}">
             <sdk:Label Content="Action" Target="{Binding ElementName=actionField}" Style="{StaticResource WideFormLabel}" />
             <ComboBox x:Name="actionField" Style="{StaticResource WideFormComboBox}"
-                      ItemsSource="{Binding Source={StaticResource orderSideValues}}"
-                      SelectedItem="{Binding Path=Side, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                      ItemsSource="{Binding Side, Mode=OneTime, Converter={StaticResource EnumToIEnumerableConverter}}"
+                      SelectedIndex="{Binding Side, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}" />
         </StackPanel>
 
         <StackPanel Style="{StaticResource FormRow}">
-            <sdk:Label Content="Quantity" Target="{Binding ElementName=quantity}" Style="{StaticResource WideFormLabel}" />
-            <TextBox x:Name="quantity" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Path=OrderParams.Quantity, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            <sdk:Label Content="Quantity" Target="{Binding ElementName=quantityField}" Style="{StaticResource WideFormLabel}" />
+            <TextBox x:Name="quantityField" Style="{StaticResource WideFormTextBox}"
+                Text="{Binding Quantity, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -72,16 +69,16 @@
         </StackPanel>
 
         <StackPanel Style="{StaticResource FormRow}">
-            <sdk:Label Content="OrderType" Target="{Binding ElementName=orderType}" Style="{StaticResource WideFormLabel}" />
-            <ComboBox x:Name="orderType" Style="{StaticResource WideFormComboBox}"
-                      ItemsSource="{Binding Source={StaticResource orderTypeValues}}"
-                      SelectedItem="{Binding Path=OrderParams.Type, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            <sdk:Label Content="Order Type" Target="{Binding ElementName=orderTypeField}" Style="{StaticResource WideFormLabel}" />
+            <ComboBox x:Name="orderTypeField" Style="{StaticResource WideFormComboBox}"
+                      ItemsSource="{Binding Type, Mode=OneTime, Converter={StaticResource EnumToIEnumerableConverter}}"
+                      SelectedIndex="{Binding Type, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}" />
         </StackPanel>
 
-        <StackPanel Style="{StaticResource FormRow}" Visibility="{Binding Path=OrderParams.Type, Converter={StaticResource orderTypeToVisibilityConverter}}">
-            <sdk:Label Content="Limit Price" Target="{Binding ElementName=limitPrice}" Style="{StaticResource WideFormLabel}" />
-            <TextBox x:Name="limitPrice" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Path=OrderParams.LimitPrice, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+        <StackPanel Style="{StaticResource FormRow}" Visibility="{Binding Type, Converter={StaticResource OrderTypeToVisibilityConverter}}">
+            <sdk:Label Content="Limit Price" Target="{Binding ElementName=limitPriceField}" Style="{StaticResource WideFormLabel}" />
+            <TextBox x:Name="limitPriceField" Style="{StaticResource WideFormTextBox}"
+                Text="{Binding Path=LimitPrice, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -89,18 +86,17 @@
         </StackPanel>
 
         <StackPanel Style="{StaticResource FormRow}">
-            <sdk:Label Content="Term" Target="{Binding ElementName=term}" Style="{StaticResource WideFormLabel}" />
-            <ComboBox x:Name="term" Style="{StaticResource WideFormComboBox}"
-                      ItemsSource="{Binding Source={StaticResource orderTermValues}}"
-                      SelectedItem="{Binding Path=OrderParams.Term, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            <sdk:Label Content="Term" Target="{Binding ElementName=termField}" Style="{StaticResource WideFormLabel}" />
+            <ComboBox x:Name="termField" Style="{StaticResource WideFormComboBox}"
+                      ItemsSource="{Binding Term, Mode=OneTime, Converter={StaticResource EnumToIEnumerableConverter}}"
+                      SelectedIndex="{Binding Term, Mode=TwoWay, Converter={StaticResource EnumToIntConverter}}" />
         </StackPanel>
 
         <StackPanel Style="{StaticResource FormRow}">
-            <sdk:Label Content="" Target="{Binding ElementName=allOrNone}" Style="{StaticResource WideFormLabel}" />
-            <CheckBox x:Name="allOrNone" Content="All-or-none" Style="{StaticResource WideFormCheckBox}"
-                      IsChecked="{Binding Path=OrderParams.AllOrNone, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+            <sdk:Label Content="" Target="{Binding ElementName=allOrNoneField}" Style="{StaticResource WideFormLabel}" />
+            <CheckBox x:Name="allOrNoneField" Content="All-or-none" Style="{StaticResource WideFormCheckBox}"
+                      IsChecked="{Binding AllOrNone, Mode=TwoWay}" />
         </StackPanel>
-        -->
 
         <StackPanel Style="{StaticResource TallFormRow}">
             <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />

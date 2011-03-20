@@ -8,6 +8,8 @@
     <fmwkConverters:DecimalToPercentageConverter x:Key="DecimalToPercentageConverter" />
     <fmwkConverters:DecimalWipeZeroConverter x:Key="DecimalWipeZeroConverter" />
     <fmwkConverters:DateTimeToDateStringConverter x:Key="DateTimeToDateStringConverter" />
+    <fmwkConverters:EnumToIEnumerableConverter x:Key="EnumToIEnumerableConverter" />
+    <fmwkConverters:EnumToIntConverter x:Key="EnumToIntConverter" />
     <fmwkConverters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
     <omsConverters:MoneyConverter x:Key="MoneyConverter" />
 

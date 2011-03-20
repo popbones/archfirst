@@ -29,6 +29,7 @@ namespace Bullsfirst.Module.Trade
     {
         public UserContext UserContext { get; set; }
         public OrderParams OrderParams { get; set; }
+        public Money LastTrade { get; set; }
         public OrderEstimate OrderEstimate { get; set; }
         public Action<PreviewOrderResponse> ResponseHandler { get; set; }
     }

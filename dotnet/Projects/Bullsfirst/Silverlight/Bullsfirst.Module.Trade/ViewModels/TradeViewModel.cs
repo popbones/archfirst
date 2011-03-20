@@ -86,6 +86,10 @@ namespace Bullsfirst.Module.Trade.ViewModels
             {
                 this.StatusMessage = e.Error.Message;
             }
+            else if (e.Result.Compliance != OrderCompliance.Compliant)
+            {
+                this.StatusMessage = e.Result.Compliance.ToString();
+            }
             else
             {
                 this.StatusMessage = null;
@@ -96,6 +100,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
                     {
                         UserContext = UserContext,
                         OrderParams = assembleOrderParams(),
+                        LastTrade = LastTrade,
                         OrderEstimate = e.Result,
                         ResponseHandler = PreviewOrderResponseHandler
                     };
@@ -174,12 +179,44 @@ namespace Bullsfirst.Module.Trade.ViewModels
 
         private void ValidateAll()
         {
+            this.Validate("Symbol");
+            this.Validate("Quantity");
         }
 
         private void Validate(string propertyName)
         {
             switch (propertyName)
             {
+                case "Symbol":
+                    if (string.IsNullOrEmpty(this.Symbol) || this.Symbol.Trim().Length == 0)
+                        this["Symbol"] = "Please enter a security to trade";
+                    else
+                        this.ClearError("Symbol");
+                    break;
+
+                case "Quantity":
+                    if (Quantity <= 0)
+                        this["Quantity"] = "Please enter the quantity to trade";
+                    else
+                        this.ClearError("Quantity");
+                    break;
+
+                case "Type":
+                    if (Type == OrderType.Market)
+                    {
+                        this.ClearError("LimitPrice");
+                    }
+                    else
+                    {
+                        this.Validate("LimitPrice");
+                    }
+                    break;
+                case "LimitPrice":
+                    if (LimitPrice <= 0)
+                        this["LimitPrice"] = "Please enter a limit price";
+                    else
+                        this.ClearError("LimitPrice");
+                    break;
             }
         }
 
