@@ -14,6 +14,11 @@
         <Setter Property="Margin" Value="0 0 0 10" />
     </Style>
 
+    <Style x:Key="Header3" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Margin" Value="0 0 0 2" />
+    </Style>
+
     <!-- HyperlinkButton Style -->
     <Style x:Key="HyperlinkButtonStyle" TargetType="HyperlinkButton">
         <Setter Property="Foreground" Value="Maroon" />
@@ -21,7 +26,7 @@
 
     <!-- Controls for Forms -->
     <Style x:Key="FormRow" TargetType="StackPanel">
-        <Setter Property="Margin" Value="0 2 0 0" />
+        <Setter Property="Margin" Value="0 4 0 0" />
         <Setter Property="Orientation" Value="Horizontal" />
     </Style>
 
@@ -36,22 +41,33 @@
         <Setter Property="Padding" Value="12 1 12 1" />
     </Style>
 
-    <!-- Controls For Narrow Forms (label on top) -->
-    <Style x:Key="NarrowFormLabel" TargetType="sdk:Label" />
+    <Style x:Key="FormButtonRightAligned" TargetType="Button" >
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="4 0 0 0" />
+        <Setter Property="Padding" Value="12 1 12 1" />
+    </Style>
 
+    <!-- Controls For Narrow Forms (label on top) -->
+    <Style x:Key="NarrowFormLabel" TargetType="sdk:Label">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+    
     <Style x:Key="NarrowFormTextBox" TargetType="TextBox" >
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Width" Value="140" />
     </Style>
 
     <Style x:Key="NarrowFormPasswordBox" TargetType="PasswordBox" >
         <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Width" Value="140" />
     </Style>
 
     <!-- Controls For Wide Forms (label on left) -->
     <Style x:Key="WideFormLabel" TargetType="sdk:Label">
         <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0 0 10 0" />
         <Setter Property="MinWidth" Value="120" />
     </Style>
@@ -95,20 +111,21 @@
         <Setter Property="Foreground" Value="Red" />
     </Style>
 
-    <!-- InfoTable Style -->
-    <Style x:Key="InfoTableBorder" TargetType="Border">
-        <Setter Property="BorderBrush" Value="LightGray" />
-        <Setter Property="BorderThickness" Value="10 10 10 10" />
-        <Setter Property="CornerRadius" Value="8 8 8 8" />
+    <!-- Controls For Compact Wide Forms (label on left) -->
+    <Style x:Key="CompactWideFormLabel" TargetType="sdk:Label">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 0 0" />
+        <Setter Property="MinWidth" Value="100" />
     </Style>
 
-    <Style x:Key="InfoTableTitle" TargetType="TextBlock">
-        <Setter Property="FontSize" Value="20" />
-        <Setter Property="Padding" Value="0 0 0 8" />
+    <Style x:Key="CompactWideFormTextBox" TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 0 0" />
     </Style>
 
-    <Style x:Key="InfoTableCell" TargetType="TextBlock">
-        <Setter Property="Margin" Value="10 5 10 5" />
+    <Style x:Key="CompactWideFormTextBlock" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 0 0" />
     </Style>
 
     <!-- Expand/Collapse Button Style -->

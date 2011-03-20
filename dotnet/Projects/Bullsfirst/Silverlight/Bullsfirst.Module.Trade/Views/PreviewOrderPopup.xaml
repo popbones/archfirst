@@ -5,7 +5,7 @@
     xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
     xmlns:local="clr-namespace:Bullsfirst.Module.Trade.Views"
     xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
-    Width="500" Height="300" 
+    Width="500" Height="290" 
     Title="Preview Order">
 
     <controls:ChildWindow.Resources>
@@ -14,88 +14,97 @@
 
     <Grid x:Name="LayoutRoot" Margin="2">
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <!-- Order Summary and Estimate -->
             <RowDefinition Height="Auto" />
+            <!-- Buttons -->
+            <RowDefinition />
         </Grid.RowDefinitions>
 
-        <StackPanel>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Order Summary" Style="{StaticResource Header3}" />
+
             <StackPanel Style="{StaticResource FormRow}">
-                <sdk:Label Content="Account:" Style="{StaticResource WideFormLabel}" />
-                <TextBlock Text="{Binding UserContext.SelectedAccount.Name}" Style="{StaticResource WideFormTextBlock}" />
+                <sdk:Label Content="Account:" Style="{StaticResource CompactWideFormLabel}" />
+                <TextBlock Text="{Binding UserContext.SelectedAccount.Name}" Style="{StaticResource CompactWideFormTextBlock}" />
             </StackPanel>
 
             <StackPanel Style="{StaticResource FormRow}">
-                <sdk:Label Content="Symbol:" Style="{StaticResource WideFormLabel}" />
-                <TextBlock Text="{Binding OrderParams.Symbol}" Style="{StaticResource WideFormTextBlock}" />
+                <sdk:Label Content="Symbol:" Style="{StaticResource CompactWideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Symbol}" Style="{StaticResource CompactWideFormTextBlock}" />
             </StackPanel>
 
             <StackPanel Style="{StaticResource FormRow}">
-                <sdk:Label Content="Action:" Style="{StaticResource WideFormLabel}" />
-                <TextBlock Text="{Binding OrderParams.Side}" Style="{StaticResource WideFormTextBlock}" />
+                <sdk:Label Content="Action:" Style="{StaticResource CompactWideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Side}" Style="{StaticResource CompactWideFormTextBlock}" />
             </StackPanel>
 
             <StackPanel Style="{StaticResource FormRow}">
-                <sdk:Label Content="Quantity:" Style="{StaticResource WideFormLabel}" />
-                <TextBlock Text="{Binding OrderParams.Quantity}" Style="{StaticResource WideFormTextBlock}" />
+                <sdk:Label Content="Quantity:" Style="{StaticResource CompactWideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Quantity}" Style="{StaticResource CompactWideFormTextBlock}" />
             </StackPanel>
 
             <StackPanel Style="{StaticResource FormRow}">
-                <sdk:Label Content="OrderType:" Style="{StaticResource WideFormLabel}" />
-                <TextBlock Text="{Binding OrderParams.Type}" Style="{StaticResource WideFormTextBlock}" />
+                <sdk:Label Content="OrderType:" Style="{StaticResource CompactWideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Type}" Style="{StaticResource CompactWideFormTextBlock}" />
             </StackPanel>
 
             <StackPanel Style="{StaticResource FormRow}" Visibility="{Binding Path=OrderParams.Type, Converter={StaticResource OrderTypeToVisibilityConverter}}">
-                <sdk:Label Content="Limit Price:" Style="{StaticResource WideFormLabel}" />
-                <TextBlock Text="{Binding OrderParams.LimitPrice, Converter={StaticResource MoneyConverter}}" Style="{StaticResource WideFormTextBlock}" />
+                <sdk:Label Content="Limit Price:" Style="{StaticResource CompactWideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.LimitPrice, Converter={StaticResource MoneyConverter}}" Style="{StaticResource CompactWideFormTextBlock}" />
             </StackPanel>
 
             <StackPanel Style="{StaticResource FormRow}">
-                <sdk:Label Content="Term:" Style="{StaticResource WideFormLabel}" />
-                <TextBlock Text="{Binding OrderParams.Term}" Style="{StaticResource WideFormTextBlock}" />
+                <sdk:Label Content="Term:" Style="{StaticResource CompactWideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.Term}" Style="{StaticResource CompactWideFormTextBlock}" />
             </StackPanel>
 
             <StackPanel Style="{StaticResource FormRow}">
-                <sdk:Label Content="All-or-none:" Style="{StaticResource WideFormLabel}" />
-                <TextBlock Text="{Binding OrderParams.AllOrNone}" Style="{StaticResource WideFormTextBlock}" />
+                <sdk:Label Content="All-or-none:" Style="{StaticResource CompactWideFormLabel}" />
+                <TextBlock Text="{Binding OrderParams.AllOrNone}" Style="{StaticResource CompactWideFormTextBlock}" />
             </StackPanel>
         </StackPanel>
 
-        <StackPanel HorizontalAlignment="Right">
-            <Border Style="{StaticResource InfoTableBorder}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                        <RowDefinition />
-                    </Grid.RowDefinitions>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Row="0"  Grid.Column="0"  Text="Summary" Grid.ColumnSpan="2" Style="{StaticResource InfoTableTitle}" />
-                    <TextBlock Grid.Row="1"  Grid.Column="0"  Text="Last Trade" Style="{StaticResource InfoTableCell}" />
-                    <TextBlock Grid.Row="1"  Grid.Column="1"  Text="{Binding LastTrade, Converter={StaticResource MoneyConverter}}" Style="{StaticResource InfoTableCell}" HorizontalAlignment="Right" />
-                    <TextBlock Grid.Row="2"  Grid.Column="0"  Text="Estimated Value" Style="{StaticResource InfoTableCell}"  />
-                    <TextBlock Grid.Row="2"  Grid.Column="1"  Text="{Binding OrderEstimate.EstimatedValue, Converter={StaticResource MoneyConverter}}" Style="{StaticResource InfoTableCell}" HorizontalAlignment="Right" />
-                    <TextBlock Grid.Row="3"  Grid.Column="0"  Text="Fees" Style="{StaticResource InfoTableCell}" />
-                    <TextBlock Grid.Row="3"  Grid.Column="1"  Text="{Binding OrderEstimate.Fees, Converter={StaticResource MoneyConverter}}" Style="{StaticResource InfoTableCell}" HorizontalAlignment="Right" />
-                    <TextBlock Grid.Row="4"  Grid.Column="0" Style="{StaticResource InfoTableCell}">Estimated Value<LineBreak />(including fees)</TextBlock>
-                    <TextBlock Grid.Row="4"  Grid.Column="1"  Text="{Binding OrderEstimate.EstimatedValueInclFees, Converter={StaticResource MoneyConverter}}" Style="{StaticResource InfoTableCell}" HorizontalAlignment="Right" />
-                </Grid>
-            </Border>
-        </StackPanel>
+        <Grid Grid.Row="0" HorizontalAlignment="Right">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Estimate" Grid.ColumnSpan="2" Style="{StaticResource Header3}" />
 
-        <Button
-            Grid.Row="1"
-            Content="EditOrder"
-            Command="{Binding EditOrderCommand}"
-            Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0"  />
-        <Button
-            Grid.Row="1"
-            Content="PlaceOrder"
-            Command="{Binding PlaceOrderCommand}"
-            Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" />
+            <sdk:Label Grid.Row="1" Grid.Column="0" Content="Last Trade" Style="{StaticResource CompactWideFormLabel}" />
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding LastTrade, Converter={StaticResource MoneyConverter}}" Style="{StaticResource CompactWideFormTextBlock}" HorizontalAlignment="Right" />
+
+            <sdk:Label Grid.Row="2" Grid.Column="0" Content="Estimated Value" Style="{StaticResource CompactWideFormLabel}"  />
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding OrderEstimate.EstimatedValue, Converter={StaticResource MoneyConverter}}" Style="{StaticResource CompactWideFormTextBlock}" HorizontalAlignment="Right" />
+
+            <sdk:Label Grid.Row="3" Grid.Column="0" Content="Fees" Style="{StaticResource CompactWideFormLabel}" />
+            <TextBlock Grid.Row="3" Grid.Column="1" Text="{Binding OrderEstimate.Fees, Converter={StaticResource MoneyConverter}}" Style="{StaticResource CompactWideFormTextBlock}" HorizontalAlignment="Right" />
+
+            <sdk:Label Grid.Row="4" Grid.Column="0" Content="Total Including Fees" Style="{StaticResource CompactWideFormLabel}" MinWidth="140" />
+            <TextBlock Grid.Row="4" Grid.Column="1" Text="{Binding OrderEstimate.EstimatedValueInclFees, Converter={StaticResource MoneyConverter}}" Style="{StaticResource CompactWideFormTextBlock}" HorizontalAlignment="Right" />
+        </Grid>
+
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button
+                Content="EditOrder"
+                Command="{Binding EditOrderCommand}"
+                Style="{StaticResource FormButtonRightAligned}"
+                VerticalAlignment="Bottom"
+                Height="23" />
+            <Button
+                Content="PlaceOrder"
+                Command="{Binding PlaceOrderCommand}"
+                Style="{StaticResource FormButtonRightAligned}"
+                VerticalAlignment="Bottom"
+                Height="23" />
+        </StackPanel>
     </Grid>
 </controls:ChildWindow>
