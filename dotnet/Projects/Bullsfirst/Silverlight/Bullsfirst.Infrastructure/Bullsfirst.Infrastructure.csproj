@@ -69,6 +69,10 @@
       <Project>{07801AC6-D680-424B-AA1D-8B27A2229A67}</Project>
       <Name>Archfirst.Framework</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.InterfaceOut.Oms\Bullsfirst.InterfaceOut.Oms.csproj">
+      <Project>{D6401855-8A3C-4584-9039-8A0241B2C279}</Project>
+      <Name>Bullsfirst.InterfaceOut.Oms</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\AccountSelector.xaml">

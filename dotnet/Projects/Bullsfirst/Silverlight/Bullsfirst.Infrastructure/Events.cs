@@ -13,6 +13,7 @@
  * limitations under the License.
  */
 using Archfirst.Framework.Helpers;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Microsoft.Practices.Prism.Events;
 
 namespace Bullsfirst.Infrastructure
@@ -31,5 +32,20 @@ namespace Bullsfirst.Infrastructure
 
     public class AccountUpdatedEvent : CompositePresentationEvent<Empty>
     {
+    }
+
+    public class OrderPlacedEvent : CompositePresentationEvent<Empty>
+    {
+    }
+
+    public class PopulateOrderEvent : CompositePresentationEvent<PopulateOrderEventArgs>
+    {
+    }
+
+    public class PopulateOrderEventArgs
+    {
+        public string Symbol { get; set; }
+        public OrderSide Side { get; set; }
+        public decimal Quantity { get; set; }
     }
 }

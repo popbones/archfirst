@@ -12,13 +12,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
+using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Positions.Interfaces;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Prism.ViewModel;
 
 namespace Bullsfirst.Module.Positions.ViewModels
@@ -32,10 +35,14 @@ namespace Bullsfirst.Module.Positions.ViewModels
         [ImportingConstructor]
         public PositionsViewModel(
             ILoggerFacade logger,
+            IRegionManager regionManager,
+            IEventAggregator eventAggregator,
             UserContext userContext)
         {
             logger.Log("PositionsViewModel.PositionsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _regionManager = regionManager;
+            _eventAggregator = eventAggregator;
             this.UserContext = userContext;
 
             BuyCommand = new DelegateCommand<object>(this.CreateBuyOrderExecute);
@@ -61,8 +68,18 @@ namespace Bullsfirst.Module.Positions.ViewModels
 
         private void CreateOrderExecute(object dummyObject, OrderSide side)
         {
+            // Send PopulateOrderEvent and switch to trade page
             Position position = (Position)dummyObject;
-            Debug.WriteLine(side + " " + position.Quantity + " of " + position.InstrumentSymbol);
+            _eventAggregator.GetEvent<PopulateOrderEvent>().Publish(
+                new PopulateOrderEventArgs
+                {
+                    Symbol = position.InstrumentSymbol,
+                    Side = side,
+                    Quantity = position.Quantity
+                });
+            _regionManager.RequestNavigate(
+                RegionNames.LoggedInUserRegion,
+                new Uri(ViewNames.TradeView, UriKind.Relative));
         }
 
         #endregion
@@ -70,6 +87,8 @@ namespace Bullsfirst.Module.Positions.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IRegionManager _regionManager;
+        private IEventAggregator _eventAggregator;
         public UserContext UserContext { get; set; }
         
         public string ViewTitle

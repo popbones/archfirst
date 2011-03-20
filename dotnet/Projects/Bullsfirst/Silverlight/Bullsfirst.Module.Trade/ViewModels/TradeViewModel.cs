@@ -15,13 +15,16 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using Archfirst.Framework.Helpers;
 using Archfirst.Framework.PrismHelpers;
+using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Trade.Interfaces;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Prism.Regions;
 
 namespace Bullsfirst.Module.Trade.ViewModels
 {
@@ -34,6 +37,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
         [ImportingConstructor]
         public TradeViewModel(
             ILoggerFacade logger,
+            IRegionManager regionManager,
             IEventAggregator eventAggregator,
             Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync marketDataService,
             ITradingServiceAsync tradingService,
@@ -42,6 +46,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
         {
             logger.Log("TradeViewModel.TradeViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _marketDataService = marketDataService;
             _tradingService = tradingService;
@@ -52,15 +57,24 @@ namespace Bullsfirst.Module.Trade.ViewModels
                 new EventHandler<InterfaceOut.Oms.MarketDataServiceReference.GetMarketPriceCompletedEventArgs>(GetMarketPriceCallback);
             _tradingService.GetOrderEstimateCompleted +=
                 new EventHandler<GetOrderEstimateCompletedEventArgs>(GetOrderEstimateCallback);
+            _tradingService.PlaceOrderCompleted +=
+                new EventHandler<PlaceOrderCompletedEventArgs>(PlaceOrderCallback);
             PreviewOrderCommand = new DelegateCommand<object>(this.PreviewOrderExecute, this.CanPreviewOrderExecute);
             this.PropertyChanged += this.OnPropertyChanged;
             this.ValidateAll();
+            SubscribeToEvents();
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             this.Validate(e.PropertyName);
             this.PreviewOrderCommand.RaiseCanExecuteChanged();
+        }
+
+        private void SubscribeToEvents()
+        {
+            // Don't use strong reference to delegate
+            _eventAggregator.GetEvent<PopulateOrderEvent>().Subscribe(OnPopulateOrder, ThreadOption.UIThread, true);
         }
 
         #endregion
@@ -125,6 +139,12 @@ namespace Bullsfirst.Module.Trade.ViewModels
             else
             {
                 this.StatusMessage = null;
+
+                // Send OrderPlacedEvent and switch to orders page
+                _eventAggregator.GetEvent<OrderPlacedEvent>().Publish(Empty.Value);
+                _regionManager.RequestNavigate(
+                    RegionNames.LoggedInUserRegion,
+                    new Uri(ViewNames.OrdersView, UriKind.Relative));
             }
         }
 
@@ -174,6 +194,17 @@ namespace Bullsfirst.Module.Trade.ViewModels
         }
 
         #endregion
+
+        #region OnPopulateOrder
+
+        private void OnPopulateOrder(PopulateOrderEventArgs args)
+        {
+            Symbol = args.Symbol;
+            Side = args.Side;
+            Quantity = args.Quantity;
+        }
+
+        #endregion // OnPopulateOrder
 
         #region IDataErrorInfo implementation
 
@@ -225,6 +256,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync _marketDataService;
         private ITradingServiceAsync _tradingService;
