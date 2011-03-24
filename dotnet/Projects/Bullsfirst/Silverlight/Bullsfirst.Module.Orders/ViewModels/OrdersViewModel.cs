@@ -13,7 +13,9 @@
  * limitations under the License.
  */
 using System.ComponentModel.Composition;
+using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.Module.Orders.Interfaces;
+using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.ViewModel;
 
 namespace Bullsfirst.Module.Orders.ViewModels
@@ -22,7 +24,24 @@ namespace Bullsfirst.Module.Orders.ViewModels
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public class OrdersViewModel : NotificationObject, IOrdersViewModel
     {
+        #region Construction
+
+        [ImportingConstructor]
+        public OrdersViewModel(
+            ILoggerFacade logger,
+            UserContext userContext)
+        {
+            logger.Log("PositionsViewModel.PositionsViewModel()", Category.Debug, Priority.Low);
+            _logger = logger;
+            this.UserContext = userContext;
+        }
+
+        #endregion
+
         #region Members
+
+        private ILoggerFacade _logger;
+        public UserContext UserContext { get; set; }
 
         public string ViewTitle
         {

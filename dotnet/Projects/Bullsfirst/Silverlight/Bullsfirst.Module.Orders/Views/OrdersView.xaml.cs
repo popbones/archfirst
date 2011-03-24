@@ -24,16 +24,18 @@ namespace Bullsfirst.Module.Orders.Views
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class OrdersView : UserControl
     {
-        public OrdersView()
+        /// <summary>
+        /// Importing constructor is the easiest way to add the ViewModel as a resource.
+        /// This is needed to fire commands from the DataGridTemplateColumn in the XAML
+        /// file for this view. See http://compositewpf.codeplex.com/discussions/246631.
+        /// </summary>
+        [ImportingConstructor]
+        public OrdersView(IOrdersViewModel viewModel)
         {
             Debug.WriteLine("[Debug] OrdersView.OrdersView()");
+            this.DataContext = viewModel;
+            this.Resources.Add("ViewModel", viewModel);
             InitializeComponent();
-        }
-
-        [Import]
-        public IOrdersViewModel ViewModel
-        {
-            set { this.DataContext = value; }
         }
     }
 }
