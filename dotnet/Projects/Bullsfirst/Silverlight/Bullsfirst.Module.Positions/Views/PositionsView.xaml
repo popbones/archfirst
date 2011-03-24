@@ -47,8 +47,8 @@
             RowStyle="{StaticResource DataGridRowStyle}">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTemplateColumn
-                    HeaderStyle="{StaticResource LeftAlignedColumnHeaderStyle}"
-                    CellStyle="{StaticResource LeftAlignedCellStyle}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}"
                     Width="30">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

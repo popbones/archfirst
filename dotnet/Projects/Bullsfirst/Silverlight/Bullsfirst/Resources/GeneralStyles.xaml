@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit">
 
     <!-- Header Styles -->
     <Style x:Key="Header1" TargetType="TextBlock">
@@ -164,5 +165,112 @@
             </Setter.Value>
         </Setter>
     </Style>
+
+    <!-- More Button Template -->
+    <ControlTemplate x:Key="MoreButtonTemplate" TargetType="ToggleButton">
+        <Grid Width="30" Height="26" Background="Transparent">
+            <Image x:Name="ExpandImage"
+                   Source="/Bullsfirst.Infrastructure;component/Images/more.png"
+                   HorizontalAlignment="Left" 
+                   VerticalAlignment="Center" 
+                   Margin="1,1,1,1" />
+        </Grid>
+        <!--
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsChecked"
+                     Value="True">
+                <Setter Property="Source"
+                        TargetName="ExpandImage"
+                        Value="/Bullsfirst.Infrastructure;component/Images/less.png"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+        -->
+    </ControlTemplate>
+
+    <!-- Filter Panel Styles -->
+    <SolidColorBrush x:Key="FilterPanelBackgroundBrush" Color="#FFE8D0" />
+
+    <Style x:Key="FilterPanel" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource FilterPanelBackgroundBrush}" />
+    </Style>
+
+    <Style x:Key="FilterPanelLabel" TargetType="sdk:Label">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="2 5 2 5" />
+    </Style>
+
+    <Style x:Key="FilterPanelTextBox" TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 10 5" />
+        <Setter Property="MinWidth" Value="60" />
+    </Style>
+
+    <Style x:Key="FilterPanelDatePicker" TargetType="sdk:DatePicker">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 10 5" />
+    </Style>
+
+    <Style x:Key="FilterPanelCheckBox" TargetType="CheckBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="8 5 0 5" />
+    </Style>
+
+    <Style x:Key="FilterPanelCheckBoxLast" TargetType="CheckBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="8 5 40 5" />
+    </Style>
+
+    <Style x:Key="FilterPanelButton" TargetType="Button" >
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 10 5" />
+    </Style>
+
+    <Style x:Key="FilterPanelMoreButton" TargetType="ToggleButton" >
+        <Setter Property="Template" Value="{StaticResource MoreButtonTemplate}" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 10 5" />
+    </Style>
+
+    <!-- ExpanderWithoutButton -->
+    <!-- TODO: Fix this style -->
+    <!--
+    <ControlTemplate x:Key="ExpanderWithoutButtonTemplate" TargetType="{toolkit:Expander}">
+        <Border
+            BorderBrush="{TemplateBinding BorderBrush}"
+            BorderThickness="{TemplateBinding BorderThickness}"
+            Background="{TemplateBinding Background}"
+            CornerRadius="3">
+            <toolkit:DockPanel>
+                <ContentPresenter
+                    Content="{TemplateBinding Header}"
+                    ContentTemplate="{TemplateBinding HeaderTemplate}"
+                    ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                    DockPanel.Dock="Top"
+                    Margin="1"
+                    Focusable="false" />
+                <ContentPresenter
+                    x:Name="ExpandSite"
+                    Visibility="Collapsed"
+                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                    Margin="{TemplateBinding Padding}"
+                    Focusable="false" />
+            </toolkit:DockPanel>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsExpanded" Value="true">
+                <Setter Property="Visibility" Value="Visible" TargetName="ExpandSite"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="ExpanderWithoutButton" TargetType="toolkit:Expander">
+        <Setter Property="Template" Value="{StaticResource ExpanderWithoutButtonTemplate}" />
+        <Setter Property="Background" Value="{StaticResource FilterPanelBackgroundBrush}" />
+    </Style>
+    -->
 
 </ResourceDictionary>

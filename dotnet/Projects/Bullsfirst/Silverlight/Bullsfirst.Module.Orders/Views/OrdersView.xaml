@@ -1,9 +1,11 @@
-﻿<UserControl xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" 
+﻿<UserControl 
     x:Class="Bullsfirst.Module.Orders.Views.OrdersView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
     xmlns:infraControls="clr-namespace:Bullsfirst.Infrastructure.Controls;assembly=Bullsfirst.Infrastructure"
@@ -35,19 +37,71 @@
             HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 10 10 0" />
 
         <!-- Filter -->
-        <Grid Grid.Row="1">
-            <TextBlock Text="Filter" />
+        <Grid Grid.Row="1" Style="{StaticResource FilterPanel}">
+            <StackPanel Orientation="Horizontal">
+                <sdk:Label Content="Order #" Style="{StaticResource FilterPanelLabel}" />
+                <!-- See http://karlshifflett.wordpress.com/2008/12/16/using-wpf-binding-stringformat-property-with-nullable-types -->
+                <TextBox Style="{StaticResource FilterPanelTextBox}"
+                    Text="{Binding Path=OrderId, TargetNullValue='Nothing'}" />
+
+                <sdk:Label Content="Symbol" Style="{StaticResource FilterPanelLabel}" />
+                <TextBox Style="{StaticResource FilterPanelTextBox}"
+                    Text="{Binding Path=Symbol, Mode=TwoWay, TargetNullValue='Nothing'}" />
+
+                <sdk:Label Content="From" Style="{StaticResource FilterPanelLabel}" />
+                <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
+                    SelectedDate="{Binding Path=FromDate, Mode=TwoWay, TargetNullValue='Nothing'}" />
+
+                <sdk:Label Content="To" Style="{StaticResource FilterPanelLabel}" />
+                <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
+                    SelectedDate="{Binding Path=ToDate, Mode=TwoWay, TargetNullValue='Nothing'}" />
+
+                <sdk:Label Content="More" Style="{StaticResource FilterPanelLabel}" />
+                <ToggleButton Content="More" Style="{StaticResource FilterPanelMoreButton}"
+                          IsChecked="{Binding IsExpanded, Mode=TwoWay, ElementName=FilterExpander}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Update" Style="{StaticResource FilterPanelButton}" Command="{Binding UpdateOrdersCommand}" />
+                <Button Content="Reset Filter" Style="{StaticResource FilterPanelButton}" />
+            </StackPanel>
         </Grid>
 
         <!-- Filter Expander -->
-        <Grid Grid.Row="2">
-            <TextBlock Text="Filter Expander" />
+        <Grid Grid.Row="2" Style="{StaticResource FilterPanel}">
+            <!-- TODO: <toolkit:Expander Name="FilterExpander" Style="{StaticResource ExpanderWithoutButton}"> -->
+            <toolkit:Expander Name="FilterExpander">
+                    <StackPanel Orientation="Horizontal">
+                    <sdk:Label Content="Order Action" Style="{StaticResource FilterPanelLabel}" />
+                    <CheckBox Content="Buy" Style="{StaticResource FilterPanelCheckBox}"
+                              IsChecked="{Binding Path=BuyFilter}" />
+                    <CheckBox Content="Sell" Style="{StaticResource FilterPanelCheckBoxLast}"
+                              IsChecked="{Binding Path=SellFilter}" />
+
+                    <sdk:Label Content="Order Status" Style="{StaticResource FilterPanelLabel}" />
+                    <ItemsControl ItemsSource="{Binding Path=OrderStatusFilters}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <CheckBox
+                                    IsChecked="{Binding Path=IsChecked}"
+                                    Content="{Binding Path=CheckBoxText}"
+                                    Style="{StaticResource FilterPanelCheckBox}" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </StackPanel>
+            </toolkit:Expander>
         </Grid>
 
         <!-- Orders -->
         <sdk:DataGrid
             Grid.Row="3"
-            ItemsSource="{Binding UserContext.SelectedAccount.Position}"
+            ItemsSource="{Binding Orders}"
             RowDetailsVisibilityMode="Collapsed"
             AutoGenerateColumns="False"
             HorizontalAlignment="Left"
@@ -60,8 +114,8 @@
             RowStyle="{StaticResource DataGridRowStyle}">
             <sdk:DataGrid.Columns>
                 <sdk:DataGridTemplateColumn
-                    HeaderStyle="{StaticResource LeftAlignedColumnHeaderStyle}"
-                    CellStyle="{StaticResource LeftAlignedCellStyle}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}"
                     Width="30">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>

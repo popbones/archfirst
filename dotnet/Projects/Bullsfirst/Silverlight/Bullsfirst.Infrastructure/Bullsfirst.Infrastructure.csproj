@@ -87,6 +87,10 @@
     <Resource Include="Images\minus.png" />
     <Resource Include="Images\plus.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\less.png" />
+    <Resource Include="Images\more.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
