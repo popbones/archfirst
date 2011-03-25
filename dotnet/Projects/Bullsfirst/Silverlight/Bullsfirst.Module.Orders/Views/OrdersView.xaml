@@ -15,6 +15,7 @@
 
     <UserControl.Resources>
         <local:ExpandCollapseVisibilityConverter x:Key="ExpandCollapseVisibilityConverter" />
+        <local:IsActiveToVisibilityConverter x:Key="IsActiveToVisibilityConverter" />
     </UserControl.Resources>
 
     <Grid x:Name="LayoutRoot" Background="White" Margin="20 10 20 10">
@@ -183,7 +184,11 @@
                     CellStyle="{StaticResource CenterAlignedCellStyle}">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <TextBlock Text="Temp" />
+                            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                                    Content="Cancel"
+                                    Visibility="{Binding Converter={StaticResource IsActiveToVisibilityConverter}}"
+                                    Command="{Binding CancelOrderCommand, Source={StaticResource ViewModel}}"
+                                    CommandParameter="{Binding}" />
                         </DataTemplate>
                     </sdk:DataGridTemplateColumn.CellTemplate>
                 </sdk:DataGridTemplateColumn>
@@ -221,6 +226,6 @@
         <!-- Status Message -->
         <TextBlock
             Grid.Row="4"
-            Text="{Binding StatusMessage}" TextWrapping="Wrap" Foreground="Red" Margin="0 10 0 0"/>
+            Text="{Binding StatusMessage}" TextWrapping="Wrap" Foreground="Red" Margin="0 10 0 0" />
     </Grid>
 </UserControl>

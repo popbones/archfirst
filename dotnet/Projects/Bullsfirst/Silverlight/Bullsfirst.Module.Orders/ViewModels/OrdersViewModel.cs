@@ -14,6 +14,7 @@
  */
 using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
@@ -48,9 +49,12 @@ namespace Bullsfirst.Module.Orders.ViewModels
             this.Orders = new ObservableCollection<Order>();
 
             this.UpdateOrdersCommand = new DelegateCommand<object>(this.UpdateOrdersExecute);
+            this.CancelOrderCommand = new DelegateCommand<object>(this.CancelOrderExecute);
 
             _tradingService.GetOrdersCompleted +=
                 new EventHandler<GetOrdersCompletedEventArgs>(GetOrdersCallback);
+            _tradingService.CancelOrderCompleted +=
+                new EventHandler<AsyncCompletedEventArgs>(CancelOrderCallback);
 
             SubscribeToEvents();
         }
@@ -68,6 +72,11 @@ namespace Bullsfirst.Module.Orders.ViewModels
         public DelegateCommand<object> UpdateOrdersCommand { get; set; }
 
         private void UpdateOrdersExecute(object dummyObject)
+        {
+            UpdateOrders();
+        }
+
+        private void UpdateOrders()
         {
             OrderCriteria criteria = new OrderCriteria
             {
@@ -91,6 +100,31 @@ namespace Bullsfirst.Module.Orders.ViewModels
                 {
                     Orders.Add(order);
                 }
+            }
+        }
+
+        #endregion
+
+        #region CancelOrderCommand
+
+        public DelegateCommand<object> CancelOrderCommand { get; set; }
+
+        private void CancelOrderExecute(object dummyObject)
+        {
+            Order order = (Order)dummyObject;
+            _tradingService.CancelOrderAsync(order.Id);
+        }
+
+        private void CancelOrderCallback(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                this.StatusMessage = null;
+                this.UpdateOrders();
             }
         }
 
