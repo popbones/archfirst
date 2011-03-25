@@ -87,7 +87,7 @@
   </xs:complexType>
   <xs:complexType name="Order">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:domainEntity">
+      <xs:extension base="tns:DomainEntity">
         <xs:sequence>
           <xs:element name="CreationTime" type="xs:dateTime" />
           <xs:element name="Side" type="tns:OrderSide" />
@@ -103,7 +103,7 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="domainEntity" abstract="true">
+  <xs:complexType name="DomainEntity" abstract="true">
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:long" />
     </xs:sequence>
@@ -116,7 +116,7 @@
   </xs:complexType>
   <xs:complexType name="Execution">
     <xs:complexContent mixed="false">
-      <xs:extension base="tns:domainEntity">
+      <xs:extension base="tns:DomainEntity">
         <xs:sequence>
           <xs:element name="CreationTime" type="tns:dateTime" />
           <xs:element name="Quantity" type="xs:decimal" />

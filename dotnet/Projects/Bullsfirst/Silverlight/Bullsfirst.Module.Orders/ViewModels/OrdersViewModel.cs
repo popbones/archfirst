@@ -15,10 +15,13 @@
 using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
+using Archfirst.Framework.Helpers;
+using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Orders.Interfaces;
 using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.ViewModel;
 
@@ -33,11 +36,13 @@ namespace Bullsfirst.Module.Orders.ViewModels
         [ImportingConstructor]
         public OrdersViewModel(
             ILoggerFacade logger,
+            IEventAggregator eventAggregator,
             ITradingServiceAsync tradingService,
             UserContext userContext)
         {
             logger.Log("PositionsViewModel.PositionsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _eventAggregator = eventAggregator;
             _tradingService = tradingService;
             this.UserContext = userContext;
             this.Orders = new ObservableCollection<Order>();
@@ -46,6 +51,14 @@ namespace Bullsfirst.Module.Orders.ViewModels
 
             _tradingService.GetOrdersCompleted +=
                 new EventHandler<GetOrdersCompletedEventArgs>(GetOrdersCallback);
+
+            SubscribeToEvents();
+        }
+
+        private void SubscribeToEvents()
+        {
+            // Don't use strong reference to delegate
+            _eventAggregator.GetEvent<UserLoggedOutEvent>().Subscribe(OnUserLoggedOut, ThreadOption.UIThread, true);
         }
 
         #endregion
@@ -83,9 +96,19 @@ namespace Bullsfirst.Module.Orders.ViewModels
 
         #endregion
 
+        #region Event Handlers
+
+        public void OnUserLoggedOut(Empty empty)
+        {
+            this.Orders.Clear();
+        }
+
+        #endregion
+
         #region Members
 
         private ILoggerFacade _logger;
+        private IEventAggregator _eventAggregator;
         private ITradingServiceAsync _tradingService;
         public UserContext UserContext { get; set; }
         public ObservableCollection<Order> Orders { get; set; }

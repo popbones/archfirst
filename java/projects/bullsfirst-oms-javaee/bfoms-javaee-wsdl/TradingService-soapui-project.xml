@@ -43,6 +43,12 @@
   <message name="PlaceOrderResponse">
     <part name="parameters" element="tns:PlaceOrderResponse"/>
   </message>
+  <message name="CancelOrder">
+    <part name="parameters" element="tns:CancelOrder"/>
+  </message>
+  <message name="CancelOrderResponse">
+    <part name="parameters" element="tns:CancelOrderResponse"/>
+  </message>
   <message name="GetBrokerageAccountSummaries">
     <part name="parameters" element="tns:GetBrokerageAccountSummaries"/>
   </message>
@@ -60,12 +66,6 @@
   </message>
   <message name="GetOrdersResponse">
     <part name="parameters" element="tns:GetOrdersResponse"/>
-  </message>
-  <message name="CancelOrder">
-    <part name="parameters" element="tns:CancelOrder"/>
-  </message>
-  <message name="CancelOrderResponse">
-    <part name="parameters" element="tns:CancelOrderResponse"/>
   </message>
   <message name="GetOrderEstimate">
     <part name="parameters" element="tns:GetOrderEstimate"/>
@@ -98,6 +98,10 @@
       <input wsam:Action="PlaceOrder" message="tns:PlaceOrder"/>
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderResponse" message="tns:PlaceOrderResponse"/>
     </operation>
+    <operation name="CancelOrder">
+      <input wsam:Action="CancelOrder" message="tns:CancelOrder"/>
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderResponse" message="tns:CancelOrderResponse"/>
+    </operation>
     <operation name="GetBrokerageAccountSummaries">
       <input wsam:Action="GetBrokerageAccountSummaries" message="tns:GetBrokerageAccountSummaries"/>
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetBrokerageAccountSummariesResponse" message="tns:GetBrokerageAccountSummariesResponse"/>
@@ -109,10 +113,6 @@
     <operation name="GetOrders">
       <input wsam:Action="GetOrders" message="tns:GetOrders"/>
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetOrdersResponse" message="tns:GetOrdersResponse"/>
-    </operation>
-    <operation name="CancelOrder">
-      <input wsam:Action="CancelOrder" message="tns:CancelOrder"/>
-      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderResponse" message="tns:CancelOrderResponse"/>
     </operation>
     <operation name="GetOrderEstimate">
       <input wsam:Action="GetOrderEstimate" message="tns:GetOrderEstimate"/>
@@ -175,6 +175,15 @@
         <soap:body use="literal"/>
       </output>
     </operation>
+    <operation name="CancelOrder">
+      <soap:operation soapAction="CancelOrder"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
     <operation name="GetBrokerageAccountSummaries">
       <soap:operation soapAction="GetBrokerageAccountSummaries"/>
       <input>
@@ -195,15 +204,6 @@
     </operation>
     <operation name="GetOrders">
       <soap:operation soapAction="GetOrders"/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
-    <operation name="CancelOrder">
-      <soap:operation soapAction="CancelOrder"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -294,10 +294,10 @@
   </xs:complexType>
   <xs:complexType name="GetOrders">
     <xs:sequence>
-      <xs:element name="OrderCriteria" type="tns:orderCriteria" minOccurs="0"/>
+      <xs:element name="OrderCriteria" type="tns:OrderCriteria" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="orderCriteria">
+  <xs:complexType name="OrderCriteria">
     <xs:sequence>
       <xs:element name="AccountId" type="xs:long" minOccurs="0"/>
       <xs:element name="Symbol" type="xs:string" minOccurs="0"/>
@@ -310,12 +310,12 @@
   </xs:complexType>
   <xs:complexType name="GetOrdersResponse">
     <xs:sequence>
-      <xs:element name="Order" type="tns:order" minOccurs="0" maxOccurs="unbounded"/>
+      <xs:element name="Order" type="tns:Order" minOccurs="0" maxOccurs="unbounded"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="order">
+  <xs:complexType name="Order">
     <xs:complexContent>
-      <xs:extension base="tns:domainEntity">
+      <xs:extension base="tns:DomainEntity">
         <xs:sequence>
           <xs:element name="CreationTime" type="xs:dateTime"/>
           <xs:element name="Side" type="tns:OrderSide"/>
@@ -326,12 +326,12 @@
           <xs:element name="Term" type="tns:OrderTerm"/>
           <xs:element name="AllOrNone" type="xs:boolean"/>
           <xs:element name="OrderStatus" type="tns:OrderStatus"/>
-          <xs:element name="Execution" type="tns:execution" maxOccurs="unbounded"/>
+          <xs:element name="Execution" type="tns:Execution" maxOccurs="unbounded"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="domainEntity" abstract="true">
+  <xs:complexType name="DomainEntity" abstract="true">
     <xs:sequence>
       <xs:element name="Id" type="xs:long" minOccurs="0"/>
     </xs:sequence>
@@ -342,9 +342,9 @@
       <xs:element name="Currency" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="execution">
+  <xs:complexType name="Execution">
     <xs:complexContent>
-      <xs:extension base="tns:domainEntity">
+      <xs:extension base="tns:DomainEntity">
         <xs:sequence>
           <xs:element name="CreationTime" type="tns:dateTime"/>
           <xs:element name="Quantity" type="xs:decimal"/>

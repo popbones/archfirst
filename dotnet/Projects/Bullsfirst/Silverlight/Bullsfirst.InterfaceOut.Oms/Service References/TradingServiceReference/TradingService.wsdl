@@ -41,6 +41,12 @@
   <message name="PlaceOrderResponse">
     <part name="parameters" element="tns:PlaceOrderResponse" />
   </message>
+  <message name="CancelOrder">
+    <part name="parameters" element="tns:CancelOrder" />
+  </message>
+  <message name="CancelOrderResponse">
+    <part name="parameters" element="tns:CancelOrderResponse" />
+  </message>
   <message name="GetBrokerageAccountSummaries">
     <part name="parameters" element="tns:GetBrokerageAccountSummaries" />
   </message>
@@ -58,12 +64,6 @@
   </message>
   <message name="GetOrdersResponse">
     <part name="parameters" element="tns:GetOrdersResponse" />
-  </message>
-  <message name="CancelOrder">
-    <part name="parameters" element="tns:CancelOrder" />
-  </message>
-  <message name="CancelOrderResponse">
-    <part name="parameters" element="tns:CancelOrderResponse" />
   </message>
   <message name="GetOrderEstimate">
     <part name="parameters" element="tns:GetOrderEstimate" />
@@ -96,6 +96,10 @@
       <input wsam:Action="PlaceOrder" message="tns:PlaceOrder" />
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderResponse" message="tns:PlaceOrderResponse" />
     </operation>
+    <operation name="CancelOrder">
+      <input wsam:Action="CancelOrder" message="tns:CancelOrder" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderResponse" message="tns:CancelOrderResponse" />
+    </operation>
     <operation name="GetBrokerageAccountSummaries">
       <input wsam:Action="GetBrokerageAccountSummaries" message="tns:GetBrokerageAccountSummaries" />
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetBrokerageAccountSummariesResponse" message="tns:GetBrokerageAccountSummariesResponse" />
@@ -107,10 +111,6 @@
     <operation name="GetOrders">
       <input wsam:Action="GetOrders" message="tns:GetOrders" />
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetOrdersResponse" message="tns:GetOrdersResponse" />
-    </operation>
-    <operation name="CancelOrder">
-      <input wsam:Action="CancelOrder" message="tns:CancelOrder" />
-      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderResponse" message="tns:CancelOrderResponse" />
     </operation>
     <operation name="GetOrderEstimate">
       <input wsam:Action="GetOrderEstimate" message="tns:GetOrderEstimate" />
@@ -173,6 +173,15 @@
         <soap:body use="literal" />
       </output>
     </operation>
+    <operation name="CancelOrder">
+      <soap:operation soapAction="CancelOrder" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
     <operation name="GetBrokerageAccountSummaries">
       <soap:operation soapAction="GetBrokerageAccountSummaries" />
       <input>
@@ -193,15 +202,6 @@
     </operation>
     <operation name="GetOrders">
       <soap:operation soapAction="GetOrders" />
-      <input>
-        <soap:body use="literal" />
-      </input>
-      <output>
-        <soap:body use="literal" />
-      </output>
-    </operation>
-    <operation name="CancelOrder">
-      <soap:operation soapAction="CancelOrder" />
       <input>
         <soap:body use="literal" />
       </input>
