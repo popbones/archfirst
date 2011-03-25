@@ -129,7 +129,14 @@
                     Width="60">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
+                            <StackPanel
+                                Orientation="Horizontal"
+                                Visibility="{Binding Converter={StaticResource BuySellVisibilityConverter}}">
+                                <!--
+                                ************************************************************
+                                Disabling multiple bindings due to System.Windows.Data Error
+                                See BuySellVisibilityConverter for details
+                                ************************************************************
                                 <bindings:BindingUtil.MultiBindings>
                                     <bindings:MultiBindings>
                                         <bindings:MultiBinding
@@ -144,6 +151,7 @@
                                         </bindings:MultiBinding>
                                     </bindings:MultiBindings>
                                 </bindings:BindingUtil.MultiBindings>
+                                -->
                                 <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
                                     Content="Buy"
                                     Command="{Binding BuyCommand, Source={StaticResource ViewModel}}"

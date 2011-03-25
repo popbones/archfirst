@@ -13,11 +13,17 @@ using System.Windows.Markup;
 
 namespace Archfirst.Framework.SilverlightMultiBinding
 {
+    /// <summary>
+    /// Manages the construction of multiple MultiBinding instances
+    /// </summary>
     [ContentProperty("Bindings")]
     public class MultiBindings : FrameworkElement
     {
         private FrameworkElement _targetElement;
 
+        /// <summary>
+        /// Gets / sets the collection of MultiBindings
+        /// </summary>
         public ObservableCollection<MultiBinding> Bindings { get; set; }
 
         public MultiBindings()
@@ -25,32 +31,35 @@ namespace Archfirst.Framework.SilverlightMultiBinding
             Bindings = new ObservableCollection<MultiBinding>();
         }
 #if !SILVERLIGHT
-        void Loaded(object sender, RoutedEventArgs e)
+    void Loaded(object sender, RoutedEventArgs e)
+    {
+      _targetElement.Loaded -= Loaded;
+      foreach (MultiBinding binding in Bindings)
+      {
+        FieldInfo field = _targetElement.GetType().GetField(binding.TargetProperty + "Property", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
+        if (field == null) continue;
+
+        System.Windows.Data.MultiBinding newBinding = new System.Windows.Data.MultiBinding
+                                                          {
+                                                            Converter = binding.Converter,
+                                                            ConverterParameter = binding.ConverterParameter
+                                                          };
+        foreach (BindingBase bindingBase in binding.Bindings)
         {
-            _targetElement.Loaded -= Loaded;
-            foreach (MultiBinding binding in Bindings)
-            {
-                FieldInfo field = _targetElement.GetType().GetField(binding.TargetProperty + "Property", BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy);
-                if (field == null) continue;
-
-                System.Windows.Data.MultiBinding newBinding = new System.Windows.Data.MultiBinding
-                                                                  {
-                                                                      Converter = binding.Converter,
-                                                                      ConverterParameter = binding.ConverterParameter
-                                                                  };
-                foreach (BindingBase bindingBase in binding.Bindings)
-                {
-                    newBinding.Bindings.Add(bindingBase);
-                }
-                
-                DependencyProperty dp = (DependencyProperty)field.GetValue(_targetElement);
-
-                BindingOperations.SetBinding(_targetElement, dp, newBinding);
-            }
-
+          newBinding.Bindings.Add(bindingBase);
         }
+
+        DependencyProperty dp = (DependencyProperty)field.GetValue(_targetElement);
+
+        BindingOperations.SetBinding(_targetElement, dp, newBinding);
+      }
+
+    }
 #endif
 
+        /// <summary>
+        /// Sets the DataContext of each of the MultiBinding instances
+        /// </summary>
         public void SetDataContext(object dataContext)
         {
             foreach (MultiBinding relay in Bindings)
@@ -59,17 +68,22 @@ namespace Archfirst.Framework.SilverlightMultiBinding
             }
         }
 
+        /// <summary>
+        /// Initialises each of the MultiBindings, and binds their ConvertedValue
+        /// to the given target property.
+        /// </summary>
         public void Initialize(FrameworkElement targetElement)
         {
             _targetElement = targetElement;
+
 #if !SILVERLIGHT
-            _targetElement.Loaded += Loaded;
+      _targetElement.Loaded += Loaded;
 #else
             const BindingFlags DpFlags = BindingFlags.Public | BindingFlags.Static | BindingFlags.FlattenHierarchy;
 
             foreach (MultiBinding relay in Bindings)
             {
-                relay.Initialise();
+                relay.Initialise(targetElement);
 
                 // find the target dependency property
                 Type targetType = null;
@@ -98,20 +112,12 @@ namespace Archfirst.Framework.SilverlightMultiBinding
 
                 // bind the ConvertedValue of our MultiBinding instance to the target property
                 // of our targetElement
-                Binding binding = new Binding("ConvertedValue") {
+                Binding binding = new Binding("ConvertedValue")
+                {
                     Source = relay,
-                    // Mode = relay.Mode,
-                    TargetNullValue = relay.TargetNullValue
+                    Mode = relay.Mode
                 };
-                Debug.WriteLine("---> MultiBindings.Initialize - "
-                    + "targetType=" + targetType
-                    + ", targetProperty=" + targetProperty
-                    + ", targetElement=" + targetElement
-                    + ", targetDependencyProperty=" + targetDependencyProperty
-                    + ", dataContext=" + targetElement.DataContext
-                    );
                 targetElement.SetBinding(targetDependencyProperty, binding);
-                Debug.WriteLine("<--- MultiBindings.Initialize");
             }
 #endif
         }

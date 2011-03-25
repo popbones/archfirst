@@ -16,16 +16,24 @@ using System.Windows.Markup;
 namespace Archfirst.Framework.SilverlightMultiBinding
 {
     /// <summary>
-    /// Allows multiple bindings to a single property.
+    /// Implements MultiBinding by creating a BindingSlave instance for each of the Bindings.
+    /// PropertyChanged events for the BindingSlae.Value property are handled, and the IMultiValueConveter
+    /// is used to compute the converted value.
     /// </summary>
     [ContentProperty("Bindings")]
     public class MultiBinding : Panel, INotifyPropertyChanged
     {
+        /// <summary>
+        /// Indicates whether the converted value property is currently being updated
+        /// as a result of one of the BindingSlave.Value properties changing
+        /// </summary>
+        private bool _updatingConvertedValue;
+
         #region ConvertedValue dependency property
 
         public static readonly DependencyProperty ConvertedValueProperty =
             DependencyProperty.Register("ConvertedValue", typeof(object), typeof(MultiBinding),
-                new PropertyMetadata(null, OnConvertedValue));
+                new PropertyMetadata(null, OnConvertedValuePropertyChanged));
 
         /// <summary>
         /// This dependency property is set to the resulting output of the
@@ -37,40 +45,47 @@ namespace Archfirst.Framework.SilverlightMultiBinding
             set { SetValue(ConvertedValueProperty, value); }
         }
 
-        private static void OnConvertedValue(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
+        private static void OnConvertedValuePropertyChanged(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
         {
             MultiBinding relay = depObj as MultiBinding;
             Debug.Assert(relay != null);
-            relay.OnPropertyChanged("ConvertedValue");
+            relay.OnConvertedValuePropertyChanged();
         }
-
-        #endregion
-
-        #region TargetNullValue dependency property
-
-        public static readonly DependencyProperty TargetNullValueProperty =
-            DependencyProperty.Register("TargetNullValue", typeof(object), typeof(MultiBinding),
-                new PropertyMetadata(null, OnTargetNullValue));
 
         /// <summary>
-        /// This dependency property is set to ???.
+        /// Handles propety changes for the ConvertedValue property
         /// </summary>
-        public object TargetNullValue
+        private void OnConvertedValuePropertyChanged()
         {
-            get { return GetValue(ConvertedValueProperty); }
-            set { SetValue(ConvertedValueProperty, value); }
-        }
+            OnPropertyChanged("ConvertedValue");
 
-        private static void OnTargetNullValue(DependencyObject depObj, DependencyPropertyChangedEventArgs e)
-        {
-            MultiBinding relay = depObj as MultiBinding;
-            Debug.Assert(relay != null);
-            relay.OnPropertyChanged("TargetNullValue");
+            // if the value is being updated, but not due to one of the multibindings
+            // then the target property has changed.
+            if (!_updatingConvertedValue)
+            {
+                // convert back
+                object[] convertedValues = Converter.ConvertBack(ConvertedValue, null,
+                  ConverterParameter, CultureInfo.InvariantCulture);
+
+                // update all the binding slaves
+                if (Children.Count == convertedValues.Length)
+                {
+                    for (int index = 0; index < convertedValues.Length; index++)
+                    {
+                        ((BindingSlave)Children[index]).Value = convertedValues[index];
+                    }
+                }
+            }
         }
 
         #endregion
 
         #region CLR properties
+
+        /// <summary>
+        /// The BindingMode
+        /// </summary>
+        public BindingMode Mode { get; set; }
 
         /// <summary>
         /// The target property on the element which this MultiBinding is assocaited with.
@@ -118,20 +133,35 @@ namespace Archfirst.Framework.SilverlightMultiBinding
             {
                 values.Add(slave.Value);
             }
+
+            _updatingConvertedValue = true;
             ConvertedValue = Converter.Convert(values.ToArray(), typeof(object), ConverterParameter, CultureInfo.CurrentCulture);
+            _updatingConvertedValue = false;
         }
 
         /// <summary>
         /// Creates a BindingSlave for each Binding and binds the Value
         /// accordingly.
         /// </summary>
-        internal void Initialise()
+        internal void Initialise(FrameworkElement targetElement)
         {
             Children.Clear();
             foreach (Binding binding in Bindings)
             {
-                BindingSlave slave = new BindingSlave();
-                slave.SetBinding(BindingSlave.ValueProperty, binding);
+                BindingSlave slave;
+
+                // create a binding slave instance 
+                if (!string.IsNullOrEmpty(binding.ElementName))
+                {
+                    // create an element name binding slave, this slave will resolve the 
+                    // binding source reference and construct a suitable binding.
+                    slave = new ElementNameBindingSlave(targetElement, binding);
+                }
+                else
+                {
+                    slave = new BindingSlave();
+                    slave.SetBinding(BindingSlave.ValueProperty, binding);
+                }
                 slave.PropertyChanged += SlavePropertyChanged;
                 Children.Add(slave);
             }
@@ -195,6 +225,57 @@ namespace Archfirst.Framework.SilverlightMultiBinding
 
     }
 
+    /// <summary>
+    /// A binding slave that performs 'ElementName' binding.
+    /// </summary>
+    public class ElementNameBindingSlave : BindingSlave
+    {
+        private FrameworkElement _multiBindingTarget;
+
+        /// <summary>
+        /// The source element named in the ElementName binding
+        /// </summary>
+        private FrameworkElement _elementNameSource;
+
+        private Binding _binding;
+
+        public ElementNameBindingSlave(FrameworkElement target, Binding binding)
+        {
+            _multiBindingTarget = target;
+            _binding = binding;
+
+            // try to locate the named element
+            ResolveElementNameBinding();
+
+            _multiBindingTarget.LayoutUpdated += MultiBindingTarget_LayoutUpdated;
+        }
+
+        /// <summary>
+        /// Try to locate the named element. If the element can be located, create the required
+        /// binding.
+        /// </summary>
+        private void ResolveElementNameBinding()
+        {
+            _elementNameSource = _multiBindingTarget.FindName(_binding.ElementName) as FrameworkElement;
+            if (_elementNameSource != null)
+            {
+                SetBinding(BindingSlave.ValueProperty, new Binding()
+                {
+                    Source = _elementNameSource,
+                    Path = _binding.Path,
+                    Converter = _binding.Converter,
+                    ConverterParameter = _binding.ConverterParameter
+                });
+            }
+        }
+
+        private void MultiBindingTarget_LayoutUpdated(object sender, EventArgs e)
+        {
+            // try to locate the named element 
+            ResolveElementNameBinding();
+        }
+    }
+
     internal delegate void BindingCollectionChangedCallback();
 
     public class BindingCollection : Collection<BindingBase>
@@ -202,11 +283,6 @@ namespace Archfirst.Framework.SilverlightMultiBinding
         // Fields
         private readonly BindingCollectionChangedCallback _collectionChangedCallback;
 
-        // Methods
-        //internal BindingCollection(BindingCollectionChangedCallback callback)
-        //{
-        //    _collectionChangedCallback = callback;
-        //}
 
         protected override void ClearItems()
         {

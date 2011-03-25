@@ -15,30 +15,38 @@
 using System;
 using System.Globalization;
 using System.Windows;
-using Archfirst.Framework.SilverlightMultiBinding;
+using System.Windows.Data;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 
 namespace Bullsfirst.Module.Positions.Views
 {
     /// <summary>
     /// Looks at Position to determine if it is tradable.
+    /// 
+    /// Note: I tried to use IMultiValueConverter instead of IValueConverter, but it was
+    /// giving me the following error:
+    ///   System.Windows.Data Error: 'MS.Internal.Data.DynamicValueConverter' converter
+    ///   failed to convert value 'null' (type 'null');
+    ///   BindingExpression: Path='ConvertedValue' DataItem='Archfirst.Framework.SilverlightMultiBinding.MultiBinding' (HashCode=15975518);
+    ///   target element is 'System.Windows.Controls.StackPanel' (Name='');
+    ///   target property is 'Visibility' (type 'System.Windows.Visibility')..
+    ///   System.InvalidOperationException: Can't convert type null to type System.Windows.Visibility.
+    ///      at MS.Internal.Data.DynamicValueConverter.Convert(Object value, Type targetType, Object parameter, CultureInfo culture)
+    ///      at System.Windows.Data.BindingExpression.ConvertToTarget(Object value). 
     /// </summary>
-    public class BuySellVisibilityConverter : IMultiValueConverter
+    public class BuySellVisibilityConverter : IValueConverter
     {
         /// <summary>
         /// Used to modify data as it is bound from the source object to the control.
         /// Converts Position to a Visibility
         /// </summary>
         public object Convert(
-            object[] values, Type targetType, object parameter, CultureInfo culture)
+            object value, Type targetType, object parameter, CultureInfo culture)
         {
             Visibility visibility = Visibility.Collapsed;
 
-            BrokerageAccountSummary summary = values[0] as BrokerageAccountSummary;
-            Position position = values[1] as Position;
-            if (summary != null && position != null &&
-                summary.TradePermission == true &&
-                (!position.InstrumentSymbol.Equals("CASH")))
+            Position position = value as Position;
+            if (position != null && (!position.InstrumentSymbol.Equals("CASH")))
             {
                 visibility = Visibility.Visible;
             }
@@ -51,8 +59,8 @@ namespace Bullsfirst.Module.Positions.Views
         /// Converts Visibility to Position
         /// But this case never happens, so throw exception
         /// </summary>
-        public object[] ConvertBack(
-            object value, Type[] targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(
+            object value, Type targetType, object parameter, CultureInfo culture)
         {
             throw new NotImplementedException();
         }
