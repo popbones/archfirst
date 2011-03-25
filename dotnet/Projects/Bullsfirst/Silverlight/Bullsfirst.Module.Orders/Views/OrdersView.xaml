@@ -108,8 +108,6 @@
             AutoGenerateColumns="False"
             HorizontalAlignment="Left"
             RowHeight="32"
-            CanUserReorderColumns="False"
-            CanUserResizeColumns="False"
             IsReadOnly="True"
             Style="{StaticResource DataGridStyle}"
             ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
@@ -134,21 +132,55 @@
                 </sdk:DataGridTemplateColumn>
                 <sdk:DataGridTextColumn
                     Header="Creation Time"
-                    Binding="{Binding CreationTime, Converter={StaticResource DateTimeToDateStringConverter}}"
+                    Binding="{Binding CreationTime}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
-                    CellStyle="{StaticResource LeftAlignedCellStyle}"
-                    Width="160" />
+                    CellStyle="{StaticResource RightAlignedCellStyle}" />
                 <sdk:DataGridTextColumn
                     Header="Order #"
                     Binding="{Binding Id}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}" />
+                <sdk:DataGridTextColumn
+                    Header="Type"
+                    Binding="{Binding Path=OrderType}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}" />
+                <sdk:DataGridTextColumn
+                    Header="Action"
+                    Binding="{Binding Path=Side}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}" />
+                <sdk:DataGridTextColumn
+                    Header="Symbol"
+                    Binding="{Binding Path=Symbol}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}" />
+                <sdk:DataGridTextColumn
+                    Header="Quantity"
+                    Binding="{Binding Path=Quantity}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}" />
+                <sdk:DataGridTextColumn
+                    Header="Limit Price"
+                    Binding="{Binding Path=LimitPrice, Converter={StaticResource MoneyConverter}}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
-                    Width="130" />
+                    SortMemberPath="LimitPrice.Amount" />
+                <sdk:DataGridTextColumn
+                    Header="Execution Price"
+                    Binding="{Binding Path=ExecutionPrice, Converter={StaticResource MoneyConverter}}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}"
+                    SortMemberPath="ExecutionPrice.Amount" />
+                <sdk:DataGridTextColumn
+                    Header="Status"
+                    Binding="{Binding Path=OrderStatus}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}" />
                 <sdk:DataGridTemplateColumn
                     Header="Actions"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
-                    CellStyle="{StaticResource CenterAlignedCellStyle}"
-                    Width="60">
+                    CellStyle="{StaticResource CenterAlignedCellStyle}">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock Text="Temp" />
@@ -165,8 +197,6 @@
                         HorizontalAlignment="Left"
                         RowHeight="20"
                         IsReadOnly="True"
-                        CanUserReorderColumns="False"
-                        CanUserResizeColumns="False"
                         HorizontalScrollBarVisibility="Hidden"
                         BorderThickness="0"
                         RowStyle="{StaticResource DataGridRowStyle}"
@@ -174,17 +204,14 @@
                         AlternatingRowBackground="White">
                         <sdk:DataGrid.Columns>
                             <sdk:DataGridTextColumn
-                                Binding="{Binding LotCreationTime, Converter={StaticResource DateTimeToDateStringConverter}}"
-                                CellStyle="{StaticResource IndentedCellStyle}"
-                                Width="160" />
-                            <sdk:DataGridTemplateColumn
-                                CellStyle="{StaticResource LeftAlignedCellStyle}"
-                                Width="60">
-                                <sdk:DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                    </DataTemplate>
-                                </sdk:DataGridTemplateColumn.CellTemplate>
-                            </sdk:DataGridTemplateColumn>
+                                Binding="{Binding CreationTime, Converter={StaticResource DateTimeToDateStringConverter}}"
+                                CellStyle="{StaticResource IndentedCellStyle}" />
+                            <sdk:DataGridTextColumn
+                                Binding="{Binding Path=Quantity}"
+                                CellStyle="{StaticResource RightAlignedCellStyle}" />
+                            <sdk:DataGridTextColumn
+                                Binding="{Binding Path=Price, Converter={StaticResource MoneyConverter}}"
+                                CellStyle="{StaticResource RightAlignedCellStyle}" />
                         </sdk:DataGrid.Columns>
                     </sdk:DataGrid>
                 </DataTemplate>
