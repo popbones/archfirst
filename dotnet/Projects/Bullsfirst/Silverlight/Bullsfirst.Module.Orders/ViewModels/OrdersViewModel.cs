@@ -58,6 +58,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
         {
             OrderCriteria criteria = new OrderCriteria
             {
+                AccountIdSpecified = true,
                 AccountId = this.UserContext.SelectedAccount.Id
             };
             _tradingService.GetOrdersAsync(criteria);
@@ -87,7 +88,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
         private ILoggerFacade _logger;
         private ITradingServiceAsync _tradingService;
         public UserContext UserContext { get; set; }
-        private ObservableCollection<Order> Orders { get; set; }
+        public ObservableCollection<Order> Orders { get; set; }
 
         public string ViewTitle
         {

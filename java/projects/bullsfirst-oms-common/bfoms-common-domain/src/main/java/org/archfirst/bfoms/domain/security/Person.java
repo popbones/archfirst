@@ -24,6 +24,7 @@ import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Person
@@ -31,6 +32,7 @@ import javax.xml.bind.annotation.XmlElement;
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Person")
 @Entity
 public class Person extends Party {
     private static final long serialVersionUID = 1L; 

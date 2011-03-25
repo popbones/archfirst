@@ -27,6 +27,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.domain.DomainEntity;
@@ -38,6 +39,7 @@ import org.archfirst.common.quantity.DecimalQuantity;
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Allocation")
 @Entity
 @Inheritance(strategy=JOINED)
 public abstract class Allocation extends DomainEntity {

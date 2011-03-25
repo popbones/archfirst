@@ -22,6 +22,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.Transient;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 import org.archfirst.common.domain.DomainEntity;
 
@@ -31,6 +32,7 @@ import org.archfirst.common.domain.DomainEntity;
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Party")
 @Entity
 @Inheritance(strategy=JOINED)
 public abstract class Party extends DomainEntity {

@@ -16,6 +16,7 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 
 namespace Bullsfirst.Module.Orders.Views
 {
@@ -33,11 +34,11 @@ namespace Bullsfirst.Module.Orders.Views
         {
             Visibility visibility = Visibility.Collapsed;
 
-            //Position position = value as Position;
-            //if (position != null && position.Child != null && position.Child.Length > 0)
-            //{
-            //    visibility = Visibility.Visible;
-            //}
+            Order order = value as Order;
+            if (order != null && order.Execution != null && order.Execution.Length > 0)
+            {
+                visibility = Visibility.Visible;
+            }
 
             return visibility;
         }

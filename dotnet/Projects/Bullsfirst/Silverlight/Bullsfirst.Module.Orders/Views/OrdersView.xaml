@@ -27,7 +27,7 @@
             <!-- Filter Expander -->
             <RowDefinition Height="Auto" />
             <!-- Orders -->
-            <RowDefinition Height="Auto" />
+            <RowDefinition />
             <!-- Status Message -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -159,7 +159,7 @@
             <sdk:DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <sdk:DataGrid
-                        ItemsSource="{Binding Child}"
+                        ItemsSource="{Binding Execution}"
                         HeadersVisibility="None"
                         AutoGenerateColumns="False"
                         HorizontalAlignment="Left"

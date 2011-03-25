@@ -29,6 +29,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlType;
 
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.util.Constants;
@@ -44,6 +45,7 @@ import org.hibernate.annotations.Type;
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "BaseAccount")
 @Entity
 @Inheritance(strategy=JOINED)
 public abstract class BaseAccount extends DomainEntity {

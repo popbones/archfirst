@@ -25,6 +25,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * An abstract class to provide base functionality for all domain entities.
@@ -32,6 +33,7 @@ import javax.xml.bind.annotation.XmlTransient;
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "DomainEntity")
 @MappedSuperclass
 public abstract class DomainEntity implements Serializable {
     private static final long serialVersionUID = 1L;

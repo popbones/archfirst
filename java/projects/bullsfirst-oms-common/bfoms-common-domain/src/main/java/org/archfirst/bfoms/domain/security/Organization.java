@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
 
 /**
  * Organization
@@ -26,6 +27,7 @@ import javax.xml.bind.annotation.XmlElement;
  * @author Naresh Bhatia
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Organization")
 @Entity
 public class Organization extends Party {
     private static final long serialVersionUID = 1L; 
