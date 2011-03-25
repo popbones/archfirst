@@ -12,9 +12,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System;
+using System.Collections.ObjectModel;
 using System.ComponentModel.Composition;
 using Bullsfirst.InterfaceOut.Oms.Domain;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Orders.Interfaces;
+using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.ViewModel;
 
@@ -29,11 +33,51 @@ namespace Bullsfirst.Module.Orders.ViewModels
         [ImportingConstructor]
         public OrdersViewModel(
             ILoggerFacade logger,
+            ITradingServiceAsync tradingService,
             UserContext userContext)
         {
             logger.Log("PositionsViewModel.PositionsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _tradingService = tradingService;
             this.UserContext = userContext;
+            this.Orders = new ObservableCollection<Order>();
+
+            this.UpdateOrdersCommand = new DelegateCommand<object>(this.UpdateOrdersExecute);
+
+            _tradingService.GetOrdersCompleted +=
+                new EventHandler<GetOrdersCompletedEventArgs>(GetOrdersCallback);
+        }
+
+        #endregion
+
+        #region UpdateOrdersCommand
+
+        public DelegateCommand<object> UpdateOrdersCommand { get; set; }
+
+        private void UpdateOrdersExecute(object dummyObject)
+        {
+            OrderCriteria criteria = new OrderCriteria
+            {
+                AccountId = this.UserContext.SelectedAccount.Id
+            };
+            _tradingService.GetOrdersAsync(criteria);
+        }
+
+        private void GetOrdersCallback(object sender, GetOrdersCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                this.StatusMessage = e.Error.Message;
+            }
+            else
+            {
+                this.StatusMessage = null;
+                Orders.Clear();
+                foreach (Order order in e.Result)
+                {
+                    Orders.Add(order);
+                }
+            }
         }
 
         #endregion
@@ -41,11 +85,24 @@ namespace Bullsfirst.Module.Orders.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private ITradingServiceAsync _tradingService;
         public UserContext UserContext { get; set; }
+        private ObservableCollection<Order> Orders { get; set; }
 
         public string ViewTitle
         {
             get { return "Orders"; }
+        }
+
+        private string _statusMessage;
+        public string StatusMessage
+        {
+            get { return _statusMessage; }
+            set
+            {
+                _statusMessage = value;
+                this.RaisePropertyChanged("StatusMessage");
+            }
         }
 
         #endregion

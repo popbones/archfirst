@@ -28,6 +28,8 @@
             <RowDefinition Height="Auto" />
             <!-- Orders -->
             <RowDefinition Height="Auto" />
+            <!-- Status Message -->
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Title -->
@@ -188,5 +190,10 @@
                 </DataTemplate>
             </sdk:DataGrid.RowDetailsTemplate>
         </sdk:DataGrid>
+
+        <!-- Status Message -->
+        <TextBlock
+            Grid.Row="4"
+            Text="{Binding StatusMessage}" TextWrapping="Wrap" Foreground="Red" Margin="0 10 0 0"/>
     </Grid>
 </UserControl>

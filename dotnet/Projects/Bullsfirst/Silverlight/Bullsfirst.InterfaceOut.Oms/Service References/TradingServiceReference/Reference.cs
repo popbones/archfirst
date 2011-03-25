@@ -2926,7 +2926,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         event EventHandler<AsyncCompletedEventArgs> TransferCashCompleted;
         event EventHandler<AsyncCompletedEventArgs> TransferSecuritiesCompleted;
         event EventHandler<PlaceOrderCompletedEventArgs> PlaceOrderCompleted;
-        event EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CancelOrderCompleted;
+        event EventHandler<AsyncCompletedEventArgs> CancelOrderCompleted;
         event EventHandler<GetBrokerageAccountSummariesCompletedEventArgs> GetBrokerageAccountSummariesCompleted;
         event EventHandler<GetExternalAccountSummariesCompletedEventArgs> GetExternalAccountSummariesCompleted;
         event EventHandler<GetOrdersCompletedEventArgs> GetOrdersCompleted;

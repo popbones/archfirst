@@ -46,12 +46,14 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _tradingService = tradingService;
+            this.UserContext = userContext;
+            this.SignOutCommand = new DelegateCommand<object>(this.SignOutExecute);
+
             _tradingService.GetBrokerageAccountSummariesCompleted +=
                 new EventHandler<GetBrokerageAccountSummariesCompletedEventArgs>(GetBrokerageAccountSummariesCallback);
             _tradingService.GetExternalAccountSummariesCompleted +=
                 new EventHandler<GetExternalAccountSummariesCompletedEventArgs>(GetExternalAccountSummariesCallback);
-            this.UserContext = userContext;
-            SignOutCommand = new DelegateCommand<object>(this.SignOutExecute);
+            
             SubscribeToEvents();
         }
 
