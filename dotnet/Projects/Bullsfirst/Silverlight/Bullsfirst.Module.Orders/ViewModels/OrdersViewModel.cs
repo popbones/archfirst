@@ -16,6 +16,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Diagnostics;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
@@ -39,7 +40,8 @@ namespace Bullsfirst.Module.Orders.ViewModels
             ILoggerFacade logger,
             IEventAggregator eventAggregator,
             ITradingServiceAsync tradingService,
-            UserContext userContext)
+            UserContext userContext,
+            ReferenceData referenceData)
         {
             logger.Log("PositionsViewModel.PositionsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
@@ -47,6 +49,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
             _tradingService = tradingService;
             this.UserContext = userContext;
             this.Orders = new ObservableCollection<Order>();
+            this.ReferenceData = referenceData;
 
             this.UpdateOrdersCommand = new DelegateCommand<object>(this.UpdateOrdersExecute);
             this.CancelOrderCommand = new DelegateCommand<object>(this.CancelOrderExecute);
@@ -78,6 +81,10 @@ namespace Bullsfirst.Module.Orders.ViewModels
 
         private void UpdateOrders()
         {
+            Debug.WriteLine("OrderId=" + OrderId);
+            Debug.WriteLine("Symbol=" + Symbol);
+            Debug.WriteLine("FromDate=" + FromDate);
+            Debug.WriteLine("ToDate=" + ToDate);
             OrderCriteria criteria = new OrderCriteria
             {
                 AccountIdSpecified = true,
@@ -145,11 +152,59 @@ namespace Bullsfirst.Module.Orders.ViewModels
         private IEventAggregator _eventAggregator;
         private ITradingServiceAsync _tradingService;
         public UserContext UserContext { get; set; }
+        public ReferenceData ReferenceData { get; set; }
         public ObservableCollection<Order> Orders { get; set; }
 
         public string ViewTitle
         {
             get { return "Orders"; }
+        }
+
+        private Nullable<long> _orderId;
+        public Nullable<long> OrderId
+        {
+            get { return _orderId; }
+            set
+            {
+                if (_orderId == value) return;
+                _orderId = value;
+                RaisePropertyChanged("OrderId");
+            }
+        }
+
+        private string _symbol;
+        public string Symbol
+        {
+            get { return _symbol; }
+            set
+            {
+                _symbol = value;
+                this.RaisePropertyChanged("Symbol");
+            }
+        }
+
+        private Nullable<DateTime> _fromDate;
+        public Nullable<DateTime> FromDate
+        {
+            get { return _fromDate; }
+            set
+            {
+                if (_fromDate != null && _fromDate.Equals(value)) return;
+                _fromDate = value;
+                RaisePropertyChanged("FromDate");
+            }
+        }
+
+        private Nullable<DateTime> _toDate;
+        public Nullable<DateTime> ToDate
+        {
+            get { return _toDate; }
+            set
+            {
+                if (_toDate != null && _toDate.Equals(value)) return;
+                _toDate = value;
+                RaisePropertyChanged("ToDate");
+            }
         }
 
         private string _statusMessage;

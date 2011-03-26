@@ -16,6 +16,7 @@ using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows.Controls;
 using Archfirst.Framework.PrismHelpers;
+using Bullsfirst.InterfaceOut.Oms.ReferenceDataServiceReference;
 using Bullsfirst.Module.Orders.Interfaces;
 
 namespace Bullsfirst.Module.Orders.Views
@@ -36,6 +37,28 @@ namespace Bullsfirst.Module.Orders.Views
             this.DataContext = viewModel;
             this.Resources.Add("ViewModel", viewModel);
             InitializeComponent();
+            symbolField.ItemFilter += InstrumentFilter;
+        }
+
+        /// <summary>
+        /// Predicate used for filtering instruments for a given search string
+        /// </summary>
+        /// <param name="search">The string used for filtering</param>
+        /// <param name="value">The instrument that is being compared with the search parameter</param>
+        /// <returns></returns>
+        bool InstrumentFilter(string search, object value)
+        {
+            Instrument instrument = value as Instrument;
+            if (instrument != null)
+            {
+                search = search.ToUpper();
+                return (instrument.Symbol.ToUpper().Contains(search) ||
+                        instrument.Name.ToUpper().Contains(search));
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

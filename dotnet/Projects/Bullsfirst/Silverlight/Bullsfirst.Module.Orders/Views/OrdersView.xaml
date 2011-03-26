@@ -45,19 +45,34 @@
                 <sdk:Label Content="Order #" Style="{StaticResource FilterPanelLabel}" />
                 <!-- See http://karlshifflett.wordpress.com/2008/12/16/using-wpf-binding-stringformat-property-with-nullable-types -->
                 <TextBox Style="{StaticResource FilterPanelTextBox}"
-                    Text="{Binding Path=OrderId, TargetNullValue='Nothing'}" />
+                    Text="{Binding Path=OrderId, Mode=TwoWay, TargetNullValue='', ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
                 <sdk:Label Content="Symbol" Style="{StaticResource FilterPanelLabel}" />
-                <TextBox Style="{StaticResource FilterPanelTextBox}"
-                    Text="{Binding Path=Symbol, Mode=TwoWay, TargetNullValue='Nothing'}" />
+                <sdk:AutoCompleteBox x:Name="symbolField" TextBoxStyle="{StaticResource FilterPanelTextBox}"
+                    Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    ItemsSource="{Binding Path=ReferenceData.Instruments}"
+                    FilterMode="Custom">
+                    <sdk:AutoCompleteBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid Width="250">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="200" />
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="{Binding Symbol}" />
+                                <TextBlock Grid.Column="1" Text="{Binding Name}" />
+                            </Grid>
+                        </DataTemplate>
+                    </sdk:AutoCompleteBox.ItemTemplate>
+                </sdk:AutoCompleteBox>
 
                 <sdk:Label Content="From" Style="{StaticResource FilterPanelLabel}" />
                 <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
-                    SelectedDate="{Binding Path=FromDate, Mode=TwoWay, TargetNullValue='Nothing'}" />
+                    SelectedDate="{Binding Path=FromDate, Mode=TwoWay, TargetNullValue=''}" />
 
                 <sdk:Label Content="To" Style="{StaticResource FilterPanelLabel}" />
                 <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
-                    SelectedDate="{Binding Path=ToDate, Mode=TwoWay, TargetNullValue='Nothing'}" />
+                    SelectedDate="{Binding Path=ToDate, Mode=TwoWay, TargetNullValue=''}" />
 
                 <sdk:Label Content="More" Style="{StaticResource FilterPanelLabel}" />
                 <ToggleButton Name="MoreButton" Content="More" Style="{StaticResource FilterPanelMoreButton}" />
@@ -75,26 +90,22 @@
                     Style="{StaticResource FilterExpanderPanel}">
             <sdk:Label Content="Order Action" Style="{StaticResource FilterPanelLabel}" />
             <CheckBox Content="Buy" Style="{StaticResource FilterPanelCheckBox}"
-                                IsChecked="{Binding Path=BuyFilter}" />
+                      IsChecked="{Binding Path=ActionBuy}" />
             <CheckBox Content="Sell" Style="{StaticResource FilterPanelCheckBox}"
-                                IsChecked="{Binding Path=SellFilter}" />
+                      IsChecked="{Binding Path=ActionSell}" />
 
-            <sdk:Label Content="Order Status" Style="{StaticResource FilterPanelLabel}" />
-            <ItemsControl ItemsSource="{Binding Path=OrderStatusFilters}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal"/>
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <CheckBox
-                                    IsChecked="{Binding Path=IsChecked}"
-                                    Content="{Binding Path=CheckBoxText}"
-                                    Style="{StaticResource FilterPanelCheckBox}" />
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+            <sdk:Label Content="Order Status" Style="{StaticResource FilterPanelLabel}"
+                       Margin="30 5 0 5" />
+            <CheckBox Content="New" Style="{StaticResource FilterPanelCheckBox}"
+                      IsChecked="{Binding Path=StatusNew}" />
+            <CheckBox Content="Partially Filled" Style="{StaticResource FilterPanelCheckBox}"
+                      IsChecked="{Binding Path=StatusPartiallyFilled}" />
+            <CheckBox Content="Filled" Style="{StaticResource FilterPanelCheckBox}"
+                      IsChecked="{Binding Path=StatusFilled}" />
+            <CheckBox Content="Canceled" Style="{StaticResource FilterPanelCheckBox}"
+                      IsChecked="{Binding Path=StatusCanceled}" />
+            <CheckBox Content="Done For Day" Style="{StaticResource FilterPanelCheckBox}"
+                      IsChecked="{Binding Path=StatusDoneForDay}" />
         </StackPanel>
 
         <!-- Orders -->
