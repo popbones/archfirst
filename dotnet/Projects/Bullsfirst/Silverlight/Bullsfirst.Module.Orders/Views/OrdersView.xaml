@@ -60,8 +60,7 @@
                     SelectedDate="{Binding Path=ToDate, Mode=TwoWay, TargetNullValue='Nothing'}" />
 
                 <sdk:Label Content="More" Style="{StaticResource FilterPanelLabel}" />
-                <ToggleButton Content="More" Style="{StaticResource FilterPanelMoreButton}"
-                          IsChecked="{Binding IsExpanded, Mode=TwoWay, ElementName=FilterExpander}" />
+                <ToggleButton Name="MoreButton" Content="More" Style="{StaticResource FilterPanelMoreButton}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -71,35 +70,32 @@
         </Grid>
 
         <!-- Filter Expander -->
-        <Grid Grid.Row="2" Style="{StaticResource FilterPanel}">
-            <!-- TODO: <toolkit:Expander Name="FilterExpander" Style="{StaticResource ExpanderWithoutButton}"> -->
-            <toolkit:Expander Name="FilterExpander">
-                    <StackPanel Orientation="Horizontal">
-                    <sdk:Label Content="Order Action" Style="{StaticResource FilterPanelLabel}" />
-                    <CheckBox Content="Buy" Style="{StaticResource FilterPanelCheckBox}"
-                              IsChecked="{Binding Path=BuyFilter}" />
-                    <CheckBox Content="Sell" Style="{StaticResource FilterPanelCheckBoxLast}"
-                              IsChecked="{Binding Path=SellFilter}" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal"
+                    Visibility="{Binding ElementName=MoreButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"
+                    Style="{StaticResource FilterExpanderPanel}">
+            <sdk:Label Content="Order Action" Style="{StaticResource FilterPanelLabel}" />
+            <CheckBox Content="Buy" Style="{StaticResource FilterPanelCheckBox}"
+                                IsChecked="{Binding Path=BuyFilter}" />
+            <CheckBox Content="Sell" Style="{StaticResource FilterPanelCheckBox}"
+                                IsChecked="{Binding Path=SellFilter}" />
 
-                    <sdk:Label Content="Order Status" Style="{StaticResource FilterPanelLabel}" />
-                    <ItemsControl ItemsSource="{Binding Path=OrderStatusFilters}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <StackPanel Orientation="Horizontal"/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <CheckBox
+            <sdk:Label Content="Order Status" Style="{StaticResource FilterPanelLabel}" />
+            <ItemsControl ItemsSource="{Binding Path=OrderStatusFilters}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <CheckBox
                                     IsChecked="{Binding Path=IsChecked}"
                                     Content="{Binding Path=CheckBoxText}"
                                     Style="{StaticResource FilterPanelCheckBox}" />
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
-                </StackPanel>
-            </toolkit:Expander>
-        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
 
         <!-- Orders -->
         <sdk:DataGrid
