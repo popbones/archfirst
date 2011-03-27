@@ -227,8 +227,7 @@
                                 CellStyle="{StaticResource LeftAlignedCellStyle}"
                                 Width="60">
                                 <sdk:DataGridTemplateColumn.CellTemplate>
-                                    <DataTemplate>
-                                    </DataTemplate>
+                                    <DataTemplate />
                                 </sdk:DataGridTemplateColumn.CellTemplate>
                             </sdk:DataGridTemplateColumn>
                         </sdk:DataGrid.Columns>

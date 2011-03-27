@@ -21,31 +21,39 @@ using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 namespace Bullsfirst.Module.Orders.Views
 {
     /// <summary>
-    /// Looks at Order.Execution to determine if expand/collapse button should be visible.
+    /// Looks at Order.Execution to determine execution price.
     /// </summary>
-    public class ExpandCollapseVisibilityConverter : IValueConverter
+    public class ExecutionPriceConverter : IValueConverter
     {
         /// <summary>
         /// Used to modify data as it is bound from the source object to the control.
-        /// Converts Order.Execution to a Visibility
+        /// Converts Order.Execution to a String (Money)
         /// </summary>
         public object Convert(
             object value, Type targetType, object parameter, CultureInfo culture)
         {
-            Visibility visibility = Visibility.Collapsed;
-
             Order order = value as Order;
             if (order != null && order.Execution != null && order.Execution.Length > 0)
             {
-                visibility = Visibility.Visible;
+                decimal totalPrice = 0.00M;
+                decimal totalQuantity = 0.00M;
+                foreach (Execution execution in order.Execution)
+                {
+                    totalPrice += execution.Price.Amount * execution.Quantity;
+                    totalQuantity += execution.Quantity;
+                }
+                decimal executionPrice = totalPrice / totalQuantity;
+                return executionPrice.ToString("C");
             }
-
-            return visibility;
+            else
+            {
+                return null;
+            }
         }
 
         /// <summary>
         /// Used to modify data as it is saved from the control to the source object.
-        /// Converts Visibility to Order.Execution
+        /// Converts String to Order.Execution
         /// But this case never happens, so throw exception
         /// </summary>
         public object ConvertBack(
