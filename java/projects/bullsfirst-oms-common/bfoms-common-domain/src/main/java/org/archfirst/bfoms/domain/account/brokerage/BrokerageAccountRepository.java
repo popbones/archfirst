@@ -24,6 +24,7 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
 import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
@@ -34,6 +35,8 @@ import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.common.domain.BaseRepository;
 import org.archfirst.common.quantity.DecimalQuantity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * BrokerageAccountRepository
@@ -41,6 +44,8 @@ import org.archfirst.common.quantity.DecimalQuantity;
  * @author Naresh Bhatia
  */
 public class BrokerageAccountRepository extends BaseRepository {
+    private static final Logger logger =
+        LoggerFactory.getLogger(BrokerageAccountRepository.class);
 
     // ----- BrokerageAccount Methods -----
     public BrokerageAccount findAccount(Long id) {
@@ -114,34 +119,49 @@ public class BrokerageAccountRepository extends BaseRepository {
         // Eager fetch executions (because executions are often needed along with orders) 
         _order.fetch(Order_.executions, JoinType.LEFT);
         
-        // where accountId = criteria.getAccountId()
+        // Construct a predicate for the where clause using conjunction
+        Predicate predicate = builder.conjunction();
+        
+        // accountId
         if (criteria.getAccountId() != null) {
+            logger.debug("---> findOrders: accountId={}", criteria.getAccountId());
             Path<BrokerageAccount> _account = _order.get(Order_.account);
             Path<Long> _accountId = _account.get(BrokerageAccount_.id);
-            query.where(builder.equal(_accountId, criteria.getAccountId()));
+            predicate = builder.and(
+                    predicate,
+                    builder.equal(_accountId, criteria.getAccountId()));
         }
 
-        // where symbol = criteria.getSymbol()
+        // symbol
         if (criteria.getSymbol() != null) {
-            query.where(builder.equal(
-                    _order.get(Order_.symbol), criteria.getSymbol()));
+            logger.debug("---> findOrders: symbol={}", criteria.getSymbol());
+            predicate = builder.and(
+                    predicate,
+                    builder.equal(_order.get(Order_.symbol), criteria.getSymbol()));
         }
 
-        // TODO
-/*        
+        // orderId
         if (criteria.getOrderId() != null) {
-            orderCriteria.add(Restrictions.eq("id",
-                    criteria.getOrderId()));
+            logger.debug("---> findOrders: orderId={}", criteria.getOrderId());
+            predicate = builder.and(
+                    predicate,
+                    builder.equal(_order.get(Order_.id), criteria.getOrderId()));
         }
 
+        /*        
+        // fromDate
         if (criteria.getFromDate() != null) {
-            orderCriteria.add(Restrictions.ge("creationTime",
+            logger.debug("---> findOrders: fromDate()={}", criteria.getFromDate());
+            query.where(builder.ge(
+                    _order.get(Order_.creationTime),
                     criteria.getFromDate().toDateTimeAtStartOfDay()));
         }
 
         if (criteria.getToDate() != null) {
-            orderCriteria.add(Restrictions.lt("creationTime",
-                    criteria.getToDate().plusDays(1).toDateTimeAtStartOfDay()));
+            logger.debug("---> findOrders: toDate()={}", criteria.getToDate());
+            query.where(builder.lt(
+                    _order.get(Order_.creationTime),
+                    criteria.getToDate().toDateTimeAtStartOfDay()));
         }
 
         if (!criteria.getSides().isEmpty()) {
@@ -155,13 +175,20 @@ public class BrokerageAccountRepository extends BaseRepository {
         }
 */
         
-        @SuppressWarnings("unchecked")
+        // Assign predicate to where clause
+        query.where(predicate);
+        
+        // Execute the query
         List<Order> orders = entityManager.createQuery(query).getResultList();
         
         // Orders with multiple executions will be added to the above list multiple times
         // Filter out duplicates
         Set<Order> distinctOrderSet = new TreeSet<Order>(orders);
         List<Order> distinctOrderList = new ArrayList<Order>(distinctOrderSet);
+        
+        for (Order order : distinctOrderList) {
+            logger.debug("---> findOrders: Order={}", order);
+        }
 
         return distinctOrderList;
     }

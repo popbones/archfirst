@@ -291,6 +291,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
             (status==OrderStatus.DoneForDay);
     }
 
+    @Transient
     private boolean isStatusChangeValid(OrderStatus newStatus) {
         boolean result = false;
         switch (this.status) {
@@ -340,6 +341,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
         builder.append(", term=").append(term);
         builder.append(", allOrNone=").append(allOrNone);
         builder.append(", status=").append(status);
+        builder.append(", accountId=").append(account.getId());
         return builder.toString();
     }
 
