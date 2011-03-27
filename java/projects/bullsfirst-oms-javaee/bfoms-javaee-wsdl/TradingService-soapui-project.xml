@@ -376,32 +376,15 @@
   </xs:complexType>
   <xs:complexType name="GetTransactionSummaries">
     <xs:sequence>
-      <xs:element name="TransactionCriteria" type="tns:transactionCriteria" minOccurs="0"/>
+      <xs:element name="TransactionCriteria" type="tns:TransactionCriteria" minOccurs="0"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="transactionCriteria">
+  <xs:complexType name="TransactionCriteria">
     <xs:sequence>
-      <xs:element name="accountId" type="xs:long" minOccurs="0"/>
-      <xs:element name="fromDate" type="tns:localDate" minOccurs="0"/>
-      <xs:element name="toDate" type="tns:localDate" minOccurs="0"/>
+      <xs:element name="AccountId" type="xs:long" minOccurs="0"/>
+      <xs:element name="FromDate" type="xs:date" minOccurs="0"/>
+      <xs:element name="ToDate" type="xs:date" minOccurs="0"/>
     </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="localDate" final="extension restriction">
-    <xs:complexContent>
-      <xs:extension base="tns:baseLocal">
-        <xs:sequence/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="baseLocal" abstract="true">
-    <xs:complexContent>
-      <xs:extension base="tns:abstractPartial">
-        <xs:sequence/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="abstractPartial" abstract="true">
-    <xs:sequence/>
   </xs:complexType>
   <xs:complexType name="GetTransactionSummariesResponse">
     <xs:sequence>
@@ -762,7 +745,7 @@
          <!--Optional:-->
          <TransactionCriteria>
             <!--Optional:-->
-            <accountId>2</accountId>
+            <AccountId>2</AccountId>
          </TransactionCriteria>
       </trad:GetTransactionSummaries>
    </soapenv:Body>

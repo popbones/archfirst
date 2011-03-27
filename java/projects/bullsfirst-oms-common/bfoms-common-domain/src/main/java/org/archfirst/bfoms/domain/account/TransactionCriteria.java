@@ -15,6 +15,14 @@
  */
 package org.archfirst.bfoms.domain.account;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import org.archfirst.common.datetime.LocalDateAdapter;
 import org.joda.time.LocalDate;
 
 /**
@@ -22,9 +30,21 @@ import org.joda.time.LocalDate;
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "TransactionCriteria")
 public class TransactionCriteria {
+
+    @XmlElement(name = "AccountId")
     private Long accountId;
+
+    @XmlElement(name = "FromDate")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @XmlSchemaType(name="date")
     private LocalDate fromDate;
+
+    @XmlElement(name = "ToDate")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @XmlSchemaType(name="date")
     private LocalDate toDate;
 
     // ----- Commands -----
