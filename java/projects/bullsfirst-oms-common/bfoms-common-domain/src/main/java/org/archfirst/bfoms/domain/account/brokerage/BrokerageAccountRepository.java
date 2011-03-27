@@ -35,8 +35,6 @@ import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.common.domain.BaseRepository;
 import org.archfirst.common.quantity.DecimalQuantity;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * BrokerageAccountRepository
@@ -44,8 +42,6 @@ import org.slf4j.LoggerFactory;
  * @author Naresh Bhatia
  */
 public class BrokerageAccountRepository extends BaseRepository {
-    private static final Logger logger =
-        LoggerFactory.getLogger(BrokerageAccountRepository.class);
 
     // ----- BrokerageAccount Methods -----
     public BrokerageAccount findAccount(Long id) {
@@ -125,7 +121,6 @@ public class BrokerageAccountRepository extends BaseRepository {
         
         // accountId
         if (criteria.getAccountId() != null) {
-            logger.debug("---> findOrders: accountId={}", criteria.getAccountId());
             Path<BrokerageAccount> _account = _order.get(Order_.account);
             Path<Long> _accountId = _account.get(BrokerageAccount_.id);
             predicate = builder.and(
@@ -135,7 +130,6 @@ public class BrokerageAccountRepository extends BaseRepository {
 
         // symbol
         if (criteria.getSymbol() != null) {
-            logger.debug("---> findOrders: symbol={}", criteria.getSymbol());
             predicate = builder.and(
                     predicate,
                     builder.equal(_order.get(Order_.symbol), criteria.getSymbol()));
@@ -143,7 +137,6 @@ public class BrokerageAccountRepository extends BaseRepository {
 
         // orderId
         if (criteria.getOrderId() != null) {
-            logger.debug("---> findOrders: orderId={}", criteria.getOrderId());
             predicate = builder.and(
                     predicate,
                     builder.equal(_order.get(Order_.id), criteria.getOrderId()));
@@ -151,7 +144,6 @@ public class BrokerageAccountRepository extends BaseRepository {
 
         // fromDate
         if (criteria.getFromDate() != null) {
-            logger.debug("---> findOrders: fromDate()={}", criteria.getFromDate());
             predicate = builder.and(
                     predicate,
                     builder.greaterThanOrEqualTo(
@@ -160,7 +152,6 @@ public class BrokerageAccountRepository extends BaseRepository {
         }
 
         if (criteria.getToDate() != null) {
-            logger.debug("---> findOrders: toDate()={}", criteria.getToDate());
             predicate = builder.and(
                     predicate,
                     builder.lessThan(
@@ -169,7 +160,6 @@ public class BrokerageAccountRepository extends BaseRepository {
         }
 
         if (!criteria.getSides().isEmpty()) {
-            logger.debug("---> findOrders: sides={}", criteria.getSides());
             CriteriaBuilder.In<OrderSide> inExpr = builder.in(_order.get(Order_.side));
             for (OrderSide side : criteria.getSides()) {
                 inExpr = inExpr.value(side);
@@ -178,7 +168,6 @@ public class BrokerageAccountRepository extends BaseRepository {
         }
 
         if (!criteria.getStatuses().isEmpty()) {
-            logger.debug("---> findOrders: statuses={}", criteria.getStatuses());
             CriteriaBuilder.In<OrderStatus> inExpr = builder.in(_order.get(Order_.status));
             for (OrderStatus status : criteria.getStatuses()) {
                 inExpr = inExpr.value(status);
@@ -197,10 +186,6 @@ public class BrokerageAccountRepository extends BaseRepository {
         Set<Order> distinctOrderSet = new TreeSet<Order>(orders);
         List<Order> distinctOrderList = new ArrayList<Order>(distinctOrderSet);
         
-        for (Order order : distinctOrderList) {
-            logger.debug("---> findOrders: Order={}", order);
-        }
-
         return distinctOrderList;
     }
 

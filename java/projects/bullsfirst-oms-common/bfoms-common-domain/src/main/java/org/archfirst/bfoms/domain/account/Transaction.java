@@ -22,7 +22,15 @@ import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlSchemaType;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.archfirst.common.datetime.DateTimeAdapter;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
 import org.hibernate.annotations.Type;
@@ -33,12 +41,19 @@ import org.joda.time.DateTime;
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Transaction")
 @Entity
 @Inheritance(strategy=JOINED)
 public abstract class Transaction extends DomainEntity {
     private static final long serialVersionUID = 1L;
 
+    @XmlElement(name = "CreationTime", required = true)
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name="dateTime")
     private DateTime creationTime;
+
+    @XmlTransient
     private BaseAccount account;
     
     // ----- Constructors -----

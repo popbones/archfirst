@@ -73,6 +73,12 @@
   <message name="GetOrderEstimateResponse">
     <part name="parameters" element="tns:GetOrderEstimateResponse"/>
   </message>
+  <message name="GetTransactionSummaries">
+    <part name="parameters" element="tns:GetTransactionSummaries"/>
+  </message>
+  <message name="GetTransactionSummariesResponse">
+    <part name="parameters" element="tns:GetTransactionSummariesResponse"/>
+  </message>
   <portType name="TradingWebService">
     <operation name="OpenNewAccount">
       <input wsam:Action="OpenNewAccount" message="tns:OpenNewAccount"/>
@@ -117,6 +123,10 @@
     <operation name="GetOrderEstimate">
       <input wsam:Action="GetOrderEstimate" message="tns:GetOrderEstimate"/>
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetOrderEstimateResponse" message="tns:GetOrderEstimateResponse"/>
+    </operation>
+    <operation name="GetTransactionSummaries">
+      <input wsam:Action="GetTransactionSummaries" message="tns:GetTransactionSummaries"/>
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetTransactionSummariesResponse" message="tns:GetTransactionSummariesResponse"/>
     </operation>
   </portType>
   <binding name="TradingWebServicePortBinding" type="tns:TradingWebService">
@@ -220,6 +230,15 @@
         <soap:body use="literal"/>
       </output>
     </operation>
+    <operation name="GetTransactionSummaries">
+      <soap:operation soapAction="GetTransactionSummaries"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
   </binding>
   <service name="TradingService">
     <port name="TradingWebServicePort" binding="tns:TradingWebServicePortBinding">
@@ -243,6 +262,8 @@
   <xs:element name="GetOrderEstimateResponse" type="tns:GetOrderEstimateResponse"/>
   <xs:element name="GetOrders" type="tns:GetOrders"/>
   <xs:element name="GetOrdersResponse" type="tns:GetOrdersResponse"/>
+  <xs:element name="GetTransactionSummaries" type="tns:GetTransactionSummaries"/>
+  <xs:element name="GetTransactionSummariesResponse" type="tns:GetTransactionSummariesResponse"/>
   <xs:element name="OpenNewAccount" type="tns:OpenNewAccount"/>
   <xs:element name="OpenNewAccountResponse" type="tns:OpenNewAccountResponse"/>
   <xs:element name="PlaceOrder" type="tns:PlaceOrder"/>
@@ -346,36 +367,56 @@
     <xs:complexContent>
       <xs:extension base="tns:DomainEntity">
         <xs:sequence>
-          <xs:element name="CreationTime" type="tns:dateTime"/>
+          <xs:element name="CreationTime" type="xs:dateTime"/>
           <xs:element name="Quantity" type="xs:decimal"/>
           <xs:element name="Price" type="tns:Money"/>
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="dateTime" final="extension restriction">
+  <xs:complexType name="GetTransactionSummaries">
+    <xs:sequence>
+      <xs:element name="TransactionCriteria" type="tns:transactionCriteria" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="transactionCriteria">
+    <xs:sequence>
+      <xs:element name="accountId" type="xs:long" minOccurs="0"/>
+      <xs:element name="fromDate" type="tns:localDate" minOccurs="0"/>
+      <xs:element name="toDate" type="tns:localDate" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="localDate" final="extension restriction">
     <xs:complexContent>
-      <xs:extension base="tns:baseDateTime">
+      <xs:extension base="tns:baseLocal">
         <xs:sequence/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="baseDateTime" abstract="true">
+  <xs:complexType name="baseLocal" abstract="true">
     <xs:complexContent>
-      <xs:extension base="tns:abstractDateTime">
+      <xs:extension base="tns:abstractPartial">
         <xs:sequence/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-  <xs:complexType name="abstractDateTime" abstract="true">
-    <xs:complexContent>
-      <xs:extension base="tns:abstractInstant">
-        <xs:sequence/>
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="abstractInstant" abstract="true">
+  <xs:complexType name="abstractPartial" abstract="true">
     <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="GetTransactionSummariesResponse">
+    <xs:sequence>
+      <xs:element name="TransactionSummary" type="tns:TransactionSummary" minOccurs="0" maxOccurs="unbounded"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransactionSummary">
+    <xs:sequence>
+      <xs:element name="AccountId" type="xs:long"/>
+      <xs:element name="TransactionId" type="xs:long"/>
+      <xs:element name="CreationTime" type="xs:dateTime"/>
+      <xs:element name="Type" type="xs:string"/>
+      <xs:element name="Description" type="xs:string"/>
+      <xs:element name="Amount" type="tns:Money"/>
+    </xs:sequence>
   </xs:complexType>
   <xs:complexType name="TransferSecurities">
     <xs:sequence>
@@ -711,4 +752,18 @@
          </OrderParams>
       </trad:GetOrderEstimate>
    </soapenv:Body>
-</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="GetOrderEstimate"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="GetOrderEstimate"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="GetTransactionSummaries" name="GetTransactionSummaries" bindingOperationName="GetTransactionSummaries" type="Request-Response" inputName="" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  &lt;con:entry key="username" value="jhorner"/>
+  &lt;con:entry key="password" value="cool"/>
+&lt;/xml-fragment></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://agni:8080/bfoms-javaee/TradingService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:trad="http://archfirst.org/bfoms/tradingservice.wsdl">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <trad:GetTransactionSummaries>
+         <!--Optional:-->
+         <TransactionCriteria>
+            <!--Optional:-->
+            <accountId>2</accountId>
+         </TransactionCriteria>
+      </trad:GetTransactionSummaries>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="GetTransactionSummaries"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:properties/><con:wssContainer/></con:soapui-project>

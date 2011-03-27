@@ -23,6 +23,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import org.archfirst.bfoms.domain.account.Transaction;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
@@ -40,16 +45,29 @@ import org.joda.time.DateTime;
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "Trade")
 @Entity
 public class Trade extends Transaction {
     private static final long serialVersionUID = 1L;
     private static final String TYPE = "Trade";
     
+    @XmlElement(name = "Side", required = true)
     private OrderSide side;
+
+    @XmlElement(name = "Symbol", required = true)
     private String symbol;
+
+    @XmlElement(name = "Quantity", required = true)
     private DecimalQuantity quantity;
+
+    @XmlElement(name = "TotalPrice", required = true)
     private Money totalPrice;
+
+    @XmlElement(name = "Fees", required = true)
     private Money fees;
+
+    @XmlTransient
     private Order order;
 
     // ----- Constructors -----

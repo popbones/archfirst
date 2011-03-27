@@ -22,6 +22,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.account.BaseAccountService;
+import org.archfirst.bfoms.domain.account.TransactionCriteria;
+import org.archfirst.bfoms.domain.account.TransactionSummary;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
@@ -112,5 +114,10 @@ public class TradingTxnService {
             OrderParams params) {
         return this.brokerageAccountService.getOrderEstimate(
                 username, brokerageAccountId, params);
+    }
+
+    public List<TransactionSummary> getTransactionSummaries(
+            String username, TransactionCriteria criteria) {
+        return this.baseAccountService.getTransactionSummaries(username, criteria);
     }
 }

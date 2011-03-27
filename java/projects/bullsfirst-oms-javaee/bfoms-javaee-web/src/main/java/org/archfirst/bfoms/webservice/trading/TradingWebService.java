@@ -29,6 +29,8 @@ import javax.jws.WebService;
 import javax.xml.ws.WebServiceContext;
 import javax.xml.ws.handler.MessageContext;
 
+import org.archfirst.bfoms.domain.account.TransactionCriteria;
+import org.archfirst.bfoms.domain.account.TransactionSummary;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountSummary;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
@@ -152,6 +154,14 @@ public class TradingWebService {
             OrderParams orderParams) {
         return tradingTxnService.getOrderEstimate(
                 getUsername(), brokerageAccountId, orderParams);
+    }
+
+    @WebMethod(operationName = "GetTransactionSummaries", action = "GetTransactionSummaries")
+    @WebResult(name = "TransactionSummary")
+    public List<TransactionSummary> getTransactionSummaries(
+            @WebParam(name = "TransactionCriteria")
+            TransactionCriteria criteria) {
+        return tradingTxnService.getTransactionSummaries(getUsername(), criteria);
     }
 
     // ----- Helper Methods -----

@@ -172,7 +172,7 @@ public class Position {
         builder.append(", instrumentName=").append(instrumentName);
         builder.append(", lotId=").append(lotId);
         if (lotCreationTime != null) {
-            builder.append(", lotCreationTime=").append(DateTimeUtil.toStringTimestamp(lotCreationTime)).append(",");
+            builder.append(", lotCreationTime=").append(DateTimeUtil.toStringTimestamp(lotCreationTime));
         }
         builder.append(", quantity=").append(quantity);
         builder.append(", lastTrade=").append(lastTrade);

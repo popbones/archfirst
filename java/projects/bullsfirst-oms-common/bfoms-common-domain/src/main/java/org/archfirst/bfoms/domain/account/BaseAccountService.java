@@ -15,12 +15,14 @@
  */
 package org.archfirst.bfoms.domain.account;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
+import org.archfirst.bfoms.domain.security.AuthorizationException;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
@@ -153,5 +155,26 @@ public class BaseAccountService {
     
     public List<Transaction> findTransactions(TransactionCriteria criteria) {
         return baseAccountRepository.findTransactions(criteria);
+    }
+
+    public List<TransactionSummary> getTransactionSummaries(
+            String username, TransactionCriteria criteria) {
+        
+        // Check authorization on account
+        // TODO: This needs to be done
+        // Currently we are only checking if accountId is specified
+        if (criteria.getAccountId() == null)
+            throw new AuthorizationException();
+        
+        List<Transaction> transactions =
+            baseAccountRepository.findTransactions(criteria);
+        
+        List<TransactionSummary> summaries =
+            new ArrayList<TransactionSummary>();
+        for (Transaction transaction : transactions) {
+            summaries.add(new TransactionSummary(transaction));
+        }
+        
+        return summaries;
     }
 }

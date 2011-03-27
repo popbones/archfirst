@@ -23,6 +23,11 @@ import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.XmlType;
 
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.money.Money;
@@ -33,13 +38,18 @@ import org.joda.time.DateTime;
  *
  * @author Naresh Bhatia
  */
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "CashTransfer")
 @Entity
 public class CashTransfer extends Transaction {
     private static final long serialVersionUID = 1L;
 
     private static final String TYPE = "Transfer";
 
+    @XmlElement(name = "Amount", required = true)
     private Money amount;
+
+    @XmlTransient
     private BaseAccount otherAccount;
     
     // ----- Constructors -----
@@ -94,7 +104,7 @@ public class CashTransfer extends Transaction {
     @Transient
     public String getDescription() {
         StringBuilder builder = new StringBuilder();
-        builder.append("Transfer ");
+        builder.append("Transfer cash ");
         builder.append(amount.isPlus() ? "from " : "to ");
         builder.append(otherAccount.getName());
         return builder.toString();

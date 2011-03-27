@@ -21,6 +21,7 @@ import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
@@ -46,6 +47,7 @@ public class BaseAccountRepository extends BaseRepository {
     }
 
     // ----- Transaction Methods -----
+    @SuppressWarnings("unchecked")
     public List<Transaction> findTransactions(TransactionCriteria criteria) {
         
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -54,21 +56,38 @@ public class BaseAccountRepository extends BaseRepository {
         // select * from Transaction
         Root<Transaction> _transaction = query.from(Transaction.class);
         
-        // where accountId = criteria.getAccountId()
+        // Construct a predicate for the where clause using conjunction
+        Predicate predicate = builder.conjunction();
+        
+        // accountId
         if (criteria.getAccountId() != null) {
             Path<BaseAccount> _account = _transaction.get(Transaction_.account);
             Path<Long> _accountId = _account.get(BaseAccount_.id);
-            query.where(builder.equal(_accountId, criteria.getAccountId()));
+            predicate = builder.and(
+                    predicate,
+                    builder.equal(_accountId, criteria.getAccountId()));
         }
 
-        // TODO
+        // fromDate
         if (criteria.getFromDate() != null) {
+            predicate = builder.and(
+                    predicate,
+                    builder.greaterThanOrEqualTo(
+                            _transaction.get(Transaction_.creationTime),
+                            criteria.getFromDate().toDateTimeAtStartOfDay()));
         }
 
-        // TODO
         if (criteria.getToDate() != null) {
+            predicate = builder.and(
+                    predicate,
+                    builder.lessThan(
+                            _transaction.get(Transaction_.creationTime),
+                            criteria.getToDate().plusDays(1).toDateTimeAtStartOfDay()));
         }
-       
+
+        // Assign predicate to where clause
+        query.where(predicate);
+        
         // Execute the query
         return entityManager.createQuery(query).getResultList();
     }
