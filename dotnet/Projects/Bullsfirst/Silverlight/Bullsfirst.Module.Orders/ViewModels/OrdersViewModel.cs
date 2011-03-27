@@ -13,10 +13,10 @@
  * limitations under the License.
  */
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
-using System.Diagnostics;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
@@ -52,6 +52,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
             this.ReferenceData = referenceData;
 
             this.UpdateOrdersCommand = new DelegateCommand<object>(this.UpdateOrdersExecute);
+            this.ResetFilterCommand = new DelegateCommand<object>(this.ResetFilterExecute);
             this.CancelOrderCommand = new DelegateCommand<object>(this.CancelOrderExecute);
 
             _tradingService.GetOrdersCompleted +=
@@ -59,6 +60,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
             _tradingService.CancelOrderCompleted +=
                 new EventHandler<AsyncCompletedEventArgs>(CancelOrderCallback);
 
+            ResetFilter();
             SubscribeToEvents();
         }
 
@@ -81,14 +83,24 @@ namespace Bullsfirst.Module.Orders.ViewModels
 
         private void UpdateOrders()
         {
-            Debug.WriteLine("OrderId=" + OrderId);
-            Debug.WriteLine("Symbol=" + Symbol);
-            Debug.WriteLine("FromDate=" + FromDate);
-            Debug.WriteLine("ToDate=" + ToDate);
             OrderCriteria criteria = new OrderCriteria
             {
                 AccountIdSpecified = true,
-                AccountId = this.UserContext.SelectedAccount.Id
+                AccountId = this.UserContext.SelectedAccount.Id,
+
+                OrderIdSpecified = OrderId.HasValue,
+                OrderId = OrderId.HasValue ? OrderId.Value : 0,
+
+                Symbol = (string.IsNullOrEmpty(Symbol) || Symbol.Trim().Length == 0) ? null : Symbol,
+
+                FromDateSpecified = FromDate.HasValue,
+                FromDate = FromDate.HasValue ? FromDate.Value : DateTime.MinValue,
+
+                ToDateSpecified = ToDate.HasValue,
+                ToDate = ToDate.HasValue ? ToDate.Value : DateTime.MinValue,
+
+                Side = GetSideFilters(),
+                Status = GetStatusFilters()
             };
             _tradingService.GetOrdersAsync(criteria);
         }
@@ -108,6 +120,31 @@ namespace Bullsfirst.Module.Orders.ViewModels
                     Orders.Add(order);
                 }
             }
+        }
+
+        private OrderSide[] GetSideFilters()
+        {
+            // Create a list of checked filters
+            List<OrderSide> sides = new List<OrderSide>();
+            if (ActionBuy) sides.Add(OrderSide.Buy);
+            if (ActionSell) sides.Add(OrderSide.Sell);
+
+            // Convert list to array
+            return (sides.Count > 0) ? sides.ToArray() : null;
+        }
+
+        private OrderStatus[] GetStatusFilters()
+        {
+            // Create a list of checked statuses
+            List<OrderStatus> statuses = new List<OrderStatus>();
+            if (StatusNew) statuses.Add(OrderStatus.New);
+            if (StatusPartiallyFilled) statuses.Add(OrderStatus.PartiallyFilled);
+            if (StatusFilled) statuses.Add(OrderStatus.Filled);
+            if (StatusCanceled) statuses.Add(OrderStatus.Canceled);
+            if (StatusDoneForDay) statuses.Add(OrderStatus.DoneForDay);
+
+            // Convert list to array
+            return (statuses.Count > 0) ? statuses.ToArray() : null;
         }
 
         #endregion
@@ -137,11 +174,41 @@ namespace Bullsfirst.Module.Orders.ViewModels
 
         #endregion
 
+        #region ResetFilterCommand
+
+        public DelegateCommand<object> ResetFilterCommand { get; set; }
+
+        private void ResetFilterExecute(object dummyObject)
+        {
+            ResetFilter();
+        }
+
+        private void ResetFilter()
+        {
+            OrderId = null;
+            Symbol = null;
+            FromDate = DateTime.Now;
+            ToDate = DateTime.Now;
+
+            ActionBuy = false;
+            ActionSell = false;
+
+            StatusNew = false;
+            StatusPartiallyFilled = false;
+            StatusFilled = false;
+            StatusCanceled = false;
+            StatusDoneForDay = false;
+
+            Orders.Clear();
+        }
+
+        #endregion
+
         #region Event Handlers
 
         public void OnUserLoggedOut(Empty empty)
         {
-            this.Orders.Clear();
+            this.ResetFilter();
         }
 
         #endregion
@@ -166,7 +233,6 @@ namespace Bullsfirst.Module.Orders.ViewModels
             get { return _orderId; }
             set
             {
-                if (_orderId == value) return;
                 _orderId = value;
                 RaisePropertyChanged("OrderId");
             }
@@ -189,7 +255,6 @@ namespace Bullsfirst.Module.Orders.ViewModels
             get { return _fromDate; }
             set
             {
-                if (_fromDate != null && _fromDate.Equals(value)) return;
                 _fromDate = value;
                 RaisePropertyChanged("FromDate");
             }
@@ -201,9 +266,85 @@ namespace Bullsfirst.Module.Orders.ViewModels
             get { return _toDate; }
             set
             {
-                if (_toDate != null && _toDate.Equals(value)) return;
                 _toDate = value;
                 RaisePropertyChanged("ToDate");
+            }
+        }
+
+        private bool _actionBuy;
+        public bool ActionBuy
+        {
+            get { return _actionBuy; }
+            set
+            {
+                _actionBuy = value;
+                RaisePropertyChanged("ActionBuy");
+            }
+        }
+
+        private bool _actionSell;
+        public bool ActionSell
+        {
+            get { return _actionSell; }
+            set
+            {
+                _actionSell = value;
+                RaisePropertyChanged("ActionSell");
+            }
+        }
+
+        private bool _statusNew;
+        public bool StatusNew
+        {
+            get { return _statusNew; }
+            set
+            {
+                _statusNew = value;
+                RaisePropertyChanged("StatusNew");
+            }
+        }
+
+        private bool _statusPartiallyFilled;
+        public bool StatusPartiallyFilled
+        {
+            get { return _statusPartiallyFilled; }
+            set
+            {
+                _statusPartiallyFilled = value;
+                RaisePropertyChanged("StatusPartiallyFilled");
+            }
+        }
+
+        private bool _statusFilled;
+        public bool StatusFilled
+        {
+            get { return _statusFilled; }
+            set
+            {
+                _statusFilled = value;
+                RaisePropertyChanged("StatusFilled");
+            }
+        }
+
+        private bool _statusCanceled;
+        public bool StatusCanceled
+        {
+            get { return _statusCanceled; }
+            set
+            {
+                _statusCanceled = value;
+                RaisePropertyChanged("StatusCanceled");
+            }
+        }
+
+        private bool _statusDoneForDay;
+        public bool StatusDoneForDay
+        {
+            get { return _statusDoneForDay; }
+            set
+            {
+                _statusDoneForDay = value;
+                RaisePropertyChanged("StatusDoneForDay");
             }
         }
 

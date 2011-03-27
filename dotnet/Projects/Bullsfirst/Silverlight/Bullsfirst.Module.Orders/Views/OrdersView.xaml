@@ -80,7 +80,7 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Content="Update" Style="{StaticResource FilterPanelButton}" Command="{Binding UpdateOrdersCommand}" />
-                <Button Content="Reset Filter" Style="{StaticResource FilterPanelButton}" />
+                <Button Content="Reset Filter" Style="{StaticResource FilterPanelButton}" Command="{Binding ResetFilterCommand}" />
             </StackPanel>
         </Grid>
 
@@ -90,22 +90,22 @@
                     Style="{StaticResource FilterExpanderPanel}">
             <sdk:Label Content="Order Action" Style="{StaticResource FilterPanelLabel}" />
             <CheckBox Content="Buy" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=ActionBuy}" />
+                      IsChecked="{Binding Path=ActionBuy, Mode=TwoWay}" />
             <CheckBox Content="Sell" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=ActionSell}" />
+                      IsChecked="{Binding Path=ActionSell, Mode=TwoWay}" />
 
             <sdk:Label Content="Order Status" Style="{StaticResource FilterPanelLabel}"
                        Margin="30 5 0 5" />
             <CheckBox Content="New" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusNew}" />
+                      IsChecked="{Binding Path=StatusNew, Mode=TwoWay}" />
             <CheckBox Content="Partially Filled" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusPartiallyFilled}" />
+                      IsChecked="{Binding Path=StatusPartiallyFilled, Mode=TwoWay}" />
             <CheckBox Content="Filled" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusFilled}" />
+                      IsChecked="{Binding Path=StatusFilled, Mode=TwoWay}" />
             <CheckBox Content="Canceled" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusCanceled}" />
+                      IsChecked="{Binding Path=StatusCanceled, Mode=TwoWay}" />
             <CheckBox Content="Done For Day" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusDoneForDay}" />
+                      IsChecked="{Binding Path=StatusDoneForDay, Mode=TwoWay}" />
         </StackPanel>
 
         <!-- Orders -->
