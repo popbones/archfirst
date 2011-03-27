@@ -118,36 +118,12 @@
     <xs:complexContent mixed="false">
       <xs:extension base="tns:DomainEntity">
         <xs:sequence>
-          <xs:element name="CreationTime" type="tns:dateTime" />
+          <xs:element name="CreationTime" type="xs:dateTime" />
           <xs:element name="Quantity" type="xs:decimal" />
           <xs:element name="Price" type="tns:Money" />
         </xs:sequence>
       </xs:extension>
     </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="dateTime" final="extension restriction">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:baseDateTime">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="baseDateTime" abstract="true">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:abstractDateTime">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="abstractDateTime" abstract="true">
-    <xs:complexContent mixed="false">
-      <xs:extension base="tns:abstractInstant">
-        <xs:sequence />
-      </xs:extension>
-    </xs:complexContent>
-  </xs:complexType>
-  <xs:complexType name="abstractInstant" abstract="true">
-    <xs:sequence />
   </xs:complexType>
   <xs:complexType name="TransferSecurities">
     <xs:sequence>

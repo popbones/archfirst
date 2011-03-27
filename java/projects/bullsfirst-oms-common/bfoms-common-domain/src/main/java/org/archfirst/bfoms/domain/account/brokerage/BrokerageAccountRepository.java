@@ -108,6 +108,7 @@ public class BrokerageAccountRepository extends BaseRepository {
         return entityManager.find(Order.class, orderId);
     }
 
+    @SuppressWarnings("unchecked")
     public List<Order> findOrders(OrderCriteria criteria) {
 
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
@@ -148,33 +149,43 @@ public class BrokerageAccountRepository extends BaseRepository {
                     builder.equal(_order.get(Order_.id), criteria.getOrderId()));
         }
 
-        /*        
         // fromDate
         if (criteria.getFromDate() != null) {
             logger.debug("---> findOrders: fromDate()={}", criteria.getFromDate());
-            query.where(builder.ge(
-                    _order.get(Order_.creationTime),
-                    criteria.getFromDate().toDateTimeAtStartOfDay()));
+            predicate = builder.and(
+                    predicate,
+                    builder.greaterThanOrEqualTo(
+                            _order.get(Order_.creationTime),
+                            criteria.getFromDate().toDateTimeAtStartOfDay()));
         }
 
         if (criteria.getToDate() != null) {
             logger.debug("---> findOrders: toDate()={}", criteria.getToDate());
-            query.where(builder.lt(
-                    _order.get(Order_.creationTime),
-                    criteria.getToDate().toDateTimeAtStartOfDay()));
+            predicate = builder.and(
+                    predicate,
+                    builder.lessThan(
+                            _order.get(Order_.creationTime),
+                            criteria.getToDate().plusDays(1).toDateTimeAtStartOfDay()));
         }
 
         if (!criteria.getSides().isEmpty()) {
-            orderCriteria.add(Restrictions.in("side",
-                    criteria.getSides()));
+            logger.debug("---> findOrders: sides={}", criteria.getSides());
+            CriteriaBuilder.In<OrderSide> inExpr = builder.in(_order.get(Order_.side));
+            for (OrderSide side : criteria.getSides()) {
+                inExpr = inExpr.value(side);
+            }
+            predicate = builder.and(predicate, inExpr);
         }
 
         if (!criteria.getStatuses().isEmpty()) {
-            orderCriteria.add(Restrictions.in("status",
-                    criteria.getStatuses()));
+            logger.debug("---> findOrders: statuses={}", criteria.getStatuses());
+            CriteriaBuilder.In<OrderStatus> inExpr = builder.in(_order.get(Order_.status));
+            for (OrderStatus status : criteria.getStatuses()) {
+                inExpr = inExpr.value(status);
+            }
+            predicate = builder.and(predicate, inExpr);
         }
-*/
-        
+
         // Assign predicate to where clause
         query.where(predicate);
         

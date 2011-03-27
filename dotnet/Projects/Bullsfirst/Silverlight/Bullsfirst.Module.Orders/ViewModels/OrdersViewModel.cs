@@ -59,6 +59,8 @@ namespace Bullsfirst.Module.Orders.ViewModels
                 new EventHandler<GetOrdersCompletedEventArgs>(GetOrdersCallback);
             _tradingService.CancelOrderCompleted +=
                 new EventHandler<AsyncCompletedEventArgs>(CancelOrderCallback);
+            this.UserContext.PropertyChanged +=
+                new PropertyChangedEventHandler(OnUserContextPropertyChanged);
 
             ResetFilter();
             SubscribeToEvents();
@@ -67,6 +69,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
         private void SubscribeToEvents()
         {
             // Don't use strong reference to delegate
+            _eventAggregator.GetEvent<OrderPlacedEvent>().Subscribe(OnOrderPlaced, ThreadOption.UIThread, true);
             _eventAggregator.GetEvent<UserLoggedOutEvent>().Subscribe(OnUserLoggedOut, ThreadOption.UIThread, true);
         }
 
@@ -115,9 +118,12 @@ namespace Bullsfirst.Module.Orders.ViewModels
             {
                 this.StatusMessage = null;
                 Orders.Clear();
-                foreach (Order order in e.Result)
+                if (e.Result != null) // in case there are no orders
                 {
-                    Orders.Add(order);
+                    foreach (Order order in e.Result)
+                    {
+                        Orders.Add(order);
+                    }
                 }
             }
         }
@@ -206,9 +212,21 @@ namespace Bullsfirst.Module.Orders.ViewModels
 
         #region Event Handlers
 
+        public void OnOrderPlaced(Empty empty)
+        {
+            this.UpdateOrders();
+        }
+
         public void OnUserLoggedOut(Empty empty)
         {
             this.ResetFilter();
+        }
+
+        public void OnUserContextPropertyChanged(Object sender, PropertyChangedEventArgs e)
+        {
+            // If selected account has changed then clear orders because they are not relevant to the new account
+            if (e.PropertyName.Equals("SelectedAccount"))
+                Orders.Clear();
         }
 
         #endregion

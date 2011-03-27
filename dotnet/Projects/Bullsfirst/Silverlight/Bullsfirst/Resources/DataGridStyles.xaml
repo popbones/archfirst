@@ -251,7 +251,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="sdk:DataGridCell">
                     <Grid Background="{TemplateBinding Background}">
-                        <!-- Left margin = 60 pixels and match remaining to DataGridElementStyle -->
+                        <!-- Left margin = 60 pixels to indent creation date and match remaining to DataGridElementStyle -->
                         <ContentPresenter Style="{StaticResource LeftAlignedElementStyle}" Margin="60 0 8 0" />
                     </Grid>
                 </ControlTemplate>

@@ -33,7 +33,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="AddExternalAccount", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/AddExternalAccou" +
             "ntResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginAddExternalAccount(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.AddExternalAccountRequest request, System.AsyncCallback callback, object asyncState);
@@ -43,7 +42,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="ChangeAccountName", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/ChangeAccountNam" +
             "eResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginChangeAccountName(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.ChangeAccountNameRequest request, System.AsyncCallback callback, object asyncState);
@@ -53,7 +51,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="TransferCash", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/TransferCashResp" +
             "onse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginTransferCash(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferCashRequest request, System.AsyncCallback callback, object asyncState);
@@ -63,7 +60,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="TransferSecurities", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/TransferSecuriti" +
             "esResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginTransferSecurities(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferSecuritiesRequest request, System.AsyncCallback callback, object asyncState);
@@ -73,7 +69,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="PlaceOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderRespon" +
             "se")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState);
@@ -83,7 +78,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="CancelOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderRespo" +
             "nse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState);
@@ -93,7 +87,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetBrokerageAccountSummaries", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetBrokerageAcco" +
             "untSummariesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginGetBrokerageAccountSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetBrokerageAccountSummariesRequest request, System.AsyncCallback callback, object asyncState);
@@ -103,7 +96,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetExternalAccountSummaries", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetExternalAccou" +
             "ntSummariesResponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginGetExternalAccountSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetExternalAccountSummariesRequest request, System.AsyncCallback callback, object asyncState);
@@ -113,7 +105,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetOrders", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetOrdersRespons" +
             "e")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginGetOrders(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetOrdersRequest request, System.AsyncCallback callback, object asyncState);
@@ -123,7 +114,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetOrderEstimate", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetOrderEstimate" +
             "Response")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(abstractInstant))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginGetOrderEstimate(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetOrderEstimateRequest request, System.AsyncCallback callback, object asyncState);
@@ -363,49 +353,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     }
     
     /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(abstractDateTime))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(baseDateTime))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(dateTime))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public abstract partial class abstractInstant : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(baseDateTime))]
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(dateTime))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public abstract partial class abstractDateTime : abstractInstant {
-    }
-    
-    /// <remarks/>
-    [System.Xml.Serialization.XmlIncludeAttribute(typeof(dateTime))]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public abstract partial class baseDateTime : abstractDateTime {
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public partial class dateTime : baseDateTime {
-    }
-    
-    /// <remarks/>
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Execution))]
     [System.Xml.Serialization.XmlIncludeAttribute(typeof(Order))]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
@@ -457,7 +404,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
     public partial class Execution : DomainEntity {
         
-        private dateTime creationTimeField;
+        private System.DateTime creationTimeField;
         
         private decimal quantityField;
         
@@ -465,7 +412,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public dateTime CreationTime {
+        public System.DateTime CreationTime {
             get {
                 return this.creationTimeField;
             }

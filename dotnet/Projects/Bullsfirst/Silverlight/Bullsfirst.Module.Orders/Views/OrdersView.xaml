@@ -45,12 +45,12 @@
                 <sdk:Label Content="Order #" Style="{StaticResource FilterPanelLabel}" />
                 <!-- See http://karlshifflett.wordpress.com/2008/12/16/using-wpf-binding-stringformat-property-with-nullable-types -->
                 <TextBox Style="{StaticResource FilterPanelTextBox}"
-                    Text="{Binding Path=OrderId, Mode=TwoWay, TargetNullValue='', ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
+                    Text="{Binding OrderId, Mode=TwoWay, TargetNullValue='', ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
                 <sdk:Label Content="Symbol" Style="{StaticResource FilterPanelLabel}" />
                 <sdk:AutoCompleteBox x:Name="symbolField" TextBoxStyle="{StaticResource FilterPanelTextBox}"
-                    Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
-                    ItemsSource="{Binding Path=ReferenceData.Instruments}"
+                    Text="{Binding Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    ItemsSource="{Binding ReferenceData.Instruments}"
                     FilterMode="Custom">
                     <sdk:AutoCompleteBox.ItemTemplate>
                         <DataTemplate>
@@ -68,11 +68,11 @@
 
                 <sdk:Label Content="From" Style="{StaticResource FilterPanelLabel}" />
                 <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
-                    SelectedDate="{Binding Path=FromDate, Mode=TwoWay, TargetNullValue=''}" />
+                    SelectedDate="{Binding FromDate, Mode=TwoWay, TargetNullValue=''}" />
 
                 <sdk:Label Content="To" Style="{StaticResource FilterPanelLabel}" />
                 <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
-                    SelectedDate="{Binding Path=ToDate, Mode=TwoWay, TargetNullValue=''}" />
+                    SelectedDate="{Binding ToDate, Mode=TwoWay, TargetNullValue=''}" />
 
                 <sdk:Label Content="More" Style="{StaticResource FilterPanelLabel}" />
                 <ToggleButton Name="MoreButton" Content="More" Style="{StaticResource FilterPanelMoreButton}" />
@@ -90,22 +90,22 @@
                     Style="{StaticResource FilterExpanderPanel}">
             <sdk:Label Content="Order Action" Style="{StaticResource FilterPanelLabel}" />
             <CheckBox Content="Buy" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=ActionBuy, Mode=TwoWay}" />
+                      IsChecked="{Binding ActionBuy, Mode=TwoWay}" />
             <CheckBox Content="Sell" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=ActionSell, Mode=TwoWay}" />
+                      IsChecked="{Binding ActionSell, Mode=TwoWay}" />
 
             <sdk:Label Content="Order Status" Style="{StaticResource FilterPanelLabel}"
                        Margin="30 5 0 5" />
             <CheckBox Content="New" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusNew, Mode=TwoWay}" />
+                      IsChecked="{Binding StatusNew, Mode=TwoWay}" />
             <CheckBox Content="Partially Filled" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusPartiallyFilled, Mode=TwoWay}" />
+                      IsChecked="{Binding StatusPartiallyFilled, Mode=TwoWay}" />
             <CheckBox Content="Filled" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusFilled, Mode=TwoWay}" />
+                      IsChecked="{Binding StatusFilled, Mode=TwoWay}" />
             <CheckBox Content="Canceled" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusCanceled, Mode=TwoWay}" />
+                      IsChecked="{Binding StatusCanceled, Mode=TwoWay}" />
             <CheckBox Content="Done For Day" Style="{StaticResource FilterPanelCheckBox}"
-                      IsChecked="{Binding Path=StatusDoneForDay, Mode=TwoWay}" />
+                      IsChecked="{Binding StatusDoneForDay, Mode=TwoWay}" />
         </StackPanel>
 
         <!-- Orders -->
@@ -150,39 +150,39 @@
                     CellStyle="{StaticResource RightAlignedCellStyle}" />
                 <sdk:DataGridTextColumn
                     Header="Type"
-                    Binding="{Binding Path=OrderType}"
+                    Binding="{Binding OrderType}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource CenterAlignedCellStyle}" />
                 <sdk:DataGridTextColumn
                     Header="Action"
-                    Binding="{Binding Path=Side}"
+                    Binding="{Binding Side}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource CenterAlignedCellStyle}" />
                 <sdk:DataGridTextColumn
                     Header="Symbol"
-                    Binding="{Binding Path=Symbol}"
+                    Binding="{Binding Symbol}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource CenterAlignedCellStyle}" />
                 <sdk:DataGridTextColumn
                     Header="Quantity"
-                    Binding="{Binding Path=Quantity}"
+                    Binding="{Binding Quantity}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}" />
                 <sdk:DataGridTextColumn
                     Header="Limit Price"
-                    Binding="{Binding Path=LimitPrice, Converter={StaticResource MoneyConverter}}"
+                    Binding="{Binding LimitPrice, Converter={StaticResource MoneyConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="LimitPrice.Amount" />
                 <sdk:DataGridTextColumn
                     Header="Execution Price"
-                    Binding="{Binding Path=ExecutionPrice, Converter={StaticResource MoneyConverter}}"
+                    Binding="{Binding ExecutionPrice, Converter={StaticResource MoneyConverter}}"
                     HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="ExecutionPrice.Amount" />
                 <sdk:DataGridTextColumn
                     Header="Status"
-                    Binding="{Binding Path=OrderStatus}"
+                    Binding="{Binding OrderStatus}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource CenterAlignedCellStyle}" />
                 <sdk:DataGridTemplateColumn
@@ -216,13 +216,13 @@
                         AlternatingRowBackground="White">
                         <sdk:DataGrid.Columns>
                             <sdk:DataGridTextColumn
-                                Binding="{Binding CreationTime, Converter={StaticResource DateTimeToDateStringConverter}}"
-                                CellStyle="{StaticResource IndentedCellStyle}" />
-                            <sdk:DataGridTextColumn
-                                Binding="{Binding Path=Quantity}"
+                                Binding="{Binding CreationTime}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}" />
                             <sdk:DataGridTextColumn
-                                Binding="{Binding Path=Price, Converter={StaticResource MoneyConverter}}"
+                                Binding="{Binding Quantity}"
+                                CellStyle="{StaticResource RightAlignedCellStyle}" />
+                            <sdk:DataGridTextColumn
+                                Binding="{Binding Price, Converter={StaticResource MoneyConverter}}"
                                 CellStyle="{StaticResource RightAlignedCellStyle}" />
                         </sdk:DataGrid.Columns>
                     </sdk:DataGrid>
