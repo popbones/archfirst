@@ -119,6 +119,15 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         System.IAsyncResult BeginGetOrderEstimate(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetOrderEstimateRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetOrderEstimateResponse EndGetOrderEstimate(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetTransactionSummaries", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetTransactionSu" +
+            "mmariesResponse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
+        System.IAsyncResult BeginGetTransactionSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesResponse EndGetTransactionSummaries(System.IAsyncResult result);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -202,6 +211,250 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             set {
                 this.accountNumberField = value;
                 this.RaisePropertyChanged("AccountNumber");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
+    public partial class TransactionSummary : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private long accountIdField;
+        
+        private long transactionIdField;
+        
+        private System.DateTime creationTimeField;
+        
+        private string typeField;
+        
+        private string descriptionField;
+        
+        private Money amountField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public long AccountId {
+            get {
+                return this.accountIdField;
+            }
+            set {
+                this.accountIdField = value;
+                this.RaisePropertyChanged("AccountId");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public long TransactionId {
+            get {
+                return this.transactionIdField;
+            }
+            set {
+                this.transactionIdField = value;
+                this.RaisePropertyChanged("TransactionId");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public System.DateTime CreationTime {
+            get {
+                return this.creationTimeField;
+            }
+            set {
+                this.creationTimeField = value;
+                this.RaisePropertyChanged("CreationTime");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public string Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+                this.RaisePropertyChanged("Type");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public string Description {
+            get {
+                return this.descriptionField;
+            }
+            set {
+                this.descriptionField = value;
+                this.RaisePropertyChanged("Description");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public Money Amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+                this.RaisePropertyChanged("Amount");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
+    public partial class Money : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private decimal amountField;
+        
+        private string currencyField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public decimal Amount {
+            get {
+                return this.amountField;
+            }
+            set {
+                this.amountField = value;
+                this.RaisePropertyChanged("Amount");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string Currency {
+            get {
+                return this.currencyField;
+            }
+            set {
+                this.currencyField = value;
+                this.RaisePropertyChanged("Currency");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
+    public partial class TransactionCriteria : object, System.ComponentModel.INotifyPropertyChanged {
+        
+        private long accountIdField;
+        
+        private bool accountIdFieldSpecified;
+        
+        private System.DateTime fromDateField;
+        
+        private bool fromDateFieldSpecified;
+        
+        private System.DateTime toDateField;
+        
+        private bool toDateFieldSpecified;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public long AccountId {
+            get {
+                return this.accountIdField;
+            }
+            set {
+                this.accountIdField = value;
+                this.RaisePropertyChanged("AccountId");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool AccountIdSpecified {
+            get {
+                return this.accountIdFieldSpecified;
+            }
+            set {
+                this.accountIdFieldSpecified = value;
+                this.RaisePropertyChanged("AccountIdSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=1)]
+        public System.DateTime FromDate {
+            get {
+                return this.fromDateField;
+            }
+            set {
+                this.fromDateField = value;
+                this.RaisePropertyChanged("FromDate");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool FromDateSpecified {
+            get {
+                return this.fromDateFieldSpecified;
+            }
+            set {
+                this.fromDateFieldSpecified = value;
+                this.RaisePropertyChanged("FromDateSpecified");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="date", Order=2)]
+        public System.DateTime ToDate {
+            get {
+                return this.toDateField;
+            }
+            set {
+                this.toDateField = value;
+                this.RaisePropertyChanged("ToDate");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool ToDateSpecified {
+            get {
+                return this.toDateFieldSpecified;
+            }
+            set {
+                this.toDateFieldSpecified = value;
+                this.RaisePropertyChanged("ToDateSpecified");
             }
         }
         
@@ -306,50 +559,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         /// <remarks/>
         InsufficientQuantity,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public partial class Money : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private decimal amountField;
-        
-        private string currencyField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public decimal Amount {
-            get {
-                return this.amountField;
-            }
-            set {
-                this.amountField = value;
-                this.RaisePropertyChanged("Amount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string Currency {
-            get {
-                return this.currencyField;
-            }
-            set {
-                this.currencyField = value;
-                this.RaisePropertyChanged("Currency");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
     }
     
     /// <remarks/>
@@ -1682,6 +1891,42 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTransactionSummaries", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class GetTransactionSummariesRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransactionCriteria TransactionCriteria;
+        
+        public GetTransactionSummariesRequest() {
+        }
+        
+        public GetTransactionSummariesRequest(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransactionCriteria TransactionCriteria) {
+            this.TransactionCriteria = TransactionCriteria;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="GetTransactionSummariesResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class GetTransactionSummariesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute("TransactionSummary", Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public TransactionSummary[] TransactionSummary;
+        
+        public GetTransactionSummariesResponse() {
+        }
+        
+        public GetTransactionSummariesResponse(TransactionSummary[] TransactionSummary) {
+            this.TransactionSummary = TransactionSummary;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface TradingWebServiceChannel : Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService, System.ServiceModel.IClientChannel {
     }
@@ -1821,6 +2066,25 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class GetTransactionSummariesCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public GetTransactionSummariesCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public TransactionSummary[] Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((TransactionSummary[])(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class TradingWebServiceClient : System.ServiceModel.ClientBase<Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService>, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService {
         
         private BeginOperationDelegate onBeginOpenNewAccountDelegate;
@@ -1888,6 +2152,12 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         private EndOperationDelegate onEndGetOrderEstimateDelegate;
         
         private System.Threading.SendOrPostCallback onGetOrderEstimateCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginGetTransactionSummariesDelegate;
+        
+        private EndOperationDelegate onEndGetTransactionSummariesDelegate;
+        
+        private System.Threading.SendOrPostCallback onGetTransactionSummariesCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenDelegate;
         
@@ -1963,6 +2233,8 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         public event System.EventHandler<GetOrdersCompletedEventArgs> GetOrdersCompleted;
         
         public event System.EventHandler<GetOrderEstimateCompletedEventArgs> GetOrderEstimateCompleted;
+        
+        public event System.EventHandler<GetTransactionSummariesCompletedEventArgs> GetTransactionSummariesCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
@@ -2630,6 +2902,65 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
                         OrderParams}, this.onEndGetOrderEstimateDelegate, this.onGetOrderEstimateCompletedDelegate, userState);
         }
         
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginGetTransactionSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginGetTransactionSummaries(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginGetTransactionSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransactionCriteria TransactionCriteria, System.AsyncCallback callback, object asyncState) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesRequest();
+            inValue.TransactionCriteria = TransactionCriteria;
+            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginGetTransactionSummaries(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndGetTransactionSummaries(System.IAsyncResult result) {
+            return base.Channel.EndGetTransactionSummaries(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private TransactionSummary[] EndGetTransactionSummaries(System.IAsyncResult result) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndGetTransactionSummaries(result);
+            return retVal.TransactionSummary;
+        }
+        
+        private System.IAsyncResult OnBeginGetTransactionSummaries(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransactionCriteria TransactionCriteria = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransactionCriteria)(inValues[0]));
+            return this.BeginGetTransactionSummaries(TransactionCriteria, callback, asyncState);
+        }
+        
+        private object[] OnEndGetTransactionSummaries(System.IAsyncResult result) {
+            TransactionSummary[] retVal = this.EndGetTransactionSummaries(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnGetTransactionSummariesCompleted(object state) {
+            if ((this.GetTransactionSummariesCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.GetTransactionSummariesCompleted(this, new GetTransactionSummariesCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void GetTransactionSummariesAsync(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransactionCriteria TransactionCriteria) {
+            this.GetTransactionSummariesAsync(TransactionCriteria, null);
+        }
+        
+        public void GetTransactionSummariesAsync(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransactionCriteria TransactionCriteria, object userState) {
+            if ((this.onBeginGetTransactionSummariesDelegate == null)) {
+                this.onBeginGetTransactionSummariesDelegate = new BeginOperationDelegate(this.OnBeginGetTransactionSummaries);
+            }
+            if ((this.onEndGetTransactionSummariesDelegate == null)) {
+                this.onEndGetTransactionSummariesDelegate = new EndOperationDelegate(this.OnEndGetTransactionSummaries);
+            }
+            if ((this.onGetTransactionSummariesCompletedDelegate == null)) {
+                this.onGetTransactionSummariesCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnGetTransactionSummariesCompleted);
+            }
+            base.InvokeAsync(this.onBeginGetTransactionSummariesDelegate, new object[] {
+                        TransactionCriteria}, this.onEndGetTransactionSummariesDelegate, this.onGetTransactionSummariesCompletedDelegate, userState);
+        }
+        
         private System.IAsyncResult OnBeginOpen(object[] inValues, System.AsyncCallback callback, object asyncState) {
             return ((System.ServiceModel.ICommunicationObject)(this)).BeginOpen(callback, asyncState);
         }
@@ -2848,6 +3179,19 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
                 Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetOrderEstimateResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetOrderEstimateResponse)(base.EndInvoke("GetOrderEstimate", _args, result)));
                 return _result;
             }
+            
+            public System.IAsyncResult BeginGetTransactionSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("GetTransactionSummaries", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesResponse EndGetTransactionSummaries(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesResponse)(base.EndInvoke("GetTransactionSummaries", _args, result)));
+                return _result;
+            }
         }
     }
 
@@ -2866,6 +3210,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         void GetExternalAccountSummariesAsync();
         void GetOrdersAsync(OrderCriteria OrderCriteria);
         void GetOrderEstimateAsync(long BrokerageAccountId, OrderParams OrderParams);
+        void GetTransactionSummariesAsync(TransactionCriteria TransactionCriteria);
 
         event EventHandler<OpenNewAccountCompletedEventArgs> OpenNewAccountCompleted;
         event EventHandler<AddExternalAccountCompletedEventArgs> AddExternalAccountCompleted;
@@ -2878,6 +3223,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         event EventHandler<GetExternalAccountSummariesCompletedEventArgs> GetExternalAccountSummariesCompleted;
         event EventHandler<GetOrdersCompletedEventArgs> GetOrdersCompleted;
         event EventHandler<GetOrderEstimateCompletedEventArgs> GetOrderEstimateCompleted;
+        event EventHandler<GetTransactionSummariesCompletedEventArgs> GetTransactionSummariesCompleted;
     }
 
     [Export(typeof(ITradingServiceAsync))]

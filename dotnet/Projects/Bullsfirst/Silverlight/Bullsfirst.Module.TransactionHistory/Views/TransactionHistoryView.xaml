@@ -1,13 +1,91 @@
-﻿<UserControl
+﻿<UserControl 
     x:Class="Bullsfirst.Module.TransactionHistory.Views.TransactionHistoryView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:infraControls="clr-namespace:Bullsfirst.Infrastructure.Controls;assembly=Bullsfirst.Infrastructure"
     mc:Ignorable="d"
     d:DesignHeight="500" d:DesignWidth="950">
 
-    <Grid x:Name="LayoutRoot" Background="White">
-        <TextBlock Text="Transaction History" Style="{StaticResource Header1}" />
+    <Grid x:Name="LayoutRoot" Background="White" Margin="20 10 20 10">
+
+        <Grid.RowDefinitions>
+            <!-- Title -->
+            <RowDefinition Height="Auto" />
+            <!-- Filter -->
+            <RowDefinition Height="Auto" />
+            <!-- Transactions -->
+            <RowDefinition />
+            <!-- Status Message -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <TextBlock Grid.Row="0" Text="Transaction History" Style="{StaticResource Header1}" />
+
+        <infraControls:AccountSelector Grid.Row="0"
+            HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0 10 10 0" />
+
+        <!-- Filter -->
+        <Grid Grid.Row="1" Style="{StaticResource FilterPanel}">
+            <StackPanel Orientation="Horizontal">
+                <sdk:Label Content="From" Style="{StaticResource FilterPanelLabel}" />
+                <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
+                    SelectedDate="{Binding FromDate, Mode=TwoWay, TargetNullValue=''}" />
+
+                <sdk:Label Content="To" Style="{StaticResource FilterPanelLabel}" />
+                <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
+                    SelectedDate="{Binding ToDate, Mode=TwoWay, TargetNullValue=''}" />
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Content="Update" Style="{StaticResource FilterPanelButton}" Command="{Binding UpdateTransactionsCommand}" />
+                <Button Content="Reset Filter" Style="{StaticResource FilterPanelButton}" Command="{Binding ResetFilterCommand}" />
+            </StackPanel>
+        </Grid>
+
+        <!-- Transactions -->
+        <sdk:DataGrid
+            Grid.Row="2"
+            ItemsSource="{Binding Transactions}"
+            RowDetailsVisibilityMode="Collapsed"
+            AutoGenerateColumns="False"
+            HorizontalAlignment="Left"
+            RowHeight="32"
+            IsReadOnly="True"
+            Style="{StaticResource DataGridStyle}"
+            ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+            RowStyle="{StaticResource DataGridRowStyle}">
+            <sdk:DataGrid.Columns>
+                <sdk:DataGridTextColumn
+                    Header="Creation Time"
+                    Binding="{Binding CreationTime}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}" />
+                <sdk:DataGridTextColumn
+                    Header="Type"
+                    Binding="{Binding Type}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}" />
+                <sdk:DataGridTextColumn
+                    Header="Description"
+                    Binding="{Binding Description}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource LeftAlignedCellStyle}" />
+                <sdk:DataGridTextColumn
+                    Header="Amount"
+                    Binding="{Binding Amount, Converter={StaticResource MoneyConverter}}"
+                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}"
+                    SortMemberPath="Amount.Amount" />
+            </sdk:DataGrid.Columns>
+        </sdk:DataGrid>
+
+        <!-- Status Message -->
+        <TextBlock
+            Grid.Row="3"
+            Text="{Binding StatusMessage}" TextWrapping="Wrap" Foreground="Red" Margin="0 10 0 0" />
     </Grid>
 </UserControl>

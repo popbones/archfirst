@@ -71,6 +71,12 @@
   <message name="GetOrderEstimateResponse">
     <part name="parameters" element="tns:GetOrderEstimateResponse" />
   </message>
+  <message name="GetTransactionSummaries">
+    <part name="parameters" element="tns:GetTransactionSummaries" />
+  </message>
+  <message name="GetTransactionSummariesResponse">
+    <part name="parameters" element="tns:GetTransactionSummariesResponse" />
+  </message>
   <portType name="TradingWebService">
     <operation name="OpenNewAccount">
       <input wsam:Action="OpenNewAccount" message="tns:OpenNewAccount" />
@@ -115,6 +121,10 @@
     <operation name="GetOrderEstimate">
       <input wsam:Action="GetOrderEstimate" message="tns:GetOrderEstimate" />
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetOrderEstimateResponse" message="tns:GetOrderEstimateResponse" />
+    </operation>
+    <operation name="GetTransactionSummaries">
+      <input wsam:Action="GetTransactionSummaries" message="tns:GetTransactionSummaries" />
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetTransactionSummariesResponse" message="tns:GetTransactionSummariesResponse" />
     </operation>
   </portType>
   <binding name="TradingWebServicePortBinding" type="tns:TradingWebService">
@@ -211,6 +221,15 @@
     </operation>
     <operation name="GetOrderEstimate">
       <soap:operation soapAction="GetOrderEstimate" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetTransactionSummaries">
+      <soap:operation soapAction="GetTransactionSummaries" />
       <input>
         <soap:body use="literal" />
       </input>

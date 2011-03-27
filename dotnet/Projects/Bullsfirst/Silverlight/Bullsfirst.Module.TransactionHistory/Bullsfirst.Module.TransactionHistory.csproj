@@ -50,9 +50,14 @@
     <Reference Include="Microsoft.Practices.Prism.MefExtensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="mscorlib" />
     <Reference Include="System.ComponentModel.Composition, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.ComponentModel.DataAnnotations, Version=2.0.5.0, Culture=neutral, PublicKeyToken=ddd0da4d3e678217" />
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Controls, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Windows.Controls.Data, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Windows.Controls.Data.Input, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+    <Reference Include="System.Windows.Data, Version=2.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Net" />
     <Reference Include="System.Windows.Browser" />
@@ -70,6 +75,14 @@
     <ProjectReference Include="..\Archfirst.Framework\Archfirst.Framework.csproj">
       <Project>{07801AC6-D680-424B-AA1D-8B27A2229A67}</Project>
       <Name>Archfirst.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.Infrastructure\Bullsfirst.Infrastructure.csproj">
+      <Project>{DF7F46D6-2173-4081-A8D9-08F22A584165}</Project>
+      <Name>Bullsfirst.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.InterfaceOut.Oms\Bullsfirst.InterfaceOut.Oms.csproj">
+      <Project>{D6401855-8A3C-4584-9039-8A0241B2C279}</Project>
+      <Name>Bullsfirst.InterfaceOut.Oms</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

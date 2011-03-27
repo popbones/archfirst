@@ -147,6 +147,9 @@
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetOrdersResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\TradingServiceReference\Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OpenNewAccountResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
