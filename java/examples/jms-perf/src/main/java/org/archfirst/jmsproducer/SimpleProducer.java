@@ -19,6 +19,7 @@ import java.io.FileInputStream;
 import java.util.Properties;
 
 import javax.jms.Connection;
+import javax.jms.DeliveryMode;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
@@ -89,6 +90,30 @@ public class SimpleProducer extends JmsBaseClient {
     
             logger.info("Creating MessageProducer...");
             producer = session.createProducer(destination);
+            
+            // Performance tuning - deliveryModeNonPersistent
+            boolean deliveryModeNonPersistent = Boolean.parseBoolean(
+                    appProperties.getProperty(
+                            PROP_PRODUCER_DELIVERY_MODE_NON_PERSISTENT,
+                            PROP_PRODUCER_DELIVERY_MODE_NON_PERSISTENT_DEFAULT));
+            if (deliveryModeNonPersistent)
+                producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+
+            // Performance tuning - disableMessageId
+            boolean disableMessageId = Boolean.parseBoolean(
+                    appProperties.getProperty(
+                            PROP_PRODUCER_DISABLE_MESSAGE_ID,
+                            PROP_PRODUCER_DISABLE_MESSAGE_ID_DEFAULT));
+            if (disableMessageId)
+                producer.setDisableMessageID(true);
+
+            // Performance tuning - disableTimestamp
+            boolean disableTimestamp = Boolean.parseBoolean(
+                    appProperties.getProperty(
+                            PROP_PRODUCER_DISABLE_TIME_STAMP,
+                            PROP_PRODUCER_DISABLE_TIME_STAMP_DEFAULT));
+            if (disableTimestamp)
+                producer.setDisableMessageTimestamp(true);
         }
         catch (JMSException je) {
             if (connection != null)
@@ -99,10 +124,10 @@ public class SimpleProducer extends JmsBaseClient {
     }
     
     private void sendMessages() throws JMSException {
-        int numMessages = Integer.parseInt(
-                appProperties.getProperty(PROP_NUM_MESSAGES));
-        int messageSize = Integer.parseInt(
-                appProperties.getProperty(PROP_MESSAGE_SIZE));
+        int numMessages = Integer.parseInt(appProperties.getProperty(
+                PROP_NUM_MESSAGES, PROP_NUM_MESSAGES_DEFAULT));
+        int messageSize = Integer.parseInt(appProperties.getProperty(
+                PROP_MESSAGE_SIZE, PROP_MESSAGE_SIZE_DEFAULT));
         String messageText = createMessageText(messageSize);
         logger.info("Sending {} messages of size {}...", numMessages, messageSize);
 

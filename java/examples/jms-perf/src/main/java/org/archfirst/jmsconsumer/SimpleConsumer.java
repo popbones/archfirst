@@ -99,10 +99,10 @@ public class SimpleConsumer extends JmsBaseClient {
     }
     
     private void receiveMessages() throws JMSException {
-        int numMessages = Integer.parseInt(
-                appProperties.getProperty(PROP_NUM_MESSAGES));
-        boolean printMessages = Boolean.parseBoolean(
-                appProperties.getProperty(PROP_CONSUMER_PRINT_MESSAGES));
+        int numMessages = Integer.parseInt(appProperties.getProperty(
+                PROP_NUM_MESSAGES, PROP_NUM_MESSAGES_DEFAULT));
+        boolean printMessages = Boolean.parseBoolean(appProperties.getProperty(
+                PROP_CONSUMER_PRINT_MESSAGES, PROP_CONSUMER_PRINT_MESSAGES_DEFAULT));
         logger.info("Receiving {} messages...", numMessages);
 
         long start = System.nanoTime();
