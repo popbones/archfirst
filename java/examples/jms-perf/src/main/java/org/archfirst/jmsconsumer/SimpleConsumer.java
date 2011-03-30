@@ -24,6 +24,7 @@ import javax.jms.MessageConsumer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
+import org.archfirst.jmsbase.Constants;
 import org.archfirst.jmsbase.JmsBaseClient;
 import org.archfirst.jmsbase.StackTraceUtil;
 import org.slf4j.Logger;
@@ -38,9 +39,9 @@ public class SimpleConsumer extends JmsBaseClient {
     private static final Logger logger =
         LoggerFactory.getLogger(SimpleConsumer.class);
 
-    private Connection connection = null;
-    private Session session = null;
-    private MessageConsumer consumer = null;
+    private Connection connection;
+    private Session session;
+    private MessageConsumer consumer;
     
     public static void main(String[] args) throws Exception {
         if (args.length < 2) {
@@ -100,9 +101,9 @@ public class SimpleConsumer extends JmsBaseClient {
     
     private void receiveMessages() throws JMSException {
         int numMessages = Integer.parseInt(appProperties.getProperty(
-                PROP_NUM_MESSAGES, PROP_NUM_MESSAGES_DEFAULT));
+                Constants.PROP_NUM_MESSAGES, Constants.PROP_NUM_MESSAGES_DEFAULT));
         boolean printMessages = Boolean.parseBoolean(appProperties.getProperty(
-                PROP_CONSUMER_PRINT_MESSAGES, PROP_CONSUMER_PRINT_MESSAGES_DEFAULT));
+                Constants.PROP_CONSUMER_PRINT_MESSAGES, Constants.PROP_CONSUMER_PRINT_MESSAGES_DEFAULT));
         logger.info("Receiving {} messages...", numMessages);
 
         long start = System.nanoTime();

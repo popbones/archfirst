@@ -15,81 +15,70 @@
  */
 package org.archfirst.jmsproducer;
 
-import java.io.FileInputStream;
 import java.util.Properties;
 
 import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
 import javax.jms.DeliveryMode;
+import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
 import javax.jms.Session;
 import javax.jms.TextMessage;
 
 import org.archfirst.jmsbase.Constants;
-import org.archfirst.jmsbase.JmsBaseClient;
+import org.archfirst.jmsbase.MaxCounter;
 import org.archfirst.jmsbase.StackTraceUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * SimpleProducer
+ * ProducerAgent
  *
  * @author Naresh Bhatia
  */
-public class SimpleProducer extends JmsBaseClient {
+public class ProducerAgent implements Runnable {
     private static final Logger logger =
-        LoggerFactory.getLogger(SimpleProducer.class);
-
-    private Connection connection;
+        LoggerFactory.getLogger(ProducerAgent.class);
+    
+    // Shared objects
+    private Properties appProperties;
+    private MaxCounter messageCounter;
+    private ConnectionFactory connectionFactory;
+    private Destination destination;
+    private Connection sharedConnection;  // possibly null
+    
+    // Thread-owned objects
+    private Connection privateConnection; // possibly null
     private Session session;
     private MessageProducer producer;
     
-    public static void main(String[] args) throws Exception {
-        if (args.length < 2) {
-            logger.error("Please specify jndi-properties-file and app-properties-file");
-            System.exit(-1);
-        }
-        
-        Properties jndiProperties = new Properties();
-        jndiProperties.load(new FileInputStream(args[0]));
-        
-        Properties appProperties = new Properties();
-        appProperties.load(new FileInputStream(args[1]));
+    public String threadName;
+    
+    public ProducerAgent(
+            Properties appProperties,
+            MaxCounter messageCounter,
+            ConnectionFactory connectionFactory,
+            Destination destination,
+            Connection sharedConnection) {
+        this.appProperties = appProperties;
+        this.messageCounter = messageCounter;
+        this.connectionFactory = connectionFactory;
+        this.destination = destination;
+        this.sharedConnection = sharedConnection;
+    }
 
-        new SimpleProducer(jndiProperties, appProperties).run();
-    }
-    
-    public SimpleProducer(Properties jndiProperties, Properties appProperties) {
-        super(jndiProperties, appProperties);
-    }
-    
-    public void run() {
+    public void init() throws JMSException {
         try {
-            lookupConnectionFactoryAndDestination();
-            createConnection();
-            connection.start();
-            sendMessages();
-        }
-        catch (Exception e) {
-            logger.error("SimpleProducer halted: {}",
-                    StackTraceUtil.getStackTrace(e));
-        }
-        finally {
-            if (connection != null)
-                try {connection.close();} catch (Exception e) {}
-        }
-    }
+            if (sharedConnection == null) {
+                logger.debug("Creating private connection...");
+                privateConnection = connectionFactory.createConnection();
+                privateConnection.start();
+            }
     
-    private void createConnection() throws JMSException {
-        try {
-            logger.info("Creating Connection...");
-            connection = connectionFactory.createConnection();
-    
-            logger.info("Creating Session...");
-            session = connection.createSession(
+            session = getConnection().createSession(
                     false, Session.AUTO_ACKNOWLEDGE);
     
-            logger.info("Creating MessageProducer...");
             producer = session.createProducer(destination);
             
             // Performance tuning - deliveryModeNonPersistent
@@ -117,38 +106,50 @@ public class SimpleProducer extends JmsBaseClient {
                 producer.setDisableMessageTimestamp(true);
         }
         catch (JMSException je) {
-            if (connection != null)
-                try {connection.close();} catch (Exception e) {}
-            connection = null;
+            if (privateConnection != null)
+                try {privateConnection.close();} catch (Exception e) {}
+            privateConnection = null;
             throw je;
         }
     }
     
-    private void sendMessages() throws JMSException {
-        int numMessages = Integer.parseInt(appProperties.getProperty(
-                Constants.PROP_NUM_MESSAGES, Constants.PROP_NUM_MESSAGES_DEFAULT));
-        int messageSize = Integer.parseInt(appProperties.getProperty(
-                Constants.PROP_MESSAGE_SIZE, Constants.PROP_MESSAGE_SIZE_DEFAULT));
-        String messageText = createMessageText(messageSize);
-        logger.info("Sending {} messages of size {}...", numMessages, messageSize);
+    @Override
+    public void run() {
+        
+        this.threadName = Thread.currentThread().getName();
+        
+        try {
+            int messageSize = Integer.parseInt(appProperties.getProperty(
+                    Constants.PROP_MESSAGE_SIZE, Constants.PROP_MESSAGE_SIZE_DEFAULT));
+            String messageText = createMessageText(messageSize);
 
-        long start = System.nanoTime();
-        for (int i=1; i <= numMessages; i++) {
-            TextMessage message = session.createTextMessage(messageText);
-            producer.send(message);
+            int numMessages = 0;
+            while (messageCounter.increment() > 0) {
+                TextMessage message = session.createTextMessage(messageText);
+                producer.send(message);
+                numMessages++;
+            }
+            logger.debug("{}: sent {} messages", threadName, numMessages);
         }
-        long end = System.nanoTime();
-        long millis = (end - start)/1000000;
-
-        logger.info("{} messages sent in {} milliseconds", numMessages, millis);
-        logger.info("{} messages/second", (numMessages * 1000)/millis);
+        catch (JMSException e) {
+            logger.error("{} halted: {}",
+                    threadName, StackTraceUtil.getStackTrace(e));
+        }
+        finally {
+            if (privateConnection != null)
+                try {privateConnection.close();} catch (Exception e) {}
+        }
     }
-    
+
     private String createMessageText(int size) {
         StringBuffer buffer = new StringBuffer(size);
         for (int i=0; i<size; i++) {
             buffer.append('.');
         }
         return buffer.toString();
+    }
+
+    private Connection getConnection() {
+        return (sharedConnection != null) ? sharedConnection : privateConnection;
     }
 }
