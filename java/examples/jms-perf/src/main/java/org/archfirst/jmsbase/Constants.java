@@ -48,7 +48,7 @@ public final class Constants {
     public static final String PROP_CONSUMER_PRINT_MESSAGES = "consumer.printMessages";
     public static final String PROP_CONSUMER_PRINT_MESSAGES_DEFAULT = "false";
     public static final String PROP_CONSUMER_NUM_THREADS = "consumer.numThreads";
-    public static final String PROP_CONSUMER_NUM_THREADS_DEFAULT = "50";
+    public static final String PROP_CONSUMER_NUM_THREADS_DEFAULT = "10";
     public static final String PROP_CONSUMER_CONNECTION_PER_THREAD = "consumer.connectionPerThread";
     public static final String PROP_CONSUMER_CONNECTION_PER_THREAD_DEFAULT = "false";
 }

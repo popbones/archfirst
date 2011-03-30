@@ -31,13 +31,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * SimpleConsumer
+ * DrainDestination
  *
  * @author Naresh Bhatia
  */
-public class SimpleConsumer extends JmsBaseClient {
+public class DrainDestination extends JmsBaseClient {
     private static final Logger logger =
-        LoggerFactory.getLogger(SimpleConsumer.class);
+        LoggerFactory.getLogger(DrainDestination.class);
 
     private Connection connection;
     private Session session;
@@ -55,10 +55,10 @@ public class SimpleConsumer extends JmsBaseClient {
         Properties appProperties = new Properties();
         appProperties.load(new FileInputStream(args[1]));
 
-        new SimpleConsumer(jndiProperties, appProperties).run();
+        new DrainDestination(jndiProperties, appProperties).run();
     }
     
-    public SimpleConsumer(Properties jndiProperties, Properties appProperties) {
+    public DrainDestination(Properties jndiProperties, Properties appProperties) {
         super(jndiProperties, appProperties);
     }
     
@@ -67,7 +67,7 @@ public class SimpleConsumer extends JmsBaseClient {
             lookupConnectionFactoryAndDestination();
             createConnection();
             connection.start();
-            receiveMessages();
+            drainDestination();
         }
         catch (Exception e) {
             logger.error("SimpleConsumer halted: {}",
@@ -99,25 +99,23 @@ public class SimpleConsumer extends JmsBaseClient {
         }
     }
     
-    private void receiveMessages() throws JMSException {
-        int numMessages = Integer.parseInt(appProperties.getProperty(
-                Constants.PROP_NUM_MESSAGES, Constants.PROP_NUM_MESSAGES_DEFAULT));
+    private void drainDestination() throws JMSException {
+        logger.info("Draining destination...");
         boolean printMessages = Boolean.parseBoolean(appProperties.getProperty(
                 Constants.PROP_CONSUMER_PRINT_MESSAGES,
                 Constants.PROP_CONSUMER_PRINT_MESSAGES_DEFAULT));
-        logger.info("Receiving {} messages...", numMessages);
 
-        long start = System.nanoTime();
-        for (int i=1; i <= numMessages; i++) {
-            TextMessage message = (TextMessage)consumer.receive();
+        int numMessages = 0;
+        while (true) {
+            // Receive next message with a 5 second timeout
+            TextMessage message = (TextMessage)consumer.receive(5000);
+            if (message == null) break;
+            numMessages++;
             if (printMessages) {
                 logger.info(message.getText());
             }
         }
-        long end = System.nanoTime();
-        long millis = (end - start)/1000000;
 
-        logger.info("{} messages received in {} milliseconds", numMessages, millis);
-        logger.info("{} messages/second", (numMessages * 1000)/millis);
+        logger.info("{} messages drained", numMessages);
     }
 }
