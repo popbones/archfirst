@@ -70,7 +70,7 @@ public class DrainDestination extends JmsBaseClient {
             drainDestination();
         }
         catch (Exception e) {
-            logger.error("SimpleConsumer halted: {}",
+            logger.error("DrainDestination halted: {}",
                     StackTraceUtil.getStackTrace(e));
         }
         finally {

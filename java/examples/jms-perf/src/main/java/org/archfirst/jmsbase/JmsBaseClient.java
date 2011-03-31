@@ -56,9 +56,10 @@ public class JmsBaseClient {
             connectionFactory = (ConnectionFactory)initialContext.lookup(
                     appProperties.getProperty(Constants.PROP_CONNECTION_FACTORY));
 
-            logger.info("Looking up Destination...");
-            destination = (Destination)initialContext.lookup(
-                    appProperties.getProperty(Constants.PROP_DESTINATION));
+            String destinationName =
+                appProperties.getProperty(Constants.PROP_DESTINATION);
+            logger.info("Looking up Destination {}...", destinationName);
+            destination = (Destination)initialContext.lookup(destinationName);
         }
         finally {
             if (initialContext != null)

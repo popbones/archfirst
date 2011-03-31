@@ -15,6 +15,15 @@
  */
 package org.archfirst.bfoms.interfaceout.exchange.trading;
 
+import javax.annotation.Resource;
+import javax.jms.Connection;
+import javax.jms.ConnectionFactory;
+import javax.jms.Destination;
+import javax.jms.JMSException;
+import javax.jms.MessageProducer;
+import javax.jms.Session;
+import javax.jms.TextMessage;
+
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.exchange.ExchangeTradingService;
 
@@ -24,9 +33,32 @@ import org.archfirst.bfoms.domain.exchange.ExchangeTradingService;
  * @author Naresh Bhatia
  */
 public class FixExchangeTradingService implements ExchangeTradingService {
+    
+    @Resource(mappedName="jms/ConnectionFactory")
+    private ConnectionFactory connectionFactory;
+    @Resource(mappedName="jms/OmsToExchangeFixQueue")
+    private Destination destination;
 
     @Override
     public void placeOrder(Order order) {
+        
+        Connection connection = null;;
+        try {
+            connection = connectionFactory.createConnection();
+            connection.start();
+            Session session = connection.createSession(
+                    false, Session.AUTO_ACKNOWLEDGE);
+            MessageProducer producer = session.createProducer(destination);
+            TextMessage message = session.createTextMessage("Place order");
+            producer.send(message);
+        }
+        catch (JMSException e) {
+            throw new RuntimeException("Failed to send PlaceOrder message", e);
+        }
+        finally {
+            if (connection != null)
+                try {connection.close();} catch (Exception e) {}
+        }
     }
 
     @Override

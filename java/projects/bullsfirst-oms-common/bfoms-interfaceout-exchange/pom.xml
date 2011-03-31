@@ -15,6 +15,12 @@
     <name>Bullsfirst OMS Common - Interface Out Exchange</name>
 
     <dependencies>
+
+    	<dependency>
+    		<groupId>javax.jms</groupId>
+    		<artifactId>jms</artifactId>
+    	</dependency>
+
         <dependency>
             <groupId>org.archfirst</groupId>
             <artifactId>bfoms-common-domain</artifactId>
