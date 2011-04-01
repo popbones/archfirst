@@ -57,6 +57,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.archfirst</groupId>
+                <artifactId>bfoms-infra</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>${org.hibernate.version}</version>
@@ -110,6 +116,12 @@
                 </exclusions>
             </dependency>
 
+            <dependency>
+                <groupId>quickfixj</groupId>
+                <artifactId>quickfixj-all</artifactId>
+                <version>1.5.0</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -157,6 +169,7 @@
         <module>bfoms-common-domain</module>
         <module>bfoms-common-ddl</module>
         <module>bfoms-common-spec</module>
+        <module>bfoms-infra</module>
         <module>bfoms-interfaceout-exchange</module>
     </modules>
 

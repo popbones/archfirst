@@ -26,14 +26,13 @@ import org.slf4j.LoggerFactory;
  *
  * @author Naresh Bhatia
  */
-public class BaseConfig {
-
+public abstract class BaseConfigurationService implements ConfigurationService {
     private static final Logger logger =
-        LoggerFactory.getLogger(BaseConfig.class);
+        LoggerFactory.getLogger(BaseConfigurationService.class);
     
     private final CompositeConfiguration config;
     
-    protected BaseConfig() {
+    protected BaseConfigurationService() {
         this.config = new CompositeConfiguration();
     }
     
@@ -49,8 +48,9 @@ public class BaseConfig {
         }
         logger.info("Loaded {}", filename);
     }
-    
-    public final String getString(String key) {
+
+    @Override
+    public String getString(String key) {
         String value = config.getString(key);
         if (value==null) {
             logger.warn("Property {} is not defined", key);

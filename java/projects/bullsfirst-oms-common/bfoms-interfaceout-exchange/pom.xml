@@ -16,6 +16,12 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
     	<dependency>
     		<groupId>javax.jms</groupId>
     		<artifactId>jms</artifactId>
@@ -24,6 +30,16 @@
         <dependency>
             <groupId>org.archfirst</groupId>
             <artifactId>bfoms-common-domain</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.archfirst</groupId>
+            <artifactId>bfoms-infra</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>quickfixj</groupId>
+            <artifactId>quickfixj-all</artifactId>
         </dependency>
     </dependencies>
 
