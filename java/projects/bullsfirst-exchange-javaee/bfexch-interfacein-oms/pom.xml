@@ -10,41 +10,32 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>bfexch-domain</artifactId>
+    <artifactId>bfexch-interfacein-oms</artifactId>
     <packaging>jar</packaging>
-    <name>Bullsfirst Exchange - Domain</name>
+    <name>Bullsfirst Exchange - Interface In OMS</name>
 
     <dependencies>
-        <dependency>
-            <groupId>javax.enterprise</groupId>
-            <artifactId>cdi-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
+            <groupId>javax.jms</groupId>
+            <artifactId>jms</artifactId>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.archfirst</groupId>
-            <artifactId>afcommon-util</artifactId>
+            <artifactId>bfexch-domain</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
+            <groupId>org.archfirst</groupId>
+            <artifactId>bfexch-infra</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate.java-persistence</groupId>
-            <artifactId>jpa-api</artifactId>
+            <groupId>org.jboss.ejb3</groupId>
+            <artifactId>jboss-ejb3-api</artifactId>
             <scope>provided</scope>
         </dependency>
     </dependencies>
