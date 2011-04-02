@@ -15,25 +15,20 @@
  */
 package org.archfirst.bfoms.infra.app;
 
-import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Singleton;
 
-import org.archfirst.common.config.ConfigurationService;
+import org.archfirst.common.config.BaseConfigurationService;
 
 /**
  * AppConfigurationService
  *
  * @author Naresh Bhatia
  */
-@ApplicationScoped
-public class AppConfigurationService implements ConfigurationService {
+@Singleton
+public class AppConfigurationService extends BaseConfigurationService {
 
     public AppConfigurationService() {
         super();
-        //load("app.properties");
-    }
-
-    @Override
-    public String getString(String key) {
-        return "JVEE";
+        load("app.properties");
     }
 }

@@ -49,10 +49,11 @@ public class FixExchangeTradingService implements ExchangeTradingService {
     
     @Resource(mappedName="jms/ConnectionFactory")
     private ConnectionFactory connectionFactory;
+
     @Resource(mappedName="jms/OmsToExchangeFixQueue")
     private Destination destination;
 
-    //@Inject private ConfigurationService configurationService;
+    @Inject private ConfigurationService configurationService;
 
     @Override
     public void placeOrder(Order order) {
@@ -100,7 +101,6 @@ public class FixExchangeTradingService implements ExchangeTradingService {
     }
     
     private String getBrokerId() {
-        return "JVEE";
-        //return configurationService.getString(ConfigConstants.PROP_BROKER_ID);
+        return configurationService.getString(ConfigConstants.PROP_BROKER_ID);
     }
 }
