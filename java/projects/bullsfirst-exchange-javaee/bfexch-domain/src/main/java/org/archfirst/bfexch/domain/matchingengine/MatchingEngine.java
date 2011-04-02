@@ -23,7 +23,7 @@ import javax.inject.Inject;
 import org.archfirst.bfexch.domain.marketdata.MarketDataRepository;
 import org.archfirst.bfexch.domain.marketdata.MarketPrice;
 import org.archfirst.bfexch.domain.order.Order;
-import org.archfirst.bfexch.domain.order.OrderRepository;
+import org.archfirst.bfexch.domain.order.OrderService;
 import org.archfirst.bfexch.domain.order.OrderStatus;
 import org.archfirst.bfexch.domain.order.OrderType;
 import org.archfirst.bfexch.domain.util.Constants;
@@ -43,14 +43,14 @@ public class MatchingEngine {
         LoggerFactory.getLogger(MatchingEngine.class);
     
     @Inject private MarketDataRepository marketDataRepository;
-    @Inject private OrderRepository orderRepository;
+    @Inject private OrderService orderService;
 
     // ----- Events -----
     @Inject private Event<MarketPriceChanged> marketPriceChangedEvent;
 
     // ----- Commands -----
     public void placeOrder(Order order) {
-        order.accept(orderRepository);
+        orderService.acceptOrder(order);
         this.performMatching(order.getSymbol());
     }
     
@@ -186,14 +186,14 @@ public class MatchingEngine {
         DecimalQuantity quantity =
             buyOrder.getLeavesQty().min(sellOrder.getLeavesQty());
         DateTime executionTime = new DateTime();
-        buyOrder.execute(orderRepository, executionTime, quantity, price);
-        sellOrder.execute(orderRepository, executionTime, quantity, price);
+        orderService.executeOrder(buyOrder, executionTime, quantity, price);
+        orderService.executeOrder(sellOrder, executionTime, quantity, price);
     }
     
     // ----- Queries and Read-Only Operations -----
     public OrderBook getOrderBook(String symbol) {
         OrderBook orderBook = new OrderBook();
-        List<Order> orders = orderRepository.findActiveOrdersForInstrument(symbol);
+        List<Order> orders = orderService.findActiveOrdersForInstrument(symbol);
         for (Order order : orders) {
             orderBook.add(order);
         }

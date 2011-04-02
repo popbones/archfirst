@@ -17,6 +17,13 @@ package org.archfirst.bfexch.domain.order;
 
 import java.util.List;
 
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
+
+import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.DecimalQuantity;
+import org.joda.time.DateTime;
+
 /**
  * OrderService
  *
@@ -24,13 +31,67 @@ import java.util.List;
  */
 public class OrderService {
 
-    private OrderRepository orderRepository;
+    @Inject private OrderRepository orderRepository;
+
+    // ----- Events -----
+    @Inject private Event<OrderAccepted> orderAcceptedEvent;
+    @Inject private Event<OrderExecuted> orderExecutedEvent;
+    @Inject private Event<OrderCanceled> orderCanceledEvent;
+    @Inject private Event<OrderCancelRejected> orderCancelRejectedEvent;
+   
     
     // ----- Commands -----
+    /**
+     * Sets order status to New and persists it.
+     */
+    public void acceptOrder(Order order) {
+        order.accept(orderRepository);
+        orderAcceptedEvent.fire(new OrderAccepted(order));
+    }
+    
+    /**
+     * Executes the order and adds an execution to it.
+     */
+    public void executeOrder(
+            Order order,
+            DateTime executionTime,
+            DecimalQuantity executionQty,
+            Money price) {
+        Execution execution =
+            order.execute(orderRepository, executionTime, executionQty, price);
+        orderExecutedEvent.fire(new OrderExecuted(execution));
+    }
+
+    /**
+     * Cancels the order if the status change is valid
+     */
+    public void cancelOrder(Order order) {
+        order.cancel();
+        if (order.getStatus() == OrderStatus.Canceled) {
+            orderCanceledEvent.fire(new OrderCanceled(order));
+        }
+        else {
+            orderCancelRejectedEvent.fire(new OrderCancelRejected(order));
+        }
+    }
+
     public void cancelActiveOrders() {
         List<Order> orders = orderRepository.findActiveOrders();
         for (Order order : orders) {
-            order.cancel();
+            this.cancelOrder(order);
         }
+    }
+
+    // ----- Queries and Read-Only Operations -----
+    public Order findOrderByClientOrderId(String clientOrderId) {
+        return orderRepository.findOrderByClientOrderId(clientOrderId);
+    }
+
+    public List<Order> findActiveOrders() {
+        return orderRepository.findActiveOrders();
+    }
+
+    public List<Order> findActiveOrdersForInstrument(String symbol) {
+        return orderRepository.findActiveOrdersForInstrument(symbol);
     }
 }

@@ -18,8 +18,6 @@ package org.archfirst.bfexch.domain.order;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.enterprise.event.Event;
-import javax.inject.Inject;
 import javax.persistence.AttributeOverride;
 import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
@@ -95,13 +93,6 @@ public class Order extends DomainEntity implements Comparable<Order> {
     @XmlElement(name = "Execution", required = true)
     private Set<Execution> executions = new HashSet<Execution>();
 
-    // ----- Events -----
-    @Inject private Event<OrderAccepted> orderAcceptedEvent;
-    @Inject private Event<OrderExecuted> orderExecutedEvent;
-    @Inject private Event<OrderCanceled> orderCanceledEvent;
-    @Inject private Event<OrderCancelRejected> orderCancelRejectedEvent;
-
-    
     // ----- Constructors -----
     private Order() {
     }
@@ -129,17 +120,21 @@ public class Order extends DomainEntity implements Comparable<Order> {
     
     // ----- Commands -----
     /**
-     * Persists the order and sends out an orderAccepted event.
+     * Sets order status to New and persists it.
+     * (Accessible from OrderService only)
      * @param orderRepository
      */
-    public void accept(OrderRepository orderRepository) {
+    void accept(OrderRepository orderRepository) {
         this.status = OrderStatus.New;
         orderRepository.persist(this);
         orderRepository.flush();
-        //orderAcceptedEvent.fire(new OrderAccepted(this));
     }
     
-    public void execute(
+    /**
+     * Executes the order and adds an execution to it.
+     * (Accessible from OrderService only)
+     */
+    Execution execute(
             OrderRepository orderRepository,
             DateTime executionTime,
             DecimalQuantity executionQty,
@@ -147,21 +142,17 @@ public class Order extends DomainEntity implements Comparable<Order> {
         Execution execution = new Execution(executionTime, executionQty, price);
         this.addExecution(execution, orderRepository);
         this.status = quantity.eq(getCumQty()) ?
-                OrderStatus.Filled : OrderStatus.PartiallyFilled; 
-        //orderExecutedEvent.fire(new OrderExecuted(execution));
+                OrderStatus.Filled : OrderStatus.PartiallyFilled;
+        return execution;
     }
 
     /**
-     * Cancels the order.
-     * @return true if successful, false otherwise.
+     * Cancels the order if the status change is valid
+     * (Accessible from OrderService only)
      */
-    public void cancel() {
+    void cancel() {
         if (isStatusChangeValid(OrderStatus.Canceled)) {
             this.status = OrderStatus.Canceled;
-            //orderCanceledEvent.fire(new OrderCanceled(this));
-        }
-        else {
-            //orderCancelRejectedEvent.fire(new OrderCancelRejected(this));
         }
     }
 

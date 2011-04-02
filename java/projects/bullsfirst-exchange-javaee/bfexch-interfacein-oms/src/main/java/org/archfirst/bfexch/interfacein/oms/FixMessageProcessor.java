@@ -19,7 +19,7 @@ import javax.inject.Inject;
 
 import org.archfirst.bfexch.domain.matchingengine.MatchingEngine;
 import org.archfirst.bfexch.domain.order.Order;
-import org.archfirst.bfexch.domain.order.OrderRepository;
+import org.archfirst.bfexch.domain.order.OrderService;
 import org.archfirst.bfexch.infra.fix.MoneyConverter;
 import org.archfirst.bfexch.infra.fix.OrderQuantityConverter;
 import org.archfirst.bfexch.infra.fix.OrderSideConverter;
@@ -56,7 +56,7 @@ public class FixMessageProcessor
     private static final Logger logger =
         LoggerFactory.getLogger(FixMessageProcessor.class);
 
-    @Inject private OrderRepository orderRepository;
+    @Inject private OrderService orderService;
     @Inject private MatchingEngine matchingEngine;
 
     public FixMessageProcessor() {
@@ -113,13 +113,13 @@ public class FixMessageProcessor
 
         // Lookup order
         String clOrdID = message.getOrigClOrdID().getValue();
-        Order order = orderRepository.findOrderByClientOrderId(clOrdID);
+        Order order = orderService.findOrderByClientOrderId(clOrdID);
         if (order == null) {
             logger.error("OrderCancelRequest: clOrdID {} not found", clOrdID);
         }
 
         // Cancel it
-        order.cancel();
+        orderService.cancelOrder(order);
     }
 
     @Override
