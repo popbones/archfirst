@@ -15,6 +15,8 @@
  */
 package org.archfirst.bfoms.interfaceout.exchange.trading;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 import javax.inject.Inject;
 import javax.jms.Connection;
@@ -28,17 +30,23 @@ import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.exchange.ExchangeTradingService;
 import org.archfirst.bfoms.infra.app.ConfigConstants;
 import org.archfirst.bfoms.infra.fix.ClOrdIDConverter;
+import org.archfirst.bfoms.infra.fix.FixFormatter;
 import org.archfirst.bfoms.infra.fix.InstrumentConverter;
 import org.archfirst.bfoms.infra.fix.MoneyConverter;
 import org.archfirst.bfoms.infra.fix.OrderQuantityConverter;
 import org.archfirst.bfoms.infra.fix.OrderSideConverter;
 import org.archfirst.bfoms.infra.fix.OrderTermConverter;
 import org.archfirst.bfoms.infra.fix.OrderTypeConverter;
+import org.archfirst.bfoms.infra.fix.OrigClOrdIDConverter;
 import org.archfirst.common.config.ConfigurationService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import quickfix.Message;
 import quickfix.field.ExecInst;
 import quickfix.field.TransactTime;
 import quickfix.fix44.NewOrderSingle;
+import quickfix.fix44.OrderCancelRequest;
 
 /**
  * FixExchangeTradingService
@@ -46,6 +54,8 @@ import quickfix.fix44.NewOrderSingle;
  * @author Naresh Bhatia
  */
 public class FixExchangeTradingService implements ExchangeTradingService {
+    private static final Logger logger =
+        LoggerFactory.getLogger(FixExchangeTradingService.class);
     
     @Resource(mappedName="jms/ConnectionFactory")
     private ConnectionFactory connectionFactory;
@@ -74,14 +84,26 @@ public class FixExchangeTradingService implements ExchangeTradingService {
             fixMessage.set(new ExecInst(Character.toString(ExecInst.ALL_OR_NONE)));
         }
 
-        sendFixMessage(fixMessage.toString());
+        sendFixMessage(fixMessage);
     }
 
     @Override
     public void cancelOrder(Order order) {
+        OrderCancelRequest fixMessage = new OrderCancelRequest(
+                OrigClOrdIDConverter.toFix(getBrokerId(), order.getId()),
+                ClOrdIDConverter.toFix(getBrokerId(), order.getId()),
+                OrderSideConverter.toFix(order.getSide()),
+                new TransactTime(new Date()));
+
+        fixMessage.set(InstrumentConverter.toFix(order.getSymbol()));
+        fixMessage.set(OrderQuantityConverter.toFix(order.getQuantity()));
+
+        sendFixMessage(fixMessage);
     }
     
-    private void sendFixMessage(String message) {
+    private void sendFixMessage(Message fixMessage) {
+        
+        logger.debug("Sending message:\n{}", FixFormatter.format(fixMessage));
 
         Connection connection = null;
         try {
@@ -89,7 +111,7 @@ public class FixExchangeTradingService implements ExchangeTradingService {
             Session session = connection.createSession(
                     false, Session.AUTO_ACKNOWLEDGE);
             MessageProducer producer = session.createProducer(destination);
-            producer.send(session.createTextMessage(message));
+            producer.send(session.createTextMessage(fixMessage.toString()));
         }
         catch (JMSException e) {
             throw new RuntimeException("Failed to send FIX message", e);
