@@ -15,16 +15,14 @@
  */
 package org.archfirst.bfexch.interfaceout.oms;
 
-import java.util.Map;
-
 import javax.annotation.Resource;
 import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import javax.jms.Connection;
 import javax.jms.ConnectionFactory;
 import javax.jms.Destination;
 import javax.jms.JMSException;
 import javax.jms.MessageProducer;
-import javax.jms.Queue;
 import javax.jms.Session;
 
 import org.archfirst.bfexch.domain.order.ExecutionReport;
@@ -68,10 +66,7 @@ public class FixBrokerAdapter {
     @Resource(mappedName="jms/ConnectionFactory")
     private ConnectionFactory connectionFactory;
 
-    @Resource(mappedName="jms/ExchangeToOmsJavaeeFixQueue")
-    private Destination destination;
-
-    private Map<String, Queue> brokerIdToQueueMap;
+    @Inject private DestinationDictionary destinationDictionary;
 
     public void onOrderAccepted(@Observes OrderAccepted event) {
         sendExecutionReport(ExecutionReport.createNewType(event.getOrder()));
@@ -147,10 +142,10 @@ public class FixBrokerAdapter {
 
     private void sendFixMessage(final String brokerId, Message fixMessage) {
         
-//        logger.debug("Sending message via queue {}:\n{}",
-//                brokerIdToQueueMap.get(brokerId).toString(), FixFormatter.format(fixMessage));
-        logger.debug("Sending message via queue {}:\n{}",
-                "Unknown", FixFormatter.format(fixMessage));
+        logger.debug("Sending message to {}:\n{}",
+                brokerId, FixFormatter.format(fixMessage));
+        Destination destination =
+            destinationDictionary.getBrokerDestination(brokerId);
 
         Connection connection = null;
         try {
