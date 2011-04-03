@@ -36,6 +36,18 @@
             </dependency>
 
             <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
+            </dependency>
+
+        	<dependency>
+        		<groupId>javax.jms</groupId>
+        		<artifactId>jms</artifactId>
+        		<version>1.1</version>
+        	</dependency>
+
+            <dependency>
                 <groupId>net.sf.dozer</groupId>
                 <artifactId>dozer</artifactId>
                 <version>5.3.1</version>
@@ -45,6 +57,18 @@
                 <groupId>org.archfirst</groupId>
                 <artifactId>bfoms-common-domain</artifactId>
                 <version>${org.archfirst.bfoms.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.archfirst</groupId>
+                <artifactId>bfoms-infra</artifactId>
+                <version>${org.archfirst.bfoms.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.archfirst</groupId>
+                <artifactId>bfoms-interfacein-exchange</artifactId>
+                <version>${project.version}</version>
             </dependency>
 
             <dependency>
@@ -176,6 +200,7 @@
     </profiles>
 
     <modules>
+        <module>bfoms-interfacein-exchange</module>
         <module>bfoms-javaee-web</module>
     </modules>
 

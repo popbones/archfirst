@@ -100,6 +100,10 @@ public class BrokerageAccountService {
         return brokerageAccountRepository.findAccount(id);
     }
     
+    public BrokerageAccount findAccountForOrder(Long orderId) {
+        return brokerageAccountRepository.findAccountForOrder(orderId);
+    }
+    
     public List<Lot> findActiveLots(Long accountId) {
         return brokerageAccountRepository.findActiveLots(findAccount(accountId));
     }
