@@ -41,7 +41,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Naresh Bhatia
  */
-@MessageDriven(mappedName="jms/ExchangeToOmsJavaeeFixQueue")
+@MessageDriven(mappedName="jms/ExchangeMarketPriceTopic")
 public class MarketPriceListener implements MessageListener {
     private static final Logger logger =
         LoggerFactory.getLogger(MarketPriceListener.class);
@@ -56,10 +56,11 @@ public class MarketPriceListener implements MessageListener {
     public void onMessage(Message message) {
 
         if (message instanceof TextMessage) {
-            String messageText = null;
             try {
-                messageText = ((TextMessage)message).getText();
-                marketDataService.updateMarketPrice(toMarketPrice(messageText));
+                String messageText = ((TextMessage)message).getText();
+                MarketPrice marketPrice = toMarketPrice(messageText);
+                logger.debug("Received market price:\n{}", marketPrice);
+                marketDataService.updateMarketPrice(marketPrice);
             }
             catch (JMSException e) {
                 throw new RuntimeException(e);
