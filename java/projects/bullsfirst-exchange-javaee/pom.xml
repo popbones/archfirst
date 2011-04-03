@@ -76,6 +76,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.archfirst</groupId>
+                <artifactId>bfexch-interfaceout-oms</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>javax.enterprise</groupId>
                 <artifactId>cdi-api</artifactId>
                 <version>1.0-SP1</version>
@@ -199,6 +205,7 @@
         <module>bfexch-domain</module>
         <module>bfexch-infra</module>
         <module>bfexch-interfacein-oms</module>
+        <module>bfexch-interfaceout-oms</module>
         <module>bfexch-javaee-web</module>
     </modules>
 

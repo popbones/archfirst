@@ -15,8 +15,6 @@
  */
 package org.archfirst.bfexch.infra.fix;
 
-import org.archfirst.bfexch.domain.referencedata.Instrument;
-
 import quickfix.field.Symbol;
 
 /**
@@ -26,8 +24,8 @@ import quickfix.field.Symbol;
  */
 public class InstrumentConverter {
 
-    public static quickfix.fix44.component.Instrument toFix(Instrument instrument) {
+    public static quickfix.fix44.component.Instrument toFix(String symbol) {
         return new quickfix.fix44.component.Instrument(
-                new Symbol(instrument.getSymbol()));
+                new Symbol(symbol));
     }
 }
