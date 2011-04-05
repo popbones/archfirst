@@ -49,14 +49,6 @@
       <xs:element name="Name" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="CancelOrder">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="OrderId" type="xs:long" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="CancelOrderResponse">
-    <xs:sequence />
-  </xs:complexType>
   <xs:complexType name="ChangeAccountName">
     <xs:sequence>
       <xs:element minOccurs="0" name="AccountId" type="xs:long" />
@@ -64,6 +56,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ChangeAccountNameResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="CancelOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelOrderResponse">
     <xs:sequence />
   </xs:complexType>
   <xs:complexType name="GetOrders">
@@ -95,6 +95,7 @@
           <xs:element name="Side" type="tns:OrderSide" />
           <xs:element name="Symbol" type="xs:string" />
           <xs:element name="Quantity" type="xs:decimal" />
+          <xs:element name="CumQty" type="xs:decimal" />
           <xs:element name="OrderType" type="tns:OrderType" />
           <xs:element name="LimitPrice" type="tns:Money" />
           <xs:element name="Term" type="tns:OrderTerm" />

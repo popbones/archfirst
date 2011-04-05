@@ -77,8 +77,8 @@ public class ExecutionReport {
                 order.getSide(),
                 order.getSymbol(),
                 null,
-                null,
-                null,
+                order.getLeavesQty(),
+                order.getCumQty(),
                 null,
                 null);
     }
@@ -98,7 +98,7 @@ public class ExecutionReport {
                 order.getSymbol(),
                 quantity,
                 order.getLeavesQty().minus(quantity),
-                null,
+                order.getCumQty().plus(quantity),
                 price,
                 null);
     }

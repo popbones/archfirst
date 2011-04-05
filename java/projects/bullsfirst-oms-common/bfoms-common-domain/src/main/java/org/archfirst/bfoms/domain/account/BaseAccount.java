@@ -36,6 +36,7 @@ import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
+import org.hibernate.annotations.OptimisticLock;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 
@@ -128,6 +129,7 @@ public abstract class BaseAccount extends DomainEntity {
     // @JoinTable(name = "Account_AccountParties",
     //    joinColumns = @JoinColumn(name = "account_id"))
     @OneToMany(mappedBy="account",  cascade=CascadeType.ALL)
+    @OptimisticLock(excluded = true)
     public Set<AccountParty> getAccountParties() {
         return accountParties;
     }
@@ -141,6 +143,7 @@ public abstract class BaseAccount extends DomainEntity {
     }
 
     @OneToMany(mappedBy="account",  cascade=CascadeType.ALL)
+    @OptimisticLock(excluded = true)
     public Set<Transaction> getTransactions() {
         return transactions;
     }

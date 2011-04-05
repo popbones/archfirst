@@ -46,6 +46,7 @@ import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
+import org.hibernate.annotations.OptimisticLock;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -450,6 +451,7 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     @OneToMany(mappedBy="account",  cascade=CascadeType.ALL)
+    @OptimisticLock(excluded = true)
     public Set<Order> getOrders() {
         return orders;
     }
@@ -463,6 +465,7 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
+    @OptimisticLock(excluded = true)
     public Set<Lot> getLots() {
         return lots;
     }

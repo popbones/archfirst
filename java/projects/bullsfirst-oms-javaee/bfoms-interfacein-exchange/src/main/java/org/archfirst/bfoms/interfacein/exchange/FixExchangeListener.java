@@ -63,6 +63,7 @@ public class FixExchangeListener implements MessageListener {
                             messageText);
                 logger.debug("Received message:\n{}", FixFormatter.format(fixMessage));
                 fixMessageProcessor.fromApp(fixMessage, null);
+                logger.debug("Processed message:\n{}", FixFormatter.format(fixMessage));
             }
             catch (InvalidMessage e) {
                 logger.error("Invalid FIX message received: " + messageText, e);

@@ -7,6 +7,18 @@
       <xsd:import namespace="http://archfirst.org/bfoms/tradingservice.wsdl" schemaLocation="http://agni:8080/bfoms-javaee/TradingService?xsd=1"/>
     </xsd:schema>
   </types>
+  <message name="PlaceOrder">
+    <part name="parameters" element="tns:PlaceOrder"/>
+  </message>
+  <message name="PlaceOrderResponse">
+    <part name="parameters" element="tns:PlaceOrderResponse"/>
+  </message>
+  <message name="CancelOrder">
+    <part name="parameters" element="tns:CancelOrder"/>
+  </message>
+  <message name="CancelOrderResponse">
+    <part name="parameters" element="tns:CancelOrderResponse"/>
+  </message>
   <message name="OpenNewAccount">
     <part name="parameters" element="tns:OpenNewAccount"/>
   </message>
@@ -36,18 +48,6 @@
   </message>
   <message name="TransferSecuritiesResponse">
     <part name="parameters" element="tns:TransferSecuritiesResponse"/>
-  </message>
-  <message name="PlaceOrder">
-    <part name="parameters" element="tns:PlaceOrder"/>
-  </message>
-  <message name="PlaceOrderResponse">
-    <part name="parameters" element="tns:PlaceOrderResponse"/>
-  </message>
-  <message name="CancelOrder">
-    <part name="parameters" element="tns:CancelOrder"/>
-  </message>
-  <message name="CancelOrderResponse">
-    <part name="parameters" element="tns:CancelOrderResponse"/>
   </message>
   <message name="GetBrokerageAccountSummaries">
     <part name="parameters" element="tns:GetBrokerageAccountSummaries"/>
@@ -80,6 +80,14 @@
     <part name="parameters" element="tns:GetTransactionSummariesResponse"/>
   </message>
   <portType name="TradingWebService">
+    <operation name="PlaceOrder">
+      <input wsam:Action="PlaceOrder" message="tns:PlaceOrder"/>
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderResponse" message="tns:PlaceOrderResponse"/>
+    </operation>
+    <operation name="CancelOrder">
+      <input wsam:Action="CancelOrder" message="tns:CancelOrder"/>
+      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderResponse" message="tns:CancelOrderResponse"/>
+    </operation>
     <operation name="OpenNewAccount">
       <input wsam:Action="OpenNewAccount" message="tns:OpenNewAccount"/>
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/OpenNewAccountResponse" message="tns:OpenNewAccountResponse"/>
@@ -99,14 +107,6 @@
     <operation name="TransferSecurities">
       <input wsam:Action="TransferSecurities" message="tns:TransferSecurities"/>
       <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/TransferSecuritiesResponse" message="tns:TransferSecuritiesResponse"/>
-    </operation>
-    <operation name="PlaceOrder">
-      <input wsam:Action="PlaceOrder" message="tns:PlaceOrder"/>
-      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderResponse" message="tns:PlaceOrderResponse"/>
-    </operation>
-    <operation name="CancelOrder">
-      <input wsam:Action="CancelOrder" message="tns:CancelOrder"/>
-      <output wsam:Action="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderResponse" message="tns:CancelOrderResponse"/>
     </operation>
     <operation name="GetBrokerageAccountSummaries">
       <input wsam:Action="GetBrokerageAccountSummaries" message="tns:GetBrokerageAccountSummaries"/>
@@ -131,6 +131,24 @@
   </portType>
   <binding name="TradingWebServicePortBinding" type="tns:TradingWebService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <operation name="PlaceOrder">
+      <soap:operation soapAction="PlaceOrder"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
+    <operation name="CancelOrder">
+      <soap:operation soapAction="CancelOrder"/>
+      <input>
+        <soap:body use="literal"/>
+      </input>
+      <output>
+        <soap:body use="literal"/>
+      </output>
+    </operation>
     <operation name="OpenNewAccount">
       <soap:operation soapAction="OpenNewAccount"/>
       <input>
@@ -169,24 +187,6 @@
     </operation>
     <operation name="TransferSecurities">
       <soap:operation soapAction="TransferSecurities"/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
-    <operation name="PlaceOrder">
-      <soap:operation soapAction="PlaceOrder"/>
-      <input>
-        <soap:body use="literal"/>
-      </input>
-      <output>
-        <soap:body use="literal"/>
-      </output>
-    </operation>
-    <operation name="CancelOrder">
-      <soap:operation soapAction="CancelOrder"/>
       <input>
         <soap:body use="literal"/>
       </input>
@@ -296,14 +296,6 @@
       <xs:element name="Name" type="xs:string"/>
     </xs:sequence>
   </xs:complexType>
-  <xs:complexType name="CancelOrder">
-    <xs:sequence>
-      <xs:element name="OrderId" type="xs:long" minOccurs="0"/>
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="CancelOrderResponse">
-    <xs:sequence/>
-  </xs:complexType>
   <xs:complexType name="ChangeAccountName">
     <xs:sequence>
       <xs:element name="AccountId" type="xs:long" minOccurs="0"/>
@@ -311,6 +303,14 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="ChangeAccountNameResponse">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="CancelOrder">
+    <xs:sequence>
+      <xs:element name="OrderId" type="xs:long" minOccurs="0"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelOrderResponse">
     <xs:sequence/>
   </xs:complexType>
   <xs:complexType name="GetOrders">
@@ -342,6 +342,7 @@
           <xs:element name="Side" type="tns:OrderSide"/>
           <xs:element name="Symbol" type="xs:string"/>
           <xs:element name="Quantity" type="xs:decimal"/>
+          <xs:element name="CumQty" type="xs:decimal"/>
           <xs:element name="OrderType" type="tns:OrderType"/>
           <xs:element name="LimitPrice" type="tns:Money"/>
           <xs:element name="Term" type="tns:OrderTerm"/>

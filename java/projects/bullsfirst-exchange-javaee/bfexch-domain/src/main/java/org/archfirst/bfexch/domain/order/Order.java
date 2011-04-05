@@ -42,6 +42,7 @@ import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.archfirst.common.quantity.DecimalQuantityMin;
+import org.hibernate.annotations.OptimisticLock;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -430,6 +431,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
     }
     
     @OneToMany(mappedBy="order",  cascade=CascadeType.ALL)
+    @OptimisticLock(excluded = true)
     public Set<Execution> getExecutions() {
         return executions;
     }

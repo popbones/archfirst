@@ -23,9 +23,29 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", ConfigurationName="TradingServiceReference.TradingWebService")]
     public interface TradingWebService {
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="PlaceOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderRespon" +
+            "se")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
+        System.IAsyncResult BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse EndPlaceOrder(System.IAsyncResult result);
+        
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="CancelOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderRespo" +
+            "nse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
+        System.IAsyncResult BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse EndCancelOrder(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="OpenNewAccount", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/OpenNewAccountRe" +
             "sponse")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
         System.IAsyncResult BeginOpenNewAccount(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OpenNewAccountRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OpenNewAccountResponse EndOpenNewAccount(System.IAsyncResult result);
@@ -65,24 +85,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         System.IAsyncResult BeginTransferSecurities(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferSecuritiesRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferSecuritiesResponse EndTransferSecurities(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="PlaceOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderRespon" +
-            "se")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
-        System.IAsyncResult BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState);
-        
-        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse EndPlaceOrder(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="CancelOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderRespo" +
-            "nse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
-        System.IAsyncResult BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState);
-        
-        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse EndCancelOrder(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="GetBrokerageAccountSummaries", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/GetBrokerageAcco" +
             "untSummariesResponse")]
@@ -130,87 +132,175 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesResponse EndGetTransactionSummaries(System.IAsyncResult result);
     }
     
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="OpenNewAccount", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class OpenNewAccountRequest {
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
+    public partial class OrderParams : object, System.ComponentModel.INotifyPropertyChanged {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public string AccountName;
+        private OrderSide sideField;
         
-        public OpenNewAccountRequest() {
+        private string symbolField;
+        
+        private decimal quantityField;
+        
+        private OrderType typeField;
+        
+        private Money limitPriceField;
+        
+        private OrderTerm termField;
+        
+        private bool allOrNoneField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
+        public OrderSide Side {
+            get {
+                return this.sideField;
+            }
+            set {
+                this.sideField = value;
+                this.RaisePropertyChanged("Side");
+            }
         }
         
-        public OpenNewAccountRequest(string AccountName) {
-            this.AccountName = AccountName;
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
+        public string Symbol {
+            get {
+                return this.symbolField;
+            }
+            set {
+                this.symbolField = value;
+                this.RaisePropertyChanged("Symbol");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
+        public decimal Quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                this.quantityField = value;
+                this.RaisePropertyChanged("Quantity");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
+        public OrderType Type {
+            get {
+                return this.typeField;
+            }
+            set {
+                this.typeField = value;
+                this.RaisePropertyChanged("Type");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=4)]
+        public Money LimitPrice {
+            get {
+                return this.limitPriceField;
+            }
+            set {
+                this.limitPriceField = value;
+                this.RaisePropertyChanged("LimitPrice");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        public OrderTerm Term {
+            get {
+                return this.termField;
+            }
+            set {
+                this.termField = value;
+                this.RaisePropertyChanged("Term");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        public bool AllOrNone {
+            get {
+                return this.allOrNoneField;
+            }
+            set {
+                this.allOrNoneField = value;
+                this.RaisePropertyChanged("AllOrNone");
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="OpenNewAccountResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class OpenNewAccountResponse {
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
+    public enum OrderSide {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public long AccountId;
+        /// <remarks/>
+        Buy,
         
-        public OpenNewAccountResponse() {
-        }
+        /// <remarks/>
+        Sell,
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
+    public enum OrderType {
         
-        public OpenNewAccountResponse(long AccountId) {
-            this.AccountId = AccountId;
-        }
+        /// <remarks/>
+        Market,
+        
+        /// <remarks/>
+        Limit,
     }
     
     /// <remarks/>
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public partial class ExternalAccountParams : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Money : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private string nameField;
+        private decimal amountField;
         
-        private string routingNumberField;
-        
-        private string accountNumberField;
+        private string currencyField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public string Name {
+        public decimal Amount {
             get {
-                return this.nameField;
+                return this.amountField;
             }
             set {
-                this.nameField = value;
-                this.RaisePropertyChanged("Name");
+                this.amountField = value;
+                this.RaisePropertyChanged("Amount");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string RoutingNumber {
+        public string Currency {
             get {
-                return this.routingNumberField;
+                return this.currencyField;
             }
             set {
-                this.routingNumberField = value;
-                this.RaisePropertyChanged("RoutingNumber");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public string AccountNumber {
-            get {
-                return this.accountNumberField;
-            }
-            set {
-                this.accountNumberField = value;
-                this.RaisePropertyChanged("AccountNumber");
+                this.currencyField = value;
+                this.RaisePropertyChanged("Currency");
             }
         }
         
@@ -311,50 +401,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             set {
                 this.amountField = value;
                 this.RaisePropertyChanged("Amount");
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public partial class Money : object, System.ComponentModel.INotifyPropertyChanged {
-        
-        private decimal amountField;
-        
-        private string currencyField;
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public decimal Amount {
-            get {
-                return this.amountField;
-            }
-            set {
-                this.amountField = value;
-                this.RaisePropertyChanged("Amount");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string Currency {
-            get {
-                return this.currencyField;
-            }
-            set {
-                this.currencyField = value;
-                this.RaisePropertyChanged("Currency");
             }
         }
         
@@ -670,6 +716,8 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         private decimal quantityField;
         
+        private decimal cumQtyField;
+        
         private OrderType orderTypeField;
         
         private Money limitPriceField;
@@ -732,6 +780,18 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=4)]
+        public decimal CumQty {
+            get {
+                return this.cumQtyField;
+            }
+            set {
+                this.cumQtyField = value;
+                this.RaisePropertyChanged("CumQty");
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
         public OrderType OrderType {
             get {
                 return this.orderTypeField;
@@ -743,7 +803,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
         public Money LimitPrice {
             get {
                 return this.limitPriceField;
@@ -755,7 +815,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
         public OrderTerm Term {
             get {
                 return this.termField;
@@ -767,7 +827,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=7)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
         public bool AllOrNone {
             get {
                 return this.allOrNoneField;
@@ -779,7 +839,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=8)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
         public OrderStatus OrderStatus {
             get {
                 return this.orderStatusField;
@@ -791,7 +851,7 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         }
         
         /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute("Execution", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=9)]
+        [System.Xml.Serialization.XmlElementAttribute("Execution", Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=10)]
         public Execution[] Execution {
             get {
                 return this.executionField;
@@ -801,30 +861,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
                 this.RaisePropertyChanged("Execution");
             }
         }
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public enum OrderSide {
-        
-        /// <remarks/>
-        Buy,
-        
-        /// <remarks/>
-        Sell,
-    }
-    
-    /// <remarks/>
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
-    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public enum OrderType {
-        
-        /// <remarks/>
-        Market,
-        
-        /// <remarks/>
-        Limit,
     }
     
     /// <remarks/>
@@ -1424,103 +1460,47 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.0.30319.1")]
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl")]
-    public partial class OrderParams : object, System.ComponentModel.INotifyPropertyChanged {
+    public partial class ExternalAccountParams : object, System.ComponentModel.INotifyPropertyChanged {
         
-        private OrderSide sideField;
+        private string nameField;
         
-        private string symbolField;
+        private string routingNumberField;
         
-        private decimal quantityField;
-        
-        private OrderType typeField;
-        
-        private Money limitPriceField;
-        
-        private OrderTerm termField;
-        
-        private bool allOrNoneField;
+        private string accountNumberField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=0)]
-        public OrderSide Side {
+        public string Name {
             get {
-                return this.sideField;
+                return this.nameField;
             }
             set {
-                this.sideField = value;
-                this.RaisePropertyChanged("Side");
+                this.nameField = value;
+                this.RaisePropertyChanged("Name");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=1)]
-        public string Symbol {
+        public string RoutingNumber {
             get {
-                return this.symbolField;
+                return this.routingNumberField;
             }
             set {
-                this.symbolField = value;
-                this.RaisePropertyChanged("Symbol");
+                this.routingNumberField = value;
+                this.RaisePropertyChanged("RoutingNumber");
             }
         }
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=2)]
-        public decimal Quantity {
+        public string AccountNumber {
             get {
-                return this.quantityField;
+                return this.accountNumberField;
             }
             set {
-                this.quantityField = value;
-                this.RaisePropertyChanged("Quantity");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=3)]
-        public OrderType Type {
-            get {
-                return this.typeField;
-            }
-            set {
-                this.typeField = value;
-                this.RaisePropertyChanged("Type");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, IsNullable=true, Order=4)]
-        public Money LimitPrice {
-            get {
-                return this.limitPriceField;
-            }
-            set {
-                this.limitPriceField = value;
-                this.RaisePropertyChanged("LimitPrice");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=5)]
-        public OrderTerm Term {
-            get {
-                return this.termField;
-            }
-            set {
-                this.termField = value;
-                this.RaisePropertyChanged("Term");
-            }
-        }
-        
-        /// <remarks/>
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, Order=6)]
-        public bool AllOrNone {
-            get {
-                return this.allOrNoneField;
-            }
-            set {
-                this.allOrNoneField = value;
-                this.RaisePropertyChanged("AllOrNone");
+                this.accountNumberField = value;
+                this.RaisePropertyChanged("AccountNumber");
             }
         }
         
@@ -1531,6 +1511,111 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             if ((propertyChanged != null)) {
                 propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
             }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="PlaceOrder", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class PlaceOrderRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long BrokerageAccountId;
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=1)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams;
+        
+        public PlaceOrderRequest() {
+        }
+        
+        public PlaceOrderRequest(long BrokerageAccountId, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams) {
+            this.BrokerageAccountId = BrokerageAccountId;
+            this.OrderParams = OrderParams;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="PlaceOrderResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class PlaceOrderResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long OrderId;
+        
+        public PlaceOrderResponse() {
+        }
+        
+        public PlaceOrderResponse(long OrderId) {
+            this.OrderId = OrderId;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CancelOrder", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class CancelOrderRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long OrderId;
+        
+        public CancelOrderRequest() {
+        }
+        
+        public CancelOrderRequest(long OrderId) {
+            this.OrderId = OrderId;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CancelOrderResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class CancelOrderResponse {
+        
+        public CancelOrderResponse() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="OpenNewAccount", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class OpenNewAccountRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public string AccountName;
+        
+        public OpenNewAccountRequest() {
+        }
+        
+        public OpenNewAccountRequest(string AccountName) {
+            this.AccountName = AccountName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="OpenNewAccountResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class OpenNewAccountResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long AccountId;
+        
+        public OpenNewAccountResponse() {
+        }
+        
+        public OpenNewAccountResponse(long AccountId) {
+            this.AccountId = AccountId;
         }
     }
     
@@ -1686,75 +1771,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     public partial class TransferSecuritiesResponse {
         
         public TransferSecuritiesResponse() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PlaceOrder", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class PlaceOrderRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public long BrokerageAccountId;
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=1)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams;
-        
-        public PlaceOrderRequest() {
-        }
-        
-        public PlaceOrderRequest(long BrokerageAccountId, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams) {
-            this.BrokerageAccountId = BrokerageAccountId;
-            this.OrderParams = OrderParams;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="PlaceOrderResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class PlaceOrderResponse {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public long OrderId;
-        
-        public PlaceOrderResponse() {
-        }
-        
-        public PlaceOrderResponse(long OrderId) {
-            this.OrderId = OrderId;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CancelOrder", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class CancelOrderRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public long OrderId;
-        
-        public CancelOrderRequest() {
-        }
-        
-        public CancelOrderRequest(long OrderId) {
-            this.OrderId = OrderId;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CancelOrderResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class CancelOrderResponse {
-        
-        public CancelOrderResponse() {
         }
     }
     
@@ -1933,6 +1949,25 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    public partial class PlaceOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
+        
+        private object[] results;
+        
+        public PlaceOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
+                base(exception, cancelled, userState) {
+            this.results = results;
+        }
+        
+        public long Result {
+            get {
+                base.RaiseExceptionIfNecessary();
+                return ((long)(this.results[0]));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class OpenNewAccountCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
         
         private object[] results;
@@ -1957,25 +1992,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         private object[] results;
         
         public AddExternalAccountCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
-                base(exception, cancelled, userState) {
-            this.results = results;
-        }
-        
-        public long Result {
-            get {
-                base.RaiseExceptionIfNecessary();
-                return ((long)(this.results[0]));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class PlaceOrderCompletedEventArgs : System.ComponentModel.AsyncCompletedEventArgs {
-        
-        private object[] results;
-        
-        public PlaceOrderCompletedEventArgs(object[] results, System.Exception exception, bool cancelled, object userState) : 
                 base(exception, cancelled, userState) {
             this.results = results;
         }
@@ -2087,6 +2103,18 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class TradingWebServiceClient : System.ServiceModel.ClientBase<Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService>, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService {
         
+        private BeginOperationDelegate onBeginPlaceOrderDelegate;
+        
+        private EndOperationDelegate onEndPlaceOrderDelegate;
+        
+        private System.Threading.SendOrPostCallback onPlaceOrderCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginCancelOrderDelegate;
+        
+        private EndOperationDelegate onEndCancelOrderDelegate;
+        
+        private System.Threading.SendOrPostCallback onCancelOrderCompletedDelegate;
+        
         private BeginOperationDelegate onBeginOpenNewAccountDelegate;
         
         private EndOperationDelegate onEndOpenNewAccountDelegate;
@@ -2116,18 +2144,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         private EndOperationDelegate onEndTransferSecuritiesDelegate;
         
         private System.Threading.SendOrPostCallback onTransferSecuritiesCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginPlaceOrderDelegate;
-        
-        private EndOperationDelegate onEndPlaceOrderDelegate;
-        
-        private System.Threading.SendOrPostCallback onPlaceOrderCompletedDelegate;
-        
-        private BeginOperationDelegate onBeginCancelOrderDelegate;
-        
-        private EndOperationDelegate onEndCancelOrderDelegate;
-        
-        private System.Threading.SendOrPostCallback onCancelOrderCompletedDelegate;
         
         private BeginOperationDelegate onBeginGetBrokerageAccountSummariesDelegate;
         
@@ -2212,6 +2228,10 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             }
         }
         
+        public event System.EventHandler<PlaceOrderCompletedEventArgs> PlaceOrderCompleted;
+        
+        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CancelOrderCompleted;
+        
         public event System.EventHandler<OpenNewAccountCompletedEventArgs> OpenNewAccountCompleted;
         
         public event System.EventHandler<AddExternalAccountCompletedEventArgs> AddExternalAccountCompleted;
@@ -2221,10 +2241,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> TransferCashCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> TransferSecuritiesCompleted;
-        
-        public event System.EventHandler<PlaceOrderCompletedEventArgs> PlaceOrderCompleted;
-        
-        public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CancelOrderCompleted;
         
         public event System.EventHandler<GetBrokerageAccountSummariesCompletedEventArgs> GetBrokerageAccountSummariesCompleted;
         
@@ -2239,6 +2255,125 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginPlaceOrder(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginPlaceOrder(long BrokerageAccountId, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams, System.AsyncCallback callback, object asyncState) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest();
+            inValue.BrokerageAccountId = BrokerageAccountId;
+            inValue.OrderParams = OrderParams;
+            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginPlaceOrder(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndPlaceOrder(System.IAsyncResult result) {
+            return base.Channel.EndPlaceOrder(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private long EndPlaceOrder(System.IAsyncResult result) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndPlaceOrder(result);
+            return retVal.OrderId;
+        }
+        
+        private System.IAsyncResult OnBeginPlaceOrder(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            long BrokerageAccountId = ((long)(inValues[0]));
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams)(inValues[1]));
+            return this.BeginPlaceOrder(BrokerageAccountId, OrderParams, callback, asyncState);
+        }
+        
+        private object[] OnEndPlaceOrder(System.IAsyncResult result) {
+            long retVal = this.EndPlaceOrder(result);
+            return new object[] {
+                    retVal};
+        }
+        
+        private void OnPlaceOrderCompleted(object state) {
+            if ((this.PlaceOrderCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.PlaceOrderCompleted(this, new PlaceOrderCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void PlaceOrderAsync(long BrokerageAccountId, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams) {
+            this.PlaceOrderAsync(BrokerageAccountId, OrderParams, null);
+        }
+        
+        public void PlaceOrderAsync(long BrokerageAccountId, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams, object userState) {
+            if ((this.onBeginPlaceOrderDelegate == null)) {
+                this.onBeginPlaceOrderDelegate = new BeginOperationDelegate(this.OnBeginPlaceOrder);
+            }
+            if ((this.onEndPlaceOrderDelegate == null)) {
+                this.onEndPlaceOrderDelegate = new EndOperationDelegate(this.OnEndPlaceOrder);
+            }
+            if ((this.onPlaceOrderCompletedDelegate == null)) {
+                this.onPlaceOrderCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnPlaceOrderCompleted);
+            }
+            base.InvokeAsync(this.onBeginPlaceOrderDelegate, new object[] {
+                        BrokerageAccountId,
+                        OrderParams}, this.onEndPlaceOrderDelegate, this.onPlaceOrderCompletedDelegate, userState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCancelOrder(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginCancelOrder(long OrderId, System.AsyncCallback callback, object asyncState) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest();
+            inValue.OrderId = OrderId;
+            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginCancelOrder(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndCancelOrder(System.IAsyncResult result) {
+            return base.Channel.EndCancelOrder(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private void EndCancelOrder(System.IAsyncResult result) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndCancelOrder(result);
+        }
+        
+        private System.IAsyncResult OnBeginCancelOrder(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            long OrderId = ((long)(inValues[0]));
+            return this.BeginCancelOrder(OrderId, callback, asyncState);
+        }
+        
+        private object[] OnEndCancelOrder(System.IAsyncResult result) {
+            this.EndCancelOrder(result);
+            return null;
+        }
+        
+        private void OnCancelOrderCompleted(object state) {
+            if ((this.CancelOrderCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.CancelOrderCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void CancelOrderAsync(long OrderId) {
+            this.CancelOrderAsync(OrderId, null);
+        }
+        
+        public void CancelOrderAsync(long OrderId, object userState) {
+            if ((this.onBeginCancelOrderDelegate == null)) {
+                this.onBeginCancelOrderDelegate = new BeginOperationDelegate(this.OnBeginCancelOrder);
+            }
+            if ((this.onEndCancelOrderDelegate == null)) {
+                this.onEndCancelOrderDelegate = new EndOperationDelegate(this.OnEndCancelOrder);
+            }
+            if ((this.onCancelOrderCompletedDelegate == null)) {
+                this.onCancelOrderCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCancelOrderCompleted);
+            }
+            base.InvokeAsync(this.onBeginCancelOrderDelegate, new object[] {
+                        OrderId}, this.onEndCancelOrderDelegate, this.onCancelOrderCompletedDelegate, userState);
+        }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginOpenNewAccount(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OpenNewAccountRequest request, System.AsyncCallback callback, object asyncState) {
@@ -2548,125 +2683,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
                         PricePaidPerShare,
                         FromAccountId,
                         ToAccountId}, this.onEndTransferSecuritiesDelegate, this.onTransferSecuritiesCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginPlaceOrder(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private System.IAsyncResult BeginPlaceOrder(long BrokerageAccountId, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams, System.AsyncCallback callback, object asyncState) {
-            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest();
-            inValue.BrokerageAccountId = BrokerageAccountId;
-            inValue.OrderParams = OrderParams;
-            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginPlaceOrder(inValue, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndPlaceOrder(System.IAsyncResult result) {
-            return base.Channel.EndPlaceOrder(result);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private long EndPlaceOrder(System.IAsyncResult result) {
-            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndPlaceOrder(result);
-            return retVal.OrderId;
-        }
-        
-        private System.IAsyncResult OnBeginPlaceOrder(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            long BrokerageAccountId = ((long)(inValues[0]));
-            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams)(inValues[1]));
-            return this.BeginPlaceOrder(BrokerageAccountId, OrderParams, callback, asyncState);
-        }
-        
-        private object[] OnEndPlaceOrder(System.IAsyncResult result) {
-            long retVal = this.EndPlaceOrder(result);
-            return new object[] {
-                    retVal};
-        }
-        
-        private void OnPlaceOrderCompleted(object state) {
-            if ((this.PlaceOrderCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.PlaceOrderCompleted(this, new PlaceOrderCompletedEventArgs(e.Results, e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void PlaceOrderAsync(long BrokerageAccountId, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams) {
-            this.PlaceOrderAsync(BrokerageAccountId, OrderParams, null);
-        }
-        
-        public void PlaceOrderAsync(long BrokerageAccountId, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OrderParams OrderParams, object userState) {
-            if ((this.onBeginPlaceOrderDelegate == null)) {
-                this.onBeginPlaceOrderDelegate = new BeginOperationDelegate(this.OnBeginPlaceOrder);
-            }
-            if ((this.onEndPlaceOrderDelegate == null)) {
-                this.onEndPlaceOrderDelegate = new EndOperationDelegate(this.OnEndPlaceOrder);
-            }
-            if ((this.onPlaceOrderCompletedDelegate == null)) {
-                this.onPlaceOrderCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnPlaceOrderCompleted);
-            }
-            base.InvokeAsync(this.onBeginPlaceOrderDelegate, new object[] {
-                        BrokerageAccountId,
-                        OrderParams}, this.onEndPlaceOrderDelegate, this.onPlaceOrderCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginCancelOrder(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private System.IAsyncResult BeginCancelOrder(long OrderId, System.AsyncCallback callback, object asyncState) {
-            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest();
-            inValue.OrderId = OrderId;
-            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginCancelOrder(inValue, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndCancelOrder(System.IAsyncResult result) {
-            return base.Channel.EndCancelOrder(result);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private void EndCancelOrder(System.IAsyncResult result) {
-            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndCancelOrder(result);
-        }
-        
-        private System.IAsyncResult OnBeginCancelOrder(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            long OrderId = ((long)(inValues[0]));
-            return this.BeginCancelOrder(OrderId, callback, asyncState);
-        }
-        
-        private object[] OnEndCancelOrder(System.IAsyncResult result) {
-            this.EndCancelOrder(result);
-            return null;
-        }
-        
-        private void OnCancelOrderCompleted(object state) {
-            if ((this.CancelOrderCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.CancelOrderCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void CancelOrderAsync(long OrderId) {
-            this.CancelOrderAsync(OrderId, null);
-        }
-        
-        public void CancelOrderAsync(long OrderId, object userState) {
-            if ((this.onBeginCancelOrderDelegate == null)) {
-                this.onBeginCancelOrderDelegate = new BeginOperationDelegate(this.OnBeginCancelOrder);
-            }
-            if ((this.onEndCancelOrderDelegate == null)) {
-                this.onEndCancelOrderDelegate = new EndOperationDelegate(this.OnEndCancelOrder);
-            }
-            if ((this.onCancelOrderCompletedDelegate == null)) {
-                this.onCancelOrderCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCancelOrderCompleted);
-            }
-            base.InvokeAsync(this.onBeginCancelOrderDelegate, new object[] {
-                        OrderId}, this.onEndCancelOrderDelegate, this.onCancelOrderCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -3037,6 +3053,32 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
                     base(client) {
             }
             
+            public System.IAsyncResult BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("PlaceOrder", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse EndPlaceOrder(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse)(base.EndInvoke("PlaceOrder", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("CancelOrder", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse EndCancelOrder(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse)(base.EndInvoke("CancelOrder", _args, result)));
+                return _result;
+            }
+            
             public System.IAsyncResult BeginOpenNewAccount(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.OpenNewAccountRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
@@ -3099,32 +3141,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferSecuritiesResponse EndTransferSecurities(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferSecuritiesResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TransferSecuritiesResponse)(base.EndInvoke("TransferSecurities", _args, result)));
-                return _result;
-            }
-            
-            public System.IAsyncResult BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("PlaceOrder", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse EndPlaceOrder(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse)(base.EndInvoke("PlaceOrder", _args, result)));
-                return _result;
-            }
-            
-            public System.IAsyncResult BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("CancelOrder", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse EndCancelOrder(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse)(base.EndInvoke("CancelOrder", _args, result)));
                 return _result;
             }
             

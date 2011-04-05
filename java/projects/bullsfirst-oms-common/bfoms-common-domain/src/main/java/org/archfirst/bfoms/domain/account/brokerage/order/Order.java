@@ -48,6 +48,7 @@ import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.archfirst.common.quantity.DecimalQuantityMin;
+import org.hibernate.annotations.OptimisticLock;
 import org.hibernate.annotations.Parameter;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
@@ -78,6 +79,9 @@ public class Order extends DomainEntity implements Comparable<Order> {
 
     @XmlElement(name = "Quantity", required = true)
     private DecimalQuantity quantity;
+
+    @XmlElement(name = "CumQty", required = true)
+    private DecimalQuantity cumQty = DecimalQuantity.ZERO;
 
     @XmlElement(name = "OrderType", required = true)
     private OrderType type;
@@ -134,7 +138,12 @@ public class Order extends DomainEntity implements Comparable<Order> {
     // ----- Commands -----
     /**
      * Processes the specified execution report and returns a trade if the
-     * order is closed as the result of this execution report.
+     * order is closed and all of the execution reports have been received.
+     * Note that because of parallel processing of FIX messages it is
+     * possible to receive execution reports in a random order. To work around
+     * this issue, this method "closes" the order only if it is in a closed
+     * state (Filled, Canceled or DoneForDay) and the filled quantity recorded
+     * at close time is equal to the sum of quantities of the executions.
      * 
      * @param executionReport
      * @return a trade if the order is closed, otherwise null
@@ -143,15 +152,15 @@ public class Order extends DomainEntity implements Comparable<Order> {
             ExecutionReport executionReport,
             BrokerageAccountRepository accountRepository) {
         
-        // Check if status change is valid, i.e ExecutionReport is coming
-        // in the right sequence
+        // Record status if it is moving forward
         OrderStatus newStatus = executionReport.getOrderStatus();
-        if (isStatusChangeValid(newStatus)) {
+        if (isStatusChangeForward(newStatus)) {
             this.status = executionReport.getOrderStatus();
         }
-        else {
-            throw new IllegalArgumentException(
-                    "Can't change status from " + this.status + " to " + newStatus);
+
+        // Record CumQty if it is higher
+        if (executionReport.getCumQty().gt(this.cumQty)) {
+            this.cumQty = executionReport.getCumQty();
         }
 
         // If ExecutionReportType is Trade, then add an execution to this order
@@ -161,19 +170,11 @@ public class Order extends DomainEntity implements Comparable<Order> {
                             new DateTime(),
                             executionReport.getLastQty(),
                             executionReport.getLastPrice()));
-            // Check if leaves quantity is matching, i.e ExecutionReport is
-            // coming in the right sequence
-            if (!this.getLeavesQty().eq(executionReport.getLeavesQty())) {
-                throw new IllegalArgumentException(
-                        "Leaves quantity of " + this.getLeavesQty() +
-                        " does not match execution report quantity of " +
-                        executionReport.getLeavesQty());
-            }
         }
         
-        // If order is closed, return a trade
+        // If order is closed and all executions received, then return a trade
         Trade trade = null;
-        if (isClosed() && !executions.isEmpty()) {
+        if (isClosed() && (this.cumQty.eq(getCumQtyOfExecutions()))) {
             trade = new Trade(
                     new DateTime(),
                     this.side,
@@ -208,12 +209,12 @@ public class Order extends DomainEntity implements Comparable<Order> {
     }
     
     @Transient
-    public DecimalQuantity getCumQty() {
-        DecimalQuantity cumQty = new DecimalQuantity();
+    public DecimalQuantity getCumQtyOfExecutions() {
+        DecimalQuantity total = new DecimalQuantity();
         for (Execution execution : executions) {
-            cumQty = cumQty.plus(execution.getQuantity());
+            total = total.plus(execution.getQuantity());
         }
-        return cumQty; 
+        return total; 
     }
     
     @Transient
@@ -272,16 +273,6 @@ public class Order extends DomainEntity implements Comparable<Order> {
         return new OrderEstimate(estimatedValue, fees, estimatedValueInclFees);
     }
     
-    /** Returns true if this order is active (New or PartiallyFilled) */
-    @Transient
-    public boolean isActive() {
-        return
-            (status==OrderStatus.New) ||
-            (status==OrderStatus.PartiallyFilled) ||
-            (status==OrderStatus.PendingNew) ||
-            (status==OrderStatus.PendingCancel);
-    }
-
     /** Returns true if this order is closed (Filled, Canceled or DoneForDay) */
     @Transient
     public boolean isClosed() {
@@ -310,6 +301,46 @@ public class Order extends DomainEntity implements Comparable<Order> {
                 break;
             case PendingCancel:
                 if (newStatus==OrderStatus.Canceled)
+                    result=true;
+                break;
+            case Filled:
+            case Canceled:
+            case DoneForDay:
+            default:
+                break;
+        }
+        
+        return result;
+    }
+    
+    @Transient
+    private boolean isStatusChangeForward(OrderStatus newStatus) {
+        boolean result = false;
+        switch (this.status) {
+            case PendingNew:
+                if (newStatus==OrderStatus.New ||
+                    newStatus==OrderStatus.PartiallyFilled ||
+                    newStatus==OrderStatus.Filled ||
+                    newStatus==OrderStatus.PendingCancel ||
+                    newStatus==OrderStatus.Canceled ||
+                    newStatus==OrderStatus.DoneForDay)
+                    result=true;
+                break;
+            case New:
+            case PartiallyFilled:
+                if (newStatus==OrderStatus.PartiallyFilled ||
+                    newStatus==OrderStatus.Filled ||
+                    newStatus==OrderStatus.PendingCancel ||
+                    newStatus==OrderStatus.Canceled ||
+                    newStatus==OrderStatus.DoneForDay)
+                    result=true;
+                break;
+            case PendingCancel:
+                if (newStatus==OrderStatus.New ||
+                    newStatus==OrderStatus.PartiallyFilled ||
+                    newStatus==OrderStatus.Filled ||
+                    newStatus==OrderStatus.Canceled ||
+                    newStatus==OrderStatus.DoneForDay)
                     result=true;
                 break;
             case Filled:
@@ -399,6 +430,21 @@ public class Order extends DomainEntity implements Comparable<Order> {
     }
 
     @NotNull
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name="value",
+            column = @Column(
+                    name="cum_qty",
+                    precision=Constants.QUANTITY_PRECISION,
+                    scale=Constants.QUANTITY_SCALE))})
+    public DecimalQuantity getCumQty() {
+        return cumQty; 
+    }
+    public void setCumQty(DecimalQuantity cumQty) {
+        this.cumQty = cumQty;
+    }
+
+    @NotNull
     @Type(
         type = "org.archfirst.common.hibernate.GenericEnumUserType",
         parameters = {
@@ -485,6 +531,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
     }
     
     @OneToMany(mappedBy="order",  cascade=CascadeType.ALL)
+    @OptimisticLock(excluded = true)
     public Set<Execution> getExecutions() {
         return executions;
     }

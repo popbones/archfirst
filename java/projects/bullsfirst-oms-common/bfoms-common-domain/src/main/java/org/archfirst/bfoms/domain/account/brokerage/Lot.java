@@ -34,6 +34,7 @@ import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
+import org.hibernate.annotations.OptimisticLock;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 
@@ -163,6 +164,7 @@ public class Lot extends DomainEntity {
     }
 
     @OneToMany(mappedBy="lot",  cascade=CascadeType.ALL)
+    @OptimisticLock(excluded = true)
     public Set<Allocation> getAllocations() {
         return allocations;
     }
