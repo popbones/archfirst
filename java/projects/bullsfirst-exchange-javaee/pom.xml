@@ -82,18 +82,6 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.enterprise</groupId>
-                <artifactId>cdi-api</artifactId>
-                <version>1.0-SP1</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.jboss.ejb3</groupId>
-                <artifactId>jboss-ejb3-api</artifactId>
-                <version>3.1.0</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>${org.hibernate.version}</version>
@@ -207,6 +195,7 @@
         <module>bfexch-interfacein-oms</module>
         <module>bfexch-interfaceout-oms</module>
         <module>bfexch-javaee-web</module>
+        <module>bfexch-spec</module>
     </modules>
 
     <repositories>

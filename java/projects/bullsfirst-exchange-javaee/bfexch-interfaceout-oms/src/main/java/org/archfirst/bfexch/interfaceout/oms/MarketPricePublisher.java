@@ -25,7 +25,7 @@ import javax.jms.MessageProducer;
 import javax.jms.Session;
 
 import org.archfirst.bfexch.domain.marketdata.MarketPrice;
-import org.archfirst.bfexch.domain.matchingengine.MarketPriceChanged;
+import org.archfirst.bfexch.domain.marketdata.MarketPriceChanged;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
