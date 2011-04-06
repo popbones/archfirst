@@ -17,11 +17,12 @@ package org.archfirst.bfexch.domain.matchingengine;
 
 import java.util.List;
 
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
+import org.archfirst.bfexch.domain.marketdata.MarketDataEventPublisher;
 import org.archfirst.bfexch.domain.marketdata.MarketDataRepository;
 import org.archfirst.bfexch.domain.marketdata.MarketPrice;
+import org.archfirst.bfexch.domain.marketdata.MarketPriceChanged;
 import org.archfirst.bfexch.domain.order.Order;
 import org.archfirst.bfexch.domain.order.OrderService;
 import org.archfirst.bfexch.domain.order.OrderStatus;
@@ -44,9 +45,7 @@ public class MatchingEngine {
     
     @Inject private MarketDataRepository marketDataRepository;
     @Inject private OrderService orderService;
-
-    // ----- Events -----
-    @Inject private Event<MarketPriceChanged> marketPriceChangedEvent;
+    @Inject private MarketDataEventPublisher marketDataEventPublisher;
 
     // ----- Commands -----
     public void placeOrder(Order order) {
@@ -103,7 +102,7 @@ public class MatchingEngine {
         
         // If market price has changed are a result of this run, publish the new price
         if (!marketPrice.getPrice().eq(preMatchingPrice)) {
-            marketPriceChangedEvent.fire(new MarketPriceChanged(marketPrice));
+            marketDataEventPublisher.publish(new MarketPriceChanged(marketPrice));
         }
     }
     

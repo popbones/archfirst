@@ -17,12 +17,13 @@ package org.archfirst.bfexch.domain.order;
 
 import java.util.List;
 
-import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * OrderService
@@ -30,23 +31,19 @@ import org.joda.time.DateTime;
  * @author Naresh Bhatia
  */
 public class OrderService {
+    private static final Logger logger =
+        LoggerFactory.getLogger(OrderService.class);
 
     @Inject private OrderRepository orderRepository;
+    @Inject private OrderEventPublisher orderEventPublisher;
 
-    // ----- Events -----
-    @Inject private Event<OrderAccepted> orderAcceptedEvent;
-    @Inject private Event<OrderExecuted> orderExecutedEvent;
-    @Inject private Event<OrderCanceled> orderCanceledEvent;
-    @Inject private Event<OrderCancelRejected> orderCancelRejectedEvent;
-   
-    
     // ----- Commands -----
     /**
      * Sets order status to New and persists it.
      */
     public void acceptOrder(Order order) {
         order.accept(orderRepository);
-        orderAcceptedEvent.fire(new OrderAccepted(order));
+        orderEventPublisher.publish(new OrderAccepted(order));
     }
     
     /**
@@ -59,7 +56,7 @@ public class OrderService {
             Money price) {
         Execution execution =
             order.execute(orderRepository, executionTime, executionQty, price);
-        orderExecutedEvent.fire(new OrderExecuted(execution));
+        orderEventPublisher.publish(new OrderExecuted(execution));
     }
 
     /**
@@ -68,10 +65,19 @@ public class OrderService {
     public void cancelOrder(Order order) {
         order.cancel();
         if (order.getStatus() == OrderStatus.Canceled) {
-            orderCanceledEvent.fire(new OrderCanceled(order));
+            orderEventPublisher.publish(new OrderCanceled(order));
         }
         else {
-            orderCancelRejectedEvent.fire(new OrderCancelRejected(order));
+            orderEventPublisher.publish(new OrderCancelRejected(order));
+        }
+    }
+    
+    public void handleEndOfDay() {
+        logger.info("Processing market closed");
+        List<Order> orders = orderRepository.findActiveGfdOrders();
+        for (Order order : orders) {
+            order.doneForDay();
+            orderEventPublisher.publish(new OrderDoneForDay(order));
         }
     }
 
