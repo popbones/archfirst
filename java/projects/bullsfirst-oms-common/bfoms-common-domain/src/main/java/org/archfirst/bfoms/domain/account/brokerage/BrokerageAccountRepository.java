@@ -107,6 +107,8 @@ public class BrokerageAccountRepository extends BaseRepository {
     @SuppressWarnings("unchecked")
     public List<Order> findOrders(OrderCriteria criteria) {
 
+        // TODO: Modify this query to return executions in ascending order of id
+        
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Order> query = builder.createQuery(Order.class);
 
