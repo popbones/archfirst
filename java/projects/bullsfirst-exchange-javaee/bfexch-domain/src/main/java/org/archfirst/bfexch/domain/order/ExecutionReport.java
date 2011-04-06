@@ -87,6 +87,13 @@ public class ExecutionReport {
                 null);
     }
 
+    public static ExecutionReport createDoneForDayType(Order order) {
+        return new ExecutionReport(
+                ExecutionReportType.DoneForDay,
+                order,
+                null);
+    }
+
     // ----- Getters -----
     public ExecutionReportType getType() {
         return type;

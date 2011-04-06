@@ -172,9 +172,13 @@ public class Order extends DomainEntity implements Comparable<Order> {
                             executionReport.getLastPrice()));
         }
         
-        // If order is closed and all executions received, then return a trade
+        // If order is closed and all executions received and something was traded,
+        // then return a trade
         Trade trade = null;
-        if (isClosed() && (this.cumQty.eq(getCumQtyOfExecutions()))) {
+        if (isClosed() &&
+            (this.cumQty.eq(getCumQtyOfExecutions())) &&
+            (this.cumQty.gt(DecimalQuantity.ZERO))) {
+            
             trade = new Trade(
                     new DateTime(),
                     this.side,

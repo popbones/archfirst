@@ -210,8 +210,8 @@ public class BrokerageAccount extends BaseAccount {
         if (trade != null) {
             this.addTransaction(trade);
             if (trade.getSide() == OrderSide.Buy) {
-                cashPosition = cashPosition.minus(
-                        trade.getAmount().negate()); // trade.amount is negative
+                cashPosition = cashPosition.plus(
+                        trade.getAmount()); // trade.amount is negative
                 depositSecurities(
                         trade.getSymbol(),
                         trade.getQuantity(),

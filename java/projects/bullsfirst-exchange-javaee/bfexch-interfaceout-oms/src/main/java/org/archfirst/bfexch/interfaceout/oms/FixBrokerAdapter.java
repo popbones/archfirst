@@ -30,6 +30,7 @@ import org.archfirst.bfexch.domain.order.Order;
 import org.archfirst.bfexch.domain.order.OrderAccepted;
 import org.archfirst.bfexch.domain.order.OrderCancelRejected;
 import org.archfirst.bfexch.domain.order.OrderCanceled;
+import org.archfirst.bfexch.domain.order.OrderDoneForDay;
 import org.archfirst.bfexch.domain.order.OrderExecuted;
 import org.archfirst.bfexch.infra.fix.AvgPriceConverter;
 import org.archfirst.bfexch.infra.fix.ClOrdIDParser;
@@ -82,6 +83,10 @@ public class FixBrokerAdapter {
 
     public void onOrderCancelRejected(@Observes OrderCancelRejected event) {
         sendOrderCancelRejected(event.getOrder());
+    }
+
+    public void onOrderDoneForDay(@Observes OrderDoneForDay event) {
+        sendExecutionReport(ExecutionReport.createDoneForDayType(event.getOrder()));
     }
 
     private void sendExecutionReport(ExecutionReport executionReport) {

@@ -75,20 +75,9 @@ public class OrderService {
         }
     }
 
-    public void cancelActiveOrders() {
-        List<Order> orders = orderRepository.findActiveOrders();
-        for (Order order : orders) {
-            this.cancelOrder(order);
-        }
-    }
-
     // ----- Queries and Read-Only Operations -----
     public Order findOrderByClientOrderId(String clientOrderId) {
         return orderRepository.findOrderByClientOrderId(clientOrderId);
-    }
-
-    public List<Order> findActiveOrders() {
-        return orderRepository.findActiveOrders();
     }
 
     public List<Order> findActiveOrdersForInstrument(String symbol) {

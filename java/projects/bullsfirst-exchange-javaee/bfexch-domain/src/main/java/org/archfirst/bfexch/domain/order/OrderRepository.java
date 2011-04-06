@@ -35,11 +35,12 @@ public class OrderRepository extends BaseRepository {
         return order;
     }
 
-    public List<Order> findActiveOrders() {
+    public List<Order> findActiveGfdOrders() {
         @SuppressWarnings("unchecked")
         List<Order> orders = entityManager.createQuery(
                 "select ord from Order ord " +
-                "where ord.status in ('NEW', 'PARTFILD')")
+                "where ord.status in ('NEW', 'PARTFILD') " +
+                "and ord.term = 'GFD'")
             .getResultList();
         return orders;
     }

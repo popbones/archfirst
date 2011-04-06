@@ -156,6 +156,10 @@ public class Order extends DomainEntity implements Comparable<Order> {
             this.status = OrderStatus.Canceled;
         }
     }
+    
+    void doneForDay() {
+        this.status = OrderStatus.DoneForDay;
+    }
 
     // ----- Queries and Read-Only Operations -----
     @Transient

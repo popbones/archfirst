@@ -209,8 +209,7 @@ public class Trade extends Transaction {
     @Override
     @Transient
     public Money getAmount() {
-        Money transactionAmount = totalPrice.plus(fees);
         return (side==OrderSide.Sell) ?
-                transactionAmount : transactionAmount.negate();
+                totalPrice.minus(fees) : totalPrice.plus(fees).negate();
     }
 }
