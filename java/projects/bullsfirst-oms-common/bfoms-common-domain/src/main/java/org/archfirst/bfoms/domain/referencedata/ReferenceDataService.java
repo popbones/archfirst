@@ -20,6 +20,10 @@ import java.util.List;
 import java.util.Map;
 
 import javax.inject.Inject;
+import javax.inject.Singleton;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Provides security definition for all instruments. Keeps instruments in a
@@ -28,7 +32,10 @@ import javax.inject.Inject;
  *
  * @author Naresh Bhatia
  */
+@Singleton
 public class ReferenceDataService {
+    private static final Logger logger =
+        LoggerFactory.getLogger(ReferenceDataService.class);
 
     @Inject private ReferenceDataAdapter referenceDataAdapter;
     
@@ -45,6 +52,11 @@ public class ReferenceDataService {
 
     /** Map from symbol to Instrument. */
     private volatile Map<String, Instrument> instrumentMap;
+
+    // ----- Constructors -----
+    public ReferenceDataService() {
+        logger.debug("ReferenceDataService.ReferenceDataService()");
+    }
 
     // ----- Queries and Read-Only Operations -----
     public List<Instrument> getInstruments() {
