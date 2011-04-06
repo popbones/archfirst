@@ -143,9 +143,9 @@ namespace Bullsfirst.Module.TransactionHistory.ViewModels
 
         public void OnUserContextPropertyChanged(Object sender, PropertyChangedEventArgs e)
         {
-            // If selected account has changed then clear transactions because they are not relevant to the new account
+            // If selected account has changed then update transactions based on new account
             if (e.PropertyName.Equals("SelectedAccount"))
-                Transactions.Clear();
+                this.UpdateTransactions();
         }
 
         #endregion
