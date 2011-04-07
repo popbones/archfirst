@@ -34,6 +34,7 @@ import org.archfirst.bfexch.domain.order.OrderSide;
 import org.archfirst.bfexch.domain.order.OrderStatus;
 import org.archfirst.bfexch.domain.order.OrderTerm;
 import org.archfirst.bfexch.domain.order.OrderType;
+import org.archfirst.bfexch.spec.mocks.OrderEventRecorder;
 import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;

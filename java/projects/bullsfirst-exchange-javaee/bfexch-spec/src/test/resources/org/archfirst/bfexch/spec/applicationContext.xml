@@ -9,8 +9,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
 
-    <import resource="classpath*:org/archfirst/bullsfirst/domain/applicationContext.xml" />
-    <import resource="classpath*:org/archfirst/bullsfirst/infra/repository/jparepository/applicationContext.xml" />
+    <import resource="classpath*:org/archfirst/bfexch/domain/applicationContext.xml" />
 
     <!-- DataSource -->
     <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -40,8 +39,7 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <!-- MockBrokerAdapter -->
-    <bean id="brokerAdapter"
-        class="org.archfirst.bullsfirst.spec.matchingengine.MockBrokerAdapter" />
+    <bean class="org.archfirst.bfexch.spec.mocks.MockMarketDataEventPublisher" />
+    <bean class="org.archfirst.bfexch.spec.mocks.OrderEventRecorder" />
 
 </beans>

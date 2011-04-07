@@ -17,7 +17,9 @@
 
     <context:component-scan base-package="org.archfirst.bfexch.domain" />
 
-    <bean class="org.archfirst.bfexch.domain.referencedata.InstrumentRepository" />
-    <bean class="org.archfirst.bfexch.domain.referencedata.ReferenceDataService" />
+    <bean class="org.archfirst.bfexch.domain.marketdata.MarketDataRepository" />
+    <bean class="org.archfirst.bfexch.domain.matchingengine.MatchingEngine" />
+    <bean class="org.archfirst.bfexch.domain.order.OrderRepository" />
+    <bean class="org.archfirst.bfexch.domain.order.OrderService" />
 
 </beans>
