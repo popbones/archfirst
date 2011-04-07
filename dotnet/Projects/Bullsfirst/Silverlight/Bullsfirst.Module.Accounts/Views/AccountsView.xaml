@@ -84,8 +84,9 @@
 
         <StackPanel Grid.Row="2" Margin="0 20 0 0" Orientation="Horizontal">
             <Image Source="/Bullsfirst.Infrastructure;component/Images/bullet.jpg" Stretch="None" />
-            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}" Margin="0 0 4 0"
                 Content="New Account..."  Command="{Binding CreateAccountCommand}" />
+            <Button Content="Update" Style="{StaticResource FormButton}" Command="{Binding UpdateAccountsCommand}" />
             <TextBlock
                 Text="{Binding Path=StatusMessage}"
                 Margin="20 0 0 0"

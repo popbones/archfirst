@@ -20,6 +20,19 @@
         <Setter Property="Margin" Value="0 0 0 2" />
     </Style>
 
+    <!-- Toolbar Style -->
+    <Style x:Key="ToolbarStyle" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0 10 0 10" />
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <!-- AccountSelector Style -->
+    <Style x:Key="AccountSelectorStyle" TargetType="UserControl">
+        <Setter Property="Margin" Value="0 10 10 10" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
     <!-- HyperlinkButton Style -->
     <Style x:Key="HyperlinkButtonStyle" TargetType="HyperlinkButton">
         <Setter Property="Foreground" Value="Maroon" />

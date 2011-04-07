@@ -64,6 +64,7 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
             _eventAggregator.GetEvent<UserLoggedOutEvent>().Subscribe(OnUserLoggedOut, ThreadOption.UIThread, true);
             _eventAggregator.GetEvent<AccountCreatedEvent>().Subscribe(OnAccountCreated, ThreadOption.UIThread, true);
             _eventAggregator.GetEvent<AccountUpdatedEvent>().Subscribe(OnAccountUpdated, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<AllAccountsUpdateEvent>().Subscribe(OnAllAccountsUpdate, ThreadOption.UIThread, true);
         }
 
         #endregion
@@ -101,6 +102,11 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         }
 
         private void OnAccountUpdated(Empty empty)
+        {
+            UpdateAccountSummaries();
+        }
+
+        private void OnAllAccountsUpdate(Empty empty)
         {
             UpdateAccountSummaries();
         }

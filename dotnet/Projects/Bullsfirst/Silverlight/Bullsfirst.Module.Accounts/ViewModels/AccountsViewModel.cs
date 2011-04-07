@@ -53,6 +53,7 @@ namespace Bullsfirst.Module.Accounts.ViewModels
             _tradingService.ChangeAccountNameCompleted += new EventHandler<AsyncCompletedEventArgs>(ChangeAccountNameCallback);
             CreateAccountCommand = new DelegateCommand<object>(this.CreateAccountExecute);
             EditAccountCommand = new DelegateCommand<object>(this.EditAccountExecute);
+            UpdateAccountsCommand = new DelegateCommand<object>(this.UpdateAccountsExecute);
             SelectAccountCommand = new DelegateCommand<object>(this.SelectAccountExecute);
         }
 
@@ -133,6 +134,17 @@ namespace Bullsfirst.Module.Accounts.ViewModels
                 // Send AccountUpdatedEvent
                 _eventAggregator.GetEvent<AccountUpdatedEvent>().Publish(Empty.Value);
             }
+        }
+
+        #endregion
+
+        #region UpdateAccountsCommand
+
+        public DelegateCommand<object> UpdateAccountsCommand { get; set; }
+
+        private void UpdateAccountsExecute(object dummyObject)
+        {
+            _eventAggregator.GetEvent<AllAccountsUpdateEvent>().Publish(Empty.Value);
         }
 
         #endregion

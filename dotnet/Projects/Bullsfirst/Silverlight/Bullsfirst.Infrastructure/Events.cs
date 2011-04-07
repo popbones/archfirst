@@ -34,6 +34,11 @@ namespace Bullsfirst.Infrastructure
     {
     }
 
+    // Sent when user requests an update to all accounts
+    public class AllAccountsUpdateEvent : CompositePresentationEvent<Empty>
+    {
+    }
+
     public class OrderPlacedEvent : CompositePresentationEvent<Empty>
     {
     }

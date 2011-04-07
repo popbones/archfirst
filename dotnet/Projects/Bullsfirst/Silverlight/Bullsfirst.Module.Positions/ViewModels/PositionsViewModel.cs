@@ -14,6 +14,7 @@
  */
 using System;
 using System.ComponentModel.Composition;
+using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
@@ -47,6 +48,7 @@ namespace Bullsfirst.Module.Positions.ViewModels
 
             BuyCommand = new DelegateCommand<object>(this.CreateBuyOrderExecute);
             SellCommand = new DelegateCommand<object>(this.CreateSellOrderExecute);
+            UpdateAccountsCommand = new DelegateCommand<object>(this.UpdateAccountsExecute);
         }
 
         #endregion
@@ -80,6 +82,17 @@ namespace Bullsfirst.Module.Positions.ViewModels
             _regionManager.RequestNavigate(
                 RegionNames.LoggedInUserRegion,
                 new Uri(ViewNames.TradeView, UriKind.Relative));
+        }
+
+        #endregion
+
+        #region UpdateAccountsCommand
+
+        public DelegateCommand<object> UpdateAccountsCommand { get; set; }
+
+        private void UpdateAccountsExecute(object dummyObject)
+        {
+            _eventAggregator.GetEvent<AllAccountsUpdateEvent>().Publish(Empty.Value);
         }
 
         #endregion
