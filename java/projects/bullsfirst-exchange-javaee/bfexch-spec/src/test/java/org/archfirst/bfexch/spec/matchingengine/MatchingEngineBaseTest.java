@@ -23,7 +23,7 @@ import java.util.SortedSet;
 import javax.inject.Inject;
 
 import org.apache.commons.lang.StringUtils;
-import org.archfirst.bfexch.domain.marketdata.MarketDataRepository;
+import org.archfirst.bfexch.domain.marketdata.MarketDataService;
 import org.archfirst.bfexch.domain.marketdata.MarketPrice;
 import org.archfirst.bfexch.domain.matchingengine.MatchingEngine;
 import org.archfirst.bfexch.domain.order.ExecutionReport;
@@ -50,7 +50,7 @@ import org.testng.annotations.BeforeMethod;
 @ContextConfiguration(locations={"classpath:/org/archfirst/bfexch/spec/applicationContext.xml"})
 public abstract class MatchingEngineBaseTest extends AbstractTransactionalSpecTest {
 
-    @Inject private MarketDataRepository marketDataRepository;
+    @Inject private MarketDataService marketDataService;
     @Inject private MatchingEngine matchingEngine;
     @Inject private OrderService orderService;
     @Inject protected OrderEventRecorder eventRecorder;
@@ -60,6 +60,14 @@ public abstract class MatchingEngineBaseTest extends AbstractTransactionalSpecTe
         eventRecorder.clear();
     }
     
+    public void setupSymbol(String symbol) {
+        marketDataService.createMarketPrice(symbol, new Money("10.00"));
+    }
+
+    public void createMarketPrice(String symbol, String price) {
+        marketDataService.createMarketPrice(symbol, new Money(price));
+    }
+
     public void placeOrder(
             String creationTime,
             String clientOrderId,
@@ -84,11 +92,6 @@ public abstract class MatchingEngineBaseTest extends AbstractTransactionalSpecTe
             (StringUtils.equalsIgnoreCase(allOrNone, "Y")) ? true : false);
         
         matchingEngine.placeOrder(order);
-    }
-
-    public void setMarketPrice(String symbol, String price) {
-        MarketPrice marketPrice = marketDataRepository.findMarketPrice(symbol);
-        marketPrice.change(new Money(price));
     }
 
     public void clearExecutionReports() {
@@ -142,7 +145,7 @@ public abstract class MatchingEngineBaseTest extends AbstractTransactionalSpecTe
     }
     
     public BigDecimal getMarketPrice(String symbol) {
-        MarketPrice marketPrice = marketDataRepository.findMarketPrice(symbol);
+        MarketPrice marketPrice = marketDataService.getMarketPrice(symbol);
         return marketPrice.getPrice().getAmount();
     }
 

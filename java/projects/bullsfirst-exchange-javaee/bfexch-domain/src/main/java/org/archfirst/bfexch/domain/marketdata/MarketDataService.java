@@ -19,6 +19,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.archfirst.common.money.Money;
+import org.joda.time.DateTime;
+
 /**
  * MarketDataService
  *
@@ -34,5 +37,15 @@ public class MarketDataService {
 
     public MarketPrice getMarketPrice(String symbol) {
         return marketDataRepository.findMarketPrice(symbol);
+    }
+    
+    public void createMarketPrice(String symbol, Money price) {
+        marketDataRepository.persist(
+                new MarketPrice(symbol, price, new DateTime()));
+    }
+
+    public void changeMarketPrice(String symbol, Money price) {
+        MarketPrice marketPrice = marketDataRepository.findMarketPrice(symbol);
+        marketPrice.change(price);
     }
 }

@@ -16,9 +16,9 @@
 package org.archfirst.bfexch.spec.matchingengine;
 
 /**
- * MatchingAllOrNoneOrdersTest
+ * MatchingContinuationForAllOrNoneTest
  *
  * @author Naresh Bhatia
  */
-public class MatchingAllOrNoneOrdersTest extends MatchingEngineBaseTest {
+public class MatchingContinuationForAllOrNoneTest extends MatchingEngineBaseTest {
 }

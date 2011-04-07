@@ -18,6 +18,7 @@
     <context:component-scan base-package="org.archfirst.bfexch.domain" />
 
     <bean class="org.archfirst.bfexch.domain.marketdata.MarketDataRepository" />
+    <bean class="org.archfirst.bfexch.domain.marketdata.MarketDataService" />
     <bean class="org.archfirst.bfexch.domain.matchingengine.MatchingEngine" />
     <bean class="org.archfirst.bfexch.domain.order.OrderRepository" />
     <bean class="org.archfirst.bfexch.domain.order.OrderService" />
