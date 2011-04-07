@@ -156,10 +156,18 @@ namespace Bullsfirst.Module.Trade.ViewModels
                 Symbol = Symbol,
                 Quantity = Quantity,
                 Type = Type,
-                LimitPrice = MoneyFactory.Create(LimitPrice),
+                LimitPrice = getEffectiveLimitPrice(),
                 Term = Term,
                 AllOrNone = AllOrNone
             };
+        }
+
+        /// <summary>
+        /// Returns LimitPrice or null depending on order type
+        /// </summary>
+        private Money getEffectiveLimitPrice()
+        {
+            return (Type == OrderType.Market) ? null : MoneyFactory.Create(LimitPrice);
         }
 
         #endregion

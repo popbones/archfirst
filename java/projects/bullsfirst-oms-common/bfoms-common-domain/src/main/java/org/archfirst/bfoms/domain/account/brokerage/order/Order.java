@@ -86,7 +86,8 @@ public class Order extends DomainEntity implements Comparable<Order> {
     @XmlElement(name = "OrderType", required = true)
     private OrderType type;
 
-    @XmlElement(name = "LimitPrice", required = true)
+    // Limit price is not a required in case of market orders
+    @XmlElement(name = "LimitPrice")
     private Money limitPrice;
 
     @XmlElement(name = "Term", required = true)
@@ -130,7 +131,9 @@ public class Order extends DomainEntity implements Comparable<Order> {
         this.symbol = params.getSymbol();
         this.quantity = new DecimalQuantity(params.getQuantity());
         this.type = params.getType();
-        this.limitPrice = params.getLimitPrice();
+        if (this.type == OrderType.Limit) {
+            this.limitPrice = params.getLimitPrice();
+        }
         this.term = params.getTerm();
         this.allOrNone = params.isAllOrNone();
     }

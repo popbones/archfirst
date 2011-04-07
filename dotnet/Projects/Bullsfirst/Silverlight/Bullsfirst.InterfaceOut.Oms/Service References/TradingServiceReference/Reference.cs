@@ -23,6 +23,13 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", ConfigurationName="TradingServiceReference.TradingWebService")]
     public interface TradingWebService {
         
+        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="CancelOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderRespo" +
+            "nse")]
+        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
+        System.IAsyncResult BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState);
+        
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse EndCancelOrder(System.IAsyncResult result);
+        
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="PlaceOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/PlaceOrderRespon" +
             "se")]
         [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
@@ -31,15 +38,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         System.IAsyncResult BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse EndPlaceOrder(System.IAsyncResult result);
-        
-        [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="CancelOrder", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/CancelOrderRespo" +
-            "nse")]
-        [System.ServiceModel.XmlSerializerFormatAttribute(SupportFaults=true)]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(DomainEntity))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(BaseAccountSummary))]
-        System.IAsyncResult BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState);
-        
-        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse EndCancelOrder(System.IAsyncResult result);
         
         [System.ServiceModel.OperationContractAttribute(AsyncPattern=true, Action="OpenNewAccount", ReplyAction="http://archfirst.org/bfoms/tradingservice.wsdl/TradingWebService/OpenNewAccountRe" +
             "sponse")]
@@ -130,6 +128,34 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         System.IAsyncResult BeginGetTransactionSummaries(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesRequest request, System.AsyncCallback callback, object asyncState);
         
         Bullsfirst.InterfaceOut.Oms.TradingServiceReference.GetTransactionSummariesResponse EndGetTransactionSummaries(System.IAsyncResult result);
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CancelOrder", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class CancelOrderRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long OrderId;
+        
+        public CancelOrderRequest() {
+        }
+        
+        public CancelOrderRequest(long OrderId) {
+            this.OrderId = OrderId;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(WrapperName="CancelOrderResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
+    public partial class CancelOrderResponse {
+        
+        public CancelOrderResponse() {
+        }
     }
     
     /// <remarks/>
@@ -1558,34 +1584,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CancelOrder", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class CancelOrderRequest {
-        
-        [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://archfirst.org/bfoms/tradingservice.wsdl", Order=0)]
-        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
-        public long OrderId;
-        
-        public CancelOrderRequest() {
-        }
-        
-        public CancelOrderRequest(long OrderId) {
-            this.OrderId = OrderId;
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.ServiceModel.MessageContractAttribute(WrapperName="CancelOrderResponse", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
-    public partial class CancelOrderResponse {
-        
-        public CancelOrderResponse() {
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(WrapperName="OpenNewAccount", WrapperNamespace="http://archfirst.org/bfoms/tradingservice.wsdl", IsWrapped=true)]
     public partial class OpenNewAccountRequest {
         
@@ -2103,17 +2101,17 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public partial class TradingWebServiceClient : System.ServiceModel.ClientBase<Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService>, Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService {
         
-        private BeginOperationDelegate onBeginPlaceOrderDelegate;
-        
-        private EndOperationDelegate onEndPlaceOrderDelegate;
-        
-        private System.Threading.SendOrPostCallback onPlaceOrderCompletedDelegate;
-        
         private BeginOperationDelegate onBeginCancelOrderDelegate;
         
         private EndOperationDelegate onEndCancelOrderDelegate;
         
         private System.Threading.SendOrPostCallback onCancelOrderCompletedDelegate;
+        
+        private BeginOperationDelegate onBeginPlaceOrderDelegate;
+        
+        private EndOperationDelegate onEndPlaceOrderDelegate;
+        
+        private System.Threading.SendOrPostCallback onPlaceOrderCompletedDelegate;
         
         private BeginOperationDelegate onBeginOpenNewAccountDelegate;
         
@@ -2228,9 +2226,9 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             }
         }
         
-        public event System.EventHandler<PlaceOrderCompletedEventArgs> PlaceOrderCompleted;
-        
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CancelOrderCompleted;
+        
+        public event System.EventHandler<PlaceOrderCompletedEventArgs> PlaceOrderCompleted;
         
         public event System.EventHandler<OpenNewAccountCompletedEventArgs> OpenNewAccountCompleted;
         
@@ -2255,6 +2253,63 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> OpenCompleted;
         
         public event System.EventHandler<System.ComponentModel.AsyncCompletedEventArgs> CloseCompleted;
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState) {
+            return base.Channel.BeginCancelOrder(request, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private System.IAsyncResult BeginCancelOrder(long OrderId, System.AsyncCallback callback, object asyncState) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest();
+            inValue.OrderId = OrderId;
+            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginCancelOrder(inValue, callback, asyncState);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndCancelOrder(System.IAsyncResult result) {
+            return base.Channel.EndCancelOrder(result);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        private void EndCancelOrder(System.IAsyncResult result) {
+            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndCancelOrder(result);
+        }
+        
+        private System.IAsyncResult OnBeginCancelOrder(object[] inValues, System.AsyncCallback callback, object asyncState) {
+            long OrderId = ((long)(inValues[0]));
+            return this.BeginCancelOrder(OrderId, callback, asyncState);
+        }
+        
+        private object[] OnEndCancelOrder(System.IAsyncResult result) {
+            this.EndCancelOrder(result);
+            return null;
+        }
+        
+        private void OnCancelOrderCompleted(object state) {
+            if ((this.CancelOrderCompleted != null)) {
+                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
+                this.CancelOrderCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
+            }
+        }
+        
+        public void CancelOrderAsync(long OrderId) {
+            this.CancelOrderAsync(OrderId, null);
+        }
+        
+        public void CancelOrderAsync(long OrderId, object userState) {
+            if ((this.onBeginCancelOrderDelegate == null)) {
+                this.onBeginCancelOrderDelegate = new BeginOperationDelegate(this.OnBeginCancelOrder);
+            }
+            if ((this.onEndCancelOrderDelegate == null)) {
+                this.onEndCancelOrderDelegate = new EndOperationDelegate(this.OnEndCancelOrder);
+            }
+            if ((this.onCancelOrderCompletedDelegate == null)) {
+                this.onCancelOrderCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCancelOrderCompleted);
+            }
+            base.InvokeAsync(this.onBeginCancelOrderDelegate, new object[] {
+                        OrderId}, this.onEndCancelOrderDelegate, this.onCancelOrderCompletedDelegate, userState);
+        }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState) {
@@ -2316,63 +2371,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             base.InvokeAsync(this.onBeginPlaceOrderDelegate, new object[] {
                         BrokerageAccountId,
                         OrderParams}, this.onEndPlaceOrderDelegate, this.onPlaceOrderCompletedDelegate, userState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.IAsyncResult Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState) {
-            return base.Channel.BeginCancelOrder(request, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private System.IAsyncResult BeginCancelOrder(long OrderId, System.AsyncCallback callback, object asyncState) {
-            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest inValue = new Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest();
-            inValue.OrderId = OrderId;
-            return ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).BeginCancelOrder(inValue, callback, asyncState);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService.EndCancelOrder(System.IAsyncResult result) {
-            return base.Channel.EndCancelOrder(result);
-        }
-        
-        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        private void EndCancelOrder(System.IAsyncResult result) {
-            Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse retVal = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.TradingWebService)(this)).EndCancelOrder(result);
-        }
-        
-        private System.IAsyncResult OnBeginCancelOrder(object[] inValues, System.AsyncCallback callback, object asyncState) {
-            long OrderId = ((long)(inValues[0]));
-            return this.BeginCancelOrder(OrderId, callback, asyncState);
-        }
-        
-        private object[] OnEndCancelOrder(System.IAsyncResult result) {
-            this.EndCancelOrder(result);
-            return null;
-        }
-        
-        private void OnCancelOrderCompleted(object state) {
-            if ((this.CancelOrderCompleted != null)) {
-                InvokeAsyncCompletedEventArgs e = ((InvokeAsyncCompletedEventArgs)(state));
-                this.CancelOrderCompleted(this, new System.ComponentModel.AsyncCompletedEventArgs(e.Error, e.Cancelled, e.UserState));
-            }
-        }
-        
-        public void CancelOrderAsync(long OrderId) {
-            this.CancelOrderAsync(OrderId, null);
-        }
-        
-        public void CancelOrderAsync(long OrderId, object userState) {
-            if ((this.onBeginCancelOrderDelegate == null)) {
-                this.onBeginCancelOrderDelegate = new BeginOperationDelegate(this.OnBeginCancelOrder);
-            }
-            if ((this.onEndCancelOrderDelegate == null)) {
-                this.onEndCancelOrderDelegate = new EndOperationDelegate(this.OnEndCancelOrder);
-            }
-            if ((this.onCancelOrderCompletedDelegate == null)) {
-                this.onCancelOrderCompletedDelegate = new System.Threading.SendOrPostCallback(this.OnCancelOrderCompleted);
-            }
-            base.InvokeAsync(this.onBeginCancelOrderDelegate, new object[] {
-                        OrderId}, this.onEndCancelOrderDelegate, this.onCancelOrderCompletedDelegate, userState);
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
@@ -3053,19 +3051,6 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
                     base(client) {
             }
             
-            public System.IAsyncResult BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState) {
-                object[] _args = new object[1];
-                _args[0] = request;
-                System.IAsyncResult _result = base.BeginInvoke("PlaceOrder", _args, callback, asyncState);
-                return _result;
-            }
-            
-            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse EndPlaceOrder(System.IAsyncResult result) {
-                object[] _args = new object[0];
-                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse)(base.EndInvoke("PlaceOrder", _args, result)));
-                return _result;
-            }
-            
             public System.IAsyncResult BeginCancelOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderRequest request, System.AsyncCallback callback, object asyncState) {
                 object[] _args = new object[1];
                 _args[0] = request;
@@ -3076,6 +3061,19 @@ namespace Bullsfirst.InterfaceOut.Oms.TradingServiceReference {
             public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse EndCancelOrder(System.IAsyncResult result) {
                 object[] _args = new object[0];
                 Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.CancelOrderResponse)(base.EndInvoke("CancelOrder", _args, result)));
+                return _result;
+            }
+            
+            public System.IAsyncResult BeginPlaceOrder(Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderRequest request, System.AsyncCallback callback, object asyncState) {
+                object[] _args = new object[1];
+                _args[0] = request;
+                System.IAsyncResult _result = base.BeginInvoke("PlaceOrder", _args, callback, asyncState);
+                return _result;
+            }
+            
+            public Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse EndPlaceOrder(System.IAsyncResult result) {
+                object[] _args = new object[0];
+                Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse _result = ((Bullsfirst.InterfaceOut.Oms.TradingServiceReference.PlaceOrderResponse)(base.EndInvoke("PlaceOrder", _args, result)));
                 return _result;
             }
             

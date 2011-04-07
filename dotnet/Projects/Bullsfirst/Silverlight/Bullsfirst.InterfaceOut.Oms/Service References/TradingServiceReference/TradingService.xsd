@@ -97,7 +97,7 @@
           <xs:element name="Quantity" type="xs:decimal" />
           <xs:element name="CumQty" type="xs:decimal" />
           <xs:element name="OrderType" type="tns:OrderType" />
-          <xs:element name="LimitPrice" type="tns:Money" />
+          <xs:element minOccurs="0" name="LimitPrice" type="tns:Money" />
           <xs:element name="Term" type="tns:OrderTerm" />
           <xs:element name="AllOrNone" type="xs:boolean" />
           <xs:element name="OrderStatus" type="tns:OrderStatus" />
