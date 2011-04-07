@@ -86,6 +86,10 @@ namespace Bullsfirst.Module.Orders.ViewModels
 
         private void UpdateOrders()
         {
+            // Protect against SelectedAccount being null
+            if (this.UserContext.SelectedAccount == null)
+                return;
+
             OrderCriteria criteria = new OrderCriteria
             {
                 AccountIdSpecified = true,

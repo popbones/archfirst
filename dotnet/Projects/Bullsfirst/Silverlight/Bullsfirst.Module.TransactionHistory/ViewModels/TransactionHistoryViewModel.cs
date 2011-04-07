@@ -79,6 +79,10 @@ namespace Bullsfirst.Module.TransactionHistory.ViewModels
 
         private void UpdateTransactions()
         {
+            // Protect against SelectedAccount being null
+            if (this.UserContext.SelectedAccount == null)
+                return;
+
             TransactionCriteria criteria = new TransactionCriteria
             {
                 AccountIdSpecified = true,
