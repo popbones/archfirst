@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System.Collections.Specialized;
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows.Controls;
@@ -27,6 +28,8 @@ namespace Bullsfirst.Module.Accounts.Views
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class AccountsView : UserControl
     {
+        #region Construction
+
         /// <summary>
         /// Importing constructor is the easiest way to add the ViewModel as a resource.
         /// This is needed to fire commands from the DataGridTemplateColumn in the XAML
@@ -40,8 +43,25 @@ namespace Bullsfirst.Module.Accounts.Views
             this.Resources.Add("ViewModel", viewModel);
             InitializeComponent();
 
+            // Detect changes to BrokerageAccountSummaries
+            viewModel.getUserContext().BrokerageAccountSummaries.CollectionChanged +=
+                new NotifyCollectionChangedEventHandler(BrokerageAccountSummariesChanged);
+
             ShowAccountsChart();
         }
+
+        /// <summary>
+        /// Detects changes to BrokerageAccountSummaries and reverts to AccountsChart
+        /// </summary>
+        private void BrokerageAccountSummariesChanged(object sender, NotifyCollectionChangedEventArgs e)
+        {
+            if (!_isShowingAccountsChart)
+                ShowAccountsChart();
+        }
+
+        #endregion
+
+        #region ShowAccountsChart
 
         private void ShowAccountsChart()
         {
@@ -57,6 +77,7 @@ namespace Bullsfirst.Module.Accounts.Views
             accountsChart.Title = "All Accounts";
             accountsChart.Series.Clear();
             accountsChart.Series.Add(pieSeries);
+            _isShowingAccountsChart = true;
         }
 
         void AccountSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,6 +86,10 @@ namespace Bullsfirst.Module.Accounts.Views
             BrokerageAccountSummary accountSummary = (BrokerageAccountSummary)(series.SelectedItem);
             ShowPositionsChart(accountSummary);
         }
+
+        #endregion
+
+        #region ShowPositionsChart
 
         void ShowPositionsChart(BrokerageAccountSummary accountSummary)
         {
@@ -80,11 +105,20 @@ namespace Bullsfirst.Module.Accounts.Views
             accountsChart.Title = accountSummary.Name;
             accountsChart.Series.Clear();
             accountsChart.Series.Add(pieSeries);
+            _isShowingAccountsChart = false;
         }
 
         void PositionSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ShowAccountsChart();
         }
+
+        #endregion
+        
+        #region Members
+
+        private bool _isShowingAccountsChart;
+
+        #endregion
     }
 }
