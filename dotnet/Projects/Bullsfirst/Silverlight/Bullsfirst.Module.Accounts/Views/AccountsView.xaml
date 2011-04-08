@@ -8,7 +8,7 @@
     xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
     mc:Ignorable="d"
     d:DesignHeight="500" d:DesignWidth="950">
-
+    
     <Grid x:Name="LayoutRoot" Background="White" Margin="20 10 20 10">
 
         <Grid.RowDefinitions>
@@ -23,8 +23,8 @@
 
         <TextBlock Grid.Row="0" Text="Accounts" Style="{StaticResource Header1}" />
 
-        <sdk:DataGrid
-            Grid.Row="1"
+        <StackPanel Grid.Row="1" Orientation="Horizontal">
+            <sdk:DataGrid
             ItemsSource="{Binding Path=UserContext.BrokerageAccountSummaries}"
             AutoGenerateColumns="False"
             HorizontalAlignment="Left"
@@ -33,54 +33,67 @@
             Style="{StaticResource DataGridStyle}"
             ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
             RowStyle="{StaticResource DataGridRowStyle}">
-            <sdk:DataGrid.Columns>
-                <sdk:DataGridTemplateColumn
+                <sdk:DataGrid.Columns>
+                    <sdk:DataGridTemplateColumn
                     Header="Name"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource LeftAlignedCellStyle}"
                     SortMemberPath="Name">
-                    <sdk:DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
-                                Content="{Binding Path=Name}"
-                                Command="{Binding SelectAccountCommand, Source={StaticResource ViewModel}}"
-                                CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </sdk:DataGridTemplateColumn.CellTemplate>
-                </sdk:DataGridTemplateColumn>
-                <sdk:DataGridTextColumn
-                    Header="Account #"
-                    Binding="{Binding Path=Id}"
-                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
-                    CellStyle="{StaticResource RightAlignedCellStyle}" />
-                <sdk:DataGridTextColumn
-                    Header="Market Value"
-                    Binding="{Binding Path=MarketValue, Converter={StaticResource MoneyConverter}}"
-                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
-                    CellStyle="{StaticResource RightAlignedCellStyle}"
-                    SortMemberPath="MarketValue.Amount" />
-                <sdk:DataGridTextColumn
-                    Header="Cash"
-                    Binding="{Binding Path=CashPosition, Converter={StaticResource MoneyConverter}}"
-                    HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
-                    CellStyle="{StaticResource RightAlignedCellStyle}"
-                    SortMemberPath="CashPosition.Amount" />
-                <sdk:DataGridTemplateColumn
-                    Header="Actions"
-                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
-                    CellStyle="{StaticResource CenterAlignedCellStyle}">
-                    <sdk:DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
-                                Content="Edit"
-                                Visibility="{Binding Path=EditPermission, Converter={StaticResource Bool2VisibilityConverter}}"
-                                Command="{Binding EditAccountCommand, Source={StaticResource ViewModel}}"
-                                CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </sdk:DataGridTemplateColumn.CellTemplate>
-                </sdk:DataGridTemplateColumn>
-            </sdk:DataGrid.Columns>
-        </sdk:DataGrid>
+                        <sdk:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                                    Content="{Binding Path=Name}"
+                                    Command="{Binding SelectAccountCommand, Source={StaticResource ViewModel}}"
+                                    CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </sdk:DataGridTemplateColumn.CellTemplate>
+                    </sdk:DataGridTemplateColumn>
+                    <sdk:DataGridTextColumn
+                        Header="Account #"
+                        Binding="{Binding Path=Id}"
+                        HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
+                        CellStyle="{StaticResource RightAlignedCellStyle}" />
+                    <sdk:DataGridTextColumn
+                        Header="Market Value"
+                        Binding="{Binding Path=MarketValue, Converter={StaticResource MoneyConverter}}"
+                        HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
+                        CellStyle="{StaticResource RightAlignedCellStyle}"
+                        SortMemberPath="MarketValue.Amount" />
+                    <sdk:DataGridTextColumn
+                        Header="Cash"
+                        Binding="{Binding Path=CashPosition, Converter={StaticResource MoneyConverter}}"
+                        HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
+                        CellStyle="{StaticResource RightAlignedCellStyle}"
+                        SortMemberPath="CashPosition.Amount" />
+                    <sdk:DataGridTemplateColumn
+                        Header="Actions"
+                        HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                        CellStyle="{StaticResource CenterAlignedCellStyle}">
+                            <sdk:DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                                        Content="Edit"
+                                        Visibility="{Binding Path=EditPermission, Converter={StaticResource Bool2VisibilityConverter}}"
+                                        Command="{Binding EditAccountCommand, Source={StaticResource ViewModel}}"
+                                        CommandParameter="{Binding}" />
+                                </DataTemplate>
+                            </sdk:DataGridTemplateColumn.CellTemplate>
+                    </sdk:DataGridTemplateColumn>
+                </sdk:DataGrid.Columns>
+            </sdk:DataGrid>
+
+            <toolkit:Chart x:Name="accountsChart"
+                Margin="50 0 0 0" Height="300" Width="400">
+
+                <toolkit:Chart.TitleStyle>
+                    <Style TargetType="toolkit:Title">
+                        <Setter Property="FontSize" Value="20" />
+                    </Style>
+                </toolkit:Chart.TitleStyle>
+
+            </toolkit:Chart>
+
+        </StackPanel>
 
         <StackPanel Grid.Row="2" Margin="0 20 0 0" Orientation="Horizontal">
             <Image Source="/Bullsfirst.Infrastructure;component/Images/bullet.jpg" Stretch="None" />

@@ -59,6 +59,15 @@ namespace Bullsfirst.Module.Accounts.ViewModels
 
         #endregion
 
+        #region IAccountsViewModel
+
+        public UserContext getUserContext()
+        {
+            return UserContext;
+        }
+
+        #endregion
+
         #region CreateAccountCommand
 
         public DelegateCommand<object> CreateAccountCommand { get; set; }

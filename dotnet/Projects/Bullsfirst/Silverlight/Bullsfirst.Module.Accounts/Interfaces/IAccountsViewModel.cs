@@ -12,10 +12,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using Bullsfirst.InterfaceOut.Oms.Domain;
 
 namespace Bullsfirst.Module.Accounts.Interfaces
 {
     public interface IAccountsViewModel
     {
+        UserContext getUserContext();
     }
 }

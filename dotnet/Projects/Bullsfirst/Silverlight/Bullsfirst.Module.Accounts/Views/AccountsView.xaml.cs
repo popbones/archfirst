@@ -15,7 +15,10 @@
 using System.ComponentModel.Composition;
 using System.Diagnostics;
 using System.Windows.Controls;
+using System.Windows.Controls.DataVisualization.Charting;
+using System.Windows.Data;
 using Archfirst.Framework.PrismHelpers;
+using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Accounts.Interfaces;
 
 namespace Bullsfirst.Module.Accounts.Views
@@ -36,6 +39,52 @@ namespace Bullsfirst.Module.Accounts.Views
             this.DataContext = viewModel;
             this.Resources.Add("ViewModel", viewModel);
             InitializeComponent();
+
+            ShowAccountsChart();
+        }
+
+        private void ShowAccountsChart()
+        {
+            // Create the pie series associated with accounts
+            PieSeries pieSeries = new PieSeries();
+            pieSeries.ItemsSource = ((IAccountsViewModel)this.DataContext).getUserContext().BrokerageAccountSummaries;
+            pieSeries.IndependentValueBinding = new Binding("Name");
+            pieSeries.DependentValueBinding = new Binding("MarketValue.Amount");
+            pieSeries.IsSelectionEnabled = true;
+            pieSeries.SelectionChanged += new SelectionChangedEventHandler(AccountSelectionChanged);
+
+            // Initialies the chart
+            accountsChart.Title = "All Accounts";
+            accountsChart.Series.Clear();
+            accountsChart.Series.Add(pieSeries);
+        }
+
+        void AccountSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            PieSeries series = (PieSeries)(accountsChart.Series[0]);
+            BrokerageAccountSummary accountSummary = (BrokerageAccountSummary)(series.SelectedItem);
+            ShowPositionsChart(accountSummary);
+        }
+
+        void ShowPositionsChart(BrokerageAccountSummary accountSummary)
+        {
+            // Create the pie series associated with positions
+            PieSeries pieSeries = new PieSeries();
+            pieSeries.ItemsSource = accountSummary.Position;
+            pieSeries.IndependentValueBinding = new Binding("InstrumentSymbol");
+            pieSeries.DependentValueBinding = new Binding("MarketValue.Amount");
+            pieSeries.IsSelectionEnabled = true;
+            pieSeries.SelectionChanged += new SelectionChangedEventHandler(PositionSelectionChanged);
+
+            // Initialies the chart
+            accountsChart.Title = accountSummary.Name;
+            accountsChart.Series.Clear();
+            accountsChart.Series.Add(pieSeries);
+        }
+
+        void PositionSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ShowAccountsChart();
         }
     }
 }
