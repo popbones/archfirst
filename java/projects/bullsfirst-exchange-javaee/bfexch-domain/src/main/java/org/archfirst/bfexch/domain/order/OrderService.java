@@ -73,7 +73,7 @@ public class OrderService {
     }
     
     public void handleEndOfDay() {
-        logger.info("Processing market closed");
+        logger.info("Processing end of day event");
         List<Order> orders = orderRepository.findActiveGfdOrders();
         for (Order order : orders) {
             order.doneForDay();
