@@ -28,7 +28,8 @@
             <StackPanel Style="{StaticResource FormRow}">
                 <sdk:Label Content="First Name" Target="{Binding ElementName=firstName}" Style="{StaticResource WideFormLabel}" />
                 <TextBox x:Name="firstName" Style="{StaticResource WideFormTextBox}"
-                    Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
                         <helpers:TextChangedBahvior />
                     </i:Interaction.Behaviors>
@@ -38,7 +39,8 @@
             <StackPanel Style="{StaticResource FormRow}">
                 <sdk:Label Content="Last Name" Target="{Binding ElementName=lastName}" Style="{StaticResource WideFormLabel}" />
                 <TextBox x:Name="lastName" Style="{StaticResource WideFormTextBox}"
-                    Text="{Binding Path=LastName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    Text="{Binding Path=LastName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
                         <helpers:TextChangedBahvior />
                     </i:Interaction.Behaviors>
@@ -48,7 +50,8 @@
             <StackPanel Style="{StaticResource FormRow}">
                 <sdk:Label Content="Username" Target="{Binding ElementName=username}" Style="{StaticResource WideFormLabel}" />
                 <TextBox x:Name="username" Style="{StaticResource WideFormTextBox}"
-                    Text="{Binding Path=Username, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    Text="{Binding Path=Username, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
                         <helpers:TextChangedBahvior />
                     </i:Interaction.Behaviors>
@@ -58,7 +61,8 @@
             <StackPanel Style="{StaticResource FormRow}">
                 <sdk:Label Content="Password" Target="{Binding ElementName=password}" Style="{StaticResource WideFormLabel}" />
                 <PasswordBox x:Name="password" Style="{StaticResource WideFormPasswordBox}"
-                    Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
                         <helpers:PasswordChangedBahvior />
                     </i:Interaction.Behaviors>
@@ -68,7 +72,8 @@
             <StackPanel Style="{StaticResource FormRow}">
                 <sdk:Label Content="Confirm Password" Target="{Binding ElementName=confirmPassword}" Style="{StaticResource WideFormLabel}" />
                 <PasswordBox x:Name="confirmPassword" Style="{StaticResource WideFormPasswordBox}"
-                    Password="{Binding Path=ConfirmPassword, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                    Password="{Binding Path=ConfirmPassword, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                    helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
                         <helpers:PasswordChangedBahvior />
                     </i:Interaction.Behaviors>
@@ -77,7 +82,7 @@
 
             <StackPanel Style="{StaticResource TallFormRow}">
                 <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
-                <Button Content="Open Account" Style="{StaticResource FormButton}" Command="{Binding OpenAccountCommand}" />
+                <Button x:Name="openAccountButton" Content="Open Account" Style="{StaticResource FormButton}" Command="{Binding OpenAccountCommand}" />
                 <Button Content="Cancel" Style="{StaticResource FormButton}" Command="{Binding CancelCommand}" />
             </StackPanel>
 

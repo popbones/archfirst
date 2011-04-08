@@ -26,7 +26,8 @@
             Grid.Row="1"
             x:Name="accountNameTextBox"
             Style="{StaticResource NarrowFormTextBox}" HorizontalAlignment="Stretch" Width="auto"
-            Text="{Binding Path=AccountName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding Path=AccountName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+            helpers:DefaultButtonService.DefaultButton="{Binding ElementName=okButton}">
             <i:Interaction.Behaviors>
                 <helpers:TextChangedBahvior />
             </i:Interaction.Behaviors>
@@ -34,6 +35,7 @@
 
         <Button
             Grid.Row="2"
+            x:Name="okButton"
             Content="OK"
             Command="{Binding CreateAccountCommand}"
             Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,79,0" />

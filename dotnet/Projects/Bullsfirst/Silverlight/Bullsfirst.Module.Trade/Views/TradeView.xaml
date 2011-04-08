@@ -29,6 +29,7 @@
             <sdk:Label Content="Symbol" Target="{Binding ElementName=symbolField}" Style="{StaticResource WideFormLabel}" />
             <sdk:AutoCompleteBox x:Name="symbolField" TextBoxStyle="{StaticResource WideFormTextBox}"
                 Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                helpers:DefaultButtonService.DefaultButton="{Binding ElementName=previewOrder}"
                 ItemsSource="{Binding Path=ReferenceData.Instruments}"
                 FilterMode="Custom"
                 LostFocus="symbolField_LostFocus">
@@ -61,7 +62,8 @@
         <StackPanel Style="{StaticResource FormRow}">
             <sdk:Label Content="Quantity" Target="{Binding ElementName=quantityField}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="quantityField" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Quantity, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                Text="{Binding Quantity, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                helpers:DefaultButtonService.DefaultButton="{Binding ElementName=previewOrder}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -78,7 +80,8 @@
         <StackPanel Style="{StaticResource FormRow}" Visibility="{Binding Type, Converter={StaticResource OrderTypeToVisibilityConverter}}">
             <sdk:Label Content="Limit Price" Target="{Binding ElementName=limitPriceField}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="limitPriceField" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Path=LimitPrice, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                Text="{Binding Path=LimitPrice, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                helpers:DefaultButtonService.DefaultButton="{Binding ElementName=previewOrder}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -100,7 +103,7 @@
 
         <StackPanel Style="{StaticResource TallFormRow}">
             <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
-            <Button Content="Preview Order" Style="{StaticResource FormButton}" Command="{Binding PreviewOrderCommand}" />
+            <Button x:Name="previewOrder" Content="Preview Order" Style="{StaticResource FormButton}" Command="{Binding PreviewOrderCommand}" />
         </StackPanel>
 
         <StackPanel Style="{StaticResource TallFormRow}">

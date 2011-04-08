@@ -13,7 +13,8 @@
 
         <sdk:Label Content="Account Name" Target="{Binding ElementName=accountName}" Style="{StaticResource NarrowFormLabel}" />
         <TextBox x:Name="accountName" Style="{StaticResource NarrowFormTextBox}" HorizontalAlignment="Stretch" Width="auto"
-            Text="{Binding Path=AccountName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding Path=AccountName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+            helpers:DefaultButtonService.DefaultButton="{Binding ElementName=okButton}">
             <i:Interaction.Behaviors>
                 <helpers:TextChangedBahvior />
             </i:Interaction.Behaviors>
@@ -21,7 +22,8 @@
 
         <sdk:Label Content="Routing Number" Target="{Binding ElementName=routingNumber}" Style="{StaticResource NarrowFormLabel}" />
         <TextBox x:Name="routingNumber" Style="{StaticResource NarrowFormTextBox}" HorizontalAlignment="Stretch" Width="auto"
-            Text="{Binding Path=RoutingNumber, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding Path=RoutingNumber, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+            helpers:DefaultButtonService.DefaultButton="{Binding ElementName=okButton}">
             <i:Interaction.Behaviors>
                 <helpers:TextChangedBahvior />
             </i:Interaction.Behaviors>
@@ -29,7 +31,8 @@
 
         <sdk:Label Content="Account Number" Target="{Binding ElementName=accountNumber}" Style="{StaticResource NarrowFormLabel}" />
         <TextBox x:Name="accountNumber" Style="{StaticResource NarrowFormTextBox}" HorizontalAlignment="Stretch" Width="auto"
-            Text="{Binding Path=AccountNumber, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+            Text="{Binding Path=AccountNumber, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+            helpers:DefaultButtonService.DefaultButton="{Binding ElementName=okButton}">
             <i:Interaction.Behaviors>
                 <helpers:TextChangedBahvior />
             </i:Interaction.Behaviors>
@@ -37,6 +40,7 @@
 
         <StackPanel Style="{StaticResource TallFormRow}" HorizontalAlignment="Right">
                 <Button
+                    x:Name="okButton"
                     Content="OK"
                     Command="{Binding AddExternalAccountCommand}"
                     Width="75" Height="23" />

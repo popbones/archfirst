@@ -48,7 +48,8 @@
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindCashVisibilityConverter}}">
             <sdk:Label Content="Amount" Target="{Binding ElementName=amount}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="amount" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Path=Amount, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                Text="{Binding Path=Amount, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                helpers:DefaultButtonService.DefaultButton="{Binding ElementName=transferButton}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -59,6 +60,7 @@
             <sdk:Label Content="Symbol" Target="{Binding ElementName=symbolField}" Style="{StaticResource WideFormLabel}" />
             <sdk:AutoCompleteBox x:Name="symbolField" TextBoxStyle="{StaticResource WideFormTextBox}"
                 Text="{Binding Path=Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                helpers:DefaultButtonService.DefaultButton="{Binding ElementName=transferButton}"
                 ItemsSource="{Binding Path=ReferenceData.Instruments}"
                 FilterMode="Custom"
                 LostFocus="symbolField_LostFocus">
@@ -84,7 +86,8 @@
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">
             <sdk:Label Content="Quantity" Target="{Binding ElementName=quantity}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="quantity" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Path=Quantity, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                Text="{Binding Path=Quantity, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                helpers:DefaultButtonService.DefaultButton="{Binding ElementName=transferButton}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -94,7 +97,8 @@
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">
             <sdk:Label Content="Price Paid Per Share" Target="{Binding ElementName=pricePaid}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="pricePaid" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Path=PricePaidPerShare, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}">
+                Text="{Binding Path=PricePaidPerShare, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                helpers:DefaultButtonService.DefaultButton="{Binding ElementName=transferButton}">
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
@@ -103,7 +107,7 @@
 
         <StackPanel Style="{StaticResource TallFormRow}">
             <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
-            <Button Content="Transfer" Style="{StaticResource FormButton}" Command="{Binding TransferCommand}" />
+            <Button x:Name="transferButton" Content="Transfer" Style="{StaticResource FormButton}" Command="{Binding TransferCommand}" />
         </StackPanel>
 
         <StackPanel Style="{StaticResource TallFormRow}">
