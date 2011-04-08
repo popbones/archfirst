@@ -47,7 +47,8 @@ public class FixExchangeListener implements MessageListener {
     @Inject private FixMessageProcessor fixMessageProcessor;
 
     public FixExchangeListener() {
-        logger.debug("FixExchangeListener created");
+        logger.debug("{}: FixExchangeListener created",
+                Thread.currentThread().getName());
     }
 
     @Override

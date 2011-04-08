@@ -47,7 +47,8 @@ public class FixBrokerListener implements MessageListener {
     @Inject private FixMessageProcessor fixMessageProcessor;
 
     public FixBrokerListener() {
-        logger.debug("FixBrokerListener created");
+        logger.debug("{}: FixBrokerListener created",
+                Thread.currentThread().getName());
     }
 
     @Override

@@ -49,7 +49,8 @@ public class MarketPriceListener implements MessageListener {
     @Inject private MarketDataService marketDataService;
 
     public MarketPriceListener() {
-        logger.debug("MarketPriceListener created");
+        logger.debug("{}: MarketPriceListener created",
+                Thread.currentThread().getName());
     }
 
     @Override
