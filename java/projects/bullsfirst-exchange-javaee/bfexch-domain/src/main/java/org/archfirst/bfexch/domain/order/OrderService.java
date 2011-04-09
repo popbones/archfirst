@@ -75,12 +75,12 @@ public class OrderService {
     public void handleEndOfDay() {
         logger.info("Processing end of day event...");
         List<Order> orders = orderRepository.findActiveGfdOrders();
-        logger.info("Marking {} orders as DoneForDay...");
+        logger.info("Marking {} orders as DoneForDay...", orders.size());
         for (Order order : orders) {
             order.doneForDay();
             orderEventPublisher.publish(new OrderDoneForDay(order));
         }
-        logger.info("Marked {} orders as DoneForDay");
+        logger.info("Marked {} orders as DoneForDay", orders.size());
     }
 
     // ----- Queries and Read-Only Operations -----
