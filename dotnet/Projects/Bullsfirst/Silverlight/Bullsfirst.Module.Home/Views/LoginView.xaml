@@ -8,7 +8,7 @@
     xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
     xmlns:helpers="clr-namespace:Archfirst.Framework.SilverlightHelpers;assembly=Archfirst.Framework"
     mc:Ignorable="d"
-    d:DesignHeight="300" d:DesignWidth="200">
+    d:DesignHeight="300" d:DesignWidth="200" Loaded="UserControl_Loaded">
     
     <StackPanel x:Name="LayoutRoot" Background="White">
         <sdk:Label Content="Username" Target="{Binding ElementName=username}" Style="{StaticResource NarrowFormLabel}" />

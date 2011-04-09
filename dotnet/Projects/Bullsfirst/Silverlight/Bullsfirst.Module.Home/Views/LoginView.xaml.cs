@@ -35,5 +35,11 @@ namespace Bullsfirst.Module.Home.Views
         {
             set { this.DataContext = value; }
         }
+
+        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e)
+        {
+            // This still does not bring the cursor to username until the user clicks somewhere in the app
+            username.Focus();
+        }
     }
 }
