@@ -376,8 +376,8 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             }
         }
 
-        private decimal _quantity;
-        public decimal Quantity
+        private int _quantity;
+        public int Quantity
         {
             get { return _quantity; }
             set

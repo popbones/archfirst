@@ -209,7 +209,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
         {
             Symbol = args.Symbol;
             Side = args.Side;
-            Quantity = args.Quantity;
+            Quantity = Convert.ToInt32(args.Quantity);
         }
 
         #endregion // OnPopulateOrder
@@ -298,8 +298,8 @@ namespace Bullsfirst.Module.Trade.ViewModels
             }
         }
 
-        private decimal _quantity;
-        public decimal Quantity
+        private int _quantity;
+        public int Quantity
         {
             get { return _quantity; }
             set

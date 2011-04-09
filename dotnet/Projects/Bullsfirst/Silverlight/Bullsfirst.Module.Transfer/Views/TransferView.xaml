@@ -48,11 +48,14 @@
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindCashVisibilityConverter}}">
             <sdk:Label Content="Amount" Target="{Binding ElementName=amount}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="amount" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Path=Amount, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=Amount, StringFormat=\{0:F2\}, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 helpers:DefaultButtonService.DefaultButton="{Binding ElementName=transferButton}">
+                <!--
+                TextChangedBahvior has problems with entering decimal point
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
+                -->
             </TextBox>
         </StackPanel>
 
@@ -86,11 +89,14 @@
         <StackPanel Style="{StaticResource FormRow}"  Visibility="{Binding Path=TransferKind, Converter={StaticResource transferKindSecuritiesVisibilityConverter}}">
             <sdk:Label Content="Quantity" Target="{Binding ElementName=quantity}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="quantity" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Path=Quantity, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Path=Quantity, StringFormat=\{0:F0\}, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 helpers:DefaultButtonService.DefaultButton="{Binding ElementName=transferButton}">
+                <!--
+                TextChangedBahvior has problems with entering decimal point
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
+                -->
             </TextBox>
         </StackPanel>
 
@@ -99,9 +105,12 @@
             <TextBox x:Name="pricePaid" Style="{StaticResource WideFormTextBox}"
                 Text="{Binding Path=PricePaidPerShare, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 helpers:DefaultButtonService.DefaultButton="{Binding ElementName=transferButton}">
+                <!--
+                TextChangedBahvior has problems with entering decimal point
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
+                -->
             </TextBox>
         </StackPanel>
 

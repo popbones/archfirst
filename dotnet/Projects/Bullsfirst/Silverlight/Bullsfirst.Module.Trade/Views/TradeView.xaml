@@ -62,11 +62,14 @@
         <StackPanel Style="{StaticResource FormRow}">
             <sdk:Label Content="Quantity" Target="{Binding ElementName=quantityField}" Style="{StaticResource WideFormLabel}" />
             <TextBox x:Name="quantityField" Style="{StaticResource WideFormTextBox}"
-                Text="{Binding Quantity, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
+                Text="{Binding Quantity, StringFormat=\{0:F0\}, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 helpers:DefaultButtonService.DefaultButton="{Binding ElementName=previewOrder}">
+                <!--
+                TextChangedBahvior has problems with entering decimal point
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
+                -->
             </TextBox>
         </StackPanel>
 
@@ -82,9 +85,12 @@
             <TextBox x:Name="limitPriceField" Style="{StaticResource WideFormTextBox}"
                 Text="{Binding Path=LimitPrice, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                 helpers:DefaultButtonService.DefaultButton="{Binding ElementName=previewOrder}">
+                <!--
+                TextChangedBahvior has problems with entering decimal point
                 <i:Interaction.Behaviors>
                     <helpers:TextChangedBahvior />
                 </i:Interaction.Behaviors>
+                -->
             </TextBox>
         </StackPanel>
 
