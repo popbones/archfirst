@@ -23,21 +23,24 @@
         <Grid.RowDefinitions>
             <!-- Title row -->
             <RowDefinition Height="Auto" />
+            <!-- Buttons row -->
+            <RowDefinition Height="Auto" />
             <!-- Positions grid -->
             <RowDefinition />
         </Grid.RowDefinitions>
         
-        <!--
         <TextBlock Grid.Row="0" Text="Positions" Style="{StaticResource Header1}" />
-        -->
-        <StackPanel Grid.Row="0" Style="{StaticResource ToolbarStyle}">
+
+        <StackPanel Grid.Row="1" Style="{StaticResource ToolbarStyle}">
             <Button Content="Update" Style="{StaticResource FormButton}" Command="{Binding UpdateAccountsCommand}" />
         </StackPanel>
 
-        <infraControls:AccountSelector Grid.Row="0" Style="{StaticResource AccountSelectorStyle}" />
-        
+        <StackPanel Grid.Row="1" Style="{StaticResource ToolbarStyle}" HorizontalAlignment="Right">
+            <infraControls:AccountSelector Grid.Row="1" Margin="0 0 15 0" />
+        </StackPanel>
+
         <sdk:DataGrid
-            Grid.Row="1"
+            Grid.Row="2"
             ItemsSource="{Binding UserContext.SelectedAccount.Position}"
             RowDetailsVisibilityMode="Collapsed"
             AutoGenerateColumns="False"

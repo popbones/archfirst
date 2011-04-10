@@ -22,7 +22,7 @@
 
     <!-- Toolbar Style -->
     <Style x:Key="ToolbarStyle" TargetType="StackPanel">
-        <Setter Property="Margin" Value="0 10 0 10" />
+        <Setter Property="Margin" Value="0 0 0 10" />
         <Setter Property="Orientation" Value="Horizontal" />
     </Style>
 
