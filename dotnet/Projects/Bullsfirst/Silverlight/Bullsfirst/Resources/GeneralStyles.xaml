@@ -214,7 +214,7 @@
     </Style>
 
     <!-- Filter Panel Styles -->
-    <SolidColorBrush x:Key="FilterPanelBackgroundBrush" Color="#FFE8D0" />
+    <SolidColorBrush x:Key="FilterPanelBackgroundBrush" Color="#FFFFF8E5" />
 
     <Style x:Key="FilterPanel" TargetType="Grid">
         <Setter Property="Background" Value="{StaticResource FilterPanelBackgroundBrush}" />
