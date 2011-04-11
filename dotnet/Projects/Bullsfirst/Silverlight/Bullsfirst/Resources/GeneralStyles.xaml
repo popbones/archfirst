@@ -33,7 +33,7 @@
     </Style>
 
     <!-- Toolbar Styles -->
-    <SolidColorBrush x:Key="ToolbarBackgroundBrush" Color="#FFB9C3CC" />
+    <SolidColorBrush x:Key="ToolbarBackgroundBrush" Color="#AAE3E0E0" />
 
     <Style x:Key="Toolbar" TargetType="Grid">
         <Setter Property="Background" Value="{StaticResource ToolbarBackgroundBrush}" />
