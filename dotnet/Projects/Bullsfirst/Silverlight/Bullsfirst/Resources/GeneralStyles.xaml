@@ -20,10 +20,9 @@
         <Setter Property="Margin" Value="0 0 0 2" />
     </Style>
 
-    <!-- Toolbar Style -->
-    <Style x:Key="ToolbarStyle" TargetType="StackPanel">
-        <Setter Property="Margin" Value="0 0 0 10" />
-        <Setter Property="Orientation" Value="Horizontal" />
+    <!-- HyperlinkButton Style -->
+    <Style x:Key="HyperlinkButtonStyle" TargetType="HyperlinkButton">
+        <Setter Property="Foreground" Value="Maroon" />
     </Style>
 
     <!-- AccountSelector Style -->
@@ -33,12 +32,49 @@
         <Setter Property="VerticalAlignment" Value="Top" />
     </Style>
 
-    <!-- HyperlinkButton Style -->
-    <Style x:Key="HyperlinkButtonStyle" TargetType="HyperlinkButton">
-        <Setter Property="Foreground" Value="Maroon" />
+    <!-- Toolbar Styles -->
+    <SolidColorBrush x:Key="ToolbarBackgroundBrush" Color="#FFB9C3CC" />
+
+    <Style x:Key="Toolbar" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource ToolbarBackgroundBrush}" />
     </Style>
 
-    <!-- Controls for Forms -->
+    <Style x:Key="ToolbarExpanderPanel" TargetType="StackPanel">
+        <Setter Property="Background" Value="{StaticResource ToolbarBackgroundBrush}" />
+    </Style>
+
+    <Style x:Key="ToolbarLabel" TargetType="sdk:Label">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="16 5 0 5" />
+    </Style>
+
+    <Style x:Key="ToolbarTextBox" TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="4 5 0 5" />
+        <Setter Property="MinWidth" Value="60" />
+    </Style>
+
+    <Style x:Key="ToolbarAccountSelector" TargetType="UserControl">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 10 5" />
+    </Style>
+
+    <Style x:Key="ToolbarDatePicker" TargetType="sdk:DatePicker">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="4 5 0 5" />
+    </Style>
+
+    <Style x:Key="ToolbarCheckBox" TargetType="CheckBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="8 5 0 5" />
+    </Style>
+
+    <Style x:Key="ToolbarButton" TargetType="Button" >
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 10 5" />
+    </Style>
+
+    <!-- Form Styles -->
     <Style x:Key="FormRow" TargetType="StackPanel">
         <Setter Property="Margin" Value="0 4 0 0" />
         <Setter Property="Orientation" Value="Horizontal" />
@@ -61,7 +97,7 @@
         <Setter Property="Padding" Value="12 1 12 1" />
     </Style>
 
-    <!-- Controls For Narrow Forms (label on top) -->
+    <!-- Narrow Form Styles (label on top) -->
     <Style x:Key="NarrowFormLabel" TargetType="sdk:Label">
         <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
@@ -78,7 +114,7 @@
         <Setter Property="Width" Value="140" />
     </Style>
 
-    <!-- Controls For Wide Forms (label on left) -->
+    <!-- Wide Form Styles (label on left) -->
     <Style x:Key="WideFormLabel" TargetType="sdk:Label">
         <Setter Property="HorizontalContentAlignment" Value="Right" />
         <Setter Property="VerticalAlignment" Value="Center" />
@@ -125,7 +161,7 @@
         <Setter Property="Foreground" Value="Red" />
     </Style>
 
-    <!-- Controls For Compact Wide Forms (label on left) -->
+    <!-- Compact Form Styles (label on left) -->
     <Style x:Key="CompactWideFormLabel" TargetType="sdk:Label">
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Margin" Value="0 5 0 0" />
@@ -179,8 +215,9 @@
         </Setter>
     </Style>
 
-    <!-- More Button Style -->
+    <!-- More Button -->
     <Style x:Key="MoreButtonStyle" TargetType="ToggleButton">
+        <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ToggleButton">
@@ -211,48 +248,6 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
-
-    <!-- Filter Panel Styles -->
-    <SolidColorBrush x:Key="FilterPanelBackgroundBrush" Color="#FFFFF8E5" />
-
-    <Style x:Key="FilterPanel" TargetType="Grid">
-        <Setter Property="Background" Value="{StaticResource FilterPanelBackgroundBrush}" />
-    </Style>
-
-    <Style x:Key="FilterExpanderPanel" TargetType="StackPanel">
-        <Setter Property="Background" Value="{StaticResource FilterPanelBackgroundBrush}" />
-    </Style>
-
-    <Style x:Key="FilterPanelLabel" TargetType="sdk:Label">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="16 5 0 5" />
-    </Style>
-
-    <Style x:Key="FilterPanelTextBox" TargetType="TextBox">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="4 5 0 5" />
-        <Setter Property="MinWidth" Value="60" />
-    </Style>
-
-    <Style x:Key="FilterPanelDatePicker" TargetType="sdk:DatePicker">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="4 5 0 5" />
-    </Style>
-
-    <Style x:Key="FilterPanelCheckBox" TargetType="CheckBox">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="8 5 0 5" />
-    </Style>
-
-    <Style x:Key="FilterPanelButton" TargetType="Button" >
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Margin" Value="0 5 10 5" />
-    </Style>
-
-    <Style x:Key="FilterPanelMoreButton" TargetType="ToggleButton"
-           BasedOn="{StaticResource MoreButtonStyle}">
-        <Setter Property="VerticalAlignment" Value="Center" />
     </Style>
 
 </ResourceDictionary>

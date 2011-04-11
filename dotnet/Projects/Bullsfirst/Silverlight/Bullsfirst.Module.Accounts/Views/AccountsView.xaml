@@ -12,96 +12,96 @@
     <Grid x:Name="LayoutRoot" Background="White" Margin="20 10 20 10">
 
         <Grid.RowDefinitions>
-            <!-- Title row -->
+            <!-- Title -->
             <RowDefinition Height="Auto" />
-            <!-- Buttons row -->
+            <!-- Toolbar -->
             <RowDefinition Height="Auto" />
-            <!-- Account summaries grid and chart -->
-            <RowDefinition />
+            <!-- Account Summaries -->
+            <RowDefinition Height="Auto" />
+            <!-- Chart -->
+            <RowDefinition Height="Auto" />
             <!-- Status row -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <TextBlock Grid.Row="0" Text="Accounts" Style="{StaticResource Header1}" />
 
-        <StackPanel Grid.Row="1" Style="{StaticResource ToolbarStyle}">
-            <Button Content="Update" Style="{StaticResource FormButton}" Command="{Binding UpdateAccountsCommand}" />
-            <Button Content="Add Account" Style="{StaticResource FormButton}" Command="{Binding CreateAccountCommand}" />
-        </StackPanel>
+        <Grid Grid.Row="1" Style="{StaticResource Toolbar}">
+            <StackPanel Orientation="Horizontal">
+                <sdk:Label Content="" Style="{StaticResource ToolbarLabel}" />
+                <Button Content="Update" Style="{StaticResource ToolbarButton}" Command="{Binding UpdateAccountsCommand}" />
+                <Button Content="Add Account" Style="{StaticResource ToolbarButton}" Command="{Binding CreateAccountCommand}" />
+            </StackPanel>
+        </Grid>
 
-        <StackPanel Grid.Row="2" Orientation="Horizontal">
-            <sdk:DataGrid
+        <sdk:DataGrid Grid.Row="2"
             ItemsSource="{Binding Path=UserContext.BrokerageAccountSummaries}"
             AutoGenerateColumns="False"
-            HorizontalAlignment="Left"
             RowHeight="32"
             IsReadOnly="True"
             Style="{StaticResource DataGridStyle}"
             ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
             RowStyle="{StaticResource DataGridRowStyle}">
-                <sdk:DataGrid.Columns>
-                    <sdk:DataGridTemplateColumn
-                    Header="Name"
+            <sdk:DataGrid.Columns>
+                <sdk:DataGridTemplateColumn
+                Header="Name"
+                HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                CellStyle="{StaticResource LeftAlignedCellStyle}"
+                SortMemberPath="Name">
+                    <sdk:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                                Content="{Binding Path=Name}"
+                                Command="{Binding SelectAccountCommand, Source={StaticResource ViewModel}}"
+                                CommandParameter="{Binding}" />
+                        </DataTemplate>
+                    </sdk:DataGridTemplateColumn.CellTemplate>
+                </sdk:DataGridTemplateColumn>
+                <sdk:DataGridTextColumn
+                    Header="Account #"
+                    Binding="{Binding Path=Id}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
-                    CellStyle="{StaticResource LeftAlignedCellStyle}"
-                    SortMemberPath="Name">
+                    CellStyle="{StaticResource RightAlignedCellStyle}" />
+                <sdk:DataGridTextColumn
+                    Header="Market Value"
+                    Binding="{Binding Path=MarketValue, Converter={StaticResource MoneyConverter}}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}"
+                    SortMemberPath="MarketValue.Amount" />
+                <sdk:DataGridTextColumn
+                    Header="Cash"
+                    Binding="{Binding Path=CashPosition, Converter={StaticResource MoneyConverter}}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}"
+                    SortMemberPath="CashPosition.Amount" />
+                <sdk:DataGridTemplateColumn
+                    Header="Actions"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}">
                         <sdk:DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
-                                    Content="{Binding Path=Name}"
-                                    Command="{Binding SelectAccountCommand, Source={StaticResource ViewModel}}"
+                                    Content="Edit"
+                                    Visibility="{Binding Path=EditPermission, Converter={StaticResource Bool2VisibilityConverter}}"
+                                    Command="{Binding EditAccountCommand, Source={StaticResource ViewModel}}"
                                     CommandParameter="{Binding}" />
                             </DataTemplate>
                         </sdk:DataGridTemplateColumn.CellTemplate>
-                    </sdk:DataGridTemplateColumn>
-                    <sdk:DataGridTextColumn
-                        Header="Account #"
-                        Binding="{Binding Path=Id}"
-                        HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
-                        CellStyle="{StaticResource RightAlignedCellStyle}" />
-                    <sdk:DataGridTextColumn
-                        Header="Market Value"
-                        Binding="{Binding Path=MarketValue, Converter={StaticResource MoneyConverter}}"
-                        HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
-                        CellStyle="{StaticResource RightAlignedCellStyle}"
-                        SortMemberPath="MarketValue.Amount" />
-                    <sdk:DataGridTextColumn
-                        Header="Cash"
-                        Binding="{Binding Path=CashPosition, Converter={StaticResource MoneyConverter}}"
-                        HeaderStyle="{StaticResource RightAlignedColumnHeaderStyle}"
-                        CellStyle="{StaticResource RightAlignedCellStyle}"
-                        SortMemberPath="CashPosition.Amount" />
-                    <sdk:DataGridTemplateColumn
-                        Header="Actions"
-                        HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
-                        CellStyle="{StaticResource CenterAlignedCellStyle}">
-                            <sdk:DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
-                                        Content="Edit"
-                                        Visibility="{Binding Path=EditPermission, Converter={StaticResource Bool2VisibilityConverter}}"
-                                        Command="{Binding EditAccountCommand, Source={StaticResource ViewModel}}"
-                                        CommandParameter="{Binding}" />
-                                </DataTemplate>
-                            </sdk:DataGridTemplateColumn.CellTemplate>
-                    </sdk:DataGridTemplateColumn>
-                </sdk:DataGrid.Columns>
-            </sdk:DataGrid>
+                </sdk:DataGridTemplateColumn>
+            </sdk:DataGrid.Columns>
+        </sdk:DataGrid>
 
-            <toolkit:Chart x:Name="accountsChart"
-                VerticalAlignment="Top" Margin="50 0 0 0" Height="300" Width="400">
+        <toolkit:Chart Grid.Row="3" x:Name="accountsChart"
+                       HorizontalAlignment="Left" BorderThickness="0"
+                       Height="300" Width="400">
+            <toolkit:Chart.TitleStyle>
+                <Style TargetType="toolkit:Title">
+                    <Setter Property="FontSize" Value="20" />
+                </Style>
+            </toolkit:Chart.TitleStyle>
+        </toolkit:Chart>
 
-                <toolkit:Chart.TitleStyle>
-                    <Style TargetType="toolkit:Title">
-                        <Setter Property="FontSize" Value="20" />
-                    </Style>
-                </toolkit:Chart.TitleStyle>
-
-            </toolkit:Chart>
-
-        </StackPanel>
-
-        <StackPanel Grid.Row="3" Margin="0 20 0 0" Orientation="Horizontal">
+        <StackPanel Grid.Row="4" Margin="0 20 0 0" Orientation="Horizontal">
             <TextBlock
                 Text="{Binding Path=StatusMessage}"
                 VerticalAlignment="Center"

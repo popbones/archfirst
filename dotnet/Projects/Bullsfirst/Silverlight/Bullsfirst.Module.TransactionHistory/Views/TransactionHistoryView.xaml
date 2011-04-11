@@ -28,20 +28,20 @@
         <infraControls:AccountSelector Grid.Row="0" Style="{StaticResource AccountSelectorStyle}" />
 
         <!-- Filter -->
-        <Grid Grid.Row="1" Style="{StaticResource FilterPanel}">
+        <Grid Grid.Row="1" Style="{StaticResource Toolbar}">
             <StackPanel Orientation="Horizontal">
-                <sdk:Label Content="From" Style="{StaticResource FilterPanelLabel}" />
-                <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
+                <sdk:Label Content="From" Style="{StaticResource ToolbarLabel}" />
+                <sdk:DatePicker Style="{StaticResource ToolbarDatePicker}"
                     SelectedDate="{Binding FromDate, Mode=TwoWay, TargetNullValue=''}" />
 
-                <sdk:Label Content="To" Style="{StaticResource FilterPanelLabel}" />
-                <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
+                <sdk:Label Content="To" Style="{StaticResource ToolbarLabel}" />
+                <sdk:DatePicker Style="{StaticResource ToolbarDatePicker}"
                     SelectedDate="{Binding ToDate, Mode=TwoWay, TargetNullValue=''}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Update" Style="{StaticResource FilterPanelButton}" Command="{Binding UpdateTransactionsCommand}" />
-                <Button Content="Reset Filter" Style="{StaticResource FilterPanelButton}" Command="{Binding ResetFilterCommand}" />
+                <Button Content="Update" Style="{StaticResource ToolbarButton}" Command="{Binding UpdateTransactionsCommand}" />
+                <Button Content="Reset Filter" Style="{StaticResource ToolbarButton}" Command="{Binding ResetFilterCommand}" />
             </StackPanel>
         </Grid>
 
@@ -51,7 +51,6 @@
             ItemsSource="{Binding Transactions}"
             RowDetailsVisibilityMode="Collapsed"
             AutoGenerateColumns="False"
-            HorizontalAlignment="Left"
             RowHeight="32"
             IsReadOnly="True"
             Style="{StaticResource DataGridStyle}"

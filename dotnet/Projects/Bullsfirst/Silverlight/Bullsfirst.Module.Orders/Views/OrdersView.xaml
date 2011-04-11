@@ -40,15 +40,15 @@
         <infraControls:AccountSelector Grid.Row="0" Style="{StaticResource AccountSelectorStyle}" />
 
         <!-- Filter -->
-        <Grid Grid.Row="1" Style="{StaticResource FilterPanel}">
+        <Grid Grid.Row="1" Style="{StaticResource Toolbar}">
             <StackPanel Orientation="Horizontal">
-                <sdk:Label Content="Order #" Style="{StaticResource FilterPanelLabel}" />
+                <sdk:Label Content="Order #" Style="{StaticResource ToolbarLabel}" />
                 <!-- See http://karlshifflett.wordpress.com/2008/12/16/using-wpf-binding-stringformat-property-with-nullable-types -->
-                <TextBox Style="{StaticResource FilterPanelTextBox}"
+                <TextBox Style="{StaticResource ToolbarTextBox}"
                     Text="{Binding OrderId, Mode=TwoWay, TargetNullValue='', ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}" />
 
-                <sdk:Label Content="Symbol" Style="{StaticResource FilterPanelLabel}" />
-                <sdk:AutoCompleteBox x:Name="symbolField" TextBoxStyle="{StaticResource FilterPanelTextBox}"
+                <sdk:Label Content="Symbol" Style="{StaticResource ToolbarLabel}" />
+                <sdk:AutoCompleteBox x:Name="symbolField" TextBoxStyle="{StaticResource ToolbarTextBox}"
                     Text="{Binding Symbol, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                     ItemsSource="{Binding ReferenceData.Instruments}"
                     FilterMode="Custom">
@@ -66,45 +66,45 @@
                     </sdk:AutoCompleteBox.ItemTemplate>
                 </sdk:AutoCompleteBox>
 
-                <sdk:Label Content="From" Style="{StaticResource FilterPanelLabel}" />
-                <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
+                <sdk:Label Content="From" Style="{StaticResource ToolbarLabel}" />
+                <sdk:DatePicker Style="{StaticResource ToolbarDatePicker}"
                     SelectedDate="{Binding FromDate, Mode=TwoWay, TargetNullValue=''}" />
 
-                <sdk:Label Content="To" Style="{StaticResource FilterPanelLabel}" />
-                <sdk:DatePicker Style="{StaticResource FilterPanelDatePicker}"
+                <sdk:Label Content="To" Style="{StaticResource ToolbarLabel}" />
+                <sdk:DatePicker Style="{StaticResource ToolbarDatePicker}"
                     SelectedDate="{Binding ToDate, Mode=TwoWay, TargetNullValue=''}" />
 
-                <sdk:Label Content="More" Style="{StaticResource FilterPanelLabel}" />
-                <ToggleButton Name="MoreButton" Content="More" Style="{StaticResource FilterPanelMoreButton}" />
+                <sdk:Label Content="More" Style="{StaticResource ToolbarLabel}" />
+                <ToggleButton Name="MoreButton" Content="More" Style="{StaticResource MoreButtonStyle}" />
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button Content="Update" Style="{StaticResource FilterPanelButton}" Command="{Binding UpdateOrdersCommand}" />
-                <Button Content="Reset Filter" Style="{StaticResource FilterPanelButton}" Command="{Binding ResetFilterCommand}" />
+                <Button Content="Update" Style="{StaticResource ToolbarButton}" Command="{Binding UpdateOrdersCommand}" />
+                <Button Content="Reset Filter" Style="{StaticResource ToolbarButton}" Command="{Binding ResetFilterCommand}" />
             </StackPanel>
         </Grid>
 
         <!-- Filter Expander -->
         <StackPanel Grid.Row="2" Orientation="Horizontal"
                     Visibility="{Binding ElementName=MoreButton, Path=IsChecked, Converter={StaticResource Bool2VisibilityConverter}}"
-                    Style="{StaticResource FilterExpanderPanel}">
-            <sdk:Label Content="Order Action" Style="{StaticResource FilterPanelLabel}" />
-            <CheckBox Content="Buy" Style="{StaticResource FilterPanelCheckBox}"
+                    Style="{StaticResource ToolbarExpanderPanel}">
+            <sdk:Label Content="Order Action" Style="{StaticResource ToolbarLabel}" />
+            <CheckBox Content="Buy" Style="{StaticResource ToolbarCheckBox}"
                       IsChecked="{Binding ActionBuy, Mode=TwoWay}" />
-            <CheckBox Content="Sell" Style="{StaticResource FilterPanelCheckBox}"
+            <CheckBox Content="Sell" Style="{StaticResource ToolbarCheckBox}"
                       IsChecked="{Binding ActionSell, Mode=TwoWay}" />
 
-            <sdk:Label Content="Order Status" Style="{StaticResource FilterPanelLabel}"
+            <sdk:Label Content="Order Status" Style="{StaticResource ToolbarLabel}"
                        Margin="30 5 0 5" />
-            <CheckBox Content="New" Style="{StaticResource FilterPanelCheckBox}"
+            <CheckBox Content="New" Style="{StaticResource ToolbarCheckBox}"
                       IsChecked="{Binding StatusNew, Mode=TwoWay}" />
-            <CheckBox Content="Partially Filled" Style="{StaticResource FilterPanelCheckBox}"
+            <CheckBox Content="Partially Filled" Style="{StaticResource ToolbarCheckBox}"
                       IsChecked="{Binding StatusPartiallyFilled, Mode=TwoWay}" />
-            <CheckBox Content="Filled" Style="{StaticResource FilterPanelCheckBox}"
+            <CheckBox Content="Filled" Style="{StaticResource ToolbarCheckBox}"
                       IsChecked="{Binding StatusFilled, Mode=TwoWay}" />
-            <CheckBox Content="Canceled" Style="{StaticResource FilterPanelCheckBox}"
+            <CheckBox Content="Canceled" Style="{StaticResource ToolbarCheckBox}"
                       IsChecked="{Binding StatusCanceled, Mode=TwoWay}" />
-            <CheckBox Content="Done For Day" Style="{StaticResource FilterPanelCheckBox}"
+            <CheckBox Content="Done For Day" Style="{StaticResource ToolbarCheckBox}"
                       IsChecked="{Binding StatusDoneForDay, Mode=TwoWay}" />
         </StackPanel>
 
@@ -114,7 +114,6 @@
             ItemsSource="{Binding Orders}"
             RowDetailsVisibilityMode="Collapsed"
             AutoGenerateColumns="False"
-            HorizontalAlignment="Left"
             RowHeight="32"
             IsReadOnly="True"
             Style="{StaticResource DataGridStyle}"

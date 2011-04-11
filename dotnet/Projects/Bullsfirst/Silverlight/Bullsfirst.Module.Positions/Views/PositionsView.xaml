@@ -21,30 +21,31 @@
     <Grid x:Name="LayoutRoot" Background="White" Margin="20 10 20 10">
 
         <Grid.RowDefinitions>
-            <!-- Title row -->
+            <!-- Title -->
             <RowDefinition Height="Auto" />
-            <!-- Buttons row -->
+            <!-- Toolbar -->
             <RowDefinition Height="Auto" />
-            <!-- Positions grid -->
+            <!-- Positions -->
             <RowDefinition />
         </Grid.RowDefinitions>
         
         <TextBlock Grid.Row="0" Text="Positions" Style="{StaticResource Header1}" />
 
-        <StackPanel Grid.Row="1" Style="{StaticResource ToolbarStyle}">
-            <Button Content="Update" Style="{StaticResource FormButton}" Command="{Binding UpdateAccountsCommand}" />
-        </StackPanel>
-
-        <StackPanel Grid.Row="1" Style="{StaticResource ToolbarStyle}" HorizontalAlignment="Right">
-            <infraControls:AccountSelector Grid.Row="1" Margin="0 0 15 0" />
-        </StackPanel>
+        <Grid Grid.Row="1" Style="{StaticResource Toolbar}">
+            <StackPanel Orientation="Horizontal">
+                <sdk:Label Content="" Style="{StaticResource ToolbarLabel}" />
+                <Button Content="Update" Style="{StaticResource ToolbarButton}" Command="{Binding UpdateAccountsCommand}" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <infraControls:AccountSelector Style="{StaticResource ToolbarAccountSelector}" />
+            </StackPanel>
+        </Grid>
 
         <sdk:DataGrid
             Grid.Row="2"
             ItemsSource="{Binding UserContext.SelectedAccount.Position}"
             RowDetailsVisibilityMode="Collapsed"
             AutoGenerateColumns="False"
-            HorizontalAlignment="Left"
             RowHeight="32"
             CanUserReorderColumns="False"
             CanUserResizeColumns="False"
