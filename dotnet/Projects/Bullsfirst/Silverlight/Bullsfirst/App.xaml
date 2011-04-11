@@ -10,6 +10,7 @@
                 <ResourceDictionary Source="Resources/GeneralStyles.xaml" />
                 <ResourceDictionary Source="Resources/DataGridStyles.xaml" />
                 <ResourceDictionary Source="Resources/DataGridRowStyle.xaml" />
+                <ResourceDictionary Source="Resources/ChartStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
