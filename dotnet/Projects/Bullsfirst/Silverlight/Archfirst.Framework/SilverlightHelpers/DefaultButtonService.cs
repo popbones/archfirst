@@ -1,5 +1,5 @@
 ﻿/*
- * From Mark Coopers's post at
+ * Based on Mark Coopers's post at
  * http://stackoverflow.com/questions/2683891/silverlight-4-default-button-service
  */
 using System;

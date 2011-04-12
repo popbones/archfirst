@@ -1,5 +1,5 @@
 ﻿/*
- * From Colin Eberhardt's post at
+ * Based on Colin Eberhardt's post at
  * http://www.scottlogic.co.uk/blog/colin/2010/05/silverlight-multibinding-solution-for-silverlight-4/
  */
 using System.Windows;

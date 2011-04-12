@@ -1,5 +1,5 @@
 ﻿/*
- * From Domenic Denicola's post at
+ * Based on Domenic Denicola's post at
  * http://stackoverflow.com/questions/1281490/binding-comboboxes-to-enums-in-silverlight
  */
 using System;

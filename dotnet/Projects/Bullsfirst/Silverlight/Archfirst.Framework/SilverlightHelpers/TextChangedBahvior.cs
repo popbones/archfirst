@@ -1,5 +1,5 @@
 ﻿/*
- * From Adam Barney's blog entry:
+ * Based on Adam Barney's blog entry:
  * http://blogs.adambarney.com/tech/2010/09/adding-propertychanged-updatesourcetrigger-mode-to-silverlight/
  */
 using System.Windows.Controls;
