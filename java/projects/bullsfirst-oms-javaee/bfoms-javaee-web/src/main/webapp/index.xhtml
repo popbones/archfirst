@@ -2,56 +2,12 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<ui:composition
-    xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://java.sun.com/jsf/html"
-    xmlns:ui="http://java.sun.com/jsf/facelets"
-    template="/WEB-INF/templates/template-2column.xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Bullsfirst OMS</title>
+</head>
 
-    <!-- Turn off global messages and title -->
-    <ui:param name="showGlobalMessages" value="false"/>
-    <ui:param name="hideTitle" value="true"/>
-
-    <ui:define name="title">
-        #{messages['bf.home']}
-    </ui:define>
-
-    <ui:define name="navigationTabs">
-        <ui:include src="/WEB-INF/templates/navigation-tabs-anonymous.xhtml" />
-    </ui:define>
-
-    <ui:define name="content">
-        <div class="center">
-            <h:graphicImage value="images/homeGraphic.png" alt="#{messages['bf.homeGraphicAlt']}" />
-        </div>
-        <br />
-        <br />
-        <p>#{messages['bf.homeMessage']}</p>
-        <br />
-    </ui:define>
-
-    <ui:define name="sidebar">
-
-        <h:messages id="messages" globalOnly="true" styleClass="bullets"
-            errorClass="errormsg" infoClass="infomsg" warnClass="warnmsg"/>
-
-        <h:form id="login">
-            #{messages['bf.username']}
-            <h:inputText id="username" required="true" class="narrowText"
-                value="#{homePm.username}" />
-
-            #{messages['bf.password']}
-            <h:inputSecret id="password" required="true" class="narrowText" redisplay="true"
-                value="#{homePm.password}" />
-
-            <div class="narrowFormRow">
-                <h:commandButton
-                    value="#{messages['bf.login']}"
-                    action="#{homePm.login}" />
-            </div>
-        </h:form>
-
-    </ui:define>
-
-</ui:composition>
+<body>
+    <h1>Bullsfirst OMS</h1>
+</body>
+</html>
