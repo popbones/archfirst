@@ -34,7 +34,8 @@
             </StackPanel>
         </Grid>
 
-        <sdk:DataGrid Grid.Row="2"
+        <sdk:DataGrid
+            Grid.Row="2"
             ItemsSource="{Binding Path=UserContext.BrokerageAccountSummaries}"
             AutoGenerateColumns="False"
             RowHeight="32"

@@ -179,7 +179,6 @@
                         ItemsSource="{Binding Child}"
                         HeadersVisibility="None"
                         AutoGenerateColumns="False"
-                        HorizontalAlignment="Left"
                         RowHeight="20"
                         IsReadOnly="True"
                         CanUserReorderColumns="False"

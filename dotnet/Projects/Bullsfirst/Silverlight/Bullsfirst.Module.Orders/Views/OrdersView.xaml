@@ -214,7 +214,6 @@
                         ItemsSource="{Binding Execution}"
                         HeadersVisibility="None"
                         AutoGenerateColumns="False"
-                        HorizontalAlignment="Left"
                         RowHeight="20"
                         IsReadOnly="True"
                         HorizontalScrollBarVisibility="Hidden"
