@@ -115,6 +115,8 @@
             RowDetailsVisibilityMode="Collapsed"
             AutoGenerateColumns="False"
             RowHeight="32"
+            CanUserReorderColumns="False"
+            CanUserResizeColumns="False"
             IsReadOnly="True"
             Style="{StaticResource DataGridStyle}"
             ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
@@ -126,6 +128,7 @@
                     Width="30">
                     <sdk:DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
+                            <!-- TODO: Why do these toggle buttons not reset to unchecked (plus sign) after the orders are cleared? -->
                             <ToggleButton Style="{StaticResource ExpandCollapseButtonStyle}"
                                           Visibility="{Binding Converter={StaticResource ExpandCollapseVisibilityConverter}}">
                                 <i:Interaction.Triggers>
@@ -216,6 +219,8 @@
                         AutoGenerateColumns="False"
                         RowHeight="20"
                         IsReadOnly="True"
+                        CanUserReorderColumns="False"
+                        CanUserResizeColumns="False"
                         HorizontalScrollBarVisibility="Hidden"
                         BorderThickness="0"
                         RowStyle="{StaticResource DataGridRowStyle}"

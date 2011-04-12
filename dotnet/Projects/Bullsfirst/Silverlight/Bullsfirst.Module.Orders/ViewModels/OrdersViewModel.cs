@@ -121,6 +121,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
             else
             {
                 this.StatusMessage = null;
+                // TODO: Why are the expand/collapse toggle buttons not reseting to unchecked (plus sign) after the clear below?
                 Orders.Clear();
                 if (e.Result != null) // in case there are no orders
                 {
