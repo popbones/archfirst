@@ -16,7 +16,7 @@
             Text="{Binding Path=Username, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
             helpers:DefaultButtonService.DefaultButton="{Binding ElementName=loginButton}">
             <i:Interaction.Behaviors>
-                <helpers:TextChangedBahvior />
+                <helpers:TextChangedBehavior />
             </i:Interaction.Behaviors>
         </TextBox>
 
@@ -25,7 +25,7 @@
             Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
             helpers:DefaultButtonService.DefaultButton="{Binding ElementName=loginButton}">
             <i:Interaction.Behaviors>
-                <helpers:PasswordChangedBahvior />
+                <helpers:PasswordChangedBehavior />
             </i:Interaction.Behaviors>
         </PasswordBox>
 

@@ -16,7 +16,7 @@
             Text="{Binding Path=AccountName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
             helpers:DefaultButtonService.DefaultButton="{Binding ElementName=okButton}">
             <i:Interaction.Behaviors>
-                <helpers:TextChangedBahvior />
+                <helpers:TextChangedBehavior />
             </i:Interaction.Behaviors>
         </TextBox>
 
@@ -25,7 +25,7 @@
             Text="{Binding Path=RoutingNumber, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
             helpers:DefaultButtonService.DefaultButton="{Binding ElementName=okButton}">
             <i:Interaction.Behaviors>
-                <helpers:TextChangedBahvior />
+                <helpers:TextChangedBehavior />
             </i:Interaction.Behaviors>
         </TextBox>
 
@@ -34,7 +34,7 @@
             Text="{Binding Path=AccountNumber, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
             helpers:DefaultButtonService.DefaultButton="{Binding ElementName=okButton}">
             <i:Interaction.Behaviors>
-                <helpers:TextChangedBahvior />
+                <helpers:TextChangedBehavior />
             </i:Interaction.Behaviors>
         </TextBox>
 

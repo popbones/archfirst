@@ -2,30 +2,29 @@
  * Based on Adam Barney's blog entry:
  * http://blogs.adambarney.com/tech/2010/09/adding-propertychanged-updatesourcetrigger-mode-to-silverlight/
  */
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Interactivity;
 
 namespace Archfirst.Framework.SilverlightHelpers
 {
-    public class PasswordChangedBahvior : Behavior<PasswordBox>
+    public class TextChangedBehavior : Behavior<TextBox>
     {
         protected override void OnAttached()
         {
             base.OnAttached();
-            AssociatedObject.PasswordChanged += PasswordBoxPasswordChanged;
+            AssociatedObject.TextChanged += TextBoxTextChanged;
         }
 
         protected override void OnDetaching()
         {
             base.OnDetaching();
-            AssociatedObject.PasswordChanged -= PasswordBoxPasswordChanged;
+            AssociatedObject.TextChanged-= TextBoxTextChanged;
         }
 
-        private void PasswordBoxPasswordChanged(object sender, RoutedEventArgs e)
+        private void TextBoxTextChanged(object sender, TextChangedEventArgs e)
         {
-            var binding = AssociatedObject.GetBindingExpression(PasswordBox.PasswordProperty);
-            if (binding != null)
+            var binding = AssociatedObject.GetBindingExpression(TextBox.TextProperty);
+            if(binding != null)
                 binding.UpdateSource();
         }
     }

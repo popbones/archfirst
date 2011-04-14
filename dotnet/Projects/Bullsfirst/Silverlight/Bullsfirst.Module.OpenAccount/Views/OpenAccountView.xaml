@@ -31,7 +31,7 @@
                     Text="{Binding Path=FirstName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                     helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
-                        <helpers:TextChangedBahvior />
+                        <helpers:TextChangedBehavior />
                     </i:Interaction.Behaviors>
                 </TextBox>
             </StackPanel>
@@ -42,7 +42,7 @@
                     Text="{Binding Path=LastName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                     helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
-                        <helpers:TextChangedBahvior />
+                        <helpers:TextChangedBehavior />
                     </i:Interaction.Behaviors>
                 </TextBox>
             </StackPanel>
@@ -53,7 +53,7 @@
                     Text="{Binding Path=Username, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                     helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
-                        <helpers:TextChangedBahvior />
+                        <helpers:TextChangedBehavior />
                     </i:Interaction.Behaviors>
                 </TextBox>
             </StackPanel>
@@ -64,7 +64,7 @@
                     Password="{Binding Path=Password, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                     helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
-                        <helpers:PasswordChangedBahvior />
+                        <helpers:PasswordChangedBehavior />
                     </i:Interaction.Behaviors>
                 </PasswordBox>
             </StackPanel>
@@ -75,7 +75,7 @@
                     Password="{Binding Path=ConfirmPassword, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
                     helpers:DefaultButtonService.DefaultButton="{Binding ElementName=openAccountButton}">
                     <i:Interaction.Behaviors>
-                        <helpers:PasswordChangedBahvior />
+                        <helpers:PasswordChangedBehavior />
                     </i:Interaction.Behaviors>
                 </PasswordBox>
             </StackPanel>

@@ -29,7 +29,7 @@
             Text="{Binding Path=AccountName, Mode=TwoWay, ValidatesOnExceptions=True, ValidatesOnDataErrors=True, NotifyOnValidationError=True}"
             helpers:DefaultButtonService.DefaultButton="{Binding ElementName=saveButton}">
             <i:Interaction.Behaviors>
-                <helpers:TextChangedBahvior />
+                <helpers:TextChangedBehavior />
             </i:Interaction.Behaviors>
         </TextBox>
 
