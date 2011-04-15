@@ -65,7 +65,7 @@
 
             <dependency>
                 <groupId>org.archfirst</groupId>
-                <artifactId>bfexch-infra</artifactId>
+                <artifactId>bfexch-infra-fix-trading</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -191,7 +191,7 @@
     <modules>
         <module>bfexch-ddl</module>
         <module>bfexch-domain</module>
-        <module>bfexch-infra</module>
+        <module>bfexch-infra-fix-trading</module>
         <module>bfexch-interfacein-oms</module>
         <module>bfexch-interfaceout-oms</module>
         <module>bfexch-javaee-web</module>

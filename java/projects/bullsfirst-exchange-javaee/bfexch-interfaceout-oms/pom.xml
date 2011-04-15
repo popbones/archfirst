@@ -36,7 +36,7 @@
         </dependency>
         <dependency>
             <groupId>org.archfirst</groupId>
-            <artifactId>bfexch-infra</artifactId>
+            <artifactId>bfexch-infra-fix-trading</artifactId>
         </dependency>
     </dependencies>
 
