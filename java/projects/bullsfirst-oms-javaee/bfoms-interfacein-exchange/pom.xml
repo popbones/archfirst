@@ -30,10 +30,6 @@
             <artifactId>bfoms-common-domain</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.archfirst</groupId>
-            <artifactId>bfoms-infra</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.jboss.ejb3</groupId>
             <artifactId>jboss-ejb3-api</artifactId>
             <scope>provided</scope>

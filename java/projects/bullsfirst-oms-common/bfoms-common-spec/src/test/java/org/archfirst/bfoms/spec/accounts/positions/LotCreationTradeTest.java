@@ -72,8 +72,7 @@ public class LotCreationTradeTest extends BaseAccountsTest {
         
         // Acknowledge the order
         ExecutionReport executionReport = ExecutionReport.createNewType(order);
-        this.brokerageAccountService.processExecutionReport(
-                brokerageAccount1Id, executionReport);
+        this.brokerageAccountService.processExecutionReport(executionReport);
         
         // Execute the trade
         executionReport = ExecutionReport.createTradeType(
@@ -81,8 +80,7 @@ public class LotCreationTradeTest extends BaseAccountsTest {
                 OrderStatus.Filled,
                 new DecimalQuantity(quantity),
                 new Money(pricePaidPerShare));
-        this.brokerageAccountService.processExecutionReport(
-                brokerageAccount1Id, executionReport);
+        this.brokerageAccountService.processExecutionReport(executionReport);
         
         List<Lot> lots =
             this.brokerageAccountService.findActiveLots(brokerageAccount1Id);

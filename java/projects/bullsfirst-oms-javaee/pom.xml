@@ -61,7 +61,7 @@
 
             <dependency>
                 <groupId>org.archfirst</groupId>
-                <artifactId>bfoms-infra</artifactId>
+                <artifactId>bfoms-infra-fix-trading</artifactId>
                 <version>${org.archfirst.bfoms.common.version}</version>
             </dependency>
 

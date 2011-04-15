@@ -15,16 +15,6 @@
     <name>Bullsfirst OMS Common - Infrastructure</name>
 
     <dependencies>
-
-        <dependency>
-            <groupId>org.archfirst</groupId>
-            <artifactId>bfoms-common-domain</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>quickfixj</groupId>
-            <artifactId>quickfixj-all</artifactId>
-        </dependency>
     </dependencies>
 
 </project>

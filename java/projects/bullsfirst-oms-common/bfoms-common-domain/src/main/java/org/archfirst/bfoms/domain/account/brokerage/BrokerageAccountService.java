@@ -26,12 +26,15 @@ import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.exchange.ExchangeTradingService;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
 import org.archfirst.bfoms.domain.security.AuthorizationException;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.bfoms.domain.security.UserRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * BrokerageAccountService
@@ -39,6 +42,8 @@ import org.archfirst.bfoms.domain.security.UserRepository;
  * @author Naresh Bhatia
  */
 public class BrokerageAccountService {
+    private static final Logger logger =
+        LoggerFactory.getLogger(BrokerageAccountService.class);
     
     @Inject private BrokerageAccountFactory brokerageAccountFactory;
     @Inject private BrokerageAccountRepository brokerageAccountRepository;
@@ -91,17 +96,28 @@ public class BrokerageAccountService {
         
     }
 
-    public void processExecutionReport(Long accountId, ExecutionReport executionReport) {
-        this.findAccount(accountId).processExecutionReport(executionReport);
+    public void processExecutionReport(ExecutionReport executionReport) {
+        // Send to account for processing
+        BrokerageAccount account = brokerageAccountRepository.findAccountForOrder(
+                executionReport.getClientOrderId());
+        account.processExecutionReport(executionReport);
     }
     
+    public void processOrderCancelReject(Long orderId, OrderStatus newStatus) {
+        
+        // Get the order
+        Order order = this.findOrder(orderId);
+        if (order == null) {
+            logger.error("OrderCancelReject: order {} not found", orderId);
+        }
+
+        // Send the new status to the order
+        order.cancelRequestRejected(newStatus);
+    }
+
     // ----- Queries and Read-Only Operations -----
     public BrokerageAccount findAccount(Long id) {
         return brokerageAccountRepository.findAccount(id);
-    }
-    
-    public BrokerageAccount findAccountForOrder(Long orderId) {
-        return brokerageAccountRepository.findAccountForOrder(orderId);
     }
     
     public List<Lot> findActiveLots(Long accountId) {

@@ -3,7 +3,7 @@
 <glassfish-ejb-jar>
     <enterprise-beans>
         <ejb>
-            <ejb-name>FixExchangeListener</ejb-name>
+            <ejb-name>ExchangeMessageListener</ejb-name>
             <bean-pool>
                 <steady-pool-size>1</steady-pool-size>
                 <resize-quantity>1</resize-quantity>

@@ -13,23 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.interfacein.exchange;
+package org.archfirst.bfoms.infra.fixtrading;
 
 import javax.inject.Inject;
 
-import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccount;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
-import org.archfirst.bfoms.infra.fix.AvgPriceConverter;
-import org.archfirst.bfoms.infra.fix.ClOrdIDConverter;
-import org.archfirst.bfoms.infra.fix.CumQtyConverter;
-import org.archfirst.bfoms.infra.fix.ExecutionTypeConverter;
-import org.archfirst.bfoms.infra.fix.LastPriceConverter;
-import org.archfirst.bfoms.infra.fix.LastQtyConverter;
-import org.archfirst.bfoms.infra.fix.LeavesQtyConverter;
-import org.archfirst.bfoms.infra.fix.OrderSideConverter;
-import org.archfirst.bfoms.infra.fix.OrderStatusConverter;
-import org.archfirst.bfoms.infra.fix.OrigClOrdIDConverter;
+import org.archfirst.bfoms.domain.exchange.ExchangeMessageProcessor;
+import org.archfirst.bfoms.infra.fixtrading.converters.AvgPriceConverter;
+import org.archfirst.bfoms.infra.fixtrading.converters.ClOrdIDConverter;
+import org.archfirst.bfoms.infra.fixtrading.converters.CumQtyConverter;
+import org.archfirst.bfoms.infra.fixtrading.converters.ExecutionTypeConverter;
+import org.archfirst.bfoms.infra.fixtrading.converters.FixFormatter;
+import org.archfirst.bfoms.infra.fixtrading.converters.FixUtil;
+import org.archfirst.bfoms.infra.fixtrading.converters.LastPriceConverter;
+import org.archfirst.bfoms.infra.fixtrading.converters.LastQtyConverter;
+import org.archfirst.bfoms.infra.fixtrading.converters.LeavesQtyConverter;
+import org.archfirst.bfoms.infra.fixtrading.converters.OrderSideConverter;
+import org.archfirst.bfoms.infra.fixtrading.converters.OrderStatusConverter;
+import org.archfirst.bfoms.infra.fixtrading.converters.OrigClOrdIDConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -37,8 +39,10 @@ import quickfix.DoNotSend;
 import quickfix.FieldNotFound;
 import quickfix.IncorrectDataFormat;
 import quickfix.IncorrectTagValue;
+import quickfix.InvalidMessage;
 import quickfix.Message;
 import quickfix.MessageCracker;
+import quickfix.MessageUtils;
 import quickfix.RejectLogon;
 import quickfix.SessionID;
 import quickfix.UnsupportedMessageType;
@@ -46,20 +50,44 @@ import quickfix.fix44.ExecutionReport;
 import quickfix.fix44.OrderCancelReject;
 
 /**
- * FixMessageProcessor
+ * FixExchangeMessageProcessor
  *
  * @author Naresh Bhatia
  */
-public class FixMessageProcessor
-    extends MessageCracker implements quickfix.Application {
-
+public class FixExchangeMessageProcessor extends MessageCracker
+        implements quickfix.Application, ExchangeMessageProcessor {
     private static final Logger logger =
-        LoggerFactory.getLogger(FixMessageProcessor.class);
+        LoggerFactory.getLogger(FixExchangeMessageProcessor.class);
 
     @Inject private BrokerageAccountService brokerageAccountService;
 
-    public FixMessageProcessor() {
-        logger.debug("FixMessageProcessor created");
+    @Override
+    public void processMessage(String messageText) {
+        quickfix.Message fixMessage;
+        try {
+            fixMessage = MessageUtils.parse(
+                    FixUtil.getDefaultMessageFactory(),
+                    FixUtil.getDefaultDataDictionary(),
+                    messageText);
+            logger.debug("Received message:\n{}", FixFormatter.format(fixMessage));
+            this.fromApp(fixMessage, null);
+            logger.debug("Processed message:\n{}", FixFormatter.format(fixMessage));
+        }
+        catch (InvalidMessage e) {
+            logger.error("Invalid FIX message received: " + messageText, e);
+        }
+        catch (FieldNotFound e) {
+            logger.error("Invalid FIX message received: " + messageText, e);
+        }
+        catch (IncorrectDataFormat e) {
+            logger.error("Invalid FIX message received: " + messageText, e);
+        }
+        catch (IncorrectTagValue e) {
+            logger.error("Invalid FIX message received: " + messageText, e);
+        }
+        catch (UnsupportedMessageType e) {
+            logger.error("Invalid FIX message received: " + messageText, e);
+        }
     }
 
     @Override
@@ -96,11 +124,8 @@ public class FixMessageProcessor
                     LastPriceConverter.toDomain(message.getLastPx()),
                     AvgPriceConverter.toDomain(message.getAvgPx()));
 
-        // Send to account for processing
-        BrokerageAccount account = brokerageAccountService.findAccountForOrder(
-                executionReport.getClientOrderId());
-        brokerageAccountService.processExecutionReport(
-                account.getId(), executionReport);
+        // Send to brokerageAccountService for processing
+        brokerageAccountService.processExecutionReport(executionReport);
     }
 
     @Override

@@ -39,11 +39,18 @@
         </dependency>
         <dependency>
             <groupId>org.archfirst</groupId>
+            <artifactId>bfoms-infra-fix-trading</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.archfirst</groupId>
             <artifactId>bfoms-interfacein-exchange</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.archfirst</groupId>
             <artifactId>bfoms-interfaceout-exchange</artifactId>
+            <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate.java-persistence</groupId>

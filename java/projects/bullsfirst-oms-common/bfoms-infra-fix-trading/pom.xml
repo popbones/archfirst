@@ -17,8 +17,19 @@
     <dependencies>
 
         <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.archfirst</groupId>
             <artifactId>bfoms-common-domain</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.archfirst</groupId>
+            <artifactId>bfoms-infra</artifactId>
         </dependency>
 
         <dependency>

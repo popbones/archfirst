@@ -36,11 +36,6 @@
             <groupId>org.archfirst</groupId>
             <artifactId>bfoms-infra</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>quickfixj</groupId>
-            <artifactId>quickfixj-all</artifactId>
-        </dependency>
     </dependencies>
 
     <profiles>
