@@ -13,26 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.scheduling;
+package org.archfirst.bfexch.infra.fixtrading.converters;
 
-import javax.ejb.Schedule;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-
-import org.archfirst.bfexch.domain.trading.TradingService;
+import quickfix.field.Symbol;
 
 /**
- * EndOfDayScheduler
+ * InstrumentConverter
  *
  * @author Naresh Bhatia
  */
-@Stateless
-public class EndOfDayScheduler {
+public class InstrumentConverter {
 
-    @Inject private TradingService tradingService;
-
-    @Schedule(hour="16", minute="00", timezone="America/New_York")
-    public void handleEndOfDay() {
-        tradingService.handleEndOfDay();
+    public static quickfix.fix44.component.Instrument toFix(String symbol) {
+        return new quickfix.fix44.component.Instrument(
+                new Symbol(symbol));
     }
 }

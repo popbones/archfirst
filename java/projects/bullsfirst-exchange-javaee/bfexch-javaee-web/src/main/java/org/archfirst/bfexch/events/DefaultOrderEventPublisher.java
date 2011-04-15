@@ -18,12 +18,12 @@ package org.archfirst.bfexch.events;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 
-import org.archfirst.bfexch.domain.order.OrderAccepted;
-import org.archfirst.bfexch.domain.order.OrderCancelRejected;
-import org.archfirst.bfexch.domain.order.OrderCanceled;
-import org.archfirst.bfexch.domain.order.OrderDoneForDay;
-import org.archfirst.bfexch.domain.order.OrderEventPublisher;
-import org.archfirst.bfexch.domain.order.OrderExecuted;
+import org.archfirst.bfexch.domain.trading.order.OrderAccepted;
+import org.archfirst.bfexch.domain.trading.order.OrderCancelRejected;
+import org.archfirst.bfexch.domain.trading.order.OrderCanceled;
+import org.archfirst.bfexch.domain.trading.order.OrderDoneForDay;
+import org.archfirst.bfexch.domain.trading.order.OrderEventPublisher;
+import org.archfirst.bfexch.domain.trading.order.OrderExecuted;
 
 /**
  * DefaultOrderEventPublisher

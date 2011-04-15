@@ -13,26 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.scheduling;
+package org.archfirst.bfexch.infra.fixtrading.converters;
 
-import javax.ejb.Schedule;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import org.archfirst.bfexch.domain.trading.order.OrderSide;
 
-import org.archfirst.bfexch.domain.trading.TradingService;
+import quickfix.field.Side;
 
 /**
- * EndOfDayScheduler
+ * OrderSideConverter
  *
  * @author Naresh Bhatia
  */
-@Stateless
-public class EndOfDayScheduler {
+public class OrderSideConverter {
 
-    @Inject private TradingService tradingService;
+    private static FixConverter<OrderSide, Side> fixConverter =
+        new FixConverter<OrderSide, Side>();
 
-    @Schedule(hour="16", minute="00", timezone="America/New_York")
-    public void handleEndOfDay() {
-        tradingService.handleEndOfDay();
+    static {
+        fixConverter.put(OrderSide.Buy, new Side(Side.BUY));
+        fixConverter.put(OrderSide.Sell, new Side(Side.SELL));
+    }
+
+    public static Side toFix(OrderSide side) {
+        return fixConverter.toFix(side);
+    }
+
+    public static OrderSide toDomain(Side side) {
+        return fixConverter.toDomain(side);
     }
 }

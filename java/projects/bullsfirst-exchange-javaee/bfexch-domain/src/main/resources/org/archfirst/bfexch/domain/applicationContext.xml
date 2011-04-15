@@ -19,8 +19,8 @@
 
     <bean class="org.archfirst.bfexch.domain.marketdata.MarketDataRepository" />
     <bean class="org.archfirst.bfexch.domain.marketdata.MarketDataService" />
-    <bean class="org.archfirst.bfexch.domain.matchingengine.MatchingEngine" />
-    <bean class="org.archfirst.bfexch.domain.order.OrderRepository" />
-    <bean class="org.archfirst.bfexch.domain.order.OrderService" />
+    <bean class="org.archfirst.bfexch.domain.trading.MatchingEngine" />
+    <bean class="org.archfirst.bfexch.domain.trading.TradingService" />
+    <bean class="org.archfirst.bfexch.domain.trading.order.OrderRepository" />
 
 </beans>

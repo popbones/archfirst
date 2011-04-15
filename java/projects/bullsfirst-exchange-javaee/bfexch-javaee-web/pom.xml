@@ -33,6 +33,12 @@
 
         <dependency>
             <groupId>org.archfirst</groupId>
+            <artifactId>bfexch-infra-fix-trading</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.archfirst</groupId>
             <artifactId>bfexch-interfacein-oms</artifactId>
             <scope>runtime</scope>
         </dependency>

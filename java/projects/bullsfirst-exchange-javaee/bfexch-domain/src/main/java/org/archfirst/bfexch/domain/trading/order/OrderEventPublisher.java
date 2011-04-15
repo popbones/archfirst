@@ -13,26 +13,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.scheduling;
-
-import javax.ejb.Schedule;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-
-import org.archfirst.bfexch.domain.trading.TradingService;
+package org.archfirst.bfexch.domain.trading.order;
 
 /**
- * EndOfDayScheduler
+ * OrderEventPublisher
  *
  * @author Naresh Bhatia
  */
-@Stateless
-public class EndOfDayScheduler {
-
-    @Inject private TradingService tradingService;
-
-    @Schedule(hour="16", minute="00", timezone="America/New_York")
-    public void handleEndOfDay() {
-        tradingService.handleEndOfDay();
-    }
+public interface OrderEventPublisher {
+    void publish(OrderAccepted event);
+    void publish(OrderExecuted event);
+    void publish(OrderCanceled event);
+    void publish(OrderCancelRejected event);
+    void publish(OrderDoneForDay event);
 }

@@ -25,15 +25,14 @@ import javax.inject.Inject;
 import org.apache.commons.lang.StringUtils;
 import org.archfirst.bfexch.domain.marketdata.MarketDataService;
 import org.archfirst.bfexch.domain.marketdata.MarketPrice;
-import org.archfirst.bfexch.domain.matchingengine.MatchingEngine;
-import org.archfirst.bfexch.domain.order.ExecutionReport;
-import org.archfirst.bfexch.domain.order.ExecutionReportType;
-import org.archfirst.bfexch.domain.order.Order;
-import org.archfirst.bfexch.domain.order.OrderService;
-import org.archfirst.bfexch.domain.order.OrderSide;
-import org.archfirst.bfexch.domain.order.OrderStatus;
-import org.archfirst.bfexch.domain.order.OrderTerm;
-import org.archfirst.bfexch.domain.order.OrderType;
+import org.archfirst.bfexch.domain.trading.MatchingEngine;
+import org.archfirst.bfexch.domain.trading.order.ExecutionReport;
+import org.archfirst.bfexch.domain.trading.order.ExecutionReportType;
+import org.archfirst.bfexch.domain.trading.order.Order;
+import org.archfirst.bfexch.domain.trading.order.OrderSide;
+import org.archfirst.bfexch.domain.trading.order.OrderStatus;
+import org.archfirst.bfexch.domain.trading.order.OrderTerm;
+import org.archfirst.bfexch.domain.trading.order.OrderType;
 import org.archfirst.bfexch.spec.mocks.OrderEventRecorder;
 import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
@@ -52,7 +51,6 @@ public abstract class MatchingEngineBaseTest extends AbstractTransactionalSpecTe
 
     @Inject private MarketDataService marketDataService;
     @Inject private MatchingEngine matchingEngine;
-    @Inject private OrderService orderService;
     @Inject protected OrderEventRecorder eventRecorder;
     
     @BeforeMethod

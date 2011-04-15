@@ -18,13 +18,13 @@ package org.archfirst.bfexch.spec.mocks;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.archfirst.bfexch.domain.order.ExecutionReport;
-import org.archfirst.bfexch.domain.order.OrderAccepted;
-import org.archfirst.bfexch.domain.order.OrderCancelRejected;
-import org.archfirst.bfexch.domain.order.OrderCanceled;
-import org.archfirst.bfexch.domain.order.OrderDoneForDay;
-import org.archfirst.bfexch.domain.order.OrderEventPublisher;
-import org.archfirst.bfexch.domain.order.OrderExecuted;
+import org.archfirst.bfexch.domain.trading.order.ExecutionReport;
+import org.archfirst.bfexch.domain.trading.order.OrderAccepted;
+import org.archfirst.bfexch.domain.trading.order.OrderCancelRejected;
+import org.archfirst.bfexch.domain.trading.order.OrderCanceled;
+import org.archfirst.bfexch.domain.trading.order.OrderDoneForDay;
+import org.archfirst.bfexch.domain.trading.order.OrderEventPublisher;
+import org.archfirst.bfexch.domain.trading.order.OrderExecuted;
 
 /**
  * MockBrokerAdapter

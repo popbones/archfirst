@@ -13,26 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.scheduling;
+package org.archfirst.bfexch.infra.fixtrading.converters;
 
-import javax.ejb.Schedule;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import java.math.BigDecimal;
 
-import org.archfirst.bfexch.domain.trading.TradingService;
+import org.archfirst.common.money.Money;
+
+import quickfix.FieldNotFound;
+import quickfix.field.LastPx;
 
 /**
- * EndOfDayScheduler
+ * LastPriceConverter
  *
  * @author Naresh Bhatia
  */
-@Stateless
-public class EndOfDayScheduler {
+public class LastPriceConverter {
 
-    @Inject private TradingService tradingService;
+    public static LastPx toFix(Money money) {
+        return new LastPx(money.getAmount().doubleValue());
+    }
 
-    @Schedule(hour="16", minute="00", timezone="America/New_York")
-    public void handleEndOfDay() {
-        tradingService.handleEndOfDay();
+    public static Money toDomain(LastPx lastPx)
+            throws FieldNotFound {
+        return new Money(new BigDecimal(Double.toString(lastPx.getValue())));
     }
 }

@@ -13,26 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.scheduling;
+package org.archfirst.bfexch.domain.broker;
 
-import javax.ejb.Schedule;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-
-import org.archfirst.bfexch.domain.trading.TradingService;
+import org.archfirst.bfexch.domain.trading.order.ExecutionReport;
+import org.archfirst.bfexch.domain.trading.order.Order;
 
 /**
- * EndOfDayScheduler
+ * Interface to converts domain entities to exchange messages in text format.
  *
  * @author Naresh Bhatia
  */
-@Stateless
-public class EndOfDayScheduler {
+public interface BrokerMessageGenerator {
 
-    @Inject private TradingService tradingService;
+    String generateExecutionReport(ExecutionReport executionReport);
 
-    @Schedule(hour="16", minute="00", timezone="America/New_York")
-    public void handleEndOfDay() {
-        tradingService.handleEndOfDay();
-    }
+    String generateOrderCancelRejected(Order order);
 }

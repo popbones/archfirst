@@ -15,29 +15,30 @@
     <name>Bullsfirst Exchange - Interface In OMS</name>
 
     <dependencies>
+
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>javax.jms</groupId>
             <artifactId>jms</artifactId>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
             <groupId>org.archfirst</groupId>
             <artifactId>bfexch-domain</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.archfirst</groupId>
-            <artifactId>bfexch-infra-fix-trading</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.jboss.ejb3</groupId>
             <artifactId>jboss-ejb3-api</artifactId>
             <scope>provided</scope>
         </dependency>
+
     </dependencies>
 
 </project>

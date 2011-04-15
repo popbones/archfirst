@@ -13,26 +13,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.scheduling;
+package org.archfirst.bfexch.infra.fixtrading.converters;
 
-import javax.ejb.Schedule;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
+import org.archfirst.common.quantity.DecimalQuantity;
 
-import org.archfirst.bfexch.domain.trading.TradingService;
+import quickfix.FieldNotFound;
+import quickfix.field.CumQty;
 
 /**
- * EndOfDayScheduler
+ * CumQtyConverter
  *
  * @author Naresh Bhatia
  */
-@Stateless
-public class EndOfDayScheduler {
+public class CumQtyConverter {
 
-    @Inject private TradingService tradingService;
+    public static CumQty toFix(DecimalQuantity quantity) {
+        return new CumQty(quantity.doubleValue());
+    }
 
-    @Schedule(hour="16", minute="00", timezone="America/New_York")
-    public void handleEndOfDay() {
-        tradingService.handleEndOfDay();
+    public static DecimalQuantity toDomain(CumQty cumQty)
+            throws FieldNotFound {
+        return new DecimalQuantity(cumQty.getValue());
     }
 }

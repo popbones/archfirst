@@ -13,26 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.scheduling;
+package org.archfirst.bfexch.infra.fixtrading.converters;
 
-import javax.ejb.Schedule;
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-
-import org.archfirst.bfexch.domain.trading.TradingService;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * EndOfDayScheduler
+ * FixConverter
  *
  * @author Naresh Bhatia
  */
-@Stateless
-public class EndOfDayScheduler {
+public class FixConverter<D, F> {
 
-    @Inject private TradingService tradingService;
+    private Map<D, F> domainToFixMap = new HashMap<D, F>();
+    private Map<F, D> fixToDomainMap = new HashMap<F, D>();
 
-    @Schedule(hour="16", minute="00", timezone="America/New_York")
-    public void handleEndOfDay() {
-        tradingService.handleEndOfDay();
+    public void put(D d, F f) {
+        domainToFixMap.put(d, f);
+        fixToDomainMap.put(f, d);
+    }
+
+    public F toFix(D d) {
+        return domainToFixMap.get(d);
+    }
+
+    public D toDomain(F f) {
+        return fixToDomainMap.get(f);
     }
 }

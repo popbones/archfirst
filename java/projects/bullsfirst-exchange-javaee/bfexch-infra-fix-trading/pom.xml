@@ -12,9 +12,15 @@
     <modelVersion>4.0.0</modelVersion>
     <artifactId>bfexch-infra-fix-trading</artifactId>
     <packaging>jar</packaging>
-    <name>Bullsfirst Exchange - Infrastructure</name>
+    <name>Bullsfirst Exchange - Infrastructure FIX Trading</name>
 
     <dependencies>
+
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.archfirst</groupId>
