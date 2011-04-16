@@ -67,6 +67,12 @@
 
             <dependency>
                 <groupId>org.archfirst</groupId>
+                <artifactId>bfoms-infra-json-trading</artifactId>
+                <version>${org.archfirst.bfoms.common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.archfirst</groupId>
                 <artifactId>bfoms-interfacein-exchange</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -148,7 +154,7 @@
             </activation>
             <build>
                 <plugins>
-                <!-- Do not run tests by default -->
+                    <!-- Do not run tests by default -->
                     <plugin>
 						<groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>

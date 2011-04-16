@@ -71,6 +71,12 @@
 
             <dependency>
                 <groupId>org.archfirst</groupId>
+                <artifactId>bfexch-infra-json-trading</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.archfirst</groupId>
                 <artifactId>bfexch-interfacein-oms</artifactId>
                 <version>${project.version}</version>
             </dependency>
@@ -192,6 +198,7 @@
         <module>bfexch-ddl</module>
         <module>bfexch-domain</module>
         <module>bfexch-infra-fix-trading</module>
+        <module>bfexch-infra-json-trading</module>
         <module>bfexch-interfacein-oms</module>
         <module>bfexch-interfaceout-oms</module>
         <module>bfexch-javaee-web</module>

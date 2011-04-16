@@ -42,9 +42,10 @@
             <artifactId>bfoms-common-domain</artifactId>
         </dependency>
 
+        <!-- FIX/JSON: Choose between fix or json -->
         <dependency>
             <groupId>org.archfirst</groupId>
-            <artifactId>bfoms-infra-fix-trading</artifactId>
+            <artifactId>bfoms-infra-json-trading</artifactId>
             <scope>runtime</scope>
         </dependency>
 

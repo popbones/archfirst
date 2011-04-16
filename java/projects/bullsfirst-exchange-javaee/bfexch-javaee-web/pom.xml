@@ -31,9 +31,10 @@
             <artifactId>bfexch-domain</artifactId>
         </dependency>
 
+        <!-- FIX/JSON: Choose between fix or json -->
         <dependency>
             <groupId>org.archfirst</groupId>
-            <artifactId>bfexch-infra-fix-trading</artifactId>
+            <artifactId>bfexch-infra-json-trading</artifactId>
             <scope>runtime</scope>
         </dependency>
 

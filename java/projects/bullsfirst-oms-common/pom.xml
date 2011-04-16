@@ -171,6 +171,7 @@
         <module>bfoms-common-spec</module>
         <module>bfoms-infra</module>
         <module>bfoms-infra-fix-trading</module>
+        <module>bfoms-infra-json-trading</module>
         <module>bfoms-interfaceout-exchange</module>
     </modules>
 

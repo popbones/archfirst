@@ -5,14 +5,14 @@
 
     <parent>
         <groupId>org.archfirst</groupId>
-        <artifactId>bfexch-javaee</artifactId>
+        <artifactId>bfoms-common</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>bfexch-infra-fix-trading</artifactId>
+    <artifactId>bfoms-infra-json-trading</artifactId>
     <packaging>jar</packaging>
-    <name>Bullsfirst Exchange - Infrastructure FIX Trading</name>
+    <name>Bullsfirst OMS Common - Infrastructure JSON Trading</name>
 
     <dependencies>
 
@@ -24,12 +24,12 @@
 
         <dependency>
             <groupId>org.archfirst</groupId>
-            <artifactId>bfexch-domain</artifactId>
+            <artifactId>bfoms-common-domain</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>quickfixj</groupId>
-            <artifactId>quickfixj-all</artifactId>
+            <groupId>org.archfirst</groupId>
+            <artifactId>bfoms-infra</artifactId>
         </dependency>
 
     </dependencies>

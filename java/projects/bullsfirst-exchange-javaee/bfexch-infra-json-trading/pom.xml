@@ -10,9 +10,9 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>bfexch-infra-fix-trading</artifactId>
+    <artifactId>bfexch-infra-json-trading</artifactId>
     <packaging>jar</packaging>
-    <name>Bullsfirst Exchange - Infrastructure FIX Trading</name>
+    <name>Bullsfirst Exchange - Infrastructure JSON Trading</name>
 
     <dependencies>
 
@@ -25,11 +25,6 @@
         <dependency>
             <groupId>org.archfirst</groupId>
             <artifactId>bfexch-domain</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>quickfixj</groupId>
-            <artifactId>quickfixj-all</artifactId>
         </dependency>
 
     </dependencies>
