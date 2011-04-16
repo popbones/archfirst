@@ -142,7 +142,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
     /**
      * Processes the specified execution report and returns a trade if the
      * order is closed and all of the execution reports have been received.
-     * Note that because of parallel processing of FIX messages it is
+     * Note that because of parallel processing of incoming messages it is
      * possible to receive execution reports in a random order. To work around
      * this issue, this method "closes" the order only if it is in a closed
      * state (Filled, Canceled or DoneForDay) and the filled quantity recorded
