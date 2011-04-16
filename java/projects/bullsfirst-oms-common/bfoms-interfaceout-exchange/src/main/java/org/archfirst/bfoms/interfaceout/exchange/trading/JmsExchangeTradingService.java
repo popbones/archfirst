@@ -31,7 +31,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * FixExchangeTradingService
+ * JmsExchangeTradingService
  *
  * @author Naresh Bhatia
  */
@@ -42,7 +42,7 @@ public class JmsExchangeTradingService implements ExchangeTradingService {
     @Resource(mappedName="jms/ConnectionFactory")
     private ConnectionFactory connectionFactory;
 
-    @Resource(mappedName="jms/OmsToExchangeFixQueue")
+    @Resource(mappedName="jms/OmsToExchangeQueue")
     private Destination destination;
 
     @Inject private ExchangeMessageGenerator exchangeMessageGenerator;
@@ -70,7 +70,7 @@ public class JmsExchangeTradingService implements ExchangeTradingService {
             producer.send(session.createTextMessage(messageText));
         }
         catch (JMSException e) {
-            throw new RuntimeException("Failed to send FIX message", e);
+            throw new RuntimeException("Failed to send message to exchange", e);
         }
         finally {
             if (connection != null)

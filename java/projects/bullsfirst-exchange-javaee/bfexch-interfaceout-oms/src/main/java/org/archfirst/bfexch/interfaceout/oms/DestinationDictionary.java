@@ -39,10 +39,10 @@ public class DestinationDictionary {
      */
     private volatile Map<String, Destination> destinationMap = null;
 
-    @Resource(mappedName="jms/ExchangeToOmsJavaeeFixQueue")
+    @Resource(mappedName="jms/ExchangeToOmsJavaeeQueue")
     private Destination jveeDestination;
     
-    @Resource(mappedName="jms/ExchangeToOmsSpringFixQueue")
+    @Resource(mappedName="jms/ExchangeToOmsSpringQueue")
     private Destination spngDestination;
     
     // ----- Queries and Read-Only Operations -----

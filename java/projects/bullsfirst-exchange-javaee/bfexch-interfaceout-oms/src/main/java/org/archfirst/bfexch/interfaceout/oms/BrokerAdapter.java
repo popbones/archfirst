@@ -100,7 +100,7 @@ public class BrokerAdapter {
             producer.send(session.createTextMessage(messageText));
         }
         catch (JMSException e) {
-            throw new RuntimeException("Failed to send FIX message", e);
+            throw new RuntimeException("Failed to send message to broker", e);
         }
         finally {
             if (connection != null)

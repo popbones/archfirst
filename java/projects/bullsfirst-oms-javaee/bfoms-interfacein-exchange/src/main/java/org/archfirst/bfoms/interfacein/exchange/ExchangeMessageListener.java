@@ -31,7 +31,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Naresh Bhatia
  */
-@MessageDriven(mappedName="jms/ExchangeToOmsJavaeeFixQueue")
+@MessageDriven(mappedName="jms/ExchangeToOmsJavaeeQueue")
 public class ExchangeMessageListener implements MessageListener {
     private static final Logger logger =
         LoggerFactory.getLogger(ExchangeMessageListener.class);
