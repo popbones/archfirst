@@ -101,6 +101,18 @@ public class JsonMessageMapper {
                     payload = mapper.readValue(
                             rootNode.path("payload"), NewOrderSingle.class);
                     break;
+                case ExecutionReport:
+                    payload = mapper.readValue(
+                            rootNode.path("payload"), ExecutionReport.class);
+                    break;
+                case OrderCancelRequest:
+                    payload = mapper.readValue(
+                            rootNode.path("payload"), OrderCancelRequest.class);
+                    break;
+                case OrderCancelReject:
+                    payload = mapper.readValue(
+                            rootNode.path("payload"), OrderCancelReject.class);
+                    break;
             }
 
             return new JsonMessage(messageType, payload);
