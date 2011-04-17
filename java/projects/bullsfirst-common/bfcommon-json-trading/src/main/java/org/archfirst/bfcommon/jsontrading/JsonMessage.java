@@ -15,44 +15,37 @@
  */
 package org.archfirst.bfcommon.jsontrading;
 
-import java.math.BigDecimal;
-
 /**
- * Money
+ * JsonMessage
  *
  * @author Naresh Bhatia
  */
-public class Money {
-
-    private BigDecimal amount;
-    private String currency;
+public class JsonMessage {
+    
+    private MessageType messageType;
+    private Object payload;
 
     // ----- Constructor -----
-    private Money() {
+    public JsonMessage() {
     }
 
-    public Money(BigDecimal amount, String currency) {
-        this.amount = amount;
-        this.currency = currency;
-    }
-
-    public Money(String amount, String currency) {
-        this.amount = new BigDecimal(amount);
-        this.currency = currency;
+    public JsonMessage(MessageType messageType, Object payload) {
+        this.messageType = messageType;
+        this.payload = payload;
     }
 
     // ----- Getters and Setters -----
-    public BigDecimal getAmount() {
-        return amount;
+    public MessageType getMessageType() {
+        return messageType;
     }
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setMessageType(MessageType messageType) {
+        this.messageType = messageType;
     }
 
-    public String getCurrency() {
-        return currency;
+    public Object getPayload() {
+        return payload;
     }
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setPayload(Object payload) {
+        this.payload = payload;
     }
 }

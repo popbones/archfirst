@@ -48,7 +48,8 @@ public class Order {
             OrderType type,
             Money limitPrice,
             OrderTerm term,
-            boolean allOrNone) {
+            boolean allOrNone,
+            OrderStatus status) {
         this.creationTime = creationTime;
         this.clientOrderId = clientOrderId;
         this.side = side;
@@ -58,6 +59,7 @@ public class Order {
         this.limitPrice = limitPrice;
         this.term = term;
         this.allOrNone = allOrNone;
+        this.status = status;
     }
 
     // ----- Getters and Setters -----

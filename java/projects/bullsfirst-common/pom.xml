@@ -15,6 +15,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <org.slf4j.version>1.6.1</org.slf4j.version>
+        <org.codehaus.jackson.version>1.7.6</org.codehaus.jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -28,6 +29,16 @@
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.16</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${org.codehaus.jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${org.codehaus.jackson.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.slf4j</groupId>

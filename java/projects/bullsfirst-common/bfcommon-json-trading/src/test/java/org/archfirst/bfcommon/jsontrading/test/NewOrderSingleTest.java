@@ -15,6 +15,20 @@
  */
 package org.archfirst.bfcommon.jsontrading.test;
 
+import org.archfirst.bfcommon.jsontrading.JsonMessage;
+import org.archfirst.bfcommon.jsontrading.JsonMessageMapper;
+import org.archfirst.bfcommon.jsontrading.MessageType;
+import org.archfirst.bfcommon.jsontrading.Money;
+import org.archfirst.bfcommon.jsontrading.NewOrderSingle;
+import org.archfirst.bfcommon.jsontrading.Order;
+import org.archfirst.bfcommon.jsontrading.OrderSide;
+import org.archfirst.bfcommon.jsontrading.OrderStatus;
+import org.archfirst.bfcommon.jsontrading.OrderTerm;
+import org.archfirst.bfcommon.jsontrading.OrderType;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
+import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 /**
@@ -23,8 +37,68 @@ import org.testng.annotations.Test;
  * @author Naresh Bhatia
  */
 public class NewOrderSingleTest {
+    
+    private JsonMessageMapper mapper = null;
+
+    @BeforeClass
+    public void setUp() {
+        mapper = new JsonMessageMapper();
+    }
 
     @Test
-    public void testSomething() {
+    public void testNewOrderSingle() throws Exception {
+        
+        // Create 2011-01-01T09:00:00.000-04:00
+        DateTime orderDate = new DateTime(
+                2011, 1, 1, 9, 0, 0, 0, DateTimeZone.forOffsetHours(-4));
+        
+        // Create a JsonMessage with NewOrderSingle
+        Order order = new Order(
+                orderDate,
+                "JVEE-1",
+                OrderSide.Buy,
+                "AAPL",
+                100,
+                OrderType.Limit,
+                new Money("100.00", "USD"),
+                OrderTerm.GoodForTheDay,
+                false,
+                OrderStatus.PendingNew);
+        NewOrderSingle newOrderSingle = new NewOrderSingle(order);
+        JsonMessage jsonMessage =
+            new JsonMessage(MessageType.NewOrderSingle, newOrderSingle);
+
+        // Write out the JsonMessage as a string
+        String jsonMessageString = mapper.toFormattedString(jsonMessage);
+        
+        // Read the JsonMessage back
+        JsonMessage jsonMessageRead = mapper.fromString(jsonMessageString);
+        
+        // Make sure that the message type has been retrieved properly
+        Assert.assertEquals(
+                jsonMessageRead.getMessageType(), MessageType.NewOrderSingle);
+        
+        // Make sure that the order has been retrieved properly
+        Order orderRead =
+            ((NewOrderSingle)jsonMessageRead.getPayload()).getOrder();
+
+        // Can't compare the two DateTime objects with equals
+        // because deserialization loses the time zone
+        Assert.assertTrue(orderRead.getCreationTime().isEqual(order.getCreationTime()));
+        
+        Assert.assertEquals(orderRead.getClientOrderId(), order.getClientOrderId());
+        Assert.assertEquals(orderRead.getSide(), order.getSide());
+        Assert.assertEquals(orderRead.getSymbol(), order.getSymbol());
+        Assert.assertEquals(orderRead.getQuantity(), order.getQuantity());
+        Assert.assertEquals(orderRead.getType(), order.getType());
+
+        // Can't compare the two BigDecimal objects with equals
+        // because precision may be different (e.g. 100.0 and 100.00)
+        Assert.assertEquals(orderRead.getLimitPrice().getAmount().compareTo(order.getLimitPrice().getAmount()), 0);
+
+        Assert.assertEquals(orderRead.getLimitPrice().getCurrency(), order.getLimitPrice().getCurrency());
+        Assert.assertEquals(orderRead.getTerm(), order.getTerm());
+        Assert.assertEquals(orderRead.isAllOrNone(), order.isAllOrNone());
+        Assert.assertEquals(orderRead.getStatus(), order.getStatus());
     }
 }

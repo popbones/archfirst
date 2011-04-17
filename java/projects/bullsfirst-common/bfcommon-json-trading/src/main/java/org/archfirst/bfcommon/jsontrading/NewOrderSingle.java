@@ -15,44 +15,28 @@
  */
 package org.archfirst.bfcommon.jsontrading;
 
-import java.math.BigDecimal;
-
 /**
- * Money
+ * NewOrderSingle
  *
  * @author Naresh Bhatia
  */
-public class Money {
-
-    private BigDecimal amount;
-    private String currency;
+public class NewOrderSingle {
+    
+    private Order order;
 
     // ----- Constructor -----
-    private Money() {
+    public NewOrderSingle() {
     }
 
-    public Money(BigDecimal amount, String currency) {
-        this.amount = amount;
-        this.currency = currency;
-    }
-
-    public Money(String amount, String currency) {
-        this.amount = new BigDecimal(amount);
-        this.currency = currency;
+    public NewOrderSingle(Order order) {
+        this.order = order;
     }
 
     // ----- Getters and Setters -----
-    public BigDecimal getAmount() {
-        return amount;
+    public Order getOrder() {
+        return order;
     }
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-    public void setCurrency(String currency) {
-        this.currency = currency;
+    public void setOrder(Order order) {
+        this.order = order;
     }
 }
