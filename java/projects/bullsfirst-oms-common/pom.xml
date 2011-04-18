@@ -21,6 +21,7 @@
 
         <!-- Package versions -->
         <org.archfirst.afcommon.version>1.0-SNAPSHOT</org.archfirst.afcommon.version>
+        <org.archfirst.bfcommon.version>1.0-SNAPSHOT</org.archfirst.bfcommon.version>
     </properties>
 
     <dependencyManagement>
@@ -48,6 +49,12 @@
                 <groupId>org.archfirst</groupId>
                 <artifactId>afcommon-util</artifactId>
                 <version>${org.archfirst.afcommon.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.archfirst</groupId>
+                <artifactId>bfcommon-json-trading</artifactId>
+                <version>${org.archfirst.bfcommon.version}</version>
             </dependency>
 
             <dependency>

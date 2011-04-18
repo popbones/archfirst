@@ -13,19 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.domain.broker;
+package org.archfirst.bfoms.infra.jsontrading.converters;
 
-import org.archfirst.bfexch.domain.trading.order.ExecutionReport;
-import org.archfirst.bfexch.domain.trading.order.Order;
+import org.apache.commons.lang.StringUtils;
 
 /**
- * Interface to converts domain entities to exchange messages in text format.
+ * ClOrdIDConverter
  *
  * @author Naresh Bhatia
  */
-public interface BrokerMessageGenerator {
-
-    String generateExecutionReport(ExecutionReport executionReport);
-
-    String generateOrderCancelReject(Order order);
+public class ClOrdIDConverter {
+    
+    /** Returns a ClOrdID in the format brokerId-orderId, e.g. JVEE-300. */
+    public static String toJson(String brokerId, Long orderId) {
+        return brokerId + "-" + orderId.toString();
+    }
+    
+    public static Long toDomain(String clOrdID) {
+        return new Long(StringUtils.substring(clOrdID, 5));
+    }
 }

@@ -54,6 +54,8 @@ public class FixExchangeMessageGenerator implements ExchangeMessageGenerator {
     @Override
     public String generateNewOrderSingleMessage(Order order) {
 
+        logger.debug("Generating NewOrderSingle: {}", order);
+
         NewOrderSingle fixMessage = new NewOrderSingle(
                 ClOrdIDConverter.toFix(getBrokerId(), order.getId()),
                 OrderSideConverter.toFix(order.getSide()),

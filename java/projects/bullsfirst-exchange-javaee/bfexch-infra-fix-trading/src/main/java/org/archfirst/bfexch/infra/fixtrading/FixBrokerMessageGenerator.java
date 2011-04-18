@@ -91,7 +91,7 @@ public class FixBrokerMessageGenerator implements BrokerMessageGenerator {
     }
 
     @Override
-    public String generateOrderCancelRejected(Order order) {
+    public String generateOrderCancelReject(Order order) {
         quickfix.fix44.OrderCancelReject fixMessage =
             new quickfix.fix44.OrderCancelReject(
                     new OrderID(order.getId().toString()),

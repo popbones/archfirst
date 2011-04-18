@@ -17,8 +17,18 @@ package org.archfirst.bfoms.infra.jsontrading;
 
 import javax.inject.Inject;
 
+import org.archfirst.bfcommon.jsontrading.ExecutionReport;
+import org.archfirst.bfcommon.jsontrading.JsonMessage;
+import org.archfirst.bfcommon.jsontrading.JsonMessageMapper;
+import org.archfirst.bfcommon.jsontrading.OrderCancelReject;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
+import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReportType;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.exchange.ExchangeMessageProcessor;
+import org.archfirst.bfoms.infra.jsontrading.converters.ClOrdIDConverter;
+import org.archfirst.bfoms.infra.jsontrading.converters.MoneyConverter;
+import org.archfirst.bfoms.infra.jsontrading.converters.QuantityConverter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,5 +45,49 @@ public class JsonExchangeMessageProcessor implements ExchangeMessageProcessor {
 
     @Override
     public void processMessage(String messageText) {
+
+        // Parse the message
+        JsonMessageMapper mapper = new JsonMessageMapper();
+        JsonMessage jsonMessage = mapper.fromString(messageText);
+        logger.debug("Received message:\n{}", mapper.toFormattedString(jsonMessage));
+        
+        // Dispatch to the correct handler
+        switch(jsonMessage.getMessageType()) {
+            case ExecutionReport:
+                this.onMessage((ExecutionReport)jsonMessage.getPayload());
+                break;
+            case OrderCancelReject:
+                this.onMessage((OrderCancelReject)jsonMessage.getPayload());
+                break;
+        }
+    }
+    
+    private void onMessage(ExecutionReport jsonEr) {
+
+        // Convert to domain ExecutionReport
+        org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport er =
+            new org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport(
+                    ExecutionReportType.valueOf(jsonEr.getType().toString()),
+                    jsonEr.getOrderId(),
+                    jsonEr.getExecutionId(),
+                    ClOrdIDConverter.toDomain(jsonEr.getClientOrderId()),
+                    OrderStatus.valueOf(jsonEr.getOrderStatus().toString()),
+                    OrderSide.valueOf(jsonEr.getSide().toString()),
+                    jsonEr.getSymbol(),
+                    QuantityConverter.toDomain(jsonEr.getLastQty()),
+                    QuantityConverter.toDomain(jsonEr.getLeavesQty()),
+                    QuantityConverter.toDomain(jsonEr.getCumQty()),
+                    MoneyConverter.toDomain(jsonEr.getLastPrice()),
+                    MoneyConverter.toDomain(jsonEr.getWeightedAvgPrice()));
+
+        // Send to brokerageAccountService for processing
+        brokerageAccountService.processExecutionReport(er);
+    }
+
+    private void onMessage(OrderCancelReject orderCancelReject) {
+        
+        brokerageAccountService.processOrderCancelReject(
+                ClOrdIDConverter.toDomain(orderCancelReject.getClientOrderId()),
+                OrderStatus.valueOf(orderCancelReject.getOrderStatus().toString()));
     }
 }

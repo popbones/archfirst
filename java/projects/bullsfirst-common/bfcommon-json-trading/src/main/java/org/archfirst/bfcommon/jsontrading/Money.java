@@ -28,7 +28,7 @@ public class Money {
     private String currency;
 
     // ----- Constructor -----
-    private Money() {
+    public Money() {
     }
 
     public Money(BigDecimal amount, String currency) {

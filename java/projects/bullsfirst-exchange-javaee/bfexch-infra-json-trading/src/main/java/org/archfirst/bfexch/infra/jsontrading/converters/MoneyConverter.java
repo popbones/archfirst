@@ -13,28 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.infra.fixtrading.converters;
+package org.archfirst.bfexch.infra.jsontrading.converters;
 
-import org.apache.commons.lang.StringUtils;
-
-import quickfix.field.ClOrdID;
+import org.archfirst.common.money.Money;
 
 /**
- * ClOrdIDConverter
+ * MoneyConverter
  *
  * @author Naresh Bhatia
  */
-public class ClOrdIDConverter {
-    
-    /** Returns a ClOrdID in the format brokerId-orderId, e.g. JVEE-300. */
-    public static ClOrdID toFix(String brokerId, Long orderId) {
-        return new ClOrdID(
-                brokerId +
-                "-" +
-                orderId.toString());
+public class MoneyConverter {
+
+    public static org.archfirst.bfcommon.jsontrading.Money toJson(Money money) {
+        return (money == null) ? null : new org.archfirst.bfcommon.jsontrading.Money(
+                money.getAmount(), money.getCurrency().toString());
     }
     
-    public static Long toDomain(ClOrdID clOrdID) {
-        return new Long(StringUtils.substring(clOrdID.getValue(), 5));
+    public static Money toDomain(org.archfirst.bfcommon.jsontrading.Money money) {
+        return (money == null) ? null : new Money(
+                money.getAmount(),
+                java.util.Currency.getInstance(money.getCurrency()));
     }
 }

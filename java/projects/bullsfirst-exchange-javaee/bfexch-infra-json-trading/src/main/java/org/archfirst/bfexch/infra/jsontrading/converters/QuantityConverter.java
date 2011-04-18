@@ -13,19 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.domain.broker;
+package org.archfirst.bfexch.infra.jsontrading.converters;
 
-import org.archfirst.bfexch.domain.trading.order.ExecutionReport;
-import org.archfirst.bfexch.domain.trading.order.Order;
+import org.archfirst.common.quantity.DecimalQuantity;
 
 /**
- * Interface to converts domain entities to exchange messages in text format.
+ * QuantityConverter
  *
  * @author Naresh Bhatia
  */
-public interface BrokerMessageGenerator {
+public class QuantityConverter {
 
-    String generateExecutionReport(ExecutionReport executionReport);
-
-    String generateOrderCancelReject(Order order);
+    public static int toJson(DecimalQuantity quantity) {
+        return (quantity == null) ? 0 : quantity.getValue().intValue();
+    }
+    
+    public static DecimalQuantity toDomain(int quantity) {
+        return new DecimalQuantity(quantity);
+    }
 }

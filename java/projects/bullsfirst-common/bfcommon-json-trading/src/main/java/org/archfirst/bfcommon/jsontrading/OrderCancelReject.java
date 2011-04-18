@@ -23,21 +23,29 @@ package org.archfirst.bfcommon.jsontrading;
 public class OrderCancelReject {
     
     private String clientOrderId;
+    private OrderStatus orderStatus;
 
     // ----- Constructors -----
     public OrderCancelReject() {
     }
 
-    public OrderCancelReject(String clientOrderId) {
+    public OrderCancelReject(String clientOrderId, OrderStatus orderStatus) {
         this.clientOrderId = clientOrderId;
+        this.orderStatus = orderStatus;
     }
 
     // ----- Getters and Setters -----
     public String getClientOrderId() {
         return clientOrderId;
     }
-
     public void setClientOrderId(String clientOrderId) {
         this.clientOrderId = clientOrderId;
+    }
+
+    public OrderStatus getOrderStatus() {
+        return orderStatus;
+    }
+    public void setOrderStatus(OrderStatus orderStatus) {
+        this.orderStatus = orderStatus;
     }
 }

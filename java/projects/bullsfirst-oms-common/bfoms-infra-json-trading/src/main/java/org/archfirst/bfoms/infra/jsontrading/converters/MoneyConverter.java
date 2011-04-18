@@ -13,19 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.domain.broker;
+package org.archfirst.bfoms.infra.jsontrading.converters;
 
-import org.archfirst.bfexch.domain.trading.order.ExecutionReport;
-import org.archfirst.bfexch.domain.trading.order.Order;
+import org.archfirst.common.money.Money;
 
 /**
- * Interface to converts domain entities to exchange messages in text format.
+ * MoneyConverter
  *
  * @author Naresh Bhatia
  */
-public interface BrokerMessageGenerator {
+public class MoneyConverter {
 
-    String generateExecutionReport(ExecutionReport executionReport);
-
-    String generateOrderCancelReject(Order order);
+    public static org.archfirst.bfcommon.jsontrading.Money toJson(Money money) {
+        return (money == null) ? null : new org.archfirst.bfcommon.jsontrading.Money(
+                money.getAmount(), money.getCurrency().toString());
+    }
+    
+    public static Money toDomain(org.archfirst.bfcommon.jsontrading.Money money) {
+        return (money == null) ? null : new Money(
+                money.getAmount(),
+                java.util.Currency.getInstance(money.getCurrency()));
+    }
 }

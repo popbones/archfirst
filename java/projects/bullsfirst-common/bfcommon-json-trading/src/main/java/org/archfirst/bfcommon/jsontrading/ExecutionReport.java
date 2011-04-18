@@ -15,8 +15,6 @@
  */
 package org.archfirst.bfcommon.jsontrading;
 
-import java.math.BigDecimal;
-
 /**
  * ExecutionReport
  *
@@ -30,9 +28,9 @@ public class ExecutionReport {
     private OrderStatus orderStatus;
     private OrderSide side;
     private String symbol;
-    private BigDecimal lastQty;
-    private BigDecimal leavesQty;
-    private BigDecimal cumQty;
+    private int lastQty;
+    private int leavesQty;
+    private int cumQty;
     private Money lastPrice;
     private Money weightedAvgPrice;
 
@@ -48,9 +46,9 @@ public class ExecutionReport {
             OrderStatus orderStatus,
             OrderSide side,
             String symbol,
-            BigDecimal lastQty,
-            BigDecimal leavesQty,
-            BigDecimal cumQty,
+            int lastQty,
+            int leavesQty,
+            int cumQty,
             Money lastPrice,
             Money weightedAvgPrice) {
         this.type = type;
@@ -117,24 +115,24 @@ public class ExecutionReport {
         this.symbol = symbol;
     }
 
-    public BigDecimal getLastQty() {
+    public int getLastQty() {
         return lastQty;
     }
-    public void setLastQty(BigDecimal lastQty) {
+    public void setLastQty(int lastQty) {
         this.lastQty = lastQty;
     }
 
-    public BigDecimal getLeavesQty() {
+    public int getLeavesQty() {
         return leavesQty;
     }
-    public void setLeavesQty(BigDecimal leavesQty) {
+    public void setLeavesQty(int leavesQty) {
         this.leavesQty = leavesQty;
     }
 
-    public BigDecimal getCumQty() {
+    public int getCumQty() {
         return cumQty;
     }
-    public void setCumQty(BigDecimal cumQty) {
+    public void setCumQty(int cumQty) {
         this.cumQty = cumQty;
     }
 

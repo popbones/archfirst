@@ -71,7 +71,6 @@ public class FixBrokerMessageProcessor extends MessageCracker
                     messageText);
             logger.debug("Received message:\n{}", FixFormatter.format(fixMessage));
             this.fromApp(fixMessage, null);
-            logger.debug("Processed message:\n{}", FixFormatter.format(fixMessage));
         }
         catch (InvalidMessage e) {
             logger.error("Invalid FIX message received: " + messageText, e);

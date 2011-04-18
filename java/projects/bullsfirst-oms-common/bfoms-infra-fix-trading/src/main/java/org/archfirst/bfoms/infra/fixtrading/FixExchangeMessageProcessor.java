@@ -18,7 +18,6 @@ package org.archfirst.bfoms.infra.fixtrading;
 import javax.inject.Inject;
 
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
-import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.exchange.ExchangeMessageProcessor;
 import org.archfirst.bfoms.infra.fixtrading.converters.AvgPriceConverter;
 import org.archfirst.bfoms.infra.fixtrading.converters.ClOrdIDConverter;
@@ -71,7 +70,6 @@ public class FixExchangeMessageProcessor extends MessageCracker
                     messageText);
             logger.debug("Received message:\n{}", FixFormatter.format(fixMessage));
             this.fromApp(fixMessage, null);
-            logger.debug("Processed message:\n{}", FixFormatter.format(fixMessage));
         }
         catch (InvalidMessage e) {
             logger.error("Invalid FIX message received: " + messageText, e);
@@ -131,16 +129,9 @@ public class FixExchangeMessageProcessor extends MessageCracker
     @Override
     public void onMessage(OrderCancelReject message, SessionID sessionID)
             throws FieldNotFound, UnsupportedMessageType, IncorrectTagValue {
-
-        // Get the order
-        Long orderId = OrigClOrdIDConverter.toDomain(message.getOrigClOrdID());
-        Order order = brokerageAccountService.findOrder(orderId);
-        if (order == null) {
-            logger.error("OrderCancelReject: order {} not found", orderId);
-        }
-
-        // Send it the new status
-        order.cancelRequestRejected(
+        
+        brokerageAccountService.processOrderCancelReject(
+                OrigClOrdIDConverter.toDomain(message.getOrigClOrdID()),
                 OrderStatusConverter.toDomain(message.getOrdStatus()));
     }
 

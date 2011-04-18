@@ -17,8 +17,19 @@ package org.archfirst.bfexch.infra.jsontrading;
 
 import javax.inject.Inject;
 
+import org.archfirst.bfcommon.jsontrading.JsonMessage;
+import org.archfirst.bfcommon.jsontrading.JsonMessageMapper;
+import org.archfirst.bfcommon.jsontrading.NewOrderSingle;
+import org.archfirst.bfcommon.jsontrading.OrderCancelRequest;
 import org.archfirst.bfexch.domain.broker.BrokerMessageProcessor;
 import org.archfirst.bfexch.domain.trading.TradingService;
+import org.archfirst.bfexch.domain.trading.order.Order;
+import org.archfirst.bfexch.domain.trading.order.OrderSide;
+import org.archfirst.bfexch.domain.trading.order.OrderTerm;
+import org.archfirst.bfexch.domain.trading.order.OrderType;
+import org.archfirst.bfexch.infra.jsontrading.converters.MoneyConverter;
+import org.archfirst.bfexch.infra.jsontrading.converters.QuantityConverter;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,5 +46,45 @@ public class JsonBrokerMessageProcessor implements BrokerMessageProcessor {
 
     @Override
     public void processMessage(String messageText) {
+
+        // Parse the message
+        JsonMessageMapper mapper = new JsonMessageMapper();
+        JsonMessage jsonMessage = mapper.fromString(messageText);
+        logger.debug("Received message:\n{}", mapper.toFormattedString(jsonMessage));
+        
+        // Dispatch to the correct handler
+        switch(jsonMessage.getMessageType()) {
+            case NewOrderSingle:
+                this.onMessage((NewOrderSingle)jsonMessage.getPayload());
+                break;
+            case OrderCancelRequest:
+                this.onMessage((OrderCancelRequest)jsonMessage.getPayload());
+                break;
+        }
+    }
+    
+    private void onMessage(NewOrderSingle newOrderSingle) {
+
+        // Extract Order
+        org.archfirst.bfcommon.jsontrading.Order jsonOrder = newOrderSingle.getOrder();
+        Order order = new Order(
+                //jsonOrder.getCreationTime(),
+                new DateTime(),
+                jsonOrder.getClientOrderId(),
+                OrderSide.valueOf(jsonOrder.getSide().toString()),
+                jsonOrder.getSymbol(),
+                QuantityConverter.toDomain(jsonOrder.getQuantity()),
+                OrderType.valueOf(jsonOrder.getType().toString()),
+                MoneyConverter.toDomain(jsonOrder.getLimitPrice()),
+                OrderTerm.valueOf(jsonOrder.getTerm().toString()),
+                jsonOrder.isAllOrNone());
+
+        // Place order
+        tradingService.processNewOrderSingle(order);
+    }
+
+    private void onMessage(OrderCancelRequest orderCancelRequest) {
+        tradingService.processOrderCancelRequest(
+                orderCancelRequest.getClientOrderId());
     }
 }

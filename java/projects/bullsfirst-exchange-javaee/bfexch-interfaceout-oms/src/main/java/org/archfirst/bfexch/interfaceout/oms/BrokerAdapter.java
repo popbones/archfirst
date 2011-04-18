@@ -82,7 +82,7 @@ public class BrokerAdapter {
 
         sendJmsMessage(
                 ClOrdIDParser.getBrokerId(order.getClientOrderId()),
-                brokerMessageGenerator.generateOrderCancelRejected(order));
+                brokerMessageGenerator.generateOrderCancelReject(order));
     }
 
     private void sendJmsMessage(final String brokerId, String messageText) {

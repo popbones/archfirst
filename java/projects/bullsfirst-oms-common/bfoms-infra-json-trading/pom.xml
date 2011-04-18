@@ -24,6 +24,11 @@
 
         <dependency>
             <groupId>org.archfirst</groupId>
+            <artifactId>bfcommon-json-trading</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.archfirst</groupId>
             <artifactId>bfoms-common-domain</artifactId>
         </dependency>
 
