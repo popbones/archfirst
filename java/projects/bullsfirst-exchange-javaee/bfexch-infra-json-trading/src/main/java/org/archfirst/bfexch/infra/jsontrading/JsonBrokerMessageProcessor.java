@@ -29,7 +29,7 @@ import org.archfirst.bfexch.domain.trading.order.OrderTerm;
 import org.archfirst.bfexch.domain.trading.order.OrderType;
 import org.archfirst.bfexch.infra.jsontrading.converters.MoneyConverter;
 import org.archfirst.bfexch.infra.jsontrading.converters.QuantityConverter;
-import org.joda.time.DateTime;
+import org.archfirst.common.datetime.DateTimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,8 +68,7 @@ public class JsonBrokerMessageProcessor implements BrokerMessageProcessor {
         // Extract Order
         org.archfirst.bfcommon.jsontrading.Order jsonOrder = newOrderSingle.getOrder();
         Order order = new Order(
-                //jsonOrder.getCreationTime(),
-                new DateTime(),
+                DateTimeUtil.parseISODateTime(jsonOrder.getCreationTime()),
                 jsonOrder.getClientOrderId(),
                 OrderSide.valueOf(jsonOrder.getSide().toString()),
                 jsonOrder.getSymbol(),

@@ -33,6 +33,7 @@ import org.archfirst.bfoms.infra.jsontrading.converters.ClOrdIDConverter;
 import org.archfirst.bfoms.infra.jsontrading.converters.MoneyConverter;
 import org.archfirst.bfoms.infra.jsontrading.converters.QuantityConverter;
 import org.archfirst.common.config.ConfigurationService;
+import org.archfirst.common.datetime.DateTimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,7 +56,7 @@ public class JsonExchangeMessageGenerator implements ExchangeMessageGenerator {
         // Create a JsonMessage with NewOrderSingle
         org.archfirst.bfcommon.jsontrading.Order jsonOrder =
             new org.archfirst.bfcommon.jsontrading.Order(
-                    //order.getCreationTime(),
+                    DateTimeUtil.toStringISODateTime(order.getCreationTime()),
                     ClOrdIDConverter.toJson(getBrokerId(), order.getId()),
                     OrderSide.valueOf(order.getSide().toString()),
                     order.getSymbol(),

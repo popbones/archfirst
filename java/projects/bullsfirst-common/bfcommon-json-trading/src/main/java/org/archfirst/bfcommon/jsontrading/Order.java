@@ -15,7 +15,6 @@
  */
 package org.archfirst.bfcommon.jsontrading;
 
-
 /**
  * Order
  *
@@ -23,8 +22,7 @@ package org.archfirst.bfcommon.jsontrading;
  */
 public class Order {
 
-    // TODO: Add it back when serialization works
-    //private DateTime creationTime;
+    private String creationTime;
     private String clientOrderId;
     private OrderSide side;
     private String symbol;
@@ -40,7 +38,7 @@ public class Order {
     }
 
     public Order(
-            //DateTime creationTime,
+            String creationTime,
             String clientOrderId,
             OrderSide side,
             String symbol,
@@ -50,7 +48,7 @@ public class Order {
             OrderTerm term,
             boolean allOrNone,
             OrderStatus status) {
-        //this.creationTime = creationTime;
+        this.creationTime = creationTime;
         this.clientOrderId = clientOrderId;
         this.side = side;
         this.symbol = symbol;
@@ -63,12 +61,12 @@ public class Order {
     }
 
     // ----- Getters and Setters -----
-//    public DateTime getCreationTime() {
-//        return creationTime;
-//    }
-//    private void setCreationTime(DateTime creationTime) {
-//        this.creationTime = creationTime;
-//    }
+    public String getCreationTime() {
+        return creationTime;
+    }
+    private void setCreationTime(String creationTime) {
+        this.creationTime = creationTime;
+    }
 
     public String getClientOrderId() {
         return clientOrderId;

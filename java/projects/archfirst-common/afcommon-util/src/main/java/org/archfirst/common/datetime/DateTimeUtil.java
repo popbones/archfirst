@@ -24,6 +24,7 @@ import org.joda.time.Interval;
 import org.joda.time.LocalDate;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
 
 /**
  * Date and time utilities.
@@ -123,6 +124,11 @@ public final class DateTimeUtil {
         return instant.toString(fmt);
     }
 
+    public static final String toStringISODateTime(DateTime instant) {
+        DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
+        return instant.toString(fmt);
+    }
+
     public static final String toStringTimestamp(DateTime instant) {
         DateTimeFormatter fmt = DateTimeFormat.forPattern(DateTimeUtil.TIMESTAMP_PATTERN);
         return instant.toString(fmt);
@@ -153,6 +159,11 @@ public final class DateTimeUtil {
 
     public static final DateTime parseDateTimeSecond(String strDateTime) {
         DateTimeFormatter fmt = DateTimeFormat.forPattern(DateTimeUtil.DATE_TIME_SEC_PATTERN);
+        return fmt.parseDateTime(strDateTime);
+    }
+
+    public static final DateTime parseISODateTime(String strDateTime) {
+        DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
         return fmt.parseDateTime(strDateTime);
     }
 
