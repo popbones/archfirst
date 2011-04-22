@@ -63,6 +63,14 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             AddExternalAccountCommand = new DelegateCommand<object>(this.AddExternalAccountExecute);
             this.PropertyChanged += this.OnPropertyChanged;
             this.ValidateAll();
+
+            SubscribeToEvents();
+        }
+
+        private void SubscribeToEvents()
+        {
+            // Don't use strong reference to delegate
+            _eventAggregator.GetEvent<UserLoggedOutEvent>().Subscribe(OnUserLoggedOut, ThreadOption.UIThread, true);
         }
 
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -174,6 +182,15 @@ namespace Bullsfirst.Module.Transfer.ViewModels
                 // Send AccountCreatedEvent
                 _eventAggregator.GetEvent<AccountCreatedEvent>().Publish(Empty.Value);
             }
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        public void OnUserLoggedOut(Empty empty)
+        {
+            this.StatusMessage = null;
         }
 
         #endregion

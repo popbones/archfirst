@@ -143,6 +143,7 @@ namespace Bullsfirst.Module.TransactionHistory.ViewModels
         public void OnUserLoggedOut(Empty empty)
         {
             this.ResetFilter();
+            this.StatusMessage = null;
         }
 
         public void OnUserContextPropertyChanged(Object sender, PropertyChangedEventArgs e)

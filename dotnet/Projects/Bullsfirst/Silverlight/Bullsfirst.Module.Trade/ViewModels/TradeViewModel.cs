@@ -75,6 +75,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
         {
             // Don't use strong reference to delegate
             _eventAggregator.GetEvent<PopulateOrderEvent>().Subscribe(OnPopulateOrder, ThreadOption.UIThread, true);
+            _eventAggregator.GetEvent<UserLoggedOutEvent>().Subscribe(OnUserLoggedOut, ThreadOption.UIThread, true);
         }
 
         #endregion
@@ -203,13 +204,18 @@ namespace Bullsfirst.Module.Trade.ViewModels
 
         #endregion
 
-        #region OnPopulateOrder
+        #region Event Handlers
 
         private void OnPopulateOrder(PopulateOrderEventArgs args)
         {
             Symbol = args.Symbol;
             Side = args.Side;
             Quantity = Convert.ToInt32(args.Quantity);
+        }
+
+        public void OnUserLoggedOut(Empty empty)
+        {
+            this.StatusMessage = null;
         }
 
         #endregion // OnPopulateOrder

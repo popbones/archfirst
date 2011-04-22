@@ -55,6 +55,14 @@ namespace Bullsfirst.Module.Accounts.ViewModels
             EditAccountCommand = new DelegateCommand<object>(this.EditAccountExecute);
             UpdateAccountsCommand = new DelegateCommand<object>(this.UpdateAccountsExecute);
             SelectAccountCommand = new DelegateCommand<object>(this.SelectAccountExecute);
+
+            SubscribeToEvents();
+        }
+
+        private void SubscribeToEvents()
+        {
+            // Don't use strong reference to delegate
+            _eventAggregator.GetEvent<UserLoggedOutEvent>().Subscribe(OnUserLoggedOut, ThreadOption.UIThread, true);
         }
 
         #endregion
@@ -168,6 +176,15 @@ namespace Bullsfirst.Module.Accounts.ViewModels
             _regionManager.RequestNavigate(
                 RegionNames.LoggedInUserRegion,
                 new Uri(ViewNames.PositionsView, UriKind.Relative));
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        public void OnUserLoggedOut(Empty empty)
+        {
+            this.StatusMessage = null;
         }
 
         #endregion

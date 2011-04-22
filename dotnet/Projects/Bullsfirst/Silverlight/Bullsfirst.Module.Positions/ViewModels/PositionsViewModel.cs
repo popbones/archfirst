@@ -49,6 +49,14 @@ namespace Bullsfirst.Module.Positions.ViewModels
             BuyCommand = new DelegateCommand<object>(this.CreateBuyOrderExecute);
             SellCommand = new DelegateCommand<object>(this.CreateSellOrderExecute);
             UpdateAccountsCommand = new DelegateCommand<object>(this.UpdateAccountsExecute);
+
+            SubscribeToEvents();
+        }
+
+        private void SubscribeToEvents()
+        {
+            // Don't use strong reference to delegate
+            _eventAggregator.GetEvent<UserLoggedOutEvent>().Subscribe(OnUserLoggedOut, ThreadOption.UIThread, true);
         }
 
         #endregion
@@ -93,6 +101,15 @@ namespace Bullsfirst.Module.Positions.ViewModels
         private void UpdateAccountsExecute(object dummyObject)
         {
             _eventAggregator.GetEvent<AllAccountsUpdateEvent>().Publish(Empty.Value);
+        }
+
+        #endregion
+
+        #region Event Handlers
+
+        public void OnUserLoggedOut(Empty empty)
+        {
+            // Do nothing
         }
 
         #endregion
