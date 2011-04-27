@@ -85,9 +85,6 @@
                 <Button x:Name="openAccountButton" Content="Open Account" Style="{StaticResource FormButton}" Command="{Binding OpenAccountCommand}" />
                 <Button Content="Cancel" Style="{StaticResource FormButton}" Command="{Binding CancelCommand}" />
             </StackPanel>
-
-            <!-- Do not wrap in TallFormRow, the StackPanel disables TextWrapping -->
-            <TextBlock Text="{Binding Path=StatusMessage}" Margin="130 10 100 0" TextWrapping="Wrap" Foreground="Red" />
         </StackPanel>
 
         <StackPanel Grid.Column="1" Margin="20">

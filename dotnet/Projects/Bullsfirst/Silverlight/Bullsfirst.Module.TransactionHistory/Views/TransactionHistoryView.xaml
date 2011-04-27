@@ -18,8 +18,6 @@
             <RowDefinition Height="Auto" />
             <!-- Transactions -->
             <RowDefinition />
-            <!-- Status Message -->
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
         <!-- Title -->
@@ -80,10 +78,5 @@
                     SortMemberPath="Amount.Amount" />
             </sdk:DataGrid.Columns>
         </sdk:DataGrid>
-
-        <!-- Status Message -->
-        <TextBlock
-            Grid.Row="3"
-            Text="{Binding StatusMessage}" TextWrapping="Wrap" Foreground="Red" Margin="0 10 0 0" />
     </Grid>
 </UserControl>

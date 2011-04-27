@@ -157,13 +157,6 @@
         <Setter Property="MinWidth" Value="168" />
     </Style>
 
-    <Style x:Key="WideStatusMessage" TargetType="TextBlock">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="MinWidth" Value="500" />
-        <Setter Property="TextWrapping" Value="Wrap" />
-        <Setter Property="Foreground" Value="Red" />
-    </Style>
-
     <!-- Compact Form Styles (label on left) -->
     <Style x:Key="CompactWideFormLabel" TargetType="sdk:Label">
         <Setter Property="VerticalAlignment" Value="Center" />

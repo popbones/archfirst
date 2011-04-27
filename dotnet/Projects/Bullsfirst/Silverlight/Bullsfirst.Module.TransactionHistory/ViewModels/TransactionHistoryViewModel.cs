@@ -18,6 +18,7 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
+using Bullsfirst.Infrastructure.Controls;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.TransactionHistory.Interfaces;
@@ -37,12 +38,14 @@ namespace Bullsfirst.Module.TransactionHistory.ViewModels
         [ImportingConstructor]
         public TransactionHistoryViewModel(
             ILoggerFacade logger,
+            IStatusBar statusBar,
             IEventAggregator eventAggregator,
             ITradingServiceAsync tradingService,
             UserContext userContext)
         {
             logger.Log("TransactionHistoryViewModel.TransactionHistoryViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _statusBar = statusBar;
             _eventAggregator = eventAggregator;
             _tradingService = tradingService;
             this.UserContext = userContext;
@@ -101,11 +104,11 @@ namespace Bullsfirst.Module.TransactionHistory.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
                 Transactions.Clear();
                 if (e.Result != null) // in case there are no transactions
                 {
@@ -143,7 +146,6 @@ namespace Bullsfirst.Module.TransactionHistory.ViewModels
         public void OnUserLoggedOut(Empty empty)
         {
             this.ResetFilter();
-            this.StatusMessage = null;
         }
 
         public void OnUserContextPropertyChanged(Object sender, PropertyChangedEventArgs e)
@@ -158,6 +160,7 @@ namespace Bullsfirst.Module.TransactionHistory.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IStatusBar _statusBar;
         private IEventAggregator _eventAggregator;
         private ITradingServiceAsync _tradingService;
         public UserContext UserContext { get; set; }
@@ -187,17 +190,6 @@ namespace Bullsfirst.Module.TransactionHistory.ViewModels
             {
                 _toDate = value;
                 RaisePropertyChanged("ToDate");
-            }
-        }
-
-        private string _statusMessage;
-        public string StatusMessage
-        {
-            get { return _statusMessage; }
-            set
-            {
-                _statusMessage = value;
-                this.RaisePropertyChanged("StatusMessage");
             }
         }
 

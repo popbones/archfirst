@@ -111,11 +111,6 @@
             <Button x:Name="transferButton" Content="Transfer" Style="{StaticResource FormButton}" Command="{Binding TransferCommand}" />
         </StackPanel>
 
-        <StackPanel Style="{StaticResource TallFormRow}">
-            <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
-            <TextBlock Text="{Binding Path=StatusMessage}" Style="{StaticResource WideStatusMessage}" />
-        </StackPanel>
-
         <StackPanel Margin="0 20 0 0" Orientation="Horizontal">
             <Image Source="/Bullsfirst.Infrastructure;component/Images/bullet.jpg" Stretch="None" />
             <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"

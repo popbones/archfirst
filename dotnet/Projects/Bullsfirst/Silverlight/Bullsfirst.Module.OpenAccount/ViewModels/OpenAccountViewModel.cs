@@ -18,6 +18,7 @@ using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.Infrastructure;
+using Bullsfirst.Infrastructure.Controls;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
@@ -38,6 +39,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         [ImportingConstructor]
         public OpenAccountViewModel(
             ILoggerFacade logger,
+            IStatusBar statusBar,
             IRegionManager regionManager,
             IEventAggregator eventAggregator,
             ISecurityServiceAsync securityService,
@@ -46,6 +48,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         {
             logger.Log("OpenAccountViewModel.OpenAccountViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _statusBar = statusBar;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _securityService = securityService;
@@ -93,11 +96,11 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
 
                 // Initialize UserContext
                 this.UserContext.InitUser(Username, FirstName, LastName);
@@ -113,11 +116,11 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
 
                 // Send UserLoggedInEvent and switch to LoggedInUserView
                 _eventAggregator.GetEvent<UserLoggedInEvent>().Publish(Empty.Value);
@@ -136,6 +139,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         private void CancelExecute(object dummyObject)
         {
             this.ClearForm();
+            _statusBar.Clear();
             _regionManager.RequestNavigate(
                 RegionNames.MainRegion,
                 new Uri(ViewNames.HomeView, UriKind.Relative));
@@ -152,7 +156,6 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
             this.Username = null;
             this.Password = null;
             this.ConfirmPassword = null;
-            this.StatusMessage = null;
         }
 
         #endregion
@@ -216,6 +219,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IStatusBar _statusBar;
         private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private ISecurityServiceAsync _securityService;
@@ -275,17 +279,6 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
             {
                 _confirmPassword = value;
                 this.RaisePropertyChanged("ConfirmPassword");
-            }
-        }
-
-        private string _statusMessage;
-        public string StatusMessage
-        {
-            get { return _statusMessage; }
-            set
-            {
-                _statusMessage = value;
-                this.RaisePropertyChanged("StatusMessage");
             }
         }
 

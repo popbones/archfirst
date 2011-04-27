@@ -19,6 +19,7 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
+using Bullsfirst.Infrastructure.Controls;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Orders.Interfaces;
@@ -38,6 +39,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
         [ImportingConstructor]
         public OrdersViewModel(
             ILoggerFacade logger,
+            IStatusBar statusBar,
             IEventAggregator eventAggregator,
             ITradingServiceAsync tradingService,
             UserContext userContext,
@@ -45,6 +47,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
         {
             logger.Log("PositionsViewModel.PositionsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _statusBar = statusBar;
             _eventAggregator = eventAggregator;
             _tradingService = tradingService;
             this.UserContext = userContext;
@@ -116,11 +119,11 @@ namespace Bullsfirst.Module.Orders.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
                 // TODO: Why are the expand/collapse toggle buttons not reseting to unchecked (plus sign) after the clear below?
                 Orders.Clear();
                 if (e.Result != null) // in case there are no orders
@@ -174,11 +177,11 @@ namespace Bullsfirst.Module.Orders.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
                 this.UpdateOrders();
             }
         }
@@ -225,7 +228,6 @@ namespace Bullsfirst.Module.Orders.ViewModels
         public void OnUserLoggedOut(Empty empty)
         {
             this.ResetFilter();
-            this.StatusMessage = null;
         }
 
         public void OnUserContextPropertyChanged(Object sender, PropertyChangedEventArgs e)
@@ -240,6 +242,7 @@ namespace Bullsfirst.Module.Orders.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IStatusBar _statusBar;
         private IEventAggregator _eventAggregator;
         private ITradingServiceAsync _tradingService;
         public UserContext UserContext { get; set; }
@@ -369,17 +372,6 @@ namespace Bullsfirst.Module.Orders.ViewModels
             {
                 _statusDoneForDay = value;
                 RaisePropertyChanged("StatusDoneForDay");
-            }
-        }
-
-        private string _statusMessage;
-        public string StatusMessage
-        {
-            get { return _statusMessage; }
-            set
-            {
-                _statusMessage = value;
-                this.RaisePropertyChanged("StatusMessage");
             }
         }
 

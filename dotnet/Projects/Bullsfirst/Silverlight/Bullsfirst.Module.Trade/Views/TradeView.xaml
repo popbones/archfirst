@@ -106,11 +106,6 @@
             <Button x:Name="previewOrder" Content="Preview Order" Style="{StaticResource FormButton}" Command="{Binding PreviewOrderCommand}" />
         </StackPanel>
 
-        <StackPanel Style="{StaticResource TallFormRow}">
-            <sdk:Label Content="" Style="{StaticResource WideFormLabel}" />
-            <TextBlock Text="{Binding Path=StatusMessage}" Style="{StaticResource WideStatusMessage}" />
-        </StackPanel>
-
     </StackPanel>
 
 </UserControl>

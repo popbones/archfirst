@@ -18,6 +18,7 @@ using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.Infrastructure;
+using Bullsfirst.Infrastructure.Controls;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Trade.Interfaces;
@@ -37,6 +38,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
         [ImportingConstructor]
         public TradeViewModel(
             ILoggerFacade logger,
+            IStatusBar statusBar,
             IRegionManager regionManager,
             IEventAggregator eventAggregator,
             Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync marketDataService,
@@ -46,6 +48,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
         {
             logger.Log("TradeViewModel.TradeViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _statusBar = statusBar;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _marketDataService = marketDataService;
@@ -99,15 +102,15 @@ namespace Bullsfirst.Module.Trade.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else if (e.Result.Compliance != OrderCompliance.Compliant)
             {
-                this.StatusMessage = e.Result.Compliance.ToString();
+                _statusBar.ShowMessage(e.Result.Compliance.ToString(), Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
 
                 // Send PreviewOrderRequestEvent to create the PreviewOrder dialog
                 PreviewOrderRequest request =
@@ -135,11 +138,11 @@ namespace Bullsfirst.Module.Trade.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
 
                 // Send OrderPlacedEvent and switch to orders page
                 _eventAggregator.GetEvent<OrderPlacedEvent>().Publish(Empty.Value);
@@ -189,11 +192,11 @@ namespace Bullsfirst.Module.Trade.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
                 LastTrade = new Money
                 {
                     Amount = e.Result.Price.Amount,
@@ -215,7 +218,6 @@ namespace Bullsfirst.Module.Trade.ViewModels
 
         public void OnUserLoggedOut(Empty empty)
         {
-            this.StatusMessage = null;
         }
 
         #endregion // OnPopulateOrder
@@ -270,6 +272,7 @@ namespace Bullsfirst.Module.Trade.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IStatusBar _statusBar;
         private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private Bullsfirst.InterfaceOut.Oms.MarketDataServiceReference.IMarketDataServiceAsync _marketDataService;
@@ -367,17 +370,6 @@ namespace Bullsfirst.Module.Trade.ViewModels
             {
                 _lastTrade = value;
                 this.RaisePropertyChanged("LastTrade");
-            }
-        }
-
-        private string _statusMessage;
-        public string StatusMessage
-        {
-            get { return _statusMessage; }
-            set
-            {
-                _statusMessage = value;
-                this.RaisePropertyChanged("StatusMessage");
             }
         }
 

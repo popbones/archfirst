@@ -16,6 +16,7 @@ using System;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
+using Bullsfirst.Infrastructure.Controls;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.LoggedInUserShell.Interfaces;
@@ -36,6 +37,7 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         [ImportingConstructor]
         public LoggedInUserViewModel(
             ILoggerFacade logger,
+            IStatusBar statusBar,
             IRegionManager regionManager,
             IEventAggregator eventAggregator,
             ITradingServiceAsync tradingService,
@@ -43,6 +45,7 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         {
             logger.Log("LoggedInUserViewModel.LoggedInUserViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _statusBar = statusBar;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _tradingService = tradingService;
@@ -94,6 +97,7 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         public void OnUserLoggedOut(Empty empty)
         {
             this.UserContext.Reset();
+            _statusBar.Clear();
         }
 
         private void OnAccountCreated(Empty empty)
@@ -124,11 +128,11 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         {
             if (e.Error != null)
             {
-                // this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                // this.StatusMessage = null;
+                _statusBar.Clear();
                 UserContext.InitializeBrokerageAccountSummaries(e.Result);
                 _tradingService.GetExternalAccountSummariesAsync();
             }
@@ -138,11 +142,11 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         {
             if (e.Error != null)
             {
-                // this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                // this.StatusMessage = null;
+                _statusBar.Clear();
                 UserContext.InitializeExternalAccountSummaries(e.Result);
                 UserContext.InitializeBaseAccountWrappers();
             }
@@ -153,6 +157,7 @@ namespace Bullsfirst.Module.LoggedInUserShell.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IStatusBar _statusBar;
         private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private ITradingServiceAsync _tradingService;

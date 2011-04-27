@@ -13,12 +13,12 @@
  * limitations under the License.
  */
 using System;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.Infrastructure;
+using Bullsfirst.Infrastructure.Controls;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Transfer.Interfaces;
@@ -38,6 +38,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         [ImportingConstructor]
         public TransferViewModel(
             ILoggerFacade logger,
+            IStatusBar statusBar,
             IRegionManager regionManager,
             IEventAggregator eventAggregator,
             ITradingServiceAsync tradingService,
@@ -47,6 +48,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         {
             logger.Log("TransferViewModel.TransferViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _statusBar = statusBar;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _tradingService = tradingService;
@@ -115,12 +117,12 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             if (e.Error != null)
             {
                 // TODO: WCF on Silverlight does not get faults correctly
-                // this.StatusMessage = e.Error.Message;
-                this.StatusMessage = "Operation failed";
+                // _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
+                _statusBar.ShowMessage("Operation failed", Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
 
                 // Change account selection as appropriate
                 if (ToAccount.AccountSummary is BrokerageAccountSummary)
@@ -173,11 +175,11 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
 
                 // Send AccountCreatedEvent
                 _eventAggregator.GetEvent<AccountCreatedEvent>().Publish(Empty.Value);
@@ -190,7 +192,6 @@ namespace Bullsfirst.Module.Transfer.ViewModels
 
         public void OnUserLoggedOut(Empty empty)
         {
-            this.StatusMessage = null;
         }
 
         #endregion
@@ -211,11 +212,11 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         {
             if (e.Error != null)
             {
-                // this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                // this.StatusMessage = null;
+                _statusBar.Clear();
                 LastTrade = new Money
                 {
                     Amount = e.Result.Price.Amount,
@@ -306,6 +307,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IStatusBar _statusBar;
         private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private ITradingServiceAsync _tradingService;
@@ -412,17 +414,6 @@ namespace Bullsfirst.Module.Transfer.ViewModels
             {
                 _pricePaidPerShare = value;
                 this.RaisePropertyChanged("PricePaidPerShare");
-            }
-        }
-
-        private string _statusMessage;
-        public string StatusMessage
-        {
-            get { return _statusMessage; }
-            set
-            {
-                _statusMessage = value;
-                this.RaisePropertyChanged("StatusMessage");
             }
         }
 

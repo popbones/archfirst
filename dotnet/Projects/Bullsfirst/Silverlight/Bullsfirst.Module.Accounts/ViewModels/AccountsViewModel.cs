@@ -17,6 +17,7 @@ using System.ComponentModel;
 using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Bullsfirst.Infrastructure;
+using Bullsfirst.Infrastructure.Controls;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.TradingServiceReference;
 using Bullsfirst.Module.Accounts.Interfaces;
@@ -37,6 +38,7 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         [ImportingConstructor]
         public AccountsViewModel(
             ILoggerFacade logger,
+            IStatusBar statusBar,
             IRegionManager regionManager,
             IEventAggregator eventAggregator,
             ITradingServiceAsync tradingService,
@@ -44,6 +46,7 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         {
             logger.Log("AccountsViewModel.AccountsViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _statusBar = statusBar;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _tradingService = tradingService;
@@ -100,11 +103,11 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
 
                 // Send AccountCreatedEvent
                 _eventAggregator.GetEvent<AccountCreatedEvent>().Publish(Empty.Value);
@@ -142,11 +145,11 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
 
                 // Send AccountUpdatedEvent
                 _eventAggregator.GetEvent<AccountUpdatedEvent>().Publish(Empty.Value);
@@ -184,7 +187,6 @@ namespace Bullsfirst.Module.Accounts.ViewModels
 
         public void OnUserLoggedOut(Empty empty)
         {
-            this.StatusMessage = null;
         }
 
         #endregion
@@ -192,6 +194,7 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IStatusBar _statusBar;
         private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private ITradingServiceAsync _tradingService;
@@ -200,17 +203,6 @@ namespace Bullsfirst.Module.Accounts.ViewModels
         public string ViewTitle
         {
             get { return "Accounts"; }
-        }
-
-        private string _statusMessage;
-        public string StatusMessage
-        {
-            get { return _statusMessage; }
-            set
-            {
-                _statusMessage = value;
-                this.RaisePropertyChanged("StatusMessage");
-            }
         }
 
         #endregion
