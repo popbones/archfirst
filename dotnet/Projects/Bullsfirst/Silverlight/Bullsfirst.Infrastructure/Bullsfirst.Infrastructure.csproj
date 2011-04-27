@@ -60,6 +60,7 @@
     <Compile Include="Controls\AccountSelector.xaml.cs">
       <DependentUpon>AccountSelector.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CategoryToBrushConverter.cs" />
     <Compile Include="Controls\IStatusBar.cs" />
     <Compile Include="Controls\StatusBarView.xaml.cs">
       <DependentUpon>StatusBarView.xaml</DependentUpon>
@@ -100,6 +101,9 @@
   <ItemGroup>
     <Resource Include="Images\less.png" />
     <Resource Include="Images\more.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cross.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />
   <ProjectExtensions>

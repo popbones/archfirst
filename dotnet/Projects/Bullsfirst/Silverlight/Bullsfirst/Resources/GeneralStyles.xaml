@@ -75,7 +75,7 @@
     </Style>
 
     <!-- Status Bar Styles -->
-    <SolidColorBrush x:Key="StatusbarBackgroundBrush" Color="#AAE3E0E0" />
+    <SolidColorBrush x:Key="StatusbarBackgroundBrush" Color="#FFF1EDED" />
 
     <!-- Form Styles -->
     <Style x:Key="FormRow" TargetType="StackPanel">
@@ -240,6 +240,24 @@
                             <Image x:Name="UncheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/more.png" Stretch="None" Opacity="0" />
                             <Image x:Name="CheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/less.png" Stretch="None" Opacity="0" />
                         </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Content Button: accepts anything as its content -->
+    <Style x:Key="ContentButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
