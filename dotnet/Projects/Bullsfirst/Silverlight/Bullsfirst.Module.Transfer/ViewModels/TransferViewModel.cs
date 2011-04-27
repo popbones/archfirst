@@ -116,9 +116,7 @@ namespace Bullsfirst.Module.Transfer.ViewModels
         {
             if (e.Error != null)
             {
-                // TODO: WCF on Silverlight does not get faults correctly
-                // _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
-                _statusBar.ShowMessage("Operation failed", Category.Exception, Priority.High);
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else
             {
