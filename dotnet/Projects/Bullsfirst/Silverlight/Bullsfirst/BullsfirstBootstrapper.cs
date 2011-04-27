@@ -16,6 +16,7 @@ using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Windows;
 using Archfirst.Framework.PrismHelpers;
+using Bullsfirst.Infrastructure.Controls;
 using Bullsfirst.InterfaceOut.Oms;
 using Bullsfirst.Module.Accounts;
 using Bullsfirst.Module.Home;
@@ -45,6 +46,7 @@ namespace Bullsfirst
             base.ConfigureAggregateCatalog();
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ViewExportAttribute).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(BullsfirstBootstrapper).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(StatusBarView).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OmsModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(HomeModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OpenAccountModule).Assembly));

@@ -74,6 +74,9 @@
         <Setter Property="Margin" Value="0 6 10 6" />
     </Style>
 
+    <!-- Status Bar Styles -->
+    <SolidColorBrush x:Key="StatusbarBackgroundBrush" Color="#AAE3E0E0" />
+
     <!-- Form Styles -->
     <Style x:Key="FormRow" TargetType="StackPanel">
         <Setter Property="Margin" Value="0 4 0 0" />

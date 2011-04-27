@@ -11,11 +11,17 @@
 
     <Grid x:Name="LayoutRoot" Background="White">
         <Grid.RowDefinitions>
+            <!-- Header -->
             <RowDefinition Height="auto" />
+            <!-- Main Region -->
             <RowDefinition />
+            <!-- Copyright Message -->
+            <RowDefinition Height="auto" />
+            <!-- Status Region -->
             <RowDefinition Height="auto" />
         </Grid.RowDefinitions>
 
+        <!-- Header -->
         <Border
             x:Name="TabBorder"
             Grid.Row="0"
@@ -38,22 +44,28 @@
             </toolkit:DockPanel>
         </Border>
 
+        <!-- Main Region -->
         <!-- Stretch the content to fill the grid row completely (default is not the stretch)  -->
         <ContentControl
             Grid.Row="1"
             HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
             prism:RegionManager.RegionName="MainRegion" />
 
+        <!-- Copyright Message -->
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0 0 0 5">
-            <TextBlock Foreground="#676767" FontSize="11"
-                       Text="This is a demo application. All data displayed is fictitious." />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock Foreground="#676767" FontSize="11"
-                    Text="Copyright 2010" />
+                       Text="This is a demo application. All data displayed is fictitious. Copyright 2010" />
                 <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
                     Content="Archfirst" TargetName="_blank"  NavigateUri="http://www.archfirst.org" />
             </StackPanel>
         </StackPanel>
+
+        <!-- Status Region -->
+        <ContentControl
+            Grid.Row="3"
+            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+            prism:RegionManager.RegionName="StatusRegion" />
     </Grid>
 
 </UserControl>

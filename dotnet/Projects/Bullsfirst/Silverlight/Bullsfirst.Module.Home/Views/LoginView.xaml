@@ -37,8 +37,5 @@
             <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
                 Content="Open an Account" Command="{Binding OpenAccountCommand}" />
         </StackPanel>
-
-        <!-- Do not wrap in TallFormRow, the StackPanel disables TextWrapping -->
-        <TextBlock Text="{Binding Path=StatusMessage}" Margin="0 10 0 0" TextWrapping="Wrap" Foreground="Red" />
     </StackPanel>
 </UserControl>

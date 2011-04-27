@@ -18,6 +18,7 @@ using System.ComponentModel.Composition;
 using Archfirst.Framework.Helpers;
 using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.Infrastructure;
+using Bullsfirst.Infrastructure.Controls;
 using Bullsfirst.InterfaceOut.Oms.Domain;
 using Bullsfirst.InterfaceOut.Oms.SecurityServiceReference;
 using Bullsfirst.Module.Home.Interfaces;
@@ -37,6 +38,7 @@ namespace Bullsfirst.Module.Home.ViewModels
         [ImportingConstructor]
         public LoginViewModel(
             ILoggerFacade logger,
+            IStatusBar statusBar,
             IRegionManager regionManager,
             IEventAggregator eventAggregator,
             ISecurityServiceAsync securityService,
@@ -44,6 +46,7 @@ namespace Bullsfirst.Module.Home.ViewModels
         {
             logger.Log("LoginViewModel.LoginViewModel()", Category.Debug, Priority.Low);
             _logger = logger;
+            _statusBar = statusBar;
             _regionManager = regionManager;
             _eventAggregator = eventAggregator;
             _securityService = securityService;
@@ -81,11 +84,11 @@ namespace Bullsfirst.Module.Home.ViewModels
         {
             if (e.Error != null)
             {
-                this.StatusMessage = e.Error.Message;
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
             }
             else if (e.Result.Success)
             {
-                this.StatusMessage = null;
+                _statusBar.Clear();
                 this.UserContext.InitUser(e.Result.User);
                 this.UserContext.InitCredentials(Username, Password);
 
@@ -100,7 +103,7 @@ namespace Bullsfirst.Module.Home.ViewModels
             }
             else
             {
-                this.StatusMessage = "Login failed";
+                _statusBar.ShowMessage("Login failed", Category.Exception, Priority.High);
             }
         }
 
@@ -152,6 +155,7 @@ namespace Bullsfirst.Module.Home.ViewModels
         #region Members
 
         private ILoggerFacade _logger;
+        private IStatusBar _statusBar;
         private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         private ISecurityServiceAsync _securityService;
@@ -180,17 +184,6 @@ namespace Bullsfirst.Module.Home.ViewModels
             }
         }
         
-        private string _statusMessage;
-        public string StatusMessage
-        {
-            get { return _statusMessage; }
-            set
-            {
-                _statusMessage = value;
-                this.RaisePropertyChanged("StatusMessage");
-            }
-        }
-
         #endregion // Members
     }
 }
