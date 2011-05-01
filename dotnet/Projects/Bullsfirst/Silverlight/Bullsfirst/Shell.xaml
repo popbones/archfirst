@@ -54,8 +54,7 @@
         <!-- Copyright Message -->
         <StackPanel Grid.Row="2" HorizontalAlignment="Center" Margin="0 0 0 5">
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <TextBlock Foreground="#676767" FontSize="11"
-                       Text="This is a demo application. All data displayed is fictitious. Copyright 2010" />
+                <TextBlock x:Name="Copyright" Foreground="#676767" FontSize="11" />
                 <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
                     Content="Archfirst" TargetName="_blank"  NavigateUri="http://www.archfirst.org" />
             </StackPanel>

@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+using System;
 using System.ComponentModel.Composition;
 using System.Windows.Controls;
 
@@ -23,6 +24,8 @@ namespace Bullsfirst
         public Shell()
         {
             InitializeComponent();
+            this.Copyright.Text =
+                string.Format("This is a demo application. All data displayed is fictitious. Copyright \u00a9 2010-{0}", DateTime.Today.Year);
         }
     }
 }
