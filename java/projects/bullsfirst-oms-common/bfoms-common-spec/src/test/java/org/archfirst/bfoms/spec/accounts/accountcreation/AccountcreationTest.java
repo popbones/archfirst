@@ -19,10 +19,10 @@ import org.archfirst.common.springtest.AbstractTransactionalSpecTest;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
- * AccountCreationTest
+ * AccountcreationTest
  *
  * @author Naresh Bhatia
  */
 @ContextConfiguration(locations={"classpath:/org/archfirst/bfoms/spec/applicationContext.xml"})
-public class AccountCreationTest extends AbstractTransactionalSpecTest {
+public class AccountcreationTest extends AbstractTransactionalSpecTest {
 }

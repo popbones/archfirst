@@ -19,10 +19,10 @@ import org.archfirst.common.springtest.AbstractTransactionalSpecTest;
 import org.springframework.test.context.ContextConfiguration;
 
 /**
- * MatchingEngineTest
+ * MatchingengineTest
  *
  * @author Naresh Bhatia
  */
 @ContextConfiguration(locations={"classpath:/org/archfirst/bfexch/spec/applicationContext.xml"})
-public class MatchingEngineTest extends AbstractTransactionalSpecTest {
+public class MatchingengineTest extends AbstractTransactionalSpecTest {
 }
