@@ -11,6 +11,8 @@
 
     <Grid x:Name="LayoutRoot" Background="White">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0 3 10 0">
+            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}" Margin="0 0 150 0"
+                    Content="Getting Started" TargetName="_blank"  NavigateUri="http://archfirst.org/books/getting-started" />
             <TextBlock Text="{Binding UserContext.User.FirstName}" />
             <TextBlock xml:space="preserve"> </TextBlock>
             <TextBlock Text="{Binding UserContext.User.LastName}" />

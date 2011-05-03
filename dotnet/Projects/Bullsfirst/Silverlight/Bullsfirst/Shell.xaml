@@ -56,7 +56,7 @@
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBlock x:Name="Copyright" Foreground="#676767" FontSize="11" />
                 <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
-                    Content="Archfirst" TargetName="_blank"  NavigateUri="http://www.archfirst.org" />
+                    Content="Archfirst" TargetName="_blank"  NavigateUri="http://archfirst.org" />
             </StackPanel>
         </StackPanel>
 
