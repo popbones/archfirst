@@ -107,7 +107,6 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
                 // Initialize UserContext
                 this.UserContext.InitUser(Username, FirstName, LastName);
                 this.UserContext.InitCredentials(Username, Password);
-                this.ClearForm();
 
                 // Open an account for the newly registered user
                 _tradingService.OpenNewAccountAsync("Brokerage Account 1");
@@ -162,6 +161,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
             else
             {
                 _statusBar.Clear();
+                this.ClearForm();
 
                 // Send UserLoggedInEvent and switch to LoggedInUserView
                 _eventAggregator.GetEvent<UserLoggedInEvent>().Publish(Empty.Value);
