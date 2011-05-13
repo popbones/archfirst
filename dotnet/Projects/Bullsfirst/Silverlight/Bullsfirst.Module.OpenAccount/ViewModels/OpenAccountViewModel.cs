@@ -57,6 +57,8 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
 
             _securityService.RegisterUserCompleted += new EventHandler<AsyncCompletedEventArgs>(RegisterUserCallback);
             _tradingService.OpenNewAccountCompleted += new EventHandler<OpenNewAccountCompletedEventArgs>(OpenNewAccountCallback);
+            _tradingService.AddExternalAccountCompleted += new EventHandler<AddExternalAccountCompletedEventArgs>(AddExternalAccountCallback);
+            _tradingService.TransferCashCompleted += new EventHandler<AsyncCompletedEventArgs>(TransferCallback);
             OpenAccountCommand = new DelegateCommand<object>(this.OpenAccountExecute, this.CanOpenAccountExecute);
             CancelCommand = new DelegateCommand<object>(this.CancelExecute);
             this.PropertyChanged += this.OnPropertyChanged;
@@ -108,11 +110,50 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
                 this.ClearForm();
 
                 // Open an account for the newly registered user
-                _tradingService.OpenNewAccountAsync("Brokerage Account");
+                _tradingService.OpenNewAccountAsync("Brokerage Account 1");
             }
         }
 
         private void OpenNewAccountCallback(object sender, OpenNewAccountCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
+            }
+            else
+            {
+                _statusBar.Clear();
+                _brokerageAccountId = e.Result;
+
+                // Add an external account
+                _tradingService.AddExternalAccountAsync(new ExternalAccountParams
+                {
+                    Name = "External Account 1",
+                    RoutingNumber = "22056782",
+                    AccountNumber = "12345678"
+                });
+            }
+        }
+
+        private void AddExternalAccountCallback(object sender, AddExternalAccountCompletedEventArgs e)
+        {
+            if (e.Error != null)
+            {
+                _statusBar.ShowMessage(e.Error.Message, Category.Exception, Priority.High);
+            }
+            else
+            {
+                _statusBar.Clear();
+
+                // Transfer $100,000 from external account to brokerage account
+                _tradingService.TransferCashAsync(
+                    MoneyFactory.Create(100000.00M),
+                    e.Result,
+                    _brokerageAccountId);
+            }
+        }
+
+        private void TransferCallback(object sender, AsyncCompletedEventArgs e)
         {
             if (e.Error != null)
             {
@@ -224,6 +265,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         private IEventAggregator _eventAggregator;
         private ISecurityServiceAsync _securityService;
         private ITradingServiceAsync _tradingService;
+        private long _brokerageAccountId;
 
         public UserContext UserContext { get; set; }
 
