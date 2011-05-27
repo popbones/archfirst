@@ -30,6 +30,7 @@ import org.archfirst.bfoms.domain.marketdata.MarketDataService;
 import org.archfirst.bfoms.domain.security.RegistrationRequest;
 import org.archfirst.bfoms.domain.security.SecurityService;
 import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.DecimalQuantity;
 import org.archfirst.common.springtest.AbstractTransactionalSpecTest;
 import org.springframework.test.context.ContextConfiguration;
 
@@ -133,6 +134,21 @@ public abstract class BaseAccountsTest extends AbstractTransactionalSpecTest  {
         }
     }
     
+    public void setUpBrokerageAccount(String accountName, String symbol, BigDecimal position) {
+        
+        createBrokerageAccount(accountName);
+        
+        // Adjust securities position
+        BigDecimal currentPosition = getSecuritiesPosition(accountName, symbol);
+        if (currentPosition != position) {
+            transferSecurities(
+                    EXTERNAL_ACCOUNT_NAME1,
+                    accountName,
+                    symbol,
+                    position.subtract(currentPosition));
+        }
+    }
+    
     public Money getCashPosition(String accountName) {
         Long accountId = getAccountId(accountName);
         BrokerageAccount account =
@@ -140,10 +156,25 @@ public abstract class BaseAccountsTest extends AbstractTransactionalSpecTest  {
         return account.getCashPosition();
     }
     
+    public BigDecimal getSecuritiesPosition(String accountName, String symbol) {
+        Long accountId = getAccountId(accountName);
+        return brokerageAccountService.getNumberOfShares(accountId, symbol).getValue();
+    }
+    
     public void transferCash(String accountName1, String accountName2, BigDecimal amount) {
         this.baseAccountService.transferCash(
                 USERNAME1,
                 new Money(amount),
+                getAccountId(accountName1),
+                getAccountId(accountName2));
+    }
+    
+    public void transferSecurities(String accountName1, String accountName2, String symbol, BigDecimal quantity) {
+        this.baseAccountService.transferSecurities(
+                USERNAME1,
+                symbol,
+                new DecimalQuantity(quantity),
+                new Money(),
                 getAccountId(accountName1),
                 getAccountId(accountName2));
     }

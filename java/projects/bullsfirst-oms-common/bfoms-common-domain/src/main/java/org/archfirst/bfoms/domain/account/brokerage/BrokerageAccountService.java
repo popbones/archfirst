@@ -33,6 +33,7 @@ import org.archfirst.bfoms.domain.referencedata.ReferenceDataService;
 import org.archfirst.bfoms.domain.security.AuthorizationException;
 import org.archfirst.bfoms.domain.security.User;
 import org.archfirst.bfoms.domain.security.UserRepository;
+import org.archfirst.common.quantity.DecimalQuantity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -122,6 +123,11 @@ public class BrokerageAccountService {
     
     public List<Lot> findActiveLots(Long accountId) {
         return brokerageAccountRepository.findActiveLots(findAccount(accountId));
+    }
+
+    public DecimalQuantity getNumberOfShares(Long accountId, String symbol) {
+        return brokerageAccountRepository.getNumberOfShares(
+                findAccount(accountId), symbol);
     }
 
     public Order findOrder(Long id) {
