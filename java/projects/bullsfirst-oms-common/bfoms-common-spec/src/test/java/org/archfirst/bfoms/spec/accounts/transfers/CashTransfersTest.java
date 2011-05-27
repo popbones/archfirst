@@ -15,19 +15,74 @@
  */
 package org.archfirst.bfoms.spec.accounts.transfers;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.archfirst.bfoms.domain.account.CashTransfer;
+import org.archfirst.bfoms.domain.account.Transaction;
+import org.archfirst.bfoms.domain.account.TransactionCriteria;
 import org.archfirst.bfoms.spec.accounts.BaseAccountsTest;
-import org.concordion.api.ExpectedToFail;
+import org.archfirst.common.money.Money;
 
 /**
  * CashTransfersTest
  *
  * @author Naresh Bhatia
  */
-@ExpectedToFail
 public class CashTransfersTest extends BaseAccountsTest {
+    
+    private Map<Long, Transfer> transferHistory = new HashMap<Long, Transfer>(); 
     
     public void setUp() throws Exception {
         this.createUser1();
         this.createExternalAccount1();
+    }
+    
+    /**
+     * @return transfers since the last time this method was called
+     */
+    public List<Transfer> recordedTransfers() {
+        
+        List<Transaction> transactions =
+            baseAccountService.findTransactions(new TransactionCriteria());
+
+        // Find new transfers
+        List<Transfer> newTransfers = new ArrayList<Transfer>();
+        for (Transaction transaction : transactions) {
+            if (transferHistory.get(transaction.getId()) == null) {
+                if (transaction.getClass().equals(CashTransfer.class)) {
+                    CashTransfer cashTransfer = (CashTransfer)transaction;
+                    Transfer transfer = new Transfer(
+                            cashTransfer.getId(),
+                            cashTransfer.getAccount().getName(),
+                            cashTransfer.getAmount());
+                    transferHistory.put(transfer.id, transfer);
+                    newTransfers.add(transfer);
+                }
+            }
+        }
+        
+        Collections.sort(newTransfers);
+        return newTransfers;
+    }
+    
+    public class Transfer implements Comparable<Transfer> {
+        public Long id;
+        public String accountName;
+        public Money amount;
+
+        public Transfer(Long id, String accountName, Money amount) {
+            this.id = id;
+            this.accountName = accountName;
+            this.amount = amount;
+        }
+
+        @Override
+        public int compareTo(Transfer other) {
+            return this.id.compareTo(other.id);
+        }
     }
 }

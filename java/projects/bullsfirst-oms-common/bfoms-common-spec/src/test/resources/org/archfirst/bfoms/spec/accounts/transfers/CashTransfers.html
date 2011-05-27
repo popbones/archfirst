@@ -51,6 +51,9 @@
                 </tbody>
             </table>
 
+            <!-- Ignore all transfers up to this point -->
+            <span concordion:execute="recordedTransfers()"></span>
+
             <p>When we make the following transfers:</p>
             <table concordion:execute="transferCash(#src, #dest, #amount)">
                 <tbody>
@@ -86,7 +89,7 @@
             </table>
 
             <p>And these transfers have been recorded:</p>
-            <table concordion:verifyrows="#transfer = recordedTransfers()">
+            <table concordion:verifyRows="#transfer : recordedTransfers()">
                 <tbody>
                     <tr>
                         <th concordion:assertEquals="#transfer.accountName">Account Name</th>
@@ -106,278 +109,157 @@
 
         <br />
 
-        <!--
         <h3>2. Transferring Cash from a Brokerage Account to an External Account</h3>
         <div class="scenario">
+
             <p>
-                Given the following account positions:
+                Given an external account
+                <span concordion:execute="setUpExternalAccount(#TEXT)">EX1</span> and
+                the following brokerage accounts:
             </p>
-            <table concordion:execute="setUpAccount(#name, #type, #position)">
+            <table concordion:execute="setUpBrokerageAccount(#name, #position)">
                 <tbody>
                     <tr>
-                        <th concordion:set="#name">
-                            Account Name
-                        </th>
-                        <th concordion:set="#type">
-                            Account Type
-                        </th>
-                        <th concordion:set="#position">
-                            Position
-                        </th>
+                        <th concordion:set="#name">Account Name</th>
+                        <th concordion:set="#position">Position</th>
                     </tr>
                     <tr>
-                        <td>
-                            EX1
-                        </td>
-                        <td>
-                            External
-                        </td>
-                        <td>
-                            $100.00
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            BR1
-                        </td>
-                        <td>
-                            Brokerage
-                        </td>
-                        <td>
-                            $50.00
-                        </td>
+                        <td>BR1</td>
+                        <td>50.00</td>
                     </tr>
                 </tbody>
             </table>
-            <p>
-                When we make the following transfers:
-            </p>
-            <table concordion:execute="transfer(#src, #dest, #amount)">
+
+            <!-- Ignore all transfers up to this point -->
+            <span concordion:execute="recordedTransfers()"></span>
+
+            <p>When we make the following transfers:</p>
+            <table concordion:execute="transferCash(#src, #dest, #amount)">
                 <tbody>
                     <tr>
-                        <th concordion:set="#src">
-                            Source Account
-                        </th>
-                        <th concordion:set="#dest">
-                            Destination Account
-                        </th>
-                        <th concordion:set="#amount">
-                            Amount Transferred
-                        </th>
+                        <th concordion:set="#src">Source Account</th>
+                        <th concordion:set="#dest">Destination Account</th>
+                        <th concordion:set="#amount">Amount Transferred</th>
                     </tr>
                     <tr>
-                        <td>
-                            BR1
-                        </td>
-                        <td>
-                            EX1
-                        </td>
-                        <td>
-                            $20.00
-                        </td>
+                        <td>BR1</td>
+                        <td>EX1</td>
+                        <td>20.00</td>
                     </tr>
                 </tbody>
             </table>
-            <p>
-                We now have the following positions:
-            </p>
-            <table concordion:execute="#newPosition = positionFor(#accountName)">
+
+            <p>We now have the following positions:</p>
+            <table concordion:execute="#newPosition = getCashPosition(#accountName)">
                 <tbody>
                     <tr>
-                        <th concordion:set="#accountName">
-                            Account Name
-                        </th>
-                        <th concordion:assertequals="#newPosition">
-                            Position
-                        </th>
+                        <th concordion:set="#accountName">Account Name</th>
+                        <th concordion:assertEquals="#newPosition">Position</th>
                     </tr>
                     <tr>
-                        <td>
-                            EX1
-                        </td>
-                        <td>
-                            $120.00
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            BR1
-                        </td>
-                        <td>
-                            $30.00
-                        </td>
+                        <td>BR1</td>
+                        <td>$30.00</td>
                     </tr>
                 </tbody>
             </table>
-            <p>
-                And these transfers have been recorded:
-            </p>
-            <table concordion:verifyrows="#transfer = recordedTransfers()">
+
+            <p>And these transfers have been recorded:</p>
+            <table concordion:verifyRows="#transfer : recordedTransfers()">
                 <tbody>
                     <tr>
-                        <th concordion:assertequals="#transfer.accountName">
-                            Account Name
-                        </th>
-                        <th concordion:assertequals="#transfer.amount">
-                            Transfer Recorded
-                        </th>
+                        <th concordion:assertEquals="#transfer.accountName">Account Name</th>
+                        <th concordion:assertEquals="#transfer.amount">Transfer Recorded</th>
                     </tr>
                     <tr>
-                        <td>
-                            BR1
-                        </td>
-                        <td>
-                            ($20.00)
-                        </td>
+                        <td>BR1</td>
+                        <td>($20.00)</td>
                     </tr>
                     <tr>
-                        <td>
-                            EX1
-                        </td>
-                        <td>
-                            $20.00
-                        </td>
+                        <td>EX1</td>
+                        <td>$20.00</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <br>
-        <h3>
-            3. Transferring Cash Between Brokerage Accounts</h3>
+
+        <br />
+
+        <h3>3. Transferring Cash Between Brokerage Accounts</h3>
         <div class="scenario">
-            <p>
-                Given the following account positions:
-            </p>
-            <table>
+        
+            <p>Given the following account positions:</p>
+            <table concordion:execute="setUpBrokerageAccount(#name, #position)">
                 <tbody>
                     <tr>
-                        <th>
-                            Account Name
-                        </th>
-                        <th>
-                            Account Type
-                        </th>
-                        <th>
-                            Position
-                        </th>
+                        <th concordion:set="#name">Account Name</th>
+                        <th concordion:set="#position">Position</th>
                     </tr>
                     <tr>
-                        <td>
-                            BR1
-                        </td>
-                        <td>
-                            Brokerage
-                        </td>
-                        <td>
-                            $10.00
-                        </td>
+                        <td>BR1</td>
+                        <td>10.00</td>
                     </tr>
                     <tr>
-                        <td>
-                            BR2
-                        </td>
-                        <td>
-                            Brokerage
-                        </td>
-                        <td>
-                            $50.00
-                        </td>
+                        <td>BR2</td>
+                        <td>50.00</td>
                     </tr>
                 </tbody>
             </table>
-            <p>
-                When we make the following transfers:
-            </p>
-            <table>
+
+            <!-- Ignore all transfers up to this point -->
+            <span concordion:execute="recordedTransfers()"></span>
+
+            <p>When we make the following transfers:</p>
+            <table concordion:execute="transferCash(#src, #dest, #amount)">
                 <tbody>
                     <tr>
-                        <th>
-                            Source Account
-                        </th>
-                        <th>
-                            Destination Account
-                        </th>
-                        <th>
-                            Amount Transferred
-                        </th>
+                        <th concordion:set="#src">Source Account</th>
+                        <th concordion:set="#dest">Destination Account</th>
+                        <th concordion:set="#amount">Amount Transferred</th>
                     </tr>
                     <tr>
-                        <td>
-                            BR2
-                        </td>
-                        <td>
-                            BR1
-                        </td>
-                        <td>
-                            $10.00
-                        </td>
+                        <td>BR2</td>
+                        <td>BR1</td>
+                        <td>10.00</td>
                     </tr>
                 </tbody>
             </table>
-            <p>
-                We now have the following positions:
-            </p>
-            <table>
+
+            <p>We now have the following positions:</p>
+            <table concordion:execute="#newPosition = getCashPosition(#accountName)">
                 <tbody>
                     <tr>
-                        <th>
-                            Account Name
-                        </th>
-                        <th>
-                            Position
-                        </th>
+                        <th concordion:set="#accountName">Account Name</th>
+                        <th concordion:assertEquals="#newPosition">Position</th>
                     </tr>
                     <tr>
-                        <td>
-                            BR1
-                        </td>
-                        <td>
-                            $20.00
-                        </td>
+                        <td>BR1</td>
+                        <td>$20.00</td>
                     </tr>
                     <tr>
-                        <td>
-                            BR2
-                        </td>
-                        <td>
-                            $40.00
-                        </td>
+                        <td>BR2</td>
+                        <td>$40.00</td>
                     </tr>
                 </tbody>
             </table>
-            <p>
-                And these transfers have been recorded:
-            </p>
-            <table>
+
+            <p>And these transfers have been recorded:</p>
+            <table concordion:verifyRows="#transfer : recordedTransfers()">
                 <tbody>
                     <tr>
-                        <th>
-                            Account Name
-                        </th>
-                        <th>
-                            Transfer Recorded
-                        </th>
+                        <th concordion:assertEquals="#transfer.accountName">Account Name</th>
+                        <th concordion:assertEquals="#transfer.amount">Transfer Recorded</th>
                     </tr>
                     <tr>
-                        <td>
-                            BR2
-                        </td>
-                        <td>
-                            ($10.00)
-                        </td>
+                        <td>BR2</td>
+                        <td>($10.00)</td>
                     </tr>
                     <tr>
-                        <td>
-                            BR1
-                        </td>
-                        <td>
-                            $10.00
-                        </td>
+                        <td>BR1</td>
+                        <td>$10.00</td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        -->
     </div>
 
 </body>
