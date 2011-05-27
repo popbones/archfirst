@@ -16,9 +16,7 @@
             <RowDefinition Height="Auto" />
             <!-- Toolbar -->
             <RowDefinition Height="Auto" />
-            <!-- Account Summaries -->
-            <RowDefinition Height="Auto" />
-            <!-- Chart -->
+            <!-- Account Summaries and Chart -->
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
@@ -31,49 +29,57 @@
                 <Button Content="Add Account" Style="{StaticResource ToolbarButton}" Command="{Binding CreateAccountCommand}" />
             </StackPanel>
         </Grid>
+        
+        <Grid Grid.Row="2">
 
-        <sdk:DataGrid
-            Grid.Row="2"
-            ItemsSource="{Binding Path=UserContext.BrokerageAccountSummaries}"
-            AutoGenerateColumns="False"
-            RowHeight="32"
-            IsReadOnly="True"
-            Style="{StaticResource DataGridStyle}"
-            ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
-            RowStyle="{StaticResource DataGridRowStyle}">
-            <sdk:DataGrid.Columns>
-                <sdk:DataGridTemplateColumn
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <sdk:DataGrid
+                Grid.Column="0"
+                Margin="0 20 0 0"
+                ItemsSource="{Binding Path=UserContext.BrokerageAccountSummaries}"
+                AutoGenerateColumns="False"
+                RowHeight="32"
+                IsReadOnly="True"
+                Style="{StaticResource DataGridStyle}"
+                ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                RowStyle="{StaticResource DataGridRowStyle}">
+                <sdk:DataGrid.Columns>
+                    <sdk:DataGridTemplateColumn
                 Header="Name"
                 HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                 CellStyle="{StaticResource LeftAlignedCellStyle}"
                 SortMemberPath="Name">
-                    <sdk:DataGridTemplateColumn.CellTemplate>
-                        <DataTemplate>
-                            <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
+                        <sdk:DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <HyperlinkButton Style="{StaticResource HyperlinkButtonStyle}"
                                 Content="{Binding Path=Name}"
                                 Command="{Binding SelectAccountCommand, Source={StaticResource ViewModel}}"
                                 CommandParameter="{Binding}" />
-                        </DataTemplate>
-                    </sdk:DataGridTemplateColumn.CellTemplate>
-                </sdk:DataGridTemplateColumn>
-                <sdk:DataGridTextColumn
+                            </DataTemplate>
+                        </sdk:DataGridTemplateColumn.CellTemplate>
+                    </sdk:DataGridTemplateColumn>
+                    <sdk:DataGridTextColumn
                     Header="Account #"
                     Binding="{Binding Path=Id}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}" />
-                <sdk:DataGridTextColumn
+                    <sdk:DataGridTextColumn
                     Header="Market Value"
                     Binding="{Binding Path=MarketValue, Converter={StaticResource MoneyConverter}}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="MarketValue.Amount" />
-                <sdk:DataGridTextColumn
+                    <sdk:DataGridTextColumn
                     Header="Cash"
                     Binding="{Binding Path=CashPosition, Converter={StaticResource MoneyConverter}}"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource RightAlignedCellStyle}"
                     SortMemberPath="CashPosition.Amount" />
-                <sdk:DataGridTemplateColumn
+                    <sdk:DataGridTemplateColumn
                     Header="Actions"
                     HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
                     CellStyle="{StaticResource CenterAlignedCellStyle}">
@@ -86,15 +92,18 @@
                                     CommandParameter="{Binding}" />
                             </DataTemplate>
                         </sdk:DataGridTemplateColumn.CellTemplate>
-                </sdk:DataGridTemplateColumn>
-            </sdk:DataGrid.Columns>
-        </sdk:DataGrid>
+                    </sdk:DataGridTemplateColumn>
+                </sdk:DataGrid.Columns>
+            </sdk:DataGrid>
 
-        <toolkit:Chart Grid.Row="3" x:Name="accountsChart"
-                       Style="{StaticResource ChartStyle}"
-                       HorizontalAlignment="Left"
-                       Margin="0 10 0 0" Height="300" Width="400">
-        </toolkit:Chart>
+            <toolkit:Chart
+                Grid.Column="1" x:Name="accountsChart"
+                Style="{StaticResource ChartStyle}"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"       
+                Margin="0 20 0 0" Height="330" Width="440">
+            </toolkit:Chart>
 
+        </Grid>
     </Grid>
 </UserControl>
