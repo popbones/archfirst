@@ -3,7 +3,7 @@ using System.Windows;
 using Microsoft.Practices.Prism.MefExtensions;
 using Microsoft.Practices.Prism.Regions;
 using SimpleMefApplication.Infrastructure;
-using SimpleMefApplication.Module.Home;
+using SimpleMefApplication.Module.Hello;
 
 namespace SimpleMefApplication
 {
@@ -14,7 +14,7 @@ namespace SimpleMefApplication
             base.ConfigureAggregateCatalog();
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(ViewExportAttribute).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(SimpleMefApplicationBootstrapper).Assembly));
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(HomeModule).Assembly));
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(HelloModule).Assembly));
         }
 
         protected override IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()

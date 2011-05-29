@@ -2,9 +2,9 @@
 using System.Windows.Input;
 using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.ViewModel;
-using SimpleMefApplication.Module.Home.Interfaces;
+using SimpleMefApplication.Module.Hello.Interfaces;
 
-namespace SimpleMefApplication.Module.Home.ViewModels
+namespace SimpleMefApplication.Module.Hello.ViewModels
 {
     [Export(typeof(IHelloViewModel))]
     [PartCreationPolicy(CreationPolicy.NonShared)]

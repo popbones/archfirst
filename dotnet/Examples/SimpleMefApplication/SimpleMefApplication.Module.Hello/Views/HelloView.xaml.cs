@@ -1,11 +1,11 @@
 ﻿using System.ComponentModel.Composition;
 using System.Windows.Controls;
 using SimpleMefApplication.Infrastructure;
-using SimpleMefApplication.Module.Home.Interfaces;
+using SimpleMefApplication.Module.Hello.Interfaces;
 
-namespace SimpleMefApplication.Module.Home.Views
+namespace SimpleMefApplication.Module.Hello.Views
 {
-    [ViewExport(RegionName = "HomeContentRegion")]
+    [ViewExport(RegionName = "MainRegion")]
     [PartCreationPolicy(CreationPolicy.NonShared)]
     public partial class HelloView : UserControl
     {

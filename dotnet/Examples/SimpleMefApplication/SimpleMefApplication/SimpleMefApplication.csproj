@@ -102,9 +102,9 @@
       <Project>{747AAAC1-4C98-4443-86C7-D41FAB9CF736}</Project>
       <Name>SimpleMefApplication.Infrastructure</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SimpleMefApplication.Module.Home\SimpleMefApplication.Module.Home.csproj">
-      <Project>{204B393F-80F7-4A75-BD9C-F10A21C75298}</Project>
-      <Name>SimpleMefApplication.Module.Home</Name>
+    <ProjectReference Include="..\SimpleMefApplication.Module.Hello\SimpleMefApplication.Module.Hello.csproj">
+      <Project>{BEE4295C-D5B9-4037-9AAB-96118BBA258C}</Project>
+      <Name>SimpleMefApplication.Module.Hello</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Silverlight\$(SilverlightVersion)\Microsoft.Silverlight.CSharp.targets" />

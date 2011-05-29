@@ -5,9 +5,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMefApplication", "Sim
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMefApplication.Web", "SimpleMefApplication.Web\SimpleMefApplication.Web.csproj", "{FA49AB7C-41D5-4315-8EDC-63A551515063}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMefApplication.Module.Home", "SimpleMefApplication.Module.Home\SimpleMefApplication.Module.Home.csproj", "{204B393F-80F7-4A75-BD9C-F10A21C75298}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMefApplication.Infrastructure", "SimpleMefApplication.Infrastructure\SimpleMefApplication.Infrastructure.csproj", "{747AAAC1-4C98-4443-86C7-D41FAB9CF736}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleMefApplication.Module.Hello", "SimpleMefApplication.Module.Hello\SimpleMefApplication.Module.Hello.csproj", "{BEE4295C-D5B9-4037-9AAB-96118BBA258C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,14 +23,14 @@ Global
 		{FA49AB7C-41D5-4315-8EDC-63A551515063}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FA49AB7C-41D5-4315-8EDC-63A551515063}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FA49AB7C-41D5-4315-8EDC-63A551515063}.Release|Any CPU.Build.0 = Release|Any CPU
-		{204B393F-80F7-4A75-BD9C-F10A21C75298}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{204B393F-80F7-4A75-BD9C-F10A21C75298}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{204B393F-80F7-4A75-BD9C-F10A21C75298}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{204B393F-80F7-4A75-BD9C-F10A21C75298}.Release|Any CPU.Build.0 = Release|Any CPU
 		{747AAAC1-4C98-4443-86C7-D41FAB9CF736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{747AAAC1-4C98-4443-86C7-D41FAB9CF736}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{747AAAC1-4C98-4443-86C7-D41FAB9CF736}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{747AAAC1-4C98-4443-86C7-D41FAB9CF736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEE4295C-D5B9-4037-9AAB-96118BBA258C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE4295C-D5B9-4037-9AAB-96118BBA258C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE4295C-D5B9-4037-9AAB-96118BBA258C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE4295C-D5B9-4037-9AAB-96118BBA258C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
