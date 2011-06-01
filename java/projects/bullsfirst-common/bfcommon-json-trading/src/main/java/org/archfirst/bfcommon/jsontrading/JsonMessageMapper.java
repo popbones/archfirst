@@ -16,15 +16,12 @@
 package org.archfirst.bfcommon.jsontrading;
 
 import java.io.IOException;
-import java.io.StringWriter;
 
 import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonNode;
 import org.codehaus.jackson.map.JsonMappingException;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.util.DefaultPrettyPrinter;
 
 /**
  * JsonMessageMapper
@@ -33,13 +30,18 @@ import org.codehaus.jackson.util.DefaultPrettyPrinter;
  */
 public class JsonMessageMapper {
     
-    // Shared instance of mapper for performance
+    // Shared instances of mapper for performance
     // (mappers are thread-safe after configuration)
     private static ObjectMapper mapper = new ObjectMapper();
+    private static ObjectMapper prettyMapper = new ObjectMapper();
     
     static {
         mapper.configure(
                 SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+        prettyMapper.configure(
+                SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+        prettyMapper.configure(
+                SerializationConfig.Feature.INDENT_OUTPUT, true);
     }
     
     public String toString(JsonMessage jsonMessage) {
@@ -59,18 +61,7 @@ public class JsonMessageMapper {
     
     public String toFormattedString(JsonMessage jsonMessage) {
         try {
-            // Initialize a mapper with a PrettyPrinter
-            ObjectMapper prettyMapper = new ObjectMapper();
-            prettyMapper.configure(
-                    SerializationConfig.Feature.WRITE_DATES_AS_TIMESTAMPS, false);
-            StringWriter writer = new StringWriter();
-            final JsonGenerator jsonGenerator =
-                prettyMapper.getJsonFactory().createJsonGenerator(writer);
-            jsonGenerator.setPrettyPrinter(new DefaultPrettyPrinter());
-            
-            // Write out the message to a string
-            prettyMapper.writeValue(jsonGenerator, jsonMessage);
-            return writer.toString();
+            return prettyMapper.writeValueAsString(jsonMessage);
         }
         catch (JsonGenerationException e) {
             throw new RuntimeException("Failed to convert to string", e);
