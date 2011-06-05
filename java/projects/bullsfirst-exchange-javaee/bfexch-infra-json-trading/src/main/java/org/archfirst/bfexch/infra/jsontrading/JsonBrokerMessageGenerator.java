@@ -16,9 +16,7 @@
 package org.archfirst.bfexch.infra.jsontrading;
 
 import org.archfirst.bfcommon.jsontrading.ExecutionReportType;
-import org.archfirst.bfcommon.jsontrading.JsonMessage;
 import org.archfirst.bfcommon.jsontrading.JsonMessageMapper;
-import org.archfirst.bfcommon.jsontrading.MessageType;
 import org.archfirst.bfcommon.jsontrading.OrderCancelReject;
 import org.archfirst.bfcommon.jsontrading.OrderSide;
 import org.archfirst.bfcommon.jsontrading.OrderStatus;
@@ -42,9 +40,6 @@ public class JsonBrokerMessageGenerator implements BrokerMessageGenerator {
     @Override
     public String generateExecutionReport(ExecutionReport executionReport) {
 
-        logger.debug("Generating ExecutionReport: {}", executionReport);
-
-        // Create a JsonMessage with ExecutionReport
         org.archfirst.bfcommon.jsontrading.ExecutionReport jsonExecutionReport =
             new org.archfirst.bfcommon.jsontrading.ExecutionReport(
                     ExecutionReportType.valueOf(executionReport.getType().toString()),
@@ -59,15 +54,9 @@ public class JsonBrokerMessageGenerator implements BrokerMessageGenerator {
                     QuantityConverter.toJson(executionReport.getCumQty()),
                     MoneyConverter.toJson(executionReport.getLastPrice()),
                     MoneyConverter.toJson(executionReport.getWeightedAvgPrice()));
-        JsonMessage jsonMessage =
-            new JsonMessage(MessageType.ExecutionReport, jsonExecutionReport);
 
-        // Write out the JsonMessage as a string
-        JsonMessageMapper mapper = new JsonMessageMapper();
-        String jsonMessageString = mapper.toString(jsonMessage);
-        
-        logger.debug("Sending message:\n{}", mapper.toFormattedString(jsonMessage));
-        return jsonMessageString;
+        logger.debug("Sending message:\n{}", JsonMessageMapper.toFormattedString(jsonExecutionReport));
+        return JsonMessageMapper.toString(jsonExecutionReport);
     }
 
     @Override
@@ -76,14 +65,8 @@ public class JsonBrokerMessageGenerator implements BrokerMessageGenerator {
         OrderCancelReject orderCancelReject = new OrderCancelReject(
                 order.getClientOrderId(),
                 OrderStatus.valueOf(order.getStatus().toString()));
-        JsonMessage jsonMessage =
-            new JsonMessage(MessageType.OrderCancelReject, orderCancelReject);
 
-        // Write out the JsonMessage as a string
-        JsonMessageMapper mapper = new JsonMessageMapper();
-        String jsonMessageString = mapper.toString(jsonMessage);
-        
-        logger.debug("Sending message:\n{}", mapper.toFormattedString(jsonMessage));
-        return jsonMessageString;
+        logger.debug("Sending message:\n{}", JsonMessageMapper.toFormattedString(orderCancelReject));
+        return JsonMessageMapper.toString(orderCancelReject);
     }
 }

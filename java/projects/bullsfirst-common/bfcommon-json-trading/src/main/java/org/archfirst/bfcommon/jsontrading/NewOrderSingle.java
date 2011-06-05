@@ -15,16 +15,19 @@
  */
 package org.archfirst.bfcommon.jsontrading;
 
+import org.codehaus.jackson.annotate.JsonTypeName;
+
 /**
  * NewOrderSingle
  *
  * @author Naresh Bhatia
  */
-public class NewOrderSingle {
+@JsonTypeName("NewOrderSingle")
+public class NewOrderSingle extends JsonMessage {
     
     private Order order;
 
-    // ----- Constructor -----
+    // ----- Constructors -----
     public NewOrderSingle() {
     }
 

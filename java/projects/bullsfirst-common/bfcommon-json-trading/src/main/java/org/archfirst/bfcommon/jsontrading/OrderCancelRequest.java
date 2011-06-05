@@ -15,12 +15,15 @@
  */
 package org.archfirst.bfcommon.jsontrading;
 
+import org.codehaus.jackson.annotate.JsonTypeName;
+
 /**
  * OrderCancelRequest
  *
  * @author Naresh Bhatia
  */
-public class OrderCancelRequest {
+@JsonTypeName("OrderCancelRequest")
+public class OrderCancelRequest extends JsonMessage {
     
     private String clientOrderId;
 
@@ -31,12 +34,11 @@ public class OrderCancelRequest {
     public OrderCancelRequest(String clientOrderId) {
         this.clientOrderId = clientOrderId;
     }
-
+    
     // ----- Getters and Setters -----
     public String getClientOrderId() {
         return clientOrderId;
     }
-
     public void setClientOrderId(String clientOrderId) {
         this.clientOrderId = clientOrderId;
     }

@@ -15,12 +15,15 @@
  */
 package org.archfirst.bfcommon.jsontrading;
 
+import org.codehaus.jackson.annotate.JsonTypeName;
+
 /**
  * ExecutionReport
  *
  * @author Naresh Bhatia
  */
-public class ExecutionReport {
+@JsonTypeName("ExecutionReport")
+public class ExecutionReport extends JsonMessage {
     private ExecutionReportType type;
     private String orderId;
     private String executionId;

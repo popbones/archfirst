@@ -47,18 +47,15 @@ public class JsonExchangeMessageProcessor implements ExchangeMessageProcessor {
     public void processMessage(String messageText) {
 
         // Parse the message
-        JsonMessageMapper mapper = new JsonMessageMapper();
-        JsonMessage jsonMessage = mapper.fromString(messageText);
-        logger.debug("Received message:\n{}", mapper.toFormattedString(jsonMessage));
+        JsonMessage jsonMessage = JsonMessageMapper.fromString(messageText);
+        logger.debug("Received message:\n{}", JsonMessageMapper.toFormattedString(jsonMessage));
         
         // Dispatch to the correct handler
-        switch(jsonMessage.getMessageType()) {
-            case ExecutionReport:
-                this.onMessage((ExecutionReport)jsonMessage.getPayload());
-                break;
-            case OrderCancelReject:
-                this.onMessage((OrderCancelReject)jsonMessage.getPayload());
-                break;
+        if (jsonMessage.getClass().equals(ExecutionReport.class)) {
+            this.onMessage((ExecutionReport)jsonMessage);
+        }
+        else if (jsonMessage.getClass().equals(OrderCancelReject.class)) {
+            this.onMessage((OrderCancelReject)jsonMessage);
         }
     }
     

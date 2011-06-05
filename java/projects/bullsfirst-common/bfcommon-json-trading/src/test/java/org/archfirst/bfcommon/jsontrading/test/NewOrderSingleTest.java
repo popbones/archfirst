@@ -17,7 +17,6 @@ package org.archfirst.bfcommon.jsontrading.test;
 
 import org.archfirst.bfcommon.jsontrading.JsonMessage;
 import org.archfirst.bfcommon.jsontrading.JsonMessageMapper;
-import org.archfirst.bfcommon.jsontrading.MessageType;
 import org.archfirst.bfcommon.jsontrading.Money;
 import org.archfirst.bfcommon.jsontrading.NewOrderSingle;
 import org.archfirst.bfcommon.jsontrading.Order;
@@ -39,7 +38,6 @@ import org.testng.annotations.Test;
  */
 public class NewOrderSingleTest {
     
-    private JsonMessageMapper mapper = new JsonMessageMapper();
     private DateTimeFormatter fmt = ISODateTimeFormat.dateTime();
 
     @Test
@@ -62,22 +60,20 @@ public class NewOrderSingleTest {
                 false,
                 OrderStatus.PendingNew);
         NewOrderSingle newOrderSingle = new NewOrderSingle(order);
-        JsonMessage jsonMessage =
-            new JsonMessage(MessageType.NewOrderSingle, newOrderSingle);
 
         // Write out the JsonMessage as a string
-        String jsonMessageString = mapper.toFormattedString(jsonMessage);
+        String jsonMessageString = JsonMessageMapper.toFormattedString(newOrderSingle);
         
         // Read the JsonMessage back
-        JsonMessage jsonMessageRead = mapper.fromString(jsonMessageString);
+        JsonMessage jsonMessageRead = JsonMessageMapper.fromString(jsonMessageString);
         
         // Make sure that the message type has been retrieved properly
-        Assert.assertEquals(
-                jsonMessageRead.getMessageType(), MessageType.NewOrderSingle);
+        Assert.assertTrue(
+                jsonMessageRead.getClass().equals(NewOrderSingle.class));
         
         // Make sure that the order has been retrieved properly
         Order orderRead =
-            ((NewOrderSingle)jsonMessageRead.getPayload()).getOrder();
+            ((NewOrderSingle)jsonMessageRead).getOrder();
 
         // Can't compare the two DateTime objects with equals
         // because deserialization loses the time zone

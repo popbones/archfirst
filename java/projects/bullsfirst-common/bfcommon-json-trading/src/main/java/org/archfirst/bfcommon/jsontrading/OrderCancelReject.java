@@ -15,12 +15,15 @@
  */
 package org.archfirst.bfcommon.jsontrading;
 
+import org.codehaus.jackson.annotate.JsonTypeName;
+
 /**
  * OrderCancelReject
  *
  * @author Naresh Bhatia
  */
-public class OrderCancelReject {
+@JsonTypeName("OrderCancelReject")
+public class OrderCancelReject extends JsonMessage {
     
     private String clientOrderId;
     private OrderStatus orderStatus;

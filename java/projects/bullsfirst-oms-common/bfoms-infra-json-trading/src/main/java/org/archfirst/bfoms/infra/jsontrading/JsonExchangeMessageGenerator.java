@@ -17,9 +17,7 @@ package org.archfirst.bfoms.infra.jsontrading;
 
 import javax.inject.Inject;
 
-import org.archfirst.bfcommon.jsontrading.JsonMessage;
 import org.archfirst.bfcommon.jsontrading.JsonMessageMapper;
-import org.archfirst.bfcommon.jsontrading.MessageType;
 import org.archfirst.bfcommon.jsontrading.NewOrderSingle;
 import org.archfirst.bfcommon.jsontrading.OrderCancelRequest;
 import org.archfirst.bfcommon.jsontrading.OrderSide;
@@ -51,9 +49,6 @@ public class JsonExchangeMessageGenerator implements ExchangeMessageGenerator {
     @Override
     public String generateNewOrderSingleMessage(Order order) {
 
-        logger.debug("Generating NewOrderSingle: {}", order);
-
-        // Create a JsonMessage with NewOrderSingle
         org.archfirst.bfcommon.jsontrading.Order jsonOrder =
             new org.archfirst.bfcommon.jsontrading.Order(
                     DateTimeUtil.toStringISODateTime(order.getCreationTime()),
@@ -67,15 +62,9 @@ public class JsonExchangeMessageGenerator implements ExchangeMessageGenerator {
                     order.isAllOrNone(),
                     OrderStatus.valueOf(order.getStatus().toString()));
         NewOrderSingle newOrderSingle = new NewOrderSingle(jsonOrder);
-        JsonMessage jsonMessage =
-            new JsonMessage(MessageType.NewOrderSingle, newOrderSingle);
 
-        // Write out the JsonMessage as a string
-        JsonMessageMapper mapper = new JsonMessageMapper();
-        String jsonMessageString = mapper.toString(jsonMessage);
-        
-        logger.debug("Sending message:\n{}", mapper.toFormattedString(jsonMessage));
-        return jsonMessageString;
+        logger.debug("Sending message:\n{}", JsonMessageMapper.toFormattedString(newOrderSingle));
+        return JsonMessageMapper.toString(newOrderSingle);
     }
 
     @Override
@@ -83,15 +72,9 @@ public class JsonExchangeMessageGenerator implements ExchangeMessageGenerator {
 
         OrderCancelRequest orderCancelRequest = new OrderCancelRequest(
                 ClOrdIDConverter.toJson(getBrokerId(), order.getId()));
-        JsonMessage jsonMessage =
-            new JsonMessage(MessageType.OrderCancelRequest, orderCancelRequest);
 
-        // Write out the JsonMessage as a string
-        JsonMessageMapper mapper = new JsonMessageMapper();
-        String jsonMessageString = mapper.toString(jsonMessage);
-        
-        logger.debug("Sending message:\n{}", mapper.toFormattedString(jsonMessage));
-        return jsonMessageString;
+        logger.debug("Sending message:\n{}", JsonMessageMapper.toFormattedString(orderCancelRequest));
+        return JsonMessageMapper.toString(orderCancelRequest);
     }
 
     private String getBrokerId() {

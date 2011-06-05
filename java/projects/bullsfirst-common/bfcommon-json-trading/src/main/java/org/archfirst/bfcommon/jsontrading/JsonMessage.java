@@ -15,37 +15,22 @@
  */
 package org.archfirst.bfcommon.jsontrading;
 
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonSubTypes.Type;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.annotate.JsonTypeInfo.As;
+import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
+
 /**
  * JsonMessage
  *
  * @author Naresh Bhatia
  */
-public class JsonMessage {
-    
-    private MessageType messageType;
-    private Object payload;
-
-    // ----- Constructor -----
-    public JsonMessage() {
-    }
-
-    public JsonMessage(MessageType messageType, Object payload) {
-        this.messageType = messageType;
-        this.payload = payload;
-    }
-
-    // ----- Getters and Setters -----
-    public MessageType getMessageType() {
-        return messageType;
-    }
-    public void setMessageType(MessageType messageType) {
-        this.messageType = messageType;
-    }
-
-    public Object getPayload() {
-        return payload;
-    }
-    public void setPayload(Object payload) {
-        this.payload = payload;
-    }
+@JsonTypeInfo(use=Id.NAME, include=As.PROPERTY, property="messageType")
+@JsonSubTypes({
+    @Type(value = NewOrderSingle.class, name = "NewOrderSingle"),
+    @Type(value = ExecutionReport.class, name = "ExecutionReport"),
+    @Type(value = OrderCancelReject.class, name = "OrderCancelReject"),
+    @Type(value = OrderCancelRequest.class, name = "OrderCancelRequest")})
+public abstract class JsonMessage {
 }

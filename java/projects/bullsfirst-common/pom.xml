@@ -14,8 +14,8 @@
         <!-- Explicitly declare source encoding to avoid Maven warning -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <org.slf4j.version>1.6.1</org.slf4j.version>
         <org.codehaus.jackson.version>1.7.6</org.codehaus.jackson.version>
+        <org.slf4j.version>1.6.1</org.slf4j.version>
     </properties>
 
     <dependencyManagement>

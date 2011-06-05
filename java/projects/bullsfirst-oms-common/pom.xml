@@ -14,6 +14,7 @@
         <!-- Explicitly declare source encoding to avoid Maven warning -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <org.codehaus.jackson.version>1.7.6</org.codehaus.jackson.version>
         <org.hibernate.version>3.6.0.Final</org.hibernate.version>
         <org.hibernate-tools.version>3.2.4.GA</org.hibernate-tools.version>
         <org.slf4j.version>1.6.1</org.slf4j.version>
@@ -67,6 +68,18 @@
                 <groupId>org.archfirst</groupId>
                 <artifactId>bfoms-infra</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-core-asl</artifactId>
+                <version>${org.codehaus.jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.codehaus.jackson</groupId>
+                <artifactId>jackson-mapper-asl</artifactId>
+                <version>${org.codehaus.jackson.version}</version>
             </dependency>
 
             <dependency>

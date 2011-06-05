@@ -48,18 +48,15 @@ public class JsonBrokerMessageProcessor implements BrokerMessageProcessor {
     public void processMessage(String messageText) {
 
         // Parse the message
-        JsonMessageMapper mapper = new JsonMessageMapper();
-        JsonMessage jsonMessage = mapper.fromString(messageText);
-        logger.debug("Received message:\n{}", mapper.toFormattedString(jsonMessage));
+        JsonMessage jsonMessage = JsonMessageMapper.fromString(messageText);
+        logger.debug("Received message:\n{}", JsonMessageMapper.toFormattedString(jsonMessage));
         
         // Dispatch to the correct handler
-        switch(jsonMessage.getMessageType()) {
-            case NewOrderSingle:
-                this.onMessage((NewOrderSingle)jsonMessage.getPayload());
-                break;
-            case OrderCancelRequest:
-                this.onMessage((OrderCancelRequest)jsonMessage.getPayload());
-                break;
+        if (jsonMessage.getClass().equals(NewOrderSingle.class)) {
+            this.onMessage((NewOrderSingle)jsonMessage);
+        }
+        else if (jsonMessage.getClass().equals(OrderCancelRequest.class)) {
+            this.onMessage((OrderCancelRequest)jsonMessage);
         }
     }
     
