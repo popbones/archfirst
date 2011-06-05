@@ -205,7 +205,7 @@ public class MatchingEngine {
     /**
      * Executes the order and adds an execution to it.
      */
-    public void executeOrder(
+    private void executeOrder(
             Order order,
             DateTime executionTime,
             DecimalQuantity executionQty,
