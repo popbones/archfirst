@@ -39,7 +39,8 @@
         <property name="dataSource" ref="dataSource" />
     </bean>
 
-    <bean class="org.archfirst.bfoms.spec.mocks.MockReferenceDataAdapter" />
-    <bean class="org.archfirst.bfoms.spec.mocks.MockMarketDataAdapter" />
     <bean class="org.archfirst.bfoms.spec.mocks.MockExchangeTradingService" />
+    <bean class="org.archfirst.bfoms.spec.mocks.MockMarketDataAdapter" />
+    <bean class="org.archfirst.bfoms.spec.mocks.MockOrderEventPublisher" />
+    <bean class="org.archfirst.bfoms.spec.mocks.MockReferenceDataAdapter" />
 </beans>

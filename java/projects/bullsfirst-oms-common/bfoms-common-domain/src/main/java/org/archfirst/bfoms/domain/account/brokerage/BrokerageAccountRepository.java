@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.inject.Inject;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.JoinType;
@@ -28,6 +29,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderEventPublisher;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order_;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
@@ -42,6 +44,8 @@ import org.archfirst.common.quantity.DecimalQuantity;
  * @author Naresh Bhatia
  */
 public class BrokerageAccountRepository extends BaseRepository {
+
+    @Inject private OrderEventPublisher orderEventPublisher;
 
     // ----- BrokerageAccount Methods -----
     public BrokerageAccount findAccount(Long id) {
@@ -289,5 +293,6 @@ public class BrokerageAccountRepository extends BaseRepository {
     
     public void injectDependencies(BrokerageAccount account) {
         account.setBrokerageAccountRepository(this);
+        account.setOrderEventPublisher(orderEventPublisher);
     }
 }

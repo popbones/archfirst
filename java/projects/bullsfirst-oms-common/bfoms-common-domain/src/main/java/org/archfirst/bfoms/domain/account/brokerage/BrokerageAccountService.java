@@ -25,6 +25,7 @@ import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderEventPublisher;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.exchange.ExchangeTradingService;
@@ -52,6 +53,7 @@ public class BrokerageAccountService {
     @Inject private ReferenceDataService referenceDataService;
     @Inject private ExchangeTradingService exchangeTradingService;
     @Inject private UserRepository userRepository;
+    @Inject private OrderEventPublisher orderEventPublisher;
 
     // ----- Commands -----
     public Long openNewAccount(String username, String accountName) {
@@ -92,7 +94,7 @@ public class BrokerageAccountService {
                 getUser(username), order.getAccount().getId(), BrokerageAccountPermission.Trade);
         
         // Cancel order
-        order.cancel();
+        order.cancel(orderEventPublisher);
         exchangeTradingService.cancelOrder(order);
         
     }
@@ -113,7 +115,7 @@ public class BrokerageAccountService {
         }
 
         // Send the new status to the order
-        order.cancelRequestRejected(newStatus);
+        order.cancelRequestRejected(newStatus, orderEventPublisher);
     }
 
     // ----- Queries and Read-Only Operations -----

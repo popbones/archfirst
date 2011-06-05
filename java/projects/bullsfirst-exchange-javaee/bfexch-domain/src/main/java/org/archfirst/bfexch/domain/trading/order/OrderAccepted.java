@@ -15,12 +15,14 @@
  */
 package org.archfirst.bfexch.domain.trading.order;
 
+import org.archfirst.common.domain.DomainEvent;
+
 /**
  * OrderAccepted
  *
  * @author Naresh Bhatia
  */
-public class OrderAccepted {
+public class OrderAccepted implements DomainEvent {
     
     private final Order order;
 

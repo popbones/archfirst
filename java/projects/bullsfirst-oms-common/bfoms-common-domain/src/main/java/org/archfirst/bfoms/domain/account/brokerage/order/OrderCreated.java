@@ -13,20 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.domain.trading.order;
+package org.archfirst.bfoms.domain.account.brokerage.order;
 
 import org.archfirst.common.domain.DomainEvent;
 
 /**
- * OrderDoneForDay
+ * OrderCreated
  *
  * @author Naresh Bhatia
  */
-public class OrderDoneForDay implements DomainEvent {
+public class OrderCreated implements DomainEvent {
     
     private final Order order;
-
-    public OrderDoneForDay(Order order) {
+    
+    public OrderCreated(Order order) {
         this.order = order;
     }
 

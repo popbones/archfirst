@@ -153,12 +153,14 @@ public class Order extends DomainEntity implements Comparable<Order> {
      */
     public Trade processExecutionReport(
             ExecutionReport executionReport,
-            BrokerageAccountRepository accountRepository) {
+            BrokerageAccountRepository accountRepository,
+            OrderEventPublisher orderEventPublisher) {
         
         // Record status if it is moving forward
         OrderStatus newStatus = executionReport.getOrderStatus();
         if (isStatusChangeForward(newStatus)) {
             this.status = executionReport.getOrderStatus();
+            orderEventPublisher.publish(new OrderStatusChanged(this));
         }
 
         // Record CumQty if it is higher
@@ -194,10 +196,11 @@ public class Order extends DomainEntity implements Comparable<Order> {
         return trade;
     }
     
-    public void cancel() {
+    public void cancel(OrderEventPublisher orderEventPublisher) {
         OrderStatus newStatus = OrderStatus.PendingCancel;
         if (isStatusChangeValid(newStatus)) {
             this.status = newStatus;
+            orderEventPublisher.publish(new OrderStatusChanged(this));
         }
         else {
             throw new IllegalArgumentException(
@@ -205,8 +208,11 @@ public class Order extends DomainEntity implements Comparable<Order> {
         }
     }
 
-    public void cancelRequestRejected(OrderStatus newStatus) {
+    public void cancelRequestRejected(
+            OrderStatus newStatus,
+            OrderEventPublisher orderEventPublisher) {
         this.status = newStatus;
+        orderEventPublisher.publish(new OrderStatusChanged(this));
     }
 
     // ----- Queries and Read-Only Operations -----

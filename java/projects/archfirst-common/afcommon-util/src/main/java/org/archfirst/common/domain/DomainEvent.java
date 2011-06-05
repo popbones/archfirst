@@ -13,24 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.domain.trading.order;
-
-import org.archfirst.common.domain.DomainEvent;
+package org.archfirst.common.domain;
 
 /**
- * OrderDoneForDay
+ * This is a marker interface to mark domain events
  *
  * @author Naresh Bhatia
  */
-public class OrderDoneForDay implements DomainEvent {
-    
-    private final Order order;
-
-    public OrderDoneForDay(Order order) {
-        this.order = order;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
+public interface DomainEvent {
 }

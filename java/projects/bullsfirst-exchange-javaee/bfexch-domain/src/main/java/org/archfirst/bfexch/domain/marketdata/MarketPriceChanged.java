@@ -15,13 +15,14 @@
  */
 package org.archfirst.bfexch.domain.marketdata;
 
+import org.archfirst.common.domain.DomainEvent;
 
 /**
  * MarketPriceChanged
  *
  * @author Naresh Bhatia
  */
-public class MarketPriceChanged {
+public class MarketPriceChanged implements DomainEvent {
 
     private final MarketPrice marketPrice;
 

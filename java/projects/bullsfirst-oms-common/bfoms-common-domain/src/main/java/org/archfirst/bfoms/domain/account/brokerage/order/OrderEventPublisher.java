@@ -13,24 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfexch.domain.trading.order;
-
-import org.archfirst.common.domain.DomainEvent;
+package org.archfirst.bfoms.domain.account.brokerage.order;
 
 /**
- * OrderDoneForDay
+ * OrderEventPublisher
  *
  * @author Naresh Bhatia
  */
-public class OrderDoneForDay implements DomainEvent {
-    
-    private final Order order;
-
-    public OrderDoneForDay(Order order) {
-        this.order = order;
-    }
-
-    public Order getOrder() {
-        return order;
-    }
+public interface OrderEventPublisher {
+    void publish(OrderCreated event);
+    void publish(OrderStatusChanged event);
 }

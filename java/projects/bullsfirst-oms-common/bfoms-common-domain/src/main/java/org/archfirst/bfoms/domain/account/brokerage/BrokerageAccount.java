@@ -37,7 +37,9 @@ import org.archfirst.bfoms.domain.account.SecuritiesTransfer;
 import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCompliance;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderCreated;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderEventPublisher;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.marketdata.MarketDataService;
@@ -71,6 +73,9 @@ public class BrokerageAccount extends BaseAccount {
     
     @Transient
     private BrokerageAccountRepository brokerageAccountRepository;
+
+    @Transient
+    private OrderEventPublisher orderEventPublisher;
 
     // ----- Constructors -----
     private BrokerageAccount() {
@@ -199,6 +204,7 @@ public class BrokerageAccount extends BaseAccount {
         order.setCreationTime(new DateTime());
         brokerageAccountRepository.persistAndFlush(order);
         this.addOrder(order);
+        orderEventPublisher.publish(new OrderCreated(order));
         return order;
     }
     
@@ -206,7 +212,8 @@ public class BrokerageAccount extends BaseAccount {
         logger.debug("Processing ExecutionReport: {}", executionReport);
         Order order =
             brokerageAccountRepository.findOrder(executionReport.getClientOrderId());
-        Trade trade = order.processExecutionReport(executionReport, brokerageAccountRepository);
+        Trade trade = order.processExecutionReport(
+                executionReport, brokerageAccountRepository, orderEventPublisher);
         if (trade != null) {
             this.addTransaction(trade);
             if (trade.getSide() == OrderSide.Buy) {
@@ -481,6 +488,10 @@ public class BrokerageAccount extends BaseAccount {
     public void setBrokerageAccountRepository(
             BrokerageAccountRepository brokerageAccountRepository) {
         this.brokerageAccountRepository = brokerageAccountRepository;
+    }
+
+    public void setOrderEventPublisher(OrderEventPublisher orderEventPublisher) {
+        this.orderEventPublisher = orderEventPublisher;
     }
 
     // ----- AllocationFactory -----

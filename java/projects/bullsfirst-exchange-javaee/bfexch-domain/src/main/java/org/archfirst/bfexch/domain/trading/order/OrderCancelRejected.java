@@ -15,12 +15,14 @@
  */
 package org.archfirst.bfexch.domain.trading.order;
 
+import org.archfirst.common.domain.DomainEvent;
+
 /**
  * OrderCanceled
  *
  * @author Naresh Bhatia
  */
-public class OrderCancelRejected {
+public class OrderCancelRejected implements DomainEvent {
     
     private final Order order;
 
