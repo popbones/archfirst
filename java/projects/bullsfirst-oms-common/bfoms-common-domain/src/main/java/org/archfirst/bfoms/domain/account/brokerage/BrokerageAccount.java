@@ -378,7 +378,7 @@ public class BrokerageAccount extends BaseAccount {
         // Determine account level compliance
         if (orderEstimate.getCompliance() == null) {
             OrderCompliance compliance = (order.getSide() == OrderSide.Buy) ?
-                    calculateBuyOrderCompliance(order, marketDataService) :
+                    calculateBuyOrderCompliance(order, orderEstimate, marketDataService) :
                     calculateSellOrderCompliance(order);
             orderEstimate.setCompliance(compliance);
         }
@@ -388,10 +388,10 @@ public class BrokerageAccount extends BaseAccount {
     
     private OrderCompliance calculateBuyOrderCompliance(
             Order order,
+            OrderEstimate orderEstimate,
             MarketDataService marketDataService) {
 
         // Check if sufficient cash is available
-        OrderEstimate orderEstimate = order.calculateOrderEstimate(marketDataService);
         return isCashAvailable(
                 orderEstimate.getEstimatedValueInclFees(),
                 marketDataService) ?

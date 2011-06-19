@@ -60,11 +60,7 @@ public class BaseAccountService {
                 this.findAccount(toAccountId));
     }
     
-    /**
-     * Transfer cash from the specified account to the specified account.
-     * Amount should always be positive.
-     */
-    public void transferCash(
+    private void transferCash(
             String username,
             Money amount,
             BaseAccount fromAccount,
@@ -110,11 +106,7 @@ public class BaseAccountService {
                 this.findAccount(toAccountId));
     }
         
-    /**
-     * Transfer securities from the specified account to the specified account.
-     * Quantity should always be positive.
-     */
-    public void transferSecurities(
+    private void transferSecurities(
             String username,
             String symbol,
             DecimalQuantity quantity,

@@ -196,7 +196,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
         return trade;
     }
     
-    public void cancel(OrderEventPublisher orderEventPublisher) {
+    public void pendingCancel(OrderEventPublisher orderEventPublisher) {
         OrderStatus newStatus = OrderStatus.PendingCancel;
         if (isStatusChangeValid(newStatus)) {
             this.status = newStatus;

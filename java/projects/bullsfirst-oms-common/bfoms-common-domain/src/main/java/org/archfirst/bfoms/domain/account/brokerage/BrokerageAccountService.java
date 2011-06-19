@@ -84,19 +84,18 @@ public class BrokerageAccountService {
         return order.getId();
     }
     
-    public void cancelOrder(
-            String username,
-            Long orderId) {
+    public void cancelOrder(String username, Long orderId) {
 
         // Check authorization on account
         Order order = brokerageAccountRepository.findOrder(orderId);
         checkAccountAuthorization(
-                getUser(username), order.getAccount().getId(), BrokerageAccountPermission.Trade);
+                getUser(username),
+                order.getAccount().getId(),
+                BrokerageAccountPermission.Trade);
         
         // Cancel order
-        order.cancel(orderEventPublisher);
+        order.pendingCancel(orderEventPublisher);
         exchangeTradingService.cancelOrder(order);
-        
     }
 
     public void processExecutionReport(ExecutionReport executionReport) {
