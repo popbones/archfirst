@@ -15,9 +15,14 @@
  */
 package org.archfirst.jpacriteriaqueryexample;
 
+import java.io.StringWriter;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +41,7 @@ public class JpaCriteriaQueryTest extends AbstractTransactionalTestNGSpringConte
     private ArtistRepository artistRepository;
 
     @Test
-    public void testGetTitles()
+    public void testGetTitles() throws JAXBException
     {
         // Create an artist
         Artist artist = new Artist(
@@ -56,11 +61,20 @@ public class JpaCriteriaQueryTest extends AbstractTransactionalTestNGSpringConte
         List<Title> titles = artistRepository.getTitles(artistId);
         Assert.assertEquals(titles.size(), 3);
         
-        logger.debug("******************************");
+        logger.debug("******************************\n");
         logger.debug("Titles for artist {}:", artistId);
         for (Title title : titles) {
             logger.debug(title.toString());
         }
+        logger.debug("");
+
+        // Write out to XML
+        JAXBContext jaxbContext = JAXBContext.newInstance(Artist.class);
+        StringWriter writer = new StringWriter();
+        Marshaller marshaller = jaxbContext.createMarshaller();
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        marshaller.marshal(artist, writer);
+        logger.debug(writer.toString());
         logger.debug("******************************");
     }
 }

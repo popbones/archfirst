@@ -25,6 +25,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Artist
@@ -32,13 +37,9 @@ import javax.persistence.OneToMany;
  * @author Naresh Bhatia
  */
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "Artist")
 public class Artist {
-    private Long id;
-    private String name;
-    private String genre;
-    private Calendar born;
-    private Calendar died;
-    private Set<Title> titles = new HashSet<Title>();
 
     // ----- Constructors -----
     public Artist() {
@@ -51,57 +52,57 @@ public class Artist {
         this.died = died;
     }
 
-    // ----- Getters and Setters -----
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    @Column(nullable = false)
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(nullable = false)
-    public String getGenre() {
-        return genre;
-    }
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
-
-    @Column(nullable = false)
-    public Calendar getBorn() {
-        return born;
-    }
-    public void setBorn(Calendar born) {
-        this.born = born;
-    }
-
-    @Column(nullable = true)
-    public Calendar getDied() {
-        return died;
-    }
-    public void setDied(Calendar died) {
-        this.died = died;
-    }
-
-    @OneToMany(mappedBy="artist",  cascade=CascadeType.ALL)
-    public Set<Title> getTitles() {
-        return titles;
-    }
-    public void setTitles(Set<Title> titles) {
-        this.titles = titles;
-    }
+    // ----- Commands -----
     public void addTitle(Title title) {
         this.titles.add(title);
         title.setArtist(this);
+    }
+
+    // ----- Queries -----
+
+    // ----- Attributes -----
+    @Id
+    @GeneratedValue
+    @XmlAttribute(name = "Id")
+    private Long id;
+
+    @Column(nullable = false)
+    @XmlAttribute(name = "Name")
+    private String name;
+
+    @Column(nullable = false)
+    @XmlAttribute(name = "Genre")
+    private String genre;
+
+    @Column(nullable = false)
+    @XmlAttribute(name = "Born")
+    private Calendar born;
+
+    @Column(nullable = true)
+    @XmlAttribute(name = "Died")
+    private Calendar died;
+
+    @OneToMany(mappedBy="artist",  cascade=CascadeType.ALL)
+    @XmlElement(name = "Title")
+    private Set<Title> titles = new HashSet<Title>();
+
+    // ----- Getters -----
+    public Long getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getGenre() {
+        return genre;
+    }
+    public Calendar getBorn() {
+        return born;
+    }
+    public Calendar getDied() {
+        return died;
+    }
+    public Set<Title> getTitles() {
+        return titles;
     }
 }

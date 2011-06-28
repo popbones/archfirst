@@ -20,6 +20,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlTransient;
 
 /**
  * Title
@@ -27,11 +31,8 @@ import javax.persistence.ManyToOne;
  * @author Naresh Bhatia
  */
 @Entity
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Title {
-    private Long id;
-    private String name;
-    private int released;
-    private Artist artist;
 
     // ----- Constructors -----
     public Title() {
@@ -42,42 +43,49 @@ public class Title {
         this.released = released;
     }
 
-    // ----- Getters and Setters -----
-    @Id
-    @GeneratedValue
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
+    // ----- Commands -----
 
-    @Column(nullable = false)
-    public String getName() {
-        return name;
-    }
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Column(nullable = false)
-    public int getReleased() {
-        return released;
-    }
-    public void setReleased(int released) {
-        this.released = released;
-    }
-
-    @ManyToOne
-    public Artist getArtist() {
-        return artist;
-    }
-    public void setArtist(Artist artist) {
-        this.artist = artist;
-    }
-
+    // ----- Queries -----
     @Override
     public String toString() {
         return name + " (" + released + ")";
+    }
+
+    // ----- Attributes -----
+    @Id
+    @GeneratedValue
+    @XmlAttribute(name = "Id")
+    private Long id;
+
+    @Column(nullable = false)
+    @XmlAttribute(name = "Name")
+    private String name;
+
+    @Column(nullable = false)
+    @XmlAttribute(name = "Released")
+    private int released;
+
+    @ManyToOne
+    @XmlTransient
+    private Artist artist;
+
+    // ----- Getters -----
+    public Long getId() {
+        return id;
+    }
+    public String getName() {
+        return name;
+    }
+    public int getReleased() {
+        return released;
+    }
+    public Artist getArtist() {
+        return artist;
+    }
+
+    // ----- Setters -----
+    // Allow access to artist
+    void setArtist(Artist artist) {
+        this.artist = artist;
     }
 }
