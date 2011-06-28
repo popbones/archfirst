@@ -1,1 +1,0 @@
-mvn exec:java -Dexec.mainClass="org.archfirst.jpajaxbsample.JpaJaxbSample"
