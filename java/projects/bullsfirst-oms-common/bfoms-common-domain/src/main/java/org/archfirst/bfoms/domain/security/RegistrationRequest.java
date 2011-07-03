@@ -31,18 +31,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "RegistrationRequest")
 public class RegistrationRequest {
 
-    @XmlElement(name = "FirstName", required = true)
-    private String firstName;
-
-    @XmlElement(name = "LastName", required = true)
-    private String lastName;
-
-    @XmlElement(name = "Username", required = true)
-    private String username;
-
-    @XmlElement(name = "Password", required = true)
-    private String password;
-
     // ----- Constructors -----
     public RegistrationRequest() {
     }
@@ -58,28 +46,29 @@ public class RegistrationRequest {
         this.password = password;
     }
 
-    // ----- Getters and Setters -----
+    // ----- Attributes -----
+    @XmlElement(name = "FirstName", required = true)
+    private String firstName;
+
+    @XmlElement(name = "LastName", required = true)
+    private String lastName;
+
+    @XmlElement(name = "Username", required = true)
+    private String username;
+
+    @XmlElement(name = "Password", required = true)
+    private String password;
+
+    // ----- Getters -----
     public String getFirstName() {
         return firstName;
     }
-    public void setFirstName(String value) {
-        this.firstName = value;
-    }
-
     public String getLastName() {
         return lastName;
     }
-    public void setLastName(String value) {
-        this.lastName = value;
-    }
-
     public String getUsername() {
         return username;
     }
-    public void setUsername(String value) {
-        this.username = value;
-    }
-
     public String getPassword() {
         return password;
     }

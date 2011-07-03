@@ -49,9 +49,6 @@ import org.archfirst.common.money.Money;
 @HandlerChain(file = "handler-chain.xml")
 public class TradingWebService {
 
-    @Inject private TradingTxnService tradingTxnService;
-    @Resource private WebServiceContext wsContext;
-    
     // ----- Commands -----
     @WebMethod(operationName = "OpenNewAccount", action = "OpenNewAccount")
     @WebResult(name = "AccountId")
@@ -124,7 +121,7 @@ public class TradingWebService {
         tradingTxnService.cancelOrder(getUsername(), orderId);
     }
     
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @WebMethod(operationName = "GetBrokerageAccountSummaries", action = "GetBrokerageAccountSummaries")
     @WebResult(name = "BrokerageAccountSummary")
     public List<BrokerageAccountSummary> getBrokerageAccountSummaries() {
@@ -164,9 +161,6 @@ public class TradingWebService {
         return tradingTxnService.getTransactionSummaries(getUsername(), criteria);
     }
 
-    // ----- Helper Methods -----
-    private static final String USERNAME_KEY = "username";
-    
     private String getUsername() {
         MessageContext msgContext = wsContext.getMessageContext();
         @SuppressWarnings("unchecked")
@@ -175,4 +169,10 @@ public class TradingWebService {
         List<String> usernameList = http_headers.get(USERNAME_KEY);
         return usernameList.get(0);
     }
+
+    // ----- Attributes -----
+    private static final String USERNAME_KEY = "username";
+    
+    @Inject private TradingTxnService tradingTxnService;
+    @Resource private WebServiceContext wsContext;
 }

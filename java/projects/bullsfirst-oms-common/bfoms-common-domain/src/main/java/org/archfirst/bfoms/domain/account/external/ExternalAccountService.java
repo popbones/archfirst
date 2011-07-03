@@ -42,7 +42,7 @@ public class ExternalAccountService {
         return account.getId();
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     public ExternalAccount findAccount(Long id) {
         return externalAccountRepository.findAccount(id);
     }

@@ -34,19 +34,6 @@ import org.archfirst.common.money.Money;
 @XmlType(name = "BrokerageAccountSummary")
 public class BrokerageAccountSummary extends BaseAccountSummary {
 
-    @XmlElement(name = "CashPosition", required = true)
-    protected Money cashPosition;
-    @XmlElement(name = "MarketValue", required = true)
-    protected Money marketValue;
-    @XmlElement(name = "EditPermission")
-    protected boolean editPermission;
-    @XmlElement(name = "TradePermission")
-    protected boolean tradePermission;
-    @XmlElement(name = "TransferPermission")
-    protected boolean transferPermission;
-    @XmlElement(name = "Position", required = true)
-    protected List<Position> positions;
-
     // ----- Constructors -----
     public BrokerageAccountSummary() {
     }
@@ -68,6 +55,20 @@ public class BrokerageAccountSummary extends BaseAccountSummary {
         this.transferPermission = transferPermission;
         this.positions = positions;
     }
+
+    // ----- Attributes -----
+    @XmlElement(name = "CashPosition", required = true)
+    protected Money cashPosition;
+    @XmlElement(name = "MarketValue", required = true)
+    protected Money marketValue;
+    @XmlElement(name = "EditPermission")
+    protected boolean editPermission;
+    @XmlElement(name = "TradePermission")
+    protected boolean tradePermission;
+    @XmlElement(name = "TransferPermission")
+    protected boolean transferPermission;
+    @XmlElement(name = "Position", required = true)
+    protected List<Position> positions;
 
     // ----- Getters and Setters -----
     public Money getCashPosition() {

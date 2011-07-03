@@ -45,20 +45,6 @@ import org.joda.time.DateTime;
 public class SecuritiesTransfer extends Transaction {
     private static final long serialVersionUID = 1L;
 
-    private static final String TYPE = "Transfer";
-
-    @XmlElement(name = "Symbol", required = true)
-    private String symbol;
-
-    @XmlElement(name = "Quantity", required = true)
-    private DecimalQuantity quantity;
-
-    @XmlElement(name = "PricePaidPerShare", required = true)
-    private Money pricePaidPerShare;
-
-    @XmlTransient
-    private BaseAccount otherAccount;
-
     // ----- Constructors -----
     protected SecuritiesTransfer() {
     }
@@ -76,22 +62,24 @@ public class SecuritiesTransfer extends Transaction {
         this.otherAccount = otherAccount;
     }
 
-    // ----- Queries and Read-Only Operations -----
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Transfer ").append(quantity).append(" shares of ");
-        builder.append(symbol).append(" @ ");
-        builder.append(pricePaidPerShare);
-        builder.append(" to ").append(otherAccount.getName());
-        return builder.toString();
-    }
+    // ----- Commands -----
 
-    // ----- Getters and Setters -----
+    // ----- Queries -----
     @Override
     @Transient
     public String getType() {
         return TYPE;
+    }
+
+    @Override
+    @Transient
+    public String getDescription() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Transfer ");
+        builder.append(quantity.abs()).append(" shares of ").append(symbol);
+        builder.append(quantity.isPlus() ? " from " : " to ");
+        builder.append(otherAccount.getName());
+        return builder.toString();
     }
 
     @Override
@@ -101,6 +89,22 @@ public class SecuritiesTransfer extends Transaction {
         return new Money("0.00");
     }
 
+    // ----- Attributes -----
+    private static final String TYPE = "Transfer";
+
+    @XmlElement(name = "Symbol", required = true)
+    private String symbol;
+
+    @XmlElement(name = "Quantity", required = true)
+    private DecimalQuantity quantity;
+
+    @XmlElement(name = "PricePaidPerShare", required = true)
+    private Money pricePaidPerShare;
+
+    @XmlTransient
+    private BaseAccount otherAccount;
+
+    // ----- Getters and Setters -----
     @NotNull
     @Column(nullable = false)
     public String getSymbol() {
@@ -151,16 +155,5 @@ public class SecuritiesTransfer extends Transaction {
     }
     private void setOtherAccount(BaseAccount otherAccount) {
         this.otherAccount = otherAccount;
-    }
-
-    @Override
-    @Transient
-    public String getDescription() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Transfer ");
-        builder.append(quantity.abs()).append(" shares of ").append(symbol);
-        builder.append(quantity.isPlus() ? " from " : " to ");
-        builder.append(otherAccount.getName());
-        return builder.toString();
     }
 }

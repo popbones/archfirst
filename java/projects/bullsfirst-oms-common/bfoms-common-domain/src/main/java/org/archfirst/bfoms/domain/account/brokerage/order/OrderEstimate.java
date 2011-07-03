@@ -31,15 +31,6 @@ import org.archfirst.common.money.Money;
 @XmlType(name = "OrderEstimate")
 public class OrderEstimate {
 
-    @XmlElement(name = "Compliance", required = true)
-    private OrderCompliance compliance;
-    @XmlElement(name = "EstimatedValue", required = true)
-    private Money estimatedValue;
-    @XmlElement(name = "Fees", required = true)
-    private Money fees;
-    @XmlElement(name = "EstimatedValueInclFees", required = true)
-    private Money estimatedValueInclFees;
-
     // ----- Constructors -----
     public OrderEstimate() {
     }
@@ -56,6 +47,16 @@ public class OrderEstimate {
         this.fees = fees;
         this.estimatedValueInclFees = estimatedValueInclFees;
     }
+
+    // ----- Attributes -----
+    @XmlElement(name = "Compliance", required = true)
+    private OrderCompliance compliance;
+    @XmlElement(name = "EstimatedValue", required = true)
+    private Money estimatedValue;
+    @XmlElement(name = "Fees", required = true)
+    private Money fees;
+    @XmlElement(name = "EstimatedValueInclFees", required = true)
+    private Money estimatedValueInclFees;
 
     // ----- Getters and Setters -----
     public OrderCompliance getCompliance() {

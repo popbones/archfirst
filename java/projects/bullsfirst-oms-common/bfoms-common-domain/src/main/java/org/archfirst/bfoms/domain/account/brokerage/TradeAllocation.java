@@ -29,8 +29,6 @@ import org.archfirst.common.quantity.DecimalQuantity;
 public class TradeAllocation extends Allocation {
     private static final long serialVersionUID = 1L;
 
-    private Trade trade;
-
     // ----- Constructors -----
     public TradeAllocation() {
     }
@@ -39,6 +37,9 @@ public class TradeAllocation extends Allocation {
         super(quantity);
         this.trade = trade;
     }
+
+    // ----- Attributes -----
+    private Trade trade;
 
     // ----- Getters and Setters -----
     @ManyToOne

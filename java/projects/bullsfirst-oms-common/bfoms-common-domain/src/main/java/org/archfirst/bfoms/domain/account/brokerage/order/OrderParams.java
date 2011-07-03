@@ -33,21 +33,6 @@ import org.archfirst.common.money.Money;
 @XmlType(name = "OrderParams")
 public class OrderParams {
 
-    @XmlElement(name = "Side", required = true)
-    protected OrderSide side;
-    @XmlElement(name = "Symbol", required = true)
-    protected String symbol;
-    @XmlElement(name = "Quantity", required = true)
-    protected BigDecimal quantity;
-    @XmlElement(name = "Type", required = true)
-    protected OrderType type;
-    @XmlElement(name = "LimitPrice", required = true, nillable = true)
-    protected Money limitPrice;
-    @XmlElement(name = "Term", required = true)
-    protected OrderTerm term;
-    @XmlElement(name = "AllOrNone")
-    protected boolean allOrNone;
-
     // ----- Constructors -----
     public OrderParams() {
     }
@@ -69,53 +54,42 @@ public class OrderParams {
         this.allOrNone = allOrNone;
     }
 
-    // ----- Getters and Setters -----
+    // ----- Attributes -----
+    @XmlElement(name = "Side", required = true)
+    protected OrderSide side;
+    @XmlElement(name = "Symbol", required = true)
+    protected String symbol;
+    @XmlElement(name = "Quantity", required = true)
+    protected BigDecimal quantity;
+    @XmlElement(name = "Type", required = true)
+    protected OrderType type;
+    @XmlElement(name = "LimitPrice", required = true, nillable = true)
+    protected Money limitPrice;
+    @XmlElement(name = "Term", required = true)
+    protected OrderTerm term;
+    @XmlElement(name = "AllOrNone")
+    protected boolean allOrNone;
+
+    // ----- Getters -----
     public OrderSide getSide() {
         return side;
     }
-    public void setSide(OrderSide value) {
-        this.side = value;
-    }
-
     public String getSymbol() {
         return symbol;
     }
-    public void setSymbol(String value) {
-        this.symbol = value;
-    }
-
     public BigDecimal getQuantity() {
         return quantity;
     }
-    public void setQuantity(BigDecimal value) {
-        this.quantity = value;
-    }
-
     public OrderType getType() {
         return type;
     }
-    public void setType(OrderType value) {
-        this.type = value;
-    }
-
     public Money getLimitPrice() {
         return limitPrice;
     }
-    public void setLimitPrice(Money value) {
-        this.limitPrice = value;
-    }
-
     public OrderTerm getTerm() {
         return term;
     }
-    public void setTerm(OrderTerm value) {
-        this.term = value;
-    }
-
     public boolean isAllOrNone() {
         return allOrNone;
-    }
-    public void setAllOrNone(boolean value) {
-        this.allOrNone = value;
     }
 }

@@ -34,7 +34,7 @@ public class EventCounter {
         lastEventNanos = System.nanoTime();
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     public synchronized EventStats getStats() {
         return new EventStats(totalEvents, firstEventNanos, lastEventNanos);
     }

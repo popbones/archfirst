@@ -59,41 +59,6 @@ import org.joda.time.DateTime;
 public class Order extends DomainEntity implements Comparable<Order> {
     private static final long serialVersionUID = 1L;
     
-    @XmlElement(name = "CreationTime", required = true)
-    @XmlJavaTypeAdapter(DateTimeAdapter.class)
-    @XmlSchemaType(name="dateTime")
-    private DateTime creationTime;
-
-    @XmlElement(name = "ClientOrderId", required = true)
-    private String clientOrderId;
-
-    @XmlElement(name = "Side", required = true)
-    private OrderSide side;
-
-    @XmlElement(name = "Symbol", required = true)
-    private String symbol;
-
-    @XmlElement(name = "Quantity", required = true)
-    private DecimalQuantity quantity;
-
-    @XmlElement(name = "OrderType", required = true)
-    private OrderType type;
-
-    @XmlElement(name = "LimitPrice", required = true)
-    private Money limitPrice;
-
-    @XmlElement(name = "Term", required = true)
-    private OrderTerm term;
-
-    @XmlElement(name = "AllOrNone", required = true)
-    private boolean allOrNone;
-
-    @XmlElement(name = "OrderStatus", required = true)
-    private OrderStatus status = OrderStatus.PendingNew;
-
-    @XmlElement(name = "Execution", required = true)
-    private Set<Execution> executions = new HashSet<Execution>();
-
     // ----- Constructors -----
     private Order() {
     }
@@ -158,7 +123,14 @@ public class Order extends DomainEntity implements Comparable<Order> {
         this.status = OrderStatus.DoneForDay;
     }
 
-    // ----- Queries and Read-Only Operations -----
+    private void addExecution(Execution execution, OrderRepository orderRepository) {
+        execution.setOrder(this);
+        orderRepository.persist(execution);
+        orderRepository.flush(); // get execution id before adding to set
+        executions.add(execution);
+    }
+    
+    // ----- Queries -----
     @Transient
     public DecimalQuantity getLeavesQty() {
         return quantity.minus(getCumQty());
@@ -294,6 +266,42 @@ public class Order extends DomainEntity implements Comparable<Order> {
         return builder.toString();
     }
     
+    // ----- Attributes -----
+    @XmlElement(name = "CreationTime", required = true)
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name="dateTime")
+    private DateTime creationTime;
+
+    @XmlElement(name = "ClientOrderId", required = true)
+    private String clientOrderId;
+
+    @XmlElement(name = "Side", required = true)
+    private OrderSide side;
+
+    @XmlElement(name = "Symbol", required = true)
+    private String symbol;
+
+    @XmlElement(name = "Quantity", required = true)
+    private DecimalQuantity quantity;
+
+    @XmlElement(name = "OrderType", required = true)
+    private OrderType type;
+
+    @XmlElement(name = "LimitPrice", required = true)
+    private Money limitPrice;
+
+    @XmlElement(name = "Term", required = true)
+    private OrderTerm term;
+
+    @XmlElement(name = "AllOrNone", required = true)
+    private boolean allOrNone;
+
+    @XmlElement(name = "OrderStatus", required = true)
+    private OrderStatus status = OrderStatus.PendingNew;
+
+    @XmlElement(name = "Execution", required = true)
+    private Set<Execution> executions = new HashSet<Execution>();
+
     // ----- Getters and Setters -----
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     @Column(nullable = false)
@@ -334,7 +342,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
     public String getSymbol() {
         return symbol;
     }
-    public void setSymbol(String symbol) {
+    private void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
@@ -438,12 +446,5 @@ public class Order extends DomainEntity implements Comparable<Order> {
     }
     private void setExecutions(Set<Execution> executions) {
         this.executions = executions;
-    }
-
-    private void addExecution(Execution execution, OrderRepository orderRepository) {
-        execution.setOrder(this);
-        orderRepository.persist(execution);
-        orderRepository.flush(); // get execution id before adding to set
-        executions.add(execution);
     }
 }

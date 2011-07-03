@@ -31,11 +31,6 @@ import org.archfirst.bfoms.domain.account.BaseAccountSummary;
 @XmlType(name = "ExternalAccountSummary")
 public class ExternalAccountSummary extends BaseAccountSummary {
 
-    @XmlElement(name = "RoutingNumber", required = true)
-    protected String routingNumber;
-    @XmlElement(name = "AccountNumber", required = true)
-    protected String accountNumber;
-
     // ----- Constructors -----
     public ExternalAccountSummary() {
     }
@@ -50,18 +45,17 @@ public class ExternalAccountSummary extends BaseAccountSummary {
         this.accountNumber = accountNumber;
     }
 
-    // ----- Getters and Setters -----
+    // ----- Attributes -----
+    @XmlElement(name = "RoutingNumber", required = true)
+    protected String routingNumber;
+    @XmlElement(name = "AccountNumber", required = true)
+    protected String accountNumber;
+
+    // ----- Getters -----
     public String getRoutingNumber() {
         return routingNumber;
     }
-    public void setRoutingNumber(String value) {
-        this.routingNumber = value;
-    }
-
     public String getAccountNumber() {
         return accountNumber;
-    }
-    public void setAccountNumber(String value) {
-        this.accountNumber = value;
     }
 }

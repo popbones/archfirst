@@ -43,50 +43,6 @@ import org.joda.time.DateTime;
 @XmlType(name = "Position")
 public class Position {
 
-    @XmlElement(name = "AccountId", required = true)
-    private Long accountId;
-
-    @XmlElement(name = "AccountName", required = true)
-    private String accountName;
-
-    @XmlElement(name = "InstrumentSymbol", required = true)
-    private String instrumentSymbol;
-
-    @XmlElement(name = "InstrumentName", required = true)
-    private String instrumentName;
-
-    @XmlElement(name = "LotId", required = true)
-    private Long lotId;
-
-    @XmlElement(name = "LotCreationTime", required = true)
-    @XmlJavaTypeAdapter(DateTimeAdapter.class)
-    @XmlSchemaType(name="dateTime")
-    private DateTime lotCreationTime;
-
-    @XmlElement(name = "Quantity", required = true)
-    private DecimalQuantity quantity;
-
-    @XmlElement(name = "LastTrade", required = true)
-    private Money lastTrade;
-
-    @XmlElement(name = "MarketValue", required = true)
-    private Money marketValue;
-
-    @XmlElement(name = "PricePaid", required = true)
-    private Money pricePaid;
-
-    @XmlElement(name = "TotalCost", required = true)
-    private Money totalCost;
-
-    @XmlElement(name = "Gain", required = true)
-    private Money gain;
-
-    @XmlElement(name = "GainPercent", required = true)
-    private Percentage gainPercent;
-
-    @XmlElement(name = "Child", required = true)
-    private List<Position> children;
-
     // ----- Commands -----
     public void setInstrumentPosition(
             Long accountId,
@@ -162,7 +118,7 @@ public class Position {
         this.children.add(position);
     }
     
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -205,6 +161,51 @@ public class Position {
 
         return builder.toString();
     }
+
+    // ----- Attributes -----
+    @XmlElement(name = "AccountId", required = true)
+    private Long accountId;
+
+    @XmlElement(name = "AccountName", required = true)
+    private String accountName;
+
+    @XmlElement(name = "InstrumentSymbol", required = true)
+    private String instrumentSymbol;
+
+    @XmlElement(name = "InstrumentName", required = true)
+    private String instrumentName;
+
+    @XmlElement(name = "LotId", required = true)
+    private Long lotId;
+
+    @XmlElement(name = "LotCreationTime", required = true)
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name="dateTime")
+    private DateTime lotCreationTime;
+
+    @XmlElement(name = "Quantity", required = true)
+    private DecimalQuantity quantity;
+
+    @XmlElement(name = "LastTrade", required = true)
+    private Money lastTrade;
+
+    @XmlElement(name = "MarketValue", required = true)
+    private Money marketValue;
+
+    @XmlElement(name = "PricePaid", required = true)
+    private Money pricePaid;
+
+    @XmlElement(name = "TotalCost", required = true)
+    private Money totalCost;
+
+    @XmlElement(name = "Gain", required = true)
+    private Money gain;
+
+    @XmlElement(name = "GainPercent", required = true)
+    private Percentage gainPercent;
+
+    @XmlElement(name = "Child", required = true)
+    private List<Position> children;
 
     // ----- Getters -----
     public Long getAccountId() {

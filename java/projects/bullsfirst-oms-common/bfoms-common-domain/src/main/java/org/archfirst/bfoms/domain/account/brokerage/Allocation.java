@@ -45,9 +45,6 @@ import org.archfirst.common.quantity.DecimalQuantity;
 public abstract class Allocation extends DomainEntity {
     private static final long serialVersionUID = 1L;
 
-    private DecimalQuantity quantity;
-    private Lot lot;
-    
     // ----- Constructors -----
     public Allocation() {
     }
@@ -58,8 +55,12 @@ public abstract class Allocation extends DomainEntity {
 
     // ----- Commands -----
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
 
+    // ----- Attributes -----
+    private DecimalQuantity quantity;
+    private Lot lot;
+    
     // ----- Getters and Setters -----
     @NotNull
     @Embedded
@@ -80,7 +81,8 @@ public abstract class Allocation extends DomainEntity {
     public Lot getLot() {
         return lot;
     }
-    public void setLot(Lot lot) {
+    // Needed by Lot
+    void setLot(Lot lot) {
         this.lot = lot;
     }
 }

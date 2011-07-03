@@ -35,14 +35,11 @@ import org.archfirst.common.quantity.DecimalQuantity;
 public class ExternalAccount extends BaseAccount {
     private static final long serialVersionUID = 1L;
     
-    private String routingNumber;
-    private String accountNumber;
-
     // ----- Constructors -----
     private ExternalAccount() {
     }
 
-    // Allow access only from AccountFactory
+    // Allow access only from ExternalAccountFactory
     ExternalAccount(String name, AccountStatus status,
             String routingNumber, String accountNumber) {
         super(name, status);
@@ -61,7 +58,7 @@ public class ExternalAccount extends BaseAccount {
         this.addTransaction(transfer);
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @Transient
     public ExternalAccountSummary getAccountSummary() {
         return new ExternalAccountSummary(
@@ -87,11 +84,6 @@ public class ExternalAccount extends BaseAccount {
         return true;
     }
 
-    @Transient
-    public String getDisplayString() {
-        return toString();
-    }
-
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -99,6 +91,10 @@ public class ExternalAccount extends BaseAccount {
         builder.append(accountNumber).append(" (External)");
         return builder.toString();
     }
+
+    // ----- Attributes -----
+    private String routingNumber;
+    private String accountNumber;
 
     // ----- Getters and Setters -----
     public String getRoutingNumber() {

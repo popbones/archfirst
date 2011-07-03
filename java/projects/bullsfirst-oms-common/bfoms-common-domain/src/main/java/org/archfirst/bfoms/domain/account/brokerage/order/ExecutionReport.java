@@ -24,18 +24,6 @@ import org.archfirst.common.quantity.DecimalQuantity;
  * @author Naresh Bhatia
  */
 public class ExecutionReport {
-    private final ExecutionReportType type;
-    private final String exchangeOrderId;
-    private final String executionId;
-    private final Long clientOrderId;
-    private final OrderStatus orderStatus;
-    private final OrderSide side;
-    private final String symbol;
-    private final DecimalQuantity lastQty;
-    private final DecimalQuantity leavesQty;
-    private final DecimalQuantity cumQty;
-    private final Money lastPrice;
-    private final Money weightedAvgPrice;
 
     // ----- Constructors -----
     public ExecutionReport(
@@ -103,7 +91,7 @@ public class ExecutionReport {
                 null);
     }
     
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -121,6 +109,20 @@ public class ExecutionReport {
         builder.append(", weightedAvgPrice=").append(weightedAvgPrice);
         return builder.toString();
     }
+
+    // ----- Attributes -----
+    private final ExecutionReportType type;
+    private final String exchangeOrderId;
+    private final String executionId;
+    private final Long clientOrderId;
+    private final OrderStatus orderStatus;
+    private final OrderSide side;
+    private final String symbol;
+    private final DecimalQuantity lastQty;
+    private final DecimalQuantity leavesQty;
+    private final DecimalQuantity cumQty;
+    private final Money lastPrice;
+    private final Money weightedAvgPrice;
 
     // ----- Getters -----
     public ExecutionReportType getType() {

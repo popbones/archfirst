@@ -23,7 +23,6 @@ import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.archfirst.common.datetime.DateTimeAdapter;
-import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
 import org.joda.time.DateTime;
 
@@ -36,6 +35,20 @@ import org.joda.time.DateTime;
 @XmlType(name = "TransactionSummary")
 public class TransactionSummary {
 
+    // ----- Constructors -----
+    public TransactionSummary() {
+    }
+    
+    public TransactionSummary(Transaction transaction) {
+        this.accountId = transaction.getAccount().getId();
+        this.transactionId = transaction.getId();
+        this.creationTime = transaction.getCreationTime();
+        this.type = transaction.getType();
+        this.description = transaction.getDescription();
+        this.amount = transaction.getAmount();
+    }
+
+    // ----- Attributes -----
     @XmlElement(name = "AccountId", required = true)
     private Long accountId;
 
@@ -55,37 +68,6 @@ public class TransactionSummary {
     
     @XmlElement(name = "Amount", required = true)
     private Money amount;
-
-    // ----- Constructors -----
-    public TransactionSummary() {
-    }
-    
-    public TransactionSummary(Transaction transaction) {
-        this.accountId = transaction.getAccount().getId();
-        this.transactionId = transaction.getId();
-        this.creationTime = transaction.getCreationTime();
-        this.type = transaction.getType();
-        this.description = transaction.getDescription();
-        this.amount = transaction.getAmount();
-    }
-
-    // ----- Commands -----
-
-    // ----- Queries and Read-Only Operations -----
-    @Override
-    public String toString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("accountId=").append(accountId);
-        builder.append(", transactionId=").append(transactionId);
-        if (creationTime != null) {
-            builder.append(", creationTime=").append(DateTimeUtil.toStringTimestamp(creationTime));
-        }
-        builder.append(", type=").append(type);
-        builder.append(", description=").append(description);
-        builder.append(", amount=").append(amount);
-        return builder.toString();
-    }
-    
 
     // ----- Getters and Setters -----
     public Long getAccountId() {

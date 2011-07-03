@@ -37,6 +37,35 @@ import org.joda.time.LocalDate;
 @XmlType(name = "OrderCriteria")
 public class OrderCriteria {
 
+    // ----- Commands -----
+
+    // ----- Queries -----
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nAccountId: ").append(accountId);
+        sb.append("\nOrderId: ").append(orderId);
+        sb.append("\nSymbol: ").append(symbol);
+        sb.append("\nFromDate: ").append(fromDate);
+        sb.append("\nToDate: ").append(toDate);
+
+        // Sides
+        sb.append("\nSides: ");
+        for (OrderSide side : sides)
+        {
+            sb.append(side).append(" ");
+        }
+
+        // Statuses
+        sb.append("\nStatuses: ");
+        for (OrderStatus status : statuses)
+        {
+            sb.append(status).append(" ");
+        }
+
+        return sb.toString();
+    }
+
+    // ----- Attributes -----
     @XmlElement(name = "AccountId")
     private Long accountId;
 
@@ -62,46 +91,6 @@ public class OrderCriteria {
 
     @XmlElement(name = "Status")
     private List<OrderStatus> statuses = new ArrayList<OrderStatus>();
-
-    // ----- Commands -----
-    /**
-     * Clear all the criteria
-     */
-    public void clear() {
-        accountId = null;
-        symbol = null;
-        orderId = null;
-        fromDate = null;
-        toDate = null;
-        sides.clear();
-        statuses.clear();
-    }
-
-    // ----- Queries and Read-Only Operations -----
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append("\nAccountId: ").append(accountId);
-        sb.append("\nOrderId: ").append(orderId);
-        sb.append("\nSymbol: ").append(symbol);
-        sb.append("\nFromDate: ").append(fromDate);
-        sb.append("\nToDate: ").append(toDate);
-
-        // Sides
-        sb.append("\nSides: ");
-        for (OrderSide side : sides)
-        {
-            sb.append(side).append(" ");
-        }
-
-        // Statuses
-        sb.append("\nStatuses: ");
-        for (OrderStatus status : statuses)
-        {
-            sb.append(status).append(" ");
-        }
-
-        return sb.toString();
-    }
 
     // ----- Getters and Setters -----
     public Long getAccountId() {

@@ -33,6 +33,7 @@ import org.hibernate.annotations.Type;
 public class BrokerageAccountAce extends AccessControlEntry<BrokerageAccount, BrokerageAccountPermission> {
     private static final long serialVersionUID = 1L;
 
+    // ----- Constructors -----
     private BrokerageAccountAce() {
     }
 
@@ -44,6 +45,7 @@ public class BrokerageAccountAce extends AccessControlEntry<BrokerageAccount, Br
         this.permission = permission;
     }
 
+    // ----- Getters and Setters -----
     @Type(
         type = "org.archfirst.common.hibernate.GenericEnumUserType",
         parameters = {

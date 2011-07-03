@@ -40,15 +40,6 @@ import org.archfirst.common.domain.DomainEntity;
 public class User extends DomainEntity {
     private static final long serialVersionUID = 1L; 
 
-    @XmlElement(name = "Username", required = true)
-    private String username;
-
-    @XmlElement(name = "PasswordHash", required = true)
-    private String passwordHash;
-
-    @XmlElement(name = "Person", required = true)
-    private Person person;
-
     // ----- Constructors -----
     private User() {
     }
@@ -59,18 +50,28 @@ public class User extends DomainEntity {
         this.person = person;
     }
 
+    // ----- Attributes -----
+    @XmlElement(name = "Username", required = true)
+    private String username;
+
+    @XmlElement(name = "PasswordHash", required = true)
+    private String passwordHash;
+
+    @XmlElement(name = "Person", required = true)
+    private Person person;
+
     // ----- Getters and Setters -----
     public String getUsername() {
         return username;
     }
-    public void setUsername(String username) {
+    private void setUsername(String username) {
         this.username = username;
     }
 
     public String getPasswordHash() {
         return passwordHash;
     }
-    public void setPasswordHash(String passwordHash) {
+    private void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
     }
 
@@ -79,7 +80,7 @@ public class User extends DomainEntity {
     public Person getPerson() {
         return person;
     }
-    public void setPerson(Person person) {
+    private void setPerson(Person person) {
         this.person = person;
     }
 }

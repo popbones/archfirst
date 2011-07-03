@@ -29,16 +29,7 @@ import org.joda.time.DateTime;
  */
 public class MarketDataService {
     
-    @Inject private MarketDataRepository marketDataRepository;
-    
-    public List<MarketPrice> getMarketPrices() {
-        return marketDataRepository.findAllMarketPrices();
-    }
-
-    public MarketPrice getMarketPrice(String symbol) {
-        return marketDataRepository.findMarketPrice(symbol);
-    }
-    
+    // ----- Commands -----
     public void createMarketPrice(String symbol, Money price) {
         marketDataRepository.persist(
                 new MarketPrice(symbol, price, new DateTime()));
@@ -48,4 +39,16 @@ public class MarketDataService {
         MarketPrice marketPrice = marketDataRepository.findMarketPrice(symbol);
         marketPrice.change(price);
     }
+
+    // ----- Queries -----
+    public List<MarketPrice> getMarketPrices() {
+        return marketDataRepository.findAllMarketPrices();
+    }
+
+    public MarketPrice getMarketPrice(String symbol) {
+        return marketDataRepository.findMarketPrice(symbol);
+    }
+    
+    // ----- Attributes -----
+    @Inject private MarketDataRepository marketDataRepository;
 }

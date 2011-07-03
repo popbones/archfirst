@@ -44,10 +44,6 @@ import org.archfirst.common.quantity.DecimalQuantity;
 @Stateless
 public class TradingTxnService {
     
-    @Inject private BaseAccountService baseAccountService;
-    @Inject private BrokerageAccountService brokerageAccountService;
-    @Inject private ExternalAccountService externalAccountService;
-
     // ----- Commands -----
     public Long openNewAccount(String username, String accountName) {
         return brokerageAccountService.openNewAccount(username, accountName);
@@ -95,7 +91,7 @@ public class TradingTxnService {
         this.brokerageAccountService.cancelOrder(username, orderId);
     }
     
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     public List<BrokerageAccountSummary> getBrokerageAccountSummaries(String username) {
         return this.brokerageAccountService.getAccountSummaries(username);
     }
@@ -120,4 +116,9 @@ public class TradingTxnService {
             String username, TransactionCriteria criteria) {
         return this.baseAccountService.getTransactionSummaries(username, criteria);
     }
+    
+    // ----- Attributes -----
+    @Inject private BaseAccountService baseAccountService;
+    @Inject private BrokerageAccountService brokerageAccountService;
+    @Inject private ExternalAccountService externalAccountService;
 }

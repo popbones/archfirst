@@ -39,6 +39,22 @@ public class MarketDataService {
     private static final Logger logger =
         LoggerFactory.getLogger(MarketDataService.class);
 
+    // ----- Constructors -----
+    public MarketDataService() {
+        logger.debug("MarketDataService.MarketDataService()");
+    }
+
+    // ----- Commands -----
+    public void updateMarketPrice(MarketPrice marketPrice) {
+        getPriceMap().put(marketPrice.getSymbol(), marketPrice);
+    }
+
+    // ----- Queries -----
+    public Money getMarketPrice(String symbol) {
+        return getPriceMap().get(symbol).getPrice();
+    }
+
+    // ----- Attributes -----
     @Inject private MarketDataAdapter marketDataAdapter;
 
     /**
@@ -50,22 +66,7 @@ public class MarketDataService {
      */
     private volatile Map<String, MarketPrice> priceMap = null;
 
-    // ----- Constructors -----
-    public MarketDataService() {
-        logger.debug("MarketDataService.MarketDataService()");
-    }
-
-    // ----- Commands -----
-    public void updateMarketPrice(MarketPrice marketPrice) {
-        getPriceMap().put(marketPrice.getSymbol(), marketPrice);
-    }
-
-    // ----- Queries and Read-Only Operations -----
-    public Money getMarketPrice(String symbol) {
-        return getPriceMap().get(symbol).getPrice();
-    }
-
-    // ----- Getters and Setters -----
+    // ----- Getters -----
     private Map<String, MarketPrice> getPriceMap() {
         if (priceMap == null) {
             synchronized(this) {
@@ -77,7 +78,6 @@ public class MarketDataService {
         return priceMap;
     }
 
-    // ----- Initializer -----
     private void initPriceMap() {
         priceMap = new HashMap<String, MarketPrice>();
         List<MarketPrice> marketPrices = marketDataAdapter.getMarketPrices();

@@ -30,6 +30,12 @@ import javax.jms.Destination;
 @Singleton
 public class DestinationDictionary {
     
+    // ----- Queries -----
+    public Destination getBrokerDestination(String brokerId) {
+        return getDestinationMap().get(brokerId);
+    }
+
+    // ----- Attributes -----
     /**
      * Map from brokerId to JMS destination. We will not synchronize this map
      * because no structural changes (additions or deletions of mappings)
@@ -45,12 +51,7 @@ public class DestinationDictionary {
     @Resource(mappedName="jms/ExchangeToOmsSpringQueue")
     private Destination spngDestination;
     
-    // ----- Queries and Read-Only Operations -----
-    public Destination getBrokerDestination(String brokerId) {
-        return getDestinationMap().get(brokerId);
-    }
-
-    // ----- Getters and Setters -----
+    // ----- Getters  -----
     private Map<String, Destination> getDestinationMap() {
         if (destinationMap == null) {
             synchronized(this) {
@@ -62,7 +63,6 @@ public class DestinationDictionary {
         return destinationMap;
     }
 
-    // ----- Initializer -----
     private void initDestinationMap() {
         destinationMap = new HashMap<String, Destination>();
         destinationMap.put("JVEE", jveeDestination);

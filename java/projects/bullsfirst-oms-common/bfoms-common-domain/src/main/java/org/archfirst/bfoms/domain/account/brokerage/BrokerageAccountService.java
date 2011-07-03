@@ -117,7 +117,7 @@ public class BrokerageAccountService {
         order.cancelRequestRejected(newStatus, orderEventPublisher);
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     public BrokerageAccount findAccount(Long id) {
         return brokerageAccountRepository.findAccount(id);
     }

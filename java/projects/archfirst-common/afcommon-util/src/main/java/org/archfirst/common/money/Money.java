@@ -503,7 +503,7 @@ public final class Money implements Comparable<Money>, Serializable {
         return new Money(newAmount, currency);
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     /**
      * Return <tt>true</tt> only if <tt>aThat</tt> <tt>Money</tt> has the
      * same currency as this <tt>Money</tt>.

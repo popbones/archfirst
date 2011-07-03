@@ -38,10 +38,6 @@ public class TradingService {
     private static final Logger logger =
         LoggerFactory.getLogger(TradingService.class);
 
-    @Inject private OrderRepository orderRepository;
-    @Inject private OrderEventPublisher orderEventPublisher;
-    @Inject MatchingEngine matchingEngine;
-
     // ----- Commands -----
     public void processNewOrderSingle(Order order) {
         matchingEngine.placeOrder(order);
@@ -77,5 +73,10 @@ public class TradingService {
         logger.info("Marked {} orders as DoneForDay", orders.size());
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
+
+    // ----- Attributes -----
+    @Inject private OrderRepository orderRepository;
+    @Inject private OrderEventPublisher orderEventPublisher;
+    @Inject MatchingEngine matchingEngine;
 }

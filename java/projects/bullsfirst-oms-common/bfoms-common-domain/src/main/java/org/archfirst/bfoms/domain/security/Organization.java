@@ -32,9 +32,6 @@ import javax.xml.bind.annotation.XmlType;
 public class Organization extends Party {
     private static final long serialVersionUID = 1L; 
 
-    @XmlElement(name = "Name")
-    private String name;
-
     // ----- Constructors -----
     private Organization() {
     }
@@ -43,7 +40,7 @@ public class Organization extends Party {
         this.name = name;
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -60,6 +57,10 @@ public class Organization extends Party {
     public int hashCode() {
         return name.hashCode();
     }
+
+    // ----- Attributes -----
+    @XmlElement(name = "Name")
+    private String name;
 
     // ----- Getters and Setters -----
     public String getName() {

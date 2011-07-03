@@ -33,11 +33,8 @@ import org.archfirst.bfexch.domain.marketdata.MarketPrice;
  */
 @WebService(targetNamespace = "http://archfirst.org/bfexch/marketdataservice.wsdl", serviceName = "MarketDataService")
 public class MarketDataWebService {
-    
-    @Inject
-    private MarketDataService marketDataService;
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @WebMethod(operationName = "GetMarketPrices", action = "GetMarketPrices")
     @WebResult(name = "MarketPrice")
     public List<MarketPrice> getMarketPrices() {
@@ -51,4 +48,8 @@ public class MarketDataWebService {
             String symbol) {
         return marketDataService.getMarketPrice(symbol);
     }
+    
+    // ----- Attributes -----
+    @Inject
+    private MarketDataService marketDataService;
 }

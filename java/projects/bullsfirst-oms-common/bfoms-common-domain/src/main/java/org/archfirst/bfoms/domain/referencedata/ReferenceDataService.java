@@ -37,6 +37,21 @@ public class ReferenceDataService {
     private static final Logger logger =
         LoggerFactory.getLogger(ReferenceDataService.class);
 
+    // ----- Constructors -----
+    public ReferenceDataService() {
+        logger.debug("ReferenceDataService.ReferenceDataService()");
+    }
+
+    // ----- Queries -----
+    public List<Instrument> getInstruments() {
+        return getInstrumentList();
+    }
+
+    public Instrument lookup(String symbol) {
+        return getInstrumentMap().get(symbol);
+    }
+    
+    // ----- Attributes -----
     @Inject private ReferenceDataAdapter referenceDataAdapter;
     
     /**
@@ -53,20 +68,6 @@ public class ReferenceDataService {
     /** Map from symbol to Instrument. */
     private volatile Map<String, Instrument> instrumentMap;
 
-    // ----- Constructors -----
-    public ReferenceDataService() {
-        logger.debug("ReferenceDataService.ReferenceDataService()");
-    }
-
-    // ----- Queries and Read-Only Operations -----
-    public List<Instrument> getInstruments() {
-        return getInstrumentList();
-    }
-
-    public Instrument lookup(String symbol) {
-        return getInstrumentMap().get(symbol);
-    }
-    
     // ----- Getters and Setters -----
     private List<Instrument> getInstrumentList() {
         if (instrumentList == null) {

@@ -64,69 +64,13 @@ import org.joda.time.DateTime;
 @Table(name="Orders") // Oracle gets confused with table named "Order"
 public class Order extends DomainEntity implements Comparable<Order> {
     private static final long serialVersionUID = 1L;
-    private static final Money FIXED_FEE = new Money("10.00");
-    
-    @XmlElement(name = "CreationTime", required = true)
-    @XmlJavaTypeAdapter(DateTimeAdapter.class)
-    @XmlSchemaType(name="dateTime")
-    private DateTime creationTime;
 
-    @XmlElement(name = "Side", required = true)
-    private OrderSide side;
-
-    @XmlElement(name = "Symbol", required = true)
-    private String symbol;
-
-    @XmlElement(name = "Quantity", required = true)
-    private DecimalQuantity quantity;
-
-    @XmlElement(name = "CumQty", required = true)
-    private DecimalQuantity cumQty = DecimalQuantity.ZERO;
-
-    @XmlElement(name = "OrderType", required = true)
-    private OrderType type;
-
-    // Limit price is not a required in case of market orders
-    @XmlElement(name = "LimitPrice")
-    private Money limitPrice;
-
-    @XmlElement(name = "Term", required = true)
-    private OrderTerm term;
-
-    @XmlElement(name = "AllOrNone", required = true)
-    private boolean allOrNone;
-
-    @XmlElement(name = "OrderStatus", required = true)
-    private OrderStatus status = OrderStatus.PendingNew;
-
-    @XmlTransient
-    private BrokerageAccount account;
-
-    @XmlElement(name = "Execution", required = true)
-    private Set<Execution> executions = new HashSet<Execution>();
-    
     // ----- Constructors -----
     private Order() {
     }
     
-    public Order(
-            OrderSide side,
-            String symbol,
-            DecimalQuantity quantity,
-            OrderType type,
-            Money limitPrice,
-            OrderTerm term,
-            boolean allOrNone) {
-        this.side = side;
-        this.symbol = symbol;
-        this.quantity = quantity;
-        this.type = type;
-        this.limitPrice = limitPrice;
-        this.term = term;
-        this.allOrNone = allOrNone;
-    }
-
     public Order(OrderParams params) {
+        this.setCreationTime(new DateTime());
         this.side = params.getSide();
         this.symbol = params.getSymbol();
         this.quantity = new DecimalQuantity(params.getQuantity());
@@ -215,7 +159,12 @@ public class Order extends DomainEntity implements Comparable<Order> {
         orderEventPublisher.publish(new OrderStatusChanged(this));
     }
 
-    // ----- Queries and Read-Only Operations -----
+    private void addExecution(Execution execution) {
+        executions.add(execution);
+        execution.setOrder(this);
+    }
+
+    // ----- Queries -----
     @Transient
     public DecimalQuantity getLeavesQty() {
         return quantity.minus(getCumQty());
@@ -389,6 +338,48 @@ public class Order extends DomainEntity implements Comparable<Order> {
         return builder.toString();
     }
 
+    // ----- Attributes -----
+    private static final Money FIXED_FEE = new Money("10.00");
+    
+    @XmlElement(name = "CreationTime", required = true)
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name="dateTime")
+    private DateTime creationTime;
+
+    @XmlElement(name = "Side", required = true)
+    private OrderSide side;
+
+    @XmlElement(name = "Symbol", required = true)
+    private String symbol;
+
+    @XmlElement(name = "Quantity", required = true)
+    private DecimalQuantity quantity;
+
+    @XmlElement(name = "CumQty", required = true)
+    private DecimalQuantity cumQty = DecimalQuantity.ZERO;
+
+    @XmlElement(name = "OrderType", required = true)
+    private OrderType type;
+
+    // Limit price is not a required in case of market orders
+    @XmlElement(name = "LimitPrice")
+    private Money limitPrice;
+
+    @XmlElement(name = "Term", required = true)
+    private OrderTerm term;
+
+    @XmlElement(name = "AllOrNone", required = true)
+    private boolean allOrNone;
+
+    @XmlElement(name = "OrderStatus", required = true)
+    private OrderStatus status = OrderStatus.PendingNew;
+
+    @XmlTransient
+    private BrokerageAccount account;
+
+    @XmlElement(name = "Execution", required = true)
+    private Set<Execution> executions = new HashSet<Execution>();
+    
     // ----- Getters and Setters -----
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
     @Column(nullable = false)
@@ -396,7 +387,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
         return creationTime;
     }
     // Allow BrokerageAccount to access this method
-    public void setCreationTime(DateTime creationTime) {
+    private void setCreationTime(DateTime creationTime) {
         this.creationTime = creationTime;
     }
 
@@ -422,7 +413,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
     public String getSymbol() {
         return symbol;
     }
-    public void setSymbol(String symbol) {
+    private void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
@@ -453,7 +444,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
     public DecimalQuantity getCumQty() {
         return cumQty; 
     }
-    public void setCumQty(DecimalQuantity cumQty) {
+    private void setCumQty(DecimalQuantity cumQty) {
         this.cumQty = cumQty;
     }
 
@@ -550,10 +541,5 @@ public class Order extends DomainEntity implements Comparable<Order> {
     }
     private void setExecutions(Set<Execution> executions) {
         this.executions = executions;
-    }
-
-    private void addExecution(Execution execution) {
-        executions.add(execution);
-        execution.setOrder(this);
     }
 }

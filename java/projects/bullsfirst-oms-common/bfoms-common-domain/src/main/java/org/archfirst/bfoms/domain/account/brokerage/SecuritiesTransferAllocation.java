@@ -30,8 +30,6 @@ import org.archfirst.common.quantity.DecimalQuantity;
 public class SecuritiesTransferAllocation extends Allocation {
     private static final long serialVersionUID = 1L;
 
-    private SecuritiesTransfer transfer;
-
     // ----- Constructors -----
     public SecuritiesTransferAllocation() {
     }
@@ -40,6 +38,9 @@ public class SecuritiesTransferAllocation extends Allocation {
         super(quantity);
         this.transfer = transfer;
     }
+
+    // ----- Attributes -----
+    private SecuritiesTransfer transfer;
 
     // ----- Getters and Setters -----
     @ManyToOne

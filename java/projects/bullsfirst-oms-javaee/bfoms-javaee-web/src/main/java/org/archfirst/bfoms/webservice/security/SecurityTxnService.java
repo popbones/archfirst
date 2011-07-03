@@ -44,7 +44,7 @@ public class SecurityTxnService {
         securityService.registerUser(request);
     }
     
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     public AuthenticationResponse authenticateUser(
             String username,
             String password) {

@@ -24,9 +24,6 @@ import javax.inject.Inject;
  */
 public class SecurityService {
 
-    @Inject
-    private UserRepository userRepository;
-
     // ----- Commands -----
     public void registerUser(RegistrationRequest request) throws UsernameExistsException {
         // Check if username already exists
@@ -47,7 +44,7 @@ public class SecurityService {
         userRepository.persist(user);      
     }
     
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     public AuthenticationResponse authenticateUser(String username, String password) {
         // Get the user from the database
         User user = userRepository.findUser(username);
@@ -65,4 +62,8 @@ public class SecurityService {
             return new AuthenticationResponse(false, null);
         }
     }
+
+    // ----- Attributes -----
+    @Inject
+    private UserRepository userRepository;
 }

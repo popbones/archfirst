@@ -50,25 +50,6 @@ import org.joda.time.DateTime;
 @Entity
 public class Trade extends Transaction {
     private static final long serialVersionUID = 1L;
-    private static final String TYPE = "Trade";
-    
-    @XmlElement(name = "Side", required = true)
-    private OrderSide side;
-
-    @XmlElement(name = "Symbol", required = true)
-    private String symbol;
-
-    @XmlElement(name = "Quantity", required = true)
-    private DecimalQuantity quantity;
-
-    @XmlElement(name = "TotalPrice", required = true)
-    private Money totalPrice;
-
-    @XmlElement(name = "Fees", required = true)
-    private Money fees;
-
-    @XmlTransient
-    private Order order;
 
     // ----- Constructors -----
     protected Trade() {
@@ -93,11 +74,56 @@ public class Trade extends Transaction {
 
     // ----- Commands -----
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @Transient
     public Money getPricePerShare() {
         return totalPrice.div(quantity, Constants.PRICE_SCALE);
     }
+
+    @Override
+    @Transient
+    public String getType() {
+        return TYPE;
+    }
+
+    @Override
+    @Transient
+    public String getDescription() {
+        StringBuilder builder = new StringBuilder();
+        builder.append((side==OrderSide.Buy) ? "Bought " : "Sold ");
+        builder.append(quantity).append(" shares of ");
+        builder.append(symbol).append(" @ ");
+        builder.append(getPricePerShare());
+        return builder.toString();
+    }
+
+    @Override
+    @Transient
+    public Money getAmount() {
+        return (side==OrderSide.Sell) ?
+                totalPrice.minus(fees) : totalPrice.plus(fees).negate();
+    }
+
+    // ----- Attributes -----
+    private static final String TYPE = "Trade";
+    
+    @XmlElement(name = "Side", required = true)
+    private OrderSide side;
+
+    @XmlElement(name = "Symbol", required = true)
+    private String symbol;
+
+    @XmlElement(name = "Quantity", required = true)
+    private DecimalQuantity quantity;
+
+    @XmlElement(name = "TotalPrice", required = true)
+    private Money totalPrice;
+
+    @XmlElement(name = "Fees", required = true)
+    private Money fees;
+
+    @XmlTransient
+    private Order order;
 
     // ----- Getters and Setters -----
     @NotNull
@@ -122,7 +148,7 @@ public class Trade extends Transaction {
     public String getSymbol() {
         return symbol;
     }
-    public void setSymbol(String symbol) {
+    private void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
@@ -187,29 +213,5 @@ public class Trade extends Transaction {
     }
     private void setOrder(Order order) {
         this.order = order;
-    }
-
-    @Override
-    @Transient
-    public String getType() {
-        return TYPE;
-    }
-
-    @Override
-    @Transient
-    public String getDescription() {
-        StringBuilder builder = new StringBuilder();
-        builder.append((side==OrderSide.Buy) ? "Bought " : "Sold ");
-        builder.append(quantity).append(" shares of ");
-        builder.append(symbol).append(" @ ");
-        builder.append(getPricePerShare());
-        return builder.toString();
-    }
-
-    @Override
-    @Transient
-    public Money getAmount() {
-        return (side==OrderSide.Sell) ?
-                totalPrice.minus(fees) : totalPrice.plus(fees).negate();
     }
 }

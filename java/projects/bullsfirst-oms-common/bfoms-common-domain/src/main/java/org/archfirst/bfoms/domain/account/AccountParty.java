@@ -37,10 +37,6 @@ import org.hibernate.annotations.Type;
 public class AccountParty extends DomainEntity {
     private static final long serialVersionUID = 1L; 
 
-    private BaseAccount account;
-    private Party party;
-    private AccountRole role;
-
     // ----- Constructors -----
     private AccountParty() {
     }
@@ -50,7 +46,9 @@ public class AccountParty extends DomainEntity {
         this.role = role;
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Commands -----
+
+    // ----- Queries -----
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -68,6 +66,11 @@ public class AccountParty extends DomainEntity {
     public int hashCode() {
         return party.hashCode() + role.hashCode();
     }
+
+    // ----- Attributes -----
+    private BaseAccount account;
+    private Party party;
+    private AccountRole role;
 
     // ----- Getters and Setters -----
     @ManyToOne

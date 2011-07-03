@@ -30,15 +30,6 @@ import javax.xml.bind.annotation.XmlType;
 public class Instrument implements Comparable <Instrument> {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name = "Symbol", required = true)
-    private String symbol;
-
-    @XmlElement(name = "Name", required = true)
-    private String name;
-
-    @XmlElement(name = "Exchange", required = true)
-    private String exchange;
-
     // ----- Constructors -----
     public Instrument() {
     }
@@ -49,7 +40,7 @@ public class Instrument implements Comparable <Instrument> {
         this.exchange = exchange;
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @Override
     public boolean equals(Object object) {
         if (this == object) {
@@ -72,18 +63,20 @@ public class Instrument implements Comparable <Instrument> {
         return this.symbol.compareTo(other.getSymbol());
     }
     
-    public String getDisplayString() {
-        StringBuilder builder = new StringBuilder();
-        builder.append(symbol);
-        builder.append(" - ");
-        builder.append(name);
-        return builder.toString();
-    }
-
     @Override
     public String toString() {
         return symbol;
     }
+
+    // ----- Attributes -----
+    @XmlElement(name = "Symbol", required = true)
+    private String symbol;
+
+    @XmlElement(name = "Name", required = true)
+    private String name;
+
+    @XmlElement(name = "Exchange", required = true)
+    private String exchange;
 
     // ----- Getters and Setters -----
     public String getSymbol() {

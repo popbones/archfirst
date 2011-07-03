@@ -47,17 +47,6 @@ import org.joda.time.DateTime;
 public class MarketPrice {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name = "Symbol", required = true)
-    private String symbol;
-
-    @XmlElement(name = "Price", required = true)
-    private Money price;
-
-    @XmlElement(name = "Effective", required = true)
-    @XmlJavaTypeAdapter(DateTimeAdapter.class)
-    @XmlSchemaType(name="dateTime")
-    private DateTime effective;
-
     // ----- Constructors -----
     private MarketPrice() {
     }
@@ -78,7 +67,7 @@ public class MarketPrice {
         this.effective = new DateTime();
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     /**
      * Returns this object as a set of properties. For example:
      * <code>
@@ -108,13 +97,25 @@ public class MarketPrice {
         return builder.toString();
     }
 
+    // ----- Attributes -----
+    @XmlElement(name = "Symbol", required = true)
+    private String symbol;
+
+    @XmlElement(name = "Price", required = true)
+    private Money price;
+
+    @XmlElement(name = "Effective", required = true)
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name="dateTime")
+    private DateTime effective;
+
     // ----- Getters and Setters -----
     @Id
     @NotNull
     public String getSymbol() {
         return symbol;
     }
-    public void setSymbol(String symbol) {
+    private void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 

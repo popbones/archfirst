@@ -29,6 +29,22 @@ import javax.inject.Inject;
  */
 public class ReferenceDataService {
 
+    // ----- Commands -----
+    synchronized public void addInstrument(Instrument instrument) {
+        getInstrumentList().add(instrument);
+        getInstrumentMap().put(instrument.getSymbol(), instrument);
+    }
+
+    // ----- Queries -----
+    public List<Instrument> getInstruments() {
+        return getInstrumentList();
+    }
+
+    public Instrument lookup(String symbol) {
+        return getInstrumentMap().get(symbol);
+    }
+
+    // ----- Attributes -----
     @Inject private ReferenceDataRepository referenceDataRepository;
 
     /**
@@ -45,22 +61,7 @@ public class ReferenceDataService {
     /** Map from symbol to Instrument. */
     private volatile Map<String, Instrument> instrumentMap;
 
-    // ----- Commands -----
-    synchronized public void addInstrument(Instrument instrument) {
-        getInstrumentList().add(instrument);
-        getInstrumentMap().put(instrument.getSymbol(), instrument);
-    }
-
-    // ----- Queries and Read-Only Operations -----
-    public List<Instrument> getInstruments() {
-        return getInstrumentList();
-    }
-
-    public Instrument lookup(String symbol) {
-        return getInstrumentMap().get(symbol);
-    }
-
-    // ----- Getters and Setters -----
+    // ----- Getters -----
     private List<Instrument> getInstrumentList() {
         if (instrumentList == null) {
             synchronized(this) {

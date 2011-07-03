@@ -140,7 +140,7 @@ public class BaseAccountService {
         toAccount.transferSecurities(toTransfer);
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     public BaseAccount findAccount(Long id) {
         return baseAccountRepository.findAccount(id);
     }

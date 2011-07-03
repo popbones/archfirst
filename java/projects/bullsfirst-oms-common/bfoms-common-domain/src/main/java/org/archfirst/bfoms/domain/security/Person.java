@@ -36,14 +36,6 @@ import javax.xml.bind.annotation.XmlType;
 @Entity
 public class Person extends Party {
     private static final long serialVersionUID = 1L; 
-    private static final int MIN_LENGTH = 3;
-    private static final int MAX_LENGTH = 40;
-    
-    @XmlElement(name = "FirstName")
-    private String firstName;
-
-    @XmlElement(name = "LastName")
-    private String lastName;
     
     // ----- Constructors -----
     private Person() {
@@ -54,7 +46,7 @@ public class Person extends Party {
         this.lastName = lastName;
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @Transient
     public String getName() {
         return firstName + " " + lastName;
@@ -86,6 +78,16 @@ public class Person extends Party {
         strBuf.append(", lastName=").append(lastName);
         return strBuf.toString();
     }
+
+    // ----- Attributes -----
+    private static final int MIN_LENGTH = 3;
+    private static final int MAX_LENGTH = 40;
+    
+    @XmlElement(name = "FirstName")
+    private String firstName;
+
+    @XmlElement(name = "LastName")
+    private String lastName;
 
     // ----- Getters and Setters -----
     @NotNull

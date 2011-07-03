@@ -48,14 +48,6 @@ import org.joda.time.DateTime;
 public abstract class Transaction extends DomainEntity {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name = "CreationTime", required = true)
-    @XmlJavaTypeAdapter(DateTimeAdapter.class)
-    @XmlSchemaType(name="dateTime")
-    private DateTime creationTime;
-
-    @XmlTransient
-    private BaseAccount account;
-    
     // ----- Constructors -----
     protected Transaction() {
     }
@@ -63,25 +55,10 @@ public abstract class Transaction extends DomainEntity {
     public Transaction(DateTime creationTime) {
         this.creationTime = creationTime;
     }
-
-    // ----- Getters and Setters -----
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
-    @Column(nullable = false)
-    public DateTime getCreationTime() {
-        return creationTime;
-    }
-    private void setCreationTime(DateTime creationTime) {
-        this.creationTime = creationTime;
-    }
     
-    @ManyToOne
-    public BaseAccount getAccount() {
-        return account;
-    }
-    public void setAccount(BaseAccount account) {
-        this.account = account;
-    }
+    // ----- Commands -----
     
+    // ----- Queries -----
     /**
      * @return the transaction type that can be shown to the user
      */
@@ -100,4 +77,32 @@ public abstract class Transaction extends DomainEntity {
      */
     @Transient
     public abstract Money getAmount();
+
+    // ----- Attributes -----
+    @XmlElement(name = "CreationTime", required = true)
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name="dateTime")
+    private DateTime creationTime;
+
+    @XmlTransient
+    private BaseAccount account;
+    
+    // ----- Getters and Setters -----
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+    @Column(nullable = false)
+    public DateTime getCreationTime() {
+        return creationTime;
+    }
+    private void setCreationTime(DateTime creationTime) {
+        this.creationTime = creationTime;
+    }
+    
+    @ManyToOne
+    public BaseAccount getAccount() {
+        return account;
+    }
+    // Needed by BaseAccount
+    public void setAccount(BaseAccount account) {
+        this.account = account;
+    }
 }

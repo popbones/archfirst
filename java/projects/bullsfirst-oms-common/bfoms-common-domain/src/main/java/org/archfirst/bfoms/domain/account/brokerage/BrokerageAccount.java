@@ -66,17 +66,6 @@ public class BrokerageAccount extends BaseAccount {
     private static final Logger logger =
         LoggerFactory.getLogger(BrokerageAccountFactory.class);
     
-    private OwnershipType ownershipType = OwnershipType.Individual;
-    private Money cashPosition = new Money("0.00");
-    private Set<Order> orders = new HashSet<Order>();
-    private Set<Lot> lots = new HashSet<Lot>();
-    
-    @Transient
-    private BrokerageAccountRepository brokerageAccountRepository;
-
-    @Transient
-    private OrderEventPublisher orderEventPublisher;
-
     // ----- Constructors -----
     private BrokerageAccount() {
     }
@@ -201,7 +190,6 @@ public class BrokerageAccount extends BaseAccount {
         }
 
         // Place order
-        order.setCreationTime(new DateTime());
         brokerageAccountRepository.persistAndFlush(order);
         this.addOrder(order);
         orderEventPublisher.publish(new OrderCreated(order));
@@ -236,7 +224,17 @@ public class BrokerageAccount extends BaseAccount {
         }
     }
 
-    // ----- Queries and Read-Only Operations -----
+    private void addOrder(Order order) {
+        orders.add(order);
+        order.setAccount(this);
+    }
+
+    private void addLot(Lot lot) {
+        lots.add(lot);
+        lot.setAccount(this);
+    }
+
+    // ----- Queries -----
     @Transient
     public BrokerageAccountSummary getAccountSummary(
             User user,
@@ -421,6 +419,18 @@ public class BrokerageAccount extends BaseAccount {
         return builder.toString();
     }
 
+    // ----- Attributes -----
+    private OwnershipType ownershipType = OwnershipType.Individual;
+    private Money cashPosition = new Money("0.00");
+    private Set<Order> orders = new HashSet<Order>();
+    private Set<Lot> lots = new HashSet<Lot>();
+    
+    @Transient
+    private BrokerageAccountRepository brokerageAccountRepository;
+
+    @Transient
+    private OrderEventPublisher orderEventPublisher;
+
     // ----- Getters and Setters -----
     @Type(
         type = "org.archfirst.common.hibernate.GenericEnumUserType",
@@ -466,11 +476,6 @@ public class BrokerageAccount extends BaseAccount {
         this.orders = orders;
     }
 
-    private void addOrder(Order order) {
-        orders.add(order);
-        order.setAccount(this);
-    }
-
     @OneToMany(mappedBy="account", cascade=CascadeType.ALL)
     @OptimisticLock(excluded = true)
     public Set<Lot> getLots() {
@@ -479,18 +484,15 @@ public class BrokerageAccount extends BaseAccount {
     private void setLots(Set<Lot> lots) {
         this.lots = lots;
     }
-     
-    private void addLot(Lot lot) {
-        lots.add(lot);
-        lot.setAccount(this);
-    }
-
-    public void setBrokerageAccountRepository(
+    
+    // Needed by BrokerageAccountRepository
+    void setBrokerageAccountRepository(
             BrokerageAccountRepository brokerageAccountRepository) {
         this.brokerageAccountRepository = brokerageAccountRepository;
     }
 
-    public void setOrderEventPublisher(OrderEventPublisher orderEventPublisher) {
+    // Needed by BrokerageAccountRepository
+    void setOrderEventPublisher(OrderEventPublisher orderEventPublisher) {
         this.orderEventPublisher = orderEventPublisher;
     }
 

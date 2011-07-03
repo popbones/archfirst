@@ -47,11 +47,6 @@ public class MatchingEngine {
     private static final Logger logger =
         LoggerFactory.getLogger(MatchingEngine.class);
     
-    @Inject private OrderRepository orderRepository;
-    @Inject private OrderEventPublisher orderEventPublisher;
-    @Inject private MarketDataRepository marketDataRepository;
-    @Inject private MarketDataEventPublisher marketDataEventPublisher;
-
     // ----- Commands -----
     public void placeOrder(Order order) {
         this.acceptOrder(order);
@@ -215,7 +210,7 @@ public class MatchingEngine {
         orderEventPublisher.publish(new OrderExecuted(execution));
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     public OrderBook getOrderBook(String symbol) {
         OrderBook orderBook = new OrderBook();
         List<Order> orders = orderRepository.findActiveOrdersForInstrument(symbol);
@@ -224,6 +219,12 @@ public class MatchingEngine {
         }
         return orderBook;
     }
+
+    // ----- Attributes -----
+    @Inject private OrderRepository orderRepository;
+    @Inject private OrderEventPublisher orderEventPublisher;
+    @Inject private MarketDataRepository marketDataRepository;
+    @Inject private MarketDataEventPublisher marketDataEventPublisher;
 
     // ----- Nested Types -----
     private enum NoMatchReason {

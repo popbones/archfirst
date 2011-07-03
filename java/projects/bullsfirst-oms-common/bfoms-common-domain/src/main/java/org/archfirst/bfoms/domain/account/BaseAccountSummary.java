@@ -29,11 +29,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "BaseAccountSummary")
 public abstract class BaseAccountSummary {
 
-    @XmlElement(name = "Id")
-    protected long id;
-    @XmlElement(name = "Name", required = true)
-    protected String name;
-
     // ----- Constructors -----
     public BaseAccountSummary() {
     }
@@ -44,6 +39,12 @@ public abstract class BaseAccountSummary {
         this.id = id;
         this.name = name;
     }
+
+    // ----- Attributes -----
+    @XmlElement(name = "Id")
+    protected long id;
+    @XmlElement(name = "Name", required = true)
+    protected String name;
 
     // ----- Getters and Setters -----
     public long getId() {

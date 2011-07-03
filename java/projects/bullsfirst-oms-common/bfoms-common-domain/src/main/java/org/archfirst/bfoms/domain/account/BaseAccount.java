@@ -52,14 +52,6 @@ import org.hibernate.annotations.Type;
 public abstract class BaseAccount extends DomainEntity {
     private static final long serialVersionUID = 1L;
 
-    private static final int MIN_LENGTH = 3;
-    private static final int MAX_LENGTH = 50;
-
-    protected String name;
-    protected AccountStatus status = AccountStatus.Active;
-    protected Set<AccountParty> accountParties = new HashSet<AccountParty>();
-    protected Set<Transaction> transactions = new HashSet<Transaction>();
-
     // ----- Constructors -----
     protected BaseAccount() {
     }
@@ -86,7 +78,19 @@ public abstract class BaseAccount extends DomainEntity {
      */
     public abstract void transferSecurities(SecuritiesTransfer transfer);
 
-    // ----- Queries and Read-Only Operations -----
+    // Needed by BrokerageAccountFactory
+    public void addAccountParty(AccountParty accountParty) {
+        accountParties.add(accountParty);
+        accountParty.setAccount(this);
+    }
+
+    // Needed by BrokerageAccount and ExternalAccount
+    protected void addTransaction(Transaction transaction) {
+        transaction.setAccount(this);
+        transactions.add(transaction);
+    }
+
+    // ----- Queries -----
     public abstract boolean isCashAvailable(
             Money amount,
             MarketDataService marketDataService);
@@ -94,6 +98,15 @@ public abstract class BaseAccount extends DomainEntity {
     public abstract boolean isSecurityAvailable(
             String symbol,
             DecimalQuantity quantity);
+
+    // ----- Attributes -----
+    private static final int MIN_LENGTH = 3;
+    private static final int MAX_LENGTH = 50;
+
+    protected String name;
+    protected AccountStatus status = AccountStatus.Active;
+    protected Set<AccountParty> accountParties = new HashSet<AccountParty>();
+    protected Set<Transaction> transactions = new HashSet<Transaction>();
 
     // ----- Getters and Setters -----
     @NotNull
@@ -137,11 +150,6 @@ public abstract class BaseAccount extends DomainEntity {
         this.accountParties = accountParties;
     }
 
-    public void addAccountParty(AccountParty accountParty) {
-        accountParties.add(accountParty);
-        accountParty.setAccount(this);
-    }
-
     @OneToMany(mappedBy="account",  cascade=CascadeType.ALL)
     @OptimisticLock(excluded = true)
     public Set<Transaction> getTransactions() {
@@ -149,10 +157,5 @@ public abstract class BaseAccount extends DomainEntity {
     }
     private void setTransactions(Set<Transaction> transactions) {
         this.transactions = transactions;
-    }
-
-    protected void addTransaction(Transaction transaction) {
-        transaction.setAccount(this);
-        transactions.add(transaction);
     }
 }

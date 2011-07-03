@@ -44,7 +44,7 @@ public class SecurityWebService {
         securityTxnService.registerUser(request);
     }
     
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @WebMethod(operationName = "AuthenticateUser", action = "AuthenticateUser")
     @WebResult(name = "AuthenticationResponse")
     public AuthenticationResponse authenticateUser(

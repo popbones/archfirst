@@ -38,13 +38,9 @@ import javax.xml.bind.annotation.XmlType;
 public abstract class DomainEntity implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name = "Id")
-    protected Long id;
-
-    @XmlTransient
-    protected int version;
-
-    // ----- Queries and Read-Only Operations -----
+    // ----- Commands -----    
+    
+    // ----- Queries -----
 
     /**
      * Entities are uniquely identified by their id. Do not rely on object
@@ -76,6 +72,13 @@ public abstract class DomainEntity implements Serializable {
         // Make sure we don't cause a NullPointerException
         return (this.id != null) ? this.id.hashCode() : super.hashCode();
     }
+
+    // ----- Attributes -----
+    @XmlElement(name = "Id")
+    protected Long id;
+
+    @XmlTransient
+    protected int version;
 
     // ----- Getters and Setters -----
     @Id

@@ -30,7 +30,6 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
 import org.archfirst.bfoms.domain.util.Constants;
-import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.domain.DomainEntity;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -47,13 +46,6 @@ import org.joda.time.DateTime;
 public class Lot extends DomainEntity {
     private static final long serialVersionUID = 1L;
     
-    private DateTime creationTime;
-    private String symbol;
-    private DecimalQuantity quantity;
-    private Money pricePaidPerShare;
-    private BrokerageAccount account;
-    private Set<Allocation> allocations = new HashSet<Allocation>();
-
     // ----- Constructors -----
     private Lot() {
     }
@@ -87,7 +79,7 @@ public class Lot extends DomainEntity {
         allocation.setLot(this);
     }
 
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -100,6 +92,14 @@ public class Lot extends DomainEntity {
         builder.append(pricePaidPerShare);
         return builder.toString();
     }
+
+    // ----- Attributes -----
+    private DateTime creationTime;
+    private String symbol;
+    private DecimalQuantity quantity;
+    private Money pricePaidPerShare;
+    private BrokerageAccount account;
+    private Set<Allocation> allocations = new HashSet<Allocation>();
 
     // ----- Getters and Setters -----
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
@@ -116,7 +116,7 @@ public class Lot extends DomainEntity {
     public String getSymbol() {
         return symbol;
     }
-    public void setSymbol(String symbol) {
+    private void setSymbol(String symbol) {
         this.symbol = symbol;
     }
 
@@ -158,7 +158,7 @@ public class Lot extends DomainEntity {
     public BrokerageAccount getAccount() {
         return account;
     }
-    // Allow access only from AccountFactory
+    // Allow access only from BrokerageAccountFactory
     void setAccount(BrokerageAccount account) {
         this.account = account;
     }

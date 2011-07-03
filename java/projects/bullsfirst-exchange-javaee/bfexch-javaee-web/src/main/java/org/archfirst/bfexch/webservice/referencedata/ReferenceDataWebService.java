@@ -34,10 +34,7 @@ import org.archfirst.bfexch.domain.referencedata.ReferenceDataService;
 @WebService(targetNamespace = "http://archfirst.org/bfexch/referencedataservice.wsdl", serviceName = "ReferenceDataService")
 public class ReferenceDataWebService {
 
-    @Inject
-    private ReferenceDataService referenceDataService;
-
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @WebMethod(operationName = "GetInstruments", action = "GetInstruments")
     @WebResult(name = "Instrument")
     public List<Instrument> getInstruments() {
@@ -51,4 +48,8 @@ public class ReferenceDataWebService {
             String symbol) {
         return referenceDataService.lookup(symbol);
     }
+
+    // ----- Attributes -----
+    @Inject
+    private ReferenceDataService referenceDataService;
 }

@@ -34,6 +34,7 @@ import org.joda.time.LocalDate;
 @XmlType(name = "TransactionCriteria")
 public class TransactionCriteria {
 
+    // ----- Attributes -----
     @XmlElement(name = "AccountId")
     private Long accountId;
 
@@ -46,16 +47,6 @@ public class TransactionCriteria {
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
     @XmlSchemaType(name="date")
     private LocalDate toDate;
-
-    // ----- Commands -----
-    /**
-     * Clear all the criteria
-     */
-    public void clear() {
-        accountId = null;
-        fromDate = null;
-        toDate = null;
-    }
 
     // ----- Getters and Setters -----
     public Long getAccountId() {

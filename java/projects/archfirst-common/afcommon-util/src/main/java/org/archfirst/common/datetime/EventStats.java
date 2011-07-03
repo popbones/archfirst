@@ -24,16 +24,7 @@ import java.math.RoundingMode;
  * @author Naresh Bhatia
  */
 public class EventStats {
-    private static BigDecimal NanosPerMilli = new BigDecimal("1000000");
 
-    private final int totalEvents;
-    private final long firstEventNanos;
-    private final long lastEventNanos;
-
-    private boolean initialized = false;
-    private BigDecimal totalMillis;
-    private BigDecimal millisPerEvent;
-    
     // ----- Constructors -----
     public EventStats(int totalEvents, long firstEventNanos, long lastEventNanos) {
         this.totalEvents = totalEvents;
@@ -41,25 +32,7 @@ public class EventStats {
         this.lastEventNanos = lastEventNanos;
     }
 
-    // ----- Initializer -----
-    private void init() {
-        long totalNanos = lastEventNanos - firstEventNanos;
-
-        this.totalMillis = new BigDecimal(totalNanos)
-            .divide(NanosPerMilli, 0, RoundingMode.HALF_UP);
-
-        if (totalEvents == 0) {
-            millisPerEvent = new BigDecimal("0.000");
-        }
-        else {
-            millisPerEvent = totalMillis.divide(
-                    new BigDecimal(totalEvents), 3, RoundingMode.HALF_UP);
-        }
-    
-        this.initialized = true;
-    }
-
-    // ----- Queries and Read-Only Operations -----
+    // ----- Queries -----
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
@@ -70,15 +43,24 @@ public class EventStats {
         return builder.toString();
     }
 
+    // ----- Attributes -----
+    private static BigDecimal NanosPerMilli = new BigDecimal("1000000");
+
+    private final int totalEvents;
+    private final long firstEventNanos;
+    private final long lastEventNanos;
+
+    private boolean initialized = false;
+    private BigDecimal totalMillis;
+    private BigDecimal millisPerEvent;
+    
     // ----- Getters -----
     public int getTotalEvents() {
         return totalEvents;
     }
-
     public long getFirstEventNanos() {
         return firstEventNanos;
     }
-
     public long getLastEventNanos() {
         return lastEventNanos;
     }
@@ -95,5 +77,22 @@ public class EventStats {
             init();
         }
         return millisPerEvent;
+    }
+
+    private void init() {
+        long totalNanos = lastEventNanos - firstEventNanos;
+
+        this.totalMillis = new BigDecimal(totalNanos)
+            .divide(NanosPerMilli, 0, RoundingMode.HALF_UP);
+
+        if (totalEvents == 0) {
+            millisPerEvent = new BigDecimal("0.000");
+        }
+        else {
+            millisPerEvent = totalMillis.divide(
+                    new BigDecimal(totalEvents), 3, RoundingMode.HALF_UP);
+        }
+    
+        this.initialized = true;
     }
 }

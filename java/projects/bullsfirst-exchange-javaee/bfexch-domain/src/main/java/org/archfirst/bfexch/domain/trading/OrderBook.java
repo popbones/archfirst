@@ -28,8 +28,6 @@ import org.archfirst.bfexch.domain.trading.order.OrderSide;
  * @author Naresh Bhatia
  */
 public class OrderBook {
-    private final SortedSet<Order> buyStack = new TreeSet<Order>();
-    private final SortedSet<Order> sellStack = new TreeSet<Order>();
     
     // ----- Commands -----
     public void add(Order order) {
@@ -40,6 +38,10 @@ public class OrderBook {
             sellStack.add(order);
         }
     }
+
+    // ----- Attributes -----
+    private final SortedSet<Order> buyStack = new TreeSet<Order>();
+    private final SortedSet<Order> sellStack = new TreeSet<Order>();
 
     // ----- Getters -----
     public SortedSet<Order> getBuyStack() {

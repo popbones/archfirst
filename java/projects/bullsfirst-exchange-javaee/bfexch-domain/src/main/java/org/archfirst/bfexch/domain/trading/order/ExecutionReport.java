@@ -24,18 +24,6 @@ import org.archfirst.common.quantity.DecimalQuantity;
  * @author Naresh Bhatia
  */
 public class ExecutionReport {
-    private final ExecutionReportType type;
-    private final String orderId;
-    private final String executionId;
-    private final String clientOrderId;
-    private final OrderStatus orderStatus;
-    private final OrderSide side;
-    private final String symbol;
-    private final DecimalQuantity lastQty;
-    private final DecimalQuantity leavesQty;
-    private final DecimalQuantity cumQty;
-    private final Money lastPrice;
-    private final Money weightedAvgPrice;
 
     // ----- Constructors -----
     /**
@@ -93,6 +81,20 @@ public class ExecutionReport {
                 order,
                 null);
     }
+
+    // ----- Attributes -----
+    private final ExecutionReportType type;
+    private final String orderId;
+    private final String executionId;
+    private final String clientOrderId;
+    private final OrderStatus orderStatus;
+    private final OrderSide side;
+    private final String symbol;
+    private final DecimalQuantity lastQty;
+    private final DecimalQuantity leavesQty;
+    private final DecimalQuantity cumQty;
+    private final Money lastPrice;
+    private final Money weightedAvgPrice;
 
     // ----- Getters -----
     public ExecutionReportType getType() {

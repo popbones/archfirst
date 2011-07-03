@@ -29,12 +29,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "AuthenticationResponse")
 public class AuthenticationResponse {
 
-    @XmlElement(name = "Success")
-    private boolean success;
-
-    @XmlElement(name = "User")
-    private User user;
-
     // ----- Constructors -----
     public AuthenticationResponse() {
     }
@@ -44,7 +38,14 @@ public class AuthenticationResponse {
         this.user = user;
     }
 
-    // ----- Getters and Setters -----
+    // ----- Attributes -----
+    @XmlElement(name = "Success")
+    private boolean success;
+
+    @XmlElement(name = "User")
+    private User user;
+
+    // ----- Getters -----
     public boolean isSuccess() {
         return success;
     }

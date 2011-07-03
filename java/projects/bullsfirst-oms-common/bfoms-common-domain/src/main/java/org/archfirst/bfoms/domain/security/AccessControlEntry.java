@@ -35,6 +35,7 @@ public class AccessControlEntry<T extends DomainEntity, P extends Enum<P>>
     
     private static final long serialVersionUID = 1L;
     
+    // ----- Attributes -----
     protected User recipient;
     protected T target;
     protected P permission;
@@ -44,7 +45,7 @@ public class AccessControlEntry<T extends DomainEntity, P extends Enum<P>>
     public User getRecipient() {
         return recipient;
     }
-    public void setRecipient(User recipient) {
+    private void setRecipient(User recipient) {
         this.recipient = recipient;
     }
 
@@ -52,7 +53,7 @@ public class AccessControlEntry<T extends DomainEntity, P extends Enum<P>>
     public T getTarget() {
         return target;
     }
-    public void setTarget(T target) {
+    private void setTarget(T target) {
         this.target = target;
     }
 
@@ -60,7 +61,7 @@ public class AccessControlEntry<T extends DomainEntity, P extends Enum<P>>
     public P getPermission() {
         return permission;
     }
-    public void setPermission(P permission) {
+    private void setPermission(P permission) {
         this.permission = permission;
     }
 }

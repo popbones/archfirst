@@ -50,20 +50,6 @@ import org.joda.time.DateTime;
 public class Execution extends DomainEntity {
     private static final long serialVersionUID = 1L;
 
-    @XmlElement(name = "CreationTime", required = true)
-    @XmlJavaTypeAdapter(DateTimeAdapter.class)
-    @XmlSchemaType(name="dateTime")
-    private DateTime creationTime;
-
-    @XmlElement(name = "Quantity", required = true)
-    private DecimalQuantity quantity;
-
-    @XmlElement(name = "Price", required = true)
-    private Money price;
-
-    @XmlTransient
-    private Order order;
-    
     // ----- Constructors -----
     private Execution() {
     }
@@ -77,6 +63,21 @@ public class Execution extends DomainEntity {
         this.quantity = quantity;
         this.price = price;
     }
+    
+    // ----- Attributes -----
+    @XmlElement(name = "CreationTime", required = true)
+    @XmlJavaTypeAdapter(DateTimeAdapter.class)
+    @XmlSchemaType(name="dateTime")
+    private DateTime creationTime;
+
+    @XmlElement(name = "Quantity", required = true)
+    private DecimalQuantity quantity;
+
+    @XmlElement(name = "Price", required = true)
+    private Money price;
+
+    @XmlTransient
+    private Order order;
     
     // ----- Getters and Setters -----
     @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")

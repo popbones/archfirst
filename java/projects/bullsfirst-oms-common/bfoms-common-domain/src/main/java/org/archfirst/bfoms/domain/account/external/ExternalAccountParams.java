@@ -31,15 +31,6 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "ExternalAccountParams")
 public class ExternalAccountParams {
 
-    @XmlElement(name = "Name", required = true)
-    private String name;
-
-    @XmlElement(name = "RoutingNumber", required = true)
-    private String routingNumber;
-
-    @XmlElement(name = "AccountNumber", required = true)
-    private String accountNumber;
-
     // ----- Constructors -----
     public ExternalAccountParams() {
     }
@@ -52,6 +43,16 @@ public class ExternalAccountParams {
         this.routingNumber = routingNumber;
         this.accountNumber = accountNumber;
     }
+
+    // ----- Attributes -----
+    @XmlElement(name = "Name", required = true)
+    private String name;
+
+    @XmlElement(name = "RoutingNumber", required = true)
+    private String routingNumber;
+
+    @XmlElement(name = "AccountNumber", required = true)
+    private String accountNumber;
 
     // ----- Getters -----
     public String getName() {

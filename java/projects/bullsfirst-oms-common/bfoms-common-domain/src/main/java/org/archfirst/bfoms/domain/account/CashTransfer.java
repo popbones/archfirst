@@ -44,14 +44,6 @@ import org.joda.time.DateTime;
 public class CashTransfer extends Transaction {
     private static final long serialVersionUID = 1L;
 
-    private static final String TYPE = "Transfer";
-
-    @XmlElement(name = "Amount", required = true)
-    private Money amount;
-
-    @XmlTransient
-    private BaseAccount otherAccount;
-    
     // ----- Constructors -----
     protected CashTransfer() {
     }
@@ -65,13 +57,35 @@ public class CashTransfer extends Transaction {
         this.otherAccount = otherAccount;
     }
 
-    // ----- Getters and Setters -----
+    // ----- Commands -----
+
+    // ----- Queries -----
     @Override
     @Transient
     public String getType() {
         return TYPE;
     }
 
+    @Override
+    @Transient
+    public String getDescription() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Transfer cash ");
+        builder.append(amount.isPlus() ? "from " : "to ");
+        builder.append(otherAccount.getName());
+        return builder.toString();
+    }
+
+    // ----- Attributes -----
+    private static final String TYPE = "Transfer";
+
+    @XmlElement(name = "Amount", required = true)
+    private Money amount;
+
+    @XmlTransient
+    private BaseAccount otherAccount;
+    
+    // ----- Getters and Setters -----
     @Embedded
     @AttributeOverrides({
         @AttributeOverride(name="amount",
@@ -98,15 +112,5 @@ public class CashTransfer extends Transaction {
     }
     private void setOtherAccount(BaseAccount otherAccount) {
         this.otherAccount = otherAccount;
-    }
-
-    @Override
-    @Transient
-    public String getDescription() {
-        StringBuilder builder = new StringBuilder();
-        builder.append("Transfer cash ");
-        builder.append(amount.isPlus() ? "from " : "to ");
-        builder.append(otherAccount.getName());
-        return builder.toString();
     }
 }
