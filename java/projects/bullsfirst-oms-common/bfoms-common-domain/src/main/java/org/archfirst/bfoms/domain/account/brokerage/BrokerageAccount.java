@@ -182,14 +182,14 @@ public class BrokerageAccount extends BaseAccount {
     
     public Order placeOrder(OrderParams params, MarketDataService marketDataService) {
         // Check compliance
-        Order order = new Order(params);
         OrderEstimate orderEstimate =
-            this.calculateOrderEstimate(order, marketDataService);
+            this.calculateOrderEstimate(params, marketDataService);
         if (orderEstimate.getCompliance() != OrderCompliance.Compliant) {
             throw new IllegalArgumentException("Order is not compliant with the account");
         }
 
         // Place order
+        Order order = new Order(params);
         brokerageAccountRepository.persistAndFlush(order);
         this.addOrder(order);
         orderEventPublisher.publish(new OrderCreated(order));
@@ -368,9 +368,10 @@ public class BrokerageAccount extends BaseAccount {
     }
 
     public OrderEstimate calculateOrderEstimate(
-            Order order,
+            OrderParams params,
             MarketDataService marketDataService) {
 
+        Order order = new Order(params);
         OrderEstimate orderEstimate = order.calculateOrderEstimate(marketDataService);
 
         // Determine account level compliance
@@ -403,11 +404,6 @@ public class BrokerageAccount extends BaseAccount {
         return isSecurityAvailable(
                 order.getSymbol(), order.getQuantity()) ?
                 OrderCompliance.Compliant : OrderCompliance.InsufficientQuantity;
-    }
-
-    @Transient
-    public String getDisplayString() {
-        return toString();
     }
 
     @Override

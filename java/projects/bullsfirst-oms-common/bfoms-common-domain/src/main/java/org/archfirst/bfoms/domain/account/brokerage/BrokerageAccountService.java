@@ -178,7 +178,7 @@ public class BrokerageAccountService {
         BrokerageAccount account =  checkAccountAuthorization(
                 getUser(username), brokerageAccountId, BrokerageAccountPermission.Trade);
 
-        return account.calculateOrderEstimate(new Order(params), marketDataService);
+        return account.calculateOrderEstimate(params, marketDataService);
     }
 
     // ----- Helpers -----
