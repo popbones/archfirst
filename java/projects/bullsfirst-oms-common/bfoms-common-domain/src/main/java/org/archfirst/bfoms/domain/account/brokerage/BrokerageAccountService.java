@@ -46,14 +46,6 @@ import org.slf4j.LoggerFactory;
 public class BrokerageAccountService {
     private static final Logger logger =
         LoggerFactory.getLogger(BrokerageAccountService.class);
-    
-    @Inject private BrokerageAccountFactory brokerageAccountFactory;
-    @Inject private BrokerageAccountRepository brokerageAccountRepository;
-    @Inject private MarketDataService marketDataService;
-    @Inject private ReferenceDataService referenceDataService;
-    @Inject private ExchangeTradingService exchangeTradingService;
-    @Inject private UserRepository userRepository;
-    @Inject private OrderEventPublisher orderEventPublisher;
 
     // ----- Commands -----
     public Long openNewAccount(String username, String accountName) {
@@ -206,8 +198,16 @@ public class BrokerageAccountService {
         }
     }
     
-    // ----- Helper Methods -----
     private User getUser(String username) {
         return userRepository.findUser(username);
     }
+    
+    // ----- Attributes -----
+    @Inject private BrokerageAccountFactory brokerageAccountFactory;
+    @Inject private BrokerageAccountRepository brokerageAccountRepository;
+    @Inject private MarketDataService marketDataService;
+    @Inject private ReferenceDataService referenceDataService;
+    @Inject private ExchangeTradingService exchangeTradingService;
+    @Inject private UserRepository userRepository;
+    @Inject private OrderEventPublisher orderEventPublisher;
 }

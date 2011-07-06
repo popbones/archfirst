@@ -34,10 +34,6 @@ import org.joda.time.DateTime;
  */
 public class BaseAccountService {
     
-    @Inject private BaseAccountRepository baseAccountRepository;
-    @Inject private ReferenceDataService referenceDataService;
-    @Inject private MarketDataService marketDataService;
-
     // ----- Commands -----
     public void changeAccountName(Long accountId, String newName) {
         this.findAccount(accountId).changeName(newName);
@@ -169,4 +165,9 @@ public class BaseAccountService {
         
         return summaries;
     }
+
+    // ----- Attributes -----
+    @Inject private BaseAccountRepository baseAccountRepository;
+    @Inject private ReferenceDataService referenceDataService;
+    @Inject private MarketDataService marketDataService;
 }
