@@ -1,0 +1,18 @@
+body {
+    font: normal 100% Arial, Verdana, Helvetica, sans-serif;
+    max-width: 800px;
+}
+
+form label {
+    display: block;
+    float: left;
+    width: 70px;
+    padding: 0;
+    margin: 5px 0 0;
+    text-align: right;
+}
+
+form input, p input {
+    width:auto;
+    margin:5px 0 0 10px;
+}

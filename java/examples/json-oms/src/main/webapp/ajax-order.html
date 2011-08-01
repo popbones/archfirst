@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AJAX Order</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#placeOrder").click(function () {
+                var dataToBeSent = $("form").serialize();
+                $.post("placeAjaxOrder", dataToBeSent, function (result) {
+                    $.each(result, function (i, field) {
+                        $("div").append(field + " ");
+                    });
+                    $("div").append("<br/>");
+                }, "json");
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+<form action="">
+    <p>
+        <label for="symbol">Symbol</label>
+        <input id="symbol" type="text" name="symbol">
+    </p>
+    
+    <p>
+        <label for="action">Action</label>
+        <input id="action" type="text" name="action">
+    </p>
+    
+    <p>
+        <label for="quantity">Quantity</label>
+        <input id="quantity" type="text" name="quantity">
+    </p>
+</form>
+
+<p>
+    <input id="placeOrder" type="submit" value="Place Order">
+</p>
+<div></div>
+
+</body>
+</html>
