@@ -17,7 +17,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 
-namespace Archfirst.Framework.SilverlightHelpers
+namespace Archfirst.Framework.Converters
 {
     public class BooleanToVisibilityConverter : IValueConverter
     {

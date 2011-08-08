@@ -16,7 +16,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Archfirst.Framework.SilverlightHelpers
+namespace Archfirst.Framework.Converters
 {
     public class DecimalToPercentageConverter : IValueConverter
     {

@@ -8,7 +8,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Data;
 
-namespace Archfirst.Framework.SilverlightHelpers
+namespace Archfirst.Framework.Converters
 {
     public class EnumToIntConverter : IValueConverter
     {

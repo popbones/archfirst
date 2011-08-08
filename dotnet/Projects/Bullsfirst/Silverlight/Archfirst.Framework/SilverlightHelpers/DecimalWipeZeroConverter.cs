@@ -16,7 +16,7 @@ using System;
 using System.Globalization;
 using System.Windows.Data;
 
-namespace Archfirst.Framework.SilverlightHelpers
+namespace Archfirst.Framework.Converters
 {
     /// <summary>
     /// Convers decimal number to a string, but if number is 0 returns empty string
