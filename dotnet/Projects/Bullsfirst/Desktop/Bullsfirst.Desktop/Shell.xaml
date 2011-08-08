@@ -1,0 +1,58 @@
+﻿<Window x:Class="Bullsfirst.Shell"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:prism="http://www.codeplex.com/prism"
+        xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit"
+        Title="Bullsfirst"
+        MinWidth="1200"
+        MinHeight="600"
+        SizeToContent="WidthAndHeight"
+        >
+
+    <DockPanel x:Name="LayoutRoot" LastChildFill="True">
+        <!-- Header -->
+        <Border
+            x:Name="TabBorder"
+           DockPanel.Dock="Top"
+            BorderBrush="#B30000"
+            BorderThickness="0 0 0 4"
+            Height="120">
+            <DockPanel>
+                <Image x:Name="logo"
+                   Source="Images/logo.jpg"
+                   Stretch="None"
+                   DockPanel.Dock="Left"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Center" />
+                <Image x:Name="slogan"
+                   Source="Images/slogan.jpg"
+                   Stretch="None"
+                   DockPanel.Dock="Right"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"/>
+            </DockPanel>
+        </Border>
+      
+        <!-- Copyright Message -->
+        <StackPanel DockPanel.Dock="Bottom" HorizontalAlignment="Center" Margin="0 0 0 5">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBlock x:Name="Copyright" Foreground="#676767" FontSize="11" />
+                <Button Margin="5,0,0,0" Content="Archfirst" Style="{StaticResource HyperlinkButtonStyle}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Status Region -->
+        <ContentControl
+            DockPanel.Dock="Bottom"
+            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+            prism:RegionManager.RegionName="StatusRegion" />
+
+        <!-- Main Region -->
+        <!-- Stretch the content to fill the grid row completely (default is not the stretch)  -->
+        <ContentControl
+            HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+            prism:RegionManager.RegionName="MainRegion" />
+
+    </DockPanel>
+</Window>

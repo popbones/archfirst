@@ -1,0 +1,16 @@
+﻿<Application x:Class="Bullsfirst.Desktop.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             >
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/GeneralStyles.xaml"/>
+                <ResourceDictionary Source="Resources/Converters.xaml"/>
+                <ResourceDictionary Source="Resources/DataGridRowStyle.xaml"/>
+                <ResourceDictionary Source="Resources/DataGridStyles.xaml"/>
+                <ResourceDictionary Source="Resources/ChartStyles.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

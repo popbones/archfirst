@@ -1,0 +1,16 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:fmwkConverters="clr-namespace:Archfirst.Framework.Converters;assembly=Archfirst.Framework.Desktop"
+    xmlns:omsConverters="clr-namespace:Bullsfirst.InterfaceOut.Oms.Converters;assembly=Bullsfirst.InterfaceOut.Oms.Desktop">
+
+    <fmwkConverters:BooleanToVisibilityConverter x:Key="Bool2VisibilityConverter" />
+    <fmwkConverters:DecimalToPercentageConverter x:Key="DecimalToPercentageConverter" />
+    <fmwkConverters:DecimalWipeZeroConverter x:Key="DecimalWipeZeroConverter" />
+    <fmwkConverters:DateTimeToDateStringConverter x:Key="DateTimeToDateStringConverter" />
+    <fmwkConverters:EnumToIEnumerableConverter x:Key="EnumToIEnumerableConverter" />
+    <fmwkConverters:EnumToIntConverter x:Key="EnumToIntConverter" />
+    <fmwkConverters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
+    <omsConverters:MoneyConverter x:Key="MoneyConverter" />
+
+</ResourceDictionary>

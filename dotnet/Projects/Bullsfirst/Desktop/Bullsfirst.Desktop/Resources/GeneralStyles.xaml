@@ -1,0 +1,298 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    >
+
+    <!-- Header Styles -->
+    <Style x:Key="Header1" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="24" />
+        <Setter Property="Margin" Value="0 0 0 12" />
+    </Style>
+
+    <Style x:Key="Header2" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="20" />
+        <Setter Property="Margin" Value="0 0 0 10" />
+    </Style>
+
+    <Style x:Key="Header3" TargetType="TextBlock">
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Margin" Value="0 0 0 2" />
+    </Style>
+
+    <Style x:Key="HyperlinkButtonStyle" TargetType="Button">
+        <Setter   Property="Template">
+            <Setter.Value>
+                <ControlTemplate
+                TargetType="Button">
+                    <TextBlock x:Name="textAround">
+                        <ContentPresenter />
+                    </TextBlock>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver"
+                            Value="true">
+                            <Setter TargetName="textAround" Property="TextDecorations" Value="Underline"/>
+                            <Setter  Property="Foreground" Value="Blue" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter  Property="Foreground"  Value="Maroon" />
+    </Style>
+
+    <!-- AccountSelector Style -->
+    <Style x:Key="AccountSelectorStyle" TargetType="UserControl">
+        <Setter Property="Margin" Value="0 10 10 10" />
+        <Setter Property="HorizontalAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Top" />
+    </Style>
+
+    <!-- Toolbar Styles -->
+    <SolidColorBrush x:Key="ToolbarBackgroundBrush" Color="#AAE3E0E0" />
+
+    <Style x:Key="Toolbar" TargetType="Grid">
+        <Setter Property="Background" Value="{StaticResource ToolbarBackgroundBrush}" />
+    </Style>
+
+    <Style x:Key="ToolbarExpanderPanel" TargetType="StackPanel">
+        <Setter Property="Background" Value="{StaticResource ToolbarBackgroundBrush}" />
+    </Style>
+
+    <Style x:Key="ToolbarLabel" TargetType="Label">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="16 6 0 6" />
+    </Style>
+
+    <Style x:Key="ToolbarTextBox" TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="4 6 0 6" />
+        <Setter Property="MinWidth" Value="60" />
+    </Style>
+
+    <Style x:Key="ToolbarAccountSelector" TargetType="UserControl">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 6 10 6" />
+    </Style>
+
+    <Style x:Key="ToolbarDatePicker" TargetType="DatePicker">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="4 6 0 6" />
+    </Style>
+
+    <Style x:Key="ToolbarCheckBox" TargetType="CheckBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="8 6 0 6" />
+    </Style>
+
+    <Style x:Key="ToolbarButton" TargetType="Button" >
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 6 10 6" />
+        <Setter Property="Padding" Value="4,0"/>
+    </Style>
+
+    <!-- Status Bar Styles -->
+    <SolidColorBrush x:Key="StatusbarBackgroundBrush" Color="#FFF1EDED" />
+
+    <!-- Form Styles -->
+    <Style x:Key="FormRow" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0 4 0 0" />
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <Style x:Key="TallFormRow" TargetType="StackPanel">
+        <Setter Property="Margin" Value="0 10 0 0" />
+        <Setter Property="Orientation" Value="Horizontal" />
+    </Style>
+
+    <Style x:Key="FormButton" TargetType="Button" >
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 0 4 0" />
+        <Setter Property="Padding" Value="12 1 12 1" />
+    </Style>
+
+    <Style x:Key="FormButtonRightAligned" TargetType="Button" >
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="4 0 0 0" />
+        <Setter Property="Padding" Value="12 1 12 1" />
+    </Style>
+
+    <ControlTemplate x:Key="TextBoxErrorTemplate">
+        <DockPanel LastChildFill="True">
+            <!--<Image Height="16" Margin="0,0,5,0" Source="Assets/warning_48.png"/>-->
+            <Border BorderThickness="1" BorderBrush="Red" DockPanel.Dock="Left">
+                <AdornedElementPlaceholder x:Name="Holder" >
+                </AdornedElementPlaceholder>
+            </Border>
+            <Border Background="Red" Margin="5,0">
+                <Label DockPanel.Dock="Right" FontSize="9" Foreground="White" Content="{Binding ElementName=Holder,Path=AdornedElement.(Validation.Errors)[0].ErrorContent}"/>
+            </Border>
+        </DockPanel>
+    </ControlTemplate>
+
+    <!-- Narrow Form Styles (label on top) -->
+    <Style x:Key="NarrowFormLabel" TargetType="Label">
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="NarrowFormTextBox" TargetType="TextBox" >
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="140" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource TextBoxErrorTemplate}"/>
+    </Style>
+
+    <Style x:Key="NarrowFormPasswordBox" TargetType="PasswordBox" >
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Width" Value="140" />
+        <Setter Property="Validation.ErrorTemplate" Value="{StaticResource TextBoxErrorTemplate}"/>
+    </Style>
+
+    <!-- Wide Form Styles (label on left) -->
+    <Style x:Key="WideFormLabel" TargetType="Label">
+        <Setter Property="HorizontalContentAlignment" Value="Right" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 0 10 0" />
+        <Setter Property="MinWidth" Value="120" />
+    </Style>
+
+    <Style x:Key="WideFormTextBox" TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="MinWidth" Value="168" />
+    </Style>
+
+    <Style x:Key="WideFormTextBlock" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="MinWidth" Value="168" />
+    </Style>
+
+    <Style x:Key="WideFormInfoBlock" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="10 0 0 0" />
+    </Style>
+
+    <Style x:Key="WideFormPasswordBox" TargetType="PasswordBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="MinWidth" Value="168" />
+    </Style>
+
+    <Style x:Key="WideFormCheckBox" TargetType="CheckBox" />
+
+    <Style x:Key="WideFormRadioButton" TargetType="RadioButton">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 0 15 0" />
+    </Style>
+
+    <Style x:Key="WideFormComboBox" TargetType="ComboBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="MinWidth" Value="168" />
+    </Style>
+
+    <!-- Compact Form Styles (label on left) -->
+    <Style x:Key="CompactWideFormLabel" TargetType="Label">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 0 0" />
+        <Setter Property="MinWidth" Value="100" />
+    </Style>
+
+    <Style x:Key="CompactWideFormTextBox" TargetType="TextBox">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 0 0" />
+    </Style>
+
+    <Style x:Key="CompactWideFormTextBlock" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0 5 0 0" />
+    </Style>
+
+    <!-- Expand/Collapse Button Style -->
+    <!-- See http://stackoverflow.com/questions/5241052/silverlight-togglebutton-with-images -->
+    <Style x:Key="ExpandCollapseButtonStyle" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="UncheckedVisual" Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CheckedVisual" Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <Image x:Name="UncheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/plus.png" Stretch="None" Opacity="0" />
+                            <Image x:Name="CheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/minus.png" Stretch="None" Opacity="0" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- More Button -->
+    <Style x:Key="MoreButtonStyle" TargetType="ToggleButton">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <Grid>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Unchecked">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="UncheckedVisual" Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="CheckedVisual" Storyboard.TargetProperty="Opacity">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <Image x:Name="UncheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/more.png" Stretch="None" Opacity="0" />
+                            <Image x:Name="CheckedVisual" Source="/Bullsfirst.Infrastructure;component/Images/less.png" Stretch="None" Opacity="0" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Content Button: accepts anything as its content -->
+    <Style x:Key="ContentButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+
+                        <ContentPresenter
+                            Content="{TemplateBinding Content}"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center" />
+
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+</ResourceDictionary>
