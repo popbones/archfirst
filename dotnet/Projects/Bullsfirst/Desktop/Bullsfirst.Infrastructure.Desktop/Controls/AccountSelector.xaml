@@ -1,0 +1,27 @@
+﻿<UserControl
+    x:Class="Bullsfirst.Infrastructure.Controls.AccountSelector"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="50" d:DesignWidth="100">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <ComboBox
+            ItemsSource="{Binding UserContext.BrokerageAccountSummaries}"
+            SelectedItem="{Binding UserContext.SelectedAccount, Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}" />
+                        <TextBlock Text=" - " />
+                        <TextBlock Text="{Binding Id}" />
+                        <TextBlock Text=" - " />
+                        <TextBlock Text="{Binding CashPosition, Converter={StaticResource MoneyConverter}}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+    </Grid>
+</UserControl>

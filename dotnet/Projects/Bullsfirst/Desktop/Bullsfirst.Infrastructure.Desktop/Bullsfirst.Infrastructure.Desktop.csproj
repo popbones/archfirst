@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{27AC415E-CD98-499B-82F7-A31AAA1811DA}</ProjectGuid>
+    <OutputType>library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bullsfirst.Infrastructure.Desktop</RootNamespace>
+    <AssemblyName>Bullsfirst.Infrastructure.Desktop</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.Prism, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Practices.Prism.MefExtensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\Silverlight\Bullsfirst.Infrastructure\Controls\CategoryToBrushConverter.cs">
+      <Link>Controls\CategoryToBrushConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Bullsfirst.Infrastructure\Controls\IStatusBar.cs">
+      <Link>Controls\IStatusBar.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Bullsfirst.Infrastructure\Controls\StatusBarViewModel.cs">
+      <Link>Controls\StatusBarViewModel.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Bullsfirst.Infrastructure\Events.cs">
+      <Link>Events.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Bullsfirst.Infrastructure\RegionNames.cs">
+      <Link>RegionNames.cs</Link>
+    </Compile>
+    <Compile Include="..\..\Silverlight\Bullsfirst.Infrastructure\ViewNames.cs">
+      <Link>ViewNames.cs</Link>
+    </Compile>
+    <Compile Include="Controls\AccountSelector.xaml.cs">
+      <DependentUpon>AccountSelector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StatusBarView.xaml.cs">
+      <DependentUpon>StatusBarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\Silverlight\Bullsfirst.Infrastructure\Images\bullet.jpg">
+      <Link>Images\bullet.jpg</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\Bullsfirst.Infrastructure\Images\cross.png">
+      <Link>Images\cross.png</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\Bullsfirst.Infrastructure\Images\less.png">
+      <Link>Images\less.png</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\Bullsfirst.Infrastructure\Images\minus.png">
+      <Link>Images\minus.png</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\Bullsfirst.Infrastructure\Images\more.png">
+      <Link>Images\more.png</Link>
+    </Resource>
+    <Resource Include="..\..\Silverlight\Bullsfirst.Infrastructure\Images\plus.png">
+      <Link>Images\plus.png</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ArchFirst.Framework.Desktop\Archfirst.Framework.Desktop.csproj">
+      <Project>{031B1E91-9D77-460D-93AF-3A6E2599008E}</Project>
+      <Name>Archfirst.Framework.Desktop</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bullsfirst.InterfaceOut.Oms.Desktop\Bullsfirst.InterfaceOut.Oms.Desktop.csproj">
+      <Project>{F280951E-9B02-48B3-B7A8-EDF10822115A}</Project>
+      <Name>Bullsfirst.InterfaceOut.Oms.Desktop</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\AccountSelector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StatusBarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

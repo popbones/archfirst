@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Bullsfirst.Infrastructure.Controls.StatusBarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="clr-namespace:Bullsfirst.Infrastructure.Controls"
+    mc:Ignorable="d"
+    d:DesignHeight="30" d:DesignWidth="950">
+
+    <UserControl.Resources>
+        <local:CategoryToBrushConverter x:Key="CategoryToBrushConverter" />
+    </UserControl.Resources>
+
+    <Grid x:Name="LayoutRoot" Background="{StaticResource StatusbarBackgroundBrush}"
+          Visibility="{Binding Path=StatusMessage, Converter={StaticResource ObjectToVisibilityConverter}}">
+        <TextBlock
+            Margin="10 4 60 4"
+            VerticalAlignment="Center"
+            Foreground="{Binding Category, Converter={StaticResource CategoryToBrushConverter}}"
+            Text="{Binding StatusMessage}" />
+
+        <Button
+            Style="{StaticResource ContentButton}"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Margin="0 4 10 4"
+            Command="{Binding ClearCommand}">
+            <Image Source="/Bullsfirst.Infrastructure;component/Images/cross.png" Stretch="None" />
+        </Button>
+    </Grid>
+</UserControl>
