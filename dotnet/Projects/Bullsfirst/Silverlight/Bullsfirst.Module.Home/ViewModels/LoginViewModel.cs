@@ -54,6 +54,9 @@ namespace Bullsfirst.Module.Home.ViewModels
             this.UserContext = userContext;
             LoginCommand = new DelegateCommand<object>(this.LoginExecute, this.CanLoginExecute);
             OpenAccountCommand = new DelegateCommand<object>(this.OpenAccountExecute);
+#if !SILVERLIGHT
+            PasswordChangedCommand = new DelegateCommand<object>(this.PasswordChangedExecute);
+#endif
             this.PropertyChanged += this.OnPropertyChanged;
             this.ValidateAll();
         }
@@ -79,6 +82,15 @@ namespace Bullsfirst.Module.Home.ViewModels
         {
             _securityService.AuthenticateUserAsync(Username, Password);
         }
+
+#if !SILVERLIGHT
+        public DelegateCommand<object> PasswordChangedCommand { get; set; }
+
+        private void PasswordChangedExecute (object parameter)
+        {
+            this.Password = (string)parameter;
+        }
+#endif
 
         private void AuthenticateUserCallback(object sender, AuthenticateUserCompletedEventArgs e)
         {
