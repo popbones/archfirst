@@ -1,0 +1,108 @@
+﻿<UserControl x:Class="Bullsfirst.Module.Accounts.Views.AccountsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+    xmlns:chartToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+    mc:Ignorable="d"
+    d:DesignHeight="500" d:DesignWidth="950">
+
+    <Grid x:Name="LayoutRoot" Background="White" Margin="20 10 20 10">
+
+        <Grid.RowDefinitions>
+            <!-- Title -->
+            <RowDefinition Height="Auto" />
+            <!-- Toolbar -->
+            <RowDefinition Height="Auto" />
+            <!-- Account Summaries and Chart -->
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Accounts" Style="{StaticResource Header1}" />
+
+        <Grid Grid.Row="1" Style="{StaticResource Toolbar}">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="" Style="{StaticResource ToolbarLabel}" />
+                <Button Content="Update" Style="{StaticResource ToolbarButton}" Command="{Binding UpdateAccountsCommand}" />
+                <Button Content="Add Account" Style="{StaticResource ToolbarButton}" Command="{Binding CreateAccountCommand}" />
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <DataGrid
+                Grid.Column="0"
+                Margin="0 20 0 0"
+                ItemsSource="{Binding Path=UserContext.BrokerageAccountSummaries}"
+                AutoGenerateColumns="False"
+                RowHeight="32"
+                IsReadOnly="True"
+                Style="{StaticResource DataGridStyle}"
+                ColumnHeaderStyle="{StaticResource DataGridColumnHeaderStyle}"
+                RowStyle="{StaticResource DataGridRowStyle}">
+                <DataGrid.Columns>
+                    <DataGridTemplateColumn
+                Header="Name"
+                HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                CellStyle="{StaticResource LeftAlignedCellStyle}"
+                SortMemberPath="Name">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource HyperlinkButtonStyle}"
+                                Content="{Binding Path=Name}"
+                                Command="{Binding SelectAccountCommand, Source={StaticResource ViewModel}}"
+                                CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTextColumn
+                    Header="Account #"
+                    Binding="{Binding Path=Id}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}" />
+                    <DataGridTextColumn
+                    Header="Market Value"
+                    Binding="{Binding Path=MarketValue, Converter={StaticResource MoneyConverter}}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}"
+                    SortMemberPath="MarketValue.Amount" />
+                    <DataGridTextColumn
+                    Header="Cash"
+                    Binding="{Binding Path=CashPosition, Converter={StaticResource MoneyConverter}}"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource RightAlignedCellStyle}"
+                    SortMemberPath="CashPosition.Amount" />
+                    <DataGridTemplateColumn
+                    Header="Actions"
+                    HeaderStyle="{StaticResource CenterAlignedColumnHeaderStyle}"
+                    CellStyle="{StaticResource CenterAlignedCellStyle}">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Style="{StaticResource HyperlinkButtonStyle}"
+                                    Content="Edit"
+                                    Visibility="{Binding Path=EditPermission, Converter={StaticResource Bool2VisibilityConverter}}"
+                                    Command="{Binding EditAccountCommand, Source={StaticResource ViewModel}}"
+                                    CommandParameter="{Binding}" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <chartToolkit:Chart
+                Style="{StaticResource ChartStyle}"
+                Grid.Column="1" x:Name="accountsChart"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"       
+                Margin="0 20 0 0" Height="330" Width="440">
+            </chartToolkit:Chart>
+
+        </Grid>
+    </Grid>
+</UserControl>
