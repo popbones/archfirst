@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://archfirst.org/bfoms/tradingservice.wsdl" targetNamespace="http://archfirst.org/bfoms/tradingservice.wsdl" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="AddExternalAccount" type="tns:AddExternalAccount" />
+  <xs:element name="AddExternalAccountResponse" type="tns:AddExternalAccountResponse" />
+  <xs:element name="CancelOrder" type="tns:CancelOrder" />
+  <xs:element name="CancelOrderResponse" type="tns:CancelOrderResponse" />
+  <xs:element name="ChangeAccountName" type="tns:ChangeAccountName" />
+  <xs:element name="ChangeAccountNameResponse" type="tns:ChangeAccountNameResponse" />
+  <xs:element name="ExternalAccountParams" type="tns:ExternalAccountParams" />
+  <xs:element name="GetBrokerageAccountSummaries" type="tns:GetBrokerageAccountSummaries" />
+  <xs:element name="GetBrokerageAccountSummariesResponse" type="tns:GetBrokerageAccountSummariesResponse" />
+  <xs:element name="GetExternalAccountSummaries" type="tns:GetExternalAccountSummaries" />
+  <xs:element name="GetExternalAccountSummariesResponse" type="tns:GetExternalAccountSummariesResponse" />
+  <xs:element name="GetOrderEstimate" type="tns:GetOrderEstimate" />
+  <xs:element name="GetOrderEstimateResponse" type="tns:GetOrderEstimateResponse" />
+  <xs:element name="GetOrders" type="tns:GetOrders" />
+  <xs:element name="GetOrdersResponse" type="tns:GetOrdersResponse" />
+  <xs:element name="GetTransactionSummaries" type="tns:GetTransactionSummaries" />
+  <xs:element name="GetTransactionSummariesResponse" type="tns:GetTransactionSummariesResponse" />
+  <xs:element name="OpenNewAccount" type="tns:OpenNewAccount" />
+  <xs:element name="OpenNewAccountResponse" type="tns:OpenNewAccountResponse" />
+  <xs:element name="PlaceOrder" type="tns:PlaceOrder" />
+  <xs:element name="PlaceOrderResponse" type="tns:PlaceOrderResponse" />
+  <xs:element name="TransferCash" type="tns:TransferCash" />
+  <xs:element name="TransferCashResponse" type="tns:TransferCashResponse" />
+  <xs:element name="TransferSecurities" type="tns:TransferSecurities" />
+  <xs:element name="TransferSecuritiesResponse" type="tns:TransferSecuritiesResponse" />
+  <xs:complexType name="GetExternalAccountSummaries">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="GetExternalAccountSummariesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ExternalAccountSummary" type="tns:ExternalAccountSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExternalAccountSummary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseAccountSummary">
+        <xs:sequence>
+          <xs:element name="RoutingNumber" type="xs:string" />
+          <xs:element name="AccountNumber" type="xs:string" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="BaseAccountSummary" abstract="true">
+    <xs:sequence>
+      <xs:element name="Id" type="xs:long" />
+      <xs:element name="Name" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="CancelOrderResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="ChangeAccountName">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:long" />
+      <xs:element minOccurs="0" name="NewName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ChangeAccountNameResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="GetOrders">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderCriteria" type="tns:OrderCriteria" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrderCriteria">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:long" />
+      <xs:element minOccurs="0" name="Symbol" type="xs:string" />
+      <xs:element minOccurs="0" name="OrderId" type="xs:long" />
+      <xs:element minOccurs="0" name="FromDate" type="xs:date" />
+      <xs:element minOccurs="0" name="ToDate" type="xs:date" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Side" type="tns:OrderSide" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Status" type="tns:OrderStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetOrdersResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Order" type="tns:Order" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Order">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DomainEntity">
+        <xs:sequence>
+          <xs:element name="CreationTime" type="xs:dateTime" />
+          <xs:element name="Side" type="tns:OrderSide" />
+          <xs:element name="Symbol" type="xs:string" />
+          <xs:element name="Quantity" type="xs:decimal" />
+          <xs:element name="CumQty" type="xs:decimal" />
+          <xs:element name="OrderType" type="tns:OrderType" />
+          <xs:element minOccurs="0" name="LimitPrice" type="tns:Money" />
+          <xs:element name="Term" type="tns:OrderTerm" />
+          <xs:element name="AllOrNone" type="xs:boolean" />
+          <xs:element name="OrderStatus" type="tns:OrderStatus" />
+          <xs:element maxOccurs="unbounded" name="Execution" type="tns:Execution" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="DomainEntity" abstract="true">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Money" final="extension restriction">
+    <xs:sequence>
+      <xs:element name="Amount" type="xs:decimal" />
+      <xs:element name="Currency" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Execution">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:DomainEntity">
+        <xs:sequence>
+          <xs:element name="CreationTime" type="xs:dateTime" />
+          <xs:element name="Quantity" type="xs:decimal" />
+          <xs:element name="Price" type="tns:Money" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="GetTransactionSummaries">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="TransactionCriteria" type="tns:TransactionCriteria" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransactionCriteria">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:long" />
+      <xs:element minOccurs="0" name="FromDate" type="xs:date" />
+      <xs:element minOccurs="0" name="ToDate" type="xs:date" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetTransactionSummariesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TransactionSummary" type="tns:TransactionSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransactionSummary">
+    <xs:sequence>
+      <xs:element name="AccountId" type="xs:long" />
+      <xs:element name="TransactionId" type="xs:long" />
+      <xs:element name="CreationTime" type="xs:dateTime" />
+      <xs:element name="Type" type="xs:string" />
+      <xs:element name="Description" type="xs:string" />
+      <xs:element name="Amount" type="tns:Money" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransferSecurities">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Symbol" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PricePaidPerShare" type="tns:Money" />
+      <xs:element minOccurs="0" name="FromAccountId" type="xs:long" />
+      <xs:element minOccurs="0" name="ToAccountId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransferSecuritiesResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="TransferCash">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Amount" type="tns:Money" />
+      <xs:element minOccurs="0" name="FromAccountId" type="xs:long" />
+      <xs:element minOccurs="0" name="ToAccountId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="TransferCashResponse">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="OpenNewAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountName" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OpenNewAccountResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetBrokerageAccountSummaries">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="GetBrokerageAccountSummariesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BrokerageAccountSummary" type="tns:BrokerageAccountSummary" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BrokerageAccountSummary">
+    <xs:complexContent mixed="false">
+      <xs:extension base="tns:BaseAccountSummary">
+        <xs:sequence>
+          <xs:element name="CashPosition" type="tns:Money" />
+          <xs:element name="MarketValue" type="tns:Money" />
+          <xs:element name="EditPermission" type="xs:boolean" />
+          <xs:element name="TradePermission" type="xs:boolean" />
+          <xs:element name="TransferPermission" type="xs:boolean" />
+          <xs:element maxOccurs="unbounded" name="Position" type="tns:Position" />
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Position">
+    <xs:sequence>
+      <xs:element name="AccountId" type="xs:long" />
+      <xs:element name="AccountName" type="xs:string" />
+      <xs:element name="InstrumentSymbol" type="xs:string" />
+      <xs:element name="InstrumentName" type="xs:string" />
+      <xs:element name="LotId" type="xs:long" />
+      <xs:element name="LotCreationTime" type="xs:dateTime" />
+      <xs:element name="Quantity" type="xs:decimal" />
+      <xs:element name="LastTrade" type="tns:Money" />
+      <xs:element name="MarketValue" type="tns:Money" />
+      <xs:element name="PricePaid" type="tns:Money" />
+      <xs:element name="TotalCost" type="tns:Money" />
+      <xs:element name="Gain" type="tns:Money" />
+      <xs:element name="GainPercent" type="xs:decimal" />
+      <xs:element maxOccurs="unbounded" name="Child" type="tns:Position" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PlaceOrder">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BrokerageAccountId" type="xs:long" />
+      <xs:element minOccurs="0" name="OrderParams" type="tns:OrderParams" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrderParams">
+    <xs:sequence>
+      <xs:element name="Side" type="tns:OrderSide" />
+      <xs:element name="Symbol" type="xs:string" />
+      <xs:element name="Quantity" type="xs:decimal" />
+      <xs:element name="Type" type="tns:OrderType" />
+      <xs:element name="LimitPrice" nillable="true" type="tns:Money" />
+      <xs:element name="Term" type="tns:OrderTerm" />
+      <xs:element name="AllOrNone" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PlaceOrderResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddExternalAccount">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ExternalAccountParams" type="tns:ExternalAccountParams" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ExternalAccountParams">
+    <xs:sequence>
+      <xs:element name="Name" type="xs:string" />
+      <xs:element name="RoutingNumber" type="xs:string" />
+      <xs:element name="AccountNumber" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="AddExternalAccountResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountId" type="xs:long" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetOrderEstimate">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BrokerageAccountId" type="xs:long" />
+      <xs:element minOccurs="0" name="OrderParams" type="tns:OrderParams" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetOrderEstimateResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="OrderEstimate" type="tns:OrderEstimate" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="OrderEstimate">
+    <xs:sequence>
+      <xs:element name="Compliance" type="tns:OrderCompliance" />
+      <xs:element name="EstimatedValue" type="tns:Money" />
+      <xs:element name="Fees" type="tns:Money" />
+      <xs:element name="EstimatedValueInclFees" type="tns:Money" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="OrderSide">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Buy" />
+      <xs:enumeration value="Sell" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OrderStatus">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="PendingNew" />
+      <xs:enumeration value="New" />
+      <xs:enumeration value="PartiallyFilled" />
+      <xs:enumeration value="Filled" />
+      <xs:enumeration value="PendingCancel" />
+      <xs:enumeration value="Canceled" />
+      <xs:enumeration value="DoneForDay" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OrderType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Market" />
+      <xs:enumeration value="Limit" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OrderTerm">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="GoodForTheDay" />
+      <xs:enumeration value="GoodTilCanceled" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="OrderCompliance">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Compliant" />
+      <xs:enumeration value="NonCompliant" />
+      <xs:enumeration value="LimitOrderWithNoLimitPrice" />
+      <xs:enumeration value="InsufficientFunds" />
+      <xs:enumeration value="InsufficientQuantity" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

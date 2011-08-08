@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://archfirst.org/bfexch/marketdataservice.wsdl" targetNamespace="http://archfirst.org/bfexch/marketdataservice.wsdl" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="GetMarketPrice" type="tns:GetMarketPrice" />
+  <xs:element name="GetMarketPriceResponse" type="tns:GetMarketPriceResponse" />
+  <xs:element name="GetMarketPrices" type="tns:GetMarketPrices" />
+  <xs:element name="GetMarketPricesResponse" type="tns:GetMarketPricesResponse" />
+  <xs:complexType name="GetMarketPrice">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Symbol" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetMarketPriceResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="MarketPrice" type="tns:MarketPrice" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="MarketPrice">
+    <xs:sequence>
+      <xs:element name="Symbol" type="xs:string" />
+      <xs:element name="Price" type="tns:Money" />
+      <xs:element name="Effective" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Money" final="extension restriction">
+    <xs:sequence>
+      <xs:element name="Amount" type="xs:decimal" />
+      <xs:element name="Currency" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GetMarketPrices">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:complexType name="GetMarketPricesResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="MarketPrice" type="tns:MarketPrice" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

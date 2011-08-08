@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://archfirst.org/bfexch/marketdataservice.wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" name="MarketDataService" targetNamespace="http://archfirst.org/bfexch/marketdataservice.wsdl" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <xsd:schema>
+      <xsd:import schemaLocation="http://archfirst.org:8080/bfexch-javaee/MarketDataService?xsd=1" namespace="http://archfirst.org/bfexch/marketdataservice.wsdl" />
+    </xsd:schema>
+  </types>
+  <message name="GetMarketPrices">
+    <part name="parameters" element="tns:GetMarketPrices" />
+  </message>
+  <message name="GetMarketPricesResponse">
+    <part name="parameters" element="tns:GetMarketPricesResponse" />
+  </message>
+  <message name="GetMarketPrice">
+    <part name="parameters" element="tns:GetMarketPrice" />
+  </message>
+  <message name="GetMarketPriceResponse">
+    <part name="parameters" element="tns:GetMarketPriceResponse" />
+  </message>
+  <portType name="MarketDataWebService">
+    <operation name="GetMarketPrices">
+      <input wsam:Action="GetMarketPrices" message="tns:GetMarketPrices" />
+      <output wsam:Action="http://archfirst.org/bfexch/marketdataservice.wsdl/MarketDataWebService/GetMarketPricesResponse" message="tns:GetMarketPricesResponse" />
+    </operation>
+    <operation name="GetMarketPrice">
+      <input wsam:Action="GetMarketPrice" message="tns:GetMarketPrice" />
+      <output wsam:Action="http://archfirst.org/bfexch/marketdataservice.wsdl/MarketDataWebService/GetMarketPriceResponse" message="tns:GetMarketPriceResponse" />
+    </operation>
+  </portType>
+  <binding name="MarketDataWebServicePortBinding" type="tns:MarketDataWebService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <operation name="GetMarketPrices">
+      <soap:operation soapAction="GetMarketPrices" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetMarketPrice">
+      <soap:operation soapAction="GetMarketPrice" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="MarketDataService">
+    <port name="MarketDataWebServicePort" binding="tns:MarketDataWebServicePortBinding">
+      <soap:address location="http://archfirst.org:8080/bfexch-javaee/MarketDataService" />
+    </port>
+  </service>
+</definitions>
