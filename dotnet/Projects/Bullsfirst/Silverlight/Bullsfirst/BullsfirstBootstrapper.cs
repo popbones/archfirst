@@ -12,6 +12,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+#if SILVERLIGHT
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Windows;
@@ -31,6 +32,23 @@ using Microsoft.Practices.Prism.Events;
 using Microsoft.Practices.Prism.Logging;
 using Microsoft.Practices.Prism.MefExtensions;
 using Microsoft.Practices.Prism.Regions;
+#else
+using System.Windows;
+using System;
+using System.Windows.Controls;
+using System.ComponentModel.Composition;
+using System.ComponentModel.Composition.Hosting;
+using Microsoft.Practices.Prism.MefExtensions;
+using Microsoft.Practices.Prism.Logging;
+using Microsoft.Practices.Prism.Regions;
+using Microsoft.Practices.Prism.Events;
+using Archfirst.Framework.PrismHelpers;
+using Bullsfirst.Infrastructure.Controls;
+using Bullsfirst.InterfaceOut.Oms;
+using Bullsfirst.Module.Home;
+using Bullsfirst.Module.LoggedInUserShell;
+using Bullsfirst.Module.Accounts;
+#endif
 
 namespace Bullsfirst
 {
@@ -49,14 +67,18 @@ namespace Bullsfirst
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(StatusBarView).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OmsModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(HomeModule).Assembly));
-            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OpenAccountModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(LoggedInUserShellModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(AccountsModule).Assembly));
+#if SILVERLIGHT
+
+            this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OpenAccountModule).Assembly));
+
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(PositionsModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(TradeModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(OrdersModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(TransactionHistoryModule).Assembly));
             this.AggregateCatalog.Catalogs.Add(new AssemblyCatalog(typeof(TransferModule).Assembly));
+#endif
         }
 
         protected override IRegionBehaviorFactory ConfigureDefaultRegionBehaviors()
@@ -77,7 +99,12 @@ namespace Bullsfirst
         protected override void InitializeShell()
         {
             base.InitializeShell();
+#if SILVERLIGHT
             Application.Current.RootVisual = (UIElement)this.Shell;
+#else
+            Application.Current.MainWindow = (Shell)this.Shell;
+            Application.Current.MainWindow.Show();
+#endif
         }
     }
 
