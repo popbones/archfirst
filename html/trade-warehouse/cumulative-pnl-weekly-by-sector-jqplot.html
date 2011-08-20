@@ -1,0 +1,284 @@
+﻿<!DOCTYPE html>
+
+<!--
+Questions:
+1. How to turn a series on and off using a LegendRenderer instead of checkboxes
+   (see http://groups.google.com/group/jqplot-users/browse_thread/thread/372ab3ef2e6021c0)
+2. How to animate a series when turning it on or off?
+3. How to create a horizontal legend?
+4. How to create a second dimension for sectors (currently using listbox)?
+-->
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Trading P&L</title>
+    <!--[if lt IE 9]><script type="text/javascript" src="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/excanvas.js"></script><![endif]-->
+
+    <link rel="stylesheet" type="text/css" href="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/jquery.jqplot.css" />
+    <link rel="stylesheet" type="text/css" href="http://archfirst.org/libs/jquery-selectbox-1.0.7-0/jquery.selectBox.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+    <!-- BEGIN: load jquery -->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="http://archfirst.org/libs/jquery-selectbox-1.0.7-0/jquery.selectBox.min.js"></script>
+    <!-- END: load jquery -->
+
+    <!-- BEGIN: load jqplot -->
+    <script type="text/javascript" src="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/jquery.jqplot.js"></script>
+    <script type="text/javascript" src="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+    <script type="text/javascript" src="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
+    <script type="text/javascript" src="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.canvasTextRenderer.min.js"></script>
+    <script type="text/javascript" src="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.cursor.min.js"></script>
+    <script type="text/javascript" src="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.dateAxisRenderer.min.js"></script>
+    <script type="text/javascript" src="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.highlighter.min.js"></script>
+    <!-- END: load jqplot -->
+
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("SELECT").selectBox();
+
+            $.jqplot.config.enablePlugins = true;
+
+            marketMoves = [
+                  [1, -75448],
+                  [2, -42508],
+                  [3, -51400],
+                  [4, -8720],
+                  [5, 62967],
+                  [6, 52846],
+                  [7, 97082],
+                  [8, 91937],
+                  [9, 192461],
+                  [10, 257119],
+                  [11, 438770],
+                  [12, 390131],
+                  [13, 386937],
+                  [14, 397602],
+                  [15, 400915],
+                  [16, 418130],
+                  [17, 460164],
+                  [18, 556645],
+                  [19, 591730],
+                  [20, 571443],
+                  [21, 541711],
+                  [22, 493495],
+                  [23, 542843],
+                  [24, 671584],
+                  [25, 586047],
+                  [26, 550864],
+                  [27, 630606],
+                  [28, 575341],
+                  [29, 617739],
+                  [30, 570401],
+                  [31, 531039],
+                  [32, 563931],
+                  [33, 572650]];
+            newTrades = [
+                  [1, -50000],
+                  [2, -15000],
+                  [3, -4000],
+                  [4, -20000],
+                  [5, -2000],
+                  [6, 25000],
+                  [7, 30000],
+                  [8, 50000],
+                  [9, 60000],
+                  [10, 70000],
+                  [11, 90000],
+                  [12, 95000],
+                  [13, 100000],
+                  [14, 120000],
+                  [15, 150000],
+                  [16, 175000],
+                  [17, 125000],
+                  [18, 120000],
+                  [19, 150000],
+                  [20, 175000],
+                  [21, 180000],
+                  [22, 200000],
+                  [23, 210000],
+                  [24, 190000],
+                  [25, 200000],
+                  [26, 220000],
+                  [27, 250000],
+                  [28, 210000],
+                  [29, 200000],
+                  [30, 250000],
+                  [31, 275000],
+                  [32, 290000],
+                  [33, 300000]];
+            feesAndComm = [
+                  [1, -1820],
+                  [2, -3575],
+                  [3, -5384],
+                  [4, -7052],
+                  [5, -8801],
+                  [6, -10536],
+                  [7, -12275],
+                  [8, -13982],
+                  [9, -15767],
+                  [10, -17601],
+                  [11, -19366],
+                  [12, -21185],
+                  [13, -22949],
+                  [14, -24614],
+                  [15, -26396],
+                  [16, -28229],
+                  [17, -29935],
+                  [18, -31580],
+                  [19, -33281],
+                  [20, -35016],
+                  [21, -36810],
+                  [22, -38570],
+                  [23, -40287],
+                  [24, -42132],
+                  [25, -43871],
+                  [26, -45595],
+                  [27, -47324],
+                  [28, -49078],
+                  [29, -50809],
+                  [30, -52586],
+                  [31, -54334],
+                  [32, -56034],
+                  [33, -56360]];
+            total = [
+                  [1, -127268],
+                  [2, -61083],
+                  [3, -60784],
+                  [4, -35772],
+                  [5, 52166],
+                  [6, 67310],
+                  [7, 114807],
+                  [8, 127955],
+                  [9, 236694],
+                  [10, 309518],
+                  [11, 509404],
+                  [12, 463946],
+                  [13, 463988],
+                  [14, 492988],
+                  [15, 524519],
+                  [16, 564901],
+                  [17, 555229],
+                  [18, 645065],
+                  [19, 708449],
+                  [20, 711427],
+                  [21, 684901],
+                  [22, 654925],
+                  [23, 712556],
+                  [24, 819452],
+                  [25, 742176],
+                  [26, 725269],
+                  [27, 833282],
+                  [28, 736263],
+                  [29, 766930],
+                  [30, 767815],
+                  [31, 751705],
+                  [32, 797897],
+                  [33, 816290]];
+
+            var plot1 = $.jqplot('chart1', [marketMoves, newTrades, feesAndComm, total], {
+                title: {
+                    text: 'Cumulative Trading P&L YTD'
+                },
+                seriesDefaults: {
+                    show: true,
+                    showLabel: true,
+                    showMarker: false
+                },
+                series: [
+                    { label: 'Market Moves' },
+                    { label: 'New Trades' },
+                    { label: 'Fees and commissions' },
+                    { label: 'Total' }
+                ],
+                axesDefaults: {
+                    tickOptions: {
+                        fontSize: '8pt'
+                    }
+                },
+                axes: {
+                    xaxis: {
+                        label: 'Week',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                        tickOptions: {
+                            formatString: '%d'
+                        }
+                    },
+                    yaxis: {
+                        label: '$ in thousands ($000\'s)',
+                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
+                        tickOptions: {
+                            formatString: '$%d'
+                        }
+                    }
+                },
+                highlighter: {
+                    show: true,
+                    sizeAdjust: 7.5
+                },
+                cursor: {
+                    show: true,
+                    zoom: true,
+                    showTooltip: false
+                }
+            });
+
+            // $('#button-reset').click(function () { plot1.resetZoom() });
+
+            $('#show-market-moves').click(function () {
+                plot1.series[0].show = this.checked;
+                plot1.replot();
+            });
+            $('#show-new-trades').click(function () {
+                plot1.series[1].show = this.checked;
+                plot1.replot();
+            });
+            $('#show-fees').click(function () {
+                plot1.series[2].show = this.checked;
+                plot1.replot();
+            });
+            $('#show-total').click(function () {
+                plot1.series[3].show = this.checked;
+                plot1.replot();
+            });
+
+        });
+
+  </script>
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="sidebar">
+        <select class="sectorList" size="15">
+            <option>Consumer Discretionary</OPTION>
+            <option>Consumer Staples</OPTION>
+            <option>Energy</OPTION>
+            <option selected="selected">Financials</OPTION>
+            <option>Health Care</OPTION>
+            <option>Industrials</OPTION>
+            <option>Information Technology</OPTION>
+            <option>Materials</OPTION>
+            <option>Telecommunication Services</OPTION>
+            <option>Utilities</OPTION>
+        </select>
+    </div>
+
+    <div id="content">
+        <div id="chart1">
+        </div>
+
+        <div id="legend1">
+            <input id="show-total" type="checkbox" checked="checked" /> <img src="images/marker-green.png" alt="cyan" /> Total&nbsp;&nbsp;
+            <input id="show-market-moves" type="checkbox" checked="checked" /> <img src="images/marker-cyan.png" alt="cyan" /> Market Moves&nbsp;&nbsp;
+            <input id="show-new-trades" type="checkbox" checked="checked" /> <img src="images/marker-gold.png" alt="cyan" /> New Trades&nbsp;&nbsp;
+            <input id="show-fees" type="checkbox" checked="checked" /> <img src="images/marker-khaki.png" alt="cyan" /> Fees and Commissions<br />
+            <!-- <button id="button-reset">Reset Zoom</button> -->
+        </div>
+    </div>
+</div>
+</body>
+</html>
