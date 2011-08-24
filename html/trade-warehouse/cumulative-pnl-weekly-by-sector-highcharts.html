@@ -2,40 +2,30 @@
 
 <!--
 Questions:
-1. How to turn a series on and off using a LegendRenderer instead of checkboxes
-   (see http://groups.google.com/group/jqplot-users/browse_thread/thread/372ab3ef2e6021c0)
-2. How to animate a series when turning it on or off?
-3. How to create a horizontal legend?
-4. How to create a second dimension for sectors (currently using listbox)?
+1. ????
 -->
 
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Cumulative P&L - jqPlot</title>
-    <!--[if lt IE 9]><script type="text/javascript" src="/libs/jquery-jqplot-1.0.0b2/excanvas.js"></script><![endif]-->
+    <title>Cumulative P&L - Highcharts</title>
 
     <link rel="stylesheet" type="text/css" href="/libs/style4/css/style4.css" />
-    <link rel="stylesheet" type="text/css" href="/libs/jquery-jqplot-1.0.0b2/jquery.jqplot.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="/libs/jquery-jqplot-1.0.0b2/jquery.jqplot.js"></script>
-    <script type="text/javascript" src="/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
-    <script type="text/javascript" src="/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.canvasAxisTickRenderer.min.js"></script>
-    <script type="text/javascript" src="/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.canvasTextRenderer.min.js"></script>
-    <script type="text/javascript" src="/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.cursor.min.js"></script>
-    <script type="text/javascript" src="/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.dateAxisRenderer.min.js"></script>
-    <script type="text/javascript" src="/libs/jquery-jqplot-1.0.0b2/plugins/jqplot.highlighter.min.js"></script>
+    <script type="text/javascript" src="/libs/highcharts-2.1.6/js/highcharts.js"></script>
+    <script type="text/javascript" src="/libs/highcharts-2.1.6/js/themes/gray.js"></script>
 
     <script type="text/javascript">
 
         var sectors = {};  // create an object called sectors
         var sectorNames = [];
+        var chart1;
+        var seriesOptions = [];
 
         $(document).ready(function () {
-            $.jqplot.config.enablePlugins = true;
 
             // Initialize p&l data by sectors
             $.ajax({
@@ -66,52 +56,26 @@ Questions:
             $('#sectorList').html(options);
 
             // Plot first sector
-            var plot1 = $.jqplot('chart1', [sectors[sectorNames[0]].marketMoves, sectors[sectorNames[0]].newTrades, sectors[sectorNames[0]].fees, sectors[sectorNames[0]].total], {
+            chart1 = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'chart1',
+                    type: 'bar'
+                },
                 title: {
-                    text: 'Cumulative Trading P&L YTD'
+                    text: 'Fruit Consumption'
                 },
-                seriesDefaults: {
-                    show: true,
-                    showLabel: true,
-                    showMarker: false
+                xAxis: {
+                    categories: ['Apples', 'Bananas', 'Oranges']
                 },
-                series: [
-                    { label: 'Market Moves' },
-                    { label: 'New Trades' },
-                    { label: 'Fees and commissions' },
-                    { label: 'Total' }
-                ],
-                axesDefaults: {
-                    tickOptions: {
-                        fontSize: '8pt'
+                yAxis: {
+                    title: {
+                        text: 'Fruit eaten'
                     }
                 },
-                axes: {
-                    xaxis: {
-                        label: 'Week',
-                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-                        tickOptions: {
-                            formatString: '%d'
-                        }
-                    },
-                    yaxis: {
-                        label: '$ in thousands ($000\'s)',
-                        labelRenderer: $.jqplot.CanvasAxisLabelRenderer,
-                        tickOptions: {
-                            formatString: '$%d'
-                        }
-                    }
-                },
-                highlighter: {
-                    show: true,
-                    sizeAdjust: 7.5
-                },
-                cursor: {
-                    show: true,
-                    zoom: true,
-                    showTooltip: false
-                }
+                series: seriesOptions
             });
+
+            seriesOptions.push({ name: 'Jane', data: [1, 0, 4] });
 
             $('.legendVisibility').click(function () {
                 var series_number = 0;
@@ -134,12 +98,7 @@ Questions:
             });
 
             $('#sectorList').change(function () {
-                plot1.series[0].data = sectors[this.value].marketMoves;
-                plot1.series[1].data = sectors[this.value].newTrades;
-                plot1.series[2].data = sectors[this.value].fees;
-                plot1.series[3].data = sectors[this.value].total;
-                plot1.resetAxesScale();
-                plot1.replot();
+                alert(this.value);
             });
 
         });
@@ -168,8 +127,8 @@ Questions:
     <div id="stylefour">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="cumulative-pnl-weekly-by-sector-jqplot.html" class="current">Cumulative P&L (jqPlot)</a></li>
-            <li><a href="cumulative-pnl-weekly-by-sector-highcharts.html">Cumulative P&L (Highcharts)</a></li>
+            <li><a href="cumulative-pnl-weekly-by-sector-jqplot.html">Cumulative P&L (jqPlot)</a></li>
+            <li><a href="cumulative-pnl-weekly-by-sector-highcharts.html" class="current">Cumulative P&L (Highcharts)</a></li>
         </ul>
     </div>
 
