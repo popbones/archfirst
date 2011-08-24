@@ -17,13 +17,11 @@ Questions:
 
     <link rel="stylesheet" type="text/css" href="http://archfirst.org/libs/style4/css/style4.css" />
     <link rel="stylesheet" type="text/css" href="http://archfirst.org/libs/jquery-jqplot-1.0.0b2/jquery.jqplot.css" />
-    <link rel="stylesheet" type="text/css" href="http://archfirst.org/libs/jquery-selectbox-1.0.7-0/jquery.selectBox.css" />
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 
     <!-- BEGIN: load jquery -->
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="http://archfirst.org/libs/jquery-selectbox-1.0.7-0/jquery.selectBox.min.js"></script>
     <!-- END: load jquery -->
 
     <!-- BEGIN: load jqplot -->
@@ -38,149 +36,42 @@ Questions:
 
     <script type="text/javascript">
 
-        $(document).ready(function () {
-            $("SELECT").selectBox();
+        var sectors = {};  // create an object called sectors
+        var sectorNames = [];
 
+        $(document).ready(function () {
             $.jqplot.config.enablePlugins = true;
 
-            marketMoves = [
-                  [1, -75448],
-                  [2, -42508],
-                  [3, -51400],
-                  [4, -8720],
-                  [5, 62967],
-                  [6, 52846],
-                  [7, 97082],
-                  [8, 91937],
-                  [9, 192461],
-                  [10, 257119],
-                  [11, 438770],
-                  [12, 390131],
-                  [13, 386937],
-                  [14, 397602],
-                  [15, 400915],
-                  [16, 418130],
-                  [17, 460164],
-                  [18, 556645],
-                  [19, 591730],
-                  [20, 571443],
-                  [21, 541711],
-                  [22, 493495],
-                  [23, 542843],
-                  [24, 671584],
-                  [25, 586047],
-                  [26, 550864],
-                  [27, 630606],
-                  [28, 575341],
-                  [29, 617739],
-                  [30, 570401],
-                  [31, 531039],
-                  [32, 563931],
-                  [33, 572650]];
-            newTrades = [
-                  [1, -50000],
-                  [2, -15000],
-                  [3, -4000],
-                  [4, -20000],
-                  [5, -2000],
-                  [6, 25000],
-                  [7, 30000],
-                  [8, 50000],
-                  [9, 60000],
-                  [10, 70000],
-                  [11, 90000],
-                  [12, 95000],
-                  [13, 100000],
-                  [14, 120000],
-                  [15, 150000],
-                  [16, 175000],
-                  [17, 125000],
-                  [18, 120000],
-                  [19, 150000],
-                  [20, 175000],
-                  [21, 180000],
-                  [22, 200000],
-                  [23, 210000],
-                  [24, 190000],
-                  [25, 200000],
-                  [26, 220000],
-                  [27, 250000],
-                  [28, 210000],
-                  [29, 200000],
-                  [30, 250000],
-                  [31, 275000],
-                  [32, 290000],
-                  [33, 300000]];
-            feesAndComm = [
-                  [1, -1820],
-                  [2, -3575],
-                  [3, -5384],
-                  [4, -7052],
-                  [5, -8801],
-                  [6, -10536],
-                  [7, -12275],
-                  [8, -13982],
-                  [9, -15767],
-                  [10, -17601],
-                  [11, -19366],
-                  [12, -21185],
-                  [13, -22949],
-                  [14, -24614],
-                  [15, -26396],
-                  [16, -28229],
-                  [17, -29935],
-                  [18, -31580],
-                  [19, -33281],
-                  [20, -35016],
-                  [21, -36810],
-                  [22, -38570],
-                  [23, -40287],
-                  [24, -42132],
-                  [25, -43871],
-                  [26, -45595],
-                  [27, -47324],
-                  [28, -49078],
-                  [29, -50809],
-                  [30, -52586],
-                  [31, -54334],
-                  [32, -56034],
-                  [33, -56360]];
-            total = [
-                  [1, -127268],
-                  [2, -61083],
-                  [3, -60784],
-                  [4, -35772],
-                  [5, 52166],
-                  [6, 67310],
-                  [7, 114807],
-                  [8, 127955],
-                  [9, 236694],
-                  [10, 309518],
-                  [11, 509404],
-                  [12, 463946],
-                  [13, 463988],
-                  [14, 492988],
-                  [15, 524519],
-                  [16, 564901],
-                  [17, 555229],
-                  [18, 645065],
-                  [19, 708449],
-                  [20, 711427],
-                  [21, 684901],
-                  [22, 654925],
-                  [23, 712556],
-                  [24, 819452],
-                  [25, 742176],
-                  [26, 725269],
-                  [27, 833282],
-                  [28, 736263],
-                  [29, 766930],
-                  [30, 767815],
-                  [31, 751705],
-                  [32, 797897],
-                  [33, 816290]];
+            // Initialize p&l data by sectors
+            $.ajax({
+                // have to use synchronous here, else the function 
+                // will return before the data is fetched
+                async: false,
+                url: "cumulative-pnl-weekly-by-sector.json",
+                dataType: "json",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var sector = getSector(data[i].sector);
+                        sector.marketMoves.push([data[i].week, data[i].marketMoves]);
+                        sector.newTrades.push([data[i].week, data[i].newTrades]);
+                        sector.fees.push([data[i].week, data[i].fees]);
+                        sector.total.push([data[i].week, data[i].total]);
+                    }
+                }
+            });
 
-            var plot1 = $.jqplot('chart1', [marketMoves, newTrades, feesAndComm, total], {
+            // Create sector names and populate in sector listbox
+            var options = "";
+            var selected = ' selected="selected"';
+            for (var sectorName in sectors) {
+                sectorNames.push(sectorName);
+                options += '<option value="' + sectorName + '"' + selected + '>' + sectorName + '</option>';
+                selected = "";  // clear selected after first time through the loop
+            }
+            $('#sectorList').html(options);
+
+            // Plot first sector
+            var plot1 = $.jqplot('chart1', [sectors[sectorNames[0]].marketMoves, sectors[sectorNames[0]].newTrades, sectors[sectorNames[0]].fees, sectors[sectorNames[0]].total], {
                 title: {
                     text: 'Cumulative Trading P&L YTD'
                 },
@@ -227,27 +118,50 @@ Questions:
                 }
             });
 
-            // $('#button-reset').click(function () { plot1.resetZoom() });
+            $('.legendVisibility').click(function() {
+                var series_number = 0;
+                switch (this.value) {
+                    case "market-moves":
+                        series_number = 0;
+                        break;
+                    case "new-trades":
+                        series_number = 1;
+                        break;
+                    case "fees":
+                        series_number = 2;
+                        break;
+                    case "total":
+                        series_number = 3;
+                        break;
+                }
+                plot1.series[series_number].show = this.checked;
+                plot1.replot();
+            });
 
-            $('#show-market-moves').click(function () {
-                plot1.series[0].show = this.checked;
-                plot1.replot();
-            });
-            $('#show-new-trades').click(function () {
-                plot1.series[1].show = this.checked;
-                plot1.replot();
-            });
-            $('#show-fees').click(function () {
-                plot1.series[2].show = this.checked;
-                plot1.replot();
-            });
-            $('#show-total').click(function () {
-                plot1.series[3].show = this.checked;
+            $('#sectorList').change(function() {
+                plot1.series[0].data = sectors[this.value].marketMoves;
+                plot1.series[1].data = sectors[this.value].newTrades;
+                plot1.series[2].data = sectors[this.value].fees;
+                plot1.series[3].data = sectors[this.value].total;
                 plot1.replot();
             });
 
         });
 
+        function getSector(name) {
+            var sector = sectors[name];
+            if (sector == null) {
+
+                sector = new Object();
+                sector.marketMoves = [];
+                sector.newTrades = [];
+                sector.fees = [];
+                sector.total = [];
+
+                sectors[name] = sector;
+            }
+            return sector;
+        }
   </script>
 </head>
 
@@ -258,35 +172,22 @@ Questions:
     <div id="stylefour">
         <ul>
             <li><a href="index.html">Home</a></li>
-            <li><a href="cumulative-pnl-weekly-by-sector-jqplot.html" class="current">jqPlot</a></li>
+            <li><a href="cumulative-pnl-weekly-by-sector-jqplot.html" class="current">Cumulative P&L (jqPlot)</a></li>
         </ul>
     </div>
 
     <div id="sidebar">
-        <select class="sectorList" size="15">
-            <option>Consumer Discretionary</OPTION>
-            <option>Consumer Staples</OPTION>
-            <option>Energy</OPTION>
-            <option selected="selected">Financials</OPTION>
-            <option>Health Care</OPTION>
-            <option>Industrials</OPTION>
-            <option>Information Technology</OPTION>
-            <option>Materials</OPTION>
-            <option>Telecommunication Services</OPTION>
-            <option>Utilities</OPTION>
-        </select>
+        <select id="sectorList" size="20"></select>
     </div>
 
     <div id="content">
-        <div id="chart1">
-        </div>
+        <div id="chart1"></div>
 
         <div id="legend1">
-            <input id="show-total" type="checkbox" checked="checked" /> <img src="images/marker-green.png" alt="cyan" /> Total&nbsp;&nbsp;
-            <input id="show-market-moves" type="checkbox" checked="checked" /> <img src="images/marker-cyan.png" alt="cyan" /> Market Moves&nbsp;&nbsp;
-            <input id="show-new-trades" type="checkbox" checked="checked" /> <img src="images/marker-gold.png" alt="cyan" /> New Trades&nbsp;&nbsp;
-            <input id="show-fees" type="checkbox" checked="checked" /> <img src="images/marker-khaki.png" alt="cyan" /> Fees and Commissions<br />
-            <!-- <button id="button-reset">Reset Zoom</button> -->
+            <input class="legendVisibility" value="total" type="checkbox" checked="checked" /> <img src="images/marker-green.png" alt="cyan" /> Total&nbsp;&nbsp;
+            <input class="legendVisibility" value="market-moves" type="checkbox" checked="checked" /> <img src="images/marker-cyan.png" alt="cyan" /> Market Moves&nbsp;&nbsp;
+            <input class="legendVisibility" value="new-trades" type="checkbox" checked="checked" /> <img src="images/marker-gold.png" alt="cyan" /> New Trades&nbsp;&nbsp;
+            <input class="legendVisibility" value="fees" type="checkbox" checked="checked" /> <img src="images/marker-khaki.png" alt="cyan" /> Fees and Commissions<br />
         </div>
     </div>
 </div>
