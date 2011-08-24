@@ -118,7 +118,7 @@ Questions:
                 }
             });
 
-            $('.legendVisibility').click(function() {
+            $('.legendVisibility').click(function () {
                 var series_number = 0;
                 switch (this.value) {
                     case "market-moves":
@@ -138,11 +138,12 @@ Questions:
                 plot1.replot();
             });
 
-            $('#sectorList').change(function() {
+            $('#sectorList').change(function () {
                 plot1.series[0].data = sectors[this.value].marketMoves;
                 plot1.series[1].data = sectors[this.value].newTrades;
                 plot1.series[2].data = sectors[this.value].fees;
                 plot1.series[3].data = sectors[this.value].total;
+                plot1.resetAxesScale();
                 plot1.replot();
             });
 

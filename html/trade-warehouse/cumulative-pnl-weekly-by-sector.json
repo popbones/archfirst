@@ -115,153 +115,153 @@
 		"week": 15,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 316030,
-		"newTrades": 41295,
+		"newTrades": 91295,
 		"fees": -69683,
-		"total": 287642
+		"total": 337642
 	},
 	{
 		"week": 16,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 373074,
-		"newTrades": 54716,
+		"newTrades": 154716,
 		"fees": -78477,
-		"total": 349313
+		"total": 449313
 	},
 	{
 		"week": 17,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 433113,
-		"newTrades": 69302,
+		"newTrades": 219302,
 		"fees": -87671,
-		"total": 414744
+		"total": 564744
 	},
 	{
 		"week": 18,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 496012,
-		"newTrades": 84870,
+		"newTrades": 284870,
 		"fees": -97016,
-		"total": 483866
+		"total": 683866
 	},
 	{
 		"week": 19,
 		"sector": "Consumer Discretionary",
-		"marketMoves": 561000,
-		"newTrades": 101033,
-		"fees": -106668,
-		"total": 555365
+		"marketMoves": 500000,
+		"newTrades": 400000,
+		"fees": -100000,
+		"total": 800000
 	},
 	{
 		"week": 20,
 		"sector": "Consumer Discretionary",
-		"marketMoves": 627909,
-		"newTrades": 117929,
-		"fees": -116633,
-		"total": 629205
+		"marketMoves": 500000,
+		"newTrades": 350000,
+		"fees": -150000,
+		"total": 700000
 	},
 	{
 		"week": 21,
 		"sector": "Consumer Discretionary",
-		"marketMoves": 672251,
-		"newTrades": 125976,
-		"fees": -124166,
-		"total": 674061
+		"marketMoves": 500000,
+		"newTrades": 350000,
+		"fees": -100000,
+		"total": 750000
 	},
 	{
 		"week": 22,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 734497,
-		"newTrades": 140588,
+		"newTrades": 440588,
 		"fees": -133849,
-		"total": 741236
+		"total": 1041236
 	},
 	{
 		"week": 23,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 803382,
-		"newTrades": 157467,
+		"newTrades": 557467,
 		"fees": -144189,
-		"total": 816660
+		"total": 1216660
 	},
 	{
 		"week": 24,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 875064,
-		"newTrades": 175472,
+		"newTrades": 575472,
 		"fees": -155068,
-		"total": 895468
+		"total": 1295468
 	},
 	{
 		"week": 25,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 948161,
-		"newTrades": 193954,
+		"newTrades": 593954,
 		"fees": -166082,
-		"total": 976033
+		"total": 1376033
 	},
 	{
 		"week": 26,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 1022279,
-		"newTrades": 212886,
+		"newTrades": 612886,
 		"fees": -177143,
-		"total": 1058022
+		"total": 1458022
 	},
 	{
 		"week": 27,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 1097105,
-		"newTrades": 232171,
+		"newTrades": 632171,
 		"fees": -188117,
-		"total": 1141159
+		"total": 1541159
 	},
 	{
 		"week": 28,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 1172626,
-		"newTrades": 251565,
+		"newTrades": 651565,
 		"fees": -198965,
-		"total": 1225226
+		"total": 1625226
 	},
 	{
 		"week": 29,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 1248501,
-		"newTrades": 270989,
+		"newTrades": 670989,
 		"fees": -210050,
-		"total": 1309440
+		"total": 1709440
 	},
 	{
 		"week": 30,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 1324806,
-		"newTrades": 290521,
+		"newTrades": 690521,
 		"fees": -221290,
-		"total": 1394037
+		"total": 1794037
 	},
 	{
 		"week": 31,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 1401390,
-		"newTrades": 310203,
+		"newTrades": 710203,
 		"fees": -232522,
-		"total": 1479071
+		"total": 1879071
 	},
 	{
 		"week": 32,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 1478134,
-		"newTrades": 329815,
+		"newTrades": 729815,
 		"fees": -243511,
-		"total": 1564438
+		"total": 1964438
 	},
 	{
 		"week": 33,
 		"sector": "Consumer Discretionary",
 		"marketMoves": 1493527,
-		"newTrades": 333762,
+		"newTrades": 733762,
 		"fees": -245734,
-		"total": 1581555
+		"total": 1981555
 	},
 	{
 		"week": 1,
