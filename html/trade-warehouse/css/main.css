@@ -26,6 +26,13 @@ h1 {
     width: 180px;
 }
 
+#sidebar2 {
+    clear: both;
+    float: left;
+    margin-top: 20px;
+    width: 180px;
+}
+
 #content {
     float: right;
     margin-top: 20px;

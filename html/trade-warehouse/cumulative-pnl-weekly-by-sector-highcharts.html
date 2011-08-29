@@ -1,10 +1,5 @@
 ﻿<!DOCTYPE html>
 
-<!--
-Questions:
-1. ????
--->
-
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -20,14 +15,13 @@ Questions:
 
     <script type="text/javascript">
 
-        var sectors = {};  // create an object called sectors
+        var sectors = {};
         var sectorNames = [];
         var chart1;
-        var seriesOptions = [];
 
         $(document).ready(function () {
 
-            // Initialize p&l data by sectors
+            // Get P&L data from server and save it in sectors
             $.ajax({
                 // have to use synchronous here, else the function 
                 // will return before the data is fetched
@@ -55,50 +49,54 @@ Questions:
             }
             $('#sectorList').html(options);
 
-            // Plot first sector
+            // Create a chart using data for the first sector
             chart1 = new Highcharts.Chart({
                 chart: {
                     renderTo: 'chart1',
-                    type: 'bar'
+                    type: 'line'
+                },
+                credits: {
+                    enabled: false
                 },
                 title: {
-                    text: 'Fruit Consumption'
+                    text: 'Cumulative Trading P&L YTD'
                 },
                 xAxis: {
-                    categories: ['Apples', 'Bananas', 'Oranges']
+                    title: {
+                        text: 'Week'
+                    }
                 },
                 yAxis: {
                     title: {
-                        text: 'Fruit eaten'
+                        text: '$ in thousands ($000\'s)'
                     }
                 },
-                series: seriesOptions
+                series: [{
+                    id: "marketMoves",
+                    name: 'Market Moves',
+                    data: sectors[sectorNames[0]].marketMoves,
+                    marker: { enabled: false }
+                }, {
+                    id: "newTrades",
+                    name: 'New Trades',
+                    data: sectors[sectorNames[0]].newTrades,
+                    marker: { enabled: false }
+                }, {
+                    id: "fees",
+                    name: 'Fees and Commissions',
+                    data: sectors[sectorNames[0]].fees,
+                    marker: { enabled: false }
+                }, {
+                    id: "total",
+                    name: 'Total',
+                    data: sectors[sectorNames[0]].total,
+                    marker: { enabled: false }
+                }]
             });
 
-            seriesOptions.push({ name: 'Jane', data: [1, 0, 4] });
-
-            $('.legendVisibility').click(function () {
-                var series_number = 0;
-                switch (this.value) {
-                    case "market-moves":
-                        series_number = 0;
-                        break;
-                    case "new-trades":
-                        series_number = 1;
-                        break;
-                    case "fees":
-                        series_number = 2;
-                        break;
-                    case "total":
-                        series_number = 3;
-                        break;
-                }
-                plot1.series[series_number].show = this.checked;
-                plot1.replot();
-            });
-
+            // Add a change event to sector list to repopulate the chart
             $('#sectorList').change(function () {
-                alert(this.value);
+                swtichSector(this.value);
             });
 
         });
@@ -117,6 +115,14 @@ Questions:
             }
             return sector;
         }
+
+        function swtichSector(sectorName) {
+            chart1.get("marketMoves").setData(sectors[sectorName].marketMoves, false);
+            chart1.get("newTrades").setData(sectors[sectorName].newTrades, false);
+            chart1.get("fees").setData(sectors[sectorName].fees, false);
+            chart1.get("total").setData(sectors[sectorName].total, false);
+            chart1.redraw();
+        }
   </script>
 </head>
 
@@ -132,19 +138,12 @@ Questions:
         </ul>
     </div>
 
-    <div id="sidebar">
-        <select id="sectorList" size="20"></select>
+    <div id="sidebar2">
+        <select id="sectorList" size="24"></select>
     </div>
 
     <div id="content">
         <div id="chart1"></div>
-
-        <div id="legend1">
-            <input class="legendVisibility" value="total" type="checkbox" checked="checked" /> <img src="images/marker-green.png" alt="cyan" /> Total&nbsp;&nbsp;
-            <input class="legendVisibility" value="market-moves" type="checkbox" checked="checked" /> <img src="images/marker-cyan.png" alt="cyan" /> Market Moves&nbsp;&nbsp;
-            <input class="legendVisibility" value="new-trades" type="checkbox" checked="checked" /> <img src="images/marker-gold.png" alt="cyan" /> New Trades&nbsp;&nbsp;
-            <input class="legendVisibility" value="fees" type="checkbox" checked="checked" /> <img src="images/marker-khaki.png" alt="cyan" /> Fees and Commissions<br />
-        </div>
     </div>
 </div>
 </body>
