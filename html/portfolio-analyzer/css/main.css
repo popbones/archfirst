@@ -1,0 +1,54 @@
+body {
+    margin:20px;
+    font-family: Arial, Helvetica, sans-serif; font-size: 14px;
+    min-width: 950px;
+}
+
+p {
+    margin: 1em 0 0 0;
+}
+
+h1 {
+    font-size: 1.5em; /* 24px */
+    margin-bottom: 0.5em; /* 24*0.5=12px */
+}
+
+#wrapper {
+    background-color: #fff;
+    margin: 0.875em auto; /* 14px */
+    width: 950px;
+}
+
+#sidebar {
+    clear: both;
+    float: left;
+    margin-top: 50px;
+    width: 180px;
+}
+
+#sidebar2 {
+    clear: both;
+    float: left;
+    margin-top: 20px;
+    width: 180px;
+}
+
+#content {
+    float: right;
+    margin-top: 20px;
+    width: 730px;
+}
+
+#chart1 {
+    width: 730px;
+    height: 400px;
+}
+
+#legend1 {
+    margin-top: 20px;
+    margin-left: 95px;
+}
+
+#sectorList {
+    width: 200px;
+}
