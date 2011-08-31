@@ -1,0 +1,2642 @@
+[
+	{
+		"week": 1,
+		"sector": "Consumer Discretionary",
+		"marketMoves": -14208,
+		"newTrades": -8225,
+		"fees": -716,
+		"total": -23149
+	},
+	{
+		"week": 2,
+		"sector": "Consumer Discretionary",
+		"marketMoves": -19594,
+		"newTrades": -13861,
+		"fees": -2316,
+		"total": -35771
+	},
+	{
+		"week": 3,
+		"sector": "Consumer Discretionary",
+		"marketMoves": -20121,
+		"newTrades": -17900,
+		"fees": -4397,
+		"total": -42418
+	},
+	{
+		"week": 4,
+		"sector": "Consumer Discretionary",
+		"marketMoves": -16443,
+		"newTrades": -20691,
+		"fees": -7022,
+		"total": -44156
+	},
+	{
+		"week": 5,
+		"sector": "Consumer Discretionary",
+		"marketMoves": -8412,
+		"newTrades": -22313,
+		"fees": -10068,
+		"total": -40793
+	},
+	{
+		"week": 6,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 4201,
+		"newTrades": -22646,
+		"fees": -13414,
+		"total": -31859
+	},
+	{
+		"week": 7,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 20884,
+		"newTrades": -21517,
+		"fees": -17481,
+		"total": -18114
+	},
+	{
+		"week": 8,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 42313,
+		"newTrades": -19032,
+		"fees": -21968,
+		"total": 1313
+	},
+	{
+		"week": 9,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 68772,
+		"newTrades": -14913,
+		"fees": -27007,
+		"total": 26852
+	},
+	{
+		"week": 10,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 100130,
+		"newTrades": -9384,
+		"fees": -32619,
+		"total": 58127
+	},
+	{
+		"week": 11,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 130376,
+		"newTrades": -1819,
+		"fees": -39006,
+		"total": 89551
+	},
+	{
+		"week": 12,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 169217,
+		"newTrades": 6960,
+		"fees": -45870,
+		"total": 130307
+	},
+	{
+		"week": 13,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 213781,
+		"newTrades": 17196,
+		"fees": -53225,
+		"total": 177752
+	},
+	{
+		"week": 14,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 262896,
+		"newTrades": 28756,
+		"fees": -61168,
+		"total": 230484
+	},
+	{
+		"week": 15,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 316030,
+		"newTrades": 91295,
+		"fees": -69683,
+		"total": 337642
+	},
+	{
+		"week": 16,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 373074,
+		"newTrades": 154716,
+		"fees": -78477,
+		"total": 449313
+	},
+	{
+		"week": 17,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 433113,
+		"newTrades": 219302,
+		"fees": -87671,
+		"total": 564744
+	},
+	{
+		"week": 18,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 496012,
+		"newTrades": 284870,
+		"fees": -97016,
+		"total": 683866
+	},
+	{
+		"week": 19,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 500000,
+		"newTrades": 400000,
+		"fees": -100000,
+		"total": 800000
+	},
+	{
+		"week": 20,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 500000,
+		"newTrades": 350000,
+		"fees": -150000,
+		"total": 700000
+	},
+	{
+		"week": 21,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 500000,
+		"newTrades": 350000,
+		"fees": -100000,
+		"total": 750000
+	},
+	{
+		"week": 22,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 734497,
+		"newTrades": 440588,
+		"fees": -133849,
+		"total": 1041236
+	},
+	{
+		"week": 23,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 803382,
+		"newTrades": 557467,
+		"fees": -144189,
+		"total": 1216660
+	},
+	{
+		"week": 24,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 875064,
+		"newTrades": 575472,
+		"fees": -155068,
+		"total": 1295468
+	},
+	{
+		"week": 25,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 948161,
+		"newTrades": 593954,
+		"fees": -166082,
+		"total": 1376033
+	},
+	{
+		"week": 26,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 1022279,
+		"newTrades": 612886,
+		"fees": -177143,
+		"total": 1458022
+	},
+	{
+		"week": 27,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 1097105,
+		"newTrades": 632171,
+		"fees": -188117,
+		"total": 1541159
+	},
+	{
+		"week": 28,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 1172626,
+		"newTrades": 651565,
+		"fees": -198965,
+		"total": 1625226
+	},
+	{
+		"week": 29,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 1248501,
+		"newTrades": 670989,
+		"fees": -210050,
+		"total": 1709440
+	},
+	{
+		"week": 30,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 1324806,
+		"newTrades": 690521,
+		"fees": -221290,
+		"total": 1794037
+	},
+	{
+		"week": 31,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 1401390,
+		"newTrades": 710203,
+		"fees": -232522,
+		"total": 1879071
+	},
+	{
+		"week": 32,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 1478134,
+		"newTrades": 729815,
+		"fees": -243511,
+		"total": 1964438
+	},
+	{
+		"week": 33,
+		"sector": "Consumer Discretionary",
+		"marketMoves": 1493527,
+		"newTrades": 733762,
+		"fees": -245734,
+		"total": 1981555
+	},
+	{
+		"week": 1,
+		"sector": "Consumer Staples",
+		"marketMoves": -6992,
+		"newTrades": -4238,
+		"fees": -447,
+		"total": -11677
+	},
+	{
+		"week": 2,
+		"sector": "Consumer Staples",
+		"marketMoves": -8322,
+		"newTrades": -7022,
+		"fees": -1444,
+		"total": -16788
+	},
+	{
+		"week": 3,
+		"sector": "Consumer Staples",
+		"marketMoves": -6632,
+		"newTrades": -8927,
+		"fees": -2775,
+		"total": -18334
+	},
+	{
+		"week": 4,
+		"sector": "Consumer Staples",
+		"marketMoves": -2214,
+		"newTrades": -10226,
+		"fees": -4290,
+		"total": -16730
+	},
+	{
+		"week": 5,
+		"sector": "Consumer Staples",
+		"marketMoves": 4897,
+		"newTrades": -10983,
+		"fees": -6073,
+		"total": -12159
+	},
+	{
+		"week": 6,
+		"sector": "Consumer Staples",
+		"marketMoves": 14806,
+		"newTrades": -10838,
+		"fees": -8139,
+		"total": -4171
+	},
+	{
+		"week": 7,
+		"sector": "Consumer Staples",
+		"marketMoves": 27230,
+		"newTrades": -9841,
+		"fees": -10481,
+		"total": 6908
+	},
+	{
+		"week": 8,
+		"sector": "Consumer Staples",
+		"marketMoves": 42630,
+		"newTrades": -7957,
+		"fees": -13152,
+		"total": 21521
+	},
+	{
+		"week": 9,
+		"sector": "Consumer Staples",
+		"marketMoves": 61179,
+		"newTrades": -5210,
+		"fees": -16297,
+		"total": 39672
+	},
+	{
+		"week": 10,
+		"sector": "Consumer Staples",
+		"marketMoves": 82795,
+		"newTrades": -1514,
+		"fees": -19831,
+		"total": 61450
+	},
+	{
+		"week": 11,
+		"sector": "Consumer Staples",
+		"marketMoves": 104100,
+		"newTrades": 1981,
+		"fees": -23395,
+		"total": 82686
+	},
+	{
+		"week": 12,
+		"sector": "Consumer Staples",
+		"marketMoves": 130526,
+		"newTrades": 6942,
+		"fees": -27423,
+		"total": 110045
+	},
+	{
+		"week": 13,
+		"sector": "Consumer Staples",
+		"marketMoves": 160415,
+		"newTrades": 12881,
+		"fees": -31807,
+		"total": 141489
+	},
+	{
+		"week": 14,
+		"sector": "Consumer Staples",
+		"marketMoves": 193138,
+		"newTrades": 19645,
+		"fees": -36550,
+		"total": 176233
+	},
+	{
+		"week": 15,
+		"sector": "Consumer Staples",
+		"marketMoves": 228271,
+		"newTrades": 27279,
+		"fees": -41774,
+		"total": 213776
+	},
+	{
+		"week": 16,
+		"sector": "Consumer Staples",
+		"marketMoves": 265623,
+		"newTrades": 35588,
+		"fees": -47257,
+		"total": 253954
+	},
+	{
+		"week": 17,
+		"sector": "Consumer Staples",
+		"marketMoves": 304927,
+		"newTrades": 44303,
+		"fees": -53056,
+		"total": 296174
+	},
+	{
+		"week": 18,
+		"sector": "Consumer Staples",
+		"marketMoves": 345910,
+		"newTrades": 53537,
+		"fees": -58981,
+		"total": 340466
+	},
+	{
+		"week": 19,
+		"sector": "Consumer Staples",
+		"marketMoves": 388383,
+		"newTrades": 63057,
+		"fees": -65017,
+		"total": 386423
+	},
+	{
+		"week": 20,
+		"sector": "Consumer Staples",
+		"marketMoves": 432213,
+		"newTrades": 72948,
+		"fees": -71183,
+		"total": 433978
+	},
+	{
+		"week": 21,
+		"sector": "Consumer Staples",
+		"marketMoves": 462791,
+		"newTrades": 77742,
+		"fees": -75818,
+		"total": 464715
+	},
+	{
+		"week": 22,
+		"sector": "Consumer Staples",
+		"marketMoves": 504116,
+		"newTrades": 86578,
+		"fees": -81874,
+		"total": 508820
+	},
+	{
+		"week": 23,
+		"sector": "Consumer Staples",
+		"marketMoves": 549385,
+		"newTrades": 96934,
+		"fees": -88348,
+		"total": 557971
+	},
+	{
+		"week": 24,
+		"sector": "Consumer Staples",
+		"marketMoves": 596232,
+		"newTrades": 107806,
+		"fees": -94863,
+		"total": 609175
+	},
+	{
+		"week": 25,
+		"sector": "Consumer Staples",
+		"marketMoves": 644158,
+		"newTrades": 118955,
+		"fees": -101407,
+		"total": 661706
+	},
+	{
+		"week": 26,
+		"sector": "Consumer Staples",
+		"marketMoves": 692693,
+		"newTrades": 130267,
+		"fees": -108069,
+		"total": 714891
+	},
+	{
+		"week": 27,
+		"sector": "Consumer Staples",
+		"marketMoves": 741420,
+		"newTrades": 141800,
+		"fees": -114863,
+		"total": 768357
+	},
+	{
+		"week": 28,
+		"sector": "Consumer Staples",
+		"marketMoves": 790634,
+		"newTrades": 153268,
+		"fees": -121698,
+		"total": 822204
+	},
+	{
+		"week": 29,
+		"sector": "Consumer Staples",
+		"marketMoves": 839970,
+		"newTrades": 164826,
+		"fees": -128679,
+		"total": 876117
+	},
+	{
+		"week": 30,
+		"sector": "Consumer Staples",
+		"marketMoves": 889423,
+		"newTrades": 176245,
+		"fees": -135756,
+		"total": 929912
+	},
+	{
+		"week": 31,
+		"sector": "Consumer Staples",
+		"marketMoves": 939094,
+		"newTrades": 187720,
+		"fees": -142920,
+		"total": 983894
+	},
+	{
+		"week": 32,
+		"sector": "Consumer Staples",
+		"marketMoves": 988911,
+		"newTrades": 199397,
+		"fees": -150145,
+		"total": 1038163
+	},
+	{
+		"week": 33,
+		"sector": "Consumer Staples",
+		"marketMoves": 998911,
+		"newTrades": 201741,
+		"fees": -151570,
+		"total": 1049082
+	},
+	{
+		"week": 1,
+		"sector": "Energy",
+		"marketMoves": -7048,
+		"newTrades": -4141,
+		"fees": -400,
+		"total": -11589
+	},
+	{
+		"week": 2,
+		"sector": "Energy",
+		"marketMoves": -9434,
+		"newTrades": -6877,
+		"fees": -1219,
+		"total": -17530
+	},
+	{
+		"week": 3,
+		"sector": "Energy",
+		"marketMoves": -9231,
+		"newTrades": -8803,
+		"fees": -2231,
+		"total": -20265
+	},
+	{
+		"week": 4,
+		"sector": "Energy",
+		"marketMoves": -6732,
+		"newTrades": -9992,
+		"fees": -3566,
+		"total": -20290
+	},
+	{
+		"week": 5,
+		"sector": "Energy",
+		"marketMoves": -1953,
+		"newTrades": -10531,
+		"fees": -5265,
+		"total": -17749
+	},
+	{
+		"week": 6,
+		"sector": "Energy",
+		"marketMoves": 5099,
+		"newTrades": -10509,
+		"fees": -7187,
+		"total": -12597
+	},
+	{
+		"week": 7,
+		"sector": "Energy",
+		"marketMoves": 14596,
+		"newTrades": -9920,
+		"fees": -9393,
+		"total": -4717
+	},
+	{
+		"week": 8,
+		"sector": "Energy",
+		"marketMoves": 26433,
+		"newTrades": -8619,
+		"fees": -11907,
+		"total": 5907
+	},
+	{
+		"week": 9,
+		"sector": "Energy",
+		"marketMoves": 40899,
+		"newTrades": -6464,
+		"fees": -14758,
+		"total": 19677
+	},
+	{
+		"week": 10,
+		"sector": "Energy",
+		"marketMoves": 58119,
+		"newTrades": -3517,
+		"fees": -17707,
+		"total": 36895
+	},
+	{
+		"week": 11,
+		"sector": "Energy",
+		"marketMoves": 75731,
+		"newTrades": -383,
+		"fees": -21124,
+		"total": 54224
+	},
+	{
+		"week": 12,
+		"sector": "Energy",
+		"marketMoves": 97444,
+		"newTrades": 4005,
+		"fees": -24665,
+		"total": 76784
+	},
+	{
+		"week": 13,
+		"sector": "Energy",
+		"marketMoves": 121864,
+		"newTrades": 9294,
+		"fees": -28525,
+		"total": 102633
+	},
+	{
+		"week": 14,
+		"sector": "Energy",
+		"marketMoves": 148500,
+		"newTrades": 15434,
+		"fees": -32765,
+		"total": 131169
+	},
+	{
+		"week": 15,
+		"sector": "Energy",
+		"marketMoves": 177137,
+		"newTrades": 22214,
+		"fees": -37244,
+		"total": 162107
+	},
+	{
+		"week": 16,
+		"sector": "Energy",
+		"marketMoves": 207675,
+		"newTrades": 29462,
+		"fees": -42026,
+		"total": 195111
+	},
+	{
+		"week": 17,
+		"sector": "Energy",
+		"marketMoves": 239889,
+		"newTrades": 37331,
+		"fees": -46944,
+		"total": 230276
+	},
+	{
+		"week": 18,
+		"sector": "Energy",
+		"marketMoves": 273538,
+		"newTrades": 45603,
+		"fees": -52041,
+		"total": 267100
+	},
+	{
+		"week": 19,
+		"sector": "Energy",
+		"marketMoves": 308428,
+		"newTrades": 54178,
+		"fees": -57321,
+		"total": 305285
+	},
+	{
+		"week": 20,
+		"sector": "Energy",
+		"marketMoves": 344436,
+		"newTrades": 63062,
+		"fees": -62525,
+		"total": 344973
+	},
+	{
+		"week": 21,
+		"sector": "Energy",
+		"marketMoves": 367126,
+		"newTrades": 67482,
+		"fees": -66556,
+		"total": 368052
+	},
+	{
+		"week": 22,
+		"sector": "Energy",
+		"marketMoves": 400209,
+		"newTrades": 75325,
+		"fees": -71546,
+		"total": 403988
+	},
+	{
+		"week": 23,
+		"sector": "Energy",
+		"marketMoves": 437176,
+		"newTrades": 84445,
+		"fees": -76924,
+		"total": 444697
+	},
+	{
+		"week": 24,
+		"sector": "Energy",
+		"marketMoves": 475792,
+		"newTrades": 93868,
+		"fees": -82538,
+		"total": 487122
+	},
+	{
+		"week": 25,
+		"sector": "Energy",
+		"marketMoves": 515233,
+		"newTrades": 103688,
+		"fees": -88251,
+		"total": 530670
+	},
+	{
+		"week": 26,
+		"sector": "Energy",
+		"marketMoves": 555221,
+		"newTrades": 113712,
+		"fees": -93929,
+		"total": 575004
+	},
+	{
+		"week": 27,
+		"sector": "Energy",
+		"marketMoves": 595554,
+		"newTrades": 124020,
+		"fees": -99626,
+		"total": 619948
+	},
+	{
+		"week": 28,
+		"sector": "Energy",
+		"marketMoves": 636059,
+		"newTrades": 134304,
+		"fees": -105503,
+		"total": 664860
+	},
+	{
+		"week": 29,
+		"sector": "Energy",
+		"marketMoves": 676821,
+		"newTrades": 144617,
+		"fees": -111418,
+		"total": 710020
+	},
+	{
+		"week": 30,
+		"sector": "Energy",
+		"marketMoves": 717737,
+		"newTrades": 154938,
+		"fees": -117382,
+		"total": 755293
+	},
+	{
+		"week": 31,
+		"sector": "Energy",
+		"marketMoves": 758741,
+		"newTrades": 165481,
+		"fees": -123376,
+		"total": 800846
+	},
+	{
+		"week": 32,
+		"sector": "Energy",
+		"marketMoves": 799836,
+		"newTrades": 176109,
+		"fees": -129451,
+		"total": 846494
+	},
+	{
+		"week": 33,
+		"sector": "Energy",
+		"marketMoves": 808060,
+		"newTrades": 178244,
+		"fees": -130659,
+		"total": 855645
+	},
+	{
+		"week": 1,
+		"sector": "Financials",
+		"marketMoves": -13737,
+		"newTrades": -8035,
+		"fees": -830,
+		"total": -22602
+	},
+	{
+		"week": 2,
+		"sector": "Financials",
+		"marketMoves": -18140,
+		"newTrades": -13621,
+		"fees": -2560,
+		"total": -34321
+	},
+	{
+		"week": 3,
+		"sector": "Financials",
+		"marketMoves": -17035,
+		"newTrades": -17626,
+		"fees": -4765,
+		"total": -39426
+	},
+	{
+		"week": 4,
+		"sector": "Financials",
+		"marketMoves": -11443,
+		"newTrades": -20128,
+		"fees": -7562,
+		"total": -39133
+	},
+	{
+		"week": 5,
+		"sector": "Financials",
+		"marketMoves": -1593,
+		"newTrades": -21421,
+		"fees": -10841,
+		"total": -33855
+	},
+	{
+		"week": 6,
+		"sector": "Financials",
+		"marketMoves": 12634,
+		"newTrades": -21437,
+		"fees": -14584,
+		"total": -23387
+	},
+	{
+		"week": 7,
+		"sector": "Financials",
+		"marketMoves": 31792,
+		"newTrades": -20057,
+		"fees": -18934,
+		"total": -7199
+	},
+	{
+		"week": 8,
+		"sector": "Financials",
+		"marketMoves": 55773,
+		"newTrades": -17206,
+		"fees": -24054,
+		"total": 14513
+	},
+	{
+		"week": 9,
+		"sector": "Financials",
+		"marketMoves": 84846,
+		"newTrades": -12793,
+		"fees": -29761,
+		"total": 42292
+	},
+	{
+		"week": 10,
+		"sector": "Financials",
+		"marketMoves": 118975,
+		"newTrades": -6641,
+		"fees": -35969,
+		"total": 76365
+	},
+	{
+		"week": 11,
+		"sector": "Financials",
+		"marketMoves": 155309,
+		"newTrades": 2213,
+		"fees": -42827,
+		"total": 114695
+	},
+	{
+		"week": 12,
+		"sector": "Financials",
+		"marketMoves": 198385,
+		"newTrades": 12020,
+		"fees": -50330,
+		"total": 160075
+	},
+	{
+		"week": 13,
+		"sector": "Financials",
+		"marketMoves": 246869,
+		"newTrades": 22925,
+		"fees": -58354,
+		"total": 211440
+	},
+	{
+		"week": 14,
+		"sector": "Financials",
+		"marketMoves": 300188,
+		"newTrades": 35041,
+		"fees": -66828,
+		"total": 268401
+	},
+	{
+		"week": 15,
+		"sector": "Financials",
+		"marketMoves": 357473,
+		"newTrades": 48388,
+		"fees": -75887,
+		"total": 329974
+	},
+	{
+		"week": 16,
+		"sector": "Financials",
+		"marketMoves": 418176,
+		"newTrades": 62842,
+		"fees": -85431,
+		"total": 395587
+	},
+	{
+		"week": 17,
+		"sector": "Financials",
+		"marketMoves": 482201,
+		"newTrades": 78322,
+		"fees": -95424,
+		"total": 465099
+	},
+	{
+		"week": 18,
+		"sector": "Financials",
+		"marketMoves": 549086,
+		"newTrades": 94722,
+		"fees": -105511,
+		"total": 538297
+	},
+	{
+		"week": 19,
+		"sector": "Financials",
+		"marketMoves": 618671,
+		"newTrades": 111940,
+		"fees": -116059,
+		"total": 614552
+	},
+	{
+		"week": 20,
+		"sector": "Financials",
+		"marketMoves": 690441,
+		"newTrades": 129772,
+		"fees": -127108,
+		"total": 693105
+	},
+	{
+		"week": 21,
+		"sector": "Financials",
+		"marketMoves": 739909,
+		"newTrades": 141724,
+		"fees": -134826,
+		"total": 746807
+	},
+	{
+		"week": 22,
+		"sector": "Financials",
+		"marketMoves": 807114,
+		"newTrades": 158537,
+		"fees": -145217,
+		"total": 820434
+	},
+	{
+		"week": 23,
+		"sector": "Financials",
+		"marketMoves": 881119,
+		"newTrades": 177130,
+		"fees": -156390,
+		"total": 901859
+	},
+	{
+		"week": 24,
+		"sector": "Financials",
+		"marketMoves": 957990,
+		"newTrades": 196530,
+		"fees": -167888,
+		"total": 986632
+	},
+	{
+		"week": 25,
+		"sector": "Financials",
+		"marketMoves": 1036245,
+		"newTrades": 216213,
+		"fees": -179700,
+		"total": 1072758
+	},
+	{
+		"week": 26,
+		"sector": "Financials",
+		"marketMoves": 1115460,
+		"newTrades": 236249,
+		"fees": -191650,
+		"total": 1160059
+	},
+	{
+		"week": 27,
+		"sector": "Financials",
+		"marketMoves": 1195283,
+		"newTrades": 256608,
+		"fees": -203609,
+		"total": 1248282
+	},
+	{
+		"week": 28,
+		"sector": "Financials",
+		"marketMoves": 1275813,
+		"newTrades": 277086,
+		"fees": -215959,
+		"total": 1336940
+	},
+	{
+		"week": 29,
+		"sector": "Financials",
+		"marketMoves": 1356675,
+		"newTrades": 297834,
+		"fees": -228276,
+		"total": 1426233
+	},
+	{
+		"week": 30,
+		"sector": "Financials",
+		"marketMoves": 1437894,
+		"newTrades": 318647,
+		"fees": -240411,
+		"total": 1516130
+	},
+	{
+		"week": 31,
+		"sector": "Financials",
+		"marketMoves": 1519398,
+		"newTrades": 339701,
+		"fees": -252568,
+		"total": 1606531
+	},
+	{
+		"week": 32,
+		"sector": "Financials",
+		"marketMoves": 1601146,
+		"newTrades": 360711,
+		"fees": -264792,
+		"total": 1697065
+	},
+	{
+		"week": 33,
+		"sector": "Financials",
+		"marketMoves": 1617515,
+		"newTrades": 364915,
+		"fees": -267270,
+		"total": 1715160
+	},
+	{
+		"week": 1,
+		"sector": "Health Care",
+		"marketMoves": -9332,
+		"newTrades": -5404,
+		"fees": -572,
+		"total": -15308
+	},
+	{
+		"week": 2,
+		"sector": "Health Care",
+		"marketMoves": -12727,
+		"newTrades": -9177,
+		"fees": -1706,
+		"total": -23610
+	},
+	{
+		"week": 3,
+		"sector": "Health Care",
+		"marketMoves": -12860,
+		"newTrades": -12121,
+		"fees": -3227,
+		"total": -28208
+	},
+	{
+		"week": 4,
+		"sector": "Health Care",
+		"marketMoves": -10138,
+		"newTrades": -14083,
+		"fees": -5039,
+		"total": -29260
+	},
+	{
+		"week": 5,
+		"sector": "Health Care",
+		"marketMoves": -4782,
+		"newTrades": -15097,
+		"fees": -7067,
+		"total": -26946
+	},
+	{
+		"week": 6,
+		"sector": "Health Care",
+		"marketMoves": 3459,
+		"newTrades": -15422,
+		"fees": -9372,
+		"total": -21335
+	},
+	{
+		"week": 7,
+		"sector": "Health Care",
+		"marketMoves": 14794,
+		"newTrades": -14779,
+		"fees": -11870,
+		"total": -11855
+	},
+	{
+		"week": 8,
+		"sector": "Health Care",
+		"marketMoves": 29271,
+		"newTrades": -13126,
+		"fees": -14725,
+		"total": 1420
+	},
+	{
+		"week": 9,
+		"sector": "Health Care",
+		"marketMoves": 46966,
+		"newTrades": -10478,
+		"fees": -18045,
+		"total": 18443
+	},
+	{
+		"week": 10,
+		"sector": "Health Care",
+		"marketMoves": 67929,
+		"newTrades": -6812,
+		"fees": -21837,
+		"total": 39280
+	},
+	{
+		"week": 11,
+		"sector": "Health Care",
+		"marketMoves": 90207,
+		"newTrades": -1952,
+		"fees": -26303,
+		"total": 61952
+	},
+	{
+		"week": 12,
+		"sector": "Health Care",
+		"marketMoves": 116768,
+		"newTrades": 3781,
+		"fees": -30928,
+		"total": 89621
+	},
+	{
+		"week": 13,
+		"sector": "Health Care",
+		"marketMoves": 146749,
+		"newTrades": 10243,
+		"fees": -35987,
+		"total": 121005
+	},
+	{
+		"week": 14,
+		"sector": "Health Care",
+		"marketMoves": 179462,
+		"newTrades": 17613,
+		"fees": -41348,
+		"total": 155727
+	},
+	{
+		"week": 15,
+		"sector": "Health Care",
+		"marketMoves": 214706,
+		"newTrades": 25815,
+		"fees": -46842,
+		"total": 193679
+	},
+	{
+		"week": 16,
+		"sector": "Health Care",
+		"marketMoves": 252411,
+		"newTrades": 34694,
+		"fees": -52718,
+		"total": 234387
+	},
+	{
+		"week": 17,
+		"sector": "Health Care",
+		"marketMoves": 292240,
+		"newTrades": 44310,
+		"fees": -58820,
+		"total": 277730
+	},
+	{
+		"week": 18,
+		"sector": "Health Care",
+		"marketMoves": 333824,
+		"newTrades": 54530,
+		"fees": -65118,
+		"total": 323236
+	},
+	{
+		"week": 19,
+		"sector": "Health Care",
+		"marketMoves": 376880,
+		"newTrades": 65243,
+		"fees": -71534,
+		"total": 370589
+	},
+	{
+		"week": 20,
+		"sector": "Health Care",
+		"marketMoves": 421299,
+		"newTrades": 76301,
+		"fees": -78199,
+		"total": 419401
+	},
+	{
+		"week": 21,
+		"sector": "Health Care",
+		"marketMoves": 445978,
+		"newTrades": 83074,
+		"fees": -83399,
+		"total": 445653
+	},
+	{
+		"week": 22,
+		"sector": "Health Care",
+		"marketMoves": 486014,
+		"newTrades": 93290,
+		"fees": -89704,
+		"total": 489600
+	},
+	{
+		"week": 23,
+		"sector": "Health Care",
+		"marketMoves": 531674,
+		"newTrades": 104876,
+		"fees": -96423,
+		"total": 540127
+	},
+	{
+		"week": 24,
+		"sector": "Health Care",
+		"marketMoves": 579693,
+		"newTrades": 116879,
+		"fees": -103343,
+		"total": 593229
+	},
+	{
+		"week": 25,
+		"sector": "Health Care",
+		"marketMoves": 628756,
+		"newTrades": 129307,
+		"fees": -110472,
+		"total": 647591
+	},
+	{
+		"week": 26,
+		"sector": "Health Care",
+		"marketMoves": 678192,
+		"newTrades": 141859,
+		"fees": -117669,
+		"total": 702382
+	},
+	{
+		"week": 27,
+		"sector": "Health Care",
+		"marketMoves": 728104,
+		"newTrades": 154367,
+		"fees": -125119,
+		"total": 757352
+	},
+	{
+		"week": 28,
+		"sector": "Health Care",
+		"marketMoves": 778294,
+		"newTrades": 167046,
+		"fees": -132503,
+		"total": 812837
+	},
+	{
+		"week": 29,
+		"sector": "Health Care",
+		"marketMoves": 828682,
+		"newTrades": 179752,
+		"fees": -139860,
+		"total": 868574
+	},
+	{
+		"week": 30,
+		"sector": "Health Care",
+		"marketMoves": 879364,
+		"newTrades": 192828,
+		"fees": -147352,
+		"total": 924840
+	},
+	{
+		"week": 31,
+		"sector": "Health Care",
+		"marketMoves": 930332,
+		"newTrades": 205915,
+		"fees": -154932,
+		"total": 981315
+	},
+	{
+		"week": 32,
+		"sector": "Health Care",
+		"marketMoves": 981473,
+		"newTrades": 218843,
+		"fees": -162446,
+		"total": 1037870
+	},
+	{
+		"week": 33,
+		"sector": "Health Care",
+		"marketMoves": 991687,
+		"newTrades": 221427,
+		"fees": -163967,
+		"total": 1049147
+	},
+	{
+		"week": 1,
+		"sector": "Industrials",
+		"marketMoves": -10374,
+		"newTrades": -6015,
+		"fees": -516,
+		"total": -16905
+	},
+	{
+		"week": 2,
+		"sector": "Industrials",
+		"marketMoves": -13847,
+		"newTrades": -10280,
+		"fees": -1834,
+		"total": -25961
+	},
+	{
+		"week": 3,
+		"sector": "Industrials",
+		"marketMoves": -13227,
+		"newTrades": -13495,
+		"fees": -3562,
+		"total": -30284
+	},
+	{
+		"week": 4,
+		"sector": "Industrials",
+		"marketMoves": -9342,
+		"newTrades": -15836,
+		"fees": -5669,
+		"total": -30847
+	},
+	{
+		"week": 5,
+		"sector": "Industrials",
+		"marketMoves": -2144,
+		"newTrades": -17100,
+		"fees": -8091,
+		"total": -27335
+	},
+	{
+		"week": 6,
+		"sector": "Industrials",
+		"marketMoves": 8571,
+		"newTrades": -17387,
+		"fees": -10720,
+		"total": -19536
+	},
+	{
+		"week": 7,
+		"sector": "Industrials",
+		"marketMoves": 22612,
+		"newTrades": -16654,
+		"fees": -13817,
+		"total": -7859
+	},
+	{
+		"week": 8,
+		"sector": "Industrials",
+		"marketMoves": 40137,
+		"newTrades": -14866,
+		"fees": -17405,
+		"total": 7866
+	},
+	{
+		"week": 9,
+		"sector": "Industrials",
+		"marketMoves": 61675,
+		"newTrades": -12119,
+		"fees": -21403,
+		"total": 28153
+	},
+	{
+		"week": 10,
+		"sector": "Industrials",
+		"marketMoves": 87063,
+		"newTrades": -8221,
+		"fees": -25968,
+		"total": 52874
+	},
+	{
+		"week": 11,
+		"sector": "Industrials",
+		"marketMoves": 115870,
+		"newTrades": -3705,
+		"fees": -30189,
+		"total": 81976
+	},
+	{
+		"week": 12,
+		"sector": "Industrials",
+		"marketMoves": 148643,
+		"newTrades": 2090,
+		"fees": -35336,
+		"total": 115397
+	},
+	{
+		"week": 13,
+		"sector": "Industrials",
+		"marketMoves": 184933,
+		"newTrades": 9065,
+		"fees": -40876,
+		"total": 153122
+	},
+	{
+		"week": 14,
+		"sector": "Industrials",
+		"marketMoves": 224596,
+		"newTrades": 17003,
+		"fees": -46890,
+		"total": 194709
+	},
+	{
+		"week": 15,
+		"sector": "Industrials",
+		"marketMoves": 267415,
+		"newTrades": 25831,
+		"fees": -53379,
+		"total": 239867
+	},
+	{
+		"week": 16,
+		"sector": "Industrials",
+		"marketMoves": 312928,
+		"newTrades": 35225,
+		"fees": -60208,
+		"total": 287945
+	},
+	{
+		"week": 17,
+		"sector": "Industrials",
+		"marketMoves": 360984,
+		"newTrades": 45589,
+		"fees": -67599,
+		"total": 338974
+	},
+	{
+		"week": 18,
+		"sector": "Industrials",
+		"marketMoves": 411049,
+		"newTrades": 56723,
+		"fees": -75136,
+		"total": 392636
+	},
+	{
+		"week": 19,
+		"sector": "Industrials",
+		"marketMoves": 463082,
+		"newTrades": 68212,
+		"fees": -82830,
+		"total": 448464
+	},
+	{
+		"week": 20,
+		"sector": "Industrials",
+		"marketMoves": 516856,
+		"newTrades": 80068,
+		"fees": -90571,
+		"total": 506353
+	},
+	{
+		"week": 21,
+		"sector": "Industrials",
+		"marketMoves": 553700,
+		"newTrades": 86517,
+		"fees": -96208,
+		"total": 544009
+	},
+	{
+		"week": 22,
+		"sector": "Industrials",
+		"marketMoves": 604073,
+		"newTrades": 97280,
+		"fees": -103407,
+		"total": 597946
+	},
+	{
+		"week": 23,
+		"sector": "Industrials",
+		"marketMoves": 659249,
+		"newTrades": 109467,
+		"fees": -111343,
+		"total": 657373
+	},
+	{
+		"week": 24,
+		"sector": "Industrials",
+		"marketMoves": 716518,
+		"newTrades": 122486,
+		"fees": -119609,
+		"total": 719395
+	},
+	{
+		"week": 25,
+		"sector": "Industrials",
+		"marketMoves": 774890,
+		"newTrades": 135940,
+		"fees": -128012,
+		"total": 782818
+	},
+	{
+		"week": 26,
+		"sector": "Industrials",
+		"marketMoves": 833971,
+		"newTrades": 149449,
+		"fees": -136513,
+		"total": 846907
+	},
+	{
+		"week": 27,
+		"sector": "Industrials",
+		"marketMoves": 893661,
+		"newTrades": 163150,
+		"fees": -144977,
+		"total": 911834
+	},
+	{
+		"week": 28,
+		"sector": "Industrials",
+		"marketMoves": 953770,
+		"newTrades": 177255,
+		"fees": -153459,
+		"total": 977566
+	},
+	{
+		"week": 29,
+		"sector": "Industrials",
+		"marketMoves": 1014203,
+		"newTrades": 191388,
+		"fees": -162057,
+		"total": 1043534
+	},
+	{
+		"week": 30,
+		"sector": "Industrials",
+		"marketMoves": 1074991,
+		"newTrades": 205563,
+		"fees": -170742,
+		"total": 1109812
+	},
+	{
+		"week": 31,
+		"sector": "Industrials",
+		"marketMoves": 1135805,
+		"newTrades": 219634,
+		"fees": -179427,
+		"total": 1176012
+	},
+	{
+		"week": 32,
+		"sector": "Industrials",
+		"marketMoves": 1197027,
+		"newTrades": 233847,
+		"fees": -188143,
+		"total": 1242731
+	},
+	{
+		"week": 33,
+		"sector": "Industrials",
+		"marketMoves": 1209285,
+		"newTrades": 236677,
+		"fees": -189870,
+		"total": 1256092
+	},
+	{
+		"week": 1,
+		"sector": "Information Technology",
+		"marketMoves": -13597,
+		"newTrades": -7875,
+		"fees": -662,
+		"total": -22134
+	},
+	{
+		"week": 2,
+		"sector": "Information Technology",
+		"marketMoves": -18419,
+		"newTrades": -13201,
+		"fees": -2293,
+		"total": -33913
+	},
+	{
+		"week": 3,
+		"sector": "Information Technology",
+		"marketMoves": -18360,
+		"newTrades": -17136,
+		"fees": -4551,
+		"total": -40047
+	},
+	{
+		"week": 4,
+		"sector": "Information Technology",
+		"marketMoves": -14326,
+		"newTrades": -19967,
+		"fees": -7244,
+		"total": -41537
+	},
+	{
+		"week": 5,
+		"sector": "Information Technology",
+		"marketMoves": -6072,
+		"newTrades": -21574,
+		"fees": -10158,
+		"total": -37804
+	},
+	{
+		"week": 6,
+		"sector": "Information Technology",
+		"marketMoves": 6588,
+		"newTrades": -21881,
+		"fees": -13537,
+		"total": -28830
+	},
+	{
+		"week": 7,
+		"sector": "Information Technology",
+		"marketMoves": 23451,
+		"newTrades": -20887,
+		"fees": -17486,
+		"total": -14922
+	},
+	{
+		"week": 8,
+		"sector": "Information Technology",
+		"marketMoves": 44896,
+		"newTrades": -18397,
+		"fees": -21981,
+		"total": 4518
+	},
+	{
+		"week": 9,
+		"sector": "Information Technology",
+		"marketMoves": 71241,
+		"newTrades": -14815,
+		"fees": -26789,
+		"total": 29637
+	},
+	{
+		"week": 10,
+		"sector": "Information Technology",
+		"marketMoves": 102354,
+		"newTrades": -9781,
+		"fees": -32053,
+		"total": 60520
+	},
+	{
+		"week": 11,
+		"sector": "Information Technology",
+		"marketMoves": 135721,
+		"newTrades": -3075,
+		"fees": -37772,
+		"total": 94874
+	},
+	{
+		"week": 12,
+		"sector": "Information Technology",
+		"marketMoves": 175204,
+		"newTrades": 4845,
+		"fees": -44348,
+		"total": 135701
+	},
+	{
+		"week": 13,
+		"sector": "Information Technology",
+		"marketMoves": 219639,
+		"newTrades": 14240,
+		"fees": -51488,
+		"total": 182391
+	},
+	{
+		"week": 14,
+		"sector": "Information Technology",
+		"marketMoves": 268445,
+		"newTrades": 24832,
+		"fees": -59219,
+		"total": 234058
+	},
+	{
+		"week": 15,
+		"sector": "Information Technology",
+		"marketMoves": 321128,
+		"newTrades": 36507,
+		"fees": -67426,
+		"total": 290209
+	},
+	{
+		"week": 16,
+		"sector": "Information Technology",
+		"marketMoves": 377213,
+		"newTrades": 49265,
+		"fees": -76177,
+		"total": 350301
+	},
+	{
+		"week": 17,
+		"sector": "Information Technology",
+		"marketMoves": 436411,
+		"newTrades": 63061,
+		"fees": -85115,
+		"total": 414357
+	},
+	{
+		"week": 18,
+		"sector": "Information Technology",
+		"marketMoves": 498358,
+		"newTrades": 77483,
+		"fees": -94375,
+		"total": 481466
+	},
+	{
+		"week": 19,
+		"sector": "Information Technology",
+		"marketMoves": 562443,
+		"newTrades": 92827,
+		"fees": -103938,
+		"total": 551332
+	},
+	{
+		"week": 20,
+		"sector": "Information Technology",
+		"marketMoves": 628664,
+		"newTrades": 108742,
+		"fees": -114007,
+		"total": 623399
+	},
+	{
+		"week": 21,
+		"sector": "Information Technology",
+		"marketMoves": 671021,
+		"newTrades": 117209,
+		"fees": -121988,
+		"total": 666242
+	},
+	{
+		"week": 22,
+		"sector": "Information Technology",
+		"marketMoves": 732082,
+		"newTrades": 131346,
+		"fees": -131441,
+		"total": 731987
+	},
+	{
+		"week": 23,
+		"sector": "Information Technology",
+		"marketMoves": 799950,
+		"newTrades": 147653,
+		"fees": -141801,
+		"total": 805802
+	},
+	{
+		"week": 24,
+		"sector": "Information Technology",
+		"marketMoves": 870792,
+		"newTrades": 164893,
+		"fees": -152407,
+		"total": 883278
+	},
+	{
+		"week": 25,
+		"sector": "Information Technology",
+		"marketMoves": 943112,
+		"newTrades": 182581,
+		"fees": -163062,
+		"total": 962631
+	},
+	{
+		"week": 26,
+		"sector": "Information Technology",
+		"marketMoves": 1016457,
+		"newTrades": 200559,
+		"fees": -173866,
+		"total": 1043150
+	},
+	{
+		"week": 27,
+		"sector": "Information Technology",
+		"marketMoves": 1090542,
+		"newTrades": 218788,
+		"fees": -184665,
+		"total": 1124665
+	},
+	{
+		"week": 28,
+		"sector": "Information Technology",
+		"marketMoves": 1165056,
+		"newTrades": 236973,
+		"fees": -195587,
+		"total": 1206442
+	},
+	{
+		"week": 29,
+		"sector": "Information Technology",
+		"marketMoves": 1240099,
+		"newTrades": 255637,
+		"fees": -206286,
+		"total": 1289450
+	},
+	{
+		"week": 30,
+		"sector": "Information Technology",
+		"marketMoves": 1315521,
+		"newTrades": 274528,
+		"fees": -216954,
+		"total": 1373095
+	},
+	{
+		"week": 31,
+		"sector": "Information Technology",
+		"marketMoves": 1391235,
+		"newTrades": 293456,
+		"fees": -227863,
+		"total": 1456828
+	},
+	{
+		"week": 32,
+		"sector": "Information Technology",
+		"marketMoves": 1467117,
+		"newTrades": 312260,
+		"fees": -238796,
+		"total": 1540581
+	},
+	{
+		"week": 33,
+		"sector": "Information Technology",
+		"marketMoves": 1482299,
+		"newTrades": 315947,
+		"fees": -241023,
+		"total": 1557223
+	},
+	{
+		"week": 1,
+		"sector": "Materials",
+		"marketMoves": -5745,
+		"newTrades": -3311,
+		"fees": -251,
+		"total": -9307
+	},
+	{
+		"week": 2,
+		"sector": "Materials",
+		"marketMoves": -8236,
+		"newTrades": -5810,
+		"fees": -780,
+		"total": -14826
+	},
+	{
+		"week": 3,
+		"sector": "Materials",
+		"marketMoves": -8685,
+		"newTrades": -7740,
+		"fees": -1537,
+		"total": -17962
+	},
+	{
+		"week": 4,
+		"sector": "Materials",
+		"marketMoves": -7747,
+		"newTrades": -9305,
+		"fees": -2577,
+		"total": -19629
+	},
+	{
+		"week": 5,
+		"sector": "Materials",
+		"marketMoves": -5268,
+		"newTrades": -10416,
+		"fees": -3753,
+		"total": -19437
+	},
+	{
+		"week": 6,
+		"sector": "Materials",
+		"marketMoves": -1151,
+		"newTrades": -11121,
+		"fees": -4982,
+		"total": -17254
+	},
+	{
+		"week": 7,
+		"sector": "Materials",
+		"marketMoves": 4735,
+		"newTrades": -11222,
+		"fees": -6414,
+		"total": -12901
+	},
+	{
+		"week": 8,
+		"sector": "Materials",
+		"marketMoves": 12303,
+		"newTrades": -10582,
+		"fees": -7934,
+		"total": -6213
+	},
+	{
+		"week": 9,
+		"sector": "Materials",
+		"marketMoves": 21426,
+		"newTrades": -9510,
+		"fees": -9829,
+		"total": 2087
+	},
+	{
+		"week": 10,
+		"sector": "Materials",
+		"marketMoves": 32324,
+		"newTrades": -8051,
+		"fees": -11977,
+		"total": 12296
+	},
+	{
+		"week": 11,
+		"sector": "Materials",
+		"marketMoves": 44854,
+		"newTrades": -6781,
+		"fees": -14411,
+		"total": 23662
+	},
+	{
+		"week": 12,
+		"sector": "Materials",
+		"marketMoves": 59302,
+		"newTrades": -4529,
+		"fees": -16973,
+		"total": 37800
+	},
+	{
+		"week": 13,
+		"sector": "Materials",
+		"marketMoves": 75410,
+		"newTrades": -1603,
+		"fees": -19724,
+		"total": 54083
+	},
+	{
+		"week": 14,
+		"sector": "Materials",
+		"marketMoves": 93106,
+		"newTrades": 1929,
+		"fees": -22629,
+		"total": 72406
+	},
+	{
+		"week": 15,
+		"sector": "Materials",
+		"marketMoves": 112249,
+		"newTrades": 5779,
+		"fees": -25686,
+		"total": 92342
+	},
+	{
+		"week": 16,
+		"sector": "Materials",
+		"marketMoves": 132580,
+		"newTrades": 10071,
+		"fees": -28992,
+		"total": 113659
+	},
+	{
+		"week": 17,
+		"sector": "Materials",
+		"marketMoves": 154126,
+		"newTrades": 14739,
+		"fees": -32501,
+		"total": 136364
+	},
+	{
+		"week": 18,
+		"sector": "Materials",
+		"marketMoves": 176806,
+		"newTrades": 19694,
+		"fees": -36001,
+		"total": 160499
+	},
+	{
+		"week": 19,
+		"sector": "Materials",
+		"marketMoves": 200415,
+		"newTrades": 24756,
+		"fees": -39605,
+		"total": 185566
+	},
+	{
+		"week": 20,
+		"sector": "Materials",
+		"marketMoves": 224603,
+		"newTrades": 30198,
+		"fees": -43250,
+		"total": 211551
+	},
+	{
+		"week": 21,
+		"sector": "Materials",
+		"marketMoves": 238432,
+		"newTrades": 33350,
+		"fees": -45880,
+		"total": 225902
+	},
+	{
+		"week": 22,
+		"sector": "Materials",
+		"marketMoves": 260320,
+		"newTrades": 38331,
+		"fees": -49315,
+		"total": 249336
+	},
+	{
+		"week": 23,
+		"sector": "Materials",
+		"marketMoves": 285118,
+		"newTrades": 44069,
+		"fees": -53058,
+		"total": 276129
+	},
+	{
+		"week": 24,
+		"sector": "Materials",
+		"marketMoves": 310883,
+		"newTrades": 50098,
+		"fees": -56791,
+		"total": 304190
+	},
+	{
+		"week": 25,
+		"sector": "Materials",
+		"marketMoves": 337244,
+		"newTrades": 56114,
+		"fees": -60492,
+		"total": 332866
+	},
+	{
+		"week": 26,
+		"sector": "Materials",
+		"marketMoves": 364183,
+		"newTrades": 62226,
+		"fees": -64263,
+		"total": 362146
+	},
+	{
+		"week": 27,
+		"sector": "Materials",
+		"marketMoves": 391323,
+		"newTrades": 68410,
+		"fees": -68200,
+		"total": 391533
+	},
+	{
+		"week": 28,
+		"sector": "Materials",
+		"marketMoves": 418553,
+		"newTrades": 74791,
+		"fees": -72247,
+		"total": 421097
+	},
+	{
+		"week": 29,
+		"sector": "Materials",
+		"marketMoves": 446015,
+		"newTrades": 81177,
+		"fees": -76143,
+		"total": 451049
+	},
+	{
+		"week": 30,
+		"sector": "Materials",
+		"marketMoves": 473598,
+		"newTrades": 87635,
+		"fees": -80139,
+		"total": 481094
+	},
+	{
+		"week": 31,
+		"sector": "Materials",
+		"marketMoves": 501179,
+		"newTrades": 94138,
+		"fees": -84139,
+		"total": 511178
+	},
+	{
+		"week": 32,
+		"sector": "Materials",
+		"marketMoves": 528772,
+		"newTrades": 100573,
+		"fees": -88221,
+		"total": 541124
+	},
+	{
+		"week": 33,
+		"sector": "Materials",
+		"marketMoves": 534321,
+		"newTrades": 101849,
+		"fees": -89052,
+		"total": 547118
+	},
+	{
+		"week": 1,
+		"sector": "Telecommunication Services",
+		"marketMoves": -1415,
+		"newTrades": -896,
+		"fees": -106,
+		"total": -2417
+	},
+	{
+		"week": 2,
+		"sector": "Telecommunication Services",
+		"marketMoves": -1481,
+		"newTrades": -1463,
+		"fees": -346,
+		"total": -3290
+	},
+	{
+		"week": 3,
+		"sector": "Telecommunication Services",
+		"marketMoves": -806,
+		"newTrades": -1992,
+		"fees": -621,
+		"total": -3419
+	},
+	{
+		"week": 4,
+		"sector": "Telecommunication Services",
+		"marketMoves": 519,
+		"newTrades": -2343,
+		"fees": -940,
+		"total": -2764
+	},
+	{
+		"week": 5,
+		"sector": "Telecommunication Services",
+		"marketMoves": 2489,
+		"newTrades": -2479,
+		"fees": -1387,
+		"total": -1377
+	},
+	{
+		"week": 6,
+		"sector": "Telecommunication Services",
+		"marketMoves": 5190,
+		"newTrades": -2344,
+		"fees": -1942,
+		"total": 904
+	},
+	{
+		"week": 7,
+		"sector": "Telecommunication Services",
+		"marketMoves": 8392,
+		"newTrades": -1940,
+		"fees": -2582,
+		"total": 3870
+	},
+	{
+		"week": 8,
+		"sector": "Telecommunication Services",
+		"marketMoves": 12298,
+		"newTrades": -1355,
+		"fees": -3261,
+		"total": 7682
+	},
+	{
+		"week": 9,
+		"sector": "Telecommunication Services",
+		"marketMoves": 16909,
+		"newTrades": -473,
+		"fees": -3943,
+		"total": 12493
+	},
+	{
+		"week": 10,
+		"sector": "Telecommunication Services",
+		"marketMoves": 22261,
+		"newTrades": 542,
+		"fees": -4735,
+		"total": 18068
+	},
+	{
+		"week": 11,
+		"sector": "Telecommunication Services",
+		"marketMoves": 27755,
+		"newTrades": 1682,
+		"fees": -5461,
+		"total": 23976
+	},
+	{
+		"week": 12,
+		"sector": "Telecommunication Services",
+		"marketMoves": 34291,
+		"newTrades": 3024,
+		"fees": -6358,
+		"total": 30957
+	},
+	{
+		"week": 13,
+		"sector": "Telecommunication Services",
+		"marketMoves": 41630,
+		"newTrades": 4516,
+		"fees": -7405,
+		"total": 38741
+	},
+	{
+		"week": 14,
+		"sector": "Telecommunication Services",
+		"marketMoves": 49646,
+		"newTrades": 6286,
+		"fees": -8542,
+		"total": 47390
+	},
+	{
+		"week": 15,
+		"sector": "Telecommunication Services",
+		"marketMoves": 58339,
+		"newTrades": 8244,
+		"fees": -9716,
+		"total": 56867
+	},
+	{
+		"week": 16,
+		"sector": "Telecommunication Services",
+		"marketMoves": 67564,
+		"newTrades": 10343,
+		"fees": -11050,
+		"total": 66857
+	},
+	{
+		"week": 17,
+		"sector": "Telecommunication Services",
+		"marketMoves": 77259,
+		"newTrades": 12563,
+		"fees": -12452,
+		"total": 77370
+	},
+	{
+		"week": 18,
+		"sector": "Telecommunication Services",
+		"marketMoves": 87284,
+		"newTrades": 14839,
+		"fees": -13916,
+		"total": 88207
+	},
+	{
+		"week": 19,
+		"sector": "Telecommunication Services",
+		"marketMoves": 97692,
+		"newTrades": 17213,
+		"fees": -15451,
+		"total": 99454
+	},
+	{
+		"week": 20,
+		"sector": "Telecommunication Services",
+		"marketMoves": 108459,
+		"newTrades": 19761,
+		"fees": -16945,
+		"total": 111275
+	},
+	{
+		"week": 21,
+		"sector": "Telecommunication Services",
+		"marketMoves": 116538,
+		"newTrades": 21001,
+		"fees": -17975,
+		"total": 119564
+	},
+	{
+		"week": 22,
+		"sector": "Telecommunication Services",
+		"marketMoves": 126689,
+		"newTrades": 23172,
+		"fees": -19342,
+		"total": 130519
+	},
+	{
+		"week": 23,
+		"sector": "Telecommunication Services",
+		"marketMoves": 137646,
+		"newTrades": 25745,
+		"fees": -20914,
+		"total": 142477
+	},
+	{
+		"week": 24,
+		"sector": "Telecommunication Services",
+		"marketMoves": 149061,
+		"newTrades": 28425,
+		"fees": -22487,
+		"total": 154999
+	},
+	{
+		"week": 25,
+		"sector": "Telecommunication Services",
+		"marketMoves": 160742,
+		"newTrades": 31115,
+		"fees": -24032,
+		"total": 167825
+	},
+	{
+		"week": 26,
+		"sector": "Telecommunication Services",
+		"marketMoves": 172581,
+		"newTrades": 33892,
+		"fees": -25710,
+		"total": 180763
+	},
+	{
+		"week": 27,
+		"sector": "Telecommunication Services",
+		"marketMoves": 184554,
+		"newTrades": 36641,
+		"fees": -27398,
+		"total": 193797
+	},
+	{
+		"week": 28,
+		"sector": "Telecommunication Services",
+		"marketMoves": 196561,
+		"newTrades": 39423,
+		"fees": -29037,
+		"total": 206947
+	},
+	{
+		"week": 29,
+		"sector": "Telecommunication Services",
+		"marketMoves": 208515,
+		"newTrades": 42166,
+		"fees": -30594,
+		"total": 220087
+	},
+	{
+		"week": 30,
+		"sector": "Telecommunication Services",
+		"marketMoves": 220532,
+		"newTrades": 44950,
+		"fees": -32213,
+		"total": 233269
+	},
+	{
+		"week": 31,
+		"sector": "Telecommunication Services",
+		"marketMoves": 232628,
+		"newTrades": 47746,
+		"fees": -33862,
+		"total": 246512
+	},
+	{
+		"week": 32,
+		"sector": "Telecommunication Services",
+		"marketMoves": 244772,
+		"newTrades": 50584,
+		"fees": -35501,
+		"total": 259855
+	},
+	{
+		"week": 33,
+		"sector": "Telecommunication Services",
+		"marketMoves": 247205,
+		"newTrades": 51152,
+		"fees": -35846,
+		"total": 262511
+	},
+	{
+		"week": 1,
+		"sector": "Utilities",
+		"marketMoves": -6162,
+		"newTrades": -3512,
+		"fees": -280,
+		"total": -9954
+	},
+	{
+		"week": 2,
+		"sector": "Utilities",
+		"marketMoves": -8551,
+		"newTrades": -5865,
+		"fees": -931,
+		"total": -15347
+	},
+	{
+		"week": 3,
+		"sector": "Utilities",
+		"marketMoves": -8954,
+		"newTrades": -7447,
+		"fees": -1861,
+		"total": -18262
+	},
+	{
+		"week": 4,
+		"sector": "Utilities",
+		"marketMoves": -7683,
+		"newTrades": -8546,
+		"fees": -2899,
+		"total": -19128
+	},
+	{
+		"week": 5,
+		"sector": "Utilities",
+		"marketMoves": -4676,
+		"newTrades": -9135,
+		"fees": -4052,
+		"total": -17863
+	},
+	{
+		"week": 6,
+		"sector": "Utilities",
+		"marketMoves": 143,
+		"newTrades": -9284,
+		"fees": -5417,
+		"total": -14558
+	},
+	{
+		"week": 7,
+		"sector": "Utilities",
+		"marketMoves": 6818,
+		"newTrades": -8748,
+		"fees": -7110,
+		"total": -9040
+	},
+	{
+		"week": 8,
+		"sector": "Utilities",
+		"marketMoves": 15520,
+		"newTrades": -7499,
+		"fees": -8907,
+		"total": -886
+	},
+	{
+		"week": 9,
+		"sector": "Utilities",
+		"marketMoves": 26318,
+		"newTrades": -5551,
+		"fees": -10969,
+		"total": 9798
+	},
+	{
+		"week": 10,
+		"sector": "Utilities",
+		"marketMoves": 39152,
+		"newTrades": -2984,
+		"fees": -13269,
+		"total": 22899
+	},
+	{
+		"week": 11,
+		"sector": "Utilities",
+		"marketMoves": 51969,
+		"newTrades": 11,
+		"fees": -15634,
+		"total": 36346
+	},
+	{
+		"week": 12,
+		"sector": "Utilities",
+		"marketMoves": 68149,
+		"newTrades": 3654,
+		"fees": -18378,
+		"total": 53425
+	},
+	{
+		"week": 13,
+		"sector": "Utilities",
+		"marketMoves": 86586,
+		"newTrades": 8037,
+		"fees": -21318,
+		"total": 73305
+	},
+	{
+		"week": 14,
+		"sector": "Utilities",
+		"marketMoves": 106951,
+		"newTrades": 12982,
+		"fees": -24437,
+		"total": 95496
+	},
+	{
+		"week": 15,
+		"sector": "Utilities",
+		"marketMoves": 129015,
+		"newTrades": 18430,
+		"fees": -27840,
+		"total": 119605
+	},
+	{
+		"week": 16,
+		"sector": "Utilities",
+		"marketMoves": 152582,
+		"newTrades": 24365,
+		"fees": -31420,
+		"total": 145527
+	},
+	{
+		"week": 17,
+		"sector": "Utilities",
+		"marketMoves": 177607,
+		"newTrades": 30529,
+		"fees": -35160,
+		"total": 172976
+	},
+	{
+		"week": 18,
+		"sector": "Utilities",
+		"marketMoves": 203648,
+		"newTrades": 37231,
+		"fees": -38971,
+		"total": 201908
+	},
+	{
+		"week": 19,
+		"sector": "Utilities",
+		"marketMoves": 230752,
+		"newTrades": 44270,
+		"fees": -42855,
+		"total": 232167
+	},
+	{
+		"week": 20,
+		"sector": "Utilities",
+		"marketMoves": 258705,
+		"newTrades": 51657,
+		"fees": -46833,
+		"total": 263529
+	},
+	{
+		"week": 21,
+		"sector": "Utilities",
+		"marketMoves": 278740,
+		"newTrades": 56089,
+		"fees": -49561,
+		"total": 285268
+	},
+	{
+		"week": 22,
+		"sector": "Utilities",
+		"marketMoves": 305072,
+		"newTrades": 62834,
+		"fees": -53377,
+		"total": 314529
+	},
+	{
+		"week": 23,
+		"sector": "Utilities",
+		"marketMoves": 333760,
+		"newTrades": 70340,
+		"fees": -57612,
+		"total": 346488
+	},
+	{
+		"week": 24,
+		"sector": "Utilities",
+		"marketMoves": 363502,
+		"newTrades": 78323,
+		"fees": -61759,
+		"total": 380066
+	},
+	{
+		"week": 25,
+		"sector": "Utilities",
+		"marketMoves": 393940,
+		"newTrades": 86381,
+		"fees": -66002,
+		"total": 414319
+	},
+	{
+		"week": 26,
+		"sector": "Utilities",
+		"marketMoves": 424725,
+		"newTrades": 94606,
+		"fees": -70392,
+		"total": 448939
+	},
+	{
+		"week": 27,
+		"sector": "Utilities",
+		"marketMoves": 455910,
+		"newTrades": 102942,
+		"fees": -74777,
+		"total": 484075
+	},
+	{
+		"week": 28,
+		"sector": "Utilities",
+		"marketMoves": 487318,
+		"newTrades": 111277,
+		"fees": -79190,
+		"total": 519405
+	},
+	{
+		"week": 29,
+		"sector": "Utilities",
+		"marketMoves": 518806,
+		"newTrades": 119800,
+		"fees": -83688,
+		"total": 554918
+	},
+	{
+		"week": 30,
+		"sector": "Utilities",
+		"marketMoves": 550400,
+		"newTrades": 128410,
+		"fees": -88304,
+		"total": 590506
+	},
+	{
+		"week": 31,
+		"sector": "Utilities",
+		"marketMoves": 582099,
+		"newTrades": 136929,
+		"fees": -92882,
+		"total": 626146
+	},
+	{
+		"week": 32,
+		"sector": "Utilities",
+		"marketMoves": 614071,
+		"newTrades": 145474,
+		"fees": -97313,
+		"total": 662232
+	},
+	{
+		"week": 33,
+		"sector": "Utilities",
+		"marketMoves": 620464,
+		"newTrades": 147187,
+		"fees": -98201,
+		"total": 669450
+	}
+]
