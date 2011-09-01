@@ -69,7 +69,7 @@ body {
 	border-bottom: solid 3px gray;
 }
 
-#sectors {
+#sidebar {
     clear: both;
     float: left;
     margin-top: 16px;
@@ -97,33 +97,34 @@ body {
     background-image:    -moz-linear-gradient(top, #444444, #000000);
     background-image:     -ms-linear-gradient(top, #444444, #000000);
     background-image:      -o-linear-gradient(top, #444444, #000000);
+}
 
+.roundedCorners {
     -moz-border-radius: 15px;
     -webkit-border-radius: 15px;
     border-radius: 15px; /* future proofing */
     -khtml-border-radius: 15px; /* for old Konqueror browsers */
 }
 
-.selector ul {
+ul.selector {
     margin: 0;
     padding: 0;
     list-style-type: none;
     width: auto;
 }
 
-.selector ul li {
+ul.selector li {
 }
 
-.selector ul li a {
+ul.selector li a {
     color: #999999;
     text-decoration: none;
 }
 
-.selector ul li a:hover {
+ul.selector li a:hover {
     color: #FFD700;
 }
 
-.selector ul li a.active {
+ul.selector li a.active {
     color: #FFFFFF;
 }
-

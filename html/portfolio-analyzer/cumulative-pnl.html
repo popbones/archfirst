@@ -1,0 +1,159 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>Cumulative P&L</title>
+
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="/libs/highcharts-2.1.6/js/highcharts.js"></script>
+    <script type="text/javascript" src="/libs/highcharts-2.1.6/js/themes/gray.js"></script>
+
+    <script type="text/javascript">
+
+        var sectors = {};
+        var sectorNames = [];
+        var chart1;
+
+        $(document).ready(function () {
+
+            // Get P&L data from server and save it in sectors
+            $.ajax({
+                // have to use synchronous here, else the function 
+                // will return before the data is fetched
+                async: false,
+                url: "cumulative-pnl-weekly-by-sector.json",
+                dataType: "json",
+                success: function (data) {
+                    for (var i = 0; i < data.length; i++) {
+                        var sector = getSector(data[i].sector);
+                        sector.marketMoves.push([data[i].week, data[i].marketMoves]);
+                        sector.newTrades.push([data[i].week, data[i].newTrades]);
+                        sector.fees.push([data[i].week, data[i].fees]);
+                        sector.total.push([data[i].week, data[i].total]);
+                    }
+                }
+            });
+
+            // Create sector names and populate in sector listbox with items like this:
+            //     <li><a href="#" class="active">Consumer Discretionary</a></li>
+            var items = "";
+            // var active = ' class="active"';  <--- active is temporarily disabled
+            var active = '';
+            for (var sectorName in sectors) {
+                sectorNames.push(sectorName);
+                items += '<li><a href="#"' + active + '>' + sectorName + '</a></li>';
+                active = "";  // clear active after first time through the loop
+            }
+            $('#sectorList').html(items);
+
+            // Create a chart using data for the first sector
+            chart1 = new Highcharts.Chart({
+                chart: {
+                    renderTo: 'chart1',
+                    type: 'line'
+                },
+                credits: {
+                    enabled: false
+                },
+                title: {
+                    text: 'Daily Trading P&L'
+                },
+                xAxis: {
+                    title: {
+                        text: 'Week'
+                    }
+                },
+                yAxis: {
+                    title: {
+                        text: '$ in thousands ($000\'s)'
+                    }
+                },
+                series: [{
+                    id: "marketMoves",
+                    name: 'Market Moves',
+                    data: sectors[sectorNames[0]].marketMoves,
+                    marker: { enabled: false }
+                }, {
+                    id: "newTrades",
+                    name: 'New Trades',
+                    data: sectors[sectorNames[0]].newTrades,
+                    marker: { enabled: false }
+                }, {
+                    id: "fees",
+                    name: 'Fees and Commissions',
+                    data: sectors[sectorNames[0]].fees,
+                    marker: { enabled: false }
+                }, {
+                    id: "total",
+                    name: 'Total',
+                    data: sectors[sectorNames[0]].total,
+                    marker: { enabled: false }
+                }]
+            });
+
+            // Add a click event to sector list to repopulate the chart
+            $('#sectorList li a').click(function () {
+                swtichSector(this.innerText);
+            });
+
+        });
+
+        function getSector(name) {
+            var sector = sectors[name];
+            if (sector == null) {
+
+                sector = new Object();
+                sector.marketMoves = [];
+                sector.newTrades = [];
+                sector.fees = [];
+                sector.total = [];
+
+                sectors[name] = sector;
+            }
+            return sector;
+        }
+
+        function swtichSector(sectorName) {
+            chart1.get("marketMoves").setData(sectors[sectorName].marketMoves, false);
+            chart1.get("newTrades").setData(sectors[sectorName].newTrades, false);
+            chart1.get("fees").setData(sectors[sectorName].fees, false);
+            chart1.get("total").setData(sectors[sectorName].total, false);
+            chart1.redraw();
+        }
+  </script>
+</head>
+
+<body>
+
+<div id="header">
+    <div class="wrapper">
+        <h1>Portfolio Analyzer</h1>
+
+        <div id="menubar">
+            <ul>
+                <li><a href="daily-pnl.html">Daily P&L</a></li>
+                <li><a href="cumulative-pnl.html" class="active">Cumulative P&L</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="wrapper">
+
+    <div id="sidebar" class="contentBlock roundedCorners">
+        <ul id="sectorList" class="selector" >
+        </ul>
+    </div>
+
+    <div id="content">
+        <div id="chart1"></div>
+    </div>
+
+</div>
+
+</body>
+</html>
