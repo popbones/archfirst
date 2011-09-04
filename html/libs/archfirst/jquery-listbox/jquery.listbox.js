@@ -19,6 +19,7 @@
  * It uses <ul> and <li> tags to create a list.
  *
  * @requires: ../utility/string.supplant.js
+ *
  * @author Manish Shankar
  */
 
