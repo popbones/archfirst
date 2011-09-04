@@ -3,15 +3,15 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Cumulative P&amp;L</title>
+    <title>Daily P&amp;L</title>
 
     <link rel="stylesheet" type="text/css" href="css/main.css" />
 
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="../../libs/highcharts-2.1.6/js/highcharts.js"></script>
-    <script type="text/javascript" src="../../libs/highcharts-2.1.6/js/themes/gray.js"></script>
-    <script type="text/javascript" src="../../libs/utility/string.supplant.js"></script>
+    <script type="text/javascript" src="../../libs/external/highstock-1.0-beta/js/highstock.js"></script>
+    <script type="text/javascript" src="../../libs/external/highstock-1.0-beta/js/themes/gray.js"></script>
+    <script type="text/javascript" src="../../libs/archfirst/utility/string.supplant.js"></script>
 
     <script type="text/javascript">
 
@@ -23,19 +23,34 @@
 
             // Get P&L data from server and save it in sectors
             $.ajax({
-                // have to use synchronous here, else the function 
+                // have to use synchronous here, else the function
                 // will return before the data is fetched
                 async: false,
-                url: "cumulative-pnl-weekly-by-sector.json",
-                dataType: "json",
-                success: function (data) {
-                    for (var i = 0; i < data.length; i++) {
-                        var sector = getSector(data[i].sector);
-                        sector.marketMoves.push([data[i].week, data[i].marketMoves]);
-                        sector.newTrades.push([data[i].week, data[i].newTrades]);
-                        sector.fees.push([data[i].week, data[i].fees]);
-                        sector.total.push([data[i].week, data[i].total]);
-                    }
+                url: "pnl-daily-by-sector.csv",
+                dataType: "text",
+                success: function (csv) {
+                    var header, comment = /^#/, x;
+                    $.each(csv.split('\n'), function (i, line) {
+                        if (!comment.test(line)) {
+                            if (!header) {
+                                header = line;
+                            }
+                            else {
+                                var point = line.split(','),
+								date = point[0].split('/');
+
+                                if (point.length > 1) {
+                                    x = Date.UTC(date[2], date[0] - 1, date[1]);
+                                    var sector = getSector(point[1]);
+                                    sector.marketMoves.push([x, parseInt(point[2])]);
+                                    sector.newTrades.push([x, parseInt(point[3])]);
+                                    sector.fees.push([x, parseInt(point[4])]);
+                                    sector.total.push([x, parseInt(point[5])]);
+                                }
+                            }
+
+                        }
+                    });
                 }
             });
 
@@ -52,7 +67,7 @@
             $('#sectorList').html(items);
 
             // Create a chart using data for the first sector
-            chart1 = new Highcharts.Chart({
+            chart1 = new Highcharts.StockChart({
                 chart: {
                     renderTo: 'chart1',
                     type: 'line'
@@ -64,8 +79,9 @@
                     text: 'Daily Trading P&L'
                 },
                 xAxis: {
+                    type: 'datetime',
                     title: {
-                        text: 'Week'
+                        text: 'Date'
                     }
                 },
                 yAxis: {
@@ -136,8 +152,8 @@
 
         <div id="menubar">
             <ul>
-                <li><a href="daily-pnl.html">Daily P&amp;L</a></li>
-                <li><a href="cumulative-pnl.html" class="active">Cumulative P&amp;L</a></li>
+                <li><a href="daily-pnl.html" class="active">Daily P&amp;L</a></li>
+                <li><a href="cumulative-pnl.html">Cumulative P&amp;L</a></li>
             </ul>
         </div>
     </div>
