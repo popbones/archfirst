@@ -15,9 +15,9 @@
  */
 
 /**
- * @fileoverview Supports Daily P&L screen.
+ * @fileoverview Supports Cumulative P&L screen.
  *
- * @requires: ../../libs/highcharts/highstock-1.0-beta/js/highstock.js
+ * @requires: ../../libs/highcharts/highcharts-2.1.6/js/highcharts.js
  * @requires: ../../libs/archfirst/utility/string.supplant.js
  * @requires: ../../libs/archfirst/jquery-listbox/jquery.listbox.js
  *
@@ -25,7 +25,7 @@
  */
 
 var PortfolioAnalyzer = window.PortfolioAnalyzer || {}; ;
-PortfolioAnalyzer.DailyPnl = function () {
+PortfolioAnalyzer.CumulativePnl = function () {
 
     var sectors = {};
     var sectorNames = [];
@@ -36,31 +36,16 @@ PortfolioAnalyzer.DailyPnl = function () {
         // have to use synchronous here, else the function 
         // will return before the data is fetched
         async: false,
-        url: "pnl-daily-by-sector.csv",
-        dataType: "text",
-        success: function (csv) {
-            var header, comment = /^#/, x;
-            $.each(csv.split('\n'), function (i, line) {
-                if (!comment.test(line)) {
-                    if (!header) {
-                        header = line;
-                    }
-                    else {
-                        var point = line.split(','),
-								date = point[0].split('/');
-
-                        if (point.length > 1) {
-                            x = Date.UTC(date[2], date[0] - 1, date[1]);
-                            var sector = getSector(point[1]);
-                            sector.marketMoves.push([x, parseInt(point[2])]);
-                            sector.newTrades.push([x, parseInt(point[3])]);
-                            sector.fees.push([x, parseInt(point[4])]);
-                            sector.total.push([x, parseInt(point[5])]);
-                        }
-                    }
-
-                }
-            });
+        url: "cumulative-pnl-weekly-by-sector.json",
+        dataType: "json",
+        success: function (data) {
+            for (var i = 0; i < data.length; i++) {
+                var sector = getSector(data[i].sector);
+                sector.marketMoves.push([data[i].week, data[i].marketMoves]);
+                sector.newTrades.push([data[i].week, data[i].newTrades]);
+                sector.fees.push([data[i].week, data[i].fees]);
+                sector.total.push([data[i].week, data[i].total]);
+            }
         },
         error: function (jqXHR, textStatus, errorThrown) {
             alert(textStatus + ": " + errorThrown);
@@ -75,7 +60,7 @@ PortfolioAnalyzer.DailyPnl = function () {
 
 
     // Create a chart using data for the first sector
-    chart1 = new Highcharts.StockChart({
+    chart1 = new Highcharts.Chart({
         chart: {
             renderTo: 'chart1',
             type: 'line'
@@ -84,12 +69,11 @@ PortfolioAnalyzer.DailyPnl = function () {
             enabled: false
         },
         title: {
-            text: 'Daily Trading P&L'
+            text: 'Cumulative Trading P&L'
         },
         xAxis: {
-            type: 'datetime',
             title: {
-                text: 'Date'
+                text: 'Week'
             }
         },
         yAxis: {
