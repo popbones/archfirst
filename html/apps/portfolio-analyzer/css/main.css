@@ -106,25 +106,25 @@ body {
     -khtml-border-radius: 15px; /* for old Konqueror browsers */
 }
 
-ul.selector {
+ul.listbox {
     margin: 0;
     padding: 0;
     list-style-type: none;
     width: auto;
 }
 
-ul.selector li {
+ul.listbox li {
 }
 
-ul.selector li a {
+ul.listbox li a {
     color: #999999;
     text-decoration: none;
 }
 
-ul.selector li a:hover {
+ul.listbox li a:hover {
     color: #FFD700;
 }
 
-ul.selector li a.active {
+ul.listbox li.active a {
     color: #FFFFFF;
 }
