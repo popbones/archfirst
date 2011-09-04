@@ -1,0 +1,48 @@
+﻿/* Style #4 CSS Menu
+ * http://www.13styles.com/css-menus/style4/
+ * -------------------------------------------------------------------------- */
+ #stylefour {
+    position: relative;
+    display: block;
+    height: 39px;
+    font-size: 11px;
+    font-weight: bold;
+    background: transparent url(../images/bgOFF.gif) repeat-x top left;
+    font-family: Arial,Verdana,Helvitica,sans-serif;
+    border-top: 4px solid #B30000;
+}
+
+#stylefour ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: auto;
+}
+
+#stylefour ul li {
+    display: block;
+    float: left;
+    margin: 0;
+    line-height: normal;
+}
+
+#stylefour ul li a {
+    display: block;
+    float: left;
+    color: #666;
+    text-decoration: none;
+    border-bottom: none;
+    padding: 11px 20px 0 20px;
+    height: 23px;
+    background: transparent url(../images/bgDIVIDER.gif) no-repeat top right;
+}
+
+#stylefour ul li a:hover {
+    color: #B30000;
+    background: #ffefef url(../images/bgON.gif) no-repeat top right;
+}
+
+#stylefour ul li a.current {
+    color: #B30000;
+    background: #fff url(../images/bgON.gif) no-repeat top right;
+}
