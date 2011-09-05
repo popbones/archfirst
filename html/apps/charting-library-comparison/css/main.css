@@ -13,6 +13,23 @@ h1 {
     margin-bottom: 0.5em; /* 24*0.5=12px */
 }
 
+h2 {
+    font-size: 1em; /* 16px */
+    margin-top: 2em; /* 16*0.5=8px */
+    margin-bottom: 0.5em; /* 16*0.5=8px */
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style-position:inside;
+}
+
+li {
+    margin: 0;
+    margin-bottom: 0.3em; /* 14*0.3=4px */
+}
+
 #wrapper {
     background-color: #fff;
     margin: 0.875em auto; /* 14px */
@@ -20,13 +37,6 @@ h1 {
 }
 
 #sidebar {
-    clear: both;
-    float: left;
-    margin-top: 50px;
-    width: 180px;
-}
-
-#sidebar2 {
     clear: both;
     float: left;
     margin-top: 20px;
