@@ -19,7 +19,7 @@
  *
  * @requires: ../../libs/highcharts/highcharts-2.1.6/js/highcharts.js
  * @requires: ../../libs/archfirst/utility/string.supplant.js
- * @requires: ../../libs/archfirst/jquery-listbox/jquery.listbox.js
+ * @requires: ../../libs/archfirst/jquery-archfirst-listbox/jquery.archfirst.listbox.js
  *
  * @author Naresh Bhatia
  */
@@ -130,7 +130,7 @@ PortfolioAnalyzer.CumulativePnl = function () {
         chart1.redraw();
     }
 
-    $('#sectorList').listbox({
+    $('#sectorList').archfirstListbox({
         data: sectorNames,
         onClickOfItem: switchSector
     });
