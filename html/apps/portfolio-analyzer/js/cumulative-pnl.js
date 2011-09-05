@@ -81,6 +81,9 @@ PortfolioAnalyzer.CumulativePnl = function () {
                 text: '$ in thousands ($000\'s)'
             }
         },
+        legend: {
+            enabled: true
+        },
         series: [{
             id: "marketMoves",
             name: 'Market Moves',
