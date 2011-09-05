@@ -33,7 +33,7 @@ PortfolioAnalyzer.CumulativePnl = function () {
 
     // Get P&L data from server and save it in sectors
     $.ajax({
-        // have to use synchronous here, else the function 
+        // have to use synchronous here, else the function
         // will return before the data is fetched
         async: false,
         url: "cumulative-pnl-weekly-by-sector.json",
@@ -80,9 +80,6 @@ PortfolioAnalyzer.CumulativePnl = function () {
             title: {
                 text: '$ in thousands ($000\'s)'
             }
-        },
-        legend: {
-            enabled: true
         },
         series: [{
             id: "marketMoves",
