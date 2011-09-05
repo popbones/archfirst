@@ -25,7 +25,7 @@
 
 (function ($) {
 
-    $.fn.listbox = function (options) {
+    $.fn.archfirstListbox = function (options) {
         options = $.extend({
             data: null,
             onClickOfItem: $.noop,
