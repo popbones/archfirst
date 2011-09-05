@@ -78,7 +78,8 @@ PortfolioAnalyzer.DailyPnl = function () {
     chart1 = new Highcharts.StockChart({
         chart: {
             renderTo: 'chart1',
-            type: 'line'
+            type: 'line',
+            spacingBottom: 50
         },
         credits: {
             enabled: false
@@ -98,7 +99,8 @@ PortfolioAnalyzer.DailyPnl = function () {
             }
         },
         legend: {
-            enabled: true
+            enabled: true,
+            y: 50
         },
         series: [{
             id: "marketMoves",
