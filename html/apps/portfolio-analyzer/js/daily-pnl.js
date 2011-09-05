@@ -79,7 +79,7 @@ PortfolioAnalyzer.DailyPnl = function () {
         chart: {
             renderTo: 'chart1',
             type: 'line',
-            spacingBottom: 50
+            spacingBottom: 70
         },
         credits: {
             enabled: false
