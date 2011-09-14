@@ -26,6 +26,7 @@
 var CustomListBoxExample = window.CustomListBoxExample || {}; ;
 
 CustomListBoxExample.Run = function () {
+
     var fruits = ['Apple', 'Banana', 'Cherry', 'Date', 'Fig', 'Grape', 'Kiwi', 'Mango', 'Orange', 'Peach', 'Strawberry'];
     var veggies = ['Artichoke', 'Broccoli', 'Carrot', 'Garlic', 'Lettuce', 'Mushroom', 'Okra', 'Potato', 'Spinach', 'Tomato', 'Yam'];
 
@@ -33,9 +34,92 @@ CustomListBoxExample.Run = function () {
         $('#selected-item-display').text(itemName);
     }
 
+
+    // ------------------------------------------------------------------------
+    // jQuery ListBox
+    // ------------------------------------------------------------------------
     $('#fruitList').archfirstListbox({
         data: fruits,
         onClickOfItem: displayItem
     });
     displayItem(fruits[0]);
+
+
+    // ------------------------------------------------------------------------
+    // Backbone.js ListBox
+    // ------------------------------------------------------------------------
+    // Item
+    // ----
+    var Item = Backbone.Model.extend({
+
+        defaults: {
+            value: "undefined",
+            selected: false
+        },
+
+        // Toggle the selected state of this Item.
+        toggleSelected: function () {
+            this.set({ "selected": !this.get("selected") });
+        }
+    });
+
+    // ItemList
+    // --------
+    var ItemList = Backbone.Collection.extend({
+        model: Item,
+
+        // Adds items to the list using the supplied values
+        addItems: function (values) {
+            for (var i = 0; i < values.length; i++) {
+                this.add(new Item({ value: values[i] }));
+            };
+        }
+    });
+
+    // ItemView
+    // --------
+    var ItemView = Backbone.View.extend({
+        tagName: "li",
+
+        template: _.template($('#item-template').html()),
+
+        events: {
+            "click": "toggleSelect"
+        },
+
+        // Re-render the contents of the list item.
+        render: function () {
+            $(this.el).html(this.template(this.model.toJSON()));
+            this.setContent();
+            return this;
+        },
+
+        // Toggle the "select" state of the model.
+        toggleSelect: function () {
+            this.model.toggleSelect();
+        }
+    });
+
+    // ItemListView
+    // ------------
+    var ItemListView = Backbone.View.extend({
+
+        template: _.template($('#item-template').html()),
+
+        events: {
+            "click": "toggleSelect"
+        },
+
+        addItemViews: function (itemList) {
+            itemList.each(this.addItemView);
+        },
+
+        addItemView: function (item) {
+            var itemView = new ItemView
+        }
+    });
+
+    var veggieList = new ItemList;
+    veggieList.addItems(veggies);
+    var veggieListView = new ItemListView({ el: $("#veggieList") });
 }
