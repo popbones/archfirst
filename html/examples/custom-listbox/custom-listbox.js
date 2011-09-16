@@ -137,11 +137,28 @@ CustomListBoxExample.Run = function () {
             if ($(e.target).is('li')) {
                 var currentlySelectedItem = findCurrentlySelectedItem();
                 var newlySelectedItem = findNewlySelectedItem();
-                if (currentlySelectedItem != newlySelectedItem) {
+                if (currentlySelectedItem == null) {
+                    newlySelectedItem.toggleSelected();
+                }
+                else if (currentlySelectedItem != newlySelectedItem) {
                     currentlySelectedItem.toggleSelected();
                     newlySelectedItem.toggleSelected();
                 }
             }
+        },
+
+        findCurrentlySelectedItem: function () {
+            this.collection.each(function (item) {
+                // update any model that's not the currently click one
+                if (item.get("selected")) {
+                    return item;
+                }
+                return null;
+            });
+        },
+
+        findNewlySelectedItem: function () {
+            return null;
         }
     });
 
