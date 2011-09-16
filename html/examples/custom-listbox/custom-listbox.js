@@ -29,7 +29,7 @@ CustomListBoxExample.Run = function () {
 
     var fruits = ['Apple', 'Banana', 'Cherry', 'Date', 'Fig', 'Grape', 'Kiwi', 'Mango', 'Orange', 'Peach', 'Strawberry'];
     var veggies = [
-        { value: 'Artichoke', selected: true },
+        { value: 'Artichoke' },
         { value: 'Broccoli' },
         { value: 'Carrot' },
         { value: 'Garlic' },
@@ -87,20 +87,21 @@ CustomListBoxExample.Run = function () {
 
         tagName: "li",
 
+        // TODO: Refers to hard-coded element in html - pass this in instead
         template: _.template($('#item-template').html()),
 
-        events: {
-            "click": "toggleSelected"
+        initialize: function () {
+            this.model.bind("change:selected", this.renderSelection, this);
         },
 
         // Render the contents of the item
         render: function () {
             $(this.el).html(this.template(this.model.toJSON()));
-            this.setSelection();
+            this.renderSelection();
             return this;
         },
 
-        setSelection: function() {
+        renderSelection: function () {
             if (this.model.get("selected")) {
                 $(this.el).addClass("active");
             }
@@ -112,13 +113,16 @@ CustomListBoxExample.Run = function () {
         // Toggle the "select" state of the item
         toggleSelected: function () {
             this.model.toggleSelected();
-            this.setSelection();
         }
     });
 
     // ItemListView
     // ------------
     var ItemListView = Backbone.View.extend({
+
+        events: {
+            "click": "changeSelection"
+        },
 
         initialize: function () {
             this.collection.each(this.addItemView, this);
@@ -127,6 +131,17 @@ CustomListBoxExample.Run = function () {
         addItemView: function (item) {
             var itemView = new ItemView({ model: item });
             this.el.append(itemView.render().el);
+        },
+
+        changeSelection: function (e) {
+            if ($(e.target).is('li')) {
+                var currentlySelectedItem = findCurrentlySelectedItem();
+                var newlySelectedItem = findNewlySelectedItem();
+                if (currentlySelectedItem != newlySelectedItem) {
+                    currentlySelectedItem.toggleSelected();
+                    newlySelectedItem.toggleSelected();
+                }
+            }
         }
     });
 
