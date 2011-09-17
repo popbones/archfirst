@@ -23,7 +23,7 @@
 * @author Naresh Bhatia
 */
 
-var CustomListBoxExample = window.CustomListBoxExample || {}; ;
+var CustomListBoxExample = window.CustomListBoxExample || {};
 
 CustomListBoxExample.Run = function () {
 
@@ -78,7 +78,19 @@ CustomListBoxExample.Run = function () {
     // ItemList
     // --------
     var ItemList = Backbone.Collection.extend({
-        model: Item
+        model: Item,
+
+        findSelectedItem: function () {
+            return this.find(function (item) {
+                return (item.get("selected") == true);
+            });
+        },
+
+        findItemWithValue: function (value) {
+            return this.find(function (item) {
+                return (item.get("value") == value);
+            });
+        }
     });
 
     // ItemView
@@ -87,16 +99,13 @@ CustomListBoxExample.Run = function () {
 
         tagName: "li",
 
-        // TODO: Refers to hard-coded element in html - pass this in instead
-        template: _.template($('#item-template').html()),
-
         initialize: function () {
             this.model.bind("change:selected", this.renderSelection, this);
         },
 
         // Render the contents of the item
         render: function () {
-            $(this.el).html(this.template(this.model.toJSON()));
+            $(this.el).html(this.options.templateString.supplant(this.model.toJSON()));
             this.renderSelection();
             return this;
         },
@@ -108,11 +117,6 @@ CustomListBoxExample.Run = function () {
             else {
                 $(this.el).removeClass("active");
             }
-        },
-
-        // Toggle the "select" state of the item
-        toggleSelected: function () {
-            this.model.toggleSelected();
         }
     });
 
@@ -133,15 +137,15 @@ CustomListBoxExample.Run = function () {
         },
 
         addItemView: function (item) {
-            var itemView = new ItemView({ model: item });
+            var itemView = new ItemView({ model: item, templateString: this.options.templateString });
             this.el.append(itemView.render().el);
         },
 
         changeSelection: function (e) {
             // TODO: use some other strategy to detect target
             if ($(e.target).is('a')) {
-                var currentlySelectedItem = this.findSelectedItem();
-                var newlySelectedItem = this.findItemWithValue(e.target.text);
+                var currentlySelectedItem = this.collection.findSelectedItem();
+                var newlySelectedItem = this.collection.findItemWithValue(e.target.text);
                 if (currentlySelectedItem == null) {
                     newlySelectedItem.toggleSelected();
                 }
@@ -149,22 +153,17 @@ CustomListBoxExample.Run = function () {
                     currentlySelectedItem.toggleSelected();
                     newlySelectedItem.toggleSelected();
                 }
+                // Call the selection callback supplied by user
+                this.options.selectionCallback(newlySelectedItem.get("value"));
             }
-        },
-
-        findSelectedItem: function () {
-            return this.collection.find(function (item) {
-                return (item.get("selected") != null);
-            });
-        },
-
-        findItemWithValue: function (value) {
-            return this.collection.find(function (item) {
-                return (item.get("value") == value);
-            });
         }
     });
 
     var veggieList = new ItemList(veggies);
-    var veggieListView = new ItemListView({ el: $("#veggieList"), collection: veggieList });
+    var veggieListView = new ItemListView({
+        el: $("#veggieList"),
+        templateString: "<a href='#'>{value}</a>",
+        collection: veggieList,
+        selectionCallback: displayItem
+    });
 }
