@@ -141,7 +141,7 @@ CustomListBoxExample.Run = function () {
             // TODO: use some other strategy to detect target
             if ($(e.target).is('a')) {
                 var currentlySelectedItem = this.findSelectedItem();
-                var newlySelectedItem = this.findItemWithValue($(e.target).text);
+                var newlySelectedItem = this.findItemWithValue(e.target.text);
                 if (currentlySelectedItem == null) {
                     newlySelectedItem.toggleSelected();
                 }
@@ -160,7 +160,7 @@ CustomListBoxExample.Run = function () {
 
         findItemWithValue: function (value) {
             return this.collection.find(function (item) {
-                return (item.get("value") != value);
+                return (item.get("value") == value);
             });
         }
     });
