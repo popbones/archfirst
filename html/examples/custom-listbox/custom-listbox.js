@@ -125,7 +125,11 @@ CustomListBoxExample.Run = function () {
         },
 
         initialize: function () {
+            // Create item views
             this.collection.each(this.addItemView, this);
+
+            // Select the first one
+            this.collection.at(0).toggleSelected();
         },
 
         addItemView: function (item) {
@@ -134,9 +138,10 @@ CustomListBoxExample.Run = function () {
         },
 
         changeSelection: function (e) {
-            if ($(e.target).is('li')) {
-                var currentlySelectedItem = findCurrentlySelectedItem();
-                var newlySelectedItem = findNewlySelectedItem();
+            // TODO: use some other strategy to detect target
+            if ($(e.target).is('a')) {
+                var currentlySelectedItem = this.findSelectedItem();
+                var newlySelectedItem = this.findItemWithValue($(e.target).text);
                 if (currentlySelectedItem == null) {
                     newlySelectedItem.toggleSelected();
                 }
@@ -147,18 +152,16 @@ CustomListBoxExample.Run = function () {
             }
         },
 
-        findCurrentlySelectedItem: function () {
-            this.collection.each(function (item) {
-                // update any model that's not the currently click one
-                if (item.get("selected")) {
-                    return item;
-                }
-                return null;
+        findSelectedItem: function () {
+            return this.collection.find(function (item) {
+                return (item.get("selected") != null);
             });
         },
 
-        findNewlySelectedItem: function () {
-            return null;
+        findItemWithValue: function (value) {
+            return this.collection.find(function (item) {
+                return (item.get("value") != value);
+            });
         }
     });
 
