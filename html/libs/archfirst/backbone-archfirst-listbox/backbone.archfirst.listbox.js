@@ -23,106 +23,119 @@
  * @author Naresh Bhatia
  */
 
-var BackboneArchfirstListbox = window.BackboneArchfirstListbox || {};
+BackboneArchfirst = window.BackboneArchfirst || {};
 
-// Item
-// ----
-BackboneArchfirstListbox.Item = Backbone.Model.extend({
+BackboneArchfirst.Listbox = function (options) {
 
-    defaults: {
-        value: "undefined",
-        selected: false
-    },
+    // Item
+    // ----
+    var Item = Backbone.Model.extend({
 
-    // Select this item
-    select: function () {
-        this.set({ "selected": true });
-    },
+        defaults: {
+            value: "undefined",
+            selected: false
+        },
 
-    // Deselect this item
-    deselect: function () {
-        this.set({ "selected": false });
-    }
-});
+        // Select this item
+        select: function () {
+            this.set({ "selected": true });
+        },
 
-// ItemList
-// --------
-BackboneArchfirstListbox.ItemList = Backbone.Collection.extend({
-
-    model: BackboneArchfirstListbox.Item,
-
-    findSelectedItem: function () {
-        return this.find(function (item) {
-            return (item.get("selected") == true);
-        });
-    },
-
-    changeSelection: function (newlySelectedItem) {
-        var currentlySelectedItem = this.findSelectedItem();
-        if (currentlySelectedItem == null) {
-            newlySelectedItem.select();
+        // Deselect this item
+        deselect: function () {
+            this.set({ "selected": false });
         }
-        else if (currentlySelectedItem != newlySelectedItem) {
-            currentlySelectedItem.deselect();
-            newlySelectedItem.select();
+    });
+
+
+    // ItemList
+    // --------
+    var ItemList = Backbone.Collection.extend({
+
+        model: Item,
+
+        findSelectedItem: function () {
+            return this.find(function (item) {
+                return (item.get("selected") == true);
+            });
+        },
+
+        changeSelection: function (newlySelectedItem) {
+            var currentlySelectedItem = this.findSelectedItem();
+            if (currentlySelectedItem == null) {
+                newlySelectedItem.select();
+            }
+            else if (currentlySelectedItem != newlySelectedItem) {
+                currentlySelectedItem.deselect();
+                newlySelectedItem.select();
+            }
         }
-    }
-});
+    });
 
-// ItemView
-// --------
-BackboneArchfirstListbox.ItemView = Backbone.View.extend({
 
-    tagName: "li",
+    // ItemView
+    // --------
+    var ItemView = Backbone.View.extend({
 
-    events: {
-        "click": "changeSelection"
-    },
+        tagName: "li",
 
-    initialize: function () {
-        this.model.bind("change:selected", this.renderSelection, this);
-    },
+        events: {
+            "click": "changeSelection"
+        },
 
-    // Render the contents of the item
-    render: function () {
-        $(this.el).html(this.options.templateString.supplant(this.model.toJSON()));
-        this.renderSelection();
-        return this;
-    },
+        initialize: function () {
+            this.model.bind("change:selected", this.renderSelection, this);
+        },
 
-    renderSelection: function () {
-        var selected = this.model.get("selected");
-        $(this.el)[selected ? "addClass" : "removeClass"]("active");
+        // Render the contents of the item
+        render: function () {
+            $(this.el).html(this.options.templateString.supplant(this.model.toJSON()));
+            this.renderSelection();
+            return this;
+        },
 
-        // Call the selection callback supplied by user
-        if (selected) {
-            this.options.selectionCallback(this.model.get("value"));
+        renderSelection: function () {
+            var selected = this.model.get("selected");
+            $(this.el)[selected ? "addClass" : "removeClass"]("active");
+
+            // Call the selection callback supplied by user
+            if (selected) {
+                this.options.selectionCallback(this.model.get("value"));
+            }
+        },
+
+        changeSelection: function () {
+            this.model.collection.changeSelection(this.model);
         }
-    },
+    });
 
-    changeSelection: function () {
-          this.model.collection.changeSelection(this.model);
-    }
-});
 
-// ItemListView
-// ------------
-BackboneArchfirstListbox.ItemListView = Backbone.View.extend({
+    // ItemListView
+    // ------------
+    var ItemListView = Backbone.View.extend({
 
-    initialize: function () {
-        // Create item views
-        this.collection.each(this.addItemView, this);
+        initialize: function () {
+            // Create item views
+            this.collection.each(this.addItemView, this);
 
-        // Select the first one
-        this.collection.at(0).select();
-    },
+            // Select the first one
+            this.collection.at(0).select();
+        },
 
-    addItemView: function (item) {
-        var itemView = new BackboneArchfirstListbox.ItemView({
-            model: item,
-            templateString: this.options.templateString,
-            selectionCallback: this.options.selectionCallback
-        });
-        this.el.append(itemView.render().el);
-    }
-});
+        addItemView: function (item) {
+            var itemView = new ItemView({
+                model: item,
+                templateString: this.options.templateString,
+                selectionCallback: this.options.selectionCallback
+            });
+            this.el.append(itemView.render().el);
+        }
+    });
+
+
+    // Replace the raw array of data with an ItemList collection
+    options.collection = new ItemList(options.collection);
+
+    // Return a new instance of ItemListView that runs the listbox
+    return new ItemListView(options);
+}
