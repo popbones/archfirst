@@ -43,17 +43,12 @@ BackboneArchfirstListbox.Item = Backbone.Model.extend({
 // ItemList
 // --------
 BackboneArchfirstListbox.ItemList = Backbone.Collection.extend({
+
     model: BackboneArchfirstListbox.Item,
 
     findSelectedItem: function () {
         return this.find(function (item) {
             return (item.get("selected") == true);
-        });
-    },
-
-    findItemWithValue: function (value) {
-        return this.find(function (item) {
-            return (item.get("value") == value);
         });
     }
 });
@@ -80,11 +75,12 @@ BackboneArchfirstListbox.ItemView = Backbone.View.extend({
     },
 
     renderSelection: function () {
-        if (this.model.get("selected")) {
-            $(this.el).addClass("active");
-        }
-        else {
-            $(this.el).removeClass("active");
+        var selected = this.model.get("selected");
+        $(this.el)[selected ? "addClass" : "removeClass"]("active");
+
+        // Call the selection callback supplied by user
+        if (selected) {
+            this.options.selectionCallback(this.model.get("value"));
         }
     },
 
@@ -98,8 +94,6 @@ BackboneArchfirstListbox.ItemView = Backbone.View.extend({
             currentlySelectedItem.toggleSelected();
             newlySelectedItem.toggleSelected();
         }
-        // Call the selection callback supplied by user
-        this.options.selectionCallback(newlySelectedItem.get("value"));
     }
 });
 
