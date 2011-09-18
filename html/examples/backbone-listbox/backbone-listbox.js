@@ -40,10 +40,10 @@ BackboneListboxExample.Run = function () {
         $('#selected-item-display').text(itemName);
     }
 
-    new BackboneArchfirstListbox.ItemListView({
+    new BackboneArchfirst.Listbox({
         el: $("#fruitList"),
         templateString: "<a href='#'>{value}</a>",
-        collection: new BackboneArchfirstListbox.ItemList(fruits),
+        collection: fruits,
         selectionCallback: displayItem
     });
 }
