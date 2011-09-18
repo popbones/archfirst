@@ -148,6 +148,16 @@ PortfolioAnalyzer.DailyPnl = function () {
         chart1.get("newTrades").setData(sectors[sectorName].newTrades, false);
         chart1.get("fees").setData(sectors[sectorName].fees, false);
         chart1.get("total").setData(sectors[sectorName].total, false);
+
+        // Work around for series that are hidden
+        // See http://highslide.com/forum/viewtopic.php?f=12&t=12169&p=54828#p54828
+        for (i = 0; i < 4; i++) {
+            if (!chart1.series[i].visible) {
+                chart1.series[i].show();
+                chart1.series[i].hide();
+            }
+        }
+
         chart1.redraw();
     }
 
