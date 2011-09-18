@@ -64,6 +64,10 @@ BackboneArchfirstListbox.ItemView = Backbone.View.extend({
 
     tagName: "li",
 
+    events: {
+        "click": "changeSelection"
+    },
+
     initialize: function () {
         this.model.bind("change:selected", this.renderSelection, this);
     },
@@ -82,16 +86,26 @@ BackboneArchfirstListbox.ItemView = Backbone.View.extend({
         else {
             $(this.el).removeClass("active");
         }
+    },
+
+    changeSelection: function () {
+        var currentlySelectedItem = this.model.collection.findSelectedItem();
+        var newlySelectedItem = this.model;
+        if (currentlySelectedItem == null) {
+            newlySelectedItem.toggleSelected();
+        }
+        else if (currentlySelectedItem != newlySelectedItem) {
+            currentlySelectedItem.toggleSelected();
+            newlySelectedItem.toggleSelected();
+        }
+        // Call the selection callback supplied by user
+        this.options.selectionCallback(newlySelectedItem.get("value"));
     }
 });
 
 // ItemListView
 // ------------
 BackboneArchfirstListbox.ItemListView = Backbone.View.extend({
-
-    events: {
-        "click": "changeSelection"
-    },
 
     initialize: function () {
         // Create item views
@@ -102,24 +116,11 @@ BackboneArchfirstListbox.ItemListView = Backbone.View.extend({
     },
 
     addItemView: function (item) {
-        var itemView = new BackboneArchfirstListbox.ItemView({ model: item, templateString: this.options.templateString });
+        var itemView = new BackboneArchfirstListbox.ItemView({
+            model: item,
+            templateString: this.options.templateString,
+            selectionCallback: this.options.selectionCallback
+        });
         this.el.append(itemView.render().el);
-    },
-
-    changeSelection: function (e) {
-        // TODO: use some other strategy to detect target
-        if ($(e.target).is('a')) {
-            var currentlySelectedItem = this.collection.findSelectedItem();
-            var newlySelectedItem = this.collection.findItemWithValue(e.target.text);
-            if (currentlySelectedItem == null) {
-                newlySelectedItem.toggleSelected();
-            }
-            else if (currentlySelectedItem != newlySelectedItem) {
-                currentlySelectedItem.toggleSelected();
-                newlySelectedItem.toggleSelected();
-            }
-            // Call the selection callback supplied by user
-            this.options.selectionCallback(newlySelectedItem.get("value"));
-        }
     }
 });
