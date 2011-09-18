@@ -34,9 +34,14 @@ BackboneArchfirstListbox.Item = Backbone.Model.extend({
         selected: false
     },
 
-    // Toggle the selected state of this Item.
-    toggleSelected: function () {
-        this.set({ "selected": !this.get("selected") });
+    // Select this item
+    select: function () {
+        this.set({ "selected": true });
+    },
+
+    // Deselect this item
+    deselect: function () {
+        this.set({ "selected": false });
     }
 });
 
@@ -50,6 +55,17 @@ BackboneArchfirstListbox.ItemList = Backbone.Collection.extend({
         return this.find(function (item) {
             return (item.get("selected") == true);
         });
+    },
+
+    changeSelection: function (newlySelectedItem) {
+        var currentlySelectedItem = this.findSelectedItem();
+        if (currentlySelectedItem == null) {
+            newlySelectedItem.select();
+        }
+        else if (currentlySelectedItem != newlySelectedItem) {
+            currentlySelectedItem.deselect();
+            newlySelectedItem.select();
+        }
     }
 });
 
@@ -85,15 +101,7 @@ BackboneArchfirstListbox.ItemView = Backbone.View.extend({
     },
 
     changeSelection: function () {
-        var currentlySelectedItem = this.model.collection.findSelectedItem();
-        var newlySelectedItem = this.model;
-        if (currentlySelectedItem == null) {
-            newlySelectedItem.toggleSelected();
-        }
-        else if (currentlySelectedItem != newlySelectedItem) {
-            currentlySelectedItem.toggleSelected();
-            newlySelectedItem.toggleSelected();
-        }
+          this.model.collection.changeSelection(this.model);
     }
 });
 
@@ -106,7 +114,7 @@ BackboneArchfirstListbox.ItemListView = Backbone.View.extend({
         this.collection.each(this.addItemView, this);
 
         // Select the first one
-        this.collection.at(0).toggleSelected();
+        this.collection.at(0).select();
     },
 
     addItemView: function (item) {
