@@ -20,7 +20,7 @@
  *
  * @requires: ../utility/string.supplant.js
  *
- * @author Manish Shankar
+ * @author Manish Shanker
  */
 
 (function ($) {
