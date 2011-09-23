@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Trade</title>
+</head>
+
+<body>
+    <h1>Trade</h1>
+
+    <form id="previewOrder" action="preview-order.html">
+        <label>Account</label><br/>
+        <select id="account">
+            <option>Brokerage Account - 6666 | $272,085.38</option>
+            <option>IRA - 7777 | $20,568.00</option>
+        </select><br/>
+
+        <label>Symbol</label><br/>
+        <input id="symbol" type="text" /><br/>
+
+        <label>Action</label><br/>
+        <select id="action">
+            <option>Buy</option>
+            <option>Sell</option>
+        </select><br/>
+
+        <label>Quantity</label><br/>
+        <input id="quantity" type="text" /><br/>
+
+        <label>Order Type</label><br/>
+        <select id="orderType">
+            <option>Market</option>
+            <option>Limit</option>
+        </select><br/>
+
+        <label>Limit Price</label><br/>
+        <input id="limitPrice" type="text" /><br/>
+
+        <label>Term</label><br/>
+        <select id="term">
+            <option>Good For The Day</option>
+            <option>Good 'til Canceled</option>
+        </select><br/>
+
+        <input type="submit" value="Preview Order" />
+    </form>
+
+    <br />
+
+    <a rel="accounts" href="accounts.html">Cancel</a>
+</body>
+</html>
