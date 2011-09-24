@@ -9,12 +9,10 @@
 <body>
     <h1>Login</h1>
 
-    <form id="login" action="accounts.html">
-        <label>Username</label><br/>
-        <input id="username" type="text" /><br/>
+    <form id="login" method="post" action="accounts.html">
+        Username: <input type="text" name="username" /><br/>
 
-        <label>Password</label><br/>
-        <input id="password" type="password" /><br/>
+        Password: <input type="password" name="password" /><br/>
 
         <input type="submit" value="Login" />
     </form>
