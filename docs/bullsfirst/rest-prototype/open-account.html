@@ -9,22 +9,12 @@
 <body>
     <h1>Open an Account</h1>
 
-    <form id="openAccount" method="post" action="accounts.html">
-        <label>First Name</label><br/>
-        <input id="firstName" type="text" /><br/>
-
-        <label>Last Name</label><br/>
-        <input id="lastName" type="text" /><br/>
-
-        <label>Username</label><br/>
-        <input id="username" type="text" /><br/>
-
-        <label>Password</label><br/>
-        <input id="password" type="password" /><br/>
-
-        <label>Confirm Password</label><br/>
-        <input id="confirmPassword" type="password" /><br/>
-
+    <form id="openAccount" action="accounts.html">
+        First Name: <input type="text" name="firstName" /><br/>
+        Last Name: <input type="text" name="lastName" /><br/>
+        Username: <input type="text" name="username" /><br/>
+        Password: <input type="password" name="password" /><br/>
+        Confirm Password: <input type="password" name="confirmPassword" /><br/>
         <input type="submit" value="Open Account" />
     </form>
 
