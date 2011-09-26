@@ -17,12 +17,17 @@ package org.archfirst.bfoms.domain.security;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * SecurityService
  *
  * @author Naresh Bhatia
  */
 public class SecurityService {
+    private static final Logger logger =
+        LoggerFactory.getLogger(SecurityService.class);
 
     // ----- Commands -----
     public void registerUser(RegistrationRequest request) throws UsernameExistsException {
@@ -31,7 +36,8 @@ public class SecurityService {
         // the username before this user
         User existingUser = userRepository.findUser(request.getUsername());
         if (existingUser != null) {
-            throw new UsernameExistsException();
+            logger.warn("Username {} already exists", existingUser.getUsername());
+            throw new UsernameExistsException(existingUser.getUsername());
         }
 
         // Create the user and persist it
@@ -41,7 +47,9 @@ public class SecurityService {
         Person person = new Person(
                 request.getFirstName(), request.getLastName());
         User user = new User(request.getUsername(), passwordHash, person);
+        logger.info("Creating user {}", user.getUsername());
         userRepository.persist(user);      
+        logger.info("Created user {} with id = {}", user.getUsername(), user.getId());
     }
     
     // ----- Queries -----

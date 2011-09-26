@@ -21,5 +21,15 @@ package org.archfirst.bfoms.domain.security;
  * @author Naresh Bhatia
  */
 public class UsernameExistsException extends Exception {
-    private static final long serialVersionUID = 1L; 
+    private static final long serialVersionUID = 1L;
+    
+    public UsernameExistsException(String username) {
+        this.username = username;
+    }
+
+    private final String username;
+    
+    public String getUsername() {
+        return username;
+    }
 }
