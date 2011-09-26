@@ -1,0 +1,27 @@
+.afGrid .afGrid-heading .sort-hover {
+	background: url(images/defaultTheme/afGrid_header_bg.png) 0 -119px repeat-x;
+}
+
+.afGrid .afGrid-heading .desc,
+.afGrid .afGrid-heading .asc {
+    background: url(images/defaultTheme/afGrid_header_bg.png) 0 -56px repeat-x;
+}
+
+.afGrid .afGrid-heading .cell .sort-arrow {
+    display: none;
+    width: 12px;
+    height: 16px;
+    right: 10px;
+    top: 4px;
+    position: absolute;
+}
+
+.afGrid .afGrid-heading .desc .sort-arrow {
+    display: inline-block;
+    background: url(images/defaultTheme/afGrid_arrows.png) 0 -33px no-repeat;
+}
+
+.afGrid .afGrid-heading .asc .sort-arrow {
+    display: inline-block;
+    background: url(images/defaultTheme/afGrid_arrows.png) no-repeat;
+}

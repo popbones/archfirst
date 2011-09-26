@@ -1,0 +1,68 @@
+.afGrid-group-by , .afGrid-group-by  div, 
+.afGrid-group-by   h3, .afGrid-group-by  span,
+.afGrid input {
+    margin: 0;
+    padding: 0;
+	font-size: 100%;
+	font-family: inherit;
+}
+
+.afGrid-group-by {
+    width: 90%;
+    border: 1px solid transparent;
+    margin-left: 10px;
+	margin-top: 10px;
+    line-height: 1.6em;
+    height: 1.6em;
+	font-family: Arial, serif;
+}
+
+.afGrid-group-by p {
+    margin: 0;
+}
+
+.afGrid-group-by  .cell {
+	background: url(images/defaultTheme/afGrid_groups_sprite.png) 0 -96px no-repeat;
+	padding-left: 5px;
+	display: inline-block;
+    cursor: move;
+}
+
+.afGrid-group-by  .first  {
+	background: url(images/defaultTheme/afGrid_groups_sprite.png) no-repeat;
+	padding-left: 5px;
+	display: inline-block;
+}
+
+.afGrid-group-by  .cell .label {
+	background: url(images/defaultTheme/afGrid_groups_sprite.png) 0 -96px repeat-x;
+	display: inline-block;
+	line-height: 26px;
+}
+
+.afGrid-group-by  .cell .arrow {
+	background: url(images/defaultTheme/afGrid_groups_sprite.png) right -48px no-repeat;
+	display: inline-block;
+	padding-right: 16px;
+}
+
+.afGrid-group-by  .last .arrow {
+	background: url(images/defaultTheme/afGrid_groups_sprite.png) top right no-repeat;
+}
+
+.afGrid-group-by .cell a.remove,
+.afGrid-group-by .cell a.remove:link,
+.afGrid-group-by .cell a.remove:visited,
+.afGrid-group-by .cell a.remove:hover,
+.afGrid-group-by .cell a.remove:active {
+	text-decoration: none;
+	color: #f00;
+}
+
+.afGrid-group-by .group-helper {
+    background: url(images/defaultTheme/afGrid_groups_sprite.png) no-repeat;
+}
+
+.afGrid-group-by .group-helper .arrow {
+    background: url(images/defaultTheme/afGrid_groups_sprite.png) top right no-repeat;
+}

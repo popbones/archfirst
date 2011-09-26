@@ -1,0 +1,128 @@
+/*afGrid.css*/
+.afGrid-blue {
+    border-color: #05687d;
+}
+
+.afGrid-blue .afGrid-heading,
+.afGrid-blue .afGrid-heading .cell  {
+    background-image: url(images/blueTheme/afGrid_header_bg.png);
+}
+
+.afGrid-blue .afGrid-heading {
+	border-bottom-color: #ccc;
+}
+
+.afGrid-blue .afGrid-heading .cell {
+	border-left-color: #fff;
+    border-right-color: #ccc;
+    color: #555;
+}
+
+.afGrid-blue .afGrid-rows .row {
+    border-bottom-color: #EDEDED;
+	background-color: #F8FDFF;
+}
+
+.afGrid-blue .afGrid-rows .row-first {
+    border-top-color: #EDEDED;
+}
+
+.afGrid-blue .afGrid-rows  .cell {
+    border-color: #FFF;
+}
+
+.afGrid-blue .afGrid-rows .even,
+.afGrid-blue .afGrid-rows .even .cell {
+    background-color: #EEF8FC;
+}
+
+.afGrid-blue .afGrid-rows .even .cell {
+    border-color: #EEF8FC;
+}
+
+.afGrid-blue .afGrid-rows .row-hover {
+    background-color: #D8E6EB;
+}
+
+.afGrid-blue .afGrid-rows .row-hover .cell {
+    background-color: #D8E6EB;
+    border-right-color: #D8E6EB;
+	border-left-color: #D8E6EB;
+}
+
+.afGrid-blue .group .group-header {
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.afGrid-blue .total-row-count {
+    background-color: #A7CBDE;
+}
+
+/*afGrid.Date.css*/
+.afGrid-blue .date {
+    color: #0099ff;
+}
+
+/*afGridColumnReorder.css*/
+.afGrid-blue .afGrid-heading .reorder {
+	border-right-color: #05687d;
+}
+
+/*afGridColumnResize.css*/
+.afGrid-blue .resize-guide {
+	background-color: #ccc;
+}
+
+/*afGridColumnSort.css*/
+.afGrid-blue .afGrid-heading .sort-hover,
+.afGrid-blue .afGrid-heading .desc,
+.afGrid-blue .afGrid-heading .asc {
+    background-image: url(images/blueTheme/afGrid_header_bg.png);
+}
+
+.afGrid-blue .afGrid-heading .desc .sort-arrow,
+.afGrid-blue .afGrid-heading .asc .sort-arrow {
+    background-image: url(images/blueTheme/afGrid_arrows.png);
+}
+
+/*afGridFilter.css*/
+.afGrid-blue .afGrid-filter .cell {
+	border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.afGrid-blue .afGrid-filter .cell .input-filter ,
+.afGrid-blue .afGrid-filter .cell .select-filter {
+    border: 1px solid #D3D3D3;
+}
+
+.afGrid-blue .afGrid-filter .cell .DATE-filter,
+.afGrid-blue .afGrid-filter .cell .DATERANGE-filter {
+    border: 1px solid #D3D3D3;
+}
+
+
+/*afGridGroups.css*/
+.afGrid-group-by-blue  .cell,
+.afGrid-group-by-blue  .first,
+.afGrid-group-by-blue  .cell .label,
+.afGrid-group-by-blue  .cell .arrow,
+.afGrid-group-by-blue  .last .arrow,
+.afGrid-group-by-blue .group-helper,
+.afGrid-group-by-blue .group-helper .arrow  {
+	color: #69818E;
+	background-image: url(images/blueTheme/afGrid_groups_sprite.png);
+}
+
+.afGrid-group-by-blue .cell a.remove,
+.afGrid-group-by-blue .cell a.remove:link,
+.afGrid-group-by-blue .cell a.remove:visited,
+.afGrid-group-by-blue .cell a.remove:hover,
+.afGrid-group-by-blue .cell a.remove:active {
+	color: #EEF8FC;
+}
+
+.afGrid-group-by-blue.ui-state-highlight {
+	background-color: #EEF8FC;
+	background-image: none;
+}

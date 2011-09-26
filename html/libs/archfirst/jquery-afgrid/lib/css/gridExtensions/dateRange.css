@@ -1,0 +1,15 @@
+.ui-daterangepickercontain {
+	font-size: 0.6em;
+}
+
+.ui-daterangepickercontain a,
+.ui-daterangepickercontain a:link,
+.ui-daterangepickercontain a:visited,
+.ui-daterangepickercontain a:hover,
+.ui-daterangepickercontain a:active {
+    color: #000;
+}
+
+.ui-daterangepicker .ui-datepicker {
+    display: block;
+}

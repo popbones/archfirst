@@ -1,0 +1,28 @@
+.afGrid .afGrid-filter {
+    white-space: nowrap;
+}
+
+.afGrid .afGrid-filter .cell {
+	border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+    padding: 8px 10px 8px 10px;
+    display: inline-block;
+}
+
+.afGrid .afGrid-filter .cell .input-filter ,
+.afGrid .afGrid-filter .cell .select-filter {
+	width: 100%;
+    border: 1px solid #D3D3D3;
+}
+
+.afGrid .afGrid-filter .cell .input-filter {
+    line-height: 1.2em;
+}
+
+.afGrid .afGrid-filter .cell .DATE-filter,
+.afGrid .afGrid-filter .cell .DATERANGE-filter {
+    border: 1px solid #D3D3D3;
+    width: 100%;
+}
+
+

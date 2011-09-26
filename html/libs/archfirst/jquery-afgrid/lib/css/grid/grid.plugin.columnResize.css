@@ -1,0 +1,15 @@
+.afGrid .resize-handle {
+    display: inline-block;
+    position: absolute;
+    width: 4px;
+    top: 0;
+    right: 0;
+    cursor: e-resize;
+	height: 24px;
+}
+
+.resize-guide {
+	width: 2px;
+	background-color: #ccc;
+	position: absolute;
+}

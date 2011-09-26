@@ -1,0 +1,128 @@
+/*afGrid.css*/
+.afGrid-brown {
+    border-color: #b15700;
+}
+
+.afGrid-brown .afGrid-heading,
+.afGrid-brown .afGrid-heading .cell  {
+    background-image: url(images/brownTheme/afGrid_header_bg.png);
+}
+
+.afGrid-brown .afGrid-heading {
+	border-bottom-color: #ccc;
+}
+
+.afGrid-brown .afGrid-heading .cell {
+	border-left-color: #fff;
+    border-right-color: #ccc;
+    color: #555;
+}
+
+.afGrid-brown .afGrid-rows .row {
+    border-bottom-color: #EDEDED;
+	background-color: #FFFCF8;
+}
+
+.afGrid-brown .afGrid-rows .row-first {
+    border-top-color: #EDEDED;
+}
+
+.afGrid-brown .afGrid-rows  .cell {
+    border-color: #FFF;
+}
+
+.afGrid-brown .afGrid-rows .even,
+.afGrid-brown .afGrid-rows .even .cell {
+    background-color: #FCF7EE;
+}
+
+.afGrid-brown .afGrid-rows .even .cell {
+    border-color: #FCF7EE;
+}
+
+.afGrid-brown .afGrid-rows .row-hover {
+    background-color: #F8E5C4;
+}
+
+.afGrid-brown .afGrid-rows .row-hover .cell {
+    background-color: #F8E5C4;
+    border-right-color: #F8E5C4;
+	border-left-color: #F8E5C4;
+}
+
+.afGrid-brown .group .group-header {
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.afGrid-brown .total-row-count {
+    background-color: #F2E9E1;
+}
+
+/*afGrid.Date.css*/
+.afGrid-brown .date {
+    color: #0099ff;
+}
+
+/*afGridColumnReorder.css*/
+.afGrid-brown .afGrid-heading .reorder {
+	border-right-color: #b15700;
+}
+
+/*afGridColumnResize.css*/
+.afGrid-brown .resize-guide {
+	background-color: #ccc;
+}
+
+/*afGridColumnSort.css*/
+.afGrid-brown .afGrid-heading .sort-hover,
+.afGrid-brown .afGrid-heading .desc,
+.afGrid-brown .afGrid-heading .asc {
+    background-image: url(images/brownTheme/afGrid_header_bg.png);
+}
+
+.afGrid-brown .afGrid-heading .desc .sort-arrow,
+.afGrid-brown .afGrid-heading .asc .sort-arrow {
+    background-image: url(images/brownTheme/afGrid_arrows.png);
+}
+
+/*afGridFilter.css*/
+.afGrid-brown .afGrid-filter .cell {
+	border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.afGrid-brown .afGrid-filter .cell .input-filter ,
+.afGrid-brown .afGrid-filter .cell .select-filter {
+    border: 1px solid #D3D3D3;
+}
+
+.afGrid-brown .afGrid-filter .cell .DATE-filter,
+.afGrid-brown .afGrid-filter .cell .DATERANGE-filter {
+    border: 1px solid #D3D3D3;
+}
+
+
+/*afGridGroups.css*/
+.afGrid-group-by-brown  .cell,
+.afGrid-group-by-brown  .first,
+.afGrid-group-by-brown  .cell .label,
+.afGrid-group-by-brown  .cell .arrow,
+.afGrid-group-by-brown  .last .arrow,
+.afGrid-group-by-brown .group-helper,
+.afGrid-group-by-brown .group-helper .arrow  {
+	color: #5B2F03;
+	background-image: url(images/brownTheme/afGrid_groups_sprite.png);
+}
+
+.afGrid-group-by-brown .cell a.remove,
+.afGrid-group-by-brown .cell a.remove:link,
+.afGrid-group-by-brown .cell a.remove:visited,
+.afGrid-group-by-brown .cell a.remove:hover,
+.afGrid-group-by-brown .cell a.remove:active {
+	color: #FCF7EE;
+}
+
+.afGrid-group-by-brown.ui-state-highlight {
+	background-color: #FCF7EE;
+	background-image: none;
+}

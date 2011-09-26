@@ -1,0 +1,128 @@
+/*afGrid.css*/
+.afGrid-grey {
+    border-color: #C5C5C4;
+}
+
+.afGrid-grey .afGrid-heading,
+.afGrid-grey .afGrid-heading .cell  {
+    background-image: url(images/greyTheme/afGrid_header_bg.png);
+}
+
+.afGrid-grey .afGrid-heading {
+	border-bottom-color: #ccc;
+}
+
+.afGrid-grey .afGrid-heading .cell {
+	border-left-color: #fff;
+    border-right-color: #ccc;
+    color: #555;
+}
+
+.afGrid-grey .afGrid-rows .row {
+    border-bottom-color: #EDEDED;
+	background-color: #F9F9F9;
+}
+
+.afGrid-grey .afGrid-rows .row-first {
+    border-top-color: #EDEDED;
+}
+
+.afGrid-grey .afGrid-rows  .cell {
+    border-color: #FFF;
+}
+
+.afGrid-grey .afGrid-rows .even,
+.afGrid-grey .afGrid-rows .even .cell {
+    background-color: #FFF;
+}
+
+.afGrid-grey .afGrid-rows .even .cell {
+    border-color: #FFF;
+}
+
+.afGrid-grey .afGrid-rows .row-hover {
+    background-color: #EBEBEB;
+}
+
+.afGrid-grey .afGrid-rows .row-hover .cell {
+    background-color: #EBEBEB;
+    border-right-color: #EBEBEB;
+	border-left-color: #EBEBEB;
+}
+
+.afGrid-grey .group .group-header {
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.afGrid-grey .total-row-count {
+    background-color: #E8E8E8;
+}
+
+/*afGrid.Date.css*/
+.afGrid-grey .date {
+    color: #0099ff;
+}
+
+/*afGridColumnReorder.css*/
+.afGrid-grey .afGrid-heading .reorder {
+	border-right-color: #C5C5C4	;
+}
+
+/*afGridColumnResize.css*/
+.afGrid-grey .resize-guide {
+	background-color: #ccc;
+}
+
+/*afGridColumnSort.css*/
+.afGrid-grey .afGrid-heading .sort-hover,
+.afGrid-grey .afGrid-heading .desc,
+.afGrid-grey .afGrid-heading .asc {
+    background-image: url(images/greyTheme/afGrid_header_bg.png);
+}
+
+.afGrid-grey .afGrid-heading .desc .sort-arrow,
+.afGrid-grey .afGrid-heading .asc .sort-arrow {
+    background-image: url(images/greyTheme/afGrid_arrows.png);
+}
+
+/*afGridFilter.css*/
+.afGrid-grey .afGrid-filter .cell {
+	border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.afGrid-grey .afGrid-filter .cell .input-filter ,
+.afGrid-grey .afGrid-filter .cell .select-filter {
+    border: 1px solid #D3D3D3;
+}
+
+.afGrid-grey .afGrid-filter .cell .DATE-filter,
+.afGrid-grey .afGrid-filter .cell .DATERANGE-filter {
+    border: 1px solid #D3D3D3;
+}
+
+
+/*afGridGroups.css*/
+.afGrid-group-by-grey  .cell,
+.afGrid-group-by-grey  .first,
+.afGrid-group-by-grey  .cell .label,
+.afGrid-group-by-grey  .cell .arrow,
+.afGrid-group-by-grey  .last .arrow,
+.afGrid-group-by-grey .group-helper,
+.afGrid-group-by-grey .group-helper .arrow  {
+	color: #FFF;
+	background-image: url(images/greyTheme/afGrid_groups_sprite.png);
+}
+
+.afGrid-group-by-grey .cell a.remove,
+.afGrid-group-by-grey .cell a.remove:link,
+.afGrid-group-by-grey .cell a.remove:visited,
+.afGrid-group-by-grey .cell a.remove:hover,
+.afGrid-group-by-grey .cell a.remove:active {
+	color: #EAEAEA;
+}
+
+.afGrid-group-by-grey.ui-state-highlight {
+	background-color: #D7D6D6;
+	background-image: none;
+}
