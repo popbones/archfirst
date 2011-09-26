@@ -80,6 +80,9 @@
 			});
 			grid1.load();
 			grid2.load();
+			setTimeout(function() {
+				$j("a.theme-brown").click();
+			},100);
 		});
 	</script>
 </head>
@@ -87,9 +90,9 @@
     <div id="mainContainer">
 		<div class="afGrid-switch-theme grid1-afGrid-switch-theme">
 			<span class="">Switch theme: </span>
+            <a class="theme theme-brown" href="#brown"></a>
             <a class="theme theme-default" href="#default"></a>
             <a class="theme theme-blue" href="#blue"></a>
-            <a class="theme theme-brown" href="#brown"></a>
             <a class="theme theme-grey" href="#grey"></a>
 		</div>
         <div class="grid1-afGrid-group-by afGrid-group-by">
@@ -99,9 +102,9 @@
         <div id="grid1"></div>
 		<div class="afGrid-switch-theme grid2-afGrid-switch-theme">
 			<span class="">Switch theme: </span>
+            <a class="theme theme-brown" href="#brown"></a>
             <a class="theme theme-default" href="#default"></a>
             <a class="theme theme-blue" href="#blue"></a>
-            <a class="theme theme-brown" href="#brown"></a>
             <a class="theme theme-grey" href="#grey"></a>
 		</div>
         <div class="grid2-afGrid-group-by afGrid-group-by">
