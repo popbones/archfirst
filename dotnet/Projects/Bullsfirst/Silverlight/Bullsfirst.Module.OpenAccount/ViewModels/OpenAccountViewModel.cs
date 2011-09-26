@@ -15,6 +15,7 @@
 using System;
 using System.ComponentModel;
 using System.ComponentModel.Composition;
+using System.Text.RegularExpressions;
 using Archfirst.Framework.Helpers;
 using Archfirst.Framework.PrismHelpers;
 using Bullsfirst.Infrastructure;
@@ -219,6 +220,8 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
                 case "FirstName":
                     if (string.IsNullOrEmpty(this.FirstName) || this.FirstName.Trim().Length == 0)
                         this["FirstName"] = "Please enter your first name";
+                    else if (!_alphaExpression.IsMatch(this.FirstName))
+                        this["FirstName"] = "Please enter only alphabetic characters";
                     else
                         this.ClearError("FirstName");
                     break;
@@ -226,6 +229,8 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
                 case "LastName":
                     if (string.IsNullOrEmpty(this.LastName) || this.LastName.Trim().Length == 0)
                         this["LastName"] = "Please enter your last name";
+                    else if (!_alphaExpression.IsMatch(this.LastName))
+                        this["LastName"] = "Please enter only alphabetic characters";
                     else
                         this.ClearError("LastName");
                     break;
@@ -266,6 +271,7 @@ namespace Bullsfirst.Module.OpenAccount.ViewModels
         private ISecurityServiceAsync _securityService;
         private ITradingServiceAsync _tradingService;
         private long _brokerageAccountId;
+        private Regex _alphaExpression = new Regex("^[a-zA-Z]+$");
 
         public UserContext UserContext { get; set; }
 
