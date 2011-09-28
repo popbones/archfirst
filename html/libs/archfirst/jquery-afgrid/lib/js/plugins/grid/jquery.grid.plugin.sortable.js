@@ -17,12 +17,12 @@
 /**
  * @author Manish Shanker
  */
- 
-(function($) {
+
+(function ($) {
 
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
-            sortable: function($afGrid, options) {
+            sortable: function ($afGrid, options) {
 
                 options = $.extend({
                     canSort: true,
@@ -36,12 +36,12 @@
                 };
 
                 function onColumnSort() {
-                    var $cell = $(this);
-                    var columnId = this.id.split("_")[1];
-                    $afGrid.find(".afGrid-heading .cell.sortable-column").not($cell)
-                        .removeClass("asc desc")
-                        .removeData("direction");
-                    var direction = $cell.data("direction");
+                    var $cell = $(this),
+						columnId = this.id.split("_")[1],
+						direction;
+                    
+					$afGrid.find(".afGrid-heading .cell.sortable-column").not($cell).removeClass("asc desc").removeData("direction");
+                    direction = $cell.data("direction");
                     if (!direction) {
                         direction = SortDirection.ASC;
                     } else if (direction === SortDirection.ASC) {
@@ -60,40 +60,39 @@
                     }
 
                     if (options.sortBy) {
-                        var $column = $afGrid.find("#"+options.id+"Col_"+options.sortBy.column);
+                        var $column = $afGrid.find("#" + options.id + "Col_" + options.sortBy.column);
                         $column.addClass(options.sortBy.direction);
                         $column.data("direction", options.sortBy.direction);
                     }
-					
-					$.each(options.columns, function(index, column) {
-						if (column.sortable!==false) {
-							$afGrid.find("#"+options.id+"Col_"+column.id).addClass("sortable-column");
-						}
-					});
-					
+
+                    $.each(options.columns, function (index, column) {
+                        if (column.sortable !== false) {
+                            $afGrid.find("#" + options.id + "Col_" + column.id).addClass("sortable-column");
+                        }
+                    });
+
                     $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "click").delegate(".afGrid-heading .cell.sortable-column", "click", onColumnSort);
-					$afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseenter").delegate(".afGrid-heading .cell.sortable-column", "mouseenter", function() {
-						$(this).addClass("sort-hover");
-					});
-					$afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseleave").delegate(".afGrid-heading .cell", "mouseleave", function() {
-						$(this).removeClass("sort-hover");
-					});
+                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseenter").delegate(".afGrid-heading .cell.sortable-column", "mouseenter", function () {
+                        $(this).addClass("sort-hover");
+                    });
+                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseleave").delegate(".afGrid-heading .cell", "mouseleave", function () {
+                        $(this).removeClass("sort-hover");
+                    });
                 }
 
                 function destroy() {
                     $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "click");
-					$afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseleave");
-					$afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseenter");
+                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseleave");
+                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseenter");
                     options = null;
                 }
 
                 return {
                     load: load,
                     destroy: destroy
-                }
+                };
             }
         }
     });
 
-})(jQuery);
-
+}(jQuery));

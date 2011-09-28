@@ -18,57 +18,57 @@
  * @author Manish Shanker
  */
 
-(function($) { 
+(function ($) {
 
-window.AF = window.AF || {};
-AF.renderer = AF.renderer || {};
+    window.AF = window.AF || {};
+    AF.renderer = AF.renderer || {};
 
-AF.renderer.Grid = function(options) {
-	
-	options = $.extend({
-		id: null,
-		afGridSelector: "#"+options.id,
-		onSortBy: $.noop,
-		onGroupBy: $.noop,
-		onFilterBy: $.noop,
-		onColumnReorder: $.noop,
-        onGroupReorder: $.noop
-	}, options);
+    AF.renderer.Grid = function (options) {
 
-	var $afGrid;
-	
-    function renderData(data) {
-        var afGridData = $.extend({
-            onScrollToBottom: options.fetchData,
-            id: options.id,
-            onSort: options.onSortBy,
-			onGroupChange: options.onGroupBy,
-			groupsPlaceHolder: "." + options.id + "-afGrid-group-by",
-			canGroup: true,
-            onFilter: options.onFilterBy,
-			onColumnReorder: options.onColumnReorder,
-			onColumnResize: options.onColumnResize,
-            onGroupReorder: options.onGroupReorder,
-			columnWidthOverride: null,
-            onRowClick: options.onRowClick
-		}, data);
-        $afGrid.trigger($.afGrid.destroy);
-        $afGrid.afGrid(afGridData);
-    }
+        options = $.extend({
+            id: null,
+            afGridSelector: "#" + options.id,
+            onSortBy: $.noop,
+            onGroupBy: $.noop,
+            onFilterBy: $.noop,
+            onColumnReorder: $.noop,
+            onGroupReorder: $.noop
+        }, options);
 
-    function addNewRows(newData) {
-        $afGrid.trigger($.afGrid.appendRows, [newData.rows]);
-    }
+        var $afGrid;
 
-    //Constructor
-    (function init() {
-		$afGrid = $(options.afGridSelector);
-    })();
+        function renderData(data) {
+            var afGridData = $.extend({
+                onScrollToBottom: options.fetchData,
+                id: options.id,
+                onSort: options.onSortBy,
+                onGroupChange: options.onGroupBy,
+                groupsPlaceHolder: "." + options.id + "-afGrid-group-by",
+                canGroup: true,
+                onFilter: options.onFilterBy,
+                onColumnReorder: options.onColumnReorder,
+                onColumnResize: options.onColumnResize,
+                onGroupReorder: options.onGroupReorder,
+                columnWidthOverride: null,
+                onRowClick: options.onRowClick
+            }, data);
+            $afGrid.trigger($.afGrid.destroy);
+            $afGrid.afGrid(afGridData);
+        }
 
-	return {
-		renderData: renderData,
-		addNewRows: addNewRows
-	}
-};
+        function addNewRows(newData) {
+            $afGrid.trigger($.afGrid.appendRows, [newData.rows]);
+        }
 
-})(jQuery);
+        //Constructor
+        (function init() {
+            $afGrid = $(options.afGridSelector);
+        }());
+
+        return {
+            renderData: renderData,
+            addNewRows: addNewRows
+        };
+    };
+
+}(jQuery));

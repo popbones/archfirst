@@ -17,20 +17,20 @@
 /**
  * @author Manish Shanker
  */
- 
-(function($) {
-    $.statePersistToCookie = {
-		load: function(key, callback) {
-			callback($.cookie(key));
-		},
-		save: function(key, value, callback) {
-			$.cookie(key, value, {
-				expires: 100, path: '/'			
-			});
-			if (callback) {
-				callback();
-			}
-		}	
-	}
-})(jQuery);
 
+(function ($) {
+    $.statePersistToCookie = {
+        load: function (key, callback) {
+            callback($.cookie(key));
+        },
+        save: function (key, value, callback) {
+            $.cookie(key, value, {
+                expires: 100,
+                path: '/'
+            });
+            if (callback) {
+                callback();
+            }
+        }
+    };
+}(jQuery));

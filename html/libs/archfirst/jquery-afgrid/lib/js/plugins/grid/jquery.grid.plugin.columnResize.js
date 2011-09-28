@@ -17,12 +17,12 @@
 /**
  * @author Manish Shanker
  */
- 
-(function($) {
+
+(function ($) {
 
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
-            columnResize: function($afGrid, options) {
+            columnResize: function ($afGrid, options) {
 
                 options = $.extend({
                     canResizeColumn: true,
@@ -38,56 +38,58 @@
                         return;
                     }
                     var $headingCells = $afGrid.find(".afGrid-heading .cell");
-                    $headingCells.each(function() {
-                        var $cell = $(this);
-                        var $resizeHandle = $("<span class='resize-handle'></span>");
-                        $resizeHandle.bind("click", function() {
+                    $headingCells.each(function () {
+                        var $cell = $(this),
+			    $resizeHandle = $("<span class='resize-handle'></span>");
+                        $resizeHandle.bind("click", function () {
                             return false;
                         });
-                        
-                        $resizeHandle.bind("mousedown", function(event) {
-							var columnId = $(this).parents(".cell").eq(0).attr("id").split("_")[1];
-							var posX;
-							var originalWidth;
-							var $guide;
-							var newWidth;
-							$guide = $("<div class='resize-guide'></div>");
-							$guide.css({
-								height: $afGrid.height(),
-								top: $afGrid.position().top + parseInt($afGrid.css("margin-top"), 10),
-								left: event.clientX
-							});
-							$("body").append($guide);
+
+                        $resizeHandle.bind("mousedown", function (event) {
+                            var columnId = $(this).parents(".cell").eq(0).attr("id").split("_")[1],
+				posX,
+				originalWidth,
+				$guide,
+				newWidth;
+                            $guide = $("<div class='resize-guide'></div>");
+                            $guide.css({
+                                height: $afGrid.height(),
+                                top: $afGrid.position().top + parseInt($afGrid.css("margin-top"), 10),
+                                left: event.clientX
+                            });
+                            $("body").append($guide);
                             originalWidth = $cell.width();
                             posX = event.screenX;
 
-							$(document).bind("mousemove.afGridResizeGuide", function(event) {
-								newWidth = originalWidth + (event.screenX - posX);
+                            $(document).bind("mousemove.afGridResizeGuide", function (event) {
+                                newWidth = originalWidth + (event.screenX - posX);
                                 if (newWidth <= options.minColumnWidth) {
                                     newWidth = options.minColumnWidth;
                                 } else if (newWidth >= options.maxColumnWidth) {
                                     newWidth = options.maxColumnWidth;
                                 } else {
-								    $guide.css({left: event.clientX});
+                                    $guide.css({
+                                        left: event.clientX
+                                    });
                                 }
                                 $cell.width(newWidth);
-								options.columns[options.columnsHashMap[columnId]].width = newWidth;
-								return false;
-							});
-						
-							$(document).bind("mouseup.afGridResizeGuide", function() {
-								$(document).unbind("mousemove.afGridResizeGuide mouseup.afGridResizeGuide");
-								$guide.unbind();
-								$guide.remove();
-								posX = null;
-								$afGrid.find(".afGrid-rows ."+columnId).width(newWidth);
-								$afGrid.find(".afGrid-filter ."+columnId).width(newWidth);
-								options.onColumnResize(columnId, originalWidth, newWidth);
-								return false;
-							});
+                                options.columns[options.columnsHashMap[columnId]].width = newWidth;
+                                return false;
+                            });
+
+                            $(document).bind("mouseup.afGridResizeGuide", function () {
+                                $(document).unbind("mousemove.afGridResizeGuide mouseup.afGridResizeGuide");
+                                $guide.unbind();
+                                $guide.remove();
+                                posX = null;
+                                $afGrid.find(".afGrid-rows ." + columnId).width(newWidth);
+                                $afGrid.find(".afGrid-filter ." + columnId).width(newWidth);
+                                options.onColumnResize(columnId, originalWidth, newWidth);
+                                return false;
+                            });
                             return false;
                         });
-                        
+
 
                         $cell.append($resizeHandle);
                     });
@@ -95,18 +97,17 @@
                 }
 
                 function destroy() {
-					$afGrid.find(".resize-handle,.resize-guide").unbind().remove();
-					columns = null;
+                    $afGrid.find(".resize-handle,.resize-guide").unbind().remove();
+                    columns = null;
                     options = null;
                 }
 
                 return {
                     load: load,
                     destroy: destroy
-                }
+                };
             }
         }
     });
 
-})(jQuery);
-
+}(jQuery));

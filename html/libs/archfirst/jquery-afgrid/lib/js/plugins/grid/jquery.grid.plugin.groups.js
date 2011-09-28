@@ -17,12 +17,12 @@
 /**
  * @author Manish Shanker
  */
- 
-(function($) {
+
+(function ($) {
 
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
-            groups: function($afGrid, options) {
+            groups: function ($afGrid, options) {
                 options = $.extend({
                     id: options.id,
                     canGroup: true,
@@ -32,17 +32,19 @@
                     groupBy: null
                 }, options);
 
-                var $groupsMainContainer;
-                var currentGroupColumnIds;
+                var $groupsMainContainer,
+                    currentGroupColumnIds;
 
                 function renderGroups(columns, groupedColumnIds) {
-                    var groupedColumnIdsLength = groupedColumnIds.length;
+                    var groupedColumnIdsLength = groupedColumnIds.length,
+                        $groupContainer,
+                        $groups;
                     if (groupedColumnIdsLength) {
                         $groupsMainContainer.find(".empty-message").hide();
-                        var $groupContainer = $groupsMainContainer.find(".groups").show();
+                        $groupContainer = $groupsMainContainer.find(".groups").show();
                         $groupContainer.empty();
-                        var $groups = $j();
-                        $j.each(groupedColumnIds, function(i, columnId) {
+                        $groups = $j();
+                        $j.each(groupedColumnIds, function (i, columnId) {
                             var $group = $j("<span id='{id}' class='cell'><span class='arrow'><span class='label'><a class='remove' href='#'>x</a> {label}</span></span></span>".supplant({
                                 label: columns[options.columnsHashMap[columnId]].label,
                                 id: options.id + "GroupBy_" + columnId
@@ -64,39 +66,39 @@
                 }
 
                 function removeColumnFromGroup(columnId) {
-                    var newGroupColumnIds = $j.grep(currentGroupColumnIds, function(id, i) {
-                        return id != columnId;
+                    var newGroupColumnIds = $j.grep(currentGroupColumnIds, function (id, i) {
+                        return id !== columnId;
                     });
                     options.onGroupChange(newGroupColumnIds);
                 }
 
                 function onColumnGroupingDrop(event, ui) {
                     var columnId = ui.draggable.attr("id").split("_")[1];
-                    if (currentGroupColumnIds && currentGroupColumnIds.indexOf(columnId)>-1) {
+                    if (currentGroupColumnIds && currentGroupColumnIds.indexOf(columnId) > -1) {
                         return false;
                     }
                     currentGroupColumnIds.push(columnId);
-                    setTimeout(function() {
+                    setTimeout(function () {
                         options.onGroupChange(currentGroupColumnIds);
-                    },10);
+                    }, 10);
                     return true;
                 }
 
                 function onGroupExpandCollapse() {
-                    var $ele = $(this);
-                    var currentState = !$ele.data("state");
+                    var $ele = $(this),
+                        currentState = !$ele.data("state");
                     $ele.data("state", currentState);
-                    $ele.find(".open-close-indicator").html(currentState?"+":"-");
-                    $ele.removeClass("open close").addClass(currentState?"close":"open");
-                    $ele.parents(".group").eq(0).children(":not('.group-header:eq(0)')")[currentState?"hide":"show"]();
+                    $ele.find(".open-close-indicator").html(currentState ? "+" : "-");
+                    $ele.removeClass("open close").addClass(currentState ? "close" : "open");
+                    $ele.parents(".group").eq(0).children(":not('.group-header:eq(0)')")[currentState ? "hide" : "show"]();
                 }
 
                 function onGroupReorderDrop(event, ui) {
                     $(this).removeClass("reorder");
-                    var groupIdToMove = ui.draggable.attr("id").split("_")[1];
-                    var groupIdToMoveAfter = $(this).attr("id").split("_")[1];
-                    var newGroupOrder = [];
-                    $.each(options.groupBy, function(i, columnId) {
+                    var groupIdToMove = ui.draggable.attr("id").split("_")[1],
+                        groupIdToMoveAfter = $(this).attr("id").split("_")[1],
+                        newGroupOrder = [];
+                    $.each(options.groupBy, function (i, columnId) {
                         if (columnId !== groupIdToMove) {
                             newGroupOrder.push(columnId);
                         }
@@ -113,7 +115,7 @@
                     }
 
                     $afGrid.undelegate(".group .group-header", "click").delegate(".group .group-header", "click", onGroupExpandCollapse);
-                    $groupsMainContainer = $(options.groupsPlaceHolder).undelegate("a.remove", "click.groups").delegate("a.remove", "click.groups", function() {
+                    $groupsMainContainer = $(options.groupsPlaceHolder).undelegate("a.remove", "click.groups").delegate("a.remove", "click.groups", function () {
                         removeColumnFromGroup($j(this).parents(".cell").eq(0).attr("id").split("_")[1]);
                         return false;
                     });
@@ -155,7 +157,7 @@
                 return {
                     load: load,
                     destroy: destroy
-                }
+                };
             }
         }
     });
@@ -172,7 +174,7 @@
         return $(event.currentTarget).clone(false).addClass("group-helper");
     }
 
-    function onGroupReorder(x,y,z) {
-        console.log(x,y,z)
+    function onGroupReorder(x, y, z) {
+        console.log(x, y, z);
     }
-})(jQuery);
+}(jQuery));

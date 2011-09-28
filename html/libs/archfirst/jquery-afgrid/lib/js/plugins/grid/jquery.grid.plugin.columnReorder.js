@@ -18,11 +18,11 @@
  * @author Manish Shanker
  */
 
-(function($) {
+(function ($) {
 
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
-            columnReorder: function($afGrid, options) {
+            columnReorder: function ($afGrid, options) {
 
                 options = $.extend({
                     canReorderColumn: true,
@@ -31,10 +31,10 @@
 
                 function onColumnReorderDrop(event, ui) {
                     $(this).removeClass("reorder");
-                    var columnIdToMove = ui.draggable.attr("id").split("_")[1];
-                    var columnIdToMoveAfter = $(this).attr("id").split("_")[1];
-                    var newColumnOrder = [];
-                    $.each(options.columns, function(i, column) {
+                    var columnIdToMove = ui.draggable.attr("id").split("_")[1],
+                        columnIdToMoveAfter = $(this).attr("id").split("_")[1],
+                        newColumnOrder = [];
+                    $.each(options.columns, function (i, column) {
                         if (column.id !== columnIdToMove) {
                             newColumnOrder.push(column.id);
                         }
@@ -42,7 +42,7 @@
                             newColumnOrder.push(columnIdToMove);
                         }
                     });
-                    options.onColumnReorder(newColumnOrder)
+                    options.onColumnReorder(newColumnOrder);
                 }
 
                 function load() {
@@ -68,7 +68,7 @@
                 return {
                     load: load,
                     destroy: destroy
-                }
+                };
             }
         }
     });
@@ -81,5 +81,4 @@
         $(this).removeClass("reorder");
     }
 
-})(jQuery);
-
+}(jQuery));

@@ -17,17 +17,16 @@
 /**
  * @author Manish Shanker
  */
- 
-(function($) {
+
+(function ($) {
     $.server = $.server || {};
     $.server = $.extend($.server, {
-        getData: function(url, data, callback) {
-			if (url.indexOf('fakeStore')>-1) {
-				$.server.fakeStore(url.split(".")[1], data, callback);
-			} else {
-				$.post(url, data, callback);
-			}
+        getData: function (url, data, callback) {
+            if (url.indexOf('fakeStore') > -1) {
+                $.server.fakeStore(url.split(".")[1], data, callback);
+            } else {
+                $.post(url, data, callback);
+            }
         }
     });
-})(jQuery);
-
+}(jQuery));
