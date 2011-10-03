@@ -13,6 +13,25 @@
         <servlet-name>Faces Servlet</servlet-name>
         <url-pattern>/faces/*</url-pattern>
     </servlet-mapping>
+    <!-- Servlet mappings required for JBoss AS 7 -->
+    <!--
+    <servlet>
+        <servlet-name>ReferenceDataService</servlet-name>
+        <servlet-class>org.archfirst.bfexch.webservice.referencedata.ReferenceDataWebService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ReferenceDataService</servlet-name>
+        <url-pattern>/ReferenceDataService/*</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>MarketDataService</servlet-name>
+        <servlet-class>org.archfirst.bfexch.webservice.marketdata.MarketDataWebService</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>MarketDataService</servlet-name>
+        <url-pattern>/MarketDataService/*</url-pattern>
+    </servlet-mapping>
+    -->
     <session-config>
         <session-timeout>
             30
