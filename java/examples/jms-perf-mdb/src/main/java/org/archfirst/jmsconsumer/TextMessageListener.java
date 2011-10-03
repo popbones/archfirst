@@ -30,6 +30,11 @@ import org.slf4j.LoggerFactory;
  * @author Naresh Bhatia
  */
 @MessageDriven(mappedName="jms/PerfQueue")
+//Annotation needed for JBoss AS 7
+//@MessageDriven(activationConfig={
+//        @ActivationConfigProperty(propertyName="destinationType", propertyValue="javax.jms.Queue"),
+//        @ActivationConfigProperty(propertyName="destination", propertyValue="jms/PerfQueue")
+//     })
 public class TextMessageListener implements MessageListener {
     private static final Logger logger =
         LoggerFactory.getLogger(TextMessageListener.class);
