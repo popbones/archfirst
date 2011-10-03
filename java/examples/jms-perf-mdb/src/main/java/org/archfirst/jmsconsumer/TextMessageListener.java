@@ -30,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * @author Naresh Bhatia
  */
 @MessageDriven(mappedName="jms/PerfQueue")
-//Annotation needed for JBoss AS 7
+//Annotation needed for JBoss AS 7 (see http://community.jboss.org/thread/173107)
 //@MessageDriven(activationConfig={
 //        @ActivationConfigProperty(propertyName="destinationType", propertyValue="javax.jms.Queue"),
 //        @ActivationConfigProperty(propertyName="destination", propertyValue="jms/PerfQueue")
@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
 public class TextMessageListener implements MessageListener {
     private static final Logger logger =
         LoggerFactory.getLogger(TextMessageListener.class);
-    
+
     private static int count = 0;
     private static final int maxCount = 1000;
     private static long start;
@@ -58,7 +58,7 @@ public class TextMessageListener implements MessageListener {
             throw new RuntimeException(e);
         }
     }
-    
+
     private synchronized void incrementCount() {
         count++;
         if (count == 1) {
