@@ -28,7 +28,7 @@ import javax.ws.rs.core.MediaType;
 @Path("/order")
 public class OrderResource {
 
-    // This method is called if HTML is request
+    // This method is called if JSON is requested
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Order getOrder() {
