@@ -16,11 +16,13 @@
 package org.archfirst.bfoms.domain.security;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -61,6 +63,8 @@ public class User extends DomainEntity {
     private Person person;
 
     // ----- Getters and Setters -----
+    @NotNull
+    @Column(nullable = false, length=50)
     public String getUsername() {
         return username;
     }
@@ -68,6 +72,8 @@ public class User extends DomainEntity {
         this.username = username;
     }
 
+    @NotNull
+    @Column(nullable = false, length=50)
     public String getPasswordHash() {
         return passwordHash;
     }

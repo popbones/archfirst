@@ -313,6 +313,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
     }
 
     @NotNull
+    @Column(nullable = false, length=50)
     public String getClientOrderId() {
         return clientOrderId;
     }
@@ -338,7 +339,7 @@ public class Order extends DomainEntity implements Comparable<Order> {
     }
 
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, length=10)
     public String getSymbol() {
         return symbol;
     }

@@ -111,7 +111,7 @@ public abstract class BaseAccount extends DomainEntity {
     // ----- Getters and Setters -----
     @NotNull
     @Size(min = MIN_LENGTH, max = MAX_LENGTH)
-    @Column(nullable = false)
+    @Column(nullable = false, length=50)
     public String getName() {
         return name;
     }

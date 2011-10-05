@@ -93,7 +93,7 @@ public class Person extends Party {
     @NotNull
     @Size(min = MIN_LENGTH, max = MAX_LENGTH)
     @Pattern(regexp="[a-zA-Z]+", message="First name must only contain letters")
-    @Column(nullable=false)
+    @Column(nullable=false, length=MAX_LENGTH)
     public String getFirstName() {
         return firstName;
     }
@@ -104,7 +104,7 @@ public class Person extends Party {
     @NotNull
     @Size(min = MIN_LENGTH, max = MAX_LENGTH)
     @Pattern(regexp="[a-zA-Z]+", message="Last name must only contain letters")
-    @Column(nullable=false)
+    @Column(nullable=false, length=MAX_LENGTH)
     public String getLastName() {
         return lastName;
     }

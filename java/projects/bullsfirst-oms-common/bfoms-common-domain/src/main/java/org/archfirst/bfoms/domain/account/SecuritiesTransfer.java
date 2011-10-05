@@ -106,7 +106,7 @@ public class SecuritiesTransfer extends Transaction {
 
     // ----- Getters and Setters -----
     @NotNull
-    @Column(nullable = false)
+    @Column(nullable = false, length=10)
     public String getSymbol() {
         return symbol;
     }

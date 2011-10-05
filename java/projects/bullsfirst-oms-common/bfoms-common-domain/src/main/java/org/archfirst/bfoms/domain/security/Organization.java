@@ -15,7 +15,9 @@
  */
 package org.archfirst.bfoms.domain.security;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -63,6 +65,8 @@ public class Organization extends Party {
     private String name;
 
     // ----- Getters and Setters -----
+    @NotNull
+    @Column(nullable = false, length=100)
     public String getName() {
         return name;
     }

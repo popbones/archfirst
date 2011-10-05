@@ -15,8 +15,10 @@
  */
 package org.archfirst.bfoms.domain.account.external;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
 
 import org.archfirst.bfoms.domain.account.AccountStatus;
 import org.archfirst.bfoms.domain.account.BaseAccount;
@@ -97,6 +99,8 @@ public class ExternalAccount extends BaseAccount {
     private String accountNumber;
 
     // ----- Getters and Setters -----
+    @NotNull
+    @Column(nullable = false, length=50)
     public String getRoutingNumber() {
         return routingNumber;
     }
@@ -104,6 +108,8 @@ public class ExternalAccount extends BaseAccount {
         this.routingNumber = routingNumber;
     }
 
+    @NotNull
+    @Column(nullable = false, length=50)
     public String getAccountNumber() {
         return accountNumber;
     }

@@ -34,8 +34,14 @@ public class DozerMapperFactory {
     public Mapper getMapper() {
         BeanMappingBuilder builder = new BeanMappingBuilder() {
             protected void configure() {
+
                 mapping(org.archfirst.bfoms.domain.security.User.class,
                         org.archfirst.bfoms.webservice.security.User.class)
+                    .fields("person.firstName", "firstName")
+                    .fields("person.lastName", "lastName");
+
+                mapping(org.archfirst.bfoms.domain.security.User.class,
+                        org.archfirst.bfoms.jsonservice.User.class)
                     .fields("person.firstName", "firstName")
                     .fields("person.lastName", "lastName");
             }

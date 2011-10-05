@@ -28,6 +28,7 @@ import org.slf4j.LoggerFactory;
 public class SecurityService {
     private static final Logger logger =
         LoggerFactory.getLogger(SecurityService.class);
+    private static final String GROUP_USER = "user";
 
     // ----- Commands -----
     public void registerUser(RegistrationRequest request) throws UsernameExistsException {
@@ -41,18 +42,25 @@ public class SecurityService {
         }
 
         // Create the user and persist it
-        String passwordHash = PasswordHashGenerator.generateSaltedHash(
-                request.getPassword(),
-                request.getUsername());
+        // Removed password salting because GlassFish does not support it
+        // See http://flexiblejdbcrealm.wamblee.org for a possible solution
+        String passwordHash = PasswordHashGenerator.generateHash(
+                request.getPassword());
         Person person = new Person(
                 request.getFirstName(), request.getLastName());
         User user = new User(request.getUsername(), passwordHash, person);
+        UserGroup userGroup = new UserGroup(request.getUsername(), GROUP_USER);
         logger.info("Creating user {}", user.getUsername());
         userRepository.persist(user);      
+        userRepository.persist(userGroup);      
         logger.info("Created user {} with id = {}", user.getUsername(), user.getId());
     }
     
     // ----- Queries -----
+    public User getUser(String username) {
+        return userRepository.findUser(username);
+    }
+
     public AuthenticationResponse authenticateUser(String username, String password) {
         // Get the user from the database
         User user = userRepository.findUser(username);
@@ -62,7 +70,7 @@ public class SecurityService {
         
         // Match passwords
         String passwordProvidedHash =
-            PasswordHashGenerator.generateSaltedHash(password, username);
+            PasswordHashGenerator.generateHash(password);
         if (passwordProvidedHash.equals(user.getPasswordHash())) {
             return new AuthenticationResponse(true, user);
         }

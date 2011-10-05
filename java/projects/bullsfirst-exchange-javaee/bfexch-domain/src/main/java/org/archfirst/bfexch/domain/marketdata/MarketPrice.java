@@ -112,6 +112,7 @@ public class MarketPrice {
     // ----- Getters and Setters -----
     @Id
     @NotNull
+    @Column(nullable = false, length=10)
     public String getSymbol() {
         return symbol;
     }

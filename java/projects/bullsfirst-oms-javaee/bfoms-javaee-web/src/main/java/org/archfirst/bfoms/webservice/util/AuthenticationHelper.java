@@ -45,8 +45,7 @@ public class AuthenticationHelper {
     public static final boolean authenticate(String username, String password)
             throws AuthenticationException {
 
-        String passwordHash =
-            PasswordHashGenerator.generateSaltedHash(password, username);
+        String passwordHash = PasswordHashGenerator.generateHash(password);
 
         // Get the password hash stored in the database
         String passwordHashDb = null;

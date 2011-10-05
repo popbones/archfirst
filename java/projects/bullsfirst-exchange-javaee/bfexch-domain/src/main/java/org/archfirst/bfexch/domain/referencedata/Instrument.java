@@ -15,6 +15,7 @@
  */
 package org.archfirst.bfexch.domain.referencedata;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
@@ -74,7 +75,6 @@ public class Instrument implements Comparable <Instrument> {
 
     // ----- Attributes -----
     @XmlElement(name = "Symbol", required = true)
-    @Id
     private String symbol;
 
     @XmlElement(name = "Name", required = true)
@@ -84,7 +84,9 @@ public class Instrument implements Comparable <Instrument> {
     private String exchange;
 
     // ----- Getters and Setters -----
+    @Id
     @NotNull
+    @Column(nullable = false, length=10)
     public String getSymbol() {
         return symbol;
     }
@@ -92,6 +94,8 @@ public class Instrument implements Comparable <Instrument> {
         this.symbol = symbol;
     }
 
+    @NotNull
+    @Column(nullable = false, length=100)
     public String getName() {
         return name;
     }
@@ -99,6 +103,8 @@ public class Instrument implements Comparable <Instrument> {
         this.name = name;
     }
 
+    @NotNull
+    @Column(nullable = false, length=50)
     public String getExchange() {
         return exchange;
     }

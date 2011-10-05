@@ -19,7 +19,13 @@ insert into Person (id, firstName, lastName) values (3, 'Jack', 'Horner');
 -- -----------------------------------------------------------------------------
 -- Users
 -- -----------------------------------------------------------------------------
-insert into Users (id, version, username, passwordHash, person_id) values (1, 0, 'jhorner', 'bDUBbzggM5St3G4xCJBX3w==', 1);
-insert into Users (id, version, username, passwordHash, person_id) values (2, 0, 'khorner', 'h4zxG34UOEqumJf1l7ti3Q==', 2);
+insert into Users (id, version, username, passwordHash, person_id) values (1, 0, 'jhorner', 'sfT5pSPjb9lp9Fc+Ja9FQA==', 1);
+insert into Users (id, version, username, passwordHash, person_id) values (2, 0, 'khorner', 'sfT5pSPjb9lp9Fc+Ja9FQA==', 2);
+
+-- -----------------------------------------------------------------------------
+-- UserGroup
+-- -----------------------------------------------------------------------------
+insert into UserGroup (id, version, username, groupname) values (1, 0, 'jhorner', 'user');
+insert into UserGroup (id, version, username, groupname) values (2, 0, 'khorner', 'user');
 
 commit;
