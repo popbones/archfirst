@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0"
+    xmlns="http://java.sun.com/xml/ns/javaee"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+
+    <servlet>
+        <servlet-name>PublicServlet</servlet-name>
+        <servlet-class>org.archfirst.authexample.PublicServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PublicServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>PrivateServlet</servlet-name>
+        <servlet-class>org.archfirst.authexample.PrivateServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>PrivateServlet</servlet-name>
+        <url-pattern>/private</url-pattern>
+    </servlet-mapping>
+
+    <!-- Define a Security Constraint on this Application -->
+    <security-constraint>
+        <web-resource-collection>
+            <web-resource-name>Private Pages</web-resource-name>
+            <url-pattern>/private/*</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <role-name>user</role-name>
+        </auth-constraint>
+    </security-constraint>
+
+    <!-- Security roles referenced by this web application -->
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+
+    <!-- Define the Login Configuration for this Application -->
+    <login-config>
+        <auth-method>BASIC</auth-method>
+        <realm-name>auth-example</realm-name>
+    </login-config>
+
+    <!-- Set session timeout to 30 minutes -->
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+
+</web-app>
