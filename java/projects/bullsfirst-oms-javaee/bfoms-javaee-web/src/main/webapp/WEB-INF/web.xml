@@ -36,11 +36,11 @@
         <url-pattern>/json/*</url-pattern>
     </servlet-mapping>
 
-    <!-- Define a Security Constraint on this Application -->
+    <!-- Define security constraints on this application -->
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>JSON Service</web-resource-name>
-            <url-pattern>/json/*</url-pattern>
+            <web-resource-name>Secure JSON Service</web-resource-name>
+            <url-pattern>/json/secure/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>user</role-name>

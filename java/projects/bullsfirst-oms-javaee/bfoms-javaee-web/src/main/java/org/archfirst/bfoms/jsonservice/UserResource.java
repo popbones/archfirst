@@ -18,36 +18,62 @@ package org.archfirst.bfoms.jsonservice;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 import org.archfirst.bfoms.domain.security.SecurityService;
 import org.dozer.Mapper;
 
 /**
- * Login
+ * UserResource
  *
  * @author Naresh Bhatia
  */
 @Stateless
-@Path("/login")
+@Path("/")
 @Produces(MediaType.APPLICATION_JSON)
-public class Login {
+public class UserResource {
 
+    // ----- Commands -----
+    @Path("users")
+    @POST
+    public String createUser() {
+        
+        return "Cool";
+    }
+
+    // ----- Queries -----
+    @Path("secure/users/{username}")
+    @GET
+    public User getUser(
+            @Context SecurityContext sc,
+            @PathParam("username") String username) {
+        
+        // Users are authorized to get information on themselves only
+        if (!username.equals(getUsername(sc))) {
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        }
+        
+        return mapper.map(
+                securityService.getUser(username),
+                User.class);
+    }
+    
+    private String getUsername(SecurityContext sc) {
+        return sc.getUserPrincipal().getName();
+    }
+
+    // ----- Attributes -----
     @Inject
     private SecurityService securityService;
     
     @Inject
     private Mapper mapper;
-    
-    // ----- Commands -----
-
-    // ----- Queries -----
-    @GET
-    public User getUser() {
-        return mapper.map(
-                securityService.getUser("jhorner"),
-                User.class);
-    }
 }
