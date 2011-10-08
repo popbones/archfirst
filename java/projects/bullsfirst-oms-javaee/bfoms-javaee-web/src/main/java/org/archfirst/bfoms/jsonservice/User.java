@@ -18,7 +18,7 @@ package org.archfirst.bfoms.jsonservice;
 /**
  * User
  *
- * @author Naresh
+ * @author Naresh Bhatia
  */
 public class User {
 

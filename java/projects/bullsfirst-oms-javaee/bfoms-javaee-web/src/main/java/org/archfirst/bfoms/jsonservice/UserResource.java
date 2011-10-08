@@ -17,6 +17,7 @@ package org.archfirst.bfoms.jsonservice;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -28,6 +29,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import org.archfirst.bfoms.domain.security.RegistrationRequest;
 import org.archfirst.bfoms.domain.security.SecurityService;
 import org.dozer.Mapper;
 
@@ -38,15 +40,16 @@ import org.dozer.Mapper;
  */
 @Stateless
 @Path("/")
+@Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UserResource {
 
     // ----- Commands -----
     @Path("users")
     @POST
-    public String createUser() {
+    public RegistrationRequest createUser(RegistrationRequest request) {
         
-        return "Cool";
+        return request;
     }
 
     // ----- Queries -----

@@ -1,9 +1,5 @@
-This example shows the difference between "traditional" HTML form processing
-and AJAX based processing. In the traditional approach each time a button
-or hyperlink is clicked, a form post and a page reload are executed.
-In the AJAX approach, the initial page is loaded once and then server requests
-are made only when new data is required or updated. In addition, changes to
-the page are made locally by the client.
+This example shows how to create and get orders using a RESTful api. We use
+JAX-RS and JSON to achieve this.
 
 Build the application as follows:
 
@@ -13,10 +9,25 @@ Execute the application as follows:
 
     > mvn jetty:run
 
-To see HTML vs. AJAX based processing, visit the two URLs below:
+Creating Orders
+===============
+POST http://localhost:8080/jaxrs-oms/rest/orders HTTP/1.1
 
-    http://localhost:8080/json-oms/html-order.html
-    http://localhost:8080/json-oms/ajax-order.html
+{
+    "id": "123",
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": "1000"
+}
 
-HTML-based processing does a full page reload to display the submitted order
-whereas the AJAX-based page displays submitted orders on the same page.
+Getting Orders
+==============
+GET http://localhost:8080/jaxrs-oms/rest/orders/123 HTTP/1.1
+
+Response:
+{
+    "id": "123",
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": "1000"
+}

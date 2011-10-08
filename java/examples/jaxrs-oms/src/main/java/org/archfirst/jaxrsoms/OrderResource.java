@@ -15,8 +15,14 @@
  */
 package org.archfirst.jaxrsoms;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -25,13 +31,26 @@ import javax.ws.rs.core.MediaType;
  *
  * @author Naresh Bhatia
  */
-@Path("/order")
+@Path("/orders")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
 public class OrderResource {
+    
+    private static Map<Integer, Order> orders = new HashMap<Integer, Order>();
 
-    // This method is called if JSON is requested
+    @POST
+    public void createOrder(Order order) {
+        
+        orders.put(order.id, order);
+    }
+    
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Order getOrder() {
-        return new Order(123, "Buy", "AAPL", 1000);
+    @Path("/{id}")
+    public Order getOrder(@PathParam("id") int id) {
+        Order order = orders.get(id);
+        if (order == null) {
+            order = new Order(0, "Buy", "Unknown", 0);
+        }
+        return order;
     }
 }
