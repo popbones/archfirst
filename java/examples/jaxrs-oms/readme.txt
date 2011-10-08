@@ -12,22 +12,41 @@ Execute the application as follows:
 Creating Orders
 ===============
 POST http://localhost:8080/jaxrs-oms/rest/orders HTTP/1.1
+Content-Type: application/json
 
 {
-    "id": "123",
     "symbol": "AAPL",
     "side": "Buy",
-    "quantity": "1000"
+    "quantity": 1000
+}
+
+Response
+--------
+HTTP/1.1 201 Created
+Location: http://localhost:8080/jaxrs-oms/rest/orders/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": 1000,
+    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
 }
 
 Getting Orders
 ==============
-GET http://localhost:8080/jaxrs-oms/rest/orders/123 HTTP/1.1
+GET http://localhost:8080/jaxrs-oms/rest/orders/1 HTTP/1.1
 
-Response:
+Response
+--------
+HTTP/1.1 200 OK
+Content-Type: application/json
+
 {
-    "id": "123",
+    "id": 1,
     "symbol": "AAPL",
     "side": "Buy",
-    "quantity": "1000"
+    "quantity": 1000,
+    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
 }

@@ -15,31 +15,25 @@
  */
 package org.archfirst.jaxrsoms;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * OrderResource
+ * OrderRepository
  *
  * @author Naresh Bhatia
  */
-@Path("/orders/{id}")
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
-public class OrderResource {
+public class OrderRepository {
     
-    @GET
-    public Order getOrder(@PathParam("id") int id) {
-        Order order = OrderRepository.find(id);
-        if (order == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        return order;
+    private static int nextId = 1;
+    private static Map<Integer, Order> orders = new HashMap<Integer, Order>();
+    
+    public static void persist(Order order) {
+        order.id = nextId++;
+        orders.put(order.id, order);
+    }
+    
+    public static Order find(int id) {
+        return orders.get(id);
     }
 }

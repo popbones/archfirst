@@ -15,39 +15,18 @@
  */
 package org.archfirst.jaxrsoms;
 
-import java.net.URI;
-
 /**
- * Order
+ * OrderParams
  *
  * @author Naresh Bhatia
  */
-public class Order {
-    
-    // ----- Constructors -----
-    public Order() {
-    }
-
-    public Order(String side, String symbol, int quantity) {
-        this.side = side;
-        this.symbol = symbol;
-        this.quantity = quantity;
-    }
-
+public class OrderParams {
     // ----- Attributes -----
-    public int id;
     public String side;
     public String symbol;
     public int quantity;
-    public URI self;
 
     // ----- Getters and Setters -----
-    public int getId() {
-        return id;
-    }
-    public void setId(int id) {
-        this.id = id;
-    }
     public String getSide() {
         return side;
     }
@@ -65,11 +44,5 @@ public class Order {
     }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-    public URI getSelf() {
-        return self;
-    }
-    public void setSelf(URI self) {
-        this.self = self;
     }
 }

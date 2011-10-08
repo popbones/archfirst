@@ -16,30 +16,35 @@
 package org.archfirst.jaxrsoms;
 
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 /**
- * OrderResource
+ * OrdersResource
  *
  * @author Naresh Bhatia
  */
-@Path("/orders/{id}")
+@Path("/orders")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class OrderResource {
-    
-    @GET
-    public Order getOrder(@PathParam("id") int id) {
-        Order order = OrderRepository.find(id);
-        if (order == null) {
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
-        }
-        return order;
+public class OrdersResource {
+
+    @Context UriInfo uriInfo;
+
+    @POST
+    public Response createOrder(OrderParams params) {
+        
+        Order order = new Order(params.side, params.symbol, params.quantity);
+        OrderRepository.persist(order);
+        order.self = uriInfo.getAbsolutePathBuilder()
+            .path(String.valueOf(order.id))
+            .build();
+
+        return Response.created(order.self).entity(order).build();
     }
 }
