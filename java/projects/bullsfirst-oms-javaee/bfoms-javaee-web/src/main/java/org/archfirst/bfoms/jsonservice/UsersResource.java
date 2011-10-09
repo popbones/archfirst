@@ -15,56 +15,59 @@
  */
 package org.archfirst.bfoms.jsonservice;
 
+import java.net.URI;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
+import javax.ws.rs.core.UriInfo;
 
+import org.archfirst.bfoms.domain.security.RegistrationRequest;
 import org.archfirst.bfoms.domain.security.SecurityService;
-import org.dozer.Mapper;
+import org.archfirst.bfoms.domain.security.UsernameExistsException;
 
 /**
- * UserResource
+ * UsersResource
  *
  * @author Naresh Bhatia
  */
 @Stateless
-@Path("/secure/users/{username}")
+@Path("/users")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class UserResource {
+public class UsersResource {
 
-    @GET
-    public User getUser(
-            @Context SecurityContext sc,
-            @PathParam("username") String username) {
+    @Context UriInfo uriInfo;
+
+    @POST
+    public Response createUser(RegistrationRequest request) {
         
-        // Users are authorized to get information on themselves only
-        if (!username.equals(getUsername(sc))) {
-            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        // Create user
+        try {
+            securityService.registerUser(request);
         }
-        
-        return mapper.map(
-                securityService.getUser(username),
-                User.class);
-    }
-    
-    private String getUsername(SecurityContext sc) {
-        return sc.getUserPrincipal().getName();
+        catch (UsernameExistsException e) {
+            return Response.status(Response.Status.CONFLICT)
+                .entity(new ErrorMessage("Username already exists")).build();
+        }
+
+        // Create link to self
+        URI selfUri = uriInfo.getBaseUriBuilder()
+            .path("secure/users")
+            .path(request.getUsername())
+            .build();
+        Link self = new Link("self", selfUri);
+
+        return Response.created(self.getUri()).entity(self).build();
     }
 
     // ----- Attributes -----
     @Inject
     private SecurityService securityService;
-    
-    @Inject
-    private Mapper mapper;
 }
