@@ -41,7 +41,7 @@ public class DozerMapperFactory {
                     .fields("person.lastName", "lastName");
 
                 mapping(org.archfirst.bfoms.domain.security.User.class,
-                        org.archfirst.bfoms.jsonservice.User.class)
+                        org.archfirst.bfoms.restservice.User.class)
                     .fields("person.firstName", "firstName")
                     .fields("person.lastName", "lastName");
             }

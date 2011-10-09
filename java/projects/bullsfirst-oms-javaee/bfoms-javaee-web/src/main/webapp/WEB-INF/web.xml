@@ -18,11 +18,11 @@
     </servlet-mapping>
 
     <servlet>
-        <servlet-name>JSON Service</servlet-name>
+        <servlet-name>REST Service</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>org.archfirst.bfoms.jsonservice</param-value>
+            <param-value>org.archfirst.bfoms.restservice</param-value>
         </init-param>
         <init-param>
             <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
@@ -32,15 +32,15 @@
     </servlet>
     
     <servlet-mapping>
-        <servlet-name>JSON Service</servlet-name>
-        <url-pattern>/json/*</url-pattern>
+        <servlet-name>REST Service</servlet-name>
+        <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
     <!-- Define security constraints on this application -->
     <security-constraint>
         <web-resource-collection>
-            <web-resource-name>Secure JSON Service</web-resource-name>
-            <url-pattern>/json/secure/*</url-pattern>
+            <web-resource-name>Secure REST Service</web-resource-name>
+            <url-pattern>/rest/secure/*</url-pattern>
         </web-resource-collection>
         <auth-constraint>
             <role-name>user</role-name>
