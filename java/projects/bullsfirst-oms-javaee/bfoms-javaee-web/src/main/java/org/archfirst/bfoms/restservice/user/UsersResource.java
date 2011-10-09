@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.restservice;
+package org.archfirst.bfoms.restservice.user;
 
 import java.net.URI;
 
@@ -31,6 +31,8 @@ import javax.ws.rs.core.UriInfo;
 import org.archfirst.bfoms.domain.security.RegistrationRequest;
 import org.archfirst.bfoms.domain.security.SecurityService;
 import org.archfirst.bfoms.domain.security.UsernameExistsException;
+import org.archfirst.bfoms.restservice.util.ErrorMessage;
+import org.archfirst.bfoms.restservice.util.Link;
 
 /**
  * UsersResource

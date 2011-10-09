@@ -13,30 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.restservice;
+package org.archfirst.bfoms.restservice.user;
 
 /**
- * ErrorMessage
+ * User
  *
  * @author Naresh Bhatia
  */
-public class ErrorMessage {
-    // ----- Constructors -----
-    public ErrorMessage() {
-    }
-    
-    public ErrorMessage(String detail) {
-        this.detail = detail;
-    }
+public class User {
 
     // ----- Attributes -----
-    private String detail;
+    private String username;
+    private String firstName;
+    private String lastName;
 
     // ----- Getters and Setters -----
-    public String getDetail() {
-        return detail;
+    public String getUsername() {
+        return username;
     }
-    public void setDetail(String detail) {
-        this.detail = detail;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getFirstName() {
+        return firstName;
+    }
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+    public String getLastName() {
+        return lastName;
+    }
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 }
