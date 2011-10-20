@@ -16,9 +16,9 @@ First access the public page:
 
     http://localhost:8080/authentication-example
 
-Note that a session is created as soon as the browser accesses the site.
-This has nothing to do with user authentication. The session lasts for the
-duration specified in web.xml (see <session-timeout>).
+Note that a session is created when the browser accesses the site. This is
+because we call request.getSession(true) in the BaseServlet. The session
+lasts for the duration specified in web.xml (see <session-timeout>).
 
 At this point you can add attributes to the session using request parameters,
 e.g.
@@ -32,4 +32,3 @@ Now access the private page:
 
 You will be asked for a username and password. Enter a valid username/password
 for a bullsfirst user. You will now be able to see the private page.
-
