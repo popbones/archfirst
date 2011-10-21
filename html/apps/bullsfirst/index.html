@@ -1,0 +1,122 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <title></title>
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <link rel="shortcut icon" href="favicon.gif">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+  <!-- CSS concatenated and minified via ant build script-->
+  <link rel="stylesheet" href="css/style.css">
+  <!-- end CSS-->
+
+  <link rel="stylesheet" href="css/960.css" />
+
+  <script src="js/libs/modernizr-2.0.6.min.js"></script>
+</head>
+
+<body>
+
+  <div class="container_16">
+    <header>
+        <img id="logo" src="img/logo.jpg" alt="Bullsfirst logo" />
+    </header>
+
+    <div id="main" role="main">
+        <div class="grid_13">
+            <div class="center">
+                <img src="img/homeGraphic.png" alt="More results with Bullsfirst at the helm of your portfolio." />
+            </div>
+            <br />
+            <br />
+            <p>
+                We love to trade, and we hope you do too. Now you can do it with the latest trading
+                platform from Bullsfirst. We guarantee a 0-second trade execution, and will give
+                you a free popsicle if your trade doesn't go through in this time period. On a side
+                note, we just bought a big freezer and 10,000 popsicles. Thankfully, we've hedged
+                all popsicle expenses for the next two years! (Commodity experts say popsicles are
+                on the rise).
+            </p>
+            <br />
+        </div>
+
+        <div class="grid_3">
+            <form id="loginForm" action="">
+                <div class="formRow">
+                    <label for="username" class="required">Username</label><br/>
+                    <input id="username" name="username" type="text" class="narrowFormInput" /><br/>
+                </div>
+
+                <div class="formRow">
+                    <label for="password" class="required">Password</label><br/>
+                    <input id="password" name="password" type="password" class="narrowFormInput" /><br/>
+                </div>
+
+                <div class="tallFormRow">
+                    <input id="login" name="login" type="submit" value="Login" />
+                </div>
+            </form>
+
+            <div class="tallFormRow">
+                <a href="openaccount.htm">Open an Account</a>
+            </div>
+
+            <div id="message" class="tallFormRow">
+            </div>
+        </div>
+
+        <div class="clear"></div>
+    </div>
+
+    <footer>
+        This is a demo application. All data displayed is fictitious.
+        Copyright &copy; 2010-2011 <a href="http://archfirst.org">Archfirst</a>.
+    </footer>
+  </div> <!--! end of #container -->
+
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+  <script>window.jQuery || document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
+
+
+  <!-- scripts concatenated and minified via ant build script-->
+  <script defer src="js/plugins.js"></script>
+  <script defer src="js/script.js"></script>
+  <script defer src="js/mylibs/base64_encode.js"></script>
+  <script defer src="js/mylibs/utf8_encode.js"></script>
+  <!-- end scripts-->
+
+  <script type="text/javascript">
+    $(document).ready(function () {
+        new Bullsfirst.ready();
+    });
+  </script>
+
+
+  <!--
+  <script> // Change UA-XXXXX-X to be your site's ID
+    window._gaq = [['_setAccount','UAXXXXXXXX1'],['_trackPageview'],['_trackPageLoadTime']];
+    Modernizr.load({
+      load: ('https:' == location.protocol ? '//ssl' : '//www') + '.google-analytics.com/ga.js'
+    });
+  </script>
+  */
+  -->
+
+
+  <!--[if lt IE 7 ]>
+    <script src="//ajax.googleapis.com/ajax/libs/chrome-frame/1.0.3/CFInstall.min.js"></script>
+    <script>window.attachEvent('onload',function(){CFInstall.check({mode:'overlay'})})</script>
+  <![endif]-->
+  
+</body>
+</html>
