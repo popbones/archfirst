@@ -126,10 +126,6 @@ strong {
     font-weight: bold;
 }
 
-img {
-    vertical-align: middle;
-}
-
 /* General purpose classes
  * -------------------------------------------------------------------------- */
 .center {
@@ -203,6 +199,23 @@ footer {
     line-height: normal;
     color: #676767;
     text-align: center;
+}
+
+/* Statusbar
+ * -------------------------------------------------------------------------- */
+#statusbar {
+    display: none;
+    background-color: #f1eded;
+    padding: 4px;
+}
+
+#statusbar_message {
+    margin-left: 6px;
+}
+
+#statusbar_cancel_button {
+    float: right;
+    margin-right: 6px;
 }
 
 

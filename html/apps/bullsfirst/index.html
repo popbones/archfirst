@@ -32,55 +32,61 @@
     </header>
 
     <div id="main" role="main">
-        <div class="grid_13">
-            <div class="center">
-                <img src="img/homeGraphic.png" alt="More results with Bullsfirst at the helm of your portfolio." />
+        <div id="home_view" class="view">
+            <div class="grid_13">
+                <div class="center">
+                    <img src="img/homeGraphic.png" alt="More results with Bullsfirst at the helm of your portfolio." />
+                </div>
+                <br />
+                <br />
+                <p>
+                    We love to trade, and we hope you do too. Now you can do it with the latest trading
+                    platform from Bullsfirst. We guarantee a 0-second trade execution, and will give
+                    you a free popsicle if your trade doesn't go through in this time period. On a side
+                    note, we just bought a big freezer and 10,000 popsicles. Thankfully, we've hedged
+                    all popsicle expenses for the next two years! (Commodity experts say popsicles are
+                    on the rise).
+                </p>
+                <br />
             </div>
-            <br />
-            <br />
-            <p>
-                We love to trade, and we hope you do too. Now you can do it with the latest trading
-                platform from Bullsfirst. We guarantee a 0-second trade execution, and will give
-                you a free popsicle if your trade doesn't go through in this time period. On a side
-                note, we just bought a big freezer and 10,000 popsicles. Thankfully, we've hedged
-                all popsicle expenses for the next two years! (Commodity experts say popsicles are
-                on the rise).
-            </p>
-            <br />
-        </div>
 
-        <div class="grid_3">
-            <form id="loginForm" action="">
-                <div class="formRow">
-                    <label for="username" class="required">Username</label><br/>
-                    <input id="username" name="username" type="text" class="narrowFormInput" /><br/>
-                </div>
+            <div class="grid_3">
+                <form id="loginForm" action="">
+                    <div class="formRow">
+                        <label for="username" class="required">Username</label><br/>
+                        <input id="username" name="username" type="text" class="narrowFormInput" /><br/>
+                    </div>
 
-                <div class="formRow">
-                    <label for="password" class="required">Password</label><br/>
-                    <input id="password" name="password" type="password" class="narrowFormInput" /><br/>
-                </div>
+                    <div class="formRow">
+                        <label for="password" class="required">Password</label><br/>
+                        <input id="password" name="password" type="password" class="narrowFormInput" /><br/>
+                    </div>
+
+                    <div class="tallFormRow">
+                        <input id="login" name="login" type="submit" value="Login" />
+                    </div>
+                </form>
 
                 <div class="tallFormRow">
-                    <input id="login" name="login" type="submit" value="Login" />
+                    <a href="openaccount.htm">Open an Account</a>
                 </div>
-            </form>
 
-            <div class="tallFormRow">
-                <a href="openaccount.htm">Open an Account</a>
-            </div>
-
-            <div id="message" class="tallFormRow">
             </div>
         </div>
-
-        <div class="clear"></div>
     </div>
+
+    <div class="clear"></div>
 
     <footer>
         This is a demo application. All data displayed is fictitious.
         Copyright &copy; 2010-2011 <a href="http://archfirst.org">Archfirst</a>.
     </footer>
+
+    <div id="statusbar">
+        <span id="statusbar_message"></span>
+        <img id="statusbar_cancel_button" src="img/cross.png" alt="Clear status message" />
+    </div>
+
   </div> <!--! end of #container -->
 
 
