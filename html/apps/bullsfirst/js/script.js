@@ -29,26 +29,8 @@ Bullsfirst.ready = function () {
 
 
     // -----------------------------------------------------------------------------------
-    // Login and Authentication
+    // Authentication Header
     // -----------------------------------------------------------------------------------
-
-    /**
-     * Logs in to the server using saved credentials. If login is successful,
-     * saves the returned user information in the user object.
-     */
-    function login() {
-        $.ajax({
-            url: '/bfoms-javaee/rest/secure/users/' + username,
-            beforeSend: setAuthorizationHeader,
-            success: function (data, textStatus, jqXHR) {
-                user = data;
-                showStatusMessage('info', 'Welcome ' + user.firstName + ' ' + user.lastName + '!');
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                showStatusMessage('error', errorThrown);
-            }
-        });
-    }
 
     /**
      * Sets an Authorization header in the request. We force this header in every
@@ -81,17 +63,59 @@ Bullsfirst.ready = function () {
         $('#statusbar').fadeIn('fast');
     }
 
-    $('#statusbar_cancel_button').click(function () {
+    function clearStatusMessage() {
         $('#statusbar').fadeOut('fast');
+    }
+
+    $('#statusbar_cancel_button').click(function () {
+        clearStatusMessage();
+    });
+
+
+    // -----------------------------------------------------------------------------------
+    // Base View
+    // -----------------------------------------------------------------------------------
+    var BaseView = Backbone.View.extend({
+        parent: $('#main'),
+        className: 'view',
+
+        initialize: function() {
+            // this.el = $(this.el);
+            this.el.hide();
+            // this.parent.append(this.el);
+            return this;
+        },
+
+        hide: function() {
+            if (this.el.is(":visible") === false) {
+                return null;
+            }
+            promise = $.Deferred(_.bind(function(dfd) { 
+                this.el.fadeOut('fast', dfd.resolve)}, this));
+            return promise.promise();
+        },
+
+        show: function() {
+            if (this.el.is(':visible')) {
+                return;
+            }       
+            promise = $.Deferred(_.bind(function(dfd) { 
+                this.el.fadeIn('fast', dfd.resolve) }, this))
+            return promise.promise();
+        }
     });
 
 
     // -----------------------------------------------------------------------------------
     // Home View
     // -----------------------------------------------------------------------------------
-    var HomeView = Backbone.View.extend({
+    var HomeView = BaseView.extend({
 
         el: $("#home_view"),
+
+        initialize: function(options) {
+            this.constructor.__super__.initialize.apply(this, [options])
+        },
 
         events: {
             "submit #loginForm": "loginFormSubmit"
@@ -105,9 +129,88 @@ Bullsfirst.ready = function () {
         }
     });
 
+    /**
+     * Logs in to the server using saved credentials. If login is successful,
+     * saves the returned user information in the user object.
+     */
+    function login() {
+        $.ajax({
+            url: '/bfoms-javaee/rest/secure/users/' + username,
+            beforeSend: setAuthorizationHeader,
+            success: function (data, textStatus, jqXHR) {
+                user = data;
+                clearStatusMessage();
+                $('#loginForm #password').html(""); // erase password from form
+                window.location.hash = 'accounts';
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showStatusMessage('error', errorThrown);
+            }
+        });
+    }
+
 
     // -----------------------------------------------------------------------------------
-    // Start Backbone
+    // Accounts View
     // -----------------------------------------------------------------------------------
-    new HomeView();
+    var AccountsView = BaseView.extend({
+
+        el: $("#accounts_view"),
+
+        initialize: function(options) {
+            this.constructor.__super__.initialize.apply(this, [options])
+        },
+
+        // TODO: not yet called
+        onUserLoggedOut : function() {
+            // clear user context
+            clearStatusMessage();
+        }
+    });
+
+
+    // -----------------------------------------------------------------------------------
+    // Workspace
+    // -----------------------------------------------------------------------------------
+    var Workspace = Backbone.Router.extend({
+
+        views: {},
+
+        routes: {
+            "": "showHome",
+            "accounts": "showAccounts"
+        },
+
+        initialize: function () {
+            this.views = {
+                "home": new HomeView(),
+                "accounts": new AccountsView()
+            };
+
+            // Start with home view
+            window.location.hash = '';
+            return this;
+        },
+
+        hideAllViews: function () {
+            return _.select(
+                _.map(this.views, function(v) { return v.hide(); }), 
+                function (t) { return t != null });
+        },
+
+        showHome: function () {
+            var view = this.views['home'];
+            $.when(this.hideAllViews()).then(
+                function() { return view.show(); });
+        },
+
+        showAccounts: function () {
+            var view = this.views['accounts'];
+            $.when(this.hideAllViews()).then(
+                function() { return view.show(); });
+        }
+    });
+
+    new Workspace();
+    Backbone.history.start();
 }
