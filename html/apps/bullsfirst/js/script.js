@@ -22,27 +22,15 @@ var Bullsfirst = window.Bullsfirst || {};
 
 Bullsfirst.ready = function () {
 
-    /* Properties
-     * ---------------------------------------------------------------------- */
+    // -----------------------------------------------------------------------------------
+    // Properties
+    // -----------------------------------------------------------------------------------
     var username, password, user;
 
 
-    /* Events
-     * ---------------------------------------------------------------------- */
-    $('#loginForm').submit(function () {
-        username = $('#loginForm #username').val();
-        password = $('#loginForm #password').val();
-        login();
-        return false;
-    });
-
-    $('#statusbar_cancel_button').click(function () {
-        hideStatusBar();
-    });
-
-
-    /* Login
-     * ---------------------------------------------------------------------- */
+    // -----------------------------------------------------------------------------------
+    // Login and Authentication
+    // -----------------------------------------------------------------------------------
 
     /**
      * Logs in to the server using saved credentials. If login is successful,
@@ -62,10 +50,6 @@ Bullsfirst.ready = function () {
         });
     }
 
-
-    /* Authoriztion Header
-     * ---------------------------------------------------------------------- */
-
     /**
      * Sets an Authorization header in the request. We force this header in every
      * request to avoid being challenged by the server for credentials (the server
@@ -81,8 +65,9 @@ Bullsfirst.ready = function () {
     }
 
 
-    /* Statusbar
-     * ---------------------------------------------------------------------- */
+    // -----------------------------------------------------------------------------------
+    // Statusbar
+    // -----------------------------------------------------------------------------------
     var messageColors = {
         debug: 'black',
         info: 'green',
@@ -96,7 +81,33 @@ Bullsfirst.ready = function () {
         $('#statusbar').fadeIn('fast');
     }
 
-    function hideStatusBar() {
+    $('#statusbar_cancel_button').click(function () {
         $('#statusbar').fadeOut('fast');
-    }
+    });
+
+
+    // -----------------------------------------------------------------------------------
+    // Home View
+    // -----------------------------------------------------------------------------------
+    var HomeView = Backbone.View.extend({
+
+        el: $("#home_view"),
+
+        events: {
+            "submit #loginForm": "loginFormSubmit"
+        },
+
+        loginFormSubmit: function() {
+            username = $('#loginForm #username').val();
+            password = $('#loginForm #password').val();
+            login();
+            return false;
+        }
+    });
+
+
+    // -----------------------------------------------------------------------------------
+    // Start Backbone
+    // -----------------------------------------------------------------------------------
+    new HomeView();
 }
