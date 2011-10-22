@@ -140,7 +140,7 @@ Bullsfirst.ready = function () {
             success: function (data, textStatus, jqXHR) {
                 user = data;
                 clearStatusMessage();
-                $('#loginForm #password').html(""); // erase password from form
+                $('#loginForm #password')[0].value = ''; // erase password from form
                 window.location.hash = 'accounts';
             },
             error: function (jqXHR, textStatus, errorThrown) {
