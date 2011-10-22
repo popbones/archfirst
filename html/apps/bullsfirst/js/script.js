@@ -73,6 +73,28 @@ Bullsfirst.ready = function () {
 
 
     // -----------------------------------------------------------------------------------
+    // Open Account
+    // -----------------------------------------------------------------------------------
+    $('#open_account_dialog').dialog({
+        autoOpen: false,
+        height: 350,
+        width: 250,
+        modal: true,
+        buttons: {
+            'Open Account': function() {
+                $( this ).dialog('close');
+            },
+            Cancel: function() {
+                $( this ).dialog('close');
+            }
+        },
+        close: function() {
+            allFields.val('').removeClass('ui-state-error');
+        }
+    });
+
+
+    // -----------------------------------------------------------------------------------
     // Base View
     // -----------------------------------------------------------------------------------
     var BaseView = Backbone.View.extend({
@@ -87,7 +109,7 @@ Bullsfirst.ready = function () {
         },
 
         hide: function() {
-            if (this.el.is(":visible") === false) {
+            if (this.el.is(':visible') === false) {
                 return null;
             }
             promise = $.Deferred(_.bind(function(dfd) { 
@@ -111,20 +133,27 @@ Bullsfirst.ready = function () {
     // -----------------------------------------------------------------------------------
     var HomeView = BaseView.extend({
 
-        el: $("#home_view"),
+        el: $('#home_view'),
 
         initialize: function(options) {
             this.constructor.__super__.initialize.apply(this, [options])
         },
 
         events: {
-            "submit #loginForm": "loginFormSubmit"
+            'submit #loginForm': 'loginFormSubmit',
+            'click #l_open_account': 'showOpenAccountDialog'
         },
 
         loginFormSubmit: function() {
-            username = $('#loginForm #username').val();
-            password = $('#loginForm #password').val();
+            username = $('#l_username').val();
+            password = $('#l_password').val();
             login();
+            return false;
+        },
+
+        showOpenAccountDialog: function() {
+            var win = $('#open_account_dialog');
+            $('#open_account_dialog').dialog('open');
             return false;
         }
     });
@@ -140,7 +169,7 @@ Bullsfirst.ready = function () {
             success: function (data, textStatus, jqXHR) {
                 user = data;
                 clearStatusMessage();
-                $('#loginForm #password')[0].value = ''; // erase password from form
+                $('#l_password')[0].value = ''; // erase password from form
                 window.location.hash = 'accounts';
             },
             error: function (jqXHR, textStatus, errorThrown) {
@@ -155,7 +184,7 @@ Bullsfirst.ready = function () {
     // -----------------------------------------------------------------------------------
     var AccountsView = BaseView.extend({
 
-        el: $("#accounts_view"),
+        el: $('#accounts_view'),
 
         initialize: function(options) {
             this.constructor.__super__.initialize.apply(this, [options])
@@ -177,14 +206,14 @@ Bullsfirst.ready = function () {
         views: {},
 
         routes: {
-            "": "showHome",
-            "accounts": "showAccounts"
+            '': 'showHome',
+            'accounts': 'showAccounts'
         },
 
         initialize: function () {
             this.views = {
-                "home": new HomeView(),
-                "accounts": new AccountsView()
+                'home': new HomeView(),
+                'accounts': new AccountsView()
             };
 
             // Start with home view

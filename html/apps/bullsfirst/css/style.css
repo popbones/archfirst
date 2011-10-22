@@ -132,7 +132,7 @@ strong {
     text-align: center;
 }
 
-/* General form styles
+/* Form styles
  * -------------------------------------------------------------------------- */
 .formRow {
     margin-top: 4px;
@@ -142,37 +142,25 @@ strong {
     margin-top: 10px;
 }
 
+.required {
+}
+
+/* Buttons */
 button, input[type="button"], input[type="reset"], input[type="submit"] {
     margin-right: 4px;
 }
  
-.required {
-    color: red;
+/* Stretch fields */
+input.stretchInput, select.stretchSelect {
+    width: 100%;
 }
 
-form .errormsg {
-    font-size: 93%; /* 12px */
-    color: #C00;
-    text-transform: uppercase;
-}
-
-/* Narrow form (labels on top)
- * -------------------------------------------------------------------------- */
-input.narrowFormInput, select.narrowFormSelect {
-    width: 140px;
-}
-
-/* Wide form (labels on left and right-aligned)
- * -------------------------------------------------------------------------- */
+/* Label on left and right-aligned */
 label.left {
     float: left; 
     width: 164px;
     margin-right: 14px;
     text-align: right; 
-}
-
-input.wideFormInput, select.wideFormSelect {
-    width: 168px;
 }
 
 /* Header
