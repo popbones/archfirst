@@ -19,20 +19,26 @@ import java.net.URI;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.archfirst.bfoms.domain.security.AuthenticationResponse;
 import org.archfirst.bfoms.domain.security.RegistrationRequest;
 import org.archfirst.bfoms.domain.security.SecurityService;
 import org.archfirst.bfoms.domain.security.UsernameExistsException;
 import org.archfirst.bfoms.restservice.util.ErrorMessage;
 import org.archfirst.bfoms.restservice.util.Link;
+import org.dozer.Mapper;
 
 /**
  * UsersResource
@@ -69,7 +75,33 @@ public class UsersResource {
         return Response.created(self.getUri()).entity(self).build();
     }
 
+    @GET
+    @Path("{username}")
+    public User getUser(
+            @PathParam("username") String username,
+            @Context HttpServletRequest request) {
+        
+        String password = request.getHeader("password");
+        if (password == null || password.isEmpty() ) {
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        }
+
+        // Authenticate the user before returning any information
+        AuthenticationResponse response =
+            securityService.authenticateUser(username, password);
+        
+        // Don't return user information if authentication failed
+        if (!response.isSuccess()) {
+            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
+        }
+
+        return mapper.map(response.getUser(), User.class);
+    }
+    
     // ----- Attributes -----
     @Inject
     private SecurityService securityService;
+    
+    @Inject
+    private Mapper mapper;
 }

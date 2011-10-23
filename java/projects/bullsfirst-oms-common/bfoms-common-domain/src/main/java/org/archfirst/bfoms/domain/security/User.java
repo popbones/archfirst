@@ -21,6 +21,7 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -46,12 +47,24 @@ public class User extends DomainEntity {
     private User() {
     }
     
-    public User(String username, String passwordHash, Person person) {
+    public User(String username, String clearPassword, Person person) {
+
         this.username = username;
-        this.passwordHash = passwordHash;
+
+        // Removed password salting because GlassFish does not support it
+        // See http://flexiblejdbcrealm.wamblee.org for a possible solution
+        this.passwordHash = PasswordHashGenerator.generateHash(clearPassword);
+
         this.person = person;
     }
 
+    // ----- Queries -----
+    @Transient
+    public boolean isPasswordValid(String clearPassword) {
+        return this.passwordHash.equals(
+                PasswordHashGenerator.generateHash(clearPassword));
+    }
+    
     // ----- Attributes -----
     @XmlElement(name = "Username", required = true)
     private String username;

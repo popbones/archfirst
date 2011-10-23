@@ -42,13 +42,9 @@ public class SecurityService {
         }
 
         // Create the user and persist it
-        // Removed password salting because GlassFish does not support it
-        // See http://flexiblejdbcrealm.wamblee.org for a possible solution
-        String passwordHash = PasswordHashGenerator.generateHash(
-                request.getPassword());
         Person person = new Person(
                 request.getFirstName(), request.getLastName());
-        User user = new User(request.getUsername(), passwordHash, person);
+        User user = new User(request.getUsername(), request.getPassword(), person);
         UserGroup userGroup = new UserGroup(request.getUsername(), GROUP_USER);
         logger.info("Creating user {}", user.getUsername());
         userRepository.persist(user);      
@@ -68,10 +64,8 @@ public class SecurityService {
             return new AuthenticationResponse(false, null);
         }
         
-        // Match passwords
-        String passwordProvidedHash =
-            PasswordHashGenerator.generateHash(password);
-        if (passwordProvidedHash.equals(user.getPasswordHash())) {
+        // Validate password
+        if (user.isPasswordValid(password)) {
             return new AuthenticationResponse(true, user);
         }
         else {
