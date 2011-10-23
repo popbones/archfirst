@@ -46,6 +46,14 @@ Bullsfirst.ready = function () {
             'Basic ' + base64_encode(username + ':' + password));
     }
 
+    /**
+     * Sets the password header in the request. This is needed only for the get user
+     * REST request.
+     */
+    function setPasswordHeader(xhr) {
+        xhr.setRequestHeader('password', password);
+    }
+
 
     // -----------------------------------------------------------------------------------
     // Configure jQuery UI
@@ -170,8 +178,8 @@ Bullsfirst.ready = function () {
      */
     function login() {
         $.ajax({
-            url: '/bfoms-javaee/rest/secure/users/' + username,
-            beforeSend: setAuthorizationHeader,
+            url: '/bfoms-javaee/rest/users/' + username,
+            beforeSend: setPasswordHeader,
             success: function (data, textStatus, jqXHR) {
                 user = data;
                 clearStatusMessage();
