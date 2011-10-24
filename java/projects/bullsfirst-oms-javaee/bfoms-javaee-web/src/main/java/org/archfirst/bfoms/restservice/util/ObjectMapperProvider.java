@@ -23,7 +23,10 @@ import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 
 /**
- * ObjectMapperProvider
+ * Provider for Object to JSON conversion. Required for ignoring JAXB
+ * annotations on objects. Without this provider JAX-RS picks up annotations
+ * meant for XML conversion and throws exceptions when casing on properties
+ * does not match. 
  *
  * @author Naresh Bhatia
  */

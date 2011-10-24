@@ -67,7 +67,7 @@ public class UsersResource {
 
         // Create link to self
         URI selfUri = uriInfo.getBaseUriBuilder()
-            .path("secure/users")
+            .path("users")
             .path(request.getUsername())
             .build();
         Link self = new Link("self", selfUri);
