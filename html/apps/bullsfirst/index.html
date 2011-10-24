@@ -15,12 +15,12 @@
   <link rel="shortcut icon" href="favicon.gif">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
+  <link rel="stylesheet" href="css/960.css" />
+  <link rel="stylesheet" href="css/jquery-ui/jquery-ui-1.8.16.custom.css" />
+
   <!-- CSS concatenated and minified via ant build script-->
   <link rel="stylesheet" href="css/style.css">
   <!-- end CSS-->
-
-  <link rel="stylesheet" href="css/960.css" />
-  <link rel="stylesheet" href="css/jquery-ui/jquery-ui-1.8.16.custom.css" />
 
   <script src="js/libs/modernizr-2.0.6.min.js"></script>
 </head>
@@ -89,6 +89,7 @@
     <div class="clear"></div>
 
     <!-- Open Account Dialog -->
+    <!-- TODO: This form shows momentarily before it is hidden. What's the best way to avoid this? -->
     <div id="open_account_dialog" title="Open an Account">
         <form id="openAccountForm" action="">
             <div class="formRow">
@@ -113,7 +114,7 @@
 
             <div class="formRow">
                 <label for="oa_confirm_password" class="required">Confirm Password</label><br/>
-                <input id="oa_confirm_password" name="password" type="password" class="stretchInput" />
+                <input id="oa_confirm_password" name="confirmPassword" type="password" class="stretchInput" />
             </div>
         </form>
     </div>
@@ -144,6 +145,9 @@
   <script defer src="js/script.js"></script>
   <script defer src="js/mylibs/base64_encode.js"></script>
   <script defer src="js/mylibs/utf8_encode.js"></script>
+  <script defer src="js/mylibs/form2object.js"></script>
+  <script defer src="js/mylibs/jquery.toObject.js"></script>
+  <script defer src="js/mylibs/json2.js"></script>
   <!-- end scripts-->
 
   <script type="text/javascript">

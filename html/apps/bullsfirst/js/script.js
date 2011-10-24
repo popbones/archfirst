@@ -87,28 +87,6 @@ Bullsfirst.ready = function () {
 
 
     // -----------------------------------------------------------------------------------
-    // Open Account
-    // -----------------------------------------------------------------------------------
-    $('#open_account_dialog').dialog({
-        autoOpen: false,
-        height: 350,
-        width: 250,
-        modal: true,
-        buttons: {
-            'Open Account': function() {
-                $( this ).dialog('close');
-            },
-            Cancel: function() {
-                $( this ).dialog('close');
-            }
-        },
-        close: function() {
-            allFields.val('').removeClass('ui-state-error');
-        }
-    });
-
-
-    // -----------------------------------------------------------------------------------
     // Base View
     // -----------------------------------------------------------------------------------
     var BaseView = Backbone.View.extend({
@@ -158,6 +136,7 @@ Bullsfirst.ready = function () {
             'click #l_open_account': 'showOpenAccountDialog'
         },
 
+        // TODO: Form validation
         loginFormSubmit: function() {
             username = $('#l_username').val();
             password = $('#l_password').val();
@@ -166,7 +145,6 @@ Bullsfirst.ready = function () {
         },
 
         showOpenAccountDialog: function() {
-            var win = $('#open_account_dialog');
             $('#open_account_dialog').dialog('open');
             return false;
         }
@@ -185,12 +163,74 @@ Bullsfirst.ready = function () {
                 clearStatusMessage();
                 $('#l_password')[0].value = ''; // erase password from form
                 window.location.hash = 'accounts';
+                // TODO: Remove after accounts page shows username
+                showStatusMessage('info', 'Hello ' + user.firstName + ' ' + user.lastName + '!');
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 showStatusMessage('error', errorThrown);
             }
         });
     }
+
+
+    // -----------------------------------------------------------------------------------
+    // Open Account View
+    // -----------------------------------------------------------------------------------
+    $('#open_account_dialog').dialog({
+        autoOpen: false,
+        width: 250,
+        modal: true,
+        resizable: false,
+        buttons: [
+            {
+                text: 'Open Account',
+                class: 'open_account_button',
+                click: function() { $(this).dialog('close'); }
+            },
+            {
+                text: 'Cancel',
+                click: function() { $(this).dialog('close'); }
+            }]
+    });
+
+    var OpenAccountView = Backbone.View.extend({
+
+        el: $('#open_account_dialog').parent(),
+
+        events: {
+            'click .open_account_button': 'openAccount'
+        },
+
+        // TODO: Form validation
+        openAccount : function() {
+            $.ajax({
+                url: '/bfoms-javaee/rest/users',
+                type: 'POST',
+                contentType: 'application/json',
+                data: this.createRegistrationRequest(),
+                success: function (data, textStatus, jqXHR) {
+                    // TODO: initialize the proper user object - not with every form element
+                    user = $('#openAccountForm').toObject();
+                    clearStatusMessage();
+                    // TODO: Erase the form
+                    window.location.hash = 'accounts';
+                    // TODO: Remove after accounts page shows username
+                    showStatusMessage('info', 'Hello ' + user.firstName + ' ' + user.lastName + '!');
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    showStatusMessage('error', errorThrown);
+                }
+            });
+        },
+
+        createRegistrationRequest: function() {
+            var request = $('#openAccountForm').toObject();
+            delete request.confirmPassword; // property not expected by REST service
+            return JSON.stringify(request, null, '\t')
+        }
+    });
+
+    new OpenAccountView();
 
 
     // -----------------------------------------------------------------------------------
