@@ -51,8 +51,6 @@ import org.dozer.Mapper;
 @Produces(MediaType.APPLICATION_JSON)
 public class UsersResource {
 
-    @Context UriInfo uriInfo;
-
     @POST
     public Response createUser(RegistrationRequest request) {
         
@@ -66,8 +64,7 @@ public class UsersResource {
         }
 
         // Create link to self
-        URI selfUri = uriInfo.getBaseUriBuilder()
-            .path("users")
+        URI selfUri = uriInfo.getAbsolutePathBuilder()
             .path(request.getUsername())
             .build();
         Link self = new Link("self", selfUri);
@@ -99,6 +96,9 @@ public class UsersResource {
     }
     
     // ----- Attributes -----
+    @Context
+    private UriInfo uriInfo;
+
     @Inject
     private SecurityService securityService;
     

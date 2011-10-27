@@ -18,9 +18,12 @@ package org.archfirst.bfoms.restservice.util;
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
+import org.archfirst.common.money.Money;
+import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
+import org.codehaus.jackson.map.module.SimpleModule;
 
 /**
  * Provider for Object to JSON conversion. Required for ignoring JAXB
@@ -43,6 +46,10 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
                 JsonSerialize.Inclusion.NON_NULL);
         mapper.configure(
                 SerializationConfig.Feature.INDENT_OUTPUT, true);
+        
+        SimpleModule conversionModule = new SimpleModule("RestModule", new Version(1, 0, 0, null))
+            .addSerializer(Money.class, new MoneySerializer());
+        mapper.registerModule(conversionModule);
     }
 
     @Override

@@ -13,58 +13,53 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.restservice.user;
+package org.archfirst.bfoms.restservice.account;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.SecurityContext;
 
-import org.archfirst.bfoms.domain.security.SecurityService;
-import org.dozer.Mapper;
+import org.archfirst.bfoms.domain.account.BaseAccountService;
 
 /**
- * UserResource
+ * AccountsResource
  *
  * @author Naresh Bhatia
  */
 @Stateless
-@Path("/secure/users/{username}")
+@Path("/secure/accounts")
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-public class UserResource {
+public class AccountsResource {
 
-    @GET
-    public User getUser(
-            @Context SecurityContext sc,
-            @PathParam("username") String username) {
+    @POST
+    @Path("{id}/change_name")
+    public Response changeAccountName(
+            @PathParam("id") Long id,
+            ChangeAccountNameRequest request) {
         
-        // Users are authorized to get information on themselves only
-        if (!username.equals(getUsername(sc))) {
-            throw new WebApplicationException(Response.Status.UNAUTHORIZED);
-        }
-        
-        return mapper.map(
-                securityService.getUser(username),
-                User.class);
+        baseAccountService.changeAccountName(id, request.getNewName());
+        return Response.ok().build();
     }
     
-    private String getUsername(SecurityContext sc) {
-        return sc.getUserPrincipal().getName();
+    // ----- Helper Classes -----
+    private static class ChangeAccountNameRequest {
+        private String newName;
+        public String getNewName() {
+            return newName;
+        }
+        public void setNewName(String newName) {
+            this.newName = newName;
+        }
     }
 
     // ----- Attributes -----
     @Inject
-    private SecurityService securityService;
-    
-    @Inject
-    private Mapper mapper;
+    private BaseAccountService baseAccountService;
 }
