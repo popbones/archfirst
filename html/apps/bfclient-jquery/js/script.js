@@ -154,12 +154,14 @@ Bullsfirst.ready = function () {
      * Logs in to the server using saved credentials. If login is successful,
      * saves the returned user information in the user object.
      */
+
     function login() {
+
         $.ajax({
             url: '/bfoms-javaee/rest/users/' + username,
             beforeSend: setPasswordHeader,
             success: function (data, textStatus, jqXHR) {
-                user = data;
+			    user = data;
                 clearStatusMessage();
                 $('#l_password')[0].value = ''; // erase password from form
                 window.location.hash = 'accounts';
@@ -184,7 +186,7 @@ Bullsfirst.ready = function () {
         buttons: [
             {
                 text: 'Open Account',
-                class: 'open_account_button',
+                "class": 'open_account_button',
                 click: function() { $(this).dialog('close'); }
             },
             {
