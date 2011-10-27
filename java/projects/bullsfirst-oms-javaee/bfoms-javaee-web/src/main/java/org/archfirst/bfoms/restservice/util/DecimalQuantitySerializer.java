@@ -17,27 +17,22 @@ package org.archfirst.bfoms.restservice.util;
 
 import java.io.IOException;
 
-import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.DecimalQuantity;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 
 /**
- * MoneySerializer
+ * DecimalQuantitySerializer
  *
  * @author Naresh Bhatia
  */
-public class MoneySerializer extends JsonSerializer<Money> {
+public class DecimalQuantitySerializer extends JsonSerializer<DecimalQuantity> {
 
     @Override
-    public void serialize(Money money, JsonGenerator jgen, SerializerProvider provider)
+    public void serialize(DecimalQuantity quantity, JsonGenerator jgen, SerializerProvider provider)
             throws IOException, JsonProcessingException {
-        jgen.writeStartObject();
-        jgen.writeFieldName("amount");
-        jgen.writeNumber(money.getAmount());
-        jgen.writeFieldName("currency");
-        jgen.writeString(money.getCurrency().getCurrencyCode());
-        jgen.writeEndObject();
+        jgen.writeNumber((quantity == null) ? 0 : quantity.getValue().intValue());
     }
 }

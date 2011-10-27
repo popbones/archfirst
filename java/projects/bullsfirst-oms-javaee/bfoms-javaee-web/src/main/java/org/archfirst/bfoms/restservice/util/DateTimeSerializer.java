@@ -17,27 +17,23 @@ package org.archfirst.bfoms.restservice.util;
 
 import java.io.IOException;
 
-import org.archfirst.common.money.Money;
+import org.archfirst.common.datetime.DateTimeUtil;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
+import org.joda.time.DateTime;
 
 /**
- * MoneySerializer
+ * DateTimeSerializer
  *
  * @author Naresh Bhatia
  */
-public class MoneySerializer extends JsonSerializer<Money> {
+public class DateTimeSerializer extends JsonSerializer<DateTime> {
 
     @Override
-    public void serialize(Money money, JsonGenerator jgen, SerializerProvider provider)
+    public void serialize(DateTime dateTime, JsonGenerator jgen, SerializerProvider provider)
             throws IOException, JsonProcessingException {
-        jgen.writeStartObject();
-        jgen.writeFieldName("amount");
-        jgen.writeNumber(money.getAmount());
-        jgen.writeFieldName("currency");
-        jgen.writeString(money.getCurrency().getCurrencyCode());
-        jgen.writeEndObject();
+        jgen.writeString(DateTimeUtil.toStringISODateTime(dateTime));
     }
 }

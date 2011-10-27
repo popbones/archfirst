@@ -16,28 +16,24 @@
 package org.archfirst.bfoms.restservice.util;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
-import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.Percentage;
 import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
 import org.codehaus.jackson.map.JsonSerializer;
 import org.codehaus.jackson.map.SerializerProvider;
 
 /**
- * MoneySerializer
+ * PercentageSerializer
  *
  * @author Naresh Bhatia
  */
-public class MoneySerializer extends JsonSerializer<Money> {
+public class PercentageSerializer extends JsonSerializer<Percentage> {
 
     @Override
-    public void serialize(Money money, JsonGenerator jgen, SerializerProvider provider)
+    public void serialize(Percentage percentage, JsonGenerator jgen, SerializerProvider provider)
             throws IOException, JsonProcessingException {
-        jgen.writeStartObject();
-        jgen.writeFieldName("amount");
-        jgen.writeNumber(money.getAmount());
-        jgen.writeFieldName("currency");
-        jgen.writeString(money.getCurrency().getCurrencyCode());
-        jgen.writeEndObject();
+        jgen.writeNumber((percentage == null) ? BigDecimal.ZERO : percentage.getValue());
     }
 }

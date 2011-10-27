@@ -19,11 +19,14 @@ import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
 
 import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.DecimalQuantity;
+import org.archfirst.common.quantity.Percentage;
 import org.codehaus.jackson.Version;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.codehaus.jackson.map.module.SimpleModule;
+import org.joda.time.DateTime;
 
 /**
  * Provider for Object to JSON conversion. Required for ignoring JAXB
@@ -48,7 +51,10 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
                 SerializationConfig.Feature.INDENT_OUTPUT, true);
         
         SimpleModule conversionModule = new SimpleModule("ConversionsModule", new Version(1, 0, 0, null))
-            .addSerializer(Money.class, new MoneySerializer());
+            .addSerializer(Money.class, new MoneySerializer())
+            .addSerializer(DecimalQuantity.class, new DecimalQuantitySerializer())
+            .addSerializer(Percentage.class, new PercentageSerializer())
+            .addSerializer(DateTime.class, new DateTimeSerializer());
         mapper.registerModule(conversionModule);
     }
 
