@@ -47,7 +47,7 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
         mapper.configure(
                 SerializationConfig.Feature.INDENT_OUTPUT, true);
         
-        SimpleModule conversionModule = new SimpleModule("RestModule", new Version(1, 0, 0, null))
+        SimpleModule conversionModule = new SimpleModule("ConversionsModule", new Version(1, 0, 0, null))
             .addSerializer(Money.class, new MoneySerializer());
         mapper.registerModule(conversionModule);
     }
