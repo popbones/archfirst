@@ -173,21 +173,17 @@
             </activation>
             <build>
                 <plugins>
-                    <!-- Do not run tests by default -->
                     <plugin>
     					<groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>2.10</version>
-                        <configuration>
-                            <skip>true</skip>
-                        </configuration>
                     </plugin>
                 </plugins>
             </build>
         </profile>
 
         <profile>
-            <id>glassfish-test</id>
+            <id>arquillian-test</id>
             <dependencies>
                 <dependency>
                     <groupId>org.jboss.arquillian.container</groupId>
@@ -201,12 +197,11 @@
                 </dependency>
             </dependencies>
 			<build>
+			    <!-- Maven gives this error: Unrecognised tag: 'testSourceDirectory' -->
+			    <!-- testSourceDirectory>${project.basedir}/src/test/java-arquillian</testSourceDirectory -->
                 <testResources>
                     <testResource>
-                        <directory>src/test/resources</directory>
-                    </testResource>
-                    <testResource>
-                        <directory>src/test/resources-glassfish-embedded</directory>
+                        <directory>src/test/resources-arquillian</directory>
                     </testResource>
                 </testResources>
 				<plugins>
