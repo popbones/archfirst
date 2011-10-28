@@ -26,6 +26,8 @@ import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.archfirst.bfoms.domain.util.Constants;
 import org.archfirst.common.datetime.DateTimeAdapter;
 import org.archfirst.common.datetime.DateTimeUtil;
@@ -162,6 +164,55 @@ public class Position {
         return builder.toString();
     }
 
+    // ----- Object Method Overrides -----
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+            .append(accountId)
+            .append(accountName)
+            .append(instrumentSymbol)
+            .append(instrumentName)
+            .append(lotId)
+            // .append(lotCreationTime)
+            .append(quantity)
+            .append(lastTrade)
+            .append(marketValue)
+            .append(pricePaid)
+            .append(totalCost)
+            .append(gain)
+            // .append(gainPercent)
+            .append(children)
+            .hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) { return false; }
+        if (other == this) { return true; }
+        if (other.getClass() != getClass()) {
+            return false;
+        }
+        final Position that = (Position)other;
+        return new EqualsBuilder()
+            .append(accountId, that.accountId)
+            .append(accountName, that.accountName)
+            .append(instrumentSymbol, that.instrumentSymbol)
+            .append(instrumentName, that.instrumentName)
+            .append(lotId, that.lotId)
+            // Causes issues with serialization/deserialization
+            // .append(lotCreationTime, that.lotCreationTime)
+            .append(quantity, that.quantity)
+            .append(lastTrade, that.lastTrade)
+            .append(marketValue, that.marketValue)
+            .append(pricePaid, that.pricePaid)
+            .append(totalCost, that.totalCost)
+            .append(gain, that.gain)
+            // Causes issues with serialization/deserialization
+            // .append(gainPercent, that.gainPercent)
+            .append(children, that.children)
+            .isEquals();
+    }
+    
     // ----- Attributes -----
     @XmlElement(name = "AccountId", required = true)
     private Long accountId;
@@ -251,6 +302,50 @@ public class Position {
         return children;
     }
     
+    // ----- Private setters to keep Jackson happy -----
+    private void setAccountId(Long accountId) {
+        this.accountId = accountId;
+    }
+    private void setAccountName(String accountName) {
+        this.accountName = accountName;
+    }
+    private void setInstrumentSymbol(String instrumentSymbol) {
+        this.instrumentSymbol = instrumentSymbol;
+    }
+    private void setInstrumentName(String instrumentName) {
+        this.instrumentName = instrumentName;
+    }
+    private void setLotId(Long lotId) {
+        this.lotId = lotId;
+    }
+    private void setLotCreationTime(DateTime lotCreationTime) {
+        this.lotCreationTime = lotCreationTime;
+    }
+    private void setQuantity(DecimalQuantity quantity) {
+        this.quantity = quantity;
+    }
+    private void setLastTrade(Money lastTrade) {
+        this.lastTrade = lastTrade;
+    }
+    private void setMarketValue(Money marketValue) {
+        this.marketValue = marketValue;
+    }
+    private void setPricePaid(Money pricePaid) {
+        this.pricePaid = pricePaid;
+    }
+    private void setTotalCost(Money totalCost) {
+        this.totalCost = totalCost;
+    }
+    private void setGain(Money gain) {
+        this.gain = gain;
+    }
+    private void setGainPercent(Percentage gainPercent) {
+        this.gainPercent = gainPercent;
+    }
+    private void setChildren(List<Position> children) {
+        this.children = children;
+    }
+
     // ----- Comparators -----
     public static class LotCreationTimeComparator implements Comparator<Position> {
 

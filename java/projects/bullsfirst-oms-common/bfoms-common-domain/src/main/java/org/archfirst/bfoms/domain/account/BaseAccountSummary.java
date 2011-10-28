@@ -20,6 +20,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * BaseAccountSummary
  *
@@ -40,6 +43,29 @@ public abstract class BaseAccountSummary {
         this.name = name;
     }
 
+    // ----- Object Method Overrides -----
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+            .append(id)
+            .append(name)
+            .hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) { return false; }
+        if (other == this) { return true; }
+        if (other.getClass() != getClass()) {
+            return false;
+        }
+        final BaseAccountSummary that = (BaseAccountSummary)other;
+        return new EqualsBuilder()
+            .append(id, that.id)
+            .append(name, that.name)
+            .isEquals();
+    }
+    
     // ----- Attributes -----
     @XmlElement(name = "Id")
     protected long id;

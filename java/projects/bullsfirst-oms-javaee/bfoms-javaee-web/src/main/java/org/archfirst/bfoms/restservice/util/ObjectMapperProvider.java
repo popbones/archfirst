@@ -54,6 +54,7 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
             .addSerializer(Money.class, new MoneySerializer())
             .addSerializer(DecimalQuantity.class, new DecimalQuantitySerializer())
             .addSerializer(Percentage.class, new PercentageSerializer())
+            .addDeserializer(Percentage.class, new PercentageDeserializer())
             .addSerializer(DateTime.class, new DateTimeSerializer());
         mapper.registerModule(conversionModule);
     }

@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.archfirst.bfoms.domain.account.BaseAccountSummary;
 import org.archfirst.common.money.Money;
 
@@ -56,6 +58,39 @@ public class BrokerageAccountSummary extends BaseAccountSummary {
         this.positions = positions;
     }
 
+    // ----- Object Method Overrides -----
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 37)
+            .appendSuper(super.hashCode())
+            .append(cashPosition)
+            .append(marketValue)
+            .append(editPermission)
+            .append(tradePermission)
+            .append(transferPermission)
+            .append(positions)
+            .hashCode();
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) { return false; }
+        if (other == this) { return true; }
+        if (other.getClass() != getClass()) {
+            return false;
+        }
+        final BrokerageAccountSummary that = (BrokerageAccountSummary)other;
+        return new EqualsBuilder()
+            .appendSuper(super.equals(that))
+            .append(cashPosition, that.cashPosition)
+            .append(marketValue, that.marketValue)
+            .append(editPermission, that.editPermission)
+            .append(tradePermission, that.tradePermission)
+            .append(transferPermission, that.transferPermission)
+            .append(positions, that.positions)
+            .isEquals();
+    }
+    
     // ----- Attributes -----
     @XmlElement(name = "CashPosition", required = true)
     protected Money cashPosition;
