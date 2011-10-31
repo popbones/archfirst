@@ -73,12 +73,7 @@ input:invalid, textarea:invalid { background-color: #f0dddd; }
 table { border-collapse: collapse; border-spacing: 0; }
 td { vertical-align: top; }
 
-/* jQuery UI
- * -------------------------------------------------------------------------- */
-.ui-widget-overlay {
-    opacity: .7; 
-    background: black;
-} 
+/* ==|== jQuery UI ======================================================= */
 /*
  * jQuery UI CSS Framework 1.8.16
  *
@@ -807,7 +802,12 @@ footer {
     margin-right: 6px;
 }
 
-
+/* jQuery UI Overrides
+ * -------------------------------------------------------------------------- */
+.ui-widget-overlay {
+    opacity: .7; 
+    background: black;
+} 
 
 
 
