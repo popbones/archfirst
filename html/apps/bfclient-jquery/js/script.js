@@ -145,7 +145,7 @@ Bullsfirst.ready = function () {
         },
 
         showOpenAccountDialog: function() {
-            $('#open_account_dialog').dialog('open');
+            $('#open_account_dialog').dialog('open').removeClass("hidden");
             return false;
         }
     });
@@ -158,7 +158,8 @@ Bullsfirst.ready = function () {
     function login() {
 
         $.ajax({
-            url: '/bfoms-javaee/rest/users/' + username,
+            url: '/bfoms-javaee/rest/users/' + username, 
+           /* url: '/archfirst/login.php?user_name='+username+'&?password='+password,*/
             beforeSend: setPasswordHeader,
             success: function (data, textStatus, jqXHR) {
 			    user = data;
@@ -186,7 +187,7 @@ Bullsfirst.ready = function () {
         buttons: [
             {
                 text: 'Open Account',
-                "class": 'open_account_button',
+                id: 'open_account_button',
                 click: function() { $(this).dialog('close'); }
             },
             {
@@ -200,13 +201,14 @@ Bullsfirst.ready = function () {
         el: $('#open_account_dialog').parent(),
 
         events: {
-            'click .open_account_button': 'openAccount'
+            'click #open_account_button': 'openAccount'
         },
 
         // TODO: Form validation
         openAccount : function() {
             $.ajax({
-                url: '/bfoms-javaee/rest/users',
+			/* 	url: '/archfirst/post.php', */
+               url: '/bfoms-javaee/rest/users',
                 type: 'POST',
                 contentType: 'application/json',
                 data: this.createRegistrationRequest(),

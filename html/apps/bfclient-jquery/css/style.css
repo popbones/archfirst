@@ -73,156 +73,6 @@ input:invalid, textarea:invalid { background-color: #f0dddd; }
 table { border-collapse: collapse; border-spacing: 0; }
 td { vertical-align: top; }
 
-
-/* ==|== primary styles =====================================================
-   Author: Naresh Bhatia
-   ========================================================================== */
-
-p {
-    font-size:  14px;
-    margin: 6px 0;
-}
-
-h1 {
-    font-size: 24px;
-    margin-bottom: 12px;
-}
-
-h2 {
-    font-size: 20px;
-    margin-bottom: 10px;
-}
-
-h3 {
-    font-size: 16px;
-    margin-bottom: 8px;
-    color: #600;
-}
-
-strong {
-    font-weight: bold;
-}
-
-/* General purpose classes
- * -------------------------------------------------------------------------- */
-.center {
-    text-align: center;
-}
-
-/* main container
- * -------------------------------------------------------------------------- */
-.container {
-	width:960px;
-	margin:auto;
-	position:relative;
-}
-/* main page area
- * -------------------------------------------------------------------------- */
-.container {
-	margin-bottom:20px;
-}
-
-/* Form styles
- * -------------------------------------------------------------------------- */
-.formRow {
-    margin-top: 4px;
-}
- 
-.tallFormRow {
-    margin-top: 10px;
-}
-
-.required {
-}
-
-/* Buttons */
-button, input[type="button"], input[type="reset"], input[type="submit"] {
-    margin-right: 4px;
-}
- 
-/* Stretch fields */
-input.stretchInput, select.stretchSelect {
-    width: 100%;
-}
-
-/* Label on left and right-aligned */
-label.left {
-    float: left; 
-    width: 164px;
-    margin-right: 14px;
-    text-align: right; 
-}
-
-/* Header
- * -------------------------------------------------------------------------- */
-header {
-    background: url(../img/slogan.jpg) right bottom no-repeat;
-    height: 100px;
-    border-bottom: 4px solid #B30000;
-    margin-bottom: 16px;
-    position:realtive;
-}
-
-header h1 {
-    background:url(../img/logo.jpg) no-repeat;
-	height:62px;
-	position:absolute;
-	top:0px;
-	width:300px;
-	text-indent:-9999px;
-}
-/* Home
- * -------------------------------------------------------------------------- */
-#home_view {
-   position:relative;
-}
-#home_view .login {
-    width:160px;
-    position:absolute;
-    right:10px;	
-    top:0px; 
-}
-#home_view .hero {
-    padding:190px 0 0 0px;
-	width:685px;
-	background:url(../img/homeGraphic.png) 105px 0 no-repeat; 
-}
-
-#home_view .hero h1 {
-	text-indent:-9999px;	 
-} 
-/* Footer
- * -------------------------------------------------------------------------- */
-footer {
-    padding: 10px;
-    font-size: 93%; /* 12px */
-    line-height: normal;
-    color: #676767;
-    text-align: center;
-}
-
-/* Statusbar
- * -------------------------------------------------------------------------- */
-#statusbar {
-    display: none;
-    background-color: #f1eded;
-    padding: 4px;
-    position:relative;
-    top:10px;
-    width:960px;
-	margin:auto;
-}
-
-#statusbar_message {
-    margin-left: 6px;
-}
-
-#statusbar_cancel_button {
-    float: right;
-    margin-right: 6px;
-}
-
-
 /* jQuery UI
  * -------------------------------------------------------------------------- */
 .ui-widget-overlay {
@@ -808,6 +658,157 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .clearfix:before, .clearfix:after { content: ""; display: table; }
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
+
+/* ==|== primary styles =====================================================
+   Author: Naresh Bhatia
+   ========================================================================== */
+
+p {
+    font-size:  14px;
+    margin: 6px 0;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #600;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* General purpose classes
+ * -------------------------------------------------------------------------- */
+.center {
+    text-align: center;
+}
+
+/* main container
+ * -------------------------------------------------------------------------- */
+.container {
+	width:960px;
+	margin:auto;
+	position:relative;
+}
+/* main page area
+ * -------------------------------------------------------------------------- */
+.container {
+	margin-bottom:20px;
+}
+
+/* Form styles
+ * -------------------------------------------------------------------------- */
+.formRow {
+    margin-top: 4px;
+}
+ 
+.tallFormRow {
+    margin-top: 10px;
+}
+
+.required {
+}
+
+/* Buttons */
+button, input[type="button"], input[type="reset"], input[type="submit"] {
+    margin-right: 4px;
+}
+ 
+/* Stretch fields */
+input.stretchInput, select.stretchSelect {
+    width: 100%;
+}
+
+/* Label on left and right-aligned */
+label.left {
+    float: left; 
+    width: 164px;
+    margin-right: 14px;
+    text-align: right; 
+}
+
+/* Header
+ * -------------------------------------------------------------------------- */
+header {
+    background: url(../img/slogan.jpg) right bottom no-repeat;
+    height: 100px;
+    border-bottom: 4px solid #B30000;
+    margin-bottom: 16px;
+    position:realtive;
+}
+
+header h1 {
+    background:url(../img/logo.jpg) no-repeat;
+	height:62px;
+	position:absolute;
+	top:0px;
+	width:300px;
+	text-indent:-9999px;
+}
+/* Home
+ * -------------------------------------------------------------------------- */
+#home_view {
+   position:relative;
+}
+#home_view .login {
+    width:160px;
+    position:absolute;
+    right:10px;	
+    top:0px; 
+}
+#home_view .hero {
+    padding:190px 0 0 0px;
+	width:685px;
+	background:url(../img/homeGraphic.png) 105px 0 no-repeat; 
+}
+
+#home_view .hero h1 {
+	text-indent:-9999px;	 
+} 
+/* Footer
+ * -------------------------------------------------------------------------- */
+footer {
+    padding: 10px;
+    font-size: 93%; /* 12px */
+    line-height: normal;
+    color: #676767;
+    text-align: center;
+}
+
+/* Statusbar
+ * -------------------------------------------------------------------------- */
+#statusbar {
+    display: none;
+    background-color: #f1eded;
+    padding: 4px;
+    position:relative;
+    top:10px;
+    width:960px;
+	margin:auto;
+}
+
+#statusbar_message {
+    margin-left: 6px;
+}
+
+#statusbar_cancel_button {
+    float: right;
+    margin-right: 6px;
+}
+
+
+
 
 
 /* ==|== media queries ====================================================== */
