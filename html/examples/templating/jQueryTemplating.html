@@ -14,7 +14,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
 <script src="../../libs/jquery-tmpl/jquery-tmpl-beta-1.0.0/jquery.tmpl.js"></script>
 
-<script id="listTemplate" type="text/x-jquery-tmpl">
+<script id="peopleTemplate" type="text/x-jquery-tmpl">
 <li>
     <span>${id}</span>
     <p><strong>Name: </strong> ${name}</p>
@@ -25,7 +25,7 @@
 </script>
     
 <script type="text/javascript">
-    var data = [
+    var people = [
         { id: 1, name: 'John',  age: 25 },
         { id: 2, name: 'Jane', age: 49 },
         { id: 3, name: 'Jim', age: 31 },
@@ -34,7 +34,7 @@
         { id: 6, name: 'Jack', age: 48 }
     ];
 
-    $('#listTemplate').tmpl(data, { showAge: true }).appendTo('ul');
+    $('#peopleTemplate').tmpl(people, { showAge: true }).appendTo('ul');
 </script>
 
 </body>

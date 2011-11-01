@@ -14,15 +14,15 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
 <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js"></script> 
 
-<script id="listTemplate" type="text/x-underscore-tmpl">
-<% for (var index = 0; index < items.length; index++) { %>
+<script id="peopleTemplate" type="text/x-underscore-tmpl">
+<% for (var index = 0; index < people.length; index++) { %>
 
-<% var item = items[index]; %>
+<% var person = people[index]; %>
 <li>
-    <span><%= item.id %></span>
-    <p><strong>Name: </strong> <%= item.name %></p>
+    <span><%= person.id %></span>
+    <p><strong>Name: </strong> <%= person.name %></p>
     <% if (showAge) { %>
-        <p><strong>Age: </strong> <%= item.age %></p>
+        <p><strong>Age: </strong> <%= person.age %></p>
     <% } %>
 </li>
 
@@ -30,7 +30,7 @@
 </script>
 
 <script type="text/javascript">
-    var data = [
+    var people = [
         { id: 1, name: 'John',  age: 25 },
         { id: 2, name: 'Jane', age: 49 },
         { id: 3, name: 'Jim', age: 31 },
@@ -40,13 +40,13 @@
     ];
 
     // Compile template into a function
-    listTemplate = _.template($('#listTemplate').html());
+    peopleTemplate = _.template($('#peopleTemplate').html());
 
     // Generate html from the template
-    $('ul').html(listTemplate({items : this.data , showAge: true}));
+    $('ul').html(peopleTemplate({people : people , showAge: true}));
 
     // Alternate approach: compile and render the template immediately
-    // $('ul').html(_.template($('#listTemplate').html(), {items : this.data , showAge: true}));
+    // $('ul').html(_.template($('#peopleTemplate').html(), {people : people , showAge: true}));
 </script>
 
 </body>

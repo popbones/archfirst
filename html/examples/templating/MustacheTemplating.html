@@ -14,7 +14,7 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
 <script src="../../libs/mustache.js/mustache.js-0.3.0/mustache.js"></script>
 
-<script id="listTemplate" type="text/x-mustache-tmpl">
+<script id="peopleTemplate" type="text/x-mustache-tmpl">
 {{#people}}
 <li>
         <span>{{{id}}</span>
@@ -41,7 +41,7 @@
         showAge: true
     }
 
-    $('ul').html(Mustache.to_html($('#listTemplate').html(), data));
+    $('ul').html(Mustache.to_html($('#peopleTemplate').html(), data));
 </script>
 
 </body>
