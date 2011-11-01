@@ -1,0 +1,48 @@
+<!--
+    Example based on
+    http://net.tutsplus.com/tutorials/javascript-ajax/quick-tip-an-introduction-to-jquery-templating/
+-->
+<!doctype html>
+<html>
+<head>        
+    <title>Mustache Templating Example</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <ul></ul>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+<script src="../../libs/mustache.js/mustache.js-0.3.0/mustache.js"></script>
+
+<script id="listTemplate" type="text/x-jquery-tmpl">
+{{#people}}
+<li>
+        <span>{{{id}}</span>
+        <p><strong>Name: </strong> {{name}}</p>
+        {{#showAge}}
+        <p><strong>Age: </strong> {{age}}</p>
+        {{/showAge}}
+</li>
+{{/people}}
+</script>
+    
+<script type="text/javascript">
+    var people = [
+        { id: 1, name: 'John',  age: 25 },
+        { id: 2, name: 'Jane', age: 49 },
+        { id: 3, name: 'Jim', age: 31 },
+        { id: 4, name: 'Julie', age: 39 },
+        { id: 5, name: 'Joe', age: 19 },
+        { id: 6, name: 'Jack', age: 48 }
+    ];
+
+    var data = {
+        people: people,
+        showAge: true
+    }
+
+    $('ul').html(Mustache.to_html($('#listTemplate').html(), data));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!--
+    Example based on
+    http://net.tutsplus.com/tutorials/javascript-ajax/quick-tip-an-introduction-to-jquery-templating/
+-->
+<!doctype html>
+<html>
+<head>        
+    <title>Underscore Templating Example</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <ul></ul>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script> 
+<script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js"></script> 
+
+<script id="listTemplate" type="text/x-underscore-tmpl">
+<% for (var index = 0; index < items.length; index++) { %>
+
+<% var item = items[index]; %>
+<li>
+    <span><%= item.id %></span>
+    <p><strong>Name: </strong> <%= item.name %></p>
+    <% if (showAge) { %>
+        <p><strong>Age: </strong> <%= item.age %></p>
+    <% } %>
+</li>
+
+<% } %>
+</script>
+
+<script type="text/javascript">
+    var data = [
+        { id: 1, name: 'John',  age: 25 },
+        { id: 2, name: 'Jane', age: 49 },
+        { id: 3, name: 'Jim', age: 31 },
+        { id: 4, name: 'Julie', age: 39 },
+        { id: 5, name: 'Joe', age: 19 },
+        { id: 6, name: 'Jack', age: 48 }
+    ];
+
+    // Compile template into a function
+    listTemplate = _.template($('#listTemplate').html());
+
+    // Generate html from the template
+    $('ul').html(listTemplate({items : this.data , showAge: true}));
+
+    // Alternate approach: compile and render the template immediately
+    // $('ul').html(_.template($('#listTemplate').html(), {items : this.data , showAge: true}));
+</script>
+
+</body>
+</html>
