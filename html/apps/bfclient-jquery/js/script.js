@@ -33,13 +33,13 @@ Bullsfirst.ready = function () {
     // -----------------------------------------------------------------------------------
 
     /**
-     * Sets an Authorization header in the request. We force this header in every
-     * request to avoid being challenged by the server for credentials (the server
-     * sends a 401 Unauthorized error along with a WWW-Authenticate header to do this).
-     * Specifically, we don't rely on username/password settings in the jQuery.ajax()
-     * call since they cause an unnecessary roundtrip to the server resulting in a 401
-     * before sending the Authorization header.
-     */
+    * Sets an Authorization header in the request. We force this header in every
+    * request to avoid being challenged by the server for credentials (the server
+    * sends a 401 Unauthorized error along with a WWW-Authenticate header to do this).
+    * Specifically, we don't rely on username/password settings in the jQuery.ajax()
+    * call since they cause an unnecessary roundtrip to the server resulting in a 401
+    * before sending the Authorization header.
+    */
     function setAuthorizationHeader(xhr) {
         xhr.setRequestHeader(
             'Authorization',
@@ -47,9 +47,9 @@ Bullsfirst.ready = function () {
     }
 
     /**
-     * Sets the password header in the request. This is needed only for the get user
-     * REST request.
-     */
+    * Sets the password header in the request. This is needed only for the get user
+    * REST request.
+    */
     function setPasswordHeader(xhr) {
         xhr.setRequestHeader('password', password);
     }
@@ -112,7 +112,7 @@ Bullsfirst.ready = function () {
         show: function() {
             if (this.el.is(':visible')) {
                 return;
-            }       
+            }
             promise = $.Deferred(_.bind(function(dfd) { 
                 this.el.fadeIn('fast', dfd.resolve) }, this))
             return promise.promise();
@@ -151,23 +151,24 @@ Bullsfirst.ready = function () {
     });
 
     /**
-     * Logs in to the server using saved credentials. If login is successful,
-     * saves the returned user information in the user object.
-     */
+    * Logs in to the server using saved credentials. If login is successful,
+    * saves the returned user information in the user object.
+    */
 
     function login() {
 
         $.ajax({
-            url: '/bfoms-javaee/rest/users/' + username, 
-           /* url: '/archfirst/login.php?user_name='+username+'&?password='+password,*/
+            url: '/bfoms-javaee/rest/users/' + username,
+            /* url: '/archfirst/login.php?user_name='+username+'&?password='+password,*/
             beforeSend: setPasswordHeader,
             success: function (data, textStatus, jqXHR) {
-			    user = data;
+                user = data;
                 clearStatusMessage();
                 $('#l_password')[0].value = ''; // erase password from form
                 window.location.hash = 'accounts';
                 // TODO: Remove after accounts page shows username
                 showStatusMessage('info', 'Hello ' + user.firstName + ' ' + user.lastName + '!');
+                getBrokerageAccounts();
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 showStatusMessage('error', errorThrown);
@@ -207,8 +208,8 @@ Bullsfirst.ready = function () {
         // TODO: Form validation
         openAccount : function() {
             $.ajax({
-			/* 	url: '/archfirst/post.php', */
-               url: '/bfoms-javaee/rest/users',
+                /* 	url: '/archfirst/post.php', */
+                url: '/bfoms-javaee/rest/users',
                 type: 'POST',
                 contentType: 'application/json',
                 data: this.createRegistrationRequest(),
@@ -254,6 +255,20 @@ Bullsfirst.ready = function () {
             clearStatusMessage();
         }
     });
+
+    function getBrokerageAccounts() {
+
+        $.ajax({
+            url: '/bfoms-javaee/rest/secure/brokerage_accounts',
+            beforeSend: setAuthorizationHeader,
+            success: function (data, textStatus, jqXHR) {
+                $('#accounts_dump').text(JSON.stringify(data, null, '    '));
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                showStatusMessage('error', errorThrown);
+            }
+        });
+    }
 
 
     // -----------------------------------------------------------------------------------
