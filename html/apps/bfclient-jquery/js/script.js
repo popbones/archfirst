@@ -257,7 +257,6 @@ Bullsfirst.ready = function () {
     });
 
     function getBrokerageAccounts() {
-
         $.ajax({
             url: '/bfoms-javaee/rest/secure/brokerage_accounts',
             beforeSend: setAuthorizationHeader,
