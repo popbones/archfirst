@@ -166,8 +166,6 @@ Bullsfirst.ready = function () {
                 clearStatusMessage();
                 $('#l_password')[0].value = ''; // erase password from form
                 window.location.hash = 'accounts';
-                // TODO: Remove after accounts page shows username
-                showStatusMessage('info', 'Hello ' + user.firstName + ' ' + user.lastName + '!');
                 getBrokerageAccounts();
             },
             error: function (jqXHR, textStatus, errorThrown) {
