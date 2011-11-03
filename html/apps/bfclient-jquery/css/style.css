@@ -685,6 +685,10 @@ strong {
 
 /* General purpose classes
  * -------------------------------------------------------------------------- */
+.nodisplay {
+    display:none;
+} 
+ 
 .center {
     text-align: center;
 }

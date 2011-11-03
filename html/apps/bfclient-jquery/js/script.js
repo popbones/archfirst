@@ -145,7 +145,7 @@ Bullsfirst.ready = function () {
         },
 
         showOpenAccountDialog: function() {
-            $('#open_account_dialog').removeClass("hidden").dialog('open');
+            $('#open_account_dialog').dialog('open');
             return false;
         }
     });
