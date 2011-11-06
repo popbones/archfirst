@@ -63,10 +63,80 @@
 
             <!-- Accounts View -->
             <div id="accounts_view" class="view nodisplay">
-                <div>
-                    <a href='#'>Logout</a>
+                <div class="navigationTabs">
+                    <div class="stylefour">
+                        <ul>
+                            <li><a href="#accounts" class="current">Accounts</a></li>
+                            <li><a href="#accounts">Positions</a></li>
+                            <li><a href="#accounts">Trade</a></li>
+                            <li><a href="#accounts">Orders</a></li>
+                            <li><a href="#accounts">Transaction History</a></li>
+                            <li><a href="#accounts">Transfer</a></li>
+                        </ul>
+                        <div class="rightSideLinks">
+                            John Horner |
+                            <a href='#'>Sign Out</a>
+                        </div>
+                    </div>
                 </div>
-                <pre id="accounts_dump"></pre>
+
+                <div class="titleLeft">
+                    <h1>Accounts</h1>
+                </div>
+
+                <div class="toolbar">
+                    <input id="act_update" name="update" type="submit" value="Update" />
+                    <input id="act_add_account" name="add_account" type="submit" value="Add Account" />
+                </div>
+
+                <div class="fullWidthContent">
+                    <table class="zebra" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th class="leftAlign">Name</th>
+                                <th class="number">Account #</th>
+                                <th class="number">Market Value</th>
+                                <th class="number">Cash</th>
+                                <th class="center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tr class="odd">
+                            <td class="leftAlign">
+                                <a href="">Brokerage Account 1</a>
+                            </td>
+                            <td class="number">
+                                <a href="">6666-6666</a>
+                            </td>
+                            <td class="number">
+                                $1,457,320.38
+                            </td>
+                            <td class="number">
+                                $272,085.38
+                            </td>
+                            <td class="center">
+                                <a href="">Edit</a>
+                            </td>
+                        </tr>
+                        <tr class="even">
+                            <td class="leftAlign">
+                                <a href="">IRA - John Horner</a>
+                            </td>
+                            <td class="number">
+                                <a href="">7777-7777</a>
+                            </td>
+                            <td class="number">
+                                $484,690.50
+                            </td>
+                            <td class="number">
+                                $20,568.00
+                            </td>
+                            <td class="center">
+                                <a href="">Edit</a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
             </div>
 
         </div>

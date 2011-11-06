@@ -654,6 +654,53 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
 .clearfix:after { clear: both; }
 .clearfix { zoom: 1; }
 
+/* ==|== Style #4 CSS Menu ==================================================
+   http://www.13styles.com/css-menus/style4/
+   ========================================================================== */
+ .stylefour {
+    position: relative;
+    display: block;
+    height: 39px;
+    font-size: 11px;
+    font-weight: bold;
+    background: transparent url(../img/bgOFF.gif) repeat-x top left;
+    font-family: Arial,Verdana,Helvitica,sans-serif;
+}
+
+.stylefour ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    width: auto;
+}
+
+.stylefour ul li {
+    display: block;
+    float: left;
+    margin: 0;
+    line-height: normal;
+}
+
+.stylefour ul li a {
+    display: block;
+    float: left;
+    color: #666;
+    text-decoration: none;
+    padding: 11px 20px 0 20px;
+    height: 23px;
+    background: transparent url(../img/bgDIVIDER.gif) no-repeat top right;
+}
+
+.stylefour ul li a:hover {
+    color: #B30000;
+    background: #ffefef url(../img/bgON.gif) no-repeat top right;
+}
+
+.stylefour ul li a.current {
+    color: #B30000;
+    background: #fff url(../img/bgON.gif) no-repeat top right;
+}
+
 /* ==|== primary styles =====================================================
    Author: Naresh Bhatia
    ========================================================================== */
@@ -700,11 +747,6 @@ strong {
 	margin:auto;
 	position:relative;
 }
-/* main page area
- * -------------------------------------------------------------------------- */
-.container {
-	margin-bottom:20px;
-}
 
 /* Form styles
  * -------------------------------------------------------------------------- */
@@ -743,7 +785,6 @@ header {
     background: url(../img/slogan.jpg) right bottom no-repeat;
     height: 100px;
     border-bottom: 4px solid #B30000;
-    margin-bottom: 16px;
     position:realtive;
 }
 
@@ -755,17 +796,70 @@ header h1 {
 	width:300px;
 	text-indent:-9999px;
 }
+
+/* Navigation tabs and links
+ * ------------------------------------------------------------------------------- */
+.navigationTabs {
+    background-color: #ccc;
+}
+
+.rightSideLinks {
+    position: absolute;
+    top: 11px;
+    right: 20px;
+}
+
+/* Title bar
+ * ------------------------------------------------------------------------------- */
+.titleLeft {
+    float: left;
+    padding: 14px 20px;
+    font-size: 14px;
+}
+
+.titleLeft h1 {
+    margin: 0;
+}
+
+.titleRight {
+    float: right;
+    padding: 12px 20px;
+    font-size: 14px;
+}
+
+/* Toolbar
+ * -------------------------------------------------------------------------- */
+.toolbar {
+    clear: both;
+    background-color: #e3e0e0;
+    margin: 0px 20px 20px 20px;
+}
+
+.toolbar input {
+    margin: 6px 0px 6px 10px;
+}
+
+/* Full width content
+ * ------------------------------------------------------------------------------- */
+.fullWidthContent {
+    clear: both;
+    padding: 0 20px 20px 20px;
+}
+
 /* Home
  * -------------------------------------------------------------------------- */
 #home_view {
    position:relative;
+   margin-top: 16px;
 }
+
 #home_view .login {
     width:160px;
     position:absolute;
     right:10px;	
     top:0px; 
 }
+
 #home_view .hero {
     padding:190px 0 0 0px;
 	width:685px;
@@ -774,7 +868,8 @@ header h1 {
 
 #home_view .hero h1 {
 	text-indent:-9999px;	 
-} 
+}
+ 
 /* Footer
  * -------------------------------------------------------------------------- */
 footer {
@@ -806,13 +901,87 @@ footer {
     margin-right: 6px;
 }
 
+/* Table styles, with zebra table inspired by
+ * http://www.duoh.com/csstutorials/csstables/
+ * -------------------------------------------------------------------------- */
+table.zebra {
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+table.zebra thead tr {
+    height: 32px;
+}
+
+table.zebra thead th {
+    font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: #960;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    padding: 7px;
+    background: #fc3 url(../img/tableheaderbg.jpg) repeat-x;
+    vertical-align: middle;
+}
+
+table.zebra tr {
+    height: 28px;
+}
+
+table.zebra tr.odd {
+    background: #fff;
+    color: #000;
+}
+
+table.zebra tr.even {
+    background: #fff url(../img/tablealt.gif) repeat;
+    color: #000;
+}
+
+table.zebra td {
+    vertical-align: middle;
+    border-bottom: 1px solid #ccc;
+    padding: 7px;
+}
+
+th.number, td.number {
+    text-align: right;
+}
+
+th.leftAlign, td.leftAlign {
+    text-align: left;
+}
+
+th.center, td.center {
+    text-align: center;
+}
+
+th.rightAlign, td.rightAlign {
+    text-align: right;
+}
+
+td.plain {
+    border-bottom: none;
+}
+
+td.gain {
+    color: #690;
+}
+
+td.loss {
+    color: #c33;
+}
+
+td.total {
+    font-weight: bold;
+}
+
 /* jQuery UI Overrides
  * -------------------------------------------------------------------------- */
 .ui-widget-overlay {
     opacity: .7; 
     background: black;
 } 
-
 
 
 /* ==|== media queries ====================================================== */
