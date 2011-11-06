@@ -663,7 +663,7 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
     height: 39px;
     font-size: 11px;
     font-weight: bold;
-    background: transparent url(../img/bgOFF.gif) repeat-x top left;
+    background: transparent url(../img/bgOff.gif) repeat-x top left;
     font-family: Arial,Verdana,Helvitica,sans-serif;
 }
 
@@ -688,17 +688,17 @@ button.ui-button::-moz-focus-inner { border: 0; padding: 0; } /* reset extra pad
     text-decoration: none;
     padding: 11px 20px 0 20px;
     height: 23px;
-    background: transparent url(../img/bgDIVIDER.gif) no-repeat top right;
+    background: transparent url(../img/bgDivider.gif) no-repeat top right;
 }
 
 .stylefour ul li a:hover {
     color: #B30000;
-    background: #ffefef url(../img/bgON.gif) no-repeat top right;
+    background: #ffefef url(../img/bgOn.gif) no-repeat top right;
 }
 
 .stylefour ul li a.current {
     color: #B30000;
-    background: #fff url(../img/bgON.gif) no-repeat top right;
+    background: #fff url(../img/bgOn.gif) no-repeat top right;
 }
 
 /* ==|== primary styles =====================================================
