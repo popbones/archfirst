@@ -68,10 +68,8 @@
                         <ul>
                             <li><a href="#accounts" class="current">Accounts</a></li>
                             <li><a href="#accounts">Positions</a></li>
-                            <li><a href="#accounts">Trade</a></li>
                             <li><a href="#accounts">Orders</a></li>
                             <li><a href="#accounts">Transaction History</a></li>
-                            <li><a href="#accounts">Transfer</a></li>
                         </ul>
                         <div class="rightSideLinks">
                             John Horner |
@@ -89,52 +87,7 @@
                     <input id="act_add_account" name="add_account" type="submit" value="Add Account" />
                 </div>
 
-                <div class="fullWidthContent">
-                    <table class="zebra" cellspacing="0">
-                        <thead>
-                            <tr>
-                                <th class="leftAlign">Name</th>
-                                <th class="number">Account #</th>
-                                <th class="number">Market Value</th>
-                                <th class="number">Cash</th>
-                                <th class="center">Actions</th>
-                            </tr>
-                        </thead>
-                        <tr class="odd">
-                            <td class="leftAlign">
-                                <a href="">Brokerage Account 1</a>
-                            </td>
-                            <td class="number">
-                                <a href="">6666-6666</a>
-                            </td>
-                            <td class="number">
-                                $1,457,320.38
-                            </td>
-                            <td class="number">
-                                $272,085.38
-                            </td>
-                            <td class="center">
-                                <a href="">Edit</a>
-                            </td>
-                        </tr>
-                        <tr class="even">
-                            <td class="leftAlign">
-                                <a href="">IRA - John Horner</a>
-                            </td>
-                            <td class="number">
-                                <a href="">7777-7777</a>
-                            </td>
-                            <td class="number">
-                                $484,690.50
-                            </td>
-                            <td class="number">
-                                $20,568.00
-                            </td>
-                            <td class="center">
-                                <a href="">Edit</a>
-                            </td>
-                        </tr>
-                    </table>
+                <div id="accounts_table" class="fullWidthContent">
                 </div>
 
             </div>
@@ -180,6 +133,45 @@
     </div>
     <!-- end of #container -->
 
+    <!-- Templates -->
+
+    <script id="accountsTemplate" type="text/x-mustache-tmpl">
+    <table class="zebra" cellspacing="0">
+        <thead>
+            <tr>
+                <th class="leftAlign">Name</th>
+                <th class="number">Account #</th>
+                <th class="number">Market Value</th>
+                <th class="number">Cash</th>
+                <th class="center">Actions</th>
+            </tr>
+        </thead>
+        {{#accounts}}
+        <tr class="{{#striper}}{{/striper}}">
+            <td class="leftAlign">
+                <a href="#accounts">{{name}}</a>
+            </td>
+            <td class="number">
+                <a href="#accounts">{{id}}</a>
+            </td>
+            <td class="number">
+                ${{marketValue.amount}}
+            </td>
+            <td class="number">
+                ${{cashPosition.amount}}
+            </td>
+            <td class="center">
+                {{#editPermission}}
+                <a href="#accounts">Edit</a>
+                {{/editPermission}}
+            </td>
+        </tr>
+        {{/accounts}}
+    </table>
+    </script>
+
+    <!-- End of templates -->
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
     <script>        window.jQuery||document.write('<script src="js/libs/jquery-1.6.2.min.js"><\/script>')</script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.1.7/underscore-min.js"></script>
@@ -196,6 +188,7 @@
     <script defer src="js/mylibs/form2object.js"></script>
     <script defer src="js/mylibs/jquery.toObject.js"></script>
     <script defer src="js/mylibs/json2.js"></script>
+    <script defer src="js/mylibs/mustache.js"></script>
     <!-- end scripts-->
 
     <script type="text/javascript">

@@ -259,7 +259,18 @@ Bullsfirst.ready = function () {
             url: '/bfoms-javaee/rest/secure/brokerage_accounts',
             beforeSend: setAuthorizationHeader,
             success: function (data, textStatus, jqXHR) {
-                $('#accounts_dump').text(JSON.stringify(data, null, '    '));
+                // console.log(JSON.stringify(data, null, '    '));
+                var counter = 1;
+                var hash = {
+                    accounts: data,
+                    striper: function() {
+                        return function(text) {
+                            return counter++ % 2 == 0 ? 'even' : 'odd';
+                        }
+                    }
+                }
+
+                $('#accounts_table').html(Mustache.to_html($('#accountsTemplate').html(), hash));
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 showStatusMessage('error', errorThrown);
