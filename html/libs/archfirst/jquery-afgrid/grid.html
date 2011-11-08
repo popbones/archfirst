@@ -5,10 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
 
     <title>Grid Sample - Multiple Grids, Theming, Grouping, all features</title>
+    
     <!--external library css files need for additional features like multi select, drag drop, date range picker, etc.-->
     <link rel="stylesheet" type="text/css" href="lib/external/css/jquery-ui-1.8.16.custom.css" />
     <link rel="stylesheet" type="text/css" href="lib/external/css/jquery.multiselect.css" />
     <link rel="stylesheet" type="text/css" href="lib/external/css/ui.daterangepicker.css" />
+    
     <!--css files for core grid and extensions-->
     <link rel="stylesheet" type="text/css" href="lib/css/grid/grid.core.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/grid/grid.plugin.groups.css" />
@@ -16,12 +18,14 @@
     <link rel="stylesheet" type="text/css" href="lib/css/grid/grid.plugin.columnSort.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/grid/grid.plugin.columnReorder.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/grid/grid.plugin.filter.css" />
+    
     <!--css files for custom extensions -->
     <link rel="stylesheet" type="text/css" href="lib/css/gridExtensions/datePicker.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/gridExtensions/dateRange.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/gridExtensions/grid.LABEL_BUTTON.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/gridExtensions/grid.DATE.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/gridExtensions/gridThemeSwitcher.css" />
+    
     <!--themes css files-->
     <link rel="stylesheet" type="text/css" href="lib/css/gridThemes/blue.gridTheme.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/gridThemes/brown.gridTheme.css" />
@@ -29,23 +33,29 @@
    
     <!--required by the plug-in-->
     <script type="text/javascript" src="lib/external/js/jquery.js"></script>
+    
     <!--external library js files need for additional features like re-loading last state, multi select, drag drop, date range picker, etc.-->
     <script type="text/javascript" src="lib/external/js/jquery-ui-1.8.14.custom.min.js"></script>
     <script type="text/javascript" src="lib/external/js/jquery.multiselect.patched.js"></script>
     <script type="text/javascript" src="lib/external/js/jquery.cookie.js"></script>
     <script type="text/javascript" src="lib/external/js/daterangepicker.jQuery.patched.js"></script>
     <script type="text/javascript" src="lib/external/js/json2.js"></script>
-    <!--js files for core grid and extensions -->
-    <script type="text/javascript" src="lib/js/plugins/grid/jquery.grid.server.js"></script>
+    
+    <!--core grid files -->
     <script type="text/javascript" src="lib/js/plugins/grid/jquery.grid.core.js"></script>
+    
+    <!--optional grid extension files-->
     <script type="text/javascript" src="lib/js/plugins/grid/jquery.grid.statePersistToCookie.js"></script>
     <script type="text/javascript" src="lib/js/plugins/grid/jquery.grid.plugin.groups.js"></script>
     <script type="text/javascript" src="lib/js/plugins/grid/jquery.grid.plugin.columnResize.js"></script>
     <script type="text/javascript" src="lib/js/plugins/grid/jquery.grid.plugin.columnReorder.js"></script>
     <script type="text/javascript" src="lib/js/plugins/grid/jquery.grid.plugin.sortable.js"></script>
     <script type="text/javascript" src="lib/js/plugins/grid/jquery.grid.plugin.filters.js"></script>
+    
+    <!--core grid files-->
     <script type="text/javascript" src="lib/js/plugins/grid/AF.Grid.renderer.js"></script>
     <script type="text/javascript" src="lib/js/plugins/grid/AF.Grid.js"></script>
+    
     <!-- js files for custom grid extensions demo-->
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.filter.DATE.js"></script>
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.filter.DATERANGE.js"></script>
@@ -53,29 +63,32 @@
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.renderer.LABEL_BUTTON.js"></script>
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.plugin.LABEL_BUTTON.js"></script>
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.plugin.switchTheme.js"></script><!-- js files for fake data store for running the grid demo locally -->
-    <script type="text/javascript" src="lib/js/plugins/gridFakeStore/jquery.server.fakeStore.core.js"></script>
-    <script type="text/javascript" src="lib/js/plugins/gridFakeStore/jquery.server.fakeStore.GRID1.js"></script>
-    <script type="text/javascript" src="lib/js/plugins/gridFakeStore/jquery.server.fakeStore.GRID2.js"></script>
+    
+    <!--fake store-->
+    <script type="text/javascript" src="lib/js/plugins/store/AF.Grid.FakeLocalStore.js"></script>
+    <script type="text/javascript" src="lib/js/plugins/store/AF.Grid.fakeDataSet1.js"></script>
+    <script type="text/javascript" src="lib/js/plugins/store/AF.Grid.fakeDataSet2.js"></script>
+    
     <script type="text/javascript">
         //<![CDATA[
-                var $j = jQuery.noConflict();
-                
-                $j(function() {
-                        var grid1 = new AF.Grid({
-                                dataSource:"fakeStore.GRID1",
-                                id:"grid1"
-                        });
-                        grid1.load();
-                        var grid2 = new AF.Grid({
-                                dataSource:"fakeStore.GRID2",
-                                id:"grid2"
-                        });
-                        grid1.load();
-                        grid2.load();
-                        setTimeout(function() {
-                                $j("a.theme-brown").click();
-                        },100);
-                });
+        var $j = jQuery.noConflict();
+        
+        $j(function() {
+            var grid1 = new AF.Grid({
+                dataSource: new AF.Grid.FakeLocalStore(AF.Grid.fakeDataSet1),
+                id:"grid1"
+            });
+            grid1.load();
+            var grid2 = new AF.Grid({
+                dataSource: new AF.Grid.FakeLocalStore(AF.Grid.fakeDataSet2),
+                id:"grid2"
+            });
+            grid1.load();
+            grid2.load();
+            setTimeout(function() {
+                    $j("a.theme-brown").click();
+            },100);
+        });
         //]]>
     </script>
 </head>

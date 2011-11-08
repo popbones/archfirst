@@ -128,7 +128,7 @@
                         });
                     }
 
-                    $filters.find(".select-filter").multiselect({
+                    $.fn.multiselect && $filters.find(".select-filter").multiselect({
                         overrideWidth: "100%",
                         overrideMenuWidth: "200px",
                         close: onFilterChange,
@@ -159,7 +159,7 @@
 
                 function destroy() {
                     $filters.find(".select-filter,.input-filter").unbind("change.filter");
-                    $filters.find(".select-filter").multiselect("destroy");
+                    $.fn.multiselect && $filters.find(".select-filter").multiselect("destroy");
                     forEachCustomFilter($filters, function ($filter, type) {
                         $.afGrid.filter[type].destroy($filter);
                     });
@@ -220,7 +220,7 @@
     }
 
     function forEachCustomFilter($filters, callback) {
-        $.each($.afGrid.filter, function (key, value) {
+        $.afGrid.filter && $.each($.afGrid.filter, function (key, value) {
             var $f = $filters.find("." + key + "-filter");
             $f.each(function () {
                 callback($(this), key);

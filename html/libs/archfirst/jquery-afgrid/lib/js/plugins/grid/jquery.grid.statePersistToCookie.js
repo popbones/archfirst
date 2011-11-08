@@ -19,7 +19,7 @@
  */
 
 (function ($) {
-    $.statePersistToCookie = {
+    $.statePersistToCookie = $.cookie && {
         load: function (key, callback) {
             callback($.cookie(key));
         },

@@ -2,46 +2,31 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+    <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
     <title>Grid Sample - Single Grid with brown theme</title>
 
-	<!--external library css files need for additional features like multi select, drag drop, date range picker, etc.-->
-	<link rel="stylesheet" type="text/css" href="lib/external/css/jquery-ui-1.8.16.custom.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/external/css/jquery.multiselect.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/external/css/ui.daterangepicker.css"/>
-
-	<!--combined css files include core grid and custom extensions--> 
+    <!--combined css files include core grid and custom extensions--> 
     <link rel="stylesheet" type="text/css" href="lib/css/grid/AF.Grid.combined.css"/>
-    <link rel="stylesheet" type="text/css" href="lib/css/gridExtensions/AF.Grid.extensions.combined.css"/>
-	<link rel="stylesheet" type="text/css" href="lib/css/gridThemes/brown.gridTheme.css"/>
+    <link rel="stylesheet" type="text/css" href="lib/css/gridThemes/brown.gridTheme.css"/>
 
-	<!--required by the plug-in-->
-	<script type="text/javascript" src="lib/external/js/jquery.js"></script>
+    <!--required by the plug-in-->
+    <script type="text/javascript" src="lib/external/js/jquery.js"></script>
 
-	<!--external library js files need for additional features like re-loading last state, multi select, drag drop, date range picker, etc.-->
-    <script type="text/javascript" src="lib/external/js/jquery-ui-1.8.14.custom.min.js"></script>
-    <script type="text/javascript" src="lib/external/js/jquery.cookie.js"></script>
-    <script type="text/javascript" src="lib/external/js/jquery.multiselect.patched.js"></script>
-    <script type="text/javascript" src="lib/external/js/daterangepicker.jQuery.patched.js"></script>
-    <script type="text/javascript" src="lib/external/js/json2.js"></script>
+    <!--combine js file includes core grid and extensions -->        
+    <script type="text/javascript" src="lib/js/plugins/grid/AF.Grid.combined.js"></script>
+ 
+    <!--combine js file includes fake data store for running the grid demo locally -->        
+    <script type="text/javascript" src="lib/js/plugins/store/AF.Grid.store.combined.js"></script>
 
-	<!--combine js file includes core grid and extensions -->        
-	<script type="text/javascript" src="lib/js/plugins/grid/AF.Grid.combined.js"></script>
-
-	<!--combine js file includes custom extensions -->        
-    <script type="text/javascript" src="lib/js/plugins/gridExtensions/AF.Grid.extensions.combined.js"></script>
-
-	<!--combine js file includes fake data store for running the grid demo locally -->        
-	<script type="text/javascript" src="lib/js/plugins/gridFakeStore/AF.Grid.fakeStore.combined.js"></script>
     <script type="text/javascript">
-		$(function() {
-			var grid1 = new AF.Grid({
-				dataSource:"fakeStore.GRID1",
-				id:"grid1"
-			});
-			grid1.load();
-		});
-	</script>
+	$(function() {
+	    var grid1 = new AF.Grid({
+		    dataSource: new AF.Grid.FakeLocalStore(AF.Grid.fakeDataSet3),
+		    id:"grid1"
+	    });
+	    grid1.load();
+	});
+    </script>
 </head>
 <body>
     <div id="mainContainer">

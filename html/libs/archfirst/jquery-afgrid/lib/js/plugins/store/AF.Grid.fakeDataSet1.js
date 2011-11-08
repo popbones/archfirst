@@ -1,15 +1,32 @@
+/**
+ * Copyright 2011 Manish Shanker
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * @author Manish Shanker
+ */
+
 (function ($) {
 
-    $.server = $.server || {};
-    $.server.fakeStore = $.server.fakeStore || {};
-    var getFilterData = $.server.fakeStore.getFilterData;
-    $.server.fakeStore.GRID1 = (function () {
+    AF.Grid.fakeDataSet1 = (function () {
         function getColumns() {
             return [{
                 label: "Column 1",
                 id: "colAN",
                 width: 240,
-                filterData: getFilterData(0, rows),
+                filterData: AF.Grid.FakeLocalStore.getFilterData(0, rows),
                 groupBy: true
             }, {
                 label: "Column 2",
@@ -22,7 +39,7 @@
                 id: "colAT",
                 width: 150,
                 groupBy: true,
-                filterData: getFilterData(2, rows)
+                filterData: AF.Grid.FakeLocalStore.getFilterData(2, rows)
             }, {
                 label: "Column 4",
                 id: "colDate",

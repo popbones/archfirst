@@ -50,7 +50,7 @@
                         return;
                     }
 
-                    $afGrid.find(".afGrid-heading .cell").droppable({
+                    $.fn.droppable && $afGrid.find(".afGrid-heading .cell").droppable({
                         drop: onColumnReorderDrop,
                         over: onColumnReorderOver,
                         out: onColumnReorderOut,
@@ -62,7 +62,7 @@
 
                 function destroy() {
                     options = null;
-                    $afGrid.find(".afGrid-heading .cell").droppable("destroy");
+                    $.fn.droppable && $afGrid.find(".afGrid-heading .cell").droppable("destroy");
                 }
 
                 return {

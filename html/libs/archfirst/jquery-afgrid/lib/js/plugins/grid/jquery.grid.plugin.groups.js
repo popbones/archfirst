@@ -121,20 +121,20 @@
                     });
                     renderGroups(options.columns, options.groupBy);
 
-                    $groupsMainContainer.droppable({
+                    $.fn.droppable && $groupsMainContainer.droppable({
                         drop: onColumnGroupingDrop,
                         accept: "#" + options.id + " .groupBy",
                         activeClass: "ui-state-highlight"
                     });
 
-                    $groupsMainContainer.find(".cell").draggable({
+                    $.fn.draggable && $groupsMainContainer.find(".cell").draggable({
                         drop: onColumnGroupingDrop,
                         helper: getGroupHelper,
                         accept: "#" + options.id + " .groupBy",
                         containment: $groupsMainContainer
                     });
 
-                    $groupsMainContainer.find(".cell").droppable({
+                    $.fn.droppable && $groupsMainContainer.find(".cell").droppable({
                         accept: ".groups .cell",
                         drop: onGroupReorderDrop,
                         over: onGroupReorderOver,
@@ -145,8 +145,8 @@
                 }
 
                 function destroy() {
-                    $groupsMainContainer.droppable("destroy");
-                    $groupsMainContainer.find(".cell").droppable("destroy").draggable("destroy");
+                    $.fn.droppable && $groupsMainContainer.droppable("destroy");
+                    $.fn.droppable &&  $.fn.draggable && $groupsMainContainer.find(".cell").droppable("destroy").draggable("destroy");
                     $groupsMainContainer.undelegate("a.remove", "click.groups");
                     $groupsMainContainer.find(".groups").empty();
                     $groupsMainContainer = null;

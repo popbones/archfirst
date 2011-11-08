@@ -168,7 +168,7 @@
     };
 
     function makeColumnDraggable($afGrid) {
-        $afGrid.find(".afGrid-heading .cell").draggable({
+        $.fn.draggable && $afGrid.find(".afGrid-heading .cell").draggable({
             helper: function (event) {
                 return getHelper(event, $afGrid.attr("class"));
             },

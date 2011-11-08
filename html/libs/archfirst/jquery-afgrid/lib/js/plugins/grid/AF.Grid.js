@@ -25,20 +25,14 @@
 
         options = $.extend(true, {
             id: null,
-            dataSource: "/dummyData",
-            requestTypeParamName: {
-                fetchRows: "fetchRows",
-                filterData: "filterData",
-                load: "load",
-                reOrderColumn: "reOrderColumn",
-                sortData: "sortData",
-                groupData: "groupData"
-            },
+            dataSource: null,
             statePersist: $.statePersistToCookie,
             onRowClick: defaultOnRowClick
         }, options);
 
-        var renderer, loadedRows = 0,
+		
+        var store = options.dataSource,
+	    renderer, loadedRows = 0,
             totalRows = 0,
             rowsToLoad = 0,
             columnData = null,
@@ -68,7 +62,9 @@
                 options.statePersist.load("afGridState_" + options.id, function (data) {
                     callback(JSON.parse(data));
                 });
-            }
+            } else {
+		callback({});
+	    }
         }
 
         function fetchRowsIncrementally() {
@@ -78,10 +74,9 @@
             }
             var requestData = $.extend({}, afGridCurrentStateData, {
                 loadFrom: loadedRows + 1,
-                count: rowsToLoad,
-                requestType: options.requestTypeParamName.fetchRows
+                count: rowsToLoad
             });
-            $.server.getData(options.dataSource, requestData, onRecieveOfNewRows);
+	    store.fetchRows(requestData, onRecieveOfNewRows);
         }
 
         function onRecieveOfNewRows(newRows) {
@@ -89,7 +84,7 @@
             renderer.addNewRows(newRows);
         }
 
-        function onRecieveOfData(data) {
+        function onReceiveOfData(data) {
             render(data);
         }
 
@@ -101,12 +96,7 @@
                 afGridCurrentStateData.filterColumns.push(filter.id);
                 afGridCurrentStateData.filterValues.push(filter.value);
             });
-            var requestData = $.extend({
-                requestType: options.requestTypeParamName.filterData
-            }, afGridCurrentStateData);
-            $.server.getData(options.dataSource, requestData, function (data) {
-                render(data);
-            });
+            store.filter(afGridCurrentStateData, render);
         }
 
         function onGroupBy(columnIds) {
@@ -124,23 +114,13 @@
                 afGridCurrentStateData.columnOrder = newColumnOrder;
             }
             afGridCurrentStateData.groupByColumns = columnIds.length ? columnIds : [];
-            requestData = $.extend({
-                requestType: options.requestTypeParamName.groupData
-            }, afGridCurrentStateData);
-            $.server.getData(options.dataSource, requestData, function (data) {
-                render(data);
-            });
+            store.groupBy(afGridCurrentStateData, render);
         }
 
         function onSortBy(columnId, direction) {
             afGridCurrentStateData.sortByColumn = columnId;
             afGridCurrentStateData.sortByDirection = direction;
-            var requestData = $.extend({
-                requestType: options.requestTypeParamName.sortData
-            }, afGridCurrentStateData);
-            $.server.getData(options.dataSource, requestData, function (data) {
-                render(data);
-            });
+	    store.sortBy(afGridCurrentStateData, render);
         }
 
         function onColumnReorder(newColumnOrder) {
@@ -160,12 +140,7 @@
                 afGridCurrentStateData.groupByColumns = newGroupByColumns;
             }
             afGridCurrentStateData.columnOrder = newColumnOrder;
-            requestData = $.extend({
-                requestType: options.requestTypeParamName.reOrderColumn
-            }, afGridCurrentStateData);
-            $.server.getData(options.dataSource, requestData, function (data) {
-                render(data);
-            });
+	    store.reorderColumn(afGridCurrentStateData, render);
         }
 
         function getColumnById(columnId) {
@@ -200,10 +175,7 @@
         function load() {
             getCurrentState(function (currentStateData) {
                 afGridCurrentStateData = currentStateData || {};
-                var requestData = $.extend({
-                    requestType: options.requestTypeParamName.load
-                }, afGridCurrentStateData);
-                $.server.getData(options.dataSource, requestData, onRecieveOfData);
+		store.load(afGridCurrentStateData, onReceiveOfData);
             });
         }
 
