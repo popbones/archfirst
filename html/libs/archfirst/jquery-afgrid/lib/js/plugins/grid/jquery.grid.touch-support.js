@@ -14,18 +14,18 @@
             break;
         case "touchmove":
             clearInterval(timer);
-            touchStartDelay=0;
-            if (delay<250) {
+            if (touchStartDelay<250) {
                 return true;
             }
+            touchStartDelay=0;
             type = "mousemove";
             break;
         case "touchend":
             clearInterval(timer);
-            touchStartDelay=0;
-            if (delay<250) {
+            if (touchStartDelay<250) {
                 return true;
             }
+            touchStartDelay=0;
             type = "mouseup";
             break;
         default:
