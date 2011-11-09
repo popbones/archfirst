@@ -16,7 +16,7 @@
             clearInterval(timer);
             touchStartDelay=0;
             if (delay<250) {
-                return;
+                return true;
             }
             type = "mousemove";
             break;
@@ -24,12 +24,12 @@
             clearInterval(timer);
             touchStartDelay=0;
             if (delay<250) {
-                return;
+                return true;
             }
             type = "mouseup";
             break;
         default:
-            return;
+            return true;
         }
         
         var simulatedEvent = document.createEvent("MouseEvent");
@@ -37,7 +37,7 @@
 
         first.target.dispatchEvent(simulatedEvent);
         event.preventDefault();
-        return;
+        return true;
     }
 
     function init() {
