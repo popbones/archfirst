@@ -46,7 +46,7 @@
             }, {
                 label: "Col 5",
                 id: "colComment",
-                width: 100
+                width: 200
             }];
         }
 

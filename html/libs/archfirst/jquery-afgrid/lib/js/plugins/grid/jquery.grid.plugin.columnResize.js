@@ -55,7 +55,7 @@
                             $guide.css({
                                 height: $afGrid.height(),
                                 top: $afGrid.position().top + parseInt($afGrid.css("margin-top"), 10),
-                                left: event.clientX
+                                left: $resizeHandle.offset().left + $resizeHandle.width()
                             });
                             $("body").append($guide);
                             originalWidth = $cell.width();
@@ -68,10 +68,11 @@
                                 } else if (newWidth >= options.maxColumnWidth) {
                                     newWidth = options.maxColumnWidth;
                                 } else {
-                                    $guide.css({
-                                        left: event.clientX
-                                    });
+                                    
                                 }
+				$guide.css({
+				    left: $resizeHandle.offset().left + $resizeHandle.width()
+				});
                                 $cell.width(newWidth);
                                 options.columns[options.columnsHashMap[columnId]].width = newWidth;
                                 return false;
@@ -85,6 +86,7 @@
                                 $afGrid.find(".afGrid-rows ." + columnId).width(newWidth);
                                 $afGrid.find(".afGrid-filter ." + columnId).width(newWidth);
                                 options.onColumnResize(columnId, originalWidth, newWidth);
+				$afGrid.trigger($.afGrid.adjustRowWidth);
                                 return false;
                             });
                             return false;

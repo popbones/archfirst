@@ -9,18 +9,18 @@
 }
 
 .afGrid-grey .afGrid-heading {
-	border-bottom-color: #ccc;
+    border-bottom-color: #ccc;
 }
 
 .afGrid-grey .afGrid-heading .cell {
-	border-left-color: #fff;
-    border-right-color: #ccc;
+    border-left-color: transparent;
+    border-right-color: #fff;
     color: #555;
 }
 
 .afGrid-grey .afGrid-rows .row {
     border-bottom-color: #EDEDED;
-	background-color: #F9F9F9;
+    background-color: #F9F9F9;
 }
 
 .afGrid-grey .afGrid-rows .row-first {
@@ -28,7 +28,7 @@
 }
 
 .afGrid-grey .afGrid-rows  .cell {
-    border-color: #FFF;
+    border-color: #F9F9F9;
 }
 
 .afGrid-grey .afGrid-rows .even,

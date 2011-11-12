@@ -62,15 +62,15 @@
     <!-- js files for custom grid extensions demo-->
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.filter.DATE.js"></script>
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.filter.DATERANGE.js"></script>
-    <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.renderer.DATE.js"></script>
+    <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.renderer.SYSTEM_DATE.js"></script>
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.renderer.LABEL_BUTTON.js"></script>
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.plugin.LABEL_BUTTON.js"></script>
     <script type="text/javascript" src="lib/js/plugins/gridExtensions/jquery.grid.plugin.switchTheme.js"></script>
     
     <!--fake store-->
     <script type="text/javascript" src="lib/js/plugins/store/AF.Grid.FakeLocalStore.js"></script>
-    <script type="text/javascript" src="lib/js/plugins/store/AF.Grid.fakeDataSet1.js"></script>
     <script type="text/javascript" src="lib/js/plugins/store/AF.Grid.fakeDataSet2.js"></script>
+    <script type="text/javascript" src="lib/js/plugins/store/AF.Grid.fakeDataSet4.js"></script>
     
     <script type="text/javascript">
         //<![CDATA[
@@ -78,7 +78,7 @@
         
         $j(function() {
             var grid1 = new AF.Grid({
-                dataSource: new AF.Grid.FakeLocalStore(AF.Grid.fakeDataSet1),
+                dataSource: new AF.Grid.FakeLocalStore(AF.Grid.fakeDataSet4),
                 id:"grid1"
             });
             grid1.load();

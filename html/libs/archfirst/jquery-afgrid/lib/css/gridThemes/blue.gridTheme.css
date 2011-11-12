@@ -9,18 +9,18 @@
 }
 
 .afGrid-blue .afGrid-heading {
-	border-bottom-color: #ccc;
+    border-bottom-color: #ccc;
 }
 
 .afGrid-blue .afGrid-heading .cell {
-	border-left-color: #fff;
-    border-right-color: #ccc;
+    border-left-color: transparent;
+    border-right-color: #B8D2D6;
     color: #555;
 }
 
 .afGrid-blue .afGrid-rows .row {
     border-bottom-color: #EDEDED;
-	background-color: #F8FDFF;
+    background-color: #F8FDFF;
 }
 
 .afGrid-blue .afGrid-rows .row-first {

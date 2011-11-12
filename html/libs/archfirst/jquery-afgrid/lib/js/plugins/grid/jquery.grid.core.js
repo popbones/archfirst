@@ -23,7 +23,8 @@
     $.afGrid = $.extend($.afGrid, {
         appendRows: "afGrid-append-rows",
         destroy: "afGrid-destroy",
-        renderingComplete: "afGrid-rendering-complete"
+        renderingComplete: "afGrid-rendering-complete",
+        adjustRowWidth: "afGrid-adjust-row-width"
     });
 
     $.afGrid.plugin = $.afGrid.plugin || {};
@@ -70,12 +71,16 @@
                 rowsAndGroup = renderRowsAndGroups(options, cachedafGridData),
                 $rows = rowsAndGroup.$rowsMainContainer,
                 $headingRows = $head,
-                $afGridRows = $headingRows.add($rows),
+                $afGridHeadingAndRows = $headingRows.add($rows),
                 countOfLoadedRows = options.rows.length,
-                scrollBottomTimer;
+                scrollBottomTimer,
+                rowWidth;
 
-            $afGrid.addClass("afGrid").empty().append($afGridRows);
-
+            $afGrid.addClass("afGrid").empty().append($afGridHeadingAndRows);
+            
+            //Fix for the grid width issue
+            adjustRowWidth($afGrid);
+            
             if (options.showTotalRows) {
                 $afGrid.append(options.totalRowLabelTemplate.supplant({
                     totalRows: "",
@@ -110,6 +115,7 @@
                 rowsAndGroup = null;
                 $rows.undelegate().unbind().remove();
                 $rows = null;
+                $afGrid.unbind($.afGrid.adjustRowWidth);
                 $afGrid.unbind($.afGrid.destroy).unbind($.afGrid.appendRows).undelegate(".group .group-header", "click");
                 $afGrid.undelegate(".afGrid-rows .row", "click").undelegate(".afGrid-rows .row", "mouseenter").undelegate(".afGrid-rows .row", "mouseleave").empty();
                 options = null;
@@ -127,10 +133,19 @@
                     currentGroupValues = rowsAndGroup.lastGroupInformation.currentGroupValues,
                     $rowsMainContainer = rowsAndGroup.$rowsMainContainer,
                     isStartRowEven = $rowsMainContainer.find(".row:last").hasClass("even");
-                rowsAndGroup.lastGroupInformation = addRows(options.id, newRows, options.columns, options.groupBy, $rowsMainContainer, $groupContainers, currentGroupValues, isStartRowEven, cachedafGridData);
+                rowsAndGroup.lastGroupInformation = addRows(options.id, newRows, options.columns, options.groupBy, $rowsMainContainer, $groupContainers, currentGroupValues, isStartRowEven, cachedafGridData, rowWidth);
             }
             $afGrid.unbind($.afGrid.appendRows).bind($.afGrid.appendRows, onRowAppend);
-
+            
+            function adjustRowWidth() {
+                rowWidth=0;
+                $afGrid.find(".afGrid-rows .row:eq(0)").children().each(function() {
+                    rowWidth+=$(this).outerWidth();    
+                });
+                $afGrid.find(".afGrid-rows .row").width(rowWidth);
+            }
+            $afGrid.unbind($.afGrid.adjustRowWidth).bind($.afGrid.adjustRowWidth, adjustRowWidth);
+            
             function updateCountLabel() {
                 if (options.showTotalRows) {
                     $afGrid.find(".total-row-count").replaceWith(options.totalRowLabelTemplate.supplant({
@@ -167,6 +182,7 @@
 
     };
 
+    
     function makeColumnDraggable($afGrid) {
         $.fn.draggable && $afGrid.find(".afGrid-heading .cell").draggable({
             helper: function (event) {
@@ -187,7 +203,7 @@
     function renderHeading(options) {
         return renderHeadingRow(options.columns, {
             container: "<div class='afGrid-heading'></div>",
-            cell: "<span class='cell {cssClass}' id='{id}'>{value}<span class='sort-arrow'></span></span>",
+            cell: "<div class='cell {cssClass}' id='{id}'>{value}<span class='sort-arrow'></span></div>",
             cellContent: function (column) {
                 return {
                     value: column.label,
@@ -267,7 +283,7 @@
         return $groupContainers;
     }
 
-    function addRows(tableId, rows, columns, groups, $rowMainContainer, $groupContainers, currentGroupValues, isStartEven, afGridData) {
+    function addRows(tableId, rows, columns, groups, $rowMainContainer, $groupContainers, currentGroupValues, isStartEven, afGridData, rowWidth) {
         var groupsLength = groups && groups.length;
         $.each(rows, function (i, row) {
             var rowId = row.id,
@@ -277,7 +293,7 @@
             if (rowId) {
                 (afGridData[rowId] = row);
             }
-            if (groups && groupsLength) {
+            if (groupsLength) {
                 if ($groupContainers === null) {
                     $.each(groups, function (index, v) {
                         currentGroupValues[index] = rowData[index];
@@ -302,9 +318,11 @@
             if (i === 0) {
                 $row.addClass("row-first");
             }
+            if (rowWidth) {
+                $row.css("width",rowWidth);
+            }
             $rowContainer.append($row);
         });
-
 
         return {
             $groupContainers: $groupContainers,
@@ -336,7 +354,7 @@
     }
 
     function getCell(column, value) {
-        var $cell = $("<span class='cell {columnId} {cssClass}'>{value}</span>".supplant({
+        var $cell = $("<div class='cell {columnId} {cssClass}'>{value}</div>".supplant({
             value: value,
             columnId: column.id,
             cssClass: column.renderer || ""
