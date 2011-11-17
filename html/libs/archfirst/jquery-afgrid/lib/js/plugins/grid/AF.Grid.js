@@ -23,28 +23,43 @@
     window.AF = window.AF || {};
     AF.Grid = function (options) {
 
-        options = $.extend(true, {
+	var defaultOptions = {
             id: null,
             dataSource: null,
             statePersist: $.statePersistToCookie,
-            onRowClick: defaultOnRowClick
-        }, options);
-
-		
+            canGroup: true,
+            groupsPlaceHolder: "." + options.id + "-afGrid-group-by",
+            columnWidthOverride: null,
+	    rowsToLoad: 20,
+            afGridSelector: "#" + options.id,
+            onRowClick: onRowClick,
+	    onSort: onSortBy,
+            onGroupChange: onGroupBy,
+	    onGroupReorder: onGroupReorder,
+            onFilter: onFilterBy,
+            onColumnReorder: onColumnReorder,
+            onColumnResize: onColumnResize,
+            onScrollToBottom: fetchRowsIncrementally
+        };
+	
+        options = $.extend(true, {}, defaultOptions, options);
+        
+        var $afGrid;
+        
         var store = options.dataSource,
-	    renderer, loadedRows = 0,
+	    loadedRows = 0,
             totalRows = 0,
-            rowsToLoad = 0,
+	    rowsToLoad = 0,
             columnData = null,
             afGridCurrentStateData = {};
-
+        
         function render(data) {
             columnData = data.columns;
             totalRows = data.totalRows;
             loadedRows = data.rows.length;
-            rowsToLoad = data.rowsToLoad || 20;
+            rowsToLoad = data.rowsToLoad || options.rowsToLoad;
             data.columnWidthOverride = afGridCurrentStateData.columnWidthOverride;
-            renderer.renderData(data);
+            renderData(data);
             afGridCurrentStateData.columnOrder = $.map(data.columns, function (column) {
                 return column.id;
             });
@@ -81,7 +96,7 @@
 
         function onRecieveOfNewRows(newRows) {
             loadedRows += newRows.rows.length;
-            renderer.addNewRows(newRows);
+            addNewRows(newRows);
         }
 
         function onReceiveOfData(data) {
@@ -162,7 +177,7 @@
             onGroupBy(newGroupOrder);
         }
 
-        function defaultOnRowClick(rowId, rowData) {
+        function onRowClick(rowId, rowData) {
             alert("Row id received: " + rowId + " Row data: " + JSON.stringify(rowData));
         }
 
@@ -179,24 +194,28 @@
             });
         }
 
-        //Constructor
-        (function init() {
-            renderer = new AF.renderer.Grid({
-                id: options.id,
-                fetchData: fetchRowsIncrementally,
-                onGroupBy: onGroupBy,
-                onSortBy: onSortBy,
-                onFilterBy: onFilterBy,
-                onColumnReorder: onColumnReorder,
-                onColumnResize: onColumnResize,
-                onRowClick: options.onRowClick,
-                onGroupReorder: onGroupReorder
-            });
-        }());
+        function renderData(data) {
+            var afGridData = $.extend(options, data);
+            if ($afGrid) {
+                $afGrid.trigger($.afGrid.destroy);
+                $afGrid = null;
+            }
+            $afGrid = $(options.afGridSelector);
+            $afGrid.afGrid(afGridData);
+        }
 
+        function addNewRows(newData) {
+            $afGrid.trigger($.afGrid.appendRows, [newData.rows]);
+        }
+
+	function getDefaultOptions() {
+	    return defaultOptions;    
+	}
+	
         return {
-            load: load
+            load: load,
+	    getDefaultOptions: getDefaultOptions
         };
     };
-
+    
 }(jQuery));

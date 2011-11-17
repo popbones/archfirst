@@ -26,12 +26,14 @@
                 label: "Title Name",
                 id: "colTitleName",
                 width: 150,
-                filterData: ""
+                filterData: "",
+                groupBy: true
             }, {
                 label: "Title Released",
                 id: "colTitleReleased",
                 width: 80,
-                filterData: ""           
+                filterData: "",
+                groupBy: true           
             }, {
                 label: "Artist Name",
                 id: "colName",
