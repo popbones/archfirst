@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -306,7 +306,7 @@
     };
     
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -516,7 +516,7 @@
     }());
 
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -666,7 +666,7 @@
     }());
 
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -811,7 +811,7 @@
     }());
 
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1213,7 +1213,7 @@ for (var artist in data.Artists.Artist) {
 console.log(JSON.stringify(rows))
 
 *//**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

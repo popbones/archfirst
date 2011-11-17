@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -200,7 +200,7 @@
     };
 
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -273,7 +273,7 @@
     };
 
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -659,7 +659,7 @@ if (!String.hasOwnProperty("supplant")) {
         });
     };
 }/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -742,7 +742,7 @@ if (!String.hasOwnProperty("supplant")) {
     }
 
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -856,7 +856,7 @@ if (!String.hasOwnProperty("supplant")) {
     });
 
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1098,7 +1098,7 @@ if (!String.hasOwnProperty("supplant")) {
     }
 
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1277,7 +1277,7 @@ if (!String.hasOwnProperty("supplant")) {
         console.log(x, y, z);
     }
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -1374,7 +1374,7 @@ if (!String.hasOwnProperty("supplant")) {
     });
 
 }(jQuery));/**
- * Copyright 2011 Manish Shanker
+ * Copyright 2011 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
