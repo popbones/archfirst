@@ -34,7 +34,7 @@
 }
 
 .afGrid .afGrid-heading .cell {
-	border-left: 1px solid #fff;
+    border-left: 1px solid #fff;
     border-right: 1px solid #ccc;
     font-weight: bold;
     padding: 8px 10px 8px 10px;
@@ -42,6 +42,10 @@
     background: url(images/defaultTheme/afGrid_header_bg.png) repeat-x;
     display: inline-block;
     position: relative;
+}
+
+html* .afGrid .afGrid-heading .cell {
+	display: inline;
 }
 
 .afGrid .afGrid-heading .first {
@@ -69,15 +73,20 @@
 .afGrid .row .cell {
     padding: 0 10px 0 10px;
     border-right: 1px solid #fff;
-	border-left: 1px solid #fff;
-	overflow: hidden;
+    border-left: 1px solid #fff;
+    overflow: hidden;
     display: inline-block;
-	vertical-align: middle;
+    vertical-align: middle;
+    margin-top: 4px;
+}
+
+html* .afGrid .row .cell {
+	display: inline;
 }
 
 .afGrid .even .cell {
     border-right: 1px solid #F7F7F7;
-	border-left: 1px solid #F7F7F7;
+    border-left: 1px solid #F7F7F7;
 }
 
 .afGrid .afGrid-rows .row-hover {
@@ -87,7 +96,7 @@
 .afGrid .afGrid-rows .row-hover .cell {
     background-color: #ebebeb;
     border-right-color: #ebebeb;
-	border-left-color: #ebebeb;
+    border-left-color: #ebebeb;
 }
 
 .afGrid .afGrid-heading .cell {
@@ -106,6 +115,10 @@ html* .afGrid .group {
 .afGrid .group .cell {
 	display: inline-block;
 	padding: 0 10px 0 10px;
+}
+
+html* .afGrid .group .cell {
+	display: inline;
 }
 
 .afGrid .group .group-header {

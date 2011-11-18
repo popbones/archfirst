@@ -44,6 +44,10 @@
     position: relative;
 }
 
+html* .afGrid .afGrid-heading .cell {
+	display: inline;
+}
+
 .afGrid .afGrid-heading .first {
 	border-left: 0;
 	padding-left: 11px;
@@ -74,6 +78,10 @@
     display: inline-block;
     vertical-align: middle;
     margin-top: 4px;
+}
+
+html* .afGrid .row .cell {
+	display: inline;
 }
 
 .afGrid .even .cell {
@@ -107,6 +115,10 @@ html* .afGrid .group {
 .afGrid .group .cell {
 	display: inline-block;
 	padding: 0 10px 0 10px;
+}
+
+html* .afGrid .group .cell {
+	display: inline;
 }
 
 .afGrid .group .group-header {
