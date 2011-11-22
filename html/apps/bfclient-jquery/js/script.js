@@ -303,9 +303,9 @@ Bullsfirst.ready = function () {
                     model: account,
                     // For even/odd calculations, row numbers start from 1
                     className: ((i + 1) % 2 == 0) ? 'even' : 'odd'
-                }, this);
+                });
                 this.el.append(view.render().el);
-            });
+            }, this);
 
             return this;
         }
