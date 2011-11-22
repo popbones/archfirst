@@ -33,13 +33,13 @@ Bullsfirst.ready = function () {
     // -----------------------------------------------------------------------------------
 
     /**
-    * Sets an Authorization header in the request. We force this header in every
-    * request to avoid being challenged by the server for credentials (the server
-    * sends a 401 Unauthorized error along with a WWW-Authenticate header to do this).
-    * Specifically, we don't rely on username/password settings in the jQuery.ajax()
-    * call since they cause an unnecessary roundtrip to the server resulting in a 401
-    * before sending the Authorization header.
-    */
+     * Sets an Authorization header in the request. We force this header in every
+     * request to avoid being challenged by the server for credentials (the server
+     * sends a 401 Unauthorized error along with a WWW-Authenticate header to do this).
+     * Specifically, we don't rely on username/password settings in the jQuery.ajax()
+     * call since they cause an unnecessary roundtrip to the server resulting in a 401
+     * before sending the Authorization header.
+     */
     function setAuthorizationHeader(xhr) {
         xhr.setRequestHeader(
             'Authorization',
@@ -47,9 +47,9 @@ Bullsfirst.ready = function () {
     }
 
     /**
-    * Sets the password header in the request. This is needed only for the get user
-    * REST request.
-    */
+     * Sets the password header in the request. This is needed only for the get user
+     * REST request.
+     */
     function setPasswordHeader(xhr) {
         xhr.setRequestHeader('password', password);
     }
@@ -87,16 +87,14 @@ Bullsfirst.ready = function () {
 
 
     // -----------------------------------------------------------------------------------
-    // Base View
+    // Page
     // -----------------------------------------------------------------------------------
-    var BaseView = Backbone.View.extend({
+    var Page = Backbone.View.extend({
         parent: $('#main'),
-        className: 'view',
 
         initialize: function() {
-            // this.el = $(this.el);
+            this.el = $(this.el);
             this.el.hide();
-            // this.parent.append(this.el);
             return this;
         },
 
@@ -121,11 +119,11 @@ Bullsfirst.ready = function () {
 
 
     // -----------------------------------------------------------------------------------
-    // Home View
+    // HomePage
     // -----------------------------------------------------------------------------------
-    var HomeView = BaseView.extend({
+    var HomePage = Page.extend({
 
-        el: $('#home_view'),
+        el: $('#home_page'),
 
         initialize: function(options) {
             this.constructor.__super__.initialize.apply(this, [options])
@@ -151,10 +149,9 @@ Bullsfirst.ready = function () {
     });
 
     /**
-    * Logs in to the server using saved credentials. If login is successful,
-    * saves the returned user information in the user object.
-    */
-
+     * Logs in to the server using saved credentials. If login is successful,
+     * saves the returned user information in the user object.
+     */
     function login() {
 
         $.ajax({
@@ -176,7 +173,7 @@ Bullsfirst.ready = function () {
 
 
     // -----------------------------------------------------------------------------------
-    // Open Account View
+    // OpenAccountDialog
     // -----------------------------------------------------------------------------------
     $('#open_account_dialog').dialog({
         autoOpen: false,
@@ -195,7 +192,8 @@ Bullsfirst.ready = function () {
             }]
     });
 
-    var OpenAccountView = Backbone.View.extend({
+    // Attach to a backbone view
+    var OpenAccountDialog = Backbone.View.extend({
 
         el: $('#open_account_dialog').parent(),
 
@@ -217,8 +215,6 @@ Bullsfirst.ready = function () {
                     clearStatusMessage();
                     // TODO: Erase the form
                     window.location.hash = 'accounts';
-                    // TODO: Remove after accounts page shows username
-                    showStatusMessage('info', 'Hello ' + user.firstName + ' ' + user.lastName + '!');
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     showStatusMessage('error', errorThrown);
@@ -233,50 +229,85 @@ Bullsfirst.ready = function () {
         }
     });
 
-    new OpenAccountView();
+    new OpenAccountDialog();
 
 
     // -----------------------------------------------------------------------------------
-    // Accounts View
+    // BrokerageAccount Model
     // -----------------------------------------------------------------------------------
-    var AccountsView = BaseView.extend({
+    var BrokerageAccount = Backbone.Model.extend({
+    });
 
-        el: $('#accounts_view'),
+    var BrokerageAccountCollection = Backbone.Collection.extend({
+        model: BrokerageAccount,
+        url: '/bfoms-javaee/rest/secure/brokerage_accounts'
+    });
+
+    // Instance of account collection
+    var accounts = new BrokerageAccountCollection;
+
+
+    // -----------------------------------------------------------------------------------
+    // AccountsPage
+    // -----------------------------------------------------------------------------------
+    var AccountsPage = Page.extend({
+
+        el: $('#accounts_page'),
 
         initialize: function(options) {
             this.constructor.__super__.initialize.apply(this, [options])
+            accounts.bind('reset', this.resetAccounts, this);
+        },
+
+        resetAccounts: function() {
+            // take out rows that might be sitting in the table
+            this.$('#accounts_table tbody').empty();
+
+            // add new rows from accounts collection
+            accounts.each(this.addAccount);
+        },
+
+        addAccount: function(account) {
+            var view = new AccountView({model: account});
+            this.$('#accounts_table tbody').append(view.render().el);
         },
 
         // TODO: not yet called
         onUserLoggedOut : function() {
             // clear user context
+            // clear accounts
             clearStatusMessage();
         }
     });
 
     function getBrokerageAccounts() {
-        $.ajax({
+        accounts.fetch({
             url: '/bfoms-javaee/rest/secure/brokerage_accounts',
             beforeSend: setAuthorizationHeader,
-            success: function (data, textStatus, jqXHR) {
-                // console.log(JSON.stringify(data, null, '    '));
-                var counter = 1;
-                var hash = {
-                    accounts: data,
-                    striper: function() {
-                        return function(text) {
-                            return counter++ % 2 == 0 ? 'even' : 'odd';
-                        }
-                    }
-                }
-
-                $('#accounts_table').html(Mustache.to_html($('#accountsTemplate').html(), hash));
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                showStatusMessage('error', errorThrown);
+            error: function (collection, response) {
+                // response is XMLHttpRequest???
+                showStatusMessage('error', response.statusText);
             }
         });
     }
+
+
+    // -----------------------------------------------------------------------------------
+    // Account View
+    // -----------------------------------------------------------------------------------
+    var AccountView = Backbone.View.extend({
+
+        model: BrokerageAccount,
+        tagName: "tr",
+
+        render: function() {
+            var hash = {
+                account: this.model.toJSON()  // returns a copy of the model's attributes 
+            }
+            $(this.el).html(Mustache.to_html($('#accountTemplate').html(), hash));
+            return this;
+        }
+    });
 
 
     // -----------------------------------------------------------------------------------
@@ -287,14 +318,14 @@ Bullsfirst.ready = function () {
         views: {},
 
         routes: {
-            '': 'showHome',
-            'accounts': 'showAccounts'
+            '': 'showHomePage',
+            'accounts': 'showAccountsPage'
         },
 
         initialize: function () {
             this.views = {
-                'home': new HomeView(),
-                'accounts': new AccountsView()
+                'home': new HomePage(),
+                'accounts': new AccountsPage()
             };
 
             // Start with home view
@@ -308,13 +339,13 @@ Bullsfirst.ready = function () {
                 function (t) { return t != null });
         },
 
-        showHome: function () {
+        showHomePage: function () {
             var view = this.views['home'];
             $.when(this.hideAllViews()).then(
                 function() { return view.show(); });
         },
 
-        showAccounts: function () {
+        showAccountsPage: function () {
             var view = this.views['accounts'];
             $.when(this.hideAllViews()).then(
                 function() { return view.show(); });

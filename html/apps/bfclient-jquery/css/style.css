@@ -736,8 +736,20 @@ strong {
     display:none;
 } 
  
+.left {
+    text-align: left;
+}
+
 .center {
     text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.number {
+    text-align: right;
 }
 
 /* main container
@@ -846,27 +858,27 @@ header h1 {
     padding: 0 20px 20px 20px;
 }
 
-/* Home
+/* HomePage
  * -------------------------------------------------------------------------- */
-#home_view {
+#home_page {
    position:relative;
    margin-top: 16px;
 }
 
-#home_view .login {
+#home_page .login {
     width:160px;
     position:absolute;
     right:10px;	
     top:0px; 
 }
 
-#home_view .hero {
+#home_page .hero {
     padding:190px 0 0 0px;
 	width:685px;
 	background:url(../img/homeGraphic.png) 105px 0 no-repeat; 
 }
 
-#home_view .hero h1 {
+#home_page .hero h1 {
 	text-indent:-9999px;	 
 }
  
@@ -942,22 +954,6 @@ table.zebra td {
     vertical-align: middle;
     border-bottom: 1px solid #ccc;
     padding: 7px;
-}
-
-th.number, td.number {
-    text-align: right;
-}
-
-th.leftAlign, td.leftAlign {
-    text-align: left;
-}
-
-th.center, td.center {
-    text-align: center;
-}
-
-th.rightAlign, td.rightAlign {
-    text-align: right;
 }
 
 td.plain {

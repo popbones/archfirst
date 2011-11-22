@@ -28,8 +28,8 @@
         <!-- Main Content Area -->
         <div id="main" role="main">
     
-            <!-- Home View -->
-            <div id="home_view" class="view">
+            <!-- Home Page -->
+            <div id="home_page">
                 <div class="hero">
                     <h1>More Results with bullsfirst at the helm of your portfolio</h1>
                     <p>
@@ -61,8 +61,8 @@
                 </div>
             </div>
 
-            <!-- Accounts View -->
-            <div id="accounts_view" class="view nodisplay">
+            <!-- Accounts Page -->
+            <div id="accounts_page" class="nodisplay">
                 <div class="navigationTabs">
                     <div class="stylefour">
                         <ul>
@@ -88,6 +88,19 @@
                 </div>
 
                 <div id="accounts_table" class="fullWidthContent">
+                    <table class="zebra">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Account #</th>
+                                <th>Market Value</th>
+                                <th>Cash</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
                 </div>
 
             </div>
@@ -135,39 +148,26 @@
 
     <!-- Templates -->
 
-    <script id="accountsTemplate" type="text/x-mustache-tmpl">
-    <table class="zebra" cellspacing="0">
-        <thead>
-            <tr>
-                <th class="leftAlign">Name</th>
-                <th class="number">Account #</th>
-                <th class="number">Market Value</th>
-                <th class="number">Cash</th>
-                <th class="center">Actions</th>
-            </tr>
-        </thead>
-        {{#accounts}}
-        <tr class="{{#striper}}{{/striper}}">
-            <td class="leftAlign">
-                <a href="#accounts">{{name}}</a>
-            </td>
-            <td class="number">
-                <a href="#accounts">{{id}}</a>
-            </td>
-            <td class="number">
-                ${{marketValue.amount}}
-            </td>
-            <td class="number">
-                ${{cashPosition.amount}}
-            </td>
-            <td class="center">
-                {{#editPermission}}
-                <a href="#accounts">Edit</a>
-                {{/editPermission}}
-            </td>
-        </tr>
-        {{/accounts}}
-    </table>
+    <script id="accountTemplate" type="text/x-mustache-tmpl">
+        {{#account}}
+        <td class="left">
+            <a href="#accounts">{{name}}</a>
+        </td>
+        <td class="number">
+            <a href="#accounts">{{id}}</a>
+        </td>
+        <td class="number">
+            ${{marketValue.amount}}
+        </td>
+        <td class="number">
+            ${{cashPosition.amount}}
+        </td>
+        <td class="center">
+            {{#editPermission}}
+            <a href="#accounts">Edit</a>
+            {{/editPermission}}
+        </td>
+        {{/account}}
     </script>
 
     <!-- End of templates -->
