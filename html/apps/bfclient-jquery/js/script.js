@@ -239,46 +239,14 @@ Bullsfirst.ready = function () {
     });
 
     var BrokerageAccountCollection = Backbone.Collection.extend({
-        model: BrokerageAccount,
-        url: '/bfoms-javaee/rest/secure/brokerage_accounts'
+        model: BrokerageAccount
     });
 
-    // Instance of account collection
+
+    // -----------------------------------------------------------------------------------
+    // Model Instances
+    // -----------------------------------------------------------------------------------
     var accounts = new BrokerageAccountCollection;
-
-
-    // -----------------------------------------------------------------------------------
-    // AccountsPage
-    // -----------------------------------------------------------------------------------
-    var AccountsPage = Page.extend({
-
-        el: $('#accounts_page'),
-
-        initialize: function(options) {
-            this.constructor.__super__.initialize.apply(this, [options])
-            accounts.bind('reset', this.resetAccounts, this);
-        },
-
-        resetAccounts: function() {
-            // take out rows that might be sitting in the table
-            this.$('#accounts_table tbody').empty();
-
-            // add new rows from accounts collection
-            accounts.each(this.addAccount);
-        },
-
-        addAccount: function(account) {
-            var view = new AccountView({model: account});
-            this.$('#accounts_table tbody').append(view.render().el);
-        },
-
-        // TODO: not yet called
-        onUserLoggedOut : function() {
-            // clear user context
-            // clear accounts
-            clearStatusMessage();
-        }
-    });
 
     function getBrokerageAccounts() {
         accounts.fetch({
@@ -293,12 +261,64 @@ Bullsfirst.ready = function () {
 
 
     // -----------------------------------------------------------------------------------
+    // AccountsPage
+    // -----------------------------------------------------------------------------------
+    var AccountsPage = Page.extend({
+
+        el: $('#accounts_page'),
+
+        initialize: function(options) {
+            this.constructor.__super__.initialize.apply(this, [options])
+            new AccountsView();
+        },
+
+        // TODO: not yet called
+        onUserLoggedOut : function() {
+            // clear user context
+            // clear accounts
+            clearStatusMessage();
+        }
+    });
+
+
+    // -----------------------------------------------------------------------------------
+    // Accounts View
+    // -----------------------------------------------------------------------------------
+    var AccountsView = Backbone.View.extend({
+
+        el: $('#accounts_table tbody'),
+
+        initialize: function(options) {
+            this.collection = accounts;
+            this.collection.bind('reset', this.render, this);
+        },
+
+        render: function() {
+            // take out rows that might be sitting in the table
+            this.el.empty();
+
+            // Add new rows from accounts collection. Pass this object as context
+            this.collection.each(function(account, i) {
+                var view = new AccountView({
+                    model: account,
+                    // For even/odd calculations, row numbers start from 1
+                    className: ((i + 1) % 2 == 0) ? 'even' : 'odd'
+                }, this);
+                this.el.append(view.render().el);
+            });
+
+            return this;
+        }
+    });
+
+
+    // -----------------------------------------------------------------------------------
     // Account View
     // -----------------------------------------------------------------------------------
     var AccountView = Backbone.View.extend({
 
         model: BrokerageAccount,
-        tagName: "tr",
+        tagName: 'tr',
 
         render: function() {
             var hash = {
