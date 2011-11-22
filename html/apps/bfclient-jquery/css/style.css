@@ -940,13 +940,8 @@ table.zebra tr {
     height: 28px;
 }
 
-table.zebra tr.odd {
-    background: #fff;
-    color: #000;
-}
-
-table.zebra tr.even {
-    background: #fff url(../img/tablealt.gif) repeat;
+table.zebra tr.alt {
+    background: #f0f0f0;
     color: #000;
 }
 

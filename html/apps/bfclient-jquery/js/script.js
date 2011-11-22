@@ -299,13 +299,12 @@ Bullsfirst.ready = function () {
 
             // Add new rows from accounts collection. Pass this object as context
             this.collection.each(function(account, i) {
-                var view = new AccountView({
-                    model: account,
-                    // For even/odd calculations, row numbers start from 1
-                    className: ((i + 1) % 2 == 0) ? 'even' : 'odd'
-                });
+                var view = new AccountView({model: account});
                 this.el.append(view.render().el);
             }, this);
+
+            // Stripe the rows
+            this.el.find('tr:odd').addClass('alt');
 
             return this;
         }
