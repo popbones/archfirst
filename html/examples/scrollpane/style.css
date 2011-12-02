@@ -1,0 +1,45 @@
+#scrollpane {
+}
+
+#scrollpane-content {
+    float: left;
+}
+
+#vert-scrollbar {
+    float: right;
+}
+
+#arrow-up {
+    background: #FF0000;
+    cursor: pointer;
+}
+
+#vert-slider {
+    margin-top: 6px;
+}
+
+#arrow-down {
+    background: #FF0000;
+    margin-top: 6px;
+    cursor: pointer;
+}
+
+#horz-scrollbar {
+}
+
+#arrow-left {
+    background: #FF0000;
+    float: left;
+    cursor: pointer;
+}
+
+#horz-slider {
+    float: left;
+    margin-left: 6px;
+}
+
+#arrow-right {
+    background: #FF0000;
+    float: right;
+    cursor: pointer;
+}

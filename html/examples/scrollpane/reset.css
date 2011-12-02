@@ -1,0 +1,12 @@
+﻿html, body {
+    height: 100%;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 11px; /* affects size of jquery-ui's slider */
+    line-height: 13px;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
