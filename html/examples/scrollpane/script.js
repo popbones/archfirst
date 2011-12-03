@@ -26,8 +26,8 @@ function ScrollPane(width, height) {
         .height(height-4*scrollbarWidth)
         .slider({
             orientation: "vertical",
-            value: 100,
-            slide: function(event, ui) { console.log('vert: ' + ui.value) }
+            slide: function(event, ui) { showSliderValues(); },
+            change: function(event, ui) { showSliderValues(); }
         });
 
     $('#horz-scrollbar')
@@ -38,6 +38,13 @@ function ScrollPane(width, height) {
         .width(width-4*scrollbarWidth)
         .height(scrollbarWidth)
         .slider({
-            slide: function(event, ui) { console.log('horz: ' + ui.value) }
+            slide: function(event, ui) { showSliderValues(); },
+            change: function(event, ui) { showSliderValues(); }
         });
+}
+
+function showSliderValues() {
+    var x = $('#horz-slider').slider("value");
+    var y = $('#vert-slider').slider("value");
+    $('#scrollpane-content').html(x + ', ' + y);
 }
