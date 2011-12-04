@@ -1,50 +1,59 @@
 $(document).ready(function() {
-    new ScrollPane(600, 400);
+    createSlider();
+    sizeComponents();
+    $(window).resize(function() {
+        sizeComponents();
+    });
+    generateTable(40, 20);
 });
 
-function ScrollPane(width, height) {
-
-    var scrollbarWidth = 12;
-
-    $('#scrollpane').width(width).height(height);
-
-    $('#arrow-up').width(scrollbarWidth).height(scrollbarWidth);
-    $('#arrow-down').width(scrollbarWidth).height(scrollbarWidth);
-    $('#arrow-left').width(scrollbarWidth).height(scrollbarWidth);
-    $('#arrow-right').width(scrollbarWidth).height(scrollbarWidth);
-
-    $('#scrollpane-content')
-        .width(width-scrollbarWidth)
-        .height(height-scrollbarWidth);
-
-    $('#vert-scrollbar')
-        .width(scrollbarWidth)
-        .height(height-scrollbarWidth);
-
+function createSlider() {
     $('#vert-slider')
-        .width(scrollbarWidth)
-        .height(height-4*scrollbarWidth)
         .slider({
-            orientation: "vertical",
-            slide: function(event, ui) { showSliderValues(); },
-            change: function(event, ui) { showSliderValues(); }
-        });
-
-    $('#horz-scrollbar')
-        .width(width-scrollbarWidth)
-        .height(scrollbarWidth);
-
-    $('#horz-slider')
-        .width(width-4*scrollbarWidth)
-        .height(scrollbarWidth)
-        .slider({
-            slide: function(event, ui) { showSliderValues(); },
-            change: function(event, ui) { showSliderValues(); }
+            orientation: 'vertical',
+            value: 100,
+            slide: function(event, ui) { scrollVertical(100 - ui.value); },
+            change: function(event, ui) { scrollVertical(100 - ui.value); }
         });
 }
 
-function showSliderValues() {
-    var x = $('#horz-slider').slider("value");
-    var y = $('#vert-slider').slider("value");
-    $('#scrollpane-content').html(x + ', ' + y);
+function sizeComponents() {
+    sizeElementHeight($('#scrollpane-content'), $('#footer'));
+    sizeVerticalScrollBar();
+}
+
+function sizeElementHeight(element, elementBelow) {
+    var windowHeight = $(window).height();
+    var elementAboveHeight = element.offset().top;
+    var elementBelowHeight = windowHeight - elementBelow.offset().top;
+    var fudgeFactor = 20;
+    element.height(windowHeight - elementAboveHeight - elementBelowHeight - fudgeFactor);
+}
+
+function sizeVerticalScrollBar() {
+    var scrollbarWidth = 12;
+    var arrowHeight = 20;
+    var scrollpaneHeight = $('#scrollpane-content').height();
+
+    $('#vert-slider')
+        .width(scrollbarWidth)
+        .height(scrollpaneHeight-2*arrowHeight);
+}
+
+function scrollVertical(value) {
+    var maxScroll = $('#scrollpane-content')[0].scrollHeight - $('#scrollpane-content').height();
+    $('#scrollpane-content').scrollTop(value*(maxScroll/100));
+}
+
+function generateTable(numRows, numColumns) {
+    var table = '<table>';
+    for (i=0; i<numRows; i++) {
+        table = table + '<tr>';
+        for (j=0; j<numColumns; j++) {
+            table = table + '<td>' + i + ', ' + j + '</td>';
+        }
+        table = table + '</tr>';
+    }
+    table = table + '</table>';
+    $('#scrollpane-content').html(table);
 }

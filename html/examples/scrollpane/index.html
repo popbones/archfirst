@@ -3,31 +3,36 @@
 <head>
     <meta charset="utf-8">
     <title>Scroll Pane</title>
-    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="../../libs/eric-meyer/css/reset.css">
     <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/themes/ui-lightness/jquery-ui.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="scrollpane">
-        
-        <div id="scrollpane-content"></div>
-        
-        <div id="vert-scrollbar">
-            <div id="arrow-up"></div>
-            <div id="vert-slider"></div>
-            <div id="arrow-down"></div>
-        </div>
 
-        <div id="horz-scrollbar">
-            <div id="arrow-left"></div>
-            <div id="horz-slider"></div>
-            <div id="arrow-right"></div>
+<div id="container">
+    <div id="header">Header</div>
+
+    <div id="main">
+
+        <div id="intro">horizontal scrolling with native scrollbar, vertical scrolling with jQuery UI slider</div>
+
+        <div id="scrollpane">
+            <div id="scrollpane-content"></div>
+            <div id="vert-scrollbar">
+                <div id="arrow-up"></div>
+                <div id="vert-slider"></div>
+                <div id="arrow-down"></div>
+            </div>
         </div>
 
     </div>
 
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
-    <script defer src="script.js"></script>
+    <div id="footer">Footer</div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.16/jquery-ui.min.js"></script>
+<script src="script.js"></script>
+
 </body>
 </html>
