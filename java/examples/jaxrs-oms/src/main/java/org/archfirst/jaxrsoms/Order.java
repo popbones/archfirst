@@ -23,7 +23,7 @@ import java.net.URI;
  * @author Naresh Bhatia
  */
 public class Order {
-    
+
     // ----- Constructors -----
     public Order() {
     }
@@ -35,11 +35,11 @@ public class Order {
     }
 
     // ----- Attributes -----
-    public int id;
-    public String side;
-    public String symbol;
-    public int quantity;
-    public URI self;
+    private int id;
+    private String side;
+    private String symbol;
+    private int quantity;
+    private URI self;
 
     // ----- Getters and Setters -----
     public int getId() {

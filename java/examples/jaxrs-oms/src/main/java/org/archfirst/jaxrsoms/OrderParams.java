@@ -22,9 +22,9 @@ package org.archfirst.jaxrsoms;
  */
 public class OrderParams {
     // ----- Attributes -----
-    public String side;
-    public String symbol;
-    public int quantity;
+    private String side;
+    private String symbol;
+    private int quantity;
 
     // ----- Getters and Setters -----
     public String getSide() {
