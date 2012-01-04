@@ -66,3 +66,10 @@
 .afGrid-group-by .group-helper .arrow {
     background: url(images/defaultTheme/afGrid_groups_sprite.png) top right no-repeat;
 }
+
+.afGrid .group .open-close-indicator {
+    display: inline-block;
+    margin-right: 5px;
+    font-size: 100%;
+    width: 5px;
+}
