@@ -1,0 +1,576 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		004F06CD148D421F003F35D3 /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004F06CC148D421F003F35D3 /* AddAccountViewController.xib */; };
+		005B34B71486BF0F00C637F5 /* AccountsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */; };
+		009C1A3C148D3FF500259534 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009C1A3B148D3FF400259534 /* AddAccountViewController.m */; };
+		00B38DE61486CE0400DC62F2 /* BrokerageAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B38DE51486CE0400DC62F2 /* BrokerageAccountCell.m */; };
+		00B38DE81487F48500DC62F2 /* btn_edit_56x31.png in Resources */ = {isa = PBXBuildFile; fileRef = 00B38DE71487F48500DC62F2 /* btn_edit_56x31.png */; };
+		00D3C409147C27120067A768 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D3C408147C27120067A768 /* UIKit.framework */; };
+		00D3C40B147C27120067A768 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D3C40A147C27120067A768 /* Foundation.framework */; };
+		00D3C40D147C27120067A768 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D3C40C147C27120067A768 /* CoreGraphics.framework */; };
+		00D3C413147C27120067A768 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 00D3C411147C27120067A768 /* InfoPlist.strings */; };
+		00D3C415147C27120067A768 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3C414147C27120067A768 /* main.m */; };
+		00D3C419147C27120067A768 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3C418147C27120067A768 /* AppDelegate.m */; };
+		00D3C422147C28440067A768 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3C420147C28440067A768 /* LoginViewController.m */; };
+		00D3C423147C28440067A768 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00D3C421147C28440067A768 /* LoginViewController.xib */; };
+		00D3C426147C2A970067A768 /* img_bullsfirst_logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D3C425147C2A970067A768 /* img_bullsfirst_logo.png */; };
+		00D3C428147C31E80067A768 /* img_bg_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D3C427147C31E80067A768 /* img_bg_login.png */; };
+		00D3C430147D537B0067A768 /* OpenAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3C42E147D537B0067A768 /* OpenAccountViewController.m */; };
+		00D3C431147D537B0067A768 /* OpenAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */; };
+		00D5191A14891B6F0049F43E /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D51901148834580049F43E /* libCorePlot-CocoaTouch.a */; };
+		00D5191B14891BD20049F43E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B38DF71488025000DC62F2 /* QuartzCore.framework */; };
+		00D5191E14891DBA0049F43E /* PieChartMVAccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */; };
+		00D51922148951370049F43E /* PieChartMVPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D51921148951370049F43E /* PieChartMVPositionViewController.m */; };
+		00DFF9041480893E001A4641 /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF9031480893E001A4641 /* AccountsViewController.m */; };
+		00DFF90714808975001A4641 /* PositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF90614808975001A4641 /* PositionsViewController.m */; };
+		00DFF90A14808989001A4641 /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF90914808988001A4641 /* OrdersViewController.m */; };
+		00DFF90D1480899D001A4641 /* TransactionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF90C1480899D001A4641 /* TransactionsViewController.m */; };
+		00DFF91A1480AAC6001A4641 /* AccountsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF9191480AAC6001A4641 /* AccountsViewController.xib */; };
+		00DFF91C1480AAF0001A4641 /* PositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */; };
+		00DFF91E1480AB01001A4641 /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF91D1480AB01001A4641 /* OrdersViewController.xib */; };
+		00DFF9201480AB14001A4641 /* TransactionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */; };
+		00DFF9231480AD68001A4641 /* BFToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF9221480AD68001A4641 /* BFToolbar.m */; };
+		00DFF9251480AD91001A4641 /* BFToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF9241480AD91001A4641 /* BFToolbar.xib */; };
+		00DFF93A1483D31D001A4641 /* btn_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF9391483D31D001A4641 /* btn_login.png */; };
+		00DFF93C1483DE23001A4641 /* btn_openanaccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF93B1483DE23001A4641 /* btn_openanaccount.png */; };
+		00DFF93E1483ED7F001A4641 /* btn_openaccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF93D1483ED7F001A4641 /* btn_openaccount.png */; };
+		00DFF9401483EE5A001A4641 /* btn_cancel500.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF93F1483EE5A001A4641 /* btn_cancel500.png */; };
+		00DFF9421483EFD1001A4641 /* img_bg_yellow.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF9411483EFD1001A4641 /* img_bg_yellow.png */; };
+		00DFF9441483F212001A4641 /* btn_logout_75x31.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF9431483F212001A4641 /* btn_logout_75x31.png */; };
+		00DFF9471483F3DB001A4641 /* btn_plus_26x26.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF9451483F3DB001A4641 /* btn_plus_26x26.png */; };
+		00DFF9481483F3DB001A4641 /* btn_refresh_26x26.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF9461483F3DB001A4641 /* btn_refresh_26x26.png */; };
+		00DFF94B1483F5D3001A4641 /* btn_trade_44x31.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF9491483F5D3001A4641 /* btn_trade_44x31.png */; };
+		00DFF94C1483F5D3001A4641 /* btn_transfer_44x31.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF94A1483F5D3001A4641 /* btn_transfer_44x31.png */; };
+		00DFF956148409BF001A4641 /* iconPositions.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF955148409BF001A4641 /* iconPositions.png */; };
+		00DFF95814840B04001A4641 /* iconAccounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF95714840B04001A4641 /* iconAccounts.png */; };
+		00DFF95B14840BD1001A4641 /* iconOrders.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF95914840BD1001A4641 /* iconOrders.png */; };
+		00DFF95C14840BD1001A4641 /* iconTransactions.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF95A14840BD1001A4641 /* iconTransactions.png */; };
+		00DFF95F14841319001A4641 /* BFMoney.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF95E14841318001A4641 /* BFMoney.m */; };
+		00DFF96214841782001A4641 /* BFPosition.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96114841781001A4641 /* BFPosition.m */; };
+		00DFF96614841B00001A4641 /* BFBrokerageAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96514841B00001A4641 /* BFBrokerageAccount.m */; };
+		00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		00D51900148834580049F43E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
+		00D5191814891B5B0049F43E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
+			remoteInfo = "CorePlot-CocoaTouch";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		004F06CC148D421F003F35D3 /* AddAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
+		005B34B51486BF0F00C637F5 /* AccountsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsTableViewController.h; sourceTree = "<group>"; };
+		005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsTableViewController.m; sourceTree = "<group>"; };
+		009C1A3A148D3FF400259534 /* AddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
+		009C1A3B148D3FF400259534 /* AddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
+		00B38DE41486CE0400DC62F2 /* BrokerageAccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrokerageAccountCell.h; sourceTree = "<group>"; };
+		00B38DE51486CE0400DC62F2 /* BrokerageAccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrokerageAccountCell.m; sourceTree = "<group>"; };
+		00B38DE71487F48500DC62F2 /* btn_edit_56x31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_edit_56x31.png; sourceTree = "<group>"; };
+		00B38DF71488025000DC62F2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		00D3C404147C27120067A768 /* Bullsfirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bullsfirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		00D3C408147C27120067A768 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		00D3C40A147C27120067A768 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		00D3C40C147C27120067A768 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		00D3C410147C27120067A768 /* Bullsfirst-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bullsfirst-Info.plist"; sourceTree = "<group>"; };
+		00D3C412147C27120067A768 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		00D3C414147C27120067A768 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		00D3C416147C27120067A768 /* Bullsfirst-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bullsfirst-Prefix.pch"; sourceTree = "<group>"; };
+		00D3C417147C27120067A768 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		00D3C418147C27120067A768 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		00D3C41F147C28440067A768 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		00D3C420147C28440067A768 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		00D3C421147C28440067A768 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		00D3C425147C2A970067A768 /* img_bullsfirst_logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_bullsfirst_logo.png; sourceTree = "<group>"; };
+		00D3C427147C31E80067A768 /* img_bg_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_bg_login.png; sourceTree = "<group>"; };
+		00D3C42D147D537B0067A768 /* OpenAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OpenAccountViewController.h; sourceTree = "<group>"; };
+		00D3C42E147D537B0067A768 /* OpenAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenAccountViewController.m; sourceTree = "<group>"; };
+		00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenAccountViewController.xib; sourceTree = "<group>"; };
+		00D3C432147D60F20067A768 /* BFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFConstants.h; sourceTree = "<group>"; };
+		00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../libraries/core-plot/core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		00D5191C14891DBA0049F43E /* PieChartMVAccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartMVAccountsViewController.h; sourceTree = "<group>"; };
+		00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartMVAccountsViewController.m; sourceTree = "<group>"; };
+		00D51920148951370049F43E /* PieChartMVPositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartMVPositionViewController.h; sourceTree = "<group>"; };
+		00D51921148951370049F43E /* PieChartMVPositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartMVPositionViewController.m; sourceTree = "<group>"; };
+		00DFF9021480893E001A4641 /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
+		00DFF9031480893E001A4641 /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
+		00DFF90514808975001A4641 /* PositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionsViewController.h; sourceTree = "<group>"; };
+		00DFF90614808975001A4641 /* PositionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PositionsViewController.m; sourceTree = "<group>"; };
+		00DFF90814808988001A4641 /* OrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersViewController.h; sourceTree = "<group>"; };
+		00DFF90914808988001A4641 /* OrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersViewController.m; sourceTree = "<group>"; };
+		00DFF90B1480899D001A4641 /* TransactionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransactionsViewController.h; sourceTree = "<group>"; };
+		00DFF90C1480899D001A4641 /* TransactionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransactionsViewController.m; sourceTree = "<group>"; };
+		00DFF9191480AAC6001A4641 /* AccountsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountsViewController.xib; sourceTree = "<group>"; };
+		00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionsViewController.xib; sourceTree = "<group>"; };
+		00DFF91D1480AB01001A4641 /* OrdersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersViewController.xib; sourceTree = "<group>"; };
+		00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionsViewController.xib; sourceTree = "<group>"; };
+		00DFF9211480AD67001A4641 /* BFToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFToolbar.h; sourceTree = "<group>"; };
+		00DFF9221480AD68001A4641 /* BFToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFToolbar.m; sourceTree = "<group>"; };
+		00DFF9241480AD91001A4641 /* BFToolbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFToolbar.xib; sourceTree = "<group>"; };
+		00DFF9391483D31D001A4641 /* btn_login.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_login.png; sourceTree = "<group>"; };
+		00DFF93B1483DE23001A4641 /* btn_openanaccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_openanaccount.png; sourceTree = "<group>"; };
+		00DFF93D1483ED7F001A4641 /* btn_openaccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_openaccount.png; sourceTree = "<group>"; };
+		00DFF93F1483EE5A001A4641 /* btn_cancel500.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_cancel500.png; sourceTree = "<group>"; };
+		00DFF9411483EFD1001A4641 /* img_bg_yellow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_bg_yellow.png; sourceTree = "<group>"; };
+		00DFF9431483F212001A4641 /* btn_logout_75x31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_logout_75x31.png; sourceTree = "<group>"; };
+		00DFF9451483F3DB001A4641 /* btn_plus_26x26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_plus_26x26.png; sourceTree = "<group>"; };
+		00DFF9461483F3DB001A4641 /* btn_refresh_26x26.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_refresh_26x26.png; sourceTree = "<group>"; };
+		00DFF9491483F5D3001A4641 /* btn_trade_44x31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_trade_44x31.png; sourceTree = "<group>"; };
+		00DFF94A1483F5D3001A4641 /* btn_transfer_44x31.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_transfer_44x31.png; sourceTree = "<group>"; };
+		00DFF955148409BF001A4641 /* iconPositions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconPositions.png; sourceTree = "<group>"; };
+		00DFF95714840B04001A4641 /* iconAccounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconAccounts.png; sourceTree = "<group>"; };
+		00DFF95914840BD1001A4641 /* iconOrders.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconOrders.png; sourceTree = "<group>"; };
+		00DFF95A14840BD1001A4641 /* iconTransactions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconTransactions.png; sourceTree = "<group>"; };
+		00DFF95D14841317001A4641 /* BFMoney.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMoney.h; sourceTree = "<group>"; };
+		00DFF95E14841318001A4641 /* BFMoney.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFMoney.m; sourceTree = "<group>"; };
+		00DFF96014841780001A4641 /* BFPosition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFPosition.h; sourceTree = "<group>"; };
+		00DFF96114841781001A4641 /* BFPosition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFPosition.m; sourceTree = "<group>"; };
+		00DFF96414841B00001A4641 /* BFBrokerageAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFBrokerageAccount.h; sourceTree = "<group>"; };
+		00DFF96514841B00001A4641 /* BFBrokerageAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFBrokerageAccount.m; sourceTree = "<group>"; };
+		00DFF96B14855010001A4641 /* BFBrokerageAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFBrokerageAccountStore.h; sourceTree = "<group>"; };
+		00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFBrokerageAccountStore.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		00D3C401147C27120067A768 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00D5191B14891BD20049F43E /* QuartzCore.framework in Frameworks */,
+				00D3C409147C27120067A768 /* UIKit.framework in Frameworks */,
+				00D3C40B147C27120067A768 /* Foundation.framework in Frameworks */,
+				00D3C40D147C27120067A768 /* CoreGraphics.framework in Frameworks */,
+				00D5191A14891B6F0049F43E /* libCorePlot-CocoaTouch.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		00D3C3F9147C27120067A768 = {
+			isa = PBXGroup;
+			children = (
+				00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */,
+				00D3C40E147C27120067A768 /* Bullsfirst */,
+				00D3C407147C27120067A768 /* Frameworks */,
+				00D3C405147C27120067A768 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		00D3C405147C27120067A768 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00D3C404147C27120067A768 /* Bullsfirst.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00D3C407147C27120067A768 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				00B38DF71488025000DC62F2 /* QuartzCore.framework */,
+				00D3C408147C27120067A768 /* UIKit.framework */,
+				00D3C40A147C27120067A768 /* Foundation.framework */,
+				00D3C40C147C27120067A768 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		00D3C40E147C27120067A768 /* Bullsfirst */ = {
+			isa = PBXGroup;
+			children = (
+				00D3C417147C27120067A768 /* AppDelegate.h */,
+				00D3C418147C27120067A768 /* AppDelegate.m */,
+				00D3C41F147C28440067A768 /* LoginViewController.h */,
+				00D3C420147C28440067A768 /* LoginViewController.m */,
+				00D3C42D147D537B0067A768 /* OpenAccountViewController.h */,
+				00D3C42E147D537B0067A768 /* OpenAccountViewController.m */,
+				00DFF9211480AD67001A4641 /* BFToolbar.h */,
+				00DFF9221480AD68001A4641 /* BFToolbar.m */,
+				00DFF9631484179D001A4641 /* Model */,
+				00DFF90E148089B6001A4641 /* Tabs */,
+				00D5191F148932BD0049F43E /* old */,
+				00D3C424147C285D0067A768 /* Resources */,
+				00D3C40F147C27120067A768 /* Supporting Files */,
+			);
+			path = Bullsfirst;
+			sourceTree = "<group>";
+		};
+		00D3C40F147C27120067A768 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				00D3C432147D60F20067A768 /* BFConstants.h */,
+				00D3C410147C27120067A768 /* Bullsfirst-Info.plist */,
+				00D3C411147C27120067A768 /* InfoPlist.strings */,
+				00D3C414147C27120067A768 /* main.m */,
+				00D3C416147C27120067A768 /* Bullsfirst-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		00D3C424147C285D0067A768 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				00DFF9181480A8F2001A4641 /* NIB */,
+				00DFF9171480A8D7001A4641 /* images */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		00D518F8148834580049F43E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				00D51901148834580049F43E /* libCorePlot-CocoaTouch.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		00D5191F148932BD0049F43E /* old */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = old;
+			sourceTree = "<group>";
+		};
+		00DFF90E148089B6001A4641 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				00DFF9021480893E001A4641 /* AccountsViewController.h */,
+				00DFF9031480893E001A4641 /* AccountsViewController.m */,
+				009C1A3A148D3FF400259534 /* AddAccountViewController.h */,
+				009C1A3B148D3FF400259534 /* AddAccountViewController.m */,
+				00D5191C14891DBA0049F43E /* PieChartMVAccountsViewController.h */,
+				00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */,
+				00D51920148951370049F43E /* PieChartMVPositionViewController.h */,
+				00D51921148951370049F43E /* PieChartMVPositionViewController.m */,
+				005B34B51486BF0F00C637F5 /* AccountsTableViewController.h */,
+				005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */,
+				00DFF90514808975001A4641 /* PositionsViewController.h */,
+				00DFF90614808975001A4641 /* PositionsViewController.m */,
+				00DFF90814808988001A4641 /* OrdersViewController.h */,
+				00DFF90914808988001A4641 /* OrdersViewController.m */,
+				00DFF90B1480899D001A4641 /* TransactionsViewController.h */,
+				00DFF90C1480899D001A4641 /* TransactionsViewController.m */,
+				00B38DE41486CE0400DC62F2 /* BrokerageAccountCell.h */,
+				00B38DE51486CE0400DC62F2 /* BrokerageAccountCell.m */,
+			);
+			name = Tabs;
+			sourceTree = "<group>";
+		};
+		00DFF9171480A8D7001A4641 /* images */ = {
+			isa = PBXGroup;
+			children = (
+				00DFF95914840BD1001A4641 /* iconOrders.png */,
+				00DFF95A14840BD1001A4641 /* iconTransactions.png */,
+				00DFF95714840B04001A4641 /* iconAccounts.png */,
+				00DFF955148409BF001A4641 /* iconPositions.png */,
+				00B38DE71487F48500DC62F2 /* btn_edit_56x31.png */,
+				00DFF9491483F5D3001A4641 /* btn_trade_44x31.png */,
+				00DFF94A1483F5D3001A4641 /* btn_transfer_44x31.png */,
+				00DFF9451483F3DB001A4641 /* btn_plus_26x26.png */,
+				00DFF9461483F3DB001A4641 /* btn_refresh_26x26.png */,
+				00DFF93F1483EE5A001A4641 /* btn_cancel500.png */,
+				00DFF9391483D31D001A4641 /* btn_login.png */,
+				00DFF9431483F212001A4641 /* btn_logout_75x31.png */,
+				00DFF93D1483ED7F001A4641 /* btn_openaccount.png */,
+				00DFF93B1483DE23001A4641 /* btn_openanaccount.png */,
+				00D3C427147C31E80067A768 /* img_bg_login.png */,
+				00DFF9411483EFD1001A4641 /* img_bg_yellow.png */,
+				00D3C425147C2A970067A768 /* img_bullsfirst_logo.png */,
+			);
+			name = images;
+			sourceTree = "<group>";
+		};
+		00DFF9181480A8F2001A4641 /* NIB */ = {
+			isa = PBXGroup;
+			children = (
+				00D3C421147C28440067A768 /* LoginViewController.xib */,
+				00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */,
+				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
+				004F06CC148D421F003F35D3 /* AddAccountViewController.xib */,
+				00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */,
+				00DFF91D1480AB01001A4641 /* OrdersViewController.xib */,
+				00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */,
+				00DFF9241480AD91001A4641 /* BFToolbar.xib */,
+			);
+			name = NIB;
+			sourceTree = "<group>";
+		};
+		00DFF9631484179D001A4641 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				00DFF95D14841317001A4641 /* BFMoney.h */,
+				00DFF95E14841318001A4641 /* BFMoney.m */,
+				00DFF96014841780001A4641 /* BFPosition.h */,
+				00DFF96114841781001A4641 /* BFPosition.m */,
+				00DFF96414841B00001A4641 /* BFBrokerageAccount.h */,
+				00DFF96514841B00001A4641 /* BFBrokerageAccount.m */,
+				00DFF96B14855010001A4641 /* BFBrokerageAccountStore.h */,
+				00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		00D3C403147C27120067A768 /* Bullsfirst */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 00D3C41C147C27120067A768 /* Build configuration list for PBXNativeTarget "Bullsfirst" */;
+			buildPhases = (
+				00D3C400147C27120067A768 /* Sources */,
+				00D3C401147C27120067A768 /* Frameworks */,
+				00D3C402147C27120067A768 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				00D5191914891B5B0049F43E /* PBXTargetDependency */,
+			);
+			name = Bullsfirst;
+			productName = Bullsfirst;
+			productReference = 00D3C404147C27120067A768 /* Bullsfirst.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		00D3C3FB147C27120067A768 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+			};
+			buildConfigurationList = 00D3C3FE147C27120067A768 /* Build configuration list for PBXProject "Bullsfirst" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 00D3C3F9147C27120067A768;
+			productRefGroup = 00D3C405147C27120067A768 /* Products */;
+			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 00D518F8148834580049F43E /* Products */;
+					ProjectRef = 00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */;
+				},
+			);
+			projectRoot = "";
+			targets = (
+				00D3C403147C27120067A768 /* Bullsfirst */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		00D51901148834580049F43E /* libCorePlot-CocoaTouch.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libCorePlot-CocoaTouch.a";
+			remoteRef = 00D51900148834580049F43E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
+/* Begin PBXResourcesBuildPhase section */
+		00D3C402147C27120067A768 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00D3C413147C27120067A768 /* InfoPlist.strings in Resources */,
+				00D3C423147C28440067A768 /* LoginViewController.xib in Resources */,
+				00D3C426147C2A970067A768 /* img_bullsfirst_logo.png in Resources */,
+				00D3C428147C31E80067A768 /* img_bg_login.png in Resources */,
+				00D3C431147D537B0067A768 /* OpenAccountViewController.xib in Resources */,
+				00DFF91A1480AAC6001A4641 /* AccountsViewController.xib in Resources */,
+				00DFF91C1480AAF0001A4641 /* PositionsViewController.xib in Resources */,
+				00DFF91E1480AB01001A4641 /* OrdersViewController.xib in Resources */,
+				00DFF9201480AB14001A4641 /* TransactionsViewController.xib in Resources */,
+				00DFF9251480AD91001A4641 /* BFToolbar.xib in Resources */,
+				00DFF93A1483D31D001A4641 /* btn_login.png in Resources */,
+				00DFF93C1483DE23001A4641 /* btn_openanaccount.png in Resources */,
+				00DFF93E1483ED7F001A4641 /* btn_openaccount.png in Resources */,
+				00DFF9401483EE5A001A4641 /* btn_cancel500.png in Resources */,
+				00DFF9421483EFD1001A4641 /* img_bg_yellow.png in Resources */,
+				00DFF9441483F212001A4641 /* btn_logout_75x31.png in Resources */,
+				00DFF9471483F3DB001A4641 /* btn_plus_26x26.png in Resources */,
+				00DFF9481483F3DB001A4641 /* btn_refresh_26x26.png in Resources */,
+				00DFF94B1483F5D3001A4641 /* btn_trade_44x31.png in Resources */,
+				00DFF94C1483F5D3001A4641 /* btn_transfer_44x31.png in Resources */,
+				00DFF956148409BF001A4641 /* iconPositions.png in Resources */,
+				00DFF95814840B04001A4641 /* iconAccounts.png in Resources */,
+				00DFF95B14840BD1001A4641 /* iconOrders.png in Resources */,
+				00DFF95C14840BD1001A4641 /* iconTransactions.png in Resources */,
+				00B38DE81487F48500DC62F2 /* btn_edit_56x31.png in Resources */,
+				004F06CD148D421F003F35D3 /* AddAccountViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		00D3C400147C27120067A768 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				00D3C415147C27120067A768 /* main.m in Sources */,
+				00D3C419147C27120067A768 /* AppDelegate.m in Sources */,
+				00D3C422147C28440067A768 /* LoginViewController.m in Sources */,
+				00D3C430147D537B0067A768 /* OpenAccountViewController.m in Sources */,
+				00DFF9041480893E001A4641 /* AccountsViewController.m in Sources */,
+				00DFF90714808975001A4641 /* PositionsViewController.m in Sources */,
+				00DFF90A14808989001A4641 /* OrdersViewController.m in Sources */,
+				00DFF90D1480899D001A4641 /* TransactionsViewController.m in Sources */,
+				00DFF9231480AD68001A4641 /* BFToolbar.m in Sources */,
+				00DFF95F14841319001A4641 /* BFMoney.m in Sources */,
+				00DFF96214841782001A4641 /* BFPosition.m in Sources */,
+				00DFF96614841B00001A4641 /* BFBrokerageAccount.m in Sources */,
+				00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */,
+				005B34B71486BF0F00C637F5 /* AccountsTableViewController.m in Sources */,
+				00B38DE61486CE0400DC62F2 /* BrokerageAccountCell.m in Sources */,
+				00D5191E14891DBA0049F43E /* PieChartMVAccountsViewController.m in Sources */,
+				00D51922148951370049F43E /* PieChartMVPositionViewController.m in Sources */,
+				009C1A3C148D3FF500259534 /* AddAccountViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		00D5191914891B5B0049F43E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "CorePlot-CocoaTouch";
+			targetProxy = 00D5191814891B5B0049F43E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		00D3C411147C27120067A768 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				00D3C412147C27120067A768 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		00D3C41A147C27120067A768 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+			};
+			name = Debug;
+		};
+		00D3C41B147C27120067A768 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = 2;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		00D3C41D147C27120067A768 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bullsfirst/Bullsfirst-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/Users/macsimus/src/libraries/core-plot/core-plot/framework/**";
+				INFOPLIST_FILE = "Bullsfirst/Bullsfirst-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		00D3C41E147C27120067A768 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bullsfirst/Bullsfirst-Prefix.pch";
+				HEADER_SEARCH_PATHS = "/Users/macsimus/src/libraries/core-plot/core-plot/framework/**";
+				INFOPLIST_FILE = "Bullsfirst/Bullsfirst-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		00D3C3FE147C27120067A768 /* Build configuration list for PBXProject "Bullsfirst" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00D3C41A147C27120067A768 /* Debug */,
+				00D3C41B147C27120067A768 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		00D3C41C147C27120067A768 /* Build configuration list for PBXNativeTarget "Bullsfirst" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				00D3C41D147C27120067A768 /* Debug */,
+				00D3C41E147C27120067A768 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 00D3C3FB147C27120067A768 /* Project object */;
+}
