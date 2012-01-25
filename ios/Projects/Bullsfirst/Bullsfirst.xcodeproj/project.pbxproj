@@ -24,7 +24,6 @@
 		00D3C428147C31E80067A768 /* img_bg_login.png in Resources */ = {isa = PBXBuildFile; fileRef = 00D3C427147C31E80067A768 /* img_bg_login.png */; };
 		00D3C430147D537B0067A768 /* OpenAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3C42E147D537B0067A768 /* OpenAccountViewController.m */; };
 		00D3C431147D537B0067A768 /* OpenAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */; };
-		00D5191A14891B6F0049F43E /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D51901148834580049F43E /* libCorePlot-CocoaTouch.a */; };
 		00D5191B14891BD20049F43E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B38DF71488025000DC62F2 /* QuartzCore.framework */; };
 		00D5191E14891DBA0049F43E /* PieChartMVAccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */; };
 		00D51922148951370049F43E /* PieChartMVPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D51921148951370049F43E /* PieChartMVPositionViewController.m */; };
@@ -58,44 +57,6 @@
 		00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		00D51900148834580049F43E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = BC9B83470FB8A0A40035D8DA;
-			remoteInfo = "CorePlot-CocoaTouch";
-		};
-		00D5191814891B5B0049F43E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = BC9B83460FB8A0A40035D8DA;
-			remoteInfo = "CorePlot-CocoaTouch";
-		};
-		10D20EA014CF7C32001F9110 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10D20E9714CF7C31001F9110 /* CorePlot.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 8DC2EF5B0486A6940098B216;
-			remoteInfo = CorePlot;
-		};
-		10D20EA214CF7C32001F9110 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10D20E9714CF7C31001F9110 /* CorePlot.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 0730F600109492D800E95162;
-			remoteInfo = UnitTests;
-		};
-		10D20EA514CF7D19001F9110 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 10D20E9714CF7C31001F9110 /* CorePlot.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 8DC2EF4F0486A6940098B216;
-			remoteInfo = CorePlot;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		004F06CC148D421F003F35D3 /* AddAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
 		005B34B51486BF0F00C637F5 /* AccountsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsTableViewController.h; sourceTree = "<group>"; };
@@ -125,7 +86,6 @@
 		00D3C42E147D537B0067A768 /* OpenAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenAccountViewController.m; sourceTree = "<group>"; };
 		00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenAccountViewController.xib; sourceTree = "<group>"; };
 		00D3C432147D60F20067A768 /* BFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFConstants.h; sourceTree = "<group>"; };
-		00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../../libraries/core-plot/core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		00D5191C14891DBA0049F43E /* PieChartMVAccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartMVAccountsViewController.h; sourceTree = "<group>"; };
 		00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartMVAccountsViewController.m; sourceTree = "<group>"; };
 		00D51920148951370049F43E /* PieChartMVPositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartMVPositionViewController.h; sourceTree = "<group>"; };
@@ -167,7 +127,6 @@
 		00DFF96514841B00001A4641 /* BFBrokerageAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFBrokerageAccount.m; sourceTree = "<group>"; };
 		00DFF96B14855010001A4641 /* BFBrokerageAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFBrokerageAccountStore.h; sourceTree = "<group>"; };
 		00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFBrokerageAccountStore.m; sourceTree = "<group>"; };
-		10D20E9714CF7C31001F9110 /* CorePlot.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CorePlot.xcodeproj; path = "../core-plot/framework/CorePlot.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,7 +138,6 @@
 				00D3C409147C27120067A768 /* UIKit.framework in Frameworks */,
 				00D3C40B147C27120067A768 /* Foundation.framework in Frameworks */,
 				00D3C40D147C27120067A768 /* CoreGraphics.framework in Frameworks */,
-				00D5191A14891B6F0049F43E /* libCorePlot-CocoaTouch.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -189,11 +147,9 @@
 		00D3C3F9147C27120067A768 = {
 			isa = PBXGroup;
 			children = (
-				00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */,
 				00D3C40E147C27120067A768 /* Bullsfirst */,
 				00D3C407147C27120067A768 /* Frameworks */,
 				00D3C405147C27120067A768 /* Products */,
-				10D20E9714CF7C31001F9110 /* CorePlot.xcodeproj */,
 			);
 			sourceTree = "<group>";
 		};
@@ -255,14 +211,6 @@
 				00DFF9171480A8D7001A4641 /* images */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		00D518F8148834580049F43E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				00D51901148834580049F43E /* libCorePlot-CocoaTouch.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		00D5191F148932BD0049F43E /* old */ = {
@@ -351,15 +299,6 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
-		10D20E9814CF7C31001F9110 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				10D20EA114CF7C32001F9110 /* CorePlot.framework */,
-				10D20EA314CF7C32001F9110 /* UnitTests.octest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -374,8 +313,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				10D20EA614CF7D19001F9110 /* PBXTargetDependency */,
-				00D5191914891B5B0049F43E /* PBXTargetDependency */,
 			);
 			name = Bullsfirst;
 			productName = Bullsfirst;
@@ -400,46 +337,12 @@
 			mainGroup = 00D3C3F9147C27120067A768;
 			productRefGroup = 00D3C405147C27120067A768 /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 00D518F8148834580049F43E /* Products */;
-					ProjectRef = 00D518F7148834580049F43E /* CorePlot-CocoaTouch.xcodeproj */;
-				},
-				{
-					ProductGroup = 10D20E9814CF7C31001F9110 /* Products */;
-					ProjectRef = 10D20E9714CF7C31001F9110 /* CorePlot.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				00D3C403147C27120067A768 /* Bullsfirst */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		00D51901148834580049F43E /* libCorePlot-CocoaTouch.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libCorePlot-CocoaTouch.a";
-			remoteRef = 00D51900148834580049F43E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		10D20EA114CF7C32001F9110 /* CorePlot.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = CorePlot.framework;
-			remoteRef = 10D20EA014CF7C32001F9110 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		10D20EA314CF7C32001F9110 /* UnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UnitTests.octest;
-			remoteRef = 10D20EA214CF7C32001F9110 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		00D3C402147C27120067A768 /* Resources */ = {
@@ -504,19 +407,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		00D5191914891B5B0049F43E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "CorePlot-CocoaTouch";
-			targetProxy = 00D5191814891B5B0049F43E /* PBXContainerItemProxy */;
-		};
-		10D20EA614CF7D19001F9110 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = CorePlot;
-			targetProxy = 10D20EA514CF7D19001F9110 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		00D3C411147C27120067A768 /* InfoPlist.strings */ = {
