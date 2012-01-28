@@ -7,25 +7,29 @@
                 <binding
                     name="MarketDataWebServicePortBinding"
                     maxBufferSize="2147483647"
-                    maxReceivedMessageSize="2147483647">
+                    maxReceivedMessageSize="2147483647"
+                    sendTimeout="00:00:20">
                     <security mode="None" />
                 </binding>
-              <binding
-                  name="ReferenceDataWebServicePortBinding"
-                  maxBufferSize="2147483647"
-                  maxReceivedMessageSize="2147483647">
-                <security mode="None" />
-              </binding>
-              <binding
+                <binding
+                    name="ReferenceDataWebServicePortBinding"
+                    maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647"
+                    sendTimeout="00:00:20">
+                    <security mode="None" />
+                </binding>
+                <binding
                     name="SecurityWebServicePortBinding"
                     maxBufferSize="2147483647"
-                    maxReceivedMessageSize="2147483647">
+                    maxReceivedMessageSize="2147483647"
+                    sendTimeout="00:00:20">
                     <security mode="None" />
                 </binding>
                 <binding
                     name="TradingWebServicePortBinding"
                     maxBufferSize="2147483647"
-                    maxReceivedMessageSize="2147483647">
+                    maxReceivedMessageSize="2147483647"
+                    sendTimeout="00:00:20">
                     <security mode="None" />
                 </binding>
             </basicHttpBinding>
@@ -34,25 +38,25 @@
         <client>
             <endpoint
                 name="ReferenceDataWebServicePort"
-                address="http://archfirst.org:8080/bfexch-javaee/ReferenceDataService"
+                address="http://archfirst.org/bfexch-javaee/ReferenceDataService"
                 binding="basicHttpBinding"
                 bindingConfiguration="ReferenceDataWebServicePortBinding"
                 contract="ReferenceDataServiceReference.ReferenceDataWebService" />
             <endpoint
                 name="MarketDataWebServicePort"
-                address="http://archfirst.org:8080/bfexch-javaee/MarketDataService"
+                address="http://archfirst.org/bfexch-javaee/MarketDataService"
                 binding="basicHttpBinding"
                 bindingConfiguration="MarketDataWebServicePortBinding"
                 contract="MarketDataServiceReference.MarketDataWebService" />
             <endpoint
                 name="SecurityWebServicePort"
-                address="http://archfirst.org:8080/bfoms-javaee/SecurityService"
+                address="http://archfirst.org/bfoms-javaee/SecurityService"
                 binding="basicHttpBinding"
                 bindingConfiguration="SecurityWebServicePortBinding"
                 contract="SecurityServiceReference.SecurityWebService" />
             <endpoint
                 name="TradingWebServicePort"
-                address="http://archfirst.org:8080/bfoms-javaee/TradingService"
+                address="http://archfirst.org/bfoms-javaee/TradingService"
                 binding="basicHttpBinding"
                 bindingConfiguration="TradingWebServicePortBinding"
                 contract="TradingServiceReference.TradingWebService" />
