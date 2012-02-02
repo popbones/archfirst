@@ -39,8 +39,8 @@
     CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
     
 	rotation.removedOnCompletion = YES;
-	rotation.fromValue			 = [NSNumber numberWithFloat:M_PI * 5];
-	rotation.toValue			 = [NSNumber numberWithFloat:0.0f];
+	rotation.fromValue			 = [NSNumber numberWithFloat:M_PI * 0.5];
+	rotation.toValue			 = [NSNumber numberWithFloat:0];
 	rotation.duration			 = 1.0f;
 	rotation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     
@@ -49,7 +49,7 @@
 	fadeInAnimation.removedOnCompletion = YES;
 	fadeInAnimation.fromValue			 = [NSNumber numberWithFloat:0.0];
 	fadeInAnimation.toValue			 = [NSNumber numberWithFloat:1];
-	fadeInAnimation.duration			 = 3.0f;
+	fadeInAnimation.duration			 = 1.0f;
 	fadeInAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
 	piePlot.shouldRasterize=YES;
     
@@ -57,13 +57,14 @@
     animationGroup.animations = [NSArray arrayWithObjects:fadeInAnimation,rotation, nil];
     
     animationGroup.delegate = self;
-    animationGroup.duration = 3.0f;
+    animationGroup.duration = 1.0f;
     
 	[piePlot addAnimation:animationGroup forKey:@"rotationAndFadeIn"];
     
 	piePlotIsRotating = YES;
     
 }
+
 
 
 
@@ -80,6 +81,7 @@
 	[super viewDidAppear:animated];
 	// Add a rotation animation
     [self performAnimation];
+    [piePlot setHidden:NO];
     viewOnFront=YES;
     
 }
@@ -87,6 +89,7 @@
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
+    [piePlot setHidden:YES];
     viewOnFront = NO;
 }
 
@@ -96,14 +99,16 @@
 {
 	piePlotIsRotating = NO;
     if(viewOnFront== NO)
+    {
         piePlot.opacity=0;
-    piePlot.opacity=1;
+        [piePlot setHidden:YES];
+    }
+    else
+    {
+        piePlot.opacity=1;
+        [piePlot setHidden:NO];
+    }
 	//[piePlot performSelector:@selector(reloadData) withObject:nil afterDelay:0.4];
-}
-
--(void) animationDidStart:(CAAnimation *)anim
-{
-    BFDebugLog(@"Animation started");
 }
 
 
