@@ -24,7 +24,6 @@
 
 @implementation BrokerageAccountCell
 @synthesize delegate;
-
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -48,12 +47,10 @@
     
     return self;
 }
-
 -(void) editButtonClicked:(id) sender
 {
     [delegate editingStartedForAccount:idLabel.text];
 }
-
 - (void)layoutSubviews
 {
     [super layoutSubviews];
@@ -67,10 +64,10 @@
     //float w = bounds.size.width;
     
     // TODO: Adjust these values for portrait mode
-    float nameWidth = 250.0;
-    float idWidth = 200.0;
-    float marketValueWidth = 180.0;
-    float cashWidth = 220.0;
+    float nameWidth = 75.0;
+    float idWidth = 70.0;
+    float marketValueWidth = 120.0;
+    float cashWidth = 120.0;
     float editWidth = 56.0; float editHeight = 31.0;
     
     CGRect nameFrame = CGRectMake(insetW, insetH, nameWidth, h-insetH*2.0);

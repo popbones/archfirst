@@ -67,8 +67,15 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-	return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    if(UIInterfaceOrientationPortrait==interfaceOrientation)
+    {
+        self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"login-screen-background-portrait.png"]];
+    }
+    else
+    {
+    self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"login-screen-background-landscape.png"]];
+    }
+    return YES;
 }
 
 #pragma mark - Methods
@@ -111,7 +118,7 @@
 {
     OpenAccountViewController *openAccountViewController = [[OpenAccountViewController alloc] initWithNibName:@"OpenAccountViewController" bundle:nil];
     [openAccountViewController setLvc:self];
-        
+    
     [openAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [openAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     
@@ -175,12 +182,12 @@
     [spinner stopAnimating];
     
     // TODO: Check for successful login
-        
+    
     // Create the tab bar controller
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
     tabBarController.delegate = self;
-         
+    
     // Create the view controllers
     //AccountsViewController *vc1 = [[AccountsViewController alloc] init];
     AccountsViewController *accountsViewController = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
@@ -189,18 +196,18 @@
     TransactionsViewController *vc4 = [[TransactionsViewController alloc] init];
     
     NSArray *viewControllers = [NSArray arrayWithObjects:accountsViewController,vc2,vc3,vc4, nil];
-            
+    
     // NOTE: Would rather only have one instance of BFToolbar; use one per tab for now
     BFToolbar *toolBar1 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
     BFToolbar *toolBar2 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
     BFToolbar *toolBar3 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
     BFToolbar *toolBar4 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-
+    
     [toolBar1 setLvc:self]; [toolBar1 setTbc:tabBarController];
     [toolBar2 setLvc:self]; [toolBar2 setTbc:tabBarController];
     [toolBar3 setLvc:self]; [toolBar3 setTbc:tabBarController];
     [toolBar4 setLvc:self]; [toolBar4 setTbc:tabBarController];
-     
+    
     // Need to take ownership of toolbars; adding it to the view is not enough
     [accountsViewController setToolbar:toolBar1]; [[accountsViewController view] addSubview:[toolBar1 view]];
     [vc2 setToolbar:toolBar2]; [[vc2 view] addSubview:[toolBar2 view]];
@@ -230,30 +237,30 @@
 }
 
 /*
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    BFDebugLog(@"response = %@", response);
-}
-*/
+ - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
+ BFDebugLog(@"response = %@", response);
+ }
+ */
 
 /*
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-    BFDebugLog(@"challenge");
-    
-    if([challenge previousFailureCount] > 0) {        
-        NSError *failure = [challenge error];
-        BFErrorLog(@"Can't authenticate: %@", [failure localizedDescription]);
-        
-        [[challenge sender] cancelAuthenticationChallenge:challenge];
-        return;
-    }
-    
-    NSURLCredential *newCred = [NSURLCredential credentialWithUser:[username text] password:[password text] persistence:NSURLCredentialPersistenceNone];
-    
-    // Supply the credential to the sender of the challenge
-    [[challenge sender] useCredential:newCred forAuthenticationChallenge:challenge];
-}
-*/
+ - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
+ {
+ BFDebugLog(@"challenge");
+ 
+ if([challenge previousFailureCount] > 0) {        
+ NSError *failure = [challenge error];
+ BFErrorLog(@"Can't authenticate: %@", [failure localizedDescription]);
+ 
+ [[challenge sender] cancelAuthenticationChallenge:challenge];
+ return;
+ }
+ 
+ NSURLCredential *newCred = [NSURLCredential credentialWithUser:[username text] password:[password text] persistence:NSURLCredentialPersistenceNone];
+ 
+ // Supply the credential to the sender of the challenge
+ [[challenge sender] useCredential:newCred forAuthenticationChallenge:challenge];
+ }
+ */
 
 
 #pragma mark tabBarController delegate methods

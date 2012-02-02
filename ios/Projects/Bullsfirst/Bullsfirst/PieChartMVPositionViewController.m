@@ -23,15 +23,14 @@
 #import "BFBrokerageAccount.h"
 #import "BFBrokerageAccountStore.h"
 #import "BFMoney.h"
-
+#import "BFPosition.h"
 @implementation PieChartMVPositionViewController
 
 @synthesize pieChartView;
 @synthesize dataForChart, dataForPlot;
-
-
+@synthesize delegate;
+@synthesize accountIndex;
 #pragma mark -
-
 #pragma mark Helper methods
 
 -(void) performAnimation
@@ -67,23 +66,22 @@
 }
 
 
-
 #pragma mark Initialization and teardown
 
 -(void)viewDidLoad
 {
-	[super viewDidLoad];  
+	[super viewDidLoad];    
 }
 
 
 -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
+    
 	// Add a rotation animation
-    [self performAnimation];
+	[self performAnimation];
     [piePlot setHidden:NO];
     viewOnFront=YES;
-    
 }
 
 -(void) viewDidDisappear:(BOOL)animated
@@ -92,13 +90,10 @@
     [piePlot setHidden:YES];
     viewOnFront = NO;
 }
-
-
-
 -(void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
 {
 	piePlotIsRotating = NO;
-    if(viewOnFront== NO)
+	if(viewOnFront== NO)
     {
         piePlot.opacity=0;
         [piePlot setHidden:YES];
@@ -110,6 +105,7 @@
     }
 	//[piePlot performSelector:@selector(reloadData) withObject:nil afterDelay:0.4];
 }
+
 
 /*
  -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -156,13 +152,6 @@
 	pieChartView.hostedGraph			 = pieGraph;
 	pieGraph.plotAreaFrame.masksToBorder = NO;
     
-    pieGraph.title = @"Market Value By Positions";
-    CPTMutableTextStyle* titleTextStyle=[[CPTMutableTextStyle alloc]init];
-    titleTextStyle.color = [CPTColor blackColor];
-    titleTextStyle.fontName=@"Arial";
-    titleTextStyle.fontSize=15;
-    [pieGraph setTitleTextStyle:titleTextStyle];
-    
 	pieGraph.paddingLeft   = -100.0;
 	pieGraph.paddingTop	   = 20.0;
 	pieGraph.paddingRight  = 20.0;
@@ -181,9 +170,10 @@
 	// Add pie chart
 	piePlot					= [[CPTPieChart alloc] init];
 	piePlot.dataSource		= self;
-	piePlot.pieRadius		= 100.0;
+    piePlot.delegate        = self;
+	piePlot.pieRadius		= 130.0;
 	piePlot.identifier		= @"Pie Chart 1";
-	piePlot.startAngle		= M_PI_4;
+	piePlot.startAngle		= M_PI;
 	piePlot.sliceDirection	= CPTPieDirectionCounterClockwise;
 	//piePlot.borderLineStyle = [CPTLineStyle lineStyle];
 	piePlot.labelOffset		= 5.0;
@@ -197,16 +187,19 @@
     NSMutableArray *contentArray = [[NSMutableArray alloc] init];
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     double total = 0.0;
-    for(BFBrokerageAccount *account in [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts])
-    {
-        [tempArray addObject:[[account cashPosition] amount]];
-        total += [[[account cashPosition] amount] doubleValue];
-    }
     
+    BFBrokerageAccount *neededAccount=[[[BFBrokerageAccountStore defaultStore]allBrokerageAccounts] objectAtIndex:accountIndex];
+    for (BFPosition *position in [neededAccount positions] ){
+       [tempArray addObject:[[position marketValue] amount]];
+        total += [[[position marketValue] amount] doubleValue];
+                
+    }
+    total +=[[[neededAccount cashPosition]amount]doubleValue];
+
     int count = 0;
     for(NSNumber *amount in tempArray)
     {
-        if(count < 5)
+        if(count < 9)
         {
             count++;        
             [contentArray addObject:[NSNumber numberWithDouble:(100.0*[amount doubleValue]/total)]];
@@ -225,9 +218,12 @@
     pieGraph.legend = theLegend;
     
     pieGraph.legendAnchor = CPTRectAnchorRight;
-    pieGraph.legendDisplacement = CGPointMake(-15.0, 30.0);  
+    pieGraph.legendDisplacement = CGPointMake(-25.0, 30.0);    
+   
+    pieGraph.title=neededAccount.name;
+    pieGraph.titleDisplacement = CGPointMake(0,-20);
     [self performAnimation];
-    
+
 }
 
 #pragma mark -
@@ -262,6 +258,10 @@
     }
     
 	return num;
+}
+-(void)pieChart:(CPTPieChart *)plot sliceWasSelectedAtRecordIndex:(NSUInteger)index
+{    
+    [delegate pieChartMVPositionClicked];
 }
 
 -(CPTLayer *)dataLabelForPlot:(CPTPlot *)plot recordIndex:(NSUInteger)index
@@ -303,7 +303,10 @@
 -(NSString *)legendTitleForPieChart:(CPTPieChart *)pieChart
                         recordIndex:(NSUInteger)index
 {
-    return [[[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:index] name];
+    if(index<=[[[[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:accountIndex] positions] count])
+        return [[[[[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:accountIndex] positions] objectAtIndex:index]instrumentSymbol];
+    else
+        return @"CASH";
 }
 
 -(CPTFill *)sliceFillForPieChart:(CPTPieChart *)pieChart recordIndex:(NSUInteger)index
@@ -320,8 +323,15 @@
         color = [CPTColor greenColor];   
     else if(index == 4)
         color = [CPTColor orangeColor];   
-    else
-        color = [CPTColor whiteColor]; // TODO: Randomize the default
+    else if(index == 5)
+        color = [CPTColor purpleColor];
+    else if(index == 6)
+        color = [CPTColor magentaColor];
+    else if(index == 7)
+        color = [CPTColor lightGrayColor];
+    else if(index == 8)
+        color = [CPTColor cyanColor];
+    // TODO: Randomize the default
     
     return [[CPTFill alloc] initWithColor:color];;
 }

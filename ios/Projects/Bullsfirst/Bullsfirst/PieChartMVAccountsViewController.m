@@ -27,8 +27,7 @@
 
 @synthesize pieChartView;
 @synthesize dataForChart, dataForPlot;
-
-
+@synthesize delegate;
 #pragma mark -
 
 #pragma mark Helper methods
@@ -65,14 +64,11 @@
     
 }
 
-
-
-
 #pragma mark Initialization and teardown
 
 -(void)viewDidLoad
 {
-	[super viewDidLoad];  
+	[super viewDidLoad];    
 }
 
 
@@ -83,9 +79,7 @@
     [self performAnimation];
     [piePlot setHidden:NO];
     viewOnFront=YES;
-    
-}
-
+	}
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -93,12 +87,10 @@
     viewOnFront = NO;
 }
 
-
-
 -(void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
 {
 	piePlotIsRotating = NO;
-    if(viewOnFront== NO)
+	if(viewOnFront== NO)
     {
         piePlot.opacity=0;
         [piePlot setHidden:YES];
@@ -108,7 +100,7 @@
         piePlot.opacity=1;
         [piePlot setHidden:NO];
     }
-	//[piePlot performSelector:@selector(reloadData) withObject:nil afterDelay:0.4];
+    //[piePlot performSelector:@selector(reloadData) withObject:nil afterDelay:0.4];
 }
 
 
@@ -150,19 +142,14 @@
 
 -(void)constructPieChart
 {
+    //Initialize contentArray
+    contentArray = [[NSMutableArray alloc] init];
 	// Create pieChart from theme
 	pieGraph = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
 	CPTTheme *theme = [CPTTheme themeNamed:kCustomPlainWhiteTheme];
 	[pieGraph applyTheme:theme];
 	pieChartView.hostedGraph			 = pieGraph;
 	pieGraph.plotAreaFrame.masksToBorder = NO;
-    
-    pieGraph.title = @"Market Value By Accounts";
-    CPTMutableTextStyle* titleTextStyle=[[CPTMutableTextStyle alloc]init];
-    titleTextStyle.color = [CPTColor blackColor];
-    titleTextStyle.fontName=@"Arial";
-    titleTextStyle.fontSize=15;
-    [pieGraph setTitleTextStyle:titleTextStyle];
     
 	pieGraph.paddingLeft   = -100.0;
 	pieGraph.paddingTop	   = 20.0;
@@ -183,21 +170,21 @@
     
 	// Add pie chart
 	piePlot					= [[CPTPieChart alloc] init];
+    piePlot.delegate=self;
 	piePlot.dataSource		= self;
-	piePlot.pieRadius		= 100.0;
+	piePlot.pieRadius		= 130.0;
 	piePlot.identifier		= @"Pie Chart 1";
-	piePlot.startAngle		= M_PI_4;
+	piePlot.startAngle		= M_PI;
 	piePlot.sliceDirection	= CPTPieDirectionCounterClockwise;
 	//piePlot.borderLineStyle = [CPTLineStyle lineStyle];
 	piePlot.labelOffset		= 5.0;
 	piePlot.overlayFill		= [CPTFill fillWithGradient:overlayGradient];
 	[pieGraph addPlot:piePlot];
 	//[piePlot release];
-    
-	// Add some initial data
+   // Add some initial data
 	//NSMutableArray *contentArray = [NSMutableArray arrayWithObjects:[NSNumber numberWithDouble:20.0], [NSNumber numberWithDouble:30.0], [NSNumber numberWithDouble:NAN], [NSNumber numberWithDouble:60.0], nil];
     //
-    NSMutableArray *contentArray = [[NSMutableArray alloc] init];
+   
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     double total = 0.0;
     for(BFBrokerageAccount *account in [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts])
@@ -209,7 +196,7 @@
     int count = 0;
     for(NSNumber *amount in tempArray)
     {
-        if(count < 5)
+        if(count < 9)
         {
             count++;
             [contentArray addObject:[NSNumber numberWithDouble:(100.0*[amount doubleValue]/total)]];
@@ -228,11 +215,18 @@
     pieGraph.legend = theLegend;
     
     pieGraph.legendAnchor = CPTRectAnchorRight;
-    pieGraph.legendDisplacement = CGPointMake(-15.0, 30.0); 
-    
+    pieGraph.legendDisplacement = CGPointMake(-25.0, 30.0);    
+    pieGraph.title=@"All Accounts";
+    pieGraph.titleDisplacement = CGPointMake(0,-20);
     [self performAnimation];
-
+	
 }
+
+-(void)pieChart:(CPTPieChart *)plot sliceWasSelectedAtRecordIndex:(NSUInteger)index
+{
+    [delegate pieChartMVAccountsClicked:index];
+}
+
 
 #pragma mark -
 #pragma mark Plot Data Source Methods
@@ -324,8 +318,14 @@
         color = [CPTColor greenColor];   
     else if(index == 4)
         color = [CPTColor orangeColor];   
-    else
-        color = [CPTColor whiteColor]; // TODO: Randomize the default
+    else if(index == 5)
+        color = [CPTColor purpleColor];
+    else if(index == 6)
+        color = [CPTColor magentaColor];
+    else if(index == 7)
+        color = [CPTColor lightGrayColor];
+    else if(index == 8)
+        color = [CPTColor cyanColor];// Randomize the default
     
     return [[CPTFill alloc] initWithColor:color];;
 }

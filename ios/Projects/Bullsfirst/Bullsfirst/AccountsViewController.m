@@ -18,18 +18,15 @@
 //  limitations under the License.
 //
 
-
 #import "AccountsViewController.h"
-
 #import "BFBrokerageAccount.h"
 #import "BFBrokerageAccountStore.h"
+#import "AccountsTableViewController.h"
 #import "AddAccountViewController.h"
 #import "EditAccountNameViewController.h"
-
 #import "CorePlot-CocoaTouch.h"
 #import "PieChartMVAccountsViewController.h"
 #import "PieChartMVPositionViewController.h"
-
 
 
 @implementation AccountsViewController
@@ -51,13 +48,24 @@
     
     return self;
 }
-
+-(void) pieChartMVPositionClicked
+{
+    pieChartMVPositionViewController.view.hidden=true;
+    pieChartMVAccountsViewController.view.hidden=false;
+}
 /*
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     return [self init];
 }
 */
+-(void) pieChartMVAccountsClicked:(int) onIndex
+{
+    pieChartMVPositionViewController.accountIndex=onIndex;
+    [pieChartMVPositionViewController constructPieChart];
+    pieChartMVAccountsViewController.view.hidden=true;
+    pieChartMVPositionViewController.view.hidden=false;
+}
 
 -(void) viewDidAppear:(BOOL)animated
 {
@@ -67,14 +75,13 @@
     
 }
 
+
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
     [pieChartMVPositionViewController viewDidDisappear:animated];
     [pieChartMVAccountsViewController viewDidDisappear:animated];
 }
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -85,20 +92,18 @@
     
     accountsTableViewController = [[AccountsTableViewController alloc] init];
     [accountsTableViewController setView:accountsTable];
-    
-    [accountsTableViewController setDelegate:self];
-    
+     [accountsTableViewController setDelegate:self];
     [accountsTable setDelegate:accountsTableViewController];
     [accountsTable setDataSource:accountsTableViewController];    
 
     pieChartMVAccountsViewController = [[PieChartMVAccountsViewController alloc] init];
     [pieChartMVAccountsViewController setView:pieChartMVAccountsView];
     [pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
-
+    pieChartMVAccountsViewController.delegate=self;
     pieChartMVPositionViewController = [[PieChartMVPositionViewController alloc] init];
     [pieChartMVPositionViewController setView:pieChartMVPositionView];
     [pieChartMVPositionViewController setPieChartView:pieChartMVPositionView];         
-    
+    pieChartMVPositionViewController.delegate=self;
     [self retrieveAccountData]; 
     
     [[self view] bringSubviewToFront:accountsPlotLabel];
@@ -146,8 +151,6 @@
     [[BFBrokerageAccountStore defaultStore] clearAccounts];
     [self retrieveAccountData];
 }
-
-
 
 #pragma mark - NSURLCollectionDelegate methods
 
@@ -230,7 +233,6 @@
     // Supply the credential to the sender of the challenge
     [[challenge sender] useCredential:newCred forAuthenticationChallenge:challenge];
 }
-
 #pragma mark AccountsTableViewController Delegate methods
 
 
@@ -244,6 +246,6 @@
     
     [self presentModalViewController:editAccountViewController animated:YES];
 }
- 
-@end
 
+
+@end

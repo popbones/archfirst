@@ -40,8 +40,8 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIImageView" id="494440406">
 						<reference key="NSNextResponder" ref="766721923"/>
-						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{401, 20}, {222, 60}}</string>
+						<int key="NSvFlags">295</int>
+						<string key="NSFrame">{{305, 105}, {408, 121}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="644399497"/>
@@ -51,13 +51,13 @@
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<object class="NSCustomResource" key="IBUIImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">img_bullsfirst_logo.png</string>
+							<string key="NSResourceName">bullsfirst-logo-transparent.png</string>
 						</object>
 					</object>
 					<object class="IBUITextField" id="644399497">
 						<reference key="NSNextResponder" ref="766721923"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{299, 133}, {426, 31}}</string>
+						<int key="NSvFlags">293</int>
+						<string key="NSFrame">{{308, 234}, {408, 31}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="101583292"/>
@@ -68,7 +68,7 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
 						<int key="IBUIBorderStyle">3</int>
-						<string key="IBUIPlaceholder">Username</string>
+						<string key="IBUIPlaceholder">Email</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -94,8 +94,8 @@
 					</object>
 					<object class="IBUITextField" id="101583292">
 						<reference key="NSNextResponder" ref="766721923"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{299, 172}, {426, 31}}</string>
+						<int key="NSvFlags">293</int>
+						<string key="NSFrame">{{308, 264}, {408, 31}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="635458697"/>
@@ -124,8 +124,8 @@
 					</object>
 					<object class="IBUIButton" id="635458697">
 						<reference key="NSNextResponder" ref="766721923"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{299, 211}, {426, 35}}</string>
+						<int key="NSvFlags">293</int>
+						<string key="NSFrame">{{308, 312}, {408, 46}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="867841659"/>
@@ -148,7 +148,7 @@
 						</object>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">btn_login.png</string>
+							<string key="NSResourceName">login-button.png</string>
 						</object>
 						<object class="IBUIFontDescription" key="IBUIFontDescription" id="897002750">
 							<int key="type">2</int>
@@ -162,8 +162,8 @@
 					</object>
 					<object class="IBUIButton" id="867841659">
 						<reference key="NSNextResponder" ref="766721923"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{299, 256}, {426, 35}}</string>
+						<int key="NSvFlags">293</int>
+						<string key="NSFrame">{{430, 635}, {164, 35}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="52480928"/>
@@ -180,7 +180,7 @@
 						<reference key="IBUINormalTitleShadowColor" ref="241949251"/>
 						<object class="NSCustomResource" key="IBUINormalBackgroundImage">
 							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">btn_openanaccount.png</string>
+							<string key="NSResourceName">open-account-button.png</string>
 						</object>
 						<reference key="IBUIFontDescription" ref="897002750"/>
 						<reference key="IBUIFont" ref="739655063"/>
@@ -188,10 +188,9 @@
 					<object class="IBUIActivityIndicatorView" id="52480928">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">-2147483356</int>
-						<string key="NSFrame">{{494, 308}, {37, 37}}</string>
+						<string key="NSFrame">{{494, 439}, {37, 37}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:1062</string>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -204,7 +203,7 @@
 				<reference key="NSNextKeyView" ref="494440406"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">1</int>
-					<bytes key="NSRGB">MC42NTQ5MDE5NjA4IDAuNjU0OTAxOTYwOCAwLjY1NDkwMTk2MDgAA</bytes>
+					<bytes key="NSRGB">MCAwIDAuNTAxOTYwODE0AA</bytes>
 				</object>
 				<bool key="IBUIClearsContextBeforeDrawing">NO</bool>
 				<object class="IBUISimulatedStatusBarMetrics" key="IBUISimulatedStatusBarMetrics">
@@ -213,6 +212,22 @@
 				<object class="IBUISimulatedOrientationMetrics" key="IBUISimulatedOrientationMetrics">
 					<int key="IBUIInterfaceOrientation">3</int>
 					<int key="interfaceOrientation">3</int>
+				</object>
+				<object class="IBUIScreenMetrics" key="IBUISimulatedDestinationMetrics">
+					<string key="IBUISimulatedSizeMetricsClass">IBUIScreenMetrics</string>
+					<object class="NSMutableDictionary" key="IBUINormalizedOrientationToSizeMap">
+						<bool key="EncodedWithXMLCoder">YES</bool>
+						<array key="dict.sortedKeys">
+							<integer value="1"/>
+							<integer value="3"/>
+						</array>
+						<array class="NSMutableArray" key="dict.values">
+							<string>{768, 1024}</string>
+							<string>{1024, 768}</string>
+						</array>
+					</object>
+					<string key="IBUITargetRuntime">IBIPadFramework</string>
+					<string key="IBUIDisplayName">iPad Full Screen</string>
 				</object>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 			</object>
@@ -294,11 +309,11 @@
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="101583292"/>
-							<reference ref="635458697"/>
-							<reference ref="867841659"/>
 							<reference ref="52480928"/>
 							<reference ref="494440406"/>
 							<reference ref="644399497"/>
+							<reference ref="635458697"/>
+							<reference ref="867841659"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -351,7 +366,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">16</int>
+			<int key="maxID">17</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -403,9 +418,9 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="btn_login.png">{426, 35}</string>
-			<string key="btn_openanaccount.png">{426, 35}</string>
-			<string key="img_bullsfirst_logo.png">{222, 60}</string>
+			<string key="bullsfirst-logo-transparent.png">{408, 121}</string>
+			<string key="login-button.png">{408, 46}</string>
+			<string key="open-account-button.png">{164, 34}</string>
 		</dictionary>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>

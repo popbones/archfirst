@@ -20,19 +20,20 @@
 
 #import <UIKit/UIKit.h>
 #import "CorePlot-CocoaTouch.h"
-
-@interface PieChartMVAccountsViewController : UIViewController <CPTPieChartDataSource>
+@protocol PieChartMVAccountsViewControllerDelegate;
+@interface PieChartMVAccountsViewController : UIViewController <CPTPieChartDataSource,CPTPieChartDelegate>
 {
     CPTGraphHostingView *pieChartView;
 	CPTXYGraph *pieGraph;
 	CPTPieChart *piePlot;
 	BOOL piePlotIsRotating;
-    BOOL viewOnFront;
-    
+     NSMutableArray *contentArray;
+        BOOL viewOnFront;
+    __weak id<PieChartMVAccountsViewControllerDelegate> delegate;
 	NSMutableArray *dataForChart, *dataForPlot;
     
 }
-
+@property(nonatomic,weak) id <PieChartMVAccountsViewControllerDelegate> delegate;
 @property (nonatomic, retain) CPTGraphHostingView *pieChartView;
 @property (nonatomic, retain) NSMutableArray *dataForChart, *dataForPlot;
 
@@ -40,4 +41,7 @@
 -(void)constructPieChart;
 
 
+@end
+@protocol PieChartMVAccountsViewControllerDelegate <NSObject>
+-(void) pieChartMVAccountsClicked:(int) onIndex;
 @end
