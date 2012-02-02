@@ -175,7 +175,6 @@
 		00D3C3F9147C27120067A768 = {
 			isa = PBXGroup;
 			children = (
-				AC9B72D114DA7E3700B843AC /* CustomThemes */,
 				00D3C40E147C27120067A768 /* Bullsfirst */,
 				00D3C407147C27120067A768 /* Frameworks */,
 				00D3C405147C27120067A768 /* Products */,
@@ -213,6 +212,7 @@
 				00D3C42E147D537B0067A768 /* OpenAccountViewController.m */,
 				00DFF9211480AD67001A4641 /* BFToolbar.h */,
 				00DFF9221480AD68001A4641 /* BFToolbar.m */,
+				AC9B72D114DA7E3700B843AC /* CustomThemes */,
 				00DFF9631484179D001A4641 /* Model */,
 				00DFF90E148089B6001A4641 /* Tabs */,
 				00D5191F148932BD0049F43E /* old */,
@@ -347,6 +347,7 @@
 				AC9B72E414DAB01800B843AC /* CPCustomPlainWhiteTheme.m */,
 			);
 			name = CustomThemes;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
