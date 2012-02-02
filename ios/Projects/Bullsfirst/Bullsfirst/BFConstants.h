@@ -15,3 +15,5 @@
 #define kRel @"rel"
 #define kDetail @"detail"
 #define kAccountName @"accountName"
+#define kNewAccountName @"newName"
+#define kCustomPlainWhiteTheme @"Custom Plain White"

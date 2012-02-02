@@ -18,15 +18,18 @@
 //  limitations under the License.
 //
 
+
 #import "AccountsViewController.h"
+
 #import "BFBrokerageAccount.h"
 #import "BFBrokerageAccountStore.h"
-#import "AccountsTableViewController.h"
 #import "AddAccountViewController.h"
+#import "EditAccountNameViewController.h"
 
 #import "CorePlot-CocoaTouch.h"
 #import "PieChartMVAccountsViewController.h"
 #import "PieChartMVPositionViewController.h"
+
 
 
 @implementation AccountsViewController
@@ -56,6 +59,22 @@
 }
 */
 
+-(void) viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:animated];
+    [pieChartMVPositionViewController viewDidAppear:animated];
+    [pieChartMVAccountsViewController viewDidAppear:animated];
+    
+}
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    [pieChartMVPositionViewController viewDidDisappear:animated];
+    [pieChartMVAccountsViewController viewDidDisappear:animated];
+}
+
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -66,6 +85,9 @@
     
     accountsTableViewController = [[AccountsTableViewController alloc] init];
     [accountsTableViewController setView:accountsTable];
+    
+    [accountsTableViewController setDelegate:self];
+    
     [accountsTable setDelegate:accountsTableViewController];
     [accountsTable setDataSource:accountsTableViewController];    
 
@@ -124,6 +146,8 @@
     [[BFBrokerageAccountStore defaultStore] clearAccounts];
     [self retrieveAccountData];
 }
+
+
 
 #pragma mark - NSURLCollectionDelegate methods
 
@@ -206,6 +230,20 @@
     // Supply the credential to the sender of the challenge
     [[challenge sender] useCredential:newCred forAuthenticationChallenge:challenge];
 }
- 
 
+#pragma mark AccountsTableViewController Delegate methods
+
+
+-(void) editingStartedForAccountWithName:(NSString *)accName
+{
+    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:accName];
+    [editAccountViewController setAvc:self];
+    
+    [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+    [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:editAccountViewController animated:YES];
+}
+ 
 @end
+

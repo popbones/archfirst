@@ -27,6 +27,7 @@
 	CPTXYGraph *pieGraph;
 	CPTPieChart *piePlot;
 	BOOL piePlotIsRotating;
+    BOOL viewOnFront;
     
 	NSMutableArray *dataForChart, *dataForPlot;
     

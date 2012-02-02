@@ -23,6 +23,7 @@
 #import "BFMoney.h"
 
 @implementation BrokerageAccountCell
+@synthesize delegate;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -46,6 +47,11 @@
     }
     
     return self;
+}
+
+-(void) editButtonClicked:(id) sender
+{
+    [delegate editingStartedForAccount:idLabel.text];
 }
 
 - (void)layoutSubviews
@@ -81,6 +87,7 @@
     
     CGRect editFrame = CGRectMake(insetW+nameWidth+insetW+idWidth+insetW+marketValueWidth+insetW+cashWidth+insetW, insetH, editWidth, editHeight);
     [editButton setFrame:editFrame];
+    [editButton addTarget:self action:@selector(editButtonClicked:) forControlEvents:UIControlEventTouchUpInside];
     
 }
 

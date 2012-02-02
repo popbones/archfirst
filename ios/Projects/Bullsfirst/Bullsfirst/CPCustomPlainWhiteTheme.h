@@ -1,8 +1,8 @@
 //
-//  AccountsTableViewController.h
+//  CPCustomPlainWhiteTheme.h
 //  Bullsfirst
 //
-//  Created by Joe Howard
+//  Created by Vivekan Arther
 //  Copyright 2012 Archfirst
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,22 +18,9 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "_CPTXYTheme.h"
 
-#import "BrokerageAccountCell.h"
-
-@protocol AccountsTableViewControllerDelegate;
-
-@interface AccountsTableViewController : UITableViewController<BrokerageAccountCellDelegate>
-{
-    __weak id<AccountsTableViewControllerDelegate> delegate;
+@interface CPCustomPlainWhiteTheme : _CPTXYTheme {
 }
-
-@property(nonatomic,weak) id<AccountsTableViewControllerDelegate> delegate;
-@end
-
-@protocol AccountsTableViewControllerDelegate <NSObject>
-
--(void) editingStartedForAccountWithName:(NSString*) accName;
 
 @end

@@ -23,6 +23,9 @@
 
 @class BFBrokerageAccount;
 
+@protocol BrokerageAccountCellDelegate;
+
+
 @interface BrokerageAccountCell : UITableViewCell
 {
     UILabel *nameLabel;
@@ -30,8 +33,17 @@
     UILabel *marketValueLabel;
     UILabel *cashLabel;
     UIButton *editButton;
+    __weak id<BrokerageAccountCellDelegate> delegate;
 }
 
+@property(nonatomic,weak) id<BrokerageAccountCellDelegate> delegate;
 - (void)setBrokerageAccount:(BFBrokerageAccount *)account;
+-(void) editButtonClicked:(id) sender;
+
+@end
+
+@protocol BrokerageAccountCellDelegate <NSObject>
+
+-(void) editingStartedForAccount:(NSString*) oldAccountName;
 
 @end

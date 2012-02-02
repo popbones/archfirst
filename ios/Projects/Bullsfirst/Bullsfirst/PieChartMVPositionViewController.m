@@ -29,38 +29,78 @@
 @synthesize pieChartView;
 @synthesize dataForChart, dataForPlot;
 
+
 #pragma mark -
+
+#pragma mark Helper methods
+
+-(void) performAnimation
+{
+    
+    CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    
+	rotation.removedOnCompletion = YES;
+	rotation.fromValue			 = [NSNumber numberWithFloat:M_PI * 5];
+	rotation.toValue			 = [NSNumber numberWithFloat:0.0f];
+	rotation.duration			 = 1.0f;
+	rotation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    
+    CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    
+	fadeInAnimation.removedOnCompletion = YES;
+	fadeInAnimation.fromValue			 = [NSNumber numberWithFloat:0.0];
+	fadeInAnimation.toValue			 = [NSNumber numberWithFloat:1];
+	fadeInAnimation.duration			 = 3.0f;
+	fadeInAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+	piePlot.shouldRasterize=YES;
+    
+    CAAnimationGroup* animationGroup=[CAAnimationGroup animation];
+    animationGroup.animations = [NSArray arrayWithObjects:fadeInAnimation,rotation, nil];
+    
+    animationGroup.delegate = self;
+    animationGroup.duration = 3.0f;
+    
+	[piePlot addAnimation:animationGroup forKey:@"rotationAndFadeIn"];
+    
+	piePlotIsRotating = YES;
+    
+}
+
+
+
 #pragma mark Initialization and teardown
 
 -(void)viewDidLoad
 {
-	[super viewDidLoad];    
+	[super viewDidLoad];  
 }
 
 
 -(void)viewDidAppear:(BOOL)animated
 {
 	[super viewDidAppear:animated];
-    
 	// Add a rotation animation
-	CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-	rotation.removedOnCompletion = YES;
-	rotation.fromValue			 = [NSNumber numberWithFloat:M_PI * 5];
-	rotation.toValue			 = [NSNumber numberWithFloat:0.0f];
-	rotation.duration			 = 1.0f;
-	rotation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-	rotation.delegate			 = self;
-	[piePlot addAnimation:rotation forKey:@"rotation"];
+    [self performAnimation];
+    viewOnFront=YES;
     
-	piePlotIsRotating = YES;
 }
+
+-(void) viewDidDisappear:(BOOL)animated
+{
+    [super viewDidDisappear:animated];
+    viewOnFront = NO;
+}
+
+
 
 -(void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
 {
 	piePlotIsRotating = NO;
-	[piePlot performSelector:@selector(reloadData) withObject:nil afterDelay:0.4];
+    if(viewOnFront== NO)
+        piePlot.opacity=0;
+    piePlot.opacity=1;
+	//[piePlot performSelector:@selector(reloadData) withObject:nil afterDelay:0.4];
 }
-
 
 /*
  -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -102,10 +142,17 @@
 {
 	// Create pieChart from theme
 	pieGraph = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
-	CPTTheme *theme = [CPTTheme themeNamed:kCPTPlainWhiteTheme];
+	CPTTheme *theme = [CPTTheme themeNamed:kCustomPlainWhiteTheme];
 	[pieGraph applyTheme:theme];
 	pieChartView.hostedGraph			 = pieGraph;
 	pieGraph.plotAreaFrame.masksToBorder = NO;
+    
+    pieGraph.title = @"Market Value By Positions";
+    CPTMutableTextStyle* titleTextStyle=[[CPTMutableTextStyle alloc]init];
+    titleTextStyle.color = [CPTColor blackColor];
+    titleTextStyle.fontName=@"Arial";
+    titleTextStyle.fontSize=15;
+    [pieGraph setTitleTextStyle:titleTextStyle];
     
 	pieGraph.paddingLeft   = -100.0;
 	pieGraph.paddingTop	   = 20.0;
@@ -169,7 +216,8 @@
     pieGraph.legend = theLegend;
     
     pieGraph.legendAnchor = CPTRectAnchorRight;
-    pieGraph.legendDisplacement = CGPointMake(-15.0, 30.0);    
+    pieGraph.legendDisplacement = CGPointMake(-15.0, 30.0);  
+    [self performAnimation];
     
 }
 

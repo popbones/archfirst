@@ -21,9 +21,10 @@
 #import "AccountsTableViewController.h"
 #import "BFBrokerageAccountStore.h"
 #import "BFBrokerageAccount.h"
-#import "BrokerageAccountCell.h"
 
 @implementation AccountsTableViewController
+
+@synthesize delegate;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -49,8 +50,10 @@
     
     if(!cell)
     {
-        cell = [[BrokerageAccountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BrokerageAccountCell"];        
+        cell = [[BrokerageAccountCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"BrokerageAccountCell"]; 
+        [cell setDelegate:self];
     }
+    
     
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:[indexPath row]];
@@ -60,4 +63,14 @@
     return cell;
 }
 
+#pragma mark BrokerageAccountCell Delegate methods
+
+-(void) editingStartedForAccount:(NSString *)oldAccountName
+{
+    [delegate editingStartedForAccountWithName:oldAccountName];
+}
+
 @end
+
+
+

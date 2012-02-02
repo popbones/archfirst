@@ -21,13 +21,16 @@
 #import <Foundation/Foundation.h>
 #import "CorePlot-CocoaTouch.h"
 
+#import "AccountsTableViewController.h"
+
+
 @class BFToolbar;
 @class AccountsTableViewController;
 
 @class PieChartMVAccountsViewController;
 @class PieChartMVPositionViewController;
 
-@interface AccountsViewController : UIViewController
+@interface AccountsViewController : UIViewController<AccountsTableViewControllerDelegate>
 {   
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIView *headerView;

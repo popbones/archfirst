@@ -56,6 +56,9 @@
 		00DFF96614841B00001A4641 /* BFBrokerageAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96514841B00001A4641 /* BFBrokerageAccount.m */; };
 		00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */; };
 		1011437C14CF77EF006E5909 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1011437814CF749D006E5909 /* libCorePlot-CocoaTouch.a */; };
+		AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */; };
+		AC9B72D014DA755200B843AC /* EditAccountNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */; };
+		AC9B72E514DAB01800B843AC /* CPCustomPlainWhiteTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72E414DAB01800B843AC /* CPCustomPlainWhiteTheme.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +149,11 @@
 		00DFF96B14855010001A4641 /* BFBrokerageAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFBrokerageAccountStore.h; sourceTree = "<group>"; };
 		00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFBrokerageAccountStore.m; sourceTree = "<group>"; };
 		1011436E14CF749C006E5909 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountNameViewController.h; sourceTree = "<group>"; };
+		AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAccountNameViewController.m; sourceTree = "<group>"; };
+		AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditAccountNameViewController.xib; sourceTree = "<group>"; };
+		AC9B72E314DAB01800B843AC /* CPCustomPlainWhiteTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CPCustomPlainWhiteTheme.h; path = Bullsfirst/CPCustomPlainWhiteTheme.h; sourceTree = "<group>"; };
+		AC9B72E414DAB01800B843AC /* CPCustomPlainWhiteTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CPCustomPlainWhiteTheme.m; path = Bullsfirst/CPCustomPlainWhiteTheme.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +175,7 @@
 		00D3C3F9147C27120067A768 = {
 			isa = PBXGroup;
 			children = (
+				AC9B72D114DA7E3700B843AC /* CustomThemes */,
 				00D3C40E147C27120067A768 /* Bullsfirst */,
 				00D3C407147C27120067A768 /* Frameworks */,
 				00D3C405147C27120067A768 /* Products */,
@@ -251,6 +260,8 @@
 				00D5191C14891DBA0049F43E /* PieChartMVAccountsViewController.h */,
 				00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */,
 				00D51920148951370049F43E /* PieChartMVPositionViewController.h */,
+				AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */,
+				AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */,
 				00D51921148951370049F43E /* PieChartMVPositionViewController.m */,
 				005B34B51486BF0F00C637F5 /* AccountsTableViewController.h */,
 				005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */,
@@ -294,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				00D3C421147C28440067A768 /* LoginViewController.xib */,
+				AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */,
 				00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */,
 				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
 				004F06CC148D421F003F35D3 /* AddAccountViewController.xib */,
@@ -326,6 +338,15 @@
 				1011437814CF749D006E5909 /* libCorePlot-CocoaTouch.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		AC9B72D114DA7E3700B843AC /* CustomThemes */ = {
+			isa = PBXGroup;
+			children = (
+				AC9B72E314DAB01800B843AC /* CPCustomPlainWhiteTheme.h */,
+				AC9B72E414DAB01800B843AC /* CPCustomPlainWhiteTheme.m */,
+			);
+			name = CustomThemes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -421,6 +442,7 @@
 				00DFF95C14840BD1001A4641 /* iconTransactions.png in Resources */,
 				00B38DE81487F48500DC62F2 /* btn_edit_56x31.png in Resources */,
 				004F06CD148D421F003F35D3 /* AddAccountViewController.xib in Resources */,
+				AC9B72D014DA755200B843AC /* EditAccountNameViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +471,8 @@
 				00D5191E14891DBA0049F43E /* PieChartMVAccountsViewController.m in Sources */,
 				00D51922148951370049F43E /* PieChartMVPositionViewController.m in Sources */,
 				009C1A3C148D3FF500259534 /* AddAccountViewController.m in Sources */,
+				AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */,
+				AC9B72E514DAB01800B843AC /* CPCustomPlainWhiteTheme.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

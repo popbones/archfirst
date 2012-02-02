@@ -178,15 +178,17 @@
         
     // Create the tab bar controller
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
+    
+    tabBarController.delegate = self;
          
     // Create the view controllers
     //AccountsViewController *vc1 = [[AccountsViewController alloc] init];
-    AccountsViewController *vc1 = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
+    AccountsViewController *accountsViewController = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
     PositionsViewController *vc2 = [[PositionsViewController alloc] init];
     OrdersViewController *vc3 = [[OrdersViewController alloc] init];
     TransactionsViewController *vc4 = [[TransactionsViewController alloc] init];
     
-    NSArray *viewControllers = [NSArray arrayWithObjects:vc1,vc2,vc3,vc4, nil];
+    NSArray *viewControllers = [NSArray arrayWithObjects:accountsViewController,vc2,vc3,vc4, nil];
             
     // NOTE: Would rather only have one instance of BFToolbar; use one per tab for now
     BFToolbar *toolBar1 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
@@ -200,12 +202,12 @@
     [toolBar4 setLvc:self]; [toolBar4 setTbc:tabBarController];
      
     // Need to take ownership of toolbars; adding it to the view is not enough
-    [vc1 setToolbar:toolBar1]; [[vc1 view] addSubview:[toolBar1 view]];
+    [accountsViewController setToolbar:toolBar1]; [[accountsViewController view] addSubview:[toolBar1 view]];
     [vc2 setToolbar:toolBar2]; [[vc2 view] addSubview:[toolBar2 view]];
     [vc3 setToolbar:toolBar3]; [[vc3 view] addSubview:[toolBar3 view]];
     [vc4 setToolbar:toolBar4]; [[vc4 view] addSubview:[toolBar4 view]];
     
-    [[vc1 view] bringSubviewToFront:[toolBar1 view]];
+    [[accountsViewController view] bringSubviewToFront:[toolBar1 view]];
     [[vc2 view] bringSubviewToFront:[toolBar2 view]];
     [[vc3 view] bringSubviewToFront:[toolBar3 view]];
     [[vc4 view] bringSubviewToFront:[toolBar4 view]];
@@ -252,5 +254,14 @@
     [[challenge sender] useCredential:newCred forAuthenticationChallenge:challenge];
 }
 */
+
+
+#pragma mark tabBarController delegate methods
+
+-(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    [viewController viewDidAppear:YES];
+    
+}
 
 @end

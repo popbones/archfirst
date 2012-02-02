@@ -1,8 +1,8 @@
 //
-//  LoginViewController.h
+//  EditAccountNameViewController.h
 //  Bullsfirst
 //
-//  Created by Joe Howard
+//  Created by Vivekan Arther
 //  Copyright 2012 Archfirst
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,24 +20,26 @@
 
 #import <UIKit/UIKit.h>
 
-@interface LoginViewController : UIViewController
-<NSURLConnectionDelegate,UITabBarControllerDelegate>
+
+@class AccountsViewController;
+
+@interface EditAccountNameViewController : UIViewController
 {
-    IBOutlet UITextField *username;
-    IBOutlet UITextField *password;
+    IBOutlet UITextField *accountName;
     IBOutlet UIActivityIndicatorView *spinner;
+    NSString* oldAccountName;
     
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
+
+    __weak AccountsViewController *avc;
     
 }
 
-@property (nonatomic, retain) UITextField *username;
-@property (nonatomic, retain) UITextField *password;
+@property (nonatomic, weak) AccountsViewController *avc;
 
-- (IBAction)login:(id)sender;
-- (IBAction)openAccount:(id)sender;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName;
 
-- (void)logout;
-
+- (IBAction)editAccountName:(id)sender;
+- (IBAction)cancel:(id)sender;
 @end
