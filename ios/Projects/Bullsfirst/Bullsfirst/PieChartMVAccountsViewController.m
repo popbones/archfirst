@@ -22,7 +22,7 @@
 #import "BFBrokerageAccount.h"
 #import "BFBrokerageAccountStore.h"
 #import "BFMoney.h"
-
+#import "BFConstants.h"
 @implementation PieChartMVAccountsViewController
 
 @synthesize pieChartView;
@@ -216,7 +216,7 @@
     
     pieGraph.legendAnchor = CPTRectAnchorRight;
     pieGraph.legendDisplacement = CGPointMake(-25.0, 30.0);    
-    pieGraph.title=@"All Accounts";
+    pieGraph.title=kAllAccounts;
     pieGraph.titleDisplacement = CGPointMake(0,-20);
     [self performAnimation];
 	
