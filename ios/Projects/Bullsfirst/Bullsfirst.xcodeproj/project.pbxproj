@@ -56,16 +56,14 @@
 		00DFF96614841B00001A4641 /* BFBrokerageAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96514841B00001A4641 /* BFBrokerageAccount.m */; };
 		00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */; };
 		1011437C14CF77EF006E5909 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1011437814CF749D006E5909 /* libCorePlot-CocoaTouch.a */; };
-		9569CC5F14DAF72C0036D8FB /* bullsfirst-logo-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5514DAF72C0036D8FB /* bullsfirst-logo-transparent.png */; };
-		9569CC6014DAF72C0036D8FB /* launch-screen-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5614DAF72C0036D8FB /* launch-screen-landscape.png */; };
-		9569CC6114DAF72C0036D8FB /* launch-screen-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5714DAF72C0036D8FB /* launch-screen-portrait.png */; };
-		9569CC6214DAF72C0036D8FB /* login-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5814DAF72C0036D8FB /* login-button-clicked.png */; };
-		9569CC6314DAF72C0036D8FB /* login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5914DAF72C0036D8FB /* login-button.png */; };
-		9569CC6414DAF72C0036D8FB /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5A14DAF72C0036D8FB /* login-screen-background-landscape.png */; };
-		9569CC6514DAF72C0036D8FB /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5B14DAF72C0036D8FB /* login-screen-background-portrait.png */; };
-		9569CC6614DAF72C0036D8FB /* login-screen-form-fields-with-hints.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5C14DAF72C0036D8FB /* login-screen-form-fields-with-hints.png */; };
-		9569CC6714DAF72C0036D8FB /* open-account-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5D14DAF72C0036D8FB /* open-account-button-clicked.png */; };
-		9569CC6814DAF72C0036D8FB /* open-account-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 9569CC5E14DAF72C0036D8FB /* open-account-button.png */; };
+		95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */; };
+		95C6A84E14DBB769004F023A /* login-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84614DBB769004F023A /* login-button-clicked.png */; };
+		95C6A84F14DBB769004F023A /* login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84714DBB769004F023A /* login-button.png */; };
+		95C6A85014DBB769004F023A /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84814DBB769004F023A /* login-screen-background-landscape.png */; };
+		95C6A85114DBB769004F023A /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84914DBB769004F023A /* login-screen-background-portrait.png */; };
+		95C6A85214DBB769004F023A /* login-screen-form-fields-with-hints.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */; };
+		95C6A85314DBB769004F023A /* open-account-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84B14DBB769004F023A /* open-account-button-clicked.png */; };
+		95C6A85414DBB769004F023A /* open-account-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84C14DBB769004F023A /* open-account-button.png */; };
 		AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */; };
 		AC9B72D014DA755200B843AC /* EditAccountNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */; };
 		AC9B72E514DAB01800B843AC /* CPCustomPlainWhiteTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72E414DAB01800B843AC /* CPCustomPlainWhiteTheme.m */; };
@@ -159,16 +157,14 @@
 		00DFF96B14855010001A4641 /* BFBrokerageAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFBrokerageAccountStore.h; sourceTree = "<group>"; };
 		00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFBrokerageAccountStore.m; sourceTree = "<group>"; };
 		1011436E14CF749C006E5909 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
-		9569CC5514DAF72C0036D8FB /* bullsfirst-logo-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "bullsfirst-logo-transparent.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/bullsfirst-logo-transparent.png"; sourceTree = "<group>"; };
-		9569CC5614DAF72C0036D8FB /* launch-screen-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launch-screen-landscape.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/launch-screen-landscape.png"; sourceTree = "<group>"; };
-		9569CC5714DAF72C0036D8FB /* launch-screen-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "launch-screen-portrait.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/launch-screen-portrait.png"; sourceTree = "<group>"; };
-		9569CC5814DAF72C0036D8FB /* login-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-button-clicked.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/login-button-clicked.png"; sourceTree = "<group>"; };
-		9569CC5914DAF72C0036D8FB /* login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-button.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/login-button.png"; sourceTree = "<group>"; };
-		9569CC5A14DAF72C0036D8FB /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-screen-background-landscape.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/login-screen-background-landscape.png"; sourceTree = "<group>"; };
-		9569CC5B14DAF72C0036D8FB /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-screen-background-portrait.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/login-screen-background-portrait.png"; sourceTree = "<group>"; };
-		9569CC5C14DAF72C0036D8FB /* login-screen-form-fields-with-hints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "login-screen-form-fields-with-hints.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/login-screen-form-fields-with-hints.png"; sourceTree = "<group>"; };
-		9569CC5D14DAF72C0036D8FB /* open-account-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "open-account-button-clicked.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/open-account-button-clicked.png"; sourceTree = "<group>"; };
-		9569CC5E14DAF72C0036D8FB /* open-account-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "open-account-button.png"; path = "../../../../../Documents/Bullsfirst/Bullsfirst/imgs/open-account-button.png"; sourceTree = "<group>"; };
+		95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-logo-transparent.png"; sourceTree = "<group>"; };
+		95C6A84614DBB769004F023A /* login-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-clicked.png"; sourceTree = "<group>"; };
+		95C6A84714DBB769004F023A /* login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button.png"; sourceTree = "<group>"; };
+		95C6A84814DBB769004F023A /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-landscape.png"; sourceTree = "<group>"; };
+		95C6A84914DBB769004F023A /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-portrait.png"; sourceTree = "<group>"; };
+		95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields-with-hints.png"; sourceTree = "<group>"; };
+		95C6A84B14DBB769004F023A /* open-account-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button-clicked.png"; sourceTree = "<group>"; };
+		95C6A84C14DBB769004F023A /* open-account-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button.png"; sourceTree = "<group>"; };
 		AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountNameViewController.h; sourceTree = "<group>"; };
 		AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAccountNameViewController.m; sourceTree = "<group>"; };
 		AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditAccountNameViewController.xib; sourceTree = "<group>"; };
@@ -364,16 +360,14 @@
 		9569CC5414DAF6B10036D8FB /* Latest Images */ = {
 			isa = PBXGroup;
 			children = (
-				9569CC5514DAF72C0036D8FB /* bullsfirst-logo-transparent.png */,
-				9569CC5614DAF72C0036D8FB /* launch-screen-landscape.png */,
-				9569CC5714DAF72C0036D8FB /* launch-screen-portrait.png */,
-				9569CC5814DAF72C0036D8FB /* login-button-clicked.png */,
-				9569CC5914DAF72C0036D8FB /* login-button.png */,
-				9569CC5A14DAF72C0036D8FB /* login-screen-background-landscape.png */,
-				9569CC5B14DAF72C0036D8FB /* login-screen-background-portrait.png */,
-				9569CC5C14DAF72C0036D8FB /* login-screen-form-fields-with-hints.png */,
-				9569CC5D14DAF72C0036D8FB /* open-account-button-clicked.png */,
-				9569CC5E14DAF72C0036D8FB /* open-account-button.png */,
+				95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */,
+				95C6A84614DBB769004F023A /* login-button-clicked.png */,
+				95C6A84714DBB769004F023A /* login-button.png */,
+				95C6A84814DBB769004F023A /* login-screen-background-landscape.png */,
+				95C6A84914DBB769004F023A /* login-screen-background-portrait.png */,
+				95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */,
+				95C6A84B14DBB769004F023A /* open-account-button-clicked.png */,
+				95C6A84C14DBB769004F023A /* open-account-button.png */,
 			);
 			name = "Latest Images";
 			sourceTree = "<group>";
@@ -482,16 +476,14 @@
 				00B38DE81487F48500DC62F2 /* btn_edit_56x31.png in Resources */,
 				004F06CD148D421F003F35D3 /* AddAccountViewController.xib in Resources */,
 				AC9B72D014DA755200B843AC /* EditAccountNameViewController.xib in Resources */,
-				9569CC5F14DAF72C0036D8FB /* bullsfirst-logo-transparent.png in Resources */,
-				9569CC6014DAF72C0036D8FB /* launch-screen-landscape.png in Resources */,
-				9569CC6114DAF72C0036D8FB /* launch-screen-portrait.png in Resources */,
-				9569CC6214DAF72C0036D8FB /* login-button-clicked.png in Resources */,
-				9569CC6314DAF72C0036D8FB /* login-button.png in Resources */,
-				9569CC6414DAF72C0036D8FB /* login-screen-background-landscape.png in Resources */,
-				9569CC6514DAF72C0036D8FB /* login-screen-background-portrait.png in Resources */,
-				9569CC6614DAF72C0036D8FB /* login-screen-form-fields-with-hints.png in Resources */,
-				9569CC6714DAF72C0036D8FB /* open-account-button-clicked.png in Resources */,
-				9569CC6814DAF72C0036D8FB /* open-account-button.png in Resources */,
+				95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */,
+				95C6A84E14DBB769004F023A /* login-button-clicked.png in Resources */,
+				95C6A84F14DBB769004F023A /* login-button.png in Resources */,
+				95C6A85014DBB769004F023A /* login-screen-background-landscape.png in Resources */,
+				95C6A85114DBB769004F023A /* login-screen-background-portrait.png in Resources */,
+				95C6A85214DBB769004F023A /* login-screen-form-fields-with-hints.png in Resources */,
+				95C6A85314DBB769004F023A /* open-account-button-clicked.png in Resources */,
+				95C6A85414DBB769004F023A /* open-account-button.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
