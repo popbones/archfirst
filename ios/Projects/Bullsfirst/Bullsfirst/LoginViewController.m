@@ -34,6 +34,7 @@
 
 @synthesize username;
 @synthesize password;
+@synthesize delegate;
 @synthesize restService;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -42,6 +43,7 @@
     if (self) {
         // Custom initialization
     }
+    
     return self;
 }
 
@@ -54,10 +56,39 @@
 }
 
 #pragma mark - View lifecycle
-
+-(void) moveView:(UIView *) view duration:(NSTimeInterval) duration curve:(int)curve x:(CGFloat)x y:(CGFloat)y
+{
+    [UIView beginAnimations:NULL context:NULL];
+    [UIView setAnimationDuration:duration];
+    [UIView setAnimationCurve:curve];
+    [UIView setAnimationBeginsFromCurrentState:YES];
+    
+    CGAffineTransform transform=CGAffineTransformMakeTranslation(x, y);
+    view.transform=transform;
+    [UIView commitAnimations];
+}
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
+    UIBezierPath *passwordMaskPath=[UIBezierPath bezierPathWithRoundedRect:password.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(10,10)];
+   
+    CAShapeLayer *passwordMasklayer=[CAShapeLayer layer];
+    passwordMasklayer.frame=password.bounds;
+    passwordMasklayer.path=passwordMaskPath.CGPath;
+    password.layer.mask=passwordMasklayer;
+    UIBezierPath *usernameMaskPath=[UIBezierPath bezierPathWithRoundedRect:password.bounds byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight cornerRadii:CGSizeMake(10,10)];
+    
+    CAShapeLayer *usernameMaskLayer=[CAShapeLayer layer];
+    usernameMaskLayer.frame=username.bounds;
+    usernameMaskLayer.path=usernameMaskPath.CGPath;
+    username.layer.mask=usernameMaskLayer;
+ 
+    [username setBackgroundColor:[UIColor whiteColor]];
+    [password setReturnKeyType:UIReturnKeyGo];
+    [password setBackgroundColor:[UIColor whiteColor]];
+    password.delegate=self;
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -80,7 +111,6 @@
     }
     return YES;
 }
-
 
 #pragma mark - selectors for handling rest call callbacks
 
@@ -113,9 +143,11 @@
     NSLog(@"jsonObject = %@", jsonObject);
     
     [spinner stopAnimating];
+    [delegate loggedin];
+    [self dismissModalViewControllerAnimated:YES];
     
     // TODO: Check for successful login
-    
+    /*
     // Create the tab bar controller
     UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
@@ -155,16 +187,19 @@
     [tabBarController setViewControllers:viewControllers];
     
     [tabBarController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
-    [self presentModalViewController:tabBarController animated:YES]; 
+    [self presentModalViewController:tabBarController animated:YES]; */
 }
 
 
 
 #pragma mark - Methods
 
-- (IBAction)login:(id)sender
+-(void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    
+    //[self moveView:self.view duration:3 curve:UIViewAnimationCurveLinear x:0 y:-60];
+}
+-(void) loginAction
+{
     if([[username text] isEqual:@""] || [[password text] isEqual:@""])
     {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
@@ -190,9 +225,31 @@
     [password resignFirstResponder];
     
 }
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField==password)
+    {
+        [password resignFirstResponder];
+      //  [self moveView:self.view duration:3 curve:UIViewAnimationCurveLinear x:0 y:60];
+        [self loginAction];
+    }
+    else
+    {
+        [username resignFirstResponder];
+      //  [self moveView:self.view duration:3 curve:UIViewAnimationCurveLinear x:0 y:60];
+
+    }
+    
+    return YES;
+}
+- (IBAction)login:(id)sender
+{
+    [self loginAction];
+}
 
 - (IBAction)openAccount:(id)sender
 {
+   
     OpenAccountViewController *openAccountViewController = [[OpenAccountViewController alloc] initWithNibName:@"OpenAccountViewController" bundle:nil];
     [openAccountViewController setLvc:self];
     

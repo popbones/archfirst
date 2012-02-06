@@ -19,11 +19,11 @@
 //
 
 #import <UIKit/UIKit.h>
-
+@protocol LoginViewControllerDelegate;
 @class BullFirstWebServiceObject;
 
 @interface LoginViewController : UIViewController
-<NSURLConnectionDelegate,UITabBarControllerDelegate>
+<NSURLConnectionDelegate,UITextFieldDelegate>
 {
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;
@@ -31,8 +31,9 @@
     
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
-    
+    __weak id<LoginViewControllerDelegate> delegate;
 }
+@property(nonatomic,weak) id <LoginViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) UITextField *username;
 @property (nonatomic, retain) UITextField *password;
@@ -43,4 +44,7 @@
 
 - (void)logout;
 
+@end
+@protocol LoginViewControllerDelegate <NSObject>
+-(void) loggedin;
 @end

@@ -64,6 +64,10 @@
 		95C6A85214DBB769004F023A /* login-screen-form-fields-with-hints.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */; };
 		95C6A85314DBB769004F023A /* open-account-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84B14DBB769004F023A /* open-account-button-clicked.png */; };
 		95C6A85414DBB769004F023A /* open-account-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84C14DBB769004F023A /* open-account-button.png */; };
+		95C6A85C14DBED54004F023A /* RootController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C6A85A14DBED54004F023A /* RootController.m */; };
+		95C6A85D14DBED54004F023A /* RootController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85B14DBED54004F023A /* RootController.xib */; };
+		95C6A85F14DFE869004F023A /* app-icon-72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85E14DFE868004F023A /* app-icon-72x72.png */; };
+		95C6A86314E01573004F023A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A86214E01573004F023A /* Default.png */; };
 		AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */; };
 		AC26C82914DBF67400ABD693 /* ChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81D14DBF67400ABD693 /* ChallengeHandler.m */; };
 		AC26C82A14DBF67400ABD693 /* ClientIdentityChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81F14DBF67400ABD693 /* ClientIdentityChallengeHandler.m */; };
@@ -174,6 +178,11 @@
 		95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields-with-hints.png"; sourceTree = "<group>"; };
 		95C6A84B14DBB769004F023A /* open-account-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button-clicked.png"; sourceTree = "<group>"; };
 		95C6A84C14DBB769004F023A /* open-account-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button.png"; sourceTree = "<group>"; };
+		95C6A85914DBED54004F023A /* RootController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootController.h; sourceTree = "<group>"; };
+		95C6A85A14DBED54004F023A /* RootController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootController.m; sourceTree = "<group>"; };
+		95C6A85B14DBED54004F023A /* RootController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootController.xib; sourceTree = "<group>"; };
+		95C6A85E14DFE868004F023A /* app-icon-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-72x72.png"; sourceTree = "<group>"; };
+		95C6A86214E01573004F023A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AC26C81A14DBF67400ABD693 /* AuthenticationChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationChallengeHandler.h; sourceTree = "<group>"; };
 		AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationChallengeHandler.m; sourceTree = "<group>"; };
 		AC26C81C14DBF67400ABD693 /* ChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeHandler.h; sourceTree = "<group>"; };
@@ -253,6 +262,8 @@
 				AC26C81914DBF64700ABD693 /* Web Service Object */,
 				00D3C417147C27120067A768 /* AppDelegate.h */,
 				00D3C418147C27120067A768 /* AppDelegate.m */,
+				95C6A85914DBED54004F023A /* RootController.h */,
+				95C6A85A14DBED54004F023A /* RootController.m */,
 				00D3C41F147C28440067A768 /* LoginViewController.h */,
 				00D3C420147C28440067A768 /* LoginViewController.m */,
 				00D3C42D147D537B0067A768 /* OpenAccountViewController.h */,
@@ -352,6 +363,7 @@
 		00DFF9181480A8F2001A4641 /* NIB */ = {
 			isa = PBXGroup;
 			children = (
+				95C6A85B14DBED54004F023A /* RootController.xib */,
 				00D3C421147C28440067A768 /* LoginViewController.xib */,
 				AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */,
 				00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */,
@@ -391,6 +403,8 @@
 		9569CC5414DAF6B10036D8FB /* Latest Images */ = {
 			isa = PBXGroup;
 			children = (
+				95C6A86214E01573004F023A /* Default.png */,
+				95C6A85E14DFE868004F023A /* app-icon-72x72.png */,
 				95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */,
 				95C6A84614DBB769004F023A /* login-button-clicked.png */,
 				95C6A84714DBB769004F023A /* login-button.png */,
@@ -552,6 +566,9 @@
 				95C6A85214DBB769004F023A /* login-screen-form-fields-with-hints.png in Resources */,
 				95C6A85314DBB769004F023A /* open-account-button-clicked.png in Resources */,
 				95C6A85414DBB769004F023A /* open-account-button.png in Resources */,
+				95C6A85D14DBED54004F023A /* RootController.xib in Resources */,
+				95C6A85F14DFE869004F023A /* app-icon-72x72.png in Resources */,
+				95C6A86314E01573004F023A /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +599,7 @@
 				009C1A3C148D3FF500259534 /* AddAccountViewController.m in Sources */,
 				AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */,
 				AC9B72E514DAB01800B843AC /* CPCustomPlainWhiteTheme.m in Sources */,
+				95C6A85C14DBED54004F023A /* RootController.m in Sources */,
 				AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */,
 				AC26C82914DBF67400ABD693 /* ChallengeHandler.m in Sources */,
 				AC26C82A14DBF67400ABD693 /* ClientIdentityChallengeHandler.m in Sources */,

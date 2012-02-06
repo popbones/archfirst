@@ -56,6 +56,7 @@
 
 @property (nonatomic, retain) BFToolbar *toolbar;
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
+@property (nonatomic, retain)  PieChartMVAccountsViewController *pieChartMVAccountsViewController;
 
 - (void)retrieveAccountData;
 - (IBAction)createAccount:(id)sender;

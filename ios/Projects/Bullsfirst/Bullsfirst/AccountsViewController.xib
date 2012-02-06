@@ -40,7 +40,7 @@
 				<array class="NSMutableArray" key="NSSubviews">
 					<object class="IBUIView" id="495896735">
 						<reference key="NSNextResponder" ref="1037586457"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">289</int>
 						<string key="NSFrame">{{522, 168}, {482, 391}}</string>
 						<reference key="NSSuperview" ref="1037586457"/>
 						<reference key="NSWindow"/>
@@ -57,11 +57,10 @@
 					</object>
 					<object class="IBUIView" id="33145888">
 						<reference key="NSNextResponder" ref="1037586457"/>
-						<int key="NSvFlags">292</int>
+						<int key="NSvFlags">289</int>
 						<string key="NSFrame">{{522, 168}, {482, 391}}</string>
 						<reference key="NSSuperview" ref="1037586457"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:212</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -314,7 +313,7 @@
 							</object>
 							<object class="IBUIActivityIndicatorView" id="1040862972">
 								<reference key="NSNextResponder" ref="958492183"/>
-								<int key="NSvFlags">-2147483356</int>
+								<int key="NSvFlags">-2147483355</int>
 								<string key="NSFrame">{{482, 13}, {20, 20}}</string>
 								<reference key="NSSuperview" ref="958492183"/>
 								<reference key="NSWindow"/>
@@ -339,7 +338,7 @@
 					</object>
 					<object class="IBUITableView" id="370225279">
 						<reference key="NSNextResponder" ref="1037586457"/>
-						<int key="NSvFlags">274</int>
+						<int key="NSvFlags">292</int>
 						<string key="NSFrame">{{20, 160}, {494, 539}}</string>
 						<reference key="NSSuperview" ref="1037586457"/>
 						<reference key="NSWindow"/>

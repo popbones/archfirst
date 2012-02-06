@@ -20,21 +20,28 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-
+#import "RootController.h"
 @implementation AppDelegate
 
 @synthesize window = _window;
-
+@synthesize tabBarController=_tabBarController;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    
-    LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];    
-    [[self window] setRootViewController:lvc];
-    
-    self.window.backgroundColor = [UIColor whiteColor];
+    self.tabBarController = [[RootController alloc] initWithNibName:@"RootController" bundle:nil];
+    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
+    
+    LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
+    [self.tabBarController presentModalViewController:controller animated:YES];        
+    controller.delegate=(RootController *)self.tabBarController;
+    //LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];    
+    //[[self window] setRootViewController:lvc];
+    
+    //self.window.backgroundColor = [UIColor whiteColor];
+    //[self.window makeKeyAndVisible];
     return YES;
 }
 

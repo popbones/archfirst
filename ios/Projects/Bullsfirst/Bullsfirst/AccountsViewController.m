@@ -31,8 +31,7 @@
 
 @implementation AccountsViewController
 
-@synthesize toolbar;
-@synthesize restServiceObject;
+@synthesize toolbar,restServiceObject,pieChartMVAccountsViewController;
 
 //- (id)init
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -54,7 +53,12 @@
     pieChartMVPositionViewController.view.hidden=true;
     pieChartMVAccountsViewController.view.hidden=false;
 }
-
+/*
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    return [self init];
+}
+*/
 -(void) pieChartMVAccountsClicked:(int) onIndex
 {
     pieChartMVPositionViewController.accountIndex=onIndex;
@@ -68,6 +72,7 @@
     [super viewDidAppear:animated];
     [pieChartMVPositionViewController viewDidAppear:animated];
     [pieChartMVAccountsViewController viewDidAppear:animated];
+    [headerView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"img_bg_yellow.png"]]];
     
 }
 
@@ -78,20 +83,21 @@
     [pieChartMVPositionViewController viewDidDisappear:animated];
     [pieChartMVAccountsViewController viewDidDisappear:animated];
 }
+-(void) viewWillAppear:(BOOL)animated
+{
+
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
     [spinner startAnimating];
-
-    [headerView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"img_bg_yellow.png"]]];
-    
     accountsTableViewController = [[AccountsTableViewController alloc] init];
     [accountsTableViewController setView:accountsTable];
-     [accountsTableViewController setDelegate:self];
+    [accountsTableViewController setDelegate:self];
     [accountsTable setDelegate:accountsTableViewController];
     [accountsTable setDataSource:accountsTableViewController];    
-
+    
     pieChartMVAccountsViewController = [[PieChartMVAccountsViewController alloc] init];
     [pieChartMVAccountsViewController setView:pieChartMVAccountsView];
     [pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
@@ -100,10 +106,12 @@
     [pieChartMVPositionViewController setView:pieChartMVPositionView];
     [pieChartMVPositionViewController setPieChartView:pieChartMVPositionView];         
     pieChartMVPositionViewController.delegate=self;
-    [self retrieveAccountData]; 
+   // [self retrieveAccountData]; 
     
     [[self view] bringSubviewToFront:accountsPlotLabel];
     [[self view] bringSubviewToFront:positionPlotLabel];
+
+    
     
 }
 
@@ -114,6 +122,36 @@
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
+#pragma mark - Methods
+
+- (void)retrieveAccountData
+{
+    [spinner startAnimating];
+    
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    
+    
+    
+    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
+    [restServiceObject getRequestWithURL:url];    
+}
+
+- (IBAction)createAccount:(id)sender
+{
+    AddAccountViewController *addAccountViewController = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];
+    [addAccountViewController setAvc:self];
+    
+    [addAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+    [addAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:addAccountViewController animated:YES];
+}
+
+- (IBAction)refreshAccounts:(id)sender
+{
+    [[BFBrokerageAccountStore defaultStore] clearAccounts];
+    [self retrieveAccountData];
+}
 #pragma mark - selectors for handling rest call callbacks
 
 -(void)receivedData:(NSData *)data
@@ -174,44 +212,9 @@
     [pieChartMVAccountsViewController constructPieChart];
     [pieChartMVPositionViewController constructPieChart];
     
-       
-
-}
-
-#pragma mark - Methods
-
-- (void)retrieveAccountData
-{
     
-    [spinner startAnimating];
-    
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-    
-    
-    
-    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
-    [restServiceObject getRequestWithURL:url];
     
 }
-
-- (IBAction)createAccount:(id)sender
-{
-    AddAccountViewController *addAccountViewController = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];
-    [addAccountViewController setAvc:self];
-    
-    [addAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [addAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
-    [self presentModalViewController:addAccountViewController animated:YES];
-}
-
-- (IBAction)refreshAccounts:(id)sender
-{
-    [[BFBrokerageAccountStore defaultStore] clearAccounts];
-    [self retrieveAccountData];
-}
-
-
 #pragma mark AccountsTableViewController Delegate methods
 
 

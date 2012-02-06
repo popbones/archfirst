@@ -45,8 +45,11 @@
 */
 - (IBAction)logout
 {
-    [tbc dismissModalViewControllerAnimated:YES];
-    [lvc logout];    
+    LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
+    [tbc presentModalViewController:controller animated:YES];
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 }
 
 @end
