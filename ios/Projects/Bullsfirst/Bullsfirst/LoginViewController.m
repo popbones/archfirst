@@ -28,10 +28,13 @@
 #import "BFBrokerageAccountStore.h"
 #import "BFToolbar.h"
 
+#import "BullFirstWebServiceObject.h"
+
 @implementation LoginViewController
 
 @synthesize username;
 @synthesize password;
+@synthesize restService;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -78,106 +81,36 @@
     return YES;
 }
 
-#pragma mark - Methods
 
-- (IBAction)login:(id)sender
+#pragma mark - selectors for handling rest call callbacks
+
+-(void)receivedData:(NSData *)data
 {
-    
-    if([[username text] isEqual:@""] || [[password text] isEqual:@""])
-    {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                     message:@"All fields are required"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
-        return;        
-    }
-    
-    jsonResponseData = [[NSMutableData alloc] init];
-    [spinner startAnimating];
-    
-    NSString *userURL = [NSString stringWithFormat:@"%@%@", @"http://archfirst.org/bfoms-javaee/rest/users/",[username text]];
-    NSURL *url = [NSURL URLWithString:userURL];
-    
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:kRequestTimeout];
-    
-    //[req setHTTPMethod:@"GET"]; // default
-    [req setValue:[password text] forHTTPHeaderField:@"password"];
-    
-    urlConnection = [[NSURLConnection alloc] initWithRequest:req delegate:self startImmediately:YES];
-    
-    [[NSUserDefaults standardUserDefaults] setValue:[password text] forKey:kPassword];
-    
-    [username resignFirstResponder];
-    [password resignFirstResponder];
     
 }
 
-- (IBAction)openAccount:(id)sender
+-(void)responseReceived:(NSURLResponse *)data
 {
-    OpenAccountViewController *openAccountViewController = [[OpenAccountViewController alloc] initWithNibName:@"OpenAccountViewController" bundle:nil];
-    [openAccountViewController setLvc:self];
     
-    [openAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [openAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
-    [self presentModalViewController:openAccountViewController animated:YES];
 }
 
-- (void)logout
-{
-    // Clear login form
-    [username setText:@""];
-    [password setText:@""];
-    
-    // Clear NSUserDefaults
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    
-    // Clear BrokerageAccountStore
-    [[BFBrokerageAccountStore defaultStore] clearAccounts]; 
+-(void)requestFailed:(NSError *)error
+{   
+    [spinner stopAnimating];
+    NSString *displayMsg = [NSString stringWithFormat:@"Connection failed! Error - %@ %@ %d",
+                            [error localizedDescription],
+                            [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey],
+                            [error code]];
+    NSLog(@"%@", displayMsg);        
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error." message:displayMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alert show];
 }
 
-#pragma mark - NSURLCollectionDelegate methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+-(void)requestSucceeded:(NSData *)data
 {
-    [jsonResponseData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSString *jsonCheck = [[NSString alloc] initWithData:jsonResponseData encoding:NSUTF8StringEncoding];    
-    BFDebugLog(@"jsonCheck = %@", jsonCheck);
-    
-    // TODO: Handle error conditions and timeout
-    
     NSError *err;
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonResponseData options:0 error:&err];
-    
-    BFDebugLog(@"jsonObject = %@", jsonObject);
-    
-    if([jsonObject isEqual:[NSNull null]] || (jsonObject == nil))
-    {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                     message:@"Error logging in.\nPlease try again."
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
-        [spinner stopAnimating];
-        return;        
-    }
-    
-    // Store user data in standardUserDefaults
-    [[NSUserDefaults standardUserDefaults] setValue:[jsonObject valueForKey:kFirstName] forKey:kFirstName];
-    [[NSUserDefaults standardUserDefaults] setValue:[jsonObject valueForKey:kLastName] forKey:kLastName];
-    [[NSUserDefaults standardUserDefaults] setValue:[jsonObject valueForKey:kUsername] forKey:kUsername];
-    
-    BFDebugLog(@"firstName = %@", [[NSUserDefaults standardUserDefaults] valueForKey:kFirstName]);
-    BFDebugLog(@"lastName = %@", [[NSUserDefaults standardUserDefaults] valueForKey:kLastName]);
-    BFDebugLog(@"username = %@", [[NSUserDefaults standardUserDefaults] valueForKey:kUsername]);
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+    NSLog(@"jsonObject = %@", jsonObject);
     
     [spinner stopAnimating];
     
@@ -222,45 +155,66 @@
     [tabBarController setViewControllers:viewControllers];
     
     [tabBarController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
-    [self presentModalViewController:tabBarController animated:YES];     
+    [self presentModalViewController:tabBarController animated:YES]; 
 }
 
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+
+
+#pragma mark - Methods
+
+- (IBAction)login:(id)sender
 {
-    urlConnection = nil;
-    jsonResponseData = nil;
     
-    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@", [error localizedDescription]];
+    if([[username text] isEqual:@""] || [[password text] isEqual:@""])
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"All fields are required"
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;        
+    }
     
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [av show];
+    jsonResponseData = [[NSMutableData alloc] init];
+    
+    restService = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    
+    NSURLCredential* userCredential = [WebServiceObject userLoginCredentialWithUsername:[username text] password:[password text]];
+    
+    [restService requestWithURL:[NSURL URLWithString:[NSString stringWithFormat:@"%@%@", @"http://archfirst.org/bfoms-javaee/rest/users/",[userCredential user]]]];
+    
+    [spinner startAnimating];
+    
+    [username resignFirstResponder];
+    [password resignFirstResponder];
+    
 }
 
-/*
- - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
- BFDebugLog(@"response = %@", response);
- }
- */
+- (IBAction)openAccount:(id)sender
+{
+    OpenAccountViewController *openAccountViewController = [[OpenAccountViewController alloc] initWithNibName:@"OpenAccountViewController" bundle:nil];
+    [openAccountViewController setLvc:self];
+    
+    [openAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+    [openAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:openAccountViewController animated:YES];
+}
 
-/*
- - (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
- {
- BFDebugLog(@"challenge");
- 
- if([challenge previousFailureCount] > 0) {        
- NSError *failure = [challenge error];
- BFErrorLog(@"Can't authenticate: %@", [failure localizedDescription]);
- 
- [[challenge sender] cancelAuthenticationChallenge:challenge];
- return;
- }
- 
- NSURLCredential *newCred = [NSURLCredential credentialWithUser:[username text] password:[password text] persistence:NSURLCredentialPersistenceNone];
- 
- // Supply the credential to the sender of the challenge
- [[challenge sender] useCredential:newCred forAuthenticationChallenge:challenge];
- }
- */
+- (void)logout
+{
+    // Clear login form
+    [username setText:@""];
+    [password setText:@""];
+    
+    // Clear NSUserDefaults
+    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
+    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    
+    // Clear BrokerageAccountStore
+    [[BFBrokerageAccountStore defaultStore] clearAccounts]; 
+}
 
 
 #pragma mark tabBarController delegate methods

@@ -20,6 +20,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class BullFirstWebServiceObject;
+
 @interface LoginViewController : UIViewController
 <NSURLConnectionDelegate,UITabBarControllerDelegate>
 {
@@ -34,6 +36,7 @@
 
 @property (nonatomic, retain) UITextField *username;
 @property (nonatomic, retain) UITextField *password;
+@property (strong, nonatomic) BullFirstWebServiceObject *restService;
 
 - (IBAction)login:(id)sender;
 - (IBAction)openAccount:(id)sender;

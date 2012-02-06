@@ -21,6 +21,7 @@
 #import <UIKit/UIKit.h>
 
 @class LoginViewController;
+@class BullFirstWebServiceObject;
 
 @interface OpenAccountViewController : UIViewController
 {
@@ -38,6 +39,7 @@
 }
 
 @property (nonatomic, weak) LoginViewController *lvc;
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 - (IBAction)createAccount:(id)sender;
 - (IBAction)cancel:(id)sender;

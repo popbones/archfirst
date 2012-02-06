@@ -1,8 +1,8 @@
 //
-//  AddAccountViewController.h
+//  ClientIdentityChallengeHandler.h
 //  Bullsfirst
 //
-//  Created by Joe Howard
+//  Created by Pong Choa
 //  Copyright 2012 Archfirst
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,26 +18,11 @@
 //  limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
+#import "ChallengeHandler.h"
 
-@class AccountsViewController;
-@class BullFirstWebServiceObject;
+@class ClientIdentityController;
 
-@interface AddAccountViewController : UIViewController
+@interface ClientIdentityChallengeHandler : ChallengeHandler
 {
-    IBOutlet UITextField *accountName;
-    IBOutlet UIActivityIndicatorView *spinner;
-    
-    NSURLConnection *urlConnection;
-    NSMutableData *jsonResponseData;
-    
-    __weak AccountsViewController *avc;
 }
-
-@property (nonatomic, weak) AccountsViewController *avc;
-@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
-
-- (IBAction)createAccount:(id)sender;
-- (IBAction)cancel:(id)sender;
-
 @end

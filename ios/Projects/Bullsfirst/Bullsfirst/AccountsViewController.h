@@ -29,6 +29,8 @@
 @class PieChartMVAccountsViewController;
 @class PieChartMVPositionViewController;
 
+@class BullFirstWebServiceObject;
+
 @interface AccountsViewController: UIViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate,
     AccountsTableViewControllerDelegate> 
 {   
@@ -53,6 +55,7 @@
 }
 
 @property (nonatomic, retain) BFToolbar *toolbar;
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 - (void)retrieveAccountData;
 - (IBAction)createAccount:(id)sender;

@@ -22,6 +22,7 @@
 
 
 @class AccountsViewController;
+@class BullFirstWebServiceObject;
 
 @interface EditAccountNameViewController : UIViewController
 {
@@ -37,6 +38,7 @@
 }
 
 @property (nonatomic, weak) AccountsViewController *avc;
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName;
 

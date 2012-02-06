@@ -20,10 +20,12 @@
 
 #import "AddAccountViewController.h"
 #import "AccountsViewController.h"
+#import "BullFirstWebServiceObject.h"
 
 @implementation AddAccountViewController
 
 @synthesize avc;
+@synthesize restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -41,6 +43,43 @@
     
     // Release any cached data, images, etc that aren't in use.
 }
+
+
+#pragma mark - selectors for handling rest call callbacks
+
+-(void)receivedData:(NSData *)data
+{
+    
+}
+
+-(void)responseReceived:(NSURLResponse *)data
+{
+    
+}
+
+-(void)requestFailed:(NSError *)error
+{   
+    [spinner stopAnimating];
+    urlConnection = nil;
+    jsonResponseData = nil;
+    
+    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@", [error localizedDescription]];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)requestSucceeded:(NSData *)data
+{
+    [spinner stopAnimating];
+    jsonResponseData = [NSMutableData dataWithData:data];
+    [self dismissModalViewControllerAnimated:YES];
+    
+    [avc refreshAccounts:self];
+
+}
+
+
 
 
 #pragma mark - Methods
@@ -61,14 +100,13 @@
     
     [spinner startAnimating];
     
-    jsonResponseData = [[NSMutableData alloc] init];
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    
+    
     
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
-    
-    NSMutableURLRequest *req = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestReloadIgnoringCacheData timeoutInterval:kRequestTimeout];
-    
-    [req setHTTPMethod:@"POST"];
-    [req setValue:@"application/json" forHTTPHeaderField:@"Content-type"];
+    [restServiceObject getRequestWithURL:url];
+
     
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
     [jsonDic setValue:[accountName text] forKey:kAccountName];
@@ -76,11 +114,7 @@
     NSError *err;
     NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
     
-    [req setHTTPBody:jsonBodyData];
-    
-    urlConnection = [[NSURLConnection alloc] initWithRequest:req delegate:self startImmediately:YES];
-    
-    //[[NSUserDefaults standardUserDefaults] setValue:[password text] forKey:kPassword];
+    [restServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
     
 }
 
@@ -111,60 +145,6 @@
 }
 
 
-#pragma mark - NSURLCollectionDelegate methods
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [jsonResponseData appendData:data];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSString *jsonCheck = [[NSString alloc] initWithData:jsonResponseData encoding:NSUTF8StringEncoding];    
-    BFDebugLog(@"jsonCheck = %@", jsonCheck);        
-    
-    NSError *err;
-    NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonResponseData options:0 error:&err];
-    
-    BFDebugLog(@"jsonObject = %@", jsonObject);
-    
-    // TODO: Handle error conditions and timeout
-    
-    [self dismissModalViewControllerAnimated:YES];
-    
-    [avc refreshAccounts:self];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    urlConnection = nil;
-    jsonResponseData = nil;
-    
-    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@", [error localizedDescription]];
-    
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [av show];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge
-{
-    BFDebugLog(@"challenge");
-    
-    if([challenge previousFailureCount] > 0) {        
-        NSError *failure = [challenge error];
-        BFErrorLog(@"Can't authenticate: %@", [failure localizedDescription]);
-        
-        [[challenge sender] cancelAuthenticationChallenge:challenge];
-        return;
-    }
-    
-    NSURLCredential *newCred = [NSURLCredential credentialWithUser:[[NSUserDefaults standardUserDefaults] valueForKey:kUsername]
-                                                          password:[[NSUserDefaults standardUserDefaults] valueForKey:kPassword]
-                                                       persistence:NSURLCredentialPersistenceNone];
-    
-    // Supply the credential to the sender of the challenge
-    [[challenge sender] useCredential:newCred forAuthenticationChallenge:challenge];
-}
 
 
 @end

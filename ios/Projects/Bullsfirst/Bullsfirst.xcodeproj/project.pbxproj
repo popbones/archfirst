@@ -64,6 +64,15 @@
 		95C6A85214DBB769004F023A /* login-screen-form-fields-with-hints.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */; };
 		95C6A85314DBB769004F023A /* open-account-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84B14DBB769004F023A /* open-account-button-clicked.png */; };
 		95C6A85414DBB769004F023A /* open-account-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84C14DBB769004F023A /* open-account-button.png */; };
+		AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */; };
+		AC26C82914DBF67400ABD693 /* ChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81D14DBF67400ABD693 /* ChallengeHandler.m */; };
+		AC26C82A14DBF67400ABD693 /* ClientIdentityChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81F14DBF67400ABD693 /* ClientIdentityChallengeHandler.m */; };
+		AC26C82B14DBF67400ABD693 /* Credentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C82114DBF67400ABD693 /* Credentials.m */; };
+		AC26C82D14DBF67400ABD693 /* ServerTrustChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C82514DBF67400ABD693 /* ServerTrustChallengeHandler.m */; };
+		AC26C84014DF9C2000ABD693 /* WebServiceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C83F14DF9C2000ABD693 /* WebServiceObject.m */; };
+		AC26C84414DFA0B900ABD693 /* BullFirstWebServiceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C84314DFA0B900ABD693 /* BullFirstWebServiceObject.m */; };
+		AC26C84814DFA10300ABD693 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C84714DFA10300ABD693 /* NSData+Base64.m */; };
+		AC26C84A14DFA84D00ABD693 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC26C84914DFA84D00ABD693 /* Security.framework */; };
 		AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */; };
 		AC9B72D014DA755200B843AC /* EditAccountNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */; };
 		AC9B72E514DAB01800B843AC /* CPCustomPlainWhiteTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72E414DAB01800B843AC /* CPCustomPlainWhiteTheme.m */; };
@@ -165,6 +174,23 @@
 		95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields-with-hints.png"; sourceTree = "<group>"; };
 		95C6A84B14DBB769004F023A /* open-account-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button-clicked.png"; sourceTree = "<group>"; };
 		95C6A84C14DBB769004F023A /* open-account-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button.png"; sourceTree = "<group>"; };
+		AC26C81A14DBF67400ABD693 /* AuthenticationChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationChallengeHandler.h; sourceTree = "<group>"; };
+		AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationChallengeHandler.m; sourceTree = "<group>"; };
+		AC26C81C14DBF67400ABD693 /* ChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeHandler.h; sourceTree = "<group>"; };
+		AC26C81D14DBF67400ABD693 /* ChallengeHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChallengeHandler.m; sourceTree = "<group>"; };
+		AC26C81E14DBF67400ABD693 /* ClientIdentityChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClientIdentityChallengeHandler.h; sourceTree = "<group>"; };
+		AC26C81F14DBF67400ABD693 /* ClientIdentityChallengeHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClientIdentityChallengeHandler.m; sourceTree = "<group>"; };
+		AC26C82014DBF67400ABD693 /* Credentials.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Credentials.h; sourceTree = "<group>"; };
+		AC26C82114DBF67400ABD693 /* Credentials.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Credentials.m; sourceTree = "<group>"; };
+		AC26C82414DBF67400ABD693 /* ServerTrustChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerTrustChallengeHandler.h; sourceTree = "<group>"; };
+		AC26C82514DBF67400ABD693 /* ServerTrustChallengeHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerTrustChallengeHandler.m; sourceTree = "<group>"; };
+		AC26C83E14DF9C2000ABD693 /* WebServiceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebServiceObject.h; sourceTree = "<group>"; };
+		AC26C83F14DF9C2000ABD693 /* WebServiceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebServiceObject.m; sourceTree = "<group>"; };
+		AC26C84214DFA0B900ABD693 /* BullFirstWebServiceObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BullFirstWebServiceObject.h; sourceTree = "<group>"; };
+		AC26C84314DFA0B900ABD693 /* BullFirstWebServiceObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BullFirstWebServiceObject.m; sourceTree = "<group>"; };
+		AC26C84614DFA10300ABD693 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
+		AC26C84714DFA10300ABD693 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
+		AC26C84914DFA84D00ABD693 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountNameViewController.h; sourceTree = "<group>"; };
 		AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAccountNameViewController.m; sourceTree = "<group>"; };
 		AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditAccountNameViewController.xib; sourceTree = "<group>"; };
@@ -177,6 +203,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AC26C84A14DFA84D00ABD693 /* Security.framework in Frameworks */,
 				00D5191B14891BD20049F43E /* QuartzCore.framework in Frameworks */,
 				00D3C409147C27120067A768 /* UIKit.framework in Frameworks */,
 				00D3C40B147C27120067A768 /* Foundation.framework in Frameworks */,
@@ -209,6 +236,7 @@
 		00D3C407147C27120067A768 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AC26C84914DFA84D00ABD693 /* Security.framework */,
 				00B38DF71488025000DC62F2 /* QuartzCore.framework */,
 				00D3C408147C27120067A768 /* UIKit.framework */,
 				00D3C40A147C27120067A768 /* Foundation.framework */,
@@ -220,6 +248,9 @@
 		00D3C40E147C27120067A768 /* Bullsfirst */ = {
 			isa = PBXGroup;
 			children = (
+				AC26C84514DFA0C100ABD693 /* base64 encoding */,
+				AC26C84114DFA08000ABD693 /* BullsFirstWebServiceObject */,
+				AC26C81914DBF64700ABD693 /* Web Service Object */,
 				00D3C417147C27120067A768 /* AppDelegate.h */,
 				00D3C418147C27120067A768 /* AppDelegate.m */,
 				00D3C41F147C28440067A768 /* LoginViewController.h */,
@@ -372,6 +403,43 @@
 			name = "Latest Images";
 			sourceTree = "<group>";
 		};
+		AC26C81914DBF64700ABD693 /* Web Service Object */ = {
+			isa = PBXGroup;
+			children = (
+				AC26C81A14DBF67400ABD693 /* AuthenticationChallengeHandler.h */,
+				AC26C83E14DF9C2000ABD693 /* WebServiceObject.h */,
+				AC26C83F14DF9C2000ABD693 /* WebServiceObject.m */,
+				AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */,
+				AC26C81C14DBF67400ABD693 /* ChallengeHandler.h */,
+				AC26C81D14DBF67400ABD693 /* ChallengeHandler.m */,
+				AC26C81E14DBF67400ABD693 /* ClientIdentityChallengeHandler.h */,
+				AC26C81F14DBF67400ABD693 /* ClientIdentityChallengeHandler.m */,
+				AC26C82014DBF67400ABD693 /* Credentials.h */,
+				AC26C82114DBF67400ABD693 /* Credentials.m */,
+				AC26C82414DBF67400ABD693 /* ServerTrustChallengeHandler.h */,
+				AC26C82514DBF67400ABD693 /* ServerTrustChallengeHandler.m */,
+			);
+			name = "Web Service Object";
+			sourceTree = "<group>";
+		};
+		AC26C84114DFA08000ABD693 /* BullsFirstWebServiceObject */ = {
+			isa = PBXGroup;
+			children = (
+				AC26C84214DFA0B900ABD693 /* BullFirstWebServiceObject.h */,
+				AC26C84314DFA0B900ABD693 /* BullFirstWebServiceObject.m */,
+			);
+			name = BullsFirstWebServiceObject;
+			sourceTree = "<group>";
+		};
+		AC26C84514DFA0C100ABD693 /* base64 encoding */ = {
+			isa = PBXGroup;
+			children = (
+				AC26C84614DFA10300ABD693 /* NSData+Base64.h */,
+				AC26C84714DFA10300ABD693 /* NSData+Base64.m */,
+			);
+			name = "base64 encoding";
+			sourceTree = "<group>";
+		};
 		AC9B72D114DA7E3700B843AC /* CustomThemes */ = {
 			isa = PBXGroup;
 			children = (
@@ -514,6 +582,14 @@
 				009C1A3C148D3FF500259534 /* AddAccountViewController.m in Sources */,
 				AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */,
 				AC9B72E514DAB01800B843AC /* CPCustomPlainWhiteTheme.m in Sources */,
+				AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */,
+				AC26C82914DBF67400ABD693 /* ChallengeHandler.m in Sources */,
+				AC26C82A14DBF67400ABD693 /* ClientIdentityChallengeHandler.m in Sources */,
+				AC26C82B14DBF67400ABD693 /* Credentials.m in Sources */,
+				AC26C82D14DBF67400ABD693 /* ServerTrustChallengeHandler.m in Sources */,
+				AC26C84014DF9C2000ABD693 /* WebServiceObject.m in Sources */,
+				AC26C84414DFA0B900ABD693 /* BullFirstWebServiceObject.m in Sources */,
+				AC26C84814DFA10300ABD693 /* NSData+Base64.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
