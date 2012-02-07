@@ -20,7 +20,7 @@
 
 #import "AppDelegate.h"
 #import "LoginViewController.h"
-#import "RootController.h"
+#import "RootViewController.h"
 @implementation AppDelegate
 
 @synthesize window = _window;
@@ -29,14 +29,14 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.tabBarController = [[RootController alloc] initWithNibName:@"RootController" bundle:nil];
+    self.tabBarController = [[RootViewController alloc] initWithNibName:@"RootController" bundle:nil];
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
     LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
     [self.tabBarController presentModalViewController:controller animated:YES];        
-    controller.delegate=(RootController *)self.tabBarController;
+    controller.delegate=(RootViewController *)self.tabBarController;
     //LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];    
     //[[self window] setRootViewController:lvc];
     

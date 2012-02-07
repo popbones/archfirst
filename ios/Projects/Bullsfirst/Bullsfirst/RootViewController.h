@@ -13,7 +13,7 @@
 #import "OrdersViewController.h"
 #import "TransactionsViewController.h"
 
-@interface RootController : UITabBarController <UITabBarControllerDelegate,LoginViewControllerDelegate>
+@interface RootViewController : UITabBarController <UITabBarControllerDelegate,LoginViewControllerDelegate>
 {
     AccountsViewController *accountsViewController;
     PositionsViewController *positionsViewController;
