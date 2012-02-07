@@ -18,9 +18,9 @@
 //  limitations under the License.
 //
 
-#import "_CPTXYTheme.h"
+#import "_BFCPTXYTheme.h"
 
-@interface CPCustomPlainWhiteTheme : _CPTXYTheme {
+@interface CPCustomPlainWhiteTheme : _BFCPTXYTheme {
 }
 
 @end
