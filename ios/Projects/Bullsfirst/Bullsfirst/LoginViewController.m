@@ -89,6 +89,8 @@
     [password setBackgroundColor:[UIColor whiteColor]];
     password.delegate=self;
     
+    restService = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -212,8 +214,6 @@
     }
     
     jsonResponseData = [[NSMutableData alloc] init];
-    
-    restService = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     
     NSURLCredential* userCredential = [WebServiceObject userLoginCredentialWithUsername:[username text] password:[password text]];
     

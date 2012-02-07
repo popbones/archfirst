@@ -100,13 +100,7 @@
     
     [spinner startAnimating];
     
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-    
-    
-    
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
-    [restServiceObject getRequestWithURL:url];
-
     
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
     [jsonDic setValue:[accountName text] forKey:kAccountName];
@@ -129,6 +123,9 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    
 }
 
 - (void)viewDidUnload

@@ -91,7 +91,8 @@
 {
     [super viewDidLoad];
     
-    [spinner startAnimating];
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    
     accountsTableViewController = [[AccountsTableViewController alloc] init];
     [accountsTableViewController setView:accountsTable];
     [accountsTableViewController setDelegate:self];
@@ -127,11 +128,6 @@
 - (void)retrieveAccountData
 {
     [spinner startAnimating];
-    
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-    
-    
-    
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
     [restServiceObject getRequestWithURL:url];    
 }
