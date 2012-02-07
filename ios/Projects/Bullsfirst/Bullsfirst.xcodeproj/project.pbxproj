@@ -71,9 +71,9 @@
 		AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */; };
 		AC26C82914DBF67400ABD693 /* ChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81D14DBF67400ABD693 /* ChallengeHandler.m */; };
 		AC26C82A14DBF67400ABD693 /* ClientIdentityChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81F14DBF67400ABD693 /* ClientIdentityChallengeHandler.m */; };
-		AC26C82B14DBF67400ABD693 /* Credentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C82114DBF67400ABD693 /* Credentials.m */; };
+		AC26C82B14DBF67400ABD693 /* Credentials.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C82114DBF67400ABD693 /* Credentials.m */; settings = {COMPILER_FLAGS = "-Wno-arc-performSelector-leaks"; }; };
 		AC26C82D14DBF67400ABD693 /* ServerTrustChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C82514DBF67400ABD693 /* ServerTrustChallengeHandler.m */; };
-		AC26C84014DF9C2000ABD693 /* WebServiceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C83F14DF9C2000ABD693 /* WebServiceObject.m */; };
+		AC26C84014DF9C2000ABD693 /* WebServiceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C83F14DF9C2000ABD693 /* WebServiceObject.m */; settings = {COMPILER_FLAGS = "-Wno-arc-performSelector-leaks"; }; };
 		AC26C84414DFA0B900ABD693 /* BullFirstWebServiceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C84314DFA0B900ABD693 /* BullFirstWebServiceObject.m */; };
 		AC26C84814DFA10300ABD693 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C84714DFA10300ABD693 /* NSData+Base64.m */; };
 		AC26C84A14DFA84D00ABD693 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC26C84914DFA84D00ABD693 /* Security.framework */; };
