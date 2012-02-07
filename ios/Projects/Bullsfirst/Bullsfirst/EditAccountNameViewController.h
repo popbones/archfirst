@@ -31,7 +31,7 @@
     IBOutlet UIButton *editAccountButton;
     IBOutlet UIButton *cancelButton;
     NSString* oldAccountName;
-    
+    NSString* accountId;
     
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
@@ -43,7 +43,7 @@
 @property (nonatomic, weak) AccountsViewController *avc;
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName;
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName withId:(NSString*) accId;;
 
 - (IBAction)editAccountButtonClicked:(id)sender;
 - (IBAction)cancel:(id)sender;

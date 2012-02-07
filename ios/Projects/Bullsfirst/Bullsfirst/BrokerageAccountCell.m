@@ -49,7 +49,7 @@
 }
 -(void) editButtonClicked:(id) sender
 {
-    [delegate editingStartedForAccount:idLabel.text];
+    [delegate editingStartedForAccount:nameLabel.text withId:idLabel.text];
 }
 - (void)layoutSubviews
 {

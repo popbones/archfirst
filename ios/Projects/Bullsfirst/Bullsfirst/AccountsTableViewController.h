@@ -34,6 +34,6 @@
 
 @protocol AccountsTableViewControllerDelegate <NSObject>
 
--(void) editingStartedForAccountWithName:(NSString*) accName;
+-(void) editingStartedForAccountWithName:(NSString*) accName withId:(NSString*) accId;
 
 @end

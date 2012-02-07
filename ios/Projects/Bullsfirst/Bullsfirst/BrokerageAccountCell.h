@@ -44,6 +44,6 @@
 
 @protocol BrokerageAccountCellDelegate <NSObject>
 
--(void) editingStartedForAccount:(NSString*) oldAccountName;
+-(void) editingStartedForAccount:(NSString*) oldAccountName withId:(NSString*) accId;
 
 @end

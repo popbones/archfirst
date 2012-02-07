@@ -218,9 +218,9 @@
 #pragma mark AccountsTableViewController Delegate methods
 
 
--(void) editingStartedForAccountWithName:(NSString *)accName
+-(void) editingStartedForAccountWithName:(NSString *)accName withId:(NSString*) accId
 {
-    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:accName];
+    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:accName withId:accId];
     [editAccountViewController setAvc:self];
     
     [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];

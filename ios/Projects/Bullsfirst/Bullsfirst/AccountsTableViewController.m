@@ -65,9 +65,9 @@
 
 #pragma mark BrokerageAccountCell Delegate methods
 
--(void) editingStartedForAccount:(NSString *)oldAccountName
+-(void) editingStartedForAccount:(NSString *)oldAccountName withId:(NSString*) accId
 {
-    [delegate editingStartedForAccountWithName:oldAccountName];
+    [delegate editingStartedForAccountWithName:oldAccountName withId:accId];
 }
 
 @end

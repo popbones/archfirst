@@ -27,13 +27,14 @@
 @synthesize avc;
 @synthesize restServiceObject;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName withId:(NSString*) accId
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
         oldAccountName=oldAccName;
-    }
+        accountId = accId;
+    }   
     return self;
 }
 
@@ -51,6 +52,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    accountName.text = oldAccountName;
     
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
 }
@@ -126,7 +129,7 @@
     editAccountButton.enabled = NO;
     cancelButton.enabled = NO;
 
-    NSString* urlString = [NSString stringWithFormat:@"%@%@%@",@"http://archfirst.org/bfoms-javaee/rest/secure/accounts/",oldAccountName,@"/change_name"];
+    NSString* urlString = [NSString stringWithFormat:@"%@%@%@",@"http://archfirst.org/bfoms-javaee/rest/secure/accounts/",accountId,@"/change_name"];
     BFDebugLog(@"EDIT ACCOUNT NAME URL %@",urlString);
     
     NSURL *url = [NSURL URLWithString:urlString];
