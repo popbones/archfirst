@@ -28,7 +28,10 @@
 {
     IBOutlet UITextField *accountName;
     IBOutlet UIActivityIndicatorView *spinner;
+    IBOutlet UIButton *editAccountButton;
+    IBOutlet UIButton *cancelButton;
     NSString* oldAccountName;
+    
     
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
@@ -42,6 +45,6 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName;
 
-- (IBAction)editAccountName:(id)sender;
+- (IBAction)editAccountButtonClicked:(id)sender;
 - (IBAction)cancel:(id)sender;
 @end

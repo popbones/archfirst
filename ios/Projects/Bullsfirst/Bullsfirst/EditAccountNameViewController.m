@@ -51,6 +51,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
 }
 
 - (void)viewDidUnload
@@ -88,6 +90,8 @@
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
+    editAccountButton.enabled = YES;
+    cancelButton.enabled = YES;
 }
 
 -(void)requestSucceeded:(NSData *)data
@@ -95,7 +99,8 @@
     [spinner stopAnimating];
     jsonResponseData = [NSMutableData dataWithData:data];
     [self dismissModalViewControllerAnimated:YES];
-    
+    editAccountButton.enabled = YES;
+    cancelButton.enabled = YES;
     [avc refreshAccounts:self];
     
 }
@@ -103,7 +108,7 @@
 
 #pragma mark - methods
 
-- (IBAction)editAccountName:(id)sender
+- (IBAction)editAccountButtonClicked:(id)sender
 {
     // Check for errors    
     if([[accountName text] isEqual:@""])
@@ -117,10 +122,9 @@
         return;        
     }
     
-    [spinner startAnimating];
-    
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-    
+    [spinner startAnimating]; 
+    editAccountButton.enabled = NO;
+    cancelButton.enabled = NO;
 
     NSString* urlString = [NSString stringWithFormat:@"%@%@%@",@"http://archfirst.org/bfoms-javaee/rest/secure/accounts/",oldAccountName,@"/change_name"];
     BFDebugLog(@"EDIT ACCOUNT NAME URL %@",urlString);
