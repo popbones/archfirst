@@ -178,7 +178,7 @@
 		95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields-with-hints.png"; sourceTree = "<group>"; };
 		95C6A84B14DBB769004F023A /* open-account-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button-clicked.png"; sourceTree = "<group>"; };
 		95C6A84C14DBB769004F023A /* open-account-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button.png"; sourceTree = "<group>"; };
-		95C6A85914DBED54004F023A /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = RootViewController.h; sourceTree = "<group>"; };
+		95C6A85914DBED54004F023A /* RootViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewController.h; sourceTree = "<group>"; };
 		95C6A85A14DBED54004F023A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		95C6A85B14DBED54004F023A /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		95C6A85E14DFE868004F023A /* app-icon-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-72x72.png"; sourceTree = "<group>"; };
