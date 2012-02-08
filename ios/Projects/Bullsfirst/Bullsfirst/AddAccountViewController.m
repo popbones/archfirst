@@ -63,7 +63,7 @@
     urlConnection = nil;
     jsonResponseData = nil;
     
-    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@", [error localizedDescription]];
+    NSString *errorString = [NSString stringWithString:@"Try Again!"];
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];

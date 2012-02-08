@@ -33,6 +33,9 @@
     IBOutlet UITextField *confirmpassword;
     IBOutlet UIActivityIndicatorView *spinner;
     
+    IBOutlet UIButton* openAccountButton;
+    IBOutlet UIButton* cancelButton;
+    
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
     bool newAccountCreated;

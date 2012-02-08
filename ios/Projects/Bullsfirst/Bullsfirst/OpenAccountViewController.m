@@ -80,10 +80,17 @@
     urlConnection = nil;
     jsonResponseData = nil;
     
-    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@", [error localizedDescription]];
+    NSString *errorString = [NSString stringWithString:@"Try Again!"];
+    
+    if(error.code == 409)
+        errorString = @"Username already exists";
+    
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
+    
+    openAccountButton.enabled = YES;
+    cancelButton.enabled = YES;
 }
 
 -(void)requestSucceededForCreateNewBFAccount:(NSData *)data
@@ -135,10 +142,13 @@
     urlConnection = nil;
     jsonResponseData = nil;
     
-    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@", [error localizedDescription]];
+    NSString *errorString = [NSString stringWithString:@"Try Again!"];
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
+    
+    openAccountButton.enabled = YES;
+    cancelButton.enabled = YES;
 }
 
 -(void)requestSucceededForCreateNewBrokerageAccount:(NSData *)data
@@ -150,6 +160,9 @@
     
     [self performSelectorOnMainThread:@selector(dismissModalViewControllerAnimated:) withObject:nil waitUntilDone:YES];
     [delegate newBFAccountCreated];
+    
+    openAccountButton.enabled = YES;
+    cancelButton.enabled = YES;
     
 
 }
@@ -182,6 +195,10 @@
     }
     
     [spinner startAnimating];
+    
+    openAccountButton.enabled = NO;
+    cancelButton.enabled = NO;
+    
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/users/"];
     
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
