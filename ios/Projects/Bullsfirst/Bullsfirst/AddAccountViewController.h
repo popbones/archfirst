@@ -31,6 +31,9 @@
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
     
+    IBOutlet UIButton *addAccountButton;
+    IBOutlet UIButton *cancelButton;
+    
     __weak AccountsViewController *avc;
 }
 

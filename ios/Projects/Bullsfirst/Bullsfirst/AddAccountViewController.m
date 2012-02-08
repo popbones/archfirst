@@ -67,6 +67,9 @@
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
+    
+    addAccountButton.enabled = YES;
+    cancelButton.enabled = YES;
 }
 
 -(void)requestSucceeded:(NSData *)data
@@ -74,6 +77,9 @@
     [spinner stopAnimating];
     jsonResponseData = [NSMutableData dataWithData:data];
     [self dismissModalViewControllerAnimated:YES];
+    
+    addAccountButton.enabled = YES;
+    cancelButton.enabled = YES;
     
     [avc refreshAccounts:self];
 
@@ -99,6 +105,9 @@
     }
     
     [spinner startAnimating];
+    
+    addAccountButton.enabled = NO;
+    cancelButton.enabled = NO;
     
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
     
