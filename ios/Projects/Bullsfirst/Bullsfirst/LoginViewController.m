@@ -19,8 +19,6 @@
 //
 
 #import "LoginViewController.h"
-#import "OpenAccountViewController.h"
-
 #import "AccountsViewController.h"
 #import "PositionsViewController.h"
 #import "OrdersViewController.h"
@@ -250,8 +248,8 @@
 - (IBAction)openAccount:(id)sender
 {
    
-    OpenAccountViewController *openAccountViewController = [[OpenAccountViewController alloc] initWithNibName:@"OpenAccountViewController" bundle:nil];
-    [openAccountViewController setLvc:self];
+    openAccountViewController = [[OpenAccountViewController alloc] initWithNibName:@"OpenAccountViewController" bundle:nil];
+    openAccountViewController.delegate = self;
     
     [openAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [openAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
@@ -279,6 +277,15 @@
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     [viewController viewDidAppear:YES];
+    
+}
+
+#pragma mark - Open Account View Controller delegate methods
+
+-(void) newBFAccountCreated
+{
+    [delegate loggedin];
+    [self dismissModalViewControllerAnimated:YES];
     
 }
 

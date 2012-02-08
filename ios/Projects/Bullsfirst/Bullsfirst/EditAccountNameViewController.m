@@ -145,7 +145,7 @@
     
 }
 
-- (IBAction)cancel:(id)sender
+- (IBAction)cancelButtonClicked:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }

@@ -46,5 +46,5 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName withId:(NSString*) accId;;
 
 - (IBAction)editAccountButtonClicked:(id)sender;
-- (IBAction)cancel:(id)sender;
+- (IBAction)cancelButtonClicked:(id)sender;
 @end

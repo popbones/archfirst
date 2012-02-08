@@ -24,8 +24,10 @@
 
 @implementation OpenAccountViewController
 
-@synthesize lvc;
-@synthesize restServiceObject;
+//@synthesize lvc;
+@synthesize delegate;
+@synthesize restServiceObjectForCreateNewBFAccount;
+@synthesize restServiceObjectForCreateNewBrokerageAccount;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,19 +46,35 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
-#pragma mark - selectors for handling rest call callbacks
+#pragma mark - helper methods
+-(void) createBrokerageAccount
+{
+    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
+    
+    NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
+    [jsonDic setValue:kdefaultBrokerageAccountName forKey:kAccountName];
+    
+    NSError *err;
+    NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
+    
+    [restServiceObjectForCreateNewBrokerageAccount postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+    
+}
 
--(void)receivedData:(NSData *)data
+
+#pragma mark - selectors for handling rest call(Create new BF Account) callbacks
+
+-(void)receivedDataForCreateNewBFAccount:(NSData *)data
 {
     
 }
 
--(void)responseReceived:(NSURLResponse *)data
+-(void)responseReceivedForCreateNewBFAccount:(NSURLResponse *)data
 {
     
 }
 
--(void)requestFailed:(NSError *)error
+-(void)requestFailedForCreateNewBFAccount:(NSError *)error
 { 
     [spinner stopAnimating];
     urlConnection = nil;
@@ -68,10 +86,8 @@
     [av show];
 }
 
--(void)requestSucceeded:(NSData *)data
+-(void)requestSucceededForCreateNewBFAccount:(NSData *)data
 {
-    [spinner stopAnimating];
-    
     jsonResponseData = [NSMutableData dataWithData:data];
     NSError *err;
     NSDictionary *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonResponseData options:0 error:&err];
@@ -96,17 +112,52 @@
         return;                
     }
     
-    [[lvc username] setText:[username text]];
-    [[lvc password] setText:[password text]];
+    //Creating a new default brokerage account within the above user account
+    [self createBrokerageAccount];
+
+}
+
+#pragma mark - selectors for handling rest call(Create new Brokerage Account) callbacks
+
+-(void)receivedDataForCreateNewBrokerageAccount:(NSData *)data
+{
     
-    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)responseReceivedForCreateNewBrokerageAccount:(NSURLResponse *)data
+{
+    
+}
+
+-(void)requestFailedForCreateNewBrokerageAccount:(NSError *)error
+{ 
+    [spinner stopAnimating];
+    urlConnection = nil;
+    jsonResponseData = nil;
+    
+    NSString *errorString = [NSString stringWithFormat:@"Fetch failed: %@", [error localizedDescription]];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)requestSucceededForCreateNewBrokerageAccount:(NSData *)data
+{
+    [spinner stopAnimating];
+    
+//    [[lvc username] setText:[username text]];
+//    [[lvc password] setText:[password text]];
+    
+    [self performSelectorOnMainThread:@selector(dismissModalViewControllerAnimated:) withObject:nil waitUntilDone:YES];
+    [delegate newBFAccountCreated];
+    
 
 }
 
 
 #pragma mark - Methods
 
-- (IBAction)createAccount:(id)sender
+- (IBAction)openAccountButtonClicked:(id)sender
 {
     // Check for errors    
     if(![[password text] isEqual:[confirmpassword text]])
@@ -142,12 +193,16 @@
     NSError *err;
     NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
     
-    [restServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+    //Opening new BullFirst Account
+    [restServiceObjectForCreateNewBFAccount postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+    
+    //updating the webservice object about the credentials
+    [WebServiceObject userLoginCredentialWithUsername:[username text] password:[password text]];
+    
 
-        
 }
 
-- (IBAction)cancel:(id)sender
+- (IBAction)cancelButtonClicked:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }
@@ -159,7 +214,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    restServiceObjectForCreateNewBFAccount = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceivedForCreateNewBFAccount:) receiveDataSelector:@selector(receivedDataForCreateNewBFAccount:) successSelector:@selector(requestSucceededForCreateNewBFAccount:) errorSelector:@selector(requestFailedForCreateNewBFAccount:)];
+    restServiceObjectForCreateNewBrokerageAccount = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceivedForCreateNewBrokerageAccount:) receiveDataSelector:@selector(receivedDataForCreateNewBrokerageAccount:) successSelector:@selector(requestSucceededForCreateNewBrokerageAccount:) errorSelector:@selector(requestFailedForCreateNewBrokerageAccount:)];
+    
+    newAccountCreated = NO;
+    
     
 }
 

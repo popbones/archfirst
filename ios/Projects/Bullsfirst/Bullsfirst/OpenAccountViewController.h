@@ -22,6 +22,7 @@
 
 @class LoginViewController;
 @class BullFirstWebServiceObject;
+@protocol OpenAccountViewControllerDelegate;
 
 @interface OpenAccountViewController : UIViewController
 {
@@ -34,14 +35,25 @@
     
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
+    bool newAccountCreated;
     
-    __weak LoginViewController *lvc;
+//    __weak LoginViewController *lvc;
+    __weak id<OpenAccountViewControllerDelegate> delegate;
 }
 
-@property (nonatomic, weak) LoginViewController *lvc;
-@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
-- (IBAction)createAccount:(id)sender;
-- (IBAction)cancel:(id)sender;
+@property (nonatomic,weak) id<OpenAccountViewControllerDelegate> delegate;
+//@property (nonatomic, weak) LoginViewController *lvc;
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObjectForCreateNewBFAccount;
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObjectForCreateNewBrokerageAccount;
+
+- (IBAction)openAccountButtonClicked:(id)sender;
+- (IBAction)cancelButtonClicked:(id)sender;
 
 @end
+
+@protocol OpenAccountViewControllerDelegate <NSObject>
+-(void) newBFAccountCreated;
+@end
+
+

@@ -19,19 +19,22 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OpenAccountViewController.h"
 @protocol LoginViewControllerDelegate;
 @class BullFirstWebServiceObject;
 
 @interface LoginViewController : UIViewController
-<NSURLConnectionDelegate,UITextFieldDelegate>
+<NSURLConnectionDelegate,UITextFieldDelegate,OpenAccountViewControllerDelegate>
 {
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;
     IBOutlet UIActivityIndicatorView *spinner;
-    
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
     __weak id<LoginViewControllerDelegate> delegate;
+    OpenAccountViewController *openAccountViewController;
+    
+    
 }
 @property(nonatomic,weak) id <LoginViewControllerDelegate> delegate;
 
@@ -43,8 +46,8 @@
 - (IBAction)openAccount:(id)sender;
 
 - (void)logout;
-
 @end
+
 @protocol LoginViewControllerDelegate <NSObject>
 -(void) loggedin;
 @end

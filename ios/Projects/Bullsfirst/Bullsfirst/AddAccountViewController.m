@@ -84,7 +84,7 @@
 
 #pragma mark - Methods
 
-- (IBAction)createAccount:(id)sender
+- (IBAction)addAccountButtonClicked:(id)sender
 {
     // Check for errors    
     if([[accountName text] isEqual:@""])
@@ -112,7 +112,7 @@
     
 }
 
-- (IBAction)cancel:(id)sender
+- (IBAction)cancelButtonClicked:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }

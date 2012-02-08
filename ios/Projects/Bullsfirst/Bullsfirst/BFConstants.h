@@ -18,3 +18,4 @@
 #define kNewAccountName @"newName"
 #define kCustomPlainWhiteTheme @"Custom Plain White"
 #define kAllAccounts @"All Accounts"
+#define kdefaultBrokerageAccountName @"Brokerage Account 1"

@@ -37,7 +37,7 @@
 @property (nonatomic, weak) AccountsViewController *avc;
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
-- (IBAction)createAccount:(id)sender;
-- (IBAction)cancel:(id)sender;
+- (IBAction)addAccountButtonClicked:(id)sender;
+- (IBAction)cancelButtonClicked:(id)sender;
 
 @end
