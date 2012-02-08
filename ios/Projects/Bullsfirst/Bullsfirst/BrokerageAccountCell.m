@@ -64,12 +64,34 @@
     //float w = bounds.size.width;
     
     // TODO: Adjust these values for portrait mode
-    float nameWidth = 75.0;
-    float idWidth = 70.0;
-    float marketValueWidth = 120.0;
-    float cashWidth = 120.0;
-    float editWidth = 56.0; float editHeight = 31.0;
+    float nameWidth;
+    float idWidth;
+    float marketValueWidth ;
+    float cashWidth;
+    float editWidth; 
+    float editHeight;
     
+
+    UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+    if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
+    {
+        nameWidth = 75.0;
+        idWidth = 70.0;
+        marketValueWidth = 120.0;
+        cashWidth = 120.0;
+        editWidth = 56.0; 
+        editHeight = 31.0;
+    }
+    else
+    {
+        nameWidth = 130.0;
+        idWidth = 130.0;
+        marketValueWidth = 180.0;
+        cashWidth = 180.0;
+        editWidth = 56.0; 
+        editHeight = 31.0;
+
+    }
     CGRect nameFrame = CGRectMake(insetW, insetH, nameWidth, h-insetH*2.0);
     [nameLabel setFrame:nameFrame];
     

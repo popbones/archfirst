@@ -71,22 +71,32 @@
     [super viewDidLoad];
     UIBezierPath *passwordMaskPath=[UIBezierPath bezierPathWithRoundedRect:password.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(10,10)];
    
+/*    UIView *usernamePadding=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 0)] ;
+    username.leftView=usernamePadding;
+    username.leftViewMode=UITextFieldViewModeUnlessEditing;
+    UIView *passwordPadding=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 0)] ;
+    password.leftView=passwordPadding;
+    password.leftViewMode=UITextFieldViewModeAlways;*/
+    
     CAShapeLayer *passwordMasklayer=[CAShapeLayer layer];
     passwordMasklayer.frame=password.bounds;
     passwordMasklayer.path=passwordMaskPath.CGPath;
     password.layer.mask=passwordMasklayer;
-    UIBezierPath *usernameMaskPath=[UIBezierPath bezierPathWithRoundedRect:password.bounds byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight cornerRadii:CGSizeMake(10,10)];
     
+    
+    
+    UIBezierPath *usernameMaskPath=[UIBezierPath bezierPathWithRoundedRect:password.bounds byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight cornerRadii:CGSizeMake(10,10)];
     CAShapeLayer *usernameMaskLayer=[CAShapeLayer layer];
     usernameMaskLayer.frame=username.bounds;
     usernameMaskLayer.path=usernameMaskPath.CGPath;
     username.layer.mask=usernameMaskLayer;
- 
+    
+    
     [username setBackgroundColor:[UIColor whiteColor]];
     [password setReturnKeyType:UIReturnKeyGo];
     [password setBackgroundColor:[UIColor whiteColor]];
     password.delegate=self;
-    
+    username.delegate=self;
     restService = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     
     // Do any additional setup after loading the view from its nib.
@@ -131,8 +141,10 @@
                             [error localizedDescription],
                             [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey],
                             [error code]];
-    NSLog(@"%@", displayMsg);        
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error." message:displayMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    NSLog(@"%@", displayMsg); 
+    NSString *alertViewTitle=@"Invalid Username or Password";
+    NSString *alertViewMsg=@"If you are new here, please open an account with Bullsfirst";
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertViewTitle message:alertViewMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
 
@@ -146,48 +158,7 @@
     [delegate loggedin];
     [self dismissModalViewControllerAnimated:YES];
     
-    // TODO: Check for successful login
-    /*
-    // Create the tab bar controller
-    UITabBarController *tabBarController = [[UITabBarController alloc] init];
     
-    tabBarController.delegate = self;
-    
-    // Create the view controllers
-    //AccountsViewController *vc1 = [[AccountsViewController alloc] init];
-    AccountsViewController *accountsViewController = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
-    PositionsViewController *vc2 = [[PositionsViewController alloc] init];
-    OrdersViewController *vc3 = [[OrdersViewController alloc] init];
-    TransactionsViewController *vc4 = [[TransactionsViewController alloc] init];
-    
-    NSArray *viewControllers = [NSArray arrayWithObjects:accountsViewController,vc2,vc3,vc4, nil];
-    
-    // NOTE: Would rather only have one instance of BFToolbar; use one per tab for now
-    BFToolbar *toolBar1 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    BFToolbar *toolBar2 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    BFToolbar *toolBar3 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    BFToolbar *toolBar4 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    
-    [toolBar1 setLvc:self]; [toolBar1 setTbc:tabBarController];
-    [toolBar2 setLvc:self]; [toolBar2 setTbc:tabBarController];
-    [toolBar3 setLvc:self]; [toolBar3 setTbc:tabBarController];
-    [toolBar4 setLvc:self]; [toolBar4 setTbc:tabBarController];
-    
-    // Need to take ownership of toolbars; adding it to the view is not enough
-    [accountsViewController setToolbar:toolBar1]; [[accountsViewController view] addSubview:[toolBar1 view]];
-    [vc2 setToolbar:toolBar2]; [[vc2 view] addSubview:[toolBar2 view]];
-    [vc3 setToolbar:toolBar3]; [[vc3 view] addSubview:[toolBar3 view]];
-    [vc4 setToolbar:toolBar4]; [[vc4 view] addSubview:[toolBar4 view]];
-    
-    [[accountsViewController view] bringSubviewToFront:[toolBar1 view]];
-    [[vc2 view] bringSubviewToFront:[toolBar2 view]];
-    [[vc3 view] bringSubviewToFront:[toolBar3 view]];
-    [[vc4 view] bringSubviewToFront:[toolBar4 view]];
-    
-    [tabBarController setViewControllers:viewControllers];
-    
-    [tabBarController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
-    [self presentModalViewController:tabBarController animated:YES]; */
 }
 
 
@@ -196,7 +167,7 @@
 
 -(void) textFieldDidBeginEditing:(UITextField *)textField
 {
-    //[self moveView:self.view duration:3 curve:UIViewAnimationCurveLinear x:0 y:-60];
+   
 }
 -(void) loginAction
 {
@@ -263,16 +234,11 @@
     [username setText:@""];
     [password setText:@""];
     
-    // Clear NSUserDefaults
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
-    
     // Clear BrokerageAccountStore
     [[BFBrokerageAccountStore defaultStore] clearAccounts]; 
 }
 
 
-#pragma mark tabBarController delegate methods
 
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {

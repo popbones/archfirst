@@ -151,10 +151,10 @@
 	pieChartView.hostedGraph			 = pieGraph;
 	pieGraph.plotAreaFrame.masksToBorder = NO;
     
-	pieGraph.paddingLeft   = -100.0;
+	pieGraph.paddingLeft   = 20.0;
 	pieGraph.paddingTop	   = 20.0;
 	pieGraph.paddingRight  = 20.0;
-	pieGraph.paddingBottom = 20.0;
+	pieGraph.paddingBottom = 220.0;
     
     pieGraph.plotAreaFrame.borderWidth = 0.0f;
     
@@ -214,10 +214,10 @@
     
     pieGraph.legend = theLegend;
     
-    pieGraph.legendAnchor = CPTRectAnchorRight;
-    pieGraph.legendDisplacement = CGPointMake(-25.0, 30.0);    
+    pieGraph.legendAnchor = CPTRectAnchorBottom;
+    pieGraph.legendDisplacement = CGPointMake(0, 30.0);    
     pieGraph.title=kAllAccounts;
-    pieGraph.titleDisplacement = CGPointMake(0,-20);
+    pieGraph.titleDisplacement = CGPointMake(0,0);
     [self performAnimation];
 	
 }

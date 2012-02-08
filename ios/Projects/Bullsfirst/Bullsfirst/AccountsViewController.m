@@ -31,7 +31,7 @@
 
 @implementation AccountsViewController
 
-@synthesize toolbar,restServiceObject,pieChartMVAccountsViewController;
+@synthesize toolbar,restServiceObject,pieChartMVAccountsViewController,portraitView,landscapeView,toolbarPortraitView;
 
 //- (id)init
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -87,6 +87,40 @@
 {
 
 }
+-(void) clearCurrentView
+{
+if(landscapeView.superview)
+    {
+        [landscapeView removeFromSuperview];
+    }
+    else
+    {
+        [portraitView removeFromSuperview];
+    }
+}
+-(void) didRotate:(NSNotification*)notification
+{
+    UIDeviceOrientation newOrientation=[[UIDevice currentDevice]orientation];
+    if(newOrientation!=UIDeviceOrientationUnknown && newOrientation!=UIDeviceOrientationFaceUp&&newOrientation!=UIDeviceOrientationFaceDown)
+    {
+        orientation=newOrientation;
+    }
+    if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
+    {
+        [self clearCurrentView];
+        [landscapeView addSubview:toolbar.view];
+        [landscapeView bringSubviewToFront:toolbar.view];
+        [self.view insertSubview:landscapeView atIndex:0];
+    }
+    else
+    {
+        [self clearCurrentView];
+        [portraitView addSubview:toolbarPortraitView.view];
+        [portraitView bringSubviewToFront:toolbarPortraitView.view];
+        
+        [self.view insertSubview:portraitView atIndex:0];
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -99,6 +133,14 @@
     [accountsTable setDelegate:accountsTableViewController];
     [accountsTable setDataSource:accountsTableViewController];    
     
+    
+    accountsTablePortraitViewController = [[AccountsTableViewController alloc] init];
+    [accountsTablePortraitViewController setView:accountsTablePortraitView];
+    [accountsTablePortraitViewController setDelegate:self];
+    [accountsTablePortraitView setDelegate:accountsTablePortraitViewController];
+    [accountsTablePortraitView setDataSource:accountsTablePortraitViewController];
+    
+    
     pieChartMVAccountsViewController = [[PieChartMVAccountsViewController alloc] init];
     [pieChartMVAccountsViewController setView:pieChartMVAccountsView];
     [pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
@@ -107,20 +149,37 @@
     [pieChartMVPositionViewController setView:pieChartMVPositionView];
     [pieChartMVPositionViewController setPieChartView:pieChartMVPositionView];         
     pieChartMVPositionViewController.delegate=self;
-   // [self retrieveAccountData]; 
-    
+   
     [[self view] bringSubviewToFront:accountsPlotLabel];
     [[self view] bringSubviewToFront:positionPlotLabel];
-
+    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didRotate:) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
+    orientation=[[UIDevice currentDevice] orientation];
+    if(orientation==UIDeviceOrientationUnknown||orientation==UIDeviceOrientationFaceDown||orientation==UIDeviceOrientationFaceUp)
+    {
+        orientation=UIDeviceOrientationPortrait;
+    }
     
     
 }
 
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+//    if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft||interfaceOrientation==UIInterfaceOrientationLandscapeRight)
+//    {
+//        headerView.autoresizingMask=UIViewAutoresizingNone;
+//        headerView.bounds=CGRectMake(200,0, 450, headerView.bounds.size.height);
+//        
+//     
+//    }
+//    else
+//    {
+//        headerView.autoresizingMask=UIViewAutoresizingNone;
+//        headerView.bounds=CGRectMake(10,0, 700, headerView.bounds.size.height);
+//        
+//    }
+    return YES;
 }
 
 #pragma mark - Methods
@@ -205,6 +264,7 @@
     NSLog(@"count = %d", [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] count]);
     
     [accountsTable reloadData];
+    [accountsTablePortraitView reloadData];
     [pieChartMVAccountsViewController constructPieChart];
     [pieChartMVPositionViewController constructPieChart];
     

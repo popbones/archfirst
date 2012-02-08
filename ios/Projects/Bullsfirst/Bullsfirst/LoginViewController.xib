@@ -398,19 +398,13 @@
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="password">UITextField</string>
-						<string key="passwordCell">UITableViewCell</string>
 						<string key="spinner">UIActivityIndicatorView</string>
 						<string key="username">UITextField</string>
-						<string key="usernameCell">UITableViewCell</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="password">
 							<string key="name">password</string>
 							<string key="candidateClassName">UITextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="passwordCell">
-							<string key="name">passwordCell</string>
-							<string key="candidateClassName">UITableViewCell</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="spinner">
 							<string key="name">spinner</string>
@@ -419,10 +413,6 @@
 						<object class="IBToOneOutletInfo" key="username">
 							<string key="name">username</string>
 							<string key="candidateClassName">UITextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="usernameCell">
-							<string key="name">usernameCell</string>
-							<string key="candidateClassName">UITableViewCell</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

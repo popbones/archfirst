@@ -56,6 +56,7 @@
 		00DFF96614841B00001A4641 /* BFBrokerageAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96514841B00001A4641 /* BFBrokerageAccount.m */; };
 		00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */; };
 		1011437C14CF77EF006E5909 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1011437814CF749D006E5909 /* libCorePlot-CocoaTouch.a */; };
+		9557904714E262D100789EDF /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9557904614E262D100789EDF /* UITextField+Padding.m */; };
 		95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */; };
 		95C6A84E14DBB769004F023A /* login-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84614DBB769004F023A /* login-button-clicked.png */; };
 		95C6A84F14DBB769004F023A /* login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84714DBB769004F023A /* login-button.png */; };
@@ -172,6 +173,8 @@
 		00DFF96B14855010001A4641 /* BFBrokerageAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFBrokerageAccountStore.h; sourceTree = "<group>"; };
 		00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFBrokerageAccountStore.m; sourceTree = "<group>"; };
 		1011436E14CF749C006E5909 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
+		9557904514E262D100789EDF /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
+		9557904614E262D100789EDF /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-logo-transparent.png"; sourceTree = "<group>"; };
 		95C6A84614DBB769004F023A /* login-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-clicked.png"; sourceTree = "<group>"; };
 		95C6A84714DBB769004F023A /* login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button.png"; sourceTree = "<group>"; };
@@ -282,6 +285,8 @@
 				00D5191F148932BD0049F43E /* old */,
 				00D3C424147C285D0067A768 /* Resources */,
 				00D3C40F147C27120067A768 /* Supporting Files */,
+				9557904514E262D100789EDF /* UITextField+Padding.h */,
+				9557904614E262D100789EDF /* UITextField+Padding.m */,
 			);
 			path = Bullsfirst;
 			sourceTree = "<group>";
@@ -620,6 +625,7 @@
 				AC26C84814DFA10300ABD693 /* NSData+Base64.m in Sources */,
 				AC9F211114E13AEE0024C3D3 /* _BFCPTXYTheme.m in Sources */,
 				AC9F211214E13AEE0024C3D3 /* BFCPTTheme.m in Sources */,
+				9557904714E262D100789EDF /* UITextField+Padding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

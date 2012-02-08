@@ -1,8 +1,8 @@
 //
-//  AppDelegate.h
+//  UITextField+Padding.m
 //  Bullsfirst
 //
-//  Created by Joe Howard
+//  Created by Subramanian R
 //  Copyright 2012 Archfirst
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,14 +17,15 @@
 //  See the License for the specific language governing permissions and
 //  limitations under the License.
 //
+#import "UITextField+Padding.h"
 
-#import <UIKit/UIKit.h>
-#import "LoginViewController.h"
-
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@implementation UITextField (Padding)
+-(CGRect) editingRectForBounds:(CGRect)bounds
 {
+    return CGRectInset(bounds,10 , 0);
 }
-@property (strong, nonatomic) UIWindow *window;
-@property(strong,nonatomic) LoginViewController *loginViewController;
-@property (strong, nonatomic) UITabBarController *tabBarController;
+-(CGRect) textRectForBounds:(CGRect)bounds
+{
+    return CGRectInset(bounds,10 , 0);
+}
 @end

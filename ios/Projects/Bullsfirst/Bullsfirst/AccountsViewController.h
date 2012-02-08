@@ -23,7 +23,7 @@
 #import "PieChartMVAccountsViewController.h"
 #import "PieChartMVPositionViewController.h"
 #import "AccountsTableViewController.h"
-@class BFToolbar;
+#import "BFToolbar.h"
 @class AccountsTableViewController;
 
 @class PieChartMVAccountsViewController;
@@ -36,10 +36,12 @@
 {   
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIView *headerView;
-    
+    IBOutlet UIView *landscapeView;
+    IBOutlet UIView *portraitView;
     IBOutlet UITableView *accountsTable;
+    IBOutlet UITableView *accountsTablePortraitView;
     AccountsTableViewController *accountsTableViewController;    
-       
+    AccountsTableViewController *accountsTablePortraitViewController; 
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
     
@@ -48,18 +50,21 @@
 
     PieChartMVPositionViewController *pieChartMVPositionViewController;
     IBOutlet CPTGraphHostingView *pieChartMVPositionView;
-    
+    BFToolbar *toolbar,*toolbarPortraitView;
     IBOutlet UILabel *accountsPlotLabel;
     IBOutlet UILabel *positionPlotLabel;
-
+    UIDeviceOrientation orientation;
 }
 
 @property (nonatomic, retain) BFToolbar *toolbar;
+@property (nonatomic, retain) BFToolbar *toolbarPortraitView;
+@property (nonatomic, retain) UIView *landscapeView;
+@property (nonatomic, retain) UIView *portraitView;
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 @property (nonatomic, retain)  PieChartMVAccountsViewController *pieChartMVAccountsViewController;
 
 - (void)retrieveAccountData;
 - (IBAction)createAccount:(id)sender;
 - (IBAction)refreshAccounts:(id)sender;
-
+- (void) clearCurrentView;
 @end

@@ -23,7 +23,7 @@
 
 @class AccountsViewController;
 @class BullFirstWebServiceObject;
-
+@class check;
 @interface EditAccountNameViewController : UIViewController
 {
     IBOutlet UITextField *accountName;

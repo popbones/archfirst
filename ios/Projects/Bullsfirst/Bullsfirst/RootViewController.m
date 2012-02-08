@@ -1,9 +1,21 @@
 //
-//  RootController.m
+//  RootViewController.h
 //  Bullsfirst
 //
-//  Created by suravi on 2/3/12.
-//  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
+//  Created by Subramanian R
+//  Copyright 2012 Archfirst
+//
+//  Licensed under the Apache License, Version 2.0 (the "License");
+//  you may not use this file except in compliance with the License.
+//  You may obtain a copy of the License at
+//
+//      http://www.apache.org/licenses/LICENSE-2.0
+//
+//  Unless required by applicable law or agreed to in writing, software
+//  distributed under the License is distributed on an "AS IS" BASIS,
+//  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+//  See the License for the specific language governing permissions and
+//  limitations under the License.
 //
 
 #import "RootViewController.h"
@@ -35,39 +47,40 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate=self;
     accountsViewController = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
-    positionsViewController = [[PositionsViewController alloc] init];
-    ordersViewController= [[OrdersViewController alloc] init];
-    transactionsViewController = [[TransactionsViewController alloc] init];
+    BFToolbar *toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
+    [toolBar setTbc:self];
+    [accountsViewController setToolbar:toolBar]; 
     
+    toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
+    [toolBar setTbc:self];
+    [accountsViewController setToolbarPortraitView:toolBar]; 
+
+    
+    positionsViewController = [[PositionsViewController alloc] init];
+    toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
+    [toolBar setTbc:self];
+    [positionsViewController setToolbar:toolBar]; [[positionsViewController view] addSubview:[toolBar view]];
+    [[positionsViewController view] bringSubviewToFront:[toolBar view]];
+    
+    
+    ordersViewController= [[OrdersViewController alloc] init];
+    toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
+    [toolBar setTbc:self];
+    [ordersViewController setToolbar:toolBar]; [[ordersViewController view] addSubview:[toolBar view]];
+    [[ordersViewController view] bringSubviewToFront:[toolBar view]];
+    
+    
+    transactionsViewController = [[TransactionsViewController alloc] init];
+    toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
+    [toolBar setTbc:self];
+    [transactionsViewController setToolbar:toolBar]; [[transactionsViewController view] addSubview:[toolBar view]];
+    [[transactionsViewController view] bringSubviewToFront:[toolBar view]];
+
     NSArray *viewControllers = [NSArray arrayWithObjects:accountsViewController,positionsViewController,ordersViewController,transactionsViewController, nil];
     
-    // NOTE: Would rather only have one instance of BFToolbar; use one per tab for now
-    BFToolbar *toolBar1 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    BFToolbar *toolBar2 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    BFToolbar *toolBar3 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    BFToolbar *toolBar4 = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
     
-   //[toolBar1 setLvc:self]; 
-    [toolBar1 setTbc:self];
-    //[toolBar2 setLvc:self]; 
     
-    [toolBar2 setTbc:self];
-    //[toolBar3 setLvc:self]; 
-    [toolBar3 setTbc:self];
-    //[toolBar4 setLvc:self];
-    [toolBar4 setTbc:self];
     
-    // Need to take ownership of toolbars; adding it to the view is not enough
-    [accountsViewController setToolbar:toolBar1]; [[accountsViewController view] addSubview:[toolBar1 view]];
-    [positionsViewController setToolbar:toolBar2]; [[positionsViewController view] addSubview:[toolBar2 view]];
-    [ordersViewController setToolbar:toolBar3]; [[ordersViewController view] addSubview:[toolBar3 view]];
-    [transactionsViewController setToolbar:toolBar4]; [[transactionsViewController view] addSubview:[toolBar4 view]];
-    
-    [[accountsViewController view] bringSubviewToFront:[toolBar1 view]];
-    [[positionsViewController view] bringSubviewToFront:[toolBar2 view]];
-    [[ordersViewController view] bringSubviewToFront:[toolBar3 view]];
-    [[transactionsViewController view] bringSubviewToFront:[toolBar4 view]];
-
     [self setViewControllers:viewControllers];
     
 }
@@ -89,5 +102,13 @@
     // Return YES for supported orientations
 	return YES;
 }
+/*
+ #pragma mark tabBarController delegate methods
+
+-(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
+{
+    [viewController viewDidAppear:YES];
+    
+}*/
 
 @end
