@@ -69,6 +69,7 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
     [pieChartMVPositionViewController viewDidAppear:animated];
     [pieChartMVAccountsViewController viewDidAppear:animated];
     [headerView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"img_bg_yellow.png"]]];
@@ -84,7 +85,8 @@
 }
 -(void) viewWillAppear:(BOOL)animated
 {
-
+    pieChartMVPositionViewController.view.hidden=true;
+    pieChartMVAccountsViewController.view.hidden=false;
 }
 -(void) clearCurrentView
 {
@@ -149,6 +151,7 @@ if(landscapeView.superview)
     [pieChartMVPositionViewController setPieChartView:pieChartMVPositionView];         
     pieChartMVPositionViewController.delegate=self;
    
+    
     [[self view] bringSubviewToFront:accountsPlotLabel];
     [[self view] bringSubviewToFront:positionPlotLabel];
     [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
@@ -206,6 +209,17 @@ if(landscapeView.superview)
     [[BFBrokerageAccountStore defaultStore] clearAccounts];
     [self retrieveAccountData];
 }
+-(void) clearViewData
+{
+    [[BFBrokerageAccountStore defaultStore] clearAccounts];
+    [accountsTable reloadData];
+    [accountsTablePortraitView reloadData];
+    [pieChartMVAccountsViewController constructPieChart];
+    [pieChartMVPositionViewController constructPieChart];
+
+}
+
+
 #pragma mark - selectors for handling rest call callbacks
 
 -(void)receivedData:(NSData *)data

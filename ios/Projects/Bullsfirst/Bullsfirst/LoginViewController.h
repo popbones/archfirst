@@ -34,7 +34,7 @@
     NSMutableData *jsonResponseData;
     __weak id<LoginViewControllerDelegate> delegate;
     OpenAccountViewController *openAccountViewController;
-    
+    UIDeviceOrientation orientation;
     
 }
 @property(nonatomic,weak) id <LoginViewControllerDelegate> delegate;
@@ -50,5 +50,5 @@
 @end
 
 @protocol LoginViewControllerDelegate <NSObject>
--(void) loggedin;
+-(void) loggedin:(NSString*) fullName;
 @end

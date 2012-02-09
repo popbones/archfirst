@@ -21,11 +21,12 @@
 #import "BFToolbar.h"
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "RootViewController.h"
 @implementation BFToolbar
 
 @synthesize lvc;
 @synthesize tbc;
-
+@synthesize userName;
 /*
 - (id)init
 {
@@ -47,8 +48,9 @@
 {
     AppDelegate* appDelegate=(AppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate.loginViewController logout];
-    [ appDelegate.loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve]; 
+    [appDelegate.loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve]; 
     [tbc presentModalViewController: appDelegate.loginViewController animated:YES];
+    [tbc.accountsViewController clearViewData];
     NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
     [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
 }

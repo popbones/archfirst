@@ -69,15 +69,11 @@
 {
     
     [super viewDidLoad];
-    UIBezierPath *passwordMaskPath=[UIBezierPath bezierPathWithRoundedRect:password.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(10,10)];
-   
-/*    UIView *usernamePadding=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 0)] ;
-    username.leftView=usernamePadding;
-    username.leftViewMode=UITextFieldViewModeUnlessEditing;
-    UIView *passwordPadding=[[UIView alloc] initWithFrame:CGRectMake(0, 0, 15, 0)] ;
-    password.leftView=passwordPadding;
-    password.leftViewMode=UITextFieldViewModeAlways;*/
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsHidden:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didRotate:) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
+    UIBezierPath *passwordMaskPath=[UIBezierPath bezierPathWithRoundedRect:password.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(10,10)];
     CAShapeLayer *passwordMasklayer=[CAShapeLayer layer];
     passwordMasklayer.frame=password.bounds;
     passwordMasklayer.path=passwordMaskPath.CGPath;
@@ -100,15 +96,79 @@
     restService = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     
     // Do any additional setup after loading the view from its nib.
+    
 }
-
+-(void) didRotate:(NSNotification*) notification
+{
+    UIDeviceOrientation newOrientation=[[UIDevice currentDevice]orientation];
+    if(newOrientation!=UIDeviceOrientationUnknown && newOrientation!=UIDeviceOrientationFaceUp&&newOrientation!=UIDeviceOrientationFaceDown)
+    {
+        orientation=newOrientation;
+    }
+    if(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationPortraitUpsideDown)  
+    {
+        CGRect frame= username.frame;
+       // frame.origin.y-=50;
+        username.frame=frame;
+        
+    }else if(orientation==UIDeviceOrientationLandscapeLeft||orientation==UIDeviceOrientationLandscapeRight)
+    {
+        CGRect frame= username.frame;
+       // frame.origin.y+=50;
+        username.frame=frame;
+    }
+}
 - (void)viewDidUnload
 {
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
-
+-(void) keyBoardIsShown: (NSNotification*) notification
+{
+    orientation=[[UIDevice currentDevice]orientation];
+    if(orientation==UIDeviceOrientationLandscapeRight)  
+    {
+    NSTimeInterval animationDuration=0.3;
+    CGRect frame= self.view.frame;
+    frame.origin.x-=70;
+    frame.size.width+=70;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.view.frame=frame;
+    [UIView commitAnimations];
+    }
+    else if(orientation==UIDeviceOrientationLandscapeLeft)
+    {
+        NSTimeInterval animationDuration=0.3;
+        CGRect frame= self.view.frame;
+        frame.origin.x+=70;
+        frame.size.width-=70;
+        [UIView beginAnimations:@"KeyboardLandScape" context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        self.view.frame=frame;
+        [UIView commitAnimations];
+    }
+}
+-(void) keyBoardIsHidden: (NSNotification*) notification
+{
+    orientation=[[UIDevice currentDevice]orientation];
+    if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
+    {
+    NSTimeInterval animationDuration=0.3;
+    CGRect frame= self.view.frame;
+    frame.origin.x+=70;
+    frame.size.width-=70;
+    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+    [UIView setAnimationDuration:animationDuration];
+    self.view.frame=frame;
+    [UIView commitAnimations];
+    }
+    else
+    {
+    
+    }
+}
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft||interfaceOrientation==UIInterfaceOrientationLandscapeRight)
@@ -154,8 +214,15 @@
     NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
     NSLog(@"jsonObject = %@", jsonObject);
     
+    NSDictionary* nameObj=(NSDictionary*)jsonObject;
+    
+    NSString* fullName=[nameObj objectForKey:@"firstName"];
+    
+    fullName=[fullName stringByAppendingString:@" "];
+    fullName=[fullName stringByAppendingString:[nameObj objectForKey:@"lastName"]];
+    fullName=[fullName uppercaseString];
     [spinner stopAnimating];
-    [delegate loggedin];
+    [delegate loggedin:fullName];
     [self dismissModalViewControllerAnimated:YES];
     
     
@@ -248,9 +315,9 @@
 
 #pragma mark - Open Account View Controller delegate methods
 
--(void) newBFAccountCreated
+-(void) newBFAccountCreated:(NSString*) fullName
 {
-    [delegate loggedin];
+    [delegate loggedin:fullName];
     [self dismissModalViewControllerAnimated:YES];
     
 }

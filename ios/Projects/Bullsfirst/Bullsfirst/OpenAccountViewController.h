@@ -56,7 +56,7 @@
 @end
 
 @protocol OpenAccountViewControllerDelegate <NSObject>
--(void) newBFAccountCreated;
+-(void) newBFAccountCreated:(NSString*) fullName;
 @end
 
 

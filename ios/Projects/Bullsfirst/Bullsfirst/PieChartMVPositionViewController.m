@@ -189,6 +189,8 @@
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     double total = 0.0;
     
+    if([[BFBrokerageAccountStore defaultStore]allBrokerageAccounts].count!=0)
+    {
     BFBrokerageAccount *neededAccount=[[[BFBrokerageAccountStore defaultStore]allBrokerageAccounts] objectAtIndex:accountIndex];
     for (BFPosition *position in [neededAccount positions] ){
        [tempArray addObject:[[position marketValue] amount]];
@@ -208,23 +210,20 @@
     }        
     
 	self.dataForChart = contentArray;
-    
-    // Add legend
+        // Add legend
     CPTLegend *theLegend = [CPTLegend legendWithGraph:pieGraph];
     theLegend.numberOfColumns = 1;
     theLegend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
     //theLegend.borderLineStyle = [CPTLineStyle lineStyle];
     theLegend.cornerRadius = 5.0;
-    
     pieGraph.legend = theLegend;
-    
     pieGraph.legendAnchor = CPTRectAnchorBottom;
-    pieGraph.legendDisplacement = CGPointMake(0, 30.0);    
-   
+    pieGraph.legendDisplacement = CGPointMake(0, 20.0);    
+    
     pieGraph.title=neededAccount.name;
     pieGraph.titleDisplacement = CGPointMake(0,0);
     [self performAnimation];
-
+    }
 }
 
 #pragma mark -
@@ -271,34 +270,35 @@
 		return nil;
 	}
     
-	static CPTMutableTextStyle *whiteText = nil;
-    
-	if ( !whiteText ) {
-		whiteText		= [[CPTMutableTextStyle alloc] init];
-		whiteText.color = [CPTColor whiteColor];
-	}
-    
-	static CPTMutableTextStyle *blackText = nil;
-    
-	if ( !blackText ) {
-		blackText		= [[CPTMutableTextStyle alloc] init];
-		blackText.color = [CPTColor blackColor];
-	}
-    
-	CPTTextLayer *newLayer = nil;
-    
-    switch ( index ) {
-        case 0:
-            newLayer = (id)[NSNull null];
-            break;
-            
-        default:
-            //newLayer = [[[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", index] style:whiteText] autorelease];
-            newLayer = [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", index] style:blackText];
-            break;
-    }
-    
-	return newLayer;
+//	static CPTMutableTextStyle *whiteText = nil;
+//    
+//	if ( !whiteText ) {
+//		whiteText		= [[CPTMutableTextStyle alloc] init];
+//		whiteText.color = [CPTColor whiteColor];
+//	}
+//    
+//	static CPTMutableTextStyle *blackText = nil;
+//    
+//	if ( !blackText ) {
+//		blackText		= [[CPTMutableTextStyle alloc] init];
+//		blackText.color = [CPTColor blackColor];
+//	}
+//    
+//	CPTTextLayer *newLayer = nil;
+//    
+//    switch ( index ) {
+//        case 0:
+//            newLayer = (id)[NSNull null];
+//            break;
+//            
+//        default:
+//            //newLayer = [[[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", index] style:whiteText] autorelease];
+//            newLayer = [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", index] style:blackText];
+//            break;
+//    }
+//    
+//	return newLayer;
+    return nil;
 }
 
 -(NSString *)legendTitleForPieChart:(CPTPieChart *)pieChart
@@ -315,7 +315,7 @@
     CPTColor *color;
     
     if(index == 0)
-        color = [CPTColor yellowColor];   
+        color = [CPTColor magentaColor];   
     else if(index == 1)
         color = [CPTColor blueColor];   
     else if(index == 2)
@@ -327,7 +327,7 @@
     else if(index == 5)
         color = [CPTColor purpleColor];
     else if(index == 6)
-        color = [CPTColor magentaColor];
+        color = [CPTColor yellowColor];
     else if(index == 7)
         color = [CPTColor lightGrayColor];
     else if(index == 8)

@@ -20,8 +20,9 @@
 
 #import "RootViewController.h"
 #import "BFToolbar.h"
+#import "WebServiceObject.h"
 @implementation RootViewController
-
+@synthesize accountsViewController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -52,6 +53,9 @@
     [accountsViewController setToolbar:toolBar]; 
     
     toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
+    CGRect frame= toolBar.view.frame;
+    frame.size.width=768;
+    toolBar.view.frame=frame;
     [toolBar setTbc:self];
     [accountsViewController setToolbarPortraitView:toolBar]; 
 
@@ -91,10 +95,13 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
--(void) loggedin
+-(void) loggedin:(NSString *)fullName
 {
     [accountsViewController retrieveAccountData];
-   // accountsViewController.pieChartMVAccountsViewController.view.hidden=FALSE;
+   
+    accountsViewController.toolbar.userName.text=fullName;
+    accountsViewController.toolbarPortraitView.userName.text=fullName;
+    // accountsViewController.pieChartMVAccountsViewController.view.hidden=FALSE;
     
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation

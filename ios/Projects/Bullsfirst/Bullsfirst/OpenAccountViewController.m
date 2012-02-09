@@ -154,12 +154,22 @@
 -(void)requestSucceededForCreateNewBrokerageAccount:(NSData *)data
 {
     [spinner stopAnimating];
+    jsonResponseData = [NSMutableData dataWithData:data];
     
+    NSError *err;
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonResponseData options:0 error:&err];
+    BFDebugLog(@"jsonObject = %@", jsonObject);
+
 //    [[lvc username] setText:[username text]];
 //    [[lvc password] setText:[password text]];
     
     [self performSelectorOnMainThread:@selector(dismissModalViewControllerAnimated:) withObject:nil waitUntilDone:YES];
-    [delegate newBFAccountCreated];
+    NSString* fullName=firstName.text;
+    fullName=[fullName stringByAppendingString:@" "];
+    fullName=[fullName stringByAppendingString:lastName.text];
+    fullName=[fullName uppercaseString];
+    
+    [delegate newBFAccountCreated:fullName];
     
     openAccountButton.enabled = YES;
     cancelButton.enabled = YES;

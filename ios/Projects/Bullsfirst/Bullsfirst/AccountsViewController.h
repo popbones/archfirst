@@ -66,4 +66,5 @@
 - (IBAction)createAccount:(id)sender;
 - (IBAction)refreshAccounts:(id)sender;
 - (void) clearCurrentView;
+- (void) clearViewData;
 @end

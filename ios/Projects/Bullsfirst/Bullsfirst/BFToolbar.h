@@ -21,14 +21,15 @@
 #import <Foundation/Foundation.h>
 
 @class LoginViewController;
-
+@class RootViewController;
 @interface BFToolbar : UIViewController {
     __weak LoginViewController *lvc;
-    __weak UITabBarController *tbc;
+    __weak RootViewController *tbc;
+    IBOutlet UILabel *userName;
 }
-
+@property (atomic,retain) IBOutlet UILabel *userName;
 @property (nonatomic, weak) LoginViewController *lvc;
-@property (nonatomic, weak) UITabBarController *tbc;
+@property (nonatomic, weak) RootViewController *tbc;
 
 - (IBAction)logout;
 
