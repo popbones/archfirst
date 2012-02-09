@@ -47,46 +47,36 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate=self;
+    
     accountsViewController = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
     BFToolbar *toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    [toolBar setTbc:self];
-    [accountsViewController setToolbar:toolBar]; 
+    toolBar.tbc=self;
+    accountsViewController.toolbar=toolBar; 
+    [accountsViewController.view addSubview:toolBar.view];
+    [accountsViewController.view bringSubviewToFront:toolBar.view];
     
+    positionsViewController = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil];
     toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    CGRect frame= toolBar.view.frame;
-    frame.size.width=768;
-    toolBar.view.frame=frame;
-    [toolBar setTbc:self];
-    [accountsViewController setToolbarPortraitView:toolBar]; 
-
+    toolBar.tbc=self;
+    positionsViewController.toolbar=toolBar; 
+    [positionsViewController.view addSubview:toolBar.view];
+    [positionsViewController.view bringSubviewToFront:toolBar.view];
     
-    positionsViewController = [[PositionsViewController alloc] init];
+    ordersViewController= [[OrdersViewController alloc] initWithNibName:@"OrdersViewController" bundle:nil];
     toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    [toolBar setTbc:self];
-    [positionsViewController setToolbar:toolBar]; [[positionsViewController view] addSubview:[toolBar view]];
-    [[positionsViewController view] bringSubviewToFront:[toolBar view]];
+    toolBar.tbc=self;
+    ordersViewController.toolbar=toolBar; 
+    [ordersViewController.view addSubview:toolBar.view];
+    [ordersViewController.view bringSubviewToFront:toolBar.view];
     
-    
-    ordersViewController= [[OrdersViewController alloc] init];
+    transactionsViewController = [[TransactionsViewController alloc] initWithNibName:@"TransactionsViewController" bundle:nil];
     toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    [toolBar setTbc:self];
-    [ordersViewController setToolbar:toolBar]; [[ordersViewController view] addSubview:[toolBar view]];
-    [[ordersViewController view] bringSubviewToFront:[toolBar view]];
+    toolBar.tbc=self;
+    transactionsViewController.toolbar=toolBar; 
+    [transactionsViewController.view addSubview:toolBar.view];
+    [transactionsViewController.view bringSubviewToFront:toolBar.view];
     
-    
-    transactionsViewController = [[TransactionsViewController alloc] init];
-    toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    [toolBar setTbc:self];
-    [transactionsViewController setToolbar:toolBar]; [[transactionsViewController view] addSubview:[toolBar view]];
-    [[transactionsViewController view] bringSubviewToFront:[toolBar view]];
-
-    NSArray *viewControllers = [NSArray arrayWithObjects:accountsViewController,positionsViewController,ordersViewController,transactionsViewController, nil];
-    
-    
-    
-    
-    [self setViewControllers:viewControllers];
-    
+    [self setViewControllers:[NSArray arrayWithObjects:accountsViewController,positionsViewController,ordersViewController,transactionsViewController, nil]];
 }
 
 - (void)viewDidUnload
