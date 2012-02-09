@@ -142,8 +142,8 @@
     {
         NSTimeInterval animationDuration=0.3;
         CGRect frame= self.view.frame;
-        frame.origin.x+=70;
-        frame.size.width-=70;
+        frame.origin.x-=70;
+        frame.size.width+=70;
         [UIView beginAnimations:@"KeyboardLandScape" context:nil];
         [UIView setAnimationDuration:animationDuration];
         self.view.frame=frame;
