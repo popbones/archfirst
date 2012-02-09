@@ -22,10 +22,18 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.SecurityContext;
 
 import org.archfirst.bfoms.domain.account.BaseAccountService;
+import org.archfirst.bfoms.domain.account.InsufficientFundsException;
+import org.archfirst.bfoms.domain.account.InsufficientQuantityException;
+import org.archfirst.bfoms.domain.account.InvalidSymbolException;
+import org.archfirst.bfoms.restservice.util.ErrorMessage;
+import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.DecimalQuantity;
 
 /**
  * AccountsResource
@@ -48,6 +56,60 @@ public class AccountsResource {
         return Response.ok().build();
     }
     
+    @POST
+    @Path("{id}/transfer_cash")
+    public Response transferCash(
+            @Context SecurityContext sc,
+            @PathParam("id") Long id,
+            TransferCashRequest request) {
+        
+        try {
+            baseAccountService.transferCash(
+                    getUsername(sc),
+                    request.getAmount(),
+                    id,
+                    request.getToAccountId());
+        }
+        catch (InsufficientFundsException e) {
+            return Response.status(Response.Status.FORBIDDEN)
+                .entity(new ErrorMessage("Insufficient Funds")).build();
+        }
+
+        return Response.ok().build();
+    }
+    
+    @POST
+    @Path("{id}/transfer_securities")
+    public Response transferSecurities (
+            @Context SecurityContext sc,
+            @PathParam("id") Long id,
+            TransferSecuritiesRequest request) {
+        
+        try {
+            baseAccountService.transferSecurities(
+                    getUsername(sc),
+                    request.getSymbol(),
+                    request.getQuantity(),
+                    request.getPricePaidPerShare(),
+                    id,
+                    request.getToAccountId());
+        }
+        catch (InvalidSymbolException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                .entity(new ErrorMessage("Invalid Symbol")).build();
+        }
+        catch (InsufficientQuantityException e) {
+            return Response.status(Response.Status.FORBIDDEN)
+                .entity(new ErrorMessage("Insufficient Quantity")).build();
+        }
+
+        return Response.ok().build();
+    }
+    
+    private String getUsername(SecurityContext sc) {
+        return sc.getUserPrincipal().getName();
+    }
+
     // ----- Helper Classes -----
     private static class ChangeAccountNameRequest {
         private String newName;
@@ -56,6 +118,54 @@ public class AccountsResource {
         }
         public void setNewName(String newName) {
             this.newName = newName;
+        }
+    }
+
+    private static class TransferCashRequest {
+        private Money amount;
+        private Long toAccountId;
+        private Money getAmount() {
+            return amount;
+        }
+        private void setAmount(Money amount) {
+            this.amount = amount;
+        }
+        private Long getToAccountId() {
+            return toAccountId;
+        }
+        private void setToAccountId(Long toAccountId) {
+            this.toAccountId = toAccountId;
+        }
+    }
+
+    private static class TransferSecuritiesRequest {
+        private String symbol;
+        private DecimalQuantity quantity;
+        private Money pricePaidPerShare;
+        private Long toAccountId;
+        private String getSymbol() {
+            return symbol;
+        }
+        private void setSymbol(String symbol) {
+            this.symbol = symbol;
+        }
+        private DecimalQuantity getQuantity() {
+            return quantity;
+        }
+        private void setQuantity(DecimalQuantity quantity) {
+            this.quantity = quantity;
+        }
+        private Money getPricePaidPerShare() {
+            return pricePaidPerShare;
+        }
+        private void setPricePaidPerShare(Money pricePaidPerShare) {
+            this.pricePaidPerShare = pricePaidPerShare;
+        }
+        private Long getToAccountId() {
+            return toAccountId;
+        }
+        private void setToAccountId(Long toAccountId) {
+            this.toAccountId = toAccountId;
         }
     }
 
