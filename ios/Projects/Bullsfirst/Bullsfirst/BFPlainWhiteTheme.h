@@ -1,5 +1,5 @@
 //
-//  CPCustomPlainWhiteTheme.h
+//  BFPlainWhiteTheme.h
 //  Bullsfirst
 //
 //  Created by Vivekan Arther
@@ -20,7 +20,7 @@
 
 #import "_BFCPTXYTheme.h"
 
-@interface CPCustomPlainWhiteTheme : _BFCPTXYTheme {
+@interface BFPlainWhiteTheme : _BFCPTXYTheme {
 }
 
 @end

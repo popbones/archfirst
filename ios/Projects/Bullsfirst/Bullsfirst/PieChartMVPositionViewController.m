@@ -147,7 +147,7 @@
 {
 	// Create pieChart from theme
 	pieGraph = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
-	CPTTheme *theme = [CPTTheme themeNamed:kCustomPlainWhiteTheme];
+	CPTTheme *theme = [CPTTheme themeNamed:kBFPlainWhiteTheme];
 	[pieGraph applyTheme:theme];
 	pieChartView.hostedGraph			 = pieGraph;
 	pieGraph.plotAreaFrame.masksToBorder = NO;

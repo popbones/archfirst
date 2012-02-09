@@ -24,7 +24,6 @@
 #import "AccountsTableViewController.h"
 #import "AddAccountViewController.h"
 #import "EditAccountNameViewController.h"
-#import "CorePlot-CocoaTouch.h"
 #import "PieChartMVAccountsViewController.h"
 #import "PieChartMVPositionViewController.h"
 #import "BullFirstWebServiceObject.h"

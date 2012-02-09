@@ -1,5 +1,5 @@
 //
-//  BFCPTTheme.m
+//  BF-CorePlot-CocoaTouch.h
 //  Bullsfirst
 //
 //  Created by Vivekan Arther
@@ -18,9 +18,7 @@
 //  limitations under the License.
 //
 
+
+
+#import "CorePlot-CocoaTouch.h"
 #import "BFCPTTheme.h"
-
-@implementation BFCPTTheme
-
-
-@end

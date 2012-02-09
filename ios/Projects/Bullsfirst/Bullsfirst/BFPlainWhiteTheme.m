@@ -1,5 +1,5 @@
 //
-//  CPCustomPlainWhiteTheme.m
+//  BFPlainWhiteTheme.m
 //  Bullsfirst
 //
 //  Created by Vivekan Arther
@@ -20,7 +20,7 @@
 
 
 
-#import "CPCustomPlainWhiteTheme.h"
+#import "BFPlainWhiteTheme.h"
 
 #import "CPTBorderedLayer.h"
 #import "CPTColor.h"
@@ -34,14 +34,13 @@
 #import "CPTXYAxisSet.h"
 #import "CPTXYGraph.h"
 #import "CPTXYPlotSpace.h"
-#import "BFConstants.h"
-
  
+NSString *const kBFPlainWhiteTheme = @"BF Plain White"; ///< BF Plain white theme.
 
 /**
  *	@brief Creates a CPTXYGraph instance formatted with white backgrounds and black lines.
  **/
-@implementation CPCustomPlainWhiteTheme
+@implementation BFPlainWhiteTheme
 
 +(void)load
 {
@@ -50,7 +49,7 @@
 
 +(NSString *)name
 {
-	return kCustomPlainWhiteTheme;
+	return kBFPlainWhiteTheme;
 }
 
 #pragma mark -
