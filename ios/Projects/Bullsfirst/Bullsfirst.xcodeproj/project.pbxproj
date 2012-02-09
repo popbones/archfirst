@@ -56,7 +56,6 @@
 		00DFF96614841B00001A4641 /* BFBrokerageAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96514841B00001A4641 /* BFBrokerageAccount.m */; };
 		00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */; };
 		1011437C14CF77EF006E5909 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1011437814CF749D006E5909 /* libCorePlot-CocoaTouch.a */; };
-		9557904714E262D100789EDF /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9557904614E262D100789EDF /* UITextField+Padding.m */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		9575360F14E4251A002A3E52 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360D14E4251A002A3E52 /* Default-Landscape.png */; };
 		9575361014E4251A002A3E52 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360E14E4251A002A3E52 /* Default-Portrait.png */; };
@@ -175,8 +174,6 @@
 		00DFF96B14855010001A4641 /* BFBrokerageAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFBrokerageAccountStore.h; sourceTree = "<group>"; };
 		00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFBrokerageAccountStore.m; sourceTree = "<group>"; };
 		1011436E14CF749C006E5909 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
-		9557904514E262D100789EDF /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
-		9557904614E262D100789EDF /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		9575360D14E4251A002A3E52 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		9575360E14E4251A002A3E52 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
@@ -276,22 +273,12 @@
 				AC26C81914DBF64700ABD693 /* Web Service Object */,
 				00D3C417147C27120067A768 /* AppDelegate.h */,
 				00D3C418147C27120067A768 /* AppDelegate.m */,
-				95C6A85914DBED54004F023A /* RootViewController.h */,
-				95C6A85A14DBED54004F023A /* RootViewController.m */,
-				00D3C41F147C28440067A768 /* LoginViewController.h */,
-				00D3C420147C28440067A768 /* LoginViewController.m */,
-				00D3C42D147D537B0067A768 /* OpenAccountViewController.h */,
-				00D3C42E147D537B0067A768 /* OpenAccountViewController.m */,
-				00DFF9211480AD67001A4641 /* BFToolbar.h */,
-				00DFF9221480AD68001A4641 /* BFToolbar.m */,
+				545C5E3214E45AEC003560C8 /* View Controllers */,
 				AC9B72D114DA7E3700B843AC /* BF-CorePlot Extensions */,
 				00DFF9631484179D001A4641 /* Model */,
-				00DFF90E148089B6001A4641 /* Tabs */,
 				00D5191F148932BD0049F43E /* old */,
 				00D3C424147C285D0067A768 /* Resources */,
 				00D3C40F147C27120067A768 /* Supporting Files */,
-				9557904514E262D100789EDF /* UITextField+Padding.h */,
-				9557904614E262D100789EDF /* UITextField+Padding.m */,
 			);
 			path = Bullsfirst;
 			sourceTree = "<group>";
@@ -311,8 +298,6 @@
 		00D3C424147C285D0067A768 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				9569CC5414DAF6B10036D8FB /* Latest Images */,
-				00DFF9181480A8F2001A4641 /* NIB */,
 				00DFF9171480A8D7001A4641 /* images */,
 			);
 			name = Resources;
@@ -330,22 +315,28 @@
 			children = (
 				00DFF9021480893E001A4641 /* AccountsViewController.h */,
 				00DFF9031480893E001A4641 /* AccountsViewController.m */,
+				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
 				009C1A3A148D3FF400259534 /* AddAccountViewController.h */,
 				009C1A3B148D3FF400259534 /* AddAccountViewController.m */,
+				004F06CC148D421F003F35D3 /* AddAccountViewController.xib */,
 				00D5191C14891DBA0049F43E /* PieChartMVAccountsViewController.h */,
 				00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */,
 				00D51920148951370049F43E /* PieChartMVPositionViewController.h */,
 				AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */,
 				AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */,
+				AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */,
 				00D51921148951370049F43E /* PieChartMVPositionViewController.m */,
 				005B34B51486BF0F00C637F5 /* AccountsTableViewController.h */,
 				005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */,
 				00DFF90514808975001A4641 /* PositionsViewController.h */,
 				00DFF90614808975001A4641 /* PositionsViewController.m */,
+				00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */,
 				00DFF90814808988001A4641 /* OrdersViewController.h */,
 				00DFF90914808988001A4641 /* OrdersViewController.m */,
+				00DFF91D1480AB01001A4641 /* OrdersViewController.xib */,
 				00DFF90B1480899D001A4641 /* TransactionsViewController.h */,
 				00DFF90C1480899D001A4641 /* TransactionsViewController.m */,
+				00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */,
 				00B38DE41486CE0400DC62F2 /* BrokerageAccountCell.h */,
 				00B38DE51486CE0400DC62F2 /* BrokerageAccountCell.m */,
 			);
@@ -355,6 +346,18 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				9575360D14E4251A002A3E52 /* Default-Landscape.png */,
+				9575360E14E4251A002A3E52 /* Default-Portrait.png */,
+				9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */,
+				95C6A85E14DFE868004F023A /* app-icon-72x72.png */,
+				95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */,
+				95C6A84614DBB769004F023A /* login-button-clicked.png */,
+				95C6A84714DBB769004F023A /* login-button.png */,
+				95C6A84814DBB769004F023A /* login-screen-background-landscape.png */,
+				95C6A84914DBB769004F023A /* login-screen-background-portrait.png */,
+				95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */,
+				95C6A84B14DBB769004F023A /* open-account-button-clicked.png */,
+				95C6A84C14DBB769004F023A /* open-account-button.png */,
 				00DFF95914840BD1001A4641 /* iconOrders.png */,
 				00DFF95A14840BD1001A4641 /* iconTransactions.png */,
 				00DFF95714840B04001A4641 /* iconAccounts.png */,
@@ -374,23 +377,6 @@
 				00D3C425147C2A970067A768 /* img_bullsfirst_logo.png */,
 			);
 			name = images;
-			sourceTree = "<group>";
-		};
-		00DFF9181480A8F2001A4641 /* NIB */ = {
-			isa = PBXGroup;
-			children = (
-				95C6A85B14DBED54004F023A /* RootViewController.xib */,
-				00D3C421147C28440067A768 /* LoginViewController.xib */,
-				AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */,
-				00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */,
-				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
-				004F06CC148D421F003F35D3 /* AddAccountViewController.xib */,
-				00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */,
-				00DFF91D1480AB01001A4641 /* OrdersViewController.xib */,
-				00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */,
-				00DFF9241480AD91001A4641 /* BFToolbar.xib */,
-			);
-			name = NIB;
 			sourceTree = "<group>";
 		};
 		00DFF9631484179D001A4641 /* Model */ = {
@@ -416,23 +402,24 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9569CC5414DAF6B10036D8FB /* Latest Images */ = {
+		545C5E3214E45AEC003560C8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9575360D14E4251A002A3E52 /* Default-Landscape.png */,
-				9575360E14E4251A002A3E52 /* Default-Portrait.png */,
-				9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */,
-				95C6A85E14DFE868004F023A /* app-icon-72x72.png */,
-				95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */,
-				95C6A84614DBB769004F023A /* login-button-clicked.png */,
-				95C6A84714DBB769004F023A /* login-button.png */,
-				95C6A84814DBB769004F023A /* login-screen-background-landscape.png */,
-				95C6A84914DBB769004F023A /* login-screen-background-portrait.png */,
-				95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */,
-				95C6A84B14DBB769004F023A /* open-account-button-clicked.png */,
-				95C6A84C14DBB769004F023A /* open-account-button.png */,
+				00DFF90E148089B6001A4641 /* Tabs */,
+				00DFF9211480AD67001A4641 /* BFToolbar.h */,
+				00DFF9221480AD68001A4641 /* BFToolbar.m */,
+				00DFF9241480AD91001A4641 /* BFToolbar.xib */,
+				95C6A85914DBED54004F023A /* RootViewController.h */,
+				95C6A85A14DBED54004F023A /* RootViewController.m */,
+				95C6A85B14DBED54004F023A /* RootViewController.xib */,
+				00D3C41F147C28440067A768 /* LoginViewController.h */,
+				00D3C420147C28440067A768 /* LoginViewController.m */,
+				00D3C421147C28440067A768 /* LoginViewController.xib */,
+				00D3C42D147D537B0067A768 /* OpenAccountViewController.h */,
+				00D3C42E147D537B0067A768 /* OpenAccountViewController.m */,
+				00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */,
 			);
-			name = "Latest Images";
+			name = "View Controllers";
 			sourceTree = "<group>";
 		};
 		AC26C81914DBF64700ABD693 /* Web Service Object */ = {
@@ -635,7 +622,6 @@
 				AC26C84814DFA10300ABD693 /* NSData+Base64.m in Sources */,
 				AC9F211114E13AEE0024C3D3 /* _BFCPTXYTheme.m in Sources */,
 				AC9F211214E13AEE0024C3D3 /* BFCPTTheme.m in Sources */,
-				9557904714E262D100789EDF /* UITextField+Padding.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
