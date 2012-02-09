@@ -73,24 +73,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsShown:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsHidden:) name:UIKeyboardDidHideNotification object:nil];
     [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didRotate:) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
-    UIBezierPath *passwordMaskPath=[UIBezierPath bezierPathWithRoundedRect:password.bounds byRoundingCorners:UIRectCornerBottomLeft|UIRectCornerBottomRight cornerRadii:CGSizeMake(10,10)];
-    CAShapeLayer *passwordMasklayer=[CAShapeLayer layer];
-    passwordMasklayer.frame=password.bounds;
-    passwordMasklayer.path=passwordMaskPath.CGPath;
-    password.layer.mask=passwordMasklayer;
-    
-    
-    
-    UIBezierPath *usernameMaskPath=[UIBezierPath bezierPathWithRoundedRect:password.bounds byRoundingCorners:UIRectCornerTopLeft|UIRectCornerTopRight cornerRadii:CGSizeMake(10,10)];
-    CAShapeLayer *usernameMaskLayer=[CAShapeLayer layer];
-    usernameMaskLayer.frame=username.bounds;
-    usernameMaskLayer.path=usernameMaskPath.CGPath;
-    username.layer.mask=usernameMaskLayer;
-    
-    
-    [username setBackgroundColor:[UIColor whiteColor]];
+     
+   
     [password setReturnKeyType:UIReturnKeyGo];
-    [password setBackgroundColor:[UIColor whiteColor]];
+   
     password.delegate=self;
     username.delegate=self;
     restService = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];

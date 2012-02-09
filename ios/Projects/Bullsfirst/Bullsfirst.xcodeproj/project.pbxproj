@@ -57,6 +57,9 @@
 		00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */; };
 		1011437C14CF77EF006E5909 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1011437814CF749D006E5909 /* libCorePlot-CocoaTouch.a */; };
 		9557904714E262D100789EDF /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = 9557904614E262D100789EDF /* UITextField+Padding.m */; };
+		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
+		9575360F14E4251A002A3E52 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360D14E4251A002A3E52 /* Default-Landscape.png */; };
+		9575361014E4251A002A3E52 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360E14E4251A002A3E52 /* Default-Portrait.png */; };
 		95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */; };
 		95C6A84E14DBB769004F023A /* login-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84614DBB769004F023A /* login-button-clicked.png */; };
 		95C6A84F14DBB769004F023A /* login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84714DBB769004F023A /* login-button.png */; };
@@ -68,7 +71,6 @@
 		95C6A85C14DBED54004F023A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C6A85A14DBED54004F023A /* RootViewController.m */; };
 		95C6A85D14DBED54004F023A /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85B14DBED54004F023A /* RootViewController.xib */; };
 		95C6A85F14DFE869004F023A /* app-icon-72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85E14DFE868004F023A /* app-icon-72x72.png */; };
-		95C6A86314E01573004F023A /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A86214E01573004F023A /* Default.png */; };
 		AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */; };
 		AC26C82914DBF67400ABD693 /* ChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81D14DBF67400ABD693 /* ChallengeHandler.m */; };
 		AC26C82A14DBF67400ABD693 /* ClientIdentityChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81F14DBF67400ABD693 /* ClientIdentityChallengeHandler.m */; };
@@ -175,6 +177,9 @@
 		1011436E14CF749C006E5909 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		9557904514E262D100789EDF /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
 		9557904614E262D100789EDF /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
+		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
+		9575360D14E4251A002A3E52 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
+		9575360E14E4251A002A3E52 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-logo-transparent.png"; sourceTree = "<group>"; };
 		95C6A84614DBB769004F023A /* login-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-clicked.png"; sourceTree = "<group>"; };
 		95C6A84714DBB769004F023A /* login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button.png"; sourceTree = "<group>"; };
@@ -187,7 +192,6 @@
 		95C6A85A14DBED54004F023A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		95C6A85B14DBED54004F023A /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		95C6A85E14DFE868004F023A /* app-icon-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-72x72.png"; sourceTree = "<group>"; };
-		95C6A86214E01573004F023A /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		AC26C81A14DBF67400ABD693 /* AuthenticationChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationChallengeHandler.h; sourceTree = "<group>"; };
 		AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationChallengeHandler.m; sourceTree = "<group>"; };
 		AC26C81C14DBF67400ABD693 /* ChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeHandler.h; sourceTree = "<group>"; };
@@ -415,7 +419,9 @@
 		9569CC5414DAF6B10036D8FB /* Latest Images */ = {
 			isa = PBXGroup;
 			children = (
-				95C6A86214E01573004F023A /* Default.png */,
+				9575360D14E4251A002A3E52 /* Default-Landscape.png */,
+				9575360E14E4251A002A3E52 /* Default-Portrait.png */,
+				9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */,
 				95C6A85E14DFE868004F023A /* app-icon-72x72.png */,
 				95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */,
 				95C6A84614DBB769004F023A /* login-button-clicked.png */,
@@ -585,7 +591,9 @@
 				95C6A85414DBB769004F023A /* open-account-button.png in Resources */,
 				95C6A85D14DBED54004F023A /* RootViewController.xib in Resources */,
 				95C6A85F14DFE869004F023A /* app-icon-72x72.png in Resources */,
-				95C6A86314E01573004F023A /* Default.png in Resources */,
+				9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */,
+				9575360F14E4251A002A3E52 /* Default-Landscape.png in Resources */,
+				9575361014E4251A002A3E52 /* Default-Portrait.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
