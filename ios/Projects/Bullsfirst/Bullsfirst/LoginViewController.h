@@ -21,7 +21,7 @@
 #import <UIKit/UIKit.h>
 #import "OpenAccountViewController.h"
 #import "UITextField+Padding.h"
-@protocol LoginViewControllerDelegate;
+
 @class BullFirstWebServiceObject;
 
 @interface LoginViewController : UIViewController
@@ -32,7 +32,6 @@
     IBOutlet UIActivityIndicatorView *spinner;
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
-    __weak id<LoginViewControllerDelegate> delegate;
     OpenAccountViewController *openAccountViewController;
     UIDeviceOrientation orientation;
     IBOutlet UIView *groupedView;
@@ -40,7 +39,6 @@
     IBOutlet UIButton *openAccountButton;
     
 }
-@property(nonatomic,weak) id <LoginViewControllerDelegate> delegate;
 
 @property (nonatomic, retain) UITextField *username;
 @property (nonatomic, retain) UITextField *password;
@@ -50,8 +48,4 @@
 - (IBAction)openAccount:(id)sender;
 
 - (void)logout;
-@end
-
-@protocol LoginViewControllerDelegate <NSObject>
--(void) loggedin:(NSString*) fullName;
 @end

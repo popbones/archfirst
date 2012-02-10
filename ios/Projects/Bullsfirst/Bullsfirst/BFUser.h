@@ -20,4 +20,6 @@
 
 + (BFUser *)userFromJSONData:(NSData *)jsonData;
 
+- (id)initWithName:(NSString *)first lastName:(NSString *)last username:(NSString *)user;
+
 @end

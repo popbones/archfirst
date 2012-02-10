@@ -33,7 +33,6 @@
 
 @synthesize username;
 @synthesize password;
-@synthesize delegate;
 @synthesize restService;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -90,14 +89,6 @@
     
     [super viewDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsShown:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsHidden:) name:UIKeyboardDidHideNotification object:nil];
-  //  UIDeviceOrientation currentorientation=[[UIDevice currentDevice]orientation];
-    
-    //Since the first view is Portrait setting the frames for portrait mode
-    
-    
-
     
     groupedView.backgroundColor=[UIColor clearColor];
     [password setReturnKeyType:UIReturnKeyGo];
@@ -106,7 +97,9 @@
     username.delegate=self;
     restService = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
    
-    // Do any additional setup after loading the view from its nib.
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newBFAccountCreated:) name:@"NEW_ACCOUNT_CREATED" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsShown:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsHidden:) name:UIKeyboardDidHideNotification object:nil];
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -212,14 +205,9 @@
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     appDelegate.currentUser = [BFUser userFromJSONData:data];
     
-    NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
-    fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
-    fullName=[fullName uppercaseString];
     [spinner stopAnimating];
-    [delegate loggedin:fullName];
     [self dismissModalViewControllerAnimated:YES];
-    
-    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGIN" object:nil];
 }
 
 
@@ -311,7 +299,7 @@
 
 -(void) newBFAccountCreated:(NSString*) fullName
 {
-    [delegate loggedin:fullName];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGIN" object:nil];
     [self dismissModalViewControllerAnimated:YES];
     
 }

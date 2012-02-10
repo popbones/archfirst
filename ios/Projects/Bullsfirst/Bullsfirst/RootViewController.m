@@ -85,14 +85,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
--(void) loggedin:(NSString *)fullName
-{
-    [accountsViewController retrieveAccountData];
-   
-    accountsViewController.toolbar.userName.text=fullName;
-    accountsViewController.toolbarPortraitView.userName.text=fullName;
-       
-}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations

@@ -19,13 +19,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "LoginViewController.h"
 #import "AccountsViewController.h"
 #import "PositionsViewController.h"
 #import "OrdersViewController.h"
 #import "TransactionsViewController.h"
 
-@interface RootViewController : UITabBarController <UITabBarControllerDelegate,LoginViewControllerDelegate>
+@interface RootViewController : UITabBarController <UITabBarControllerDelegate>
 {
     AccountsViewController *accountsViewController;
     PositionsViewController *positionsViewController;

@@ -38,7 +38,6 @@
     loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
     [self.tabBarController presentModalViewController:loginViewController animated:YES];        
-    loginViewController.delegate=(RootViewController *)self.tabBarController;
 
     return YES;
 }

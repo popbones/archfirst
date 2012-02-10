@@ -27,6 +27,7 @@
 #import "PieChartMVAccountsViewController.h"
 #import "PieChartMVPositionViewController.h"
 #import "BullFirstWebServiceObject.h"
+#import "AppDelegate.h"
 
 @implementation AccountsViewController
 
@@ -161,6 +162,7 @@ if(landscapeView.superview)
         [self.view insertSubview:portraitView atIndex:0];
     }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
     
 }
 
@@ -282,6 +284,21 @@ if(landscapeView.superview)
     [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     
     [self presentModalViewController:editAccountViewController animated:YES];
+}
+
+#pragma mark MVC Delegate methods
+
+-(void)userLogin:(NSNotification*)notification
+{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [self retrieveAccountData];
+
+    NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
+    fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
+    fullName=[fullName uppercaseString];
+
+    self.toolbar.userName.text=fullName;
+    self.toolbarPortraitView.userName.text=fullName;
 }
 
 

@@ -13,35 +13,38 @@
 
 + (BFUser *)userFromJSONData:(NSData *)jsonData
 {
-    BFUser *user = [[BFUser alloc] init];
-
-    if (user != nil) {
-        NSError *err;
-        NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
-        NSLog(@"jsonObject = %@", jsonObject);
-        
-        NSDictionary* nameObj=(NSDictionary*)jsonObject;
-        
-        user.firstName=[nameObj objectForKey:@"firstName"];
-        user.lastName=[nameObj objectForKey:@"lastName"];
-        user.userName=[nameObj objectForKey:@"username"];
-    }
-    return user;
+    NSError *err;
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+    NSLog(@"jsonObject = %@", jsonObject);
+    
+    NSDictionary* nameObj=(NSDictionary*)jsonObject;
+    
+    return [[BFUser alloc] initWithName:[nameObj objectForKey:@"firstName"]
+                               lastName:[nameObj objectForKey:@"lastName"] 
+                               username:[nameObj objectForKey:@"username"]];
 }
 
-- (id)init
+- (id)initWithName:(NSString *)first lastName:(NSString *)last username:(NSString *)user
 {
     self = [super init];
     
     if(self)
     {
-        self.firstName = @"";
-        self.lastName = @"";
-        self.userName = @"";
+        self.firstName = [NSString stringWithString:first];
+        self.lastName = [NSString stringWithString:last];
+        self.userName = [NSString stringWithString:user];
         
     }
     
     return self;
+}
+
+
+- (id)init
+{
+    return [[BFUser alloc] initWithName:@""
+                               lastName:@"" 
+                               username:@""];
 }
 
 @end

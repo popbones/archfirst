@@ -21,6 +21,7 @@
 #import "OpenAccountViewController.h"
 #import "LoginViewController.h"
 #import "BullFirstWebServiceObject.h"
+#import "AppDelegate.h"
 
 @implementation OpenAccountViewController
 
@@ -190,16 +191,13 @@
     else if(currentProcess == TransferAmount)
     {
         [spinner stopAnimating];
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        appDelegate.currentUser = [[BFUser alloc] initWithName:firstName.text
+                                                      lastName:lastName.text 
+                                                      username:username.text];
+        
         [self performSelectorOnMainThread:@selector(dismissModalViewControllerAnimated:) withObject:nil waitUntilDone:YES];
-        NSString* fullName=firstName.text;
-        fullName=[fullName stringByAppendingString:@" "];
-        fullName=[fullName stringByAppendingString:lastName.text];
-        fullName=[fullName uppercaseString];
-        
-        [delegate newBFAccountCreated:fullName];
-        
-        openAccountButton.enabled = YES;
-        cancelButton.enabled = YES;
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"NEW_ACCOUNT_CREATED" object:nil];
     }
 }
 
@@ -270,8 +268,6 @@
     // Do any additional setup after loading the view from its nib.
     
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-    
-        
     
 }
 

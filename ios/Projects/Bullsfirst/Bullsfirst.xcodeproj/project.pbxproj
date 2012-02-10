@@ -57,9 +57,9 @@
 		00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */; };
 		1011437C14CF77EF006E5909 /* libCorePlot-CocoaTouch.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1011437814CF749D006E5909 /* libCorePlot-CocoaTouch.a */; };
 		545C5E7614E55DA6003560C8 /* BFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 545C5E7514E55DA6003560C8 /* BFUser.m */; };
+		545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */; };
+		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
-		9575360F14E4251A002A3E52 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360D14E4251A002A3E52 /* Default-Landscape.png */; };
-		9575361014E4251A002A3E52 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360E14E4251A002A3E52 /* Default-Portrait.png */; };
 		95BA216F14E506B000F813E2 /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */; };
 		95BA217014E506B100F813E2 /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */; };
 		95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */; };
@@ -177,9 +177,9 @@
 		1011436E14CF749C006E5909 /* CorePlot-CocoaTouch.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = "CorePlot-CocoaTouch.xcodeproj"; path = "../core-plot/framework/CorePlot-CocoaTouch.xcodeproj"; sourceTree = "<group>"; };
 		545C5E7414E55DA6003560C8 /* BFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFUser.h; sourceTree = "<group>"; };
 		545C5E7514E55DA6003560C8 /* BFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFUser.m; sourceTree = "<group>"; };
+		545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
+		545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
-		9575360D14E4251A002A3E52 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
-		9575360E14E4251A002A3E52 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-landscape.png"; sourceTree = "<group>"; };
 		95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-portrait.png"; sourceTree = "<group>"; };
 		95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-logo-transparent.png"; sourceTree = "<group>"; };
@@ -349,10 +349,10 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */,
+				545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */,
 				95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */,
 				95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */,
-				9575360D14E4251A002A3E52 /* Default-Landscape.png */,
-				9575360E14E4251A002A3E52 /* Default-Portrait.png */,
 				9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */,
 				95C6A85E14DFE868004F023A /* app-icon-72x72.png */,
 				95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */,
@@ -582,10 +582,10 @@
 				95C6A85D14DBED54004F023A /* RootViewController.xib in Resources */,
 				95C6A85F14DFE869004F023A /* app-icon-72x72.png in Resources */,
 				9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */,
-				9575360F14E4251A002A3E52 /* Default-Landscape.png in Resources */,
-				9575361014E4251A002A3E52 /* Default-Portrait.png in Resources */,
 				95BA216F14E506B000F813E2 /* login-screen-background-landscape.png in Resources */,
 				95BA217014E506B100F813E2 /* login-screen-background-portrait.png in Resources */,
+				545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */,
+				545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
