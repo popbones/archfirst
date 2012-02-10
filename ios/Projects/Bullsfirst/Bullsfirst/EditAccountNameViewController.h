@@ -32,15 +32,8 @@
     IBOutlet UIButton *cancelButton;
     NSString* oldAccountName;
     NSString* accountId;
-    
-    NSURLConnection *urlConnection;
-    NSMutableData *jsonResponseData;
-
-    __weak AccountsViewController *avc;
-    
 }
 
-@property (nonatomic, weak) AccountsViewController *avc;
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName withId:(NSString*) accId;;

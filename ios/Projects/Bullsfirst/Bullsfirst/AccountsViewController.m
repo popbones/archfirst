@@ -195,9 +195,7 @@
 
 -(void) editingStartedForAccountWithName:(NSString *)accName withId:(NSString*) accId
 {
-    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:accName withId:accId];
-    [editAccountViewController setAvc:self];
-    
+    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:accName withId:accId];    
     [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     

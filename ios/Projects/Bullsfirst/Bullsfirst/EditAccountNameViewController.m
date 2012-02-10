@@ -24,7 +24,6 @@
 
 
 @implementation EditAccountNameViewController
-@synthesize avc;
 @synthesize restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil oldAccountName:(NSString*) oldAccName withId:(NSString*) accId
@@ -86,11 +85,7 @@
 -(void)requestFailed:(NSError *)error
 {   
     [spinner stopAnimating];
-    urlConnection = nil;
-    jsonResponseData = nil;
-    
     NSString *errorString = [NSString stringWithString:@"Try Again!"];
-    
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
     editAccountButton.enabled = YES;
@@ -100,11 +95,8 @@
 -(void)requestSucceeded:(NSData *)data
 {
     [spinner stopAnimating];
-    jsonResponseData = [NSMutableData dataWithData:data];
     [self dismissModalViewControllerAnimated:YES];
-    editAccountButton.enabled = YES;
-    cancelButton.enabled = YES;
-    [avc refreshAccounts:self];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
     
 }
 
