@@ -275,18 +275,6 @@
     
     [self presentModalViewController:openAccountViewController animated:YES];
 }
-/*
-- (void)logout
-{
-    // Clear login form
-    [username setText:@""];
-    [password setText:@""];
-    
-    // Clear BrokerageAccountStore
-    [[BFBrokerageAccountStore defaultStore] clearAccounts]; 
-}
-
-*/
 
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {

@@ -47,5 +47,4 @@
 - (IBAction)login:(id)sender;
 - (IBAction)openAccount:(id)sender;
 
-- (void)logout;
 @end
