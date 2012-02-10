@@ -20,11 +20,14 @@
 
 #import <UIKit/UIKit.h>
 #import "LoginViewController.h"
+#import "BFUser.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
+    BFUser *currentUser;
 }
+@property (strong, nonatomic) BFUser *currentUser;
 @property (strong, nonatomic) UIWindow *window;
-@property(strong,nonatomic) LoginViewController *loginViewController;
+@property (strong, nonatomic) LoginViewController *loginViewController;
 @property (strong, nonatomic) UITabBarController *tabBarController;
 @end

@@ -25,6 +25,8 @@
 @synthesize loginViewController;
 @synthesize window = _window;
 @synthesize tabBarController=_tabBarController;
+@synthesize currentUser;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -37,11 +39,7 @@
     [loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
     [self.tabBarController presentModalViewController:loginViewController animated:YES];        
     loginViewController.delegate=(RootViewController *)self.tabBarController;
-    //LoginViewController *lvc = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];    
-    //[[self window] setRootViewController:lvc];
-    
-    //self.window.backgroundColor = [UIColor whiteColor];
-    //[self.window makeKeyAndVisible];
+
     return YES;
 }
 

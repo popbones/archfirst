@@ -25,8 +25,9 @@
 #import "TransactionsViewController.h"
 #import "BFBrokerageAccountStore.h"
 #import "BFToolbar.h"
-
+#import "BFUser.h"
 #import "BullFirstWebServiceObject.h"
+#import "AppDelegate.h"
 
 @implementation LoginViewController
 
@@ -208,16 +209,11 @@
 
 -(void)requestSucceeded:(NSData *)data
 {
-    NSError *err;
-    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
-    NSLog(@"jsonObject = %@", jsonObject);
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.currentUser = [BFUser userFromJSONData:data];
     
-    NSDictionary* nameObj=(NSDictionary*)jsonObject;
-    
-    NSString* fullName=[nameObj objectForKey:@"firstName"];
-    
-    fullName=[fullName stringByAppendingString:@" "];
-    fullName=[fullName stringByAppendingString:[nameObj objectForKey:@"lastName"]];
+    NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
+    fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
     fullName=[fullName uppercaseString];
     [spinner stopAnimating];
     [delegate loggedin:fullName];
