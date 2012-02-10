@@ -30,6 +30,7 @@
 @synthesize tradeBTN;
 @synthesize refreshBTN;
 @synthesize switchAcountBTN;
+@synthesize positionCell;
 
 - (id)init
 {
@@ -171,15 +172,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"PositionCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    }
+    UITableViewCell *cell;
+    [[NSBundle mainBundle] loadNibNamed:@"PositionTableViewCell" owner:self options:nil];
+    cell = positionCell;
+
+    UILabel *label;
+    label = (UILabel *)[cell viewWithTag:1];
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:[indexPath row]];
-    cell.textLabel.text = account.name;
+    label.text = account.name;
     
     return cell;
 }

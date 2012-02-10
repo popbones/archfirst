@@ -21,6 +21,8 @@
 #import <Foundation/Foundation.h>
 
 @interface PositionsViewController : UIViewController
+
+@property (strong, nonatomic) IBOutlet UITableViewCell *positionCell;
 @property (strong, nonatomic) IBOutlet UITableView *positionTBL;
 @property (strong, nonatomic) IBOutlet UILabel *accountName;
 @property (strong, nonatomic) IBOutlet UIButton *transferBTN;
@@ -31,5 +33,6 @@
 - (IBAction)refreshBTNClicked:(id)sender;
 - (IBAction)tradeBTNClicked:(id)sender;
 - (IBAction)transferBTNClicked:(id)sender;
+
 
 @end
