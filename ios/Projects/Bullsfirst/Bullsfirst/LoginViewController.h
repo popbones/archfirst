@@ -35,6 +35,9 @@
     __weak id<LoginViewControllerDelegate> delegate;
     OpenAccountViewController *openAccountViewController;
     UIDeviceOrientation orientation;
+    IBOutlet UIView *groupedView;
+    IBOutlet UIImageView *backgroundImage;
+    IBOutlet UIButton *openAccountButton;
     
 }
 @property(nonatomic,weak) id <LoginViewControllerDelegate> delegate;

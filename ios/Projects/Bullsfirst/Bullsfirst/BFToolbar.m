@@ -44,6 +44,11 @@
     return [self init];
 }
 */
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    // Return YES for supported orientations
+	return YES;
+}
 - (IBAction)logout
 {
     AppDelegate* appDelegate=(AppDelegate*)[UIApplication sharedApplication].delegate;

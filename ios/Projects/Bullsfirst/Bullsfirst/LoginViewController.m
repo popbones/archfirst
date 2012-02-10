@@ -65,6 +65,25 @@
     view.transform=transform;
     [UIView commitAnimations];
 }
+-(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        groupedView.frame=CGRectMake(255, 156, groupedView.frame.size.width, groupedView.frame.size.height);
+        backgroundImage.frame=CGRectMake(0, 0, 1024, 768);
+        [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-landscape.png"]];
+        openAccountButton.frame=CGRectMake(433, 694, openAccountButton.frame.size.width, openAccountButton.frame.size.height);
+    }
+    else
+    {
+        groupedView.frame=CGRectMake(143, 177, groupedView.frame.size.width, groupedView.frame.size.height);
+         backgroundImage.frame=CGRectMake(0, 0, 768, 1024);
+        [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-portrait.png"]];
+        openAccountButton.frame=CGRectMake(313, 710, openAccountButton.frame.size.width, openAccountButton.frame.size.height);
+    }
+
+
+}
 - (void)viewDidLoad
 {
     
@@ -72,36 +91,40 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsShown:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsHidden:) name:UIKeyboardDidHideNotification object:nil];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didRotate:) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
-     
-   
+  //  UIDeviceOrientation currentorientation=[[UIDevice currentDevice]orientation];
+    
+    //Since the first view is Portrait setting the frames for portrait mode
+    
+    
+
+    
+    groupedView.backgroundColor=[UIColor clearColor];
     [password setReturnKeyType:UIReturnKeyGo];
    
     password.delegate=self;
     username.delegate=self;
     restService = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-    
+   
     // Do any additional setup after loading the view from its nib.
     
 }
--(void) didRotate:(NSNotification*) notification
+-(void)viewWillAppear:(BOOL)animated
 {
-    UIDeviceOrientation newOrientation=[[UIDevice currentDevice]orientation];
-    if(newOrientation!=UIDeviceOrientationUnknown && newOrientation!=UIDeviceOrientationFaceUp&&newOrientation!=UIDeviceOrientationFaceDown)
+    [super viewWillAppear:animated];
+    orientation=[[UIDevice currentDevice]orientation];
+    if(orientation==UIDeviceOrientationLandscapeLeft||orientation==UIDeviceOrientationLandscapeRight)
     {
-        orientation=newOrientation;
+        groupedView.frame=CGRectMake(255, 156, groupedView.frame.size.width, groupedView.frame.size.height);
+        backgroundImage.frame=CGRectMake(0, 0, 1024, 768);
+        [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-landscape.png"]];
+        openAccountButton.frame=CGRectMake(433, 694, openAccountButton.frame.size.width, openAccountButton.frame.size.height);
     }
-    if(orientation==UIDeviceOrientationPortrait||orientation==UIDeviceOrientationPortraitUpsideDown)  
+    else
     {
-        CGRect frame= username.frame;
-       // frame.origin.y-=50;
-        username.frame=frame;
-        
-    }else if(orientation==UIDeviceOrientationLandscapeLeft||orientation==UIDeviceOrientationLandscapeRight)
-    {
-        CGRect frame= username.frame;
-       // frame.origin.y+=50;
-        username.frame=frame;
+        groupedView.frame=CGRectMake(143, 177, groupedView.frame.size.width, groupedView.frame.size.height);
+        backgroundImage.frame=CGRectMake(0, 0, 768, 1024);
+        [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-portrait.png"]];
+        openAccountButton.frame=CGRectMake(313, 710, openAccountButton.frame.size.width, openAccountButton.frame.size.height);
     }
 }
 - (void)viewDidUnload
@@ -112,60 +135,49 @@
 }
 -(void) keyBoardIsShown: (NSNotification*) notification
 {
-    orientation=[[UIDevice currentDevice]orientation];
-    if(orientation==UIDeviceOrientationLandscapeRight)  
-    {
     NSTimeInterval animationDuration=0.3;
-    CGRect frame= self.view.frame;
-    frame.origin.x-=70;
-    frame.size.width+=70;
-    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    self.view.frame=frame;
-    [UIView commitAnimations];
-    }
-    else if(orientation==UIDeviceOrientationLandscapeLeft)
-    {
-        NSTimeInterval animationDuration=0.3;
-        CGRect frame= self.view.frame;
-        frame.origin.x-=70;
-        frame.size.width+=70;
-        [UIView beginAnimations:@"KeyboardLandScape" context:nil];
-        [UIView setAnimationDuration:animationDuration];
-        self.view.frame=frame;
-        [UIView commitAnimations];
-    }
-}
--(void) keyBoardIsHidden: (NSNotification*) notification
-{
     orientation=[[UIDevice currentDevice]orientation];
     if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
     {
-    NSTimeInterval animationDuration=0.3;
-    CGRect frame= self.view.frame;
-    frame.origin.x+=70;
-    frame.size.width-=70;
-    [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-    [UIView setAnimationDuration:animationDuration];
-    self.view.frame=frame;
+   
+    CGRect viewframe= groupedView.frame;
+    viewframe.origin.y-=100;
+    viewframe.size.height+=100;
+       groupedView.frame=viewframe;
+        CGRect imageframe= backgroundImage.frame;
+        imageframe.origin.y-=100;
+        imageframe.size.height+=100;
+       [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+       [UIView setAnimationDuration:animationDuration];
+        backgroundImage.frame=imageframe;
     [UIView commitAnimations];
     }
-    else
+  
+}
+-(void) keyBoardIsHidden: (NSNotification*) notification
+{
+    NSTimeInterval animationDuration=0.3;
+    orientation=[[UIDevice currentDevice]orientation];
+    if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
     {
-    
+        CGRect viewframe= groupedView.frame;
+        viewframe.origin.y+=100;
+        viewframe.size.height-=100;
+        groupedView.frame=viewframe;
+        CGRect imageframe= backgroundImage.frame;
+        imageframe.origin.y+=100;
+        imageframe.size.height-=100;
+       [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        backgroundImage.frame=imageframe;
+        [UIView commitAnimations];
+
     }
+   
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft||interfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-        self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"login-screen-background-landscape.png"]];
-    }
-    else
-    {
-        self.view.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"login-screen-background-portrait.png"]];
-    }
-    return YES;
+        return YES;
 }
 
 #pragma mark - selectors for handling rest call callbacks

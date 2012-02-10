@@ -59,11 +59,11 @@
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		9575360F14E4251A002A3E52 /* Default-Landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360D14E4251A002A3E52 /* Default-Landscape.png */; };
 		9575361014E4251A002A3E52 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360E14E4251A002A3E52 /* Default-Portrait.png */; };
+		95BA216F14E506B000F813E2 /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */; };
+		95BA217014E506B100F813E2 /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */; };
 		95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */; };
 		95C6A84E14DBB769004F023A /* login-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84614DBB769004F023A /* login-button-clicked.png */; };
 		95C6A84F14DBB769004F023A /* login-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84714DBB769004F023A /* login-button.png */; };
-		95C6A85014DBB769004F023A /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84814DBB769004F023A /* login-screen-background-landscape.png */; };
-		95C6A85114DBB769004F023A /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84914DBB769004F023A /* login-screen-background-portrait.png */; };
 		95C6A85214DBB769004F023A /* login-screen-form-fields-with-hints.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */; };
 		95C6A85314DBB769004F023A /* open-account-button-clicked.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84B14DBB769004F023A /* open-account-button-clicked.png */; };
 		95C6A85414DBB769004F023A /* open-account-button.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84C14DBB769004F023A /* open-account-button.png */; };
@@ -177,11 +177,11 @@
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		9575360D14E4251A002A3E52 /* Default-Landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Landscape.png"; sourceTree = "<group>"; };
 		9575360E14E4251A002A3E52 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-landscape.png"; sourceTree = "<group>"; };
+		95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-portrait.png"; sourceTree = "<group>"; };
 		95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-logo-transparent.png"; sourceTree = "<group>"; };
 		95C6A84614DBB769004F023A /* login-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-clicked.png"; sourceTree = "<group>"; };
 		95C6A84714DBB769004F023A /* login-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button.png"; sourceTree = "<group>"; };
-		95C6A84814DBB769004F023A /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-landscape.png"; sourceTree = "<group>"; };
-		95C6A84914DBB769004F023A /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-portrait.png"; sourceTree = "<group>"; };
 		95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields-with-hints.png"; sourceTree = "<group>"; };
 		95C6A84B14DBB769004F023A /* open-account-button-clicked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button-clicked.png"; sourceTree = "<group>"; };
 		95C6A84C14DBB769004F023A /* open-account-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "open-account-button.png"; sourceTree = "<group>"; };
@@ -346,6 +346,8 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */,
+				95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */,
 				9575360D14E4251A002A3E52 /* Default-Landscape.png */,
 				9575360E14E4251A002A3E52 /* Default-Portrait.png */,
 				9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */,
@@ -353,8 +355,6 @@
 				95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */,
 				95C6A84614DBB769004F023A /* login-button-clicked.png */,
 				95C6A84714DBB769004F023A /* login-button.png */,
-				95C6A84814DBB769004F023A /* login-screen-background-landscape.png */,
-				95C6A84914DBB769004F023A /* login-screen-background-portrait.png */,
 				95C6A84A14DBB769004F023A /* login-screen-form-fields-with-hints.png */,
 				95C6A84B14DBB769004F023A /* open-account-button-clicked.png */,
 				95C6A84C14DBB769004F023A /* open-account-button.png */,
@@ -571,8 +571,6 @@
 				95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */,
 				95C6A84E14DBB769004F023A /* login-button-clicked.png in Resources */,
 				95C6A84F14DBB769004F023A /* login-button.png in Resources */,
-				95C6A85014DBB769004F023A /* login-screen-background-landscape.png in Resources */,
-				95C6A85114DBB769004F023A /* login-screen-background-portrait.png in Resources */,
 				95C6A85214DBB769004F023A /* login-screen-form-fields-with-hints.png in Resources */,
 				95C6A85314DBB769004F023A /* open-account-button-clicked.png in Resources */,
 				95C6A85414DBB769004F023A /* open-account-button.png in Resources */,
@@ -581,6 +579,8 @@
 				9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */,
 				9575360F14E4251A002A3E52 /* Default-Landscape.png in Resources */,
 				9575361014E4251A002A3E52 /* Default-Portrait.png in Resources */,
+				95BA216F14E506B000F813E2 /* login-screen-background-landscape.png in Resources */,
+				95BA217014E506B100F813E2 /* login-screen-background-portrait.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

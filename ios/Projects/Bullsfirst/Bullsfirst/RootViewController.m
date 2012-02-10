@@ -91,8 +91,7 @@
    
     accountsViewController.toolbar.userName.text=fullName;
     accountsViewController.toolbarPortraitView.userName.text=fullName;
-    // accountsViewController.pieChartMVAccountsViewController.view.hidden=FALSE;
-    
+       
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {

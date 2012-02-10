@@ -99,14 +99,9 @@ if(landscapeView.superview)
         [portraitView removeFromSuperview];
     }
 }
--(void) didRotate:(NSNotification*)notification
+-(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    UIDeviceOrientation newOrientation=[[UIDevice currentDevice]orientation];
-    if(newOrientation!=UIDeviceOrientationUnknown && newOrientation!=UIDeviceOrientationFaceUp&&newOrientation!=UIDeviceOrientationFaceDown)
-    {
-        orientation=newOrientation;
-    }
-    if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)
+    if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
     {
         [self clearCurrentView];
         [landscapeView addSubview:toolbar.view];
@@ -118,10 +113,11 @@ if(landscapeView.superview)
         [self clearCurrentView];
         [portraitView addSubview:toolbarPortraitView.view];
         [portraitView bringSubviewToFront:toolbarPortraitView.view];
-        
         [self.view insertSubview:portraitView atIndex:0];
     }
+
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -154,12 +150,15 @@ if(landscapeView.superview)
     
     [[self view] bringSubviewToFront:accountsPlotLabel];
     [[self view] bringSubviewToFront:positionPlotLabel];
-    [[UIDevice currentDevice] beginGeneratingDeviceOrientationNotifications];
-    [[NSNotificationCenter defaultCenter]addObserver:self selector:@selector(didRotate:) name:@"UIDeviceOrientationDidChangeNotification" object:nil];
     orientation=[[UIDevice currentDevice] orientation];
     if(orientation==UIDeviceOrientationUnknown||orientation==UIDeviceOrientationFaceDown||orientation==UIDeviceOrientationFaceUp)
     {
         orientation=UIDeviceOrientationPortrait;
+        [self clearCurrentView];
+        [portraitView addSubview:toolbarPortraitView.view];
+        [portraitView bringSubviewToFront:toolbarPortraitView.view];
+        
+        [self.view insertSubview:portraitView atIndex:0];
     }
     
     
@@ -167,20 +166,7 @@ if(landscapeView.superview)
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
-//    if(interfaceOrientation==UIInterfaceOrientationLandscapeLeft||interfaceOrientation==UIInterfaceOrientationLandscapeRight)
-//    {
-//        headerView.autoresizingMask=UIViewAutoresizingNone;
-//        headerView.bounds=CGRectMake(200,0, 450, headerView.bounds.size.height);
-//        
-//     
-//    }
-//    else
-//    {
-//        headerView.autoresizingMask=UIViewAutoresizingNone;
-//        headerView.bounds=CGRectMake(10,0, 700, headerView.bounds.size.height);
-//        
-//    }
+    
     return YES;
 }
 
