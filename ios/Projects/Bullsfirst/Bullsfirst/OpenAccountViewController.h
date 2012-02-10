@@ -26,6 +26,11 @@
 
 @interface OpenAccountViewController : UIViewController
 {
+    
+    //to keep track of the responses being received from the server
+    enum { CreateNewBFAccount, CreateNewBrokerageAccount, CreateExternalAccount, TransferAmount} currentProcess;
+    
+    
     IBOutlet UITextField *firstName;
     IBOutlet UITextField *lastName;
     IBOutlet UITextField *username;
@@ -38,17 +43,18 @@
     
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
-    bool newAccountCreated;
     
-//    __weak LoginViewController *lvc;
+    NSNumber* newBrokerageAccountId;
+    NSNumber* newExternalAccountId;
+    
     __weak id<OpenAccountViewControllerDelegate> delegate;
 }
 
 
 @property (nonatomic,weak) id<OpenAccountViewControllerDelegate> delegate;
 //@property (nonatomic, weak) LoginViewController *lvc;
-@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObjectForCreateNewBFAccount;
-@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObjectForCreateNewBrokerageAccount;
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
+
 
 - (IBAction)openAccountButtonClicked:(id)sender;
 - (IBAction)cancelButtonClicked:(id)sender;

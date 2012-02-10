@@ -24,10 +24,8 @@
 
 @implementation OpenAccountViewController
 
-//@synthesize lvc;
 @synthesize delegate;
-@synthesize restServiceObjectForCreateNewBFAccount;
-@synthesize restServiceObjectForCreateNewBrokerageAccount;
+@synthesize restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -36,6 +34,15 @@
         // Custom initialization
     }
     return self;
+}
+-(void) goToAccountView
+{
+    [self performSelectorOnMainThread:@selector(dismissModalViewControllerAnimated:) withObject:nil waitUntilDone:YES];
+    [delegate newBFAccountCreated:[NSString stringWithFormat:@"%@ %@",[firstName.text uppercaseString], [lastName.text uppercaseString]]];
+    
+    openAccountButton.enabled = YES;
+    cancelButton.enabled = YES;
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -49,6 +56,7 @@
 #pragma mark - helper methods
 -(void) createBrokerageAccount
 {
+    currentProcess = CreateNewBrokerageAccount;
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
     
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
@@ -57,43 +65,97 @@
     NSError *err;
     NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
     
-    [restServiceObjectForCreateNewBrokerageAccount postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+    [restServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
     
 }
 
+-(void) createExternalAccount
+{
+    
+    currentProcess = CreateExternalAccount;
+    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/external_accounts"];
+    
+    NSMutableDictionary* jsonDic = [[NSMutableDictionary alloc]init];
+    [jsonDic setValue:kDefaultExternalAccountName forKey:kExternalAccountName];
+    [jsonDic setValue:[NSNumber numberWithInt:kDefaultRoutingNumber] forKey:kRoutingNumber];
+    [jsonDic setValue:[NSNumber numberWithInt:kDefaultExternalAccountNumber] forKey:kAccountNumber];
+    
+    NSError *err;
+    NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
+    [restServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+}
 
-#pragma mark - selectors for handling rest call(Create new BF Account) callbacks
+-(void) transferAmount
+{
+    currentProcess = TransferAmount;
+    NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/accounts/%@/transfer_cash",newExternalAccountId]];
+    
+    
+    BFDebugLog(@"URL : %@",url.absoluteString);
+    NSMutableDictionary* jsonDic = [[NSMutableDictionary alloc]init];
+    
+    NSMutableDictionary* amountDic = [[NSMutableDictionary alloc]init];
+    [amountDic setValue:[NSNumber numberWithInt:kDefaultTransferAmount] forKey:kAmount];
+    [amountDic setValue:kUSD forKey:kCurrency];
+    
+    [jsonDic setValue:amountDic forKey:kAmount];
+    [jsonDic setValue:newBrokerageAccountId forKey:kToAccountId];
+    
+    NSError *err;
+    NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
+    [restServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+}
 
--(void)receivedDataForCreateNewBFAccount:(NSData *)data
+-(void)receivedData:(NSData *)data
 {
     
 }
 
--(void)responseReceivedForCreateNewBFAccount:(NSURLResponse *)data
+-(void)responseReceived:(NSURLResponse *)data
 {
-    
+
 }
 
--(void)requestFailedForCreateNewBFAccount:(NSError *)error
+-(void)requestFailed:(NSError *)error
 { 
     [spinner stopAnimating];
     urlConnection = nil;
     jsonResponseData = nil;
     
     NSString *errorString = [NSString stringWithString:@"Try Again!"];
-    
-    if(error.code == 409)
-        errorString = @"Username already exists";
-    
+    BFDebugLog(@"%@ %@",error.description,error.debugDescription);
+    if(currentProcess == CreateNewBFAccount)
+    {
+        if(error.code == 409)
+            errorString = @"Username already exists";
+    }
+    else if(currentProcess == CreateNewBrokerageAccount)
+    {
+        errorString = @"Not able to create default brokerage account";
+    }
+    else if(currentProcess == CreateExternalAccount)
+    {
+        errorString = @"Not able to create default external account";
+    }
+    else if(currentProcess == TransferAmount)
+    {
+        if([error code] == 403)
+        {
+            errorString = @"Insufficient Funds";
+        }
+    }
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [av show];
-    
+    [av show];    
     openAccountButton.enabled = YES;
     cancelButton.enabled = YES;
+    if(currentProcess != CreateNewBFAccount)
+    {
+        [self goToAccountView];
+    }
 }
 
--(void)requestSucceededForCreateNewBFAccount:(NSData *)data
+-(void)requestSucceeded:(NSData *)data
 {
     jsonResponseData = [NSMutableData dataWithData:data];
     NSError *err;
@@ -101,80 +163,44 @@
     
     BFDebugLog(@"jsonObject = %@", jsonObject);
     
-    // TODO: Handle error conditions and timeout
-    if([jsonObject objectForKey:kUrl])
+    if(currentProcess == CreateNewBFAccount)
     {
-        [[NSUserDefaults standardUserDefaults] setValue:[jsonObject valueForKey:kUrl] forKey:kUrl];
-        BFDebugLog(@"url = %@", [[NSUserDefaults standardUserDefaults] valueForKey:kUrl]);
+        [self createBrokerageAccount];       
     }
-    else if([jsonObject objectForKey:kDetail])
+    else if(currentProcess == CreateNewBrokerageAccount)
     {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                     message:[jsonObject valueForKey:kDetail]
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
+        if([jsonObject objectForKey:@"uri"])
+        {
+            NSArray* chunks = [[jsonObject objectForKey:@"uri"] componentsSeparatedByString:@"/"];
+            newBrokerageAccountId = [chunks lastObject];
+        }
+        
+        [self createExternalAccount];
+    }
+    else if(currentProcess == CreateExternalAccount)
+    {
+        if([jsonObject objectForKey:@"uri"])
+        {
+            NSArray* chunks = [[jsonObject objectForKey:@"uri"] componentsSeparatedByString:@"/"];
+            newExternalAccountId = [chunks lastObject];
+            BFDebugLog(@"%@",newExternalAccountId);
+        }
+        [self transferAmount];
+    }
+    else if(currentProcess == TransferAmount)
+    {
         [spinner stopAnimating];
-        return;                
+        [self performSelectorOnMainThread:@selector(dismissModalViewControllerAnimated:) withObject:nil waitUntilDone:YES];
+        NSString* fullName=firstName.text;
+        fullName=[fullName stringByAppendingString:@" "];
+        fullName=[fullName stringByAppendingString:lastName.text];
+        fullName=[fullName uppercaseString];
+        
+        [delegate newBFAccountCreated:fullName];
+        
+        openAccountButton.enabled = YES;
+        cancelButton.enabled = YES;
     }
-    
-    //Creating a new default brokerage account within the above user account
-    [self createBrokerageAccount];
-
-}
-
-#pragma mark - selectors for handling rest call(Create new Brokerage Account) callbacks
-
--(void)receivedDataForCreateNewBrokerageAccount:(NSData *)data
-{
-    
-}
-
--(void)responseReceivedForCreateNewBrokerageAccount:(NSURLResponse *)data
-{
-    
-}
-
--(void)requestFailedForCreateNewBrokerageAccount:(NSError *)error
-{ 
-    [spinner stopAnimating];
-    urlConnection = nil;
-    jsonResponseData = nil;
-    
-    NSString *errorString = [NSString stringWithString:@"Try Again!"];
-    
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [av show];
-    
-    openAccountButton.enabled = YES;
-    cancelButton.enabled = YES;
-}
-
--(void)requestSucceededForCreateNewBrokerageAccount:(NSData *)data
-{
-    [spinner stopAnimating];
-    jsonResponseData = [NSMutableData dataWithData:data];
-    
-    NSError *err;
-    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonResponseData options:0 error:&err];
-    BFDebugLog(@"jsonObject = %@", jsonObject);
-
-//    [[lvc username] setText:[username text]];
-//    [[lvc password] setText:[password text]];
-    
-    [self performSelectorOnMainThread:@selector(dismissModalViewControllerAnimated:) withObject:nil waitUntilDone:YES];
-    NSString* fullName=firstName.text;
-    fullName=[fullName stringByAppendingString:@" "];
-    fullName=[fullName stringByAppendingString:lastName.text];
-    fullName=[fullName uppercaseString];
-    
-    [delegate newBFAccountCreated:fullName];
-    
-    openAccountButton.enabled = YES;
-    cancelButton.enabled = YES;
-    
-
 }
 
 
@@ -206,6 +232,8 @@
     
     [spinner startAnimating];
     
+    currentProcess = CreateNewBFAccount;
+    
     openAccountButton.enabled = NO;
     cancelButton.enabled = NO;
     
@@ -216,17 +244,17 @@
     [jsonDic setValue:[lastName text] forKey:kLastName];
     [jsonDic setValue:[username text] forKey:kUsername];
     [jsonDic setValue:[password text] forKey:kPassword];
-        
+    
     NSError *err;
     NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
     
     //Opening new BullFirst Account
-    [restServiceObjectForCreateNewBFAccount postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+    [restServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
     
     //updating the webservice object about the credentials
     [WebServiceObject userLoginCredentialWithUsername:[username text] password:[password text]];
     
-
+    
 }
 
 - (IBAction)cancelButtonClicked:(id)sender
@@ -241,11 +269,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     
-    restServiceObjectForCreateNewBFAccount = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceivedForCreateNewBFAccount:) receiveDataSelector:@selector(receivedDataForCreateNewBFAccount:) successSelector:@selector(requestSucceededForCreateNewBFAccount:) errorSelector:@selector(requestFailedForCreateNewBFAccount:)];
-    restServiceObjectForCreateNewBrokerageAccount = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceivedForCreateNewBrokerageAccount:) receiveDataSelector:@selector(receivedDataForCreateNewBrokerageAccount:) successSelector:@selector(requestSucceededForCreateNewBrokerageAccount:) errorSelector:@selector(requestFailedForCreateNewBrokerageAccount:)];
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     
-    newAccountCreated = NO;
-    
+        
     
 }
 
@@ -261,7 +287,7 @@
     // Return YES for supported orientations
     
     return YES;
-
+    
 }
 
 
