@@ -22,9 +22,13 @@
 #import "BFToolbar.h"
 #import "WebServiceObject.h"
 #import "AppDelegate.h"
+#import "BFBrokerageAccountStore.h"
+#import "BullFirstWebServiceObject.h"
 
 @implementation RootViewController
 @synthesize accountsViewController;
+@synthesize restServiceObject;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -75,13 +79,20 @@
     [transactionsViewController.view bringSubviewToFront:toolBar.view];
     
     [self setViewControllers:[NSArray arrayWithObjects:accountsViewController,positionsViewController,ordersViewController,transactionsViewController, nil]];
+
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"REFRESH_ACCOUNT" object:nil];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_LOGIN" object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_LOGOUT" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"REFRESH_ACCOUNT" object:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -92,6 +103,36 @@
 	return YES;
 }
 
+- (void)retrieveAccountData
+{
+}
+
+#pragma mark - selectors for handling rest call callbacks
+
+-(void)receivedData:(NSData *)data
+{
+    
+}
+
+-(void)responseReceived:(NSURLResponse *)data
+{
+    
+}
+
+-(void)requestFailed:(NSError *)error
+{       
+    NSString *errorString = [NSString stringWithString:@"Try Refreshing!"];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)requestSucceeded:(NSData *)data
+{
+    [[BFBrokerageAccountStore defaultStore] accountsFromJSONData:data];
+}
+
+
 #pragma mark MVC Delegate methods
 
 -(void)userLogout:(NSNotification*)notification
@@ -99,6 +140,14 @@
     AppDelegate* appDelegate=(AppDelegate*)[UIApplication sharedApplication].delegate;
     [appDelegate.loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve]; 
     [self presentModalViewController: appDelegate.loginViewController animated:YES];
+    [[BFBrokerageAccountStore defaultStore] clearAccounts];
+}
+
+
+-(void)userLogin:(NSNotification*)notification
+{
+    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
+    [restServiceObject getRequestWithURL:url];    
 }
 
 /*

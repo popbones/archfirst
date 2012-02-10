@@ -316,32 +316,16 @@
 		00DFF90E148089B6001A4641 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				00DFF9021480893E001A4641 /* AccountsViewController.h */,
-				00DFF9031480893E001A4641 /* AccountsViewController.m */,
-				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
-				009C1A3A148D3FF400259534 /* AddAccountViewController.h */,
-				009C1A3B148D3FF400259534 /* AddAccountViewController.m */,
-				004F06CC148D421F003F35D3 /* AddAccountViewController.xib */,
-				00D5191C14891DBA0049F43E /* PieChartMVAccountsViewController.h */,
-				00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */,
-				00D51920148951370049F43E /* PieChartMVPositionViewController.h */,
-				AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */,
-				AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */,
-				AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */,
-				00D51921148951370049F43E /* PieChartMVPositionViewController.m */,
-				005B34B51486BF0F00C637F5 /* AccountsTableViewController.h */,
-				005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */,
-				00DFF90514808975001A4641 /* PositionsViewController.h */,
-				00DFF90614808975001A4641 /* PositionsViewController.m */,
-				00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */,
-				00DFF90814808988001A4641 /* OrdersViewController.h */,
-				00DFF90914808988001A4641 /* OrdersViewController.m */,
-				00DFF91D1480AB01001A4641 /* OrdersViewController.xib */,
-				00DFF90B1480899D001A4641 /* TransactionsViewController.h */,
-				00DFF90C1480899D001A4641 /* TransactionsViewController.m */,
-				00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */,
-				00B38DE41486CE0400DC62F2 /* BrokerageAccountCell.h */,
-				00B38DE51486CE0400DC62F2 /* BrokerageAccountCell.m */,
+				54B78A1C14E58F74002FF1AC /* Account Tab */,
+				54B78A1D14E58FA4002FF1AC /* Position Tab */,
+				54B78A1E14E58FD4002FF1AC /* Order Tab */,
+				54B78A1F14E58FED002FF1AC /* Transection Tab */,
+				00DFF9211480AD67001A4641 /* BFToolbar.h */,
+				00DFF9221480AD68001A4641 /* BFToolbar.m */,
+				00DFF9241480AD91001A4641 /* BFToolbar.xib */,
+				95C6A85914DBED54004F023A /* RootViewController.h */,
+				95C6A85A14DBED54004F023A /* RootViewController.m */,
+				95C6A85B14DBED54004F023A /* RootViewController.xib */,
 			);
 			name = Tabs;
 			sourceTree = "<group>";
@@ -410,13 +394,69 @@
 		545C5E3214E45AEC003560C8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				54B78A2014E5902A002FF1AC /* Login */,
 				00DFF90E148089B6001A4641 /* Tabs */,
-				00DFF9211480AD67001A4641 /* BFToolbar.h */,
-				00DFF9221480AD68001A4641 /* BFToolbar.m */,
-				00DFF9241480AD91001A4641 /* BFToolbar.xib */,
-				95C6A85914DBED54004F023A /* RootViewController.h */,
-				95C6A85A14DBED54004F023A /* RootViewController.m */,
-				95C6A85B14DBED54004F023A /* RootViewController.xib */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		54B78A1C14E58F74002FF1AC /* Account Tab */ = {
+			isa = PBXGroup;
+			children = (
+				00DFF9021480893E001A4641 /* AccountsViewController.h */,
+				00DFF9031480893E001A4641 /* AccountsViewController.m */,
+				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
+				009C1A3A148D3FF400259534 /* AddAccountViewController.h */,
+				009C1A3B148D3FF400259534 /* AddAccountViewController.m */,
+				004F06CC148D421F003F35D3 /* AddAccountViewController.xib */,
+				00D5191C14891DBA0049F43E /* PieChartMVAccountsViewController.h */,
+				00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */,
+				00D51920148951370049F43E /* PieChartMVPositionViewController.h */,
+				00D51921148951370049F43E /* PieChartMVPositionViewController.m */,
+				AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */,
+				AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */,
+				AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */,
+				005B34B51486BF0F00C637F5 /* AccountsTableViewController.h */,
+				005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */,
+				00B38DE41486CE0400DC62F2 /* BrokerageAccountCell.h */,
+				00B38DE51486CE0400DC62F2 /* BrokerageAccountCell.m */,
+			);
+			name = "Account Tab";
+			sourceTree = "<group>";
+		};
+		54B78A1D14E58FA4002FF1AC /* Position Tab */ = {
+			isa = PBXGroup;
+			children = (
+				00DFF90514808975001A4641 /* PositionsViewController.h */,
+				00DFF90614808975001A4641 /* PositionsViewController.m */,
+				00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */,
+			);
+			name = "Position Tab";
+			sourceTree = "<group>";
+		};
+		54B78A1E14E58FD4002FF1AC /* Order Tab */ = {
+			isa = PBXGroup;
+			children = (
+				00DFF90814808988001A4641 /* OrdersViewController.h */,
+				00DFF90914808988001A4641 /* OrdersViewController.m */,
+				00DFF91D1480AB01001A4641 /* OrdersViewController.xib */,
+			);
+			name = "Order Tab";
+			sourceTree = "<group>";
+		};
+		54B78A1F14E58FED002FF1AC /* Transection Tab */ = {
+			isa = PBXGroup;
+			children = (
+				00DFF90B1480899D001A4641 /* TransactionsViewController.h */,
+				00DFF90C1480899D001A4641 /* TransactionsViewController.m */,
+				00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */,
+			);
+			name = "Transection Tab";
+			sourceTree = "<group>";
+		};
+		54B78A2014E5902A002FF1AC /* Login */ = {
+			isa = PBXGroup;
+			children = (
 				00D3C41F147C28440067A768 /* LoginViewController.h */,
 				00D3C420147C28440067A768 /* LoginViewController.m */,
 				00D3C421147C28440067A768 /* LoginViewController.xib */,
@@ -424,7 +464,7 @@
 				00D3C42E147D537B0067A768 /* OpenAccountViewController.m */,
 				00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */,
 			);
-			name = "View Controllers";
+			name = Login;
 			sourceTree = "<group>";
 		};
 		AC26C81914DBF64700ABD693 /* Web Service Object */ = {

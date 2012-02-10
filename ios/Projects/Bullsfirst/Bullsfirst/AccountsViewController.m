@@ -31,7 +31,7 @@
 
 @implementation AccountsViewController
 
-@synthesize toolbar,restServiceObject,pieChartMVAccountsViewController,portraitView,landscapeView,toolbarPortraitView;
+@synthesize toolbar,pieChartMVAccountsViewController,portraitView,landscapeView,toolbarPortraitView;
 
 //- (id)init
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -53,12 +53,7 @@
     pieChartMVPositionViewController.view.hidden=true;
     pieChartMVAccountsViewController.view.hidden=false;
 }
-/*
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    return [self init];
-}
-*/
+
 -(void) pieChartMVAccountsClicked:(int) onIndex
 {
     pieChartMVPositionViewController.accountIndex=onIndex;
@@ -89,9 +84,10 @@
     pieChartMVPositionViewController.view.hidden=true;
     pieChartMVAccountsViewController.view.hidden=false;
 }
+
 -(void) clearCurrentView
 {
-if(landscapeView.superview)
+    if(landscapeView.superview)
     {
         [landscapeView removeFromSuperview];
     }
@@ -100,6 +96,7 @@ if(landscapeView.superview)
         [portraitView removeFromSuperview];
     }
 }
+
 -(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
@@ -122,8 +119,6 @@ if(landscapeView.superview)
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     
     accountsTableViewController = [[AccountsTableViewController alloc] init];
     [accountsTableViewController setView:accountsTable];
@@ -162,38 +157,24 @@ if(landscapeView.superview)
         [self.view insertSubview:portraitView atIndex:0];
     }
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+    [appDelegate addObserver:self forKeyPath:@"currentUser" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_LOGIN" object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_LOGOUT" object:nil];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate removeObserver:self forKeyPath:@"accounts"];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
+    [appDelegate removeObserver:self forKeyPath:@"currentUser"];
 }
 
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    
     return YES;
-}
-
-#pragma mark - Methods
-
-- (void)retrieveAccountData
-{
-    [spinner startAnimating];
-    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
-    [restServiceObject getRequestWithURL:url];    
 }
 
 - (IBAction)createAccount:(id)sender
@@ -209,51 +190,7 @@ if(landscapeView.superview)
 
 - (IBAction)refreshAccounts:(id)sender
 {
-    [[BFBrokerageAccountStore defaultStore] clearAccounts];
-    [self retrieveAccountData];
-}
-
--(void) clearViewData
-{
-    [[BFBrokerageAccountStore defaultStore] clearAccounts];
-    /*
-    [accountsTable reloadData];
-    [accountsTablePortraitView reloadData];
-    [pieChartMVAccountsViewController constructPieChart];
-    [pieChartMVPositionViewController constructPieChart];
-*/
-}
-
-
-#pragma mark - selectors for handling rest call callbacks
-
--(void)receivedData:(NSData *)data
-{
-    
-}
-
--(void)responseReceived:(NSURLResponse *)data
-{
-    
-}
-
--(void)requestFailed:(NSError *)error
-{   
-    [spinner stopAnimating];
-    urlConnection = nil;
-    jsonResponseData = nil;
-    
-   NSString *errorString = [NSString stringWithString:@"Try Refreshing!"];
-    
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [av show];
-}
-
--(void)requestSucceeded:(NSData *)data
-{
-    [spinner stopAnimating];
-    [[BFBrokerageAccountStore defaultStore] accountsFromJSONData:data];
-
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 }
 
 #pragma mark AccountsTableViewController Delegate methods
@@ -270,27 +207,6 @@ if(landscapeView.superview)
     [self presentModalViewController:editAccountViewController animated:YES];
 }
 
-#pragma mark MVC Delegate methods
-
--(void)userLogout:(NSNotification*)notification
-{
-    [[BFBrokerageAccountStore defaultStore] clearAccounts];
-}
-
-
--(void)userLogin:(NSNotification*)notification
-{
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [self retrieveAccountData];
-
-    NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
-    fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
-    fullName=[fullName uppercaseString];
-
-    self.toolbar.userName.text=fullName;
-    self.toolbarPortraitView.userName.text=fullName;
-}
-
 #pragma mark - KVO lifecycle
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -302,7 +218,16 @@ if(landscapeView.superview)
         [pieChartMVPositionViewController constructPieChart];
         return;
     }
-    
+    if ([keyPath isEqualToString:@"currentUser"]) {
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
+        fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
+        fullName=[fullName uppercaseString];
+        
+        self.toolbar.userName.text=fullName;
+        self.toolbarPortraitView.userName.text=fullName;
+        return;
+    }
 }
 
 @end

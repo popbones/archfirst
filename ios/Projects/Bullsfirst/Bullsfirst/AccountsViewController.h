@@ -28,8 +28,6 @@
 @class PieChartMVAccountsViewController;
 @class PieChartMVPositionViewController;
 
-@class BullFirstWebServiceObject;
-
 @interface AccountsViewController: UIViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate,
     AccountsTableViewControllerDelegate> 
 {   
@@ -59,12 +57,9 @@
 @property (nonatomic, retain) BFToolbar *toolbarPortraitView;
 @property (nonatomic, retain) UIView *landscapeView;
 @property (nonatomic, retain) UIView *portraitView;
-@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 @property (nonatomic, retain)  PieChartMVAccountsViewController *pieChartMVAccountsViewController;
 
-- (void)retrieveAccountData;
 - (IBAction)createAccount:(id)sender;
 - (IBAction)refreshAccounts:(id)sender;
 - (void) clearCurrentView;
-- (void) clearViewData;
 @end
