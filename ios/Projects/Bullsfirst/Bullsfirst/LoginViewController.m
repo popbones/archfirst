@@ -269,7 +269,6 @@
 {
    
     openAccountViewController = [[OpenAccountViewController alloc] initWithNibName:@"OpenAccountViewController" bundle:nil];
-    openAccountViewController.delegate = self;
     
     [openAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [openAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
@@ -295,7 +294,7 @@
     
 }
 
-#pragma mark - Open Account View Controller delegate methods
+#pragma mark - MVC delegate methods
 
 -(void) newBFAccountCreated:(NSString*) fullName
 {

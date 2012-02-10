@@ -25,7 +25,6 @@
 
 @implementation OpenAccountViewController
 
-@synthesize delegate;
 @synthesize restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -35,15 +34,6 @@
         // Custom initialization
     }
     return self;
-}
--(void) goToAccountView
-{
-    [self performSelectorOnMainThread:@selector(dismissModalViewControllerAnimated:) withObject:nil waitUntilDone:YES];
-    [delegate newBFAccountCreated:[NSString stringWithFormat:@"%@ %@",[firstName.text uppercaseString], [lastName.text uppercaseString]]];
-    
-    openAccountButton.enabled = YES;
-    cancelButton.enabled = YES;
-    
 }
 
 - (void)didReceiveMemoryWarning
@@ -150,10 +140,6 @@
     [av show];    
     openAccountButton.enabled = YES;
     cancelButton.enabled = YES;
-    if(currentProcess != CreateNewBFAccount)
-    {
-        [self goToAccountView];
-    }
 }
 
 -(void)requestSucceeded:(NSData *)data

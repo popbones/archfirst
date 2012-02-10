@@ -22,7 +22,6 @@
 
 @class LoginViewController;
 @class BullFirstWebServiceObject;
-@protocol OpenAccountViewControllerDelegate;
 
 @interface OpenAccountViewController : UIViewController
 {
@@ -47,12 +46,9 @@
     NSNumber* newBrokerageAccountId;
     NSNumber* newExternalAccountId;
     
-    __weak id<OpenAccountViewControllerDelegate> delegate;
 }
 
 
-@property (nonatomic,weak) id<OpenAccountViewControllerDelegate> delegate;
-//@property (nonatomic, weak) LoginViewController *lvc;
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 
