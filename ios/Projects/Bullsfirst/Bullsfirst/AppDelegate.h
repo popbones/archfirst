@@ -25,8 +25,10 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 {
     BFUser *currentUser;
+    NSMutableArray *accounts;
 }
 @property (strong, nonatomic) BFUser *currentUser;
+@property (strong, nonatomic) NSMutableArray *accounts;
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) LoginViewController *loginViewController;
 @property (strong, nonatomic) UITabBarController *tabBarController;

@@ -24,26 +24,8 @@
 #import "RootViewController.h"
 @implementation BFToolbar
 
-@synthesize lvc;
-@synthesize tbc;
 @synthesize userName;
-/*
-- (id)init
-{
-    self = [super initWithNibName:nil bundle:nil];
-    
-    //if(self)
-    //{
-    //}
-    
-    return self;
-}
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    return [self init];
-}
-*/
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
@@ -51,13 +33,7 @@
 }
 - (IBAction)logout
 {
-    AppDelegate* appDelegate=(AppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate.loginViewController logout];
-    [appDelegate.loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve]; 
-    [tbc presentModalViewController: appDelegate.loginViewController animated:YES];
-    [tbc.accountsViewController clearViewData];
-    NSString *appDomain = [[NSBundle mainBundle] bundleIdentifier];
-    [[NSUserDefaults standardUserDefaults] removePersistentDomainForName:appDomain];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
 }
 
 @end

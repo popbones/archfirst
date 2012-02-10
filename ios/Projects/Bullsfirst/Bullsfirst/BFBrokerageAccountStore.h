@@ -23,10 +23,10 @@
 @class BFBrokerageAccount;
 
 @interface BFBrokerageAccountStore : NSObject {
-    NSMutableArray *allBrokerageAccounts;
 }
 
 + (BFBrokerageAccountStore *)defaultStore;
+- (void)accountsFromJSONData:(NSData *)data;
 
 - (NSArray *)allBrokerageAccounts;
 

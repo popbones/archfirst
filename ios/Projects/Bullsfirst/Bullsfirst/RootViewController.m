@@ -21,6 +21,8 @@
 #import "RootViewController.h"
 #import "BFToolbar.h"
 #import "WebServiceObject.h"
+#import "AppDelegate.h"
+
 @implementation RootViewController
 @synthesize accountsViewController;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -50,38 +52,36 @@
     
     accountsViewController = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
     BFToolbar *toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    toolBar.tbc=self;
     accountsViewController.toolbar=toolBar; 
     [accountsViewController.view addSubview:toolBar.view];
     [accountsViewController.view bringSubviewToFront:toolBar.view];
     
     positionsViewController = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil];
     toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    toolBar.tbc=self;
     positionsViewController.toolbar=toolBar; 
     [positionsViewController.view addSubview:toolBar.view];
     [positionsViewController.view bringSubviewToFront:toolBar.view];
     
     ordersViewController= [[OrdersViewController alloc] initWithNibName:@"OrdersViewController" bundle:nil];
     toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    toolBar.tbc=self;
     ordersViewController.toolbar=toolBar; 
     [ordersViewController.view addSubview:toolBar.view];
     [ordersViewController.view bringSubviewToFront:toolBar.view];
     
     transactionsViewController = [[TransactionsViewController alloc] initWithNibName:@"TransactionsViewController" bundle:nil];
     toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    toolBar.tbc=self;
     transactionsViewController.toolbar=toolBar; 
     [transactionsViewController.view addSubview:toolBar.view];
     [transactionsViewController.view bringSubviewToFront:toolBar.view];
     
     [self setViewControllers:[NSArray arrayWithObjects:accountsViewController,positionsViewController,ordersViewController,transactionsViewController, nil]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_LOGOUT" object:nil];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -91,6 +91,16 @@
     // Return YES for supported orientations
 	return YES;
 }
+
+#pragma mark MVC Delegate methods
+
+-(void)userLogout:(NSNotification*)notification
+{
+    AppDelegate* appDelegate=(AppDelegate*)[UIApplication sharedApplication].delegate;
+    [appDelegate.loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve]; 
+    [self presentModalViewController: appDelegate.loginViewController animated:YES];
+}
+
 /*
  #pragma mark tabBarController delegate methods
 

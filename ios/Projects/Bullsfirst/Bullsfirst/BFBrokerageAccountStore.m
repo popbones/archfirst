@@ -19,6 +19,8 @@
 //
 
 #import "BFBrokerageAccountStore.h"
+#import "BFBrokerageAccount.h"
+#import "AppDelegate.h"
 
 static BFBrokerageAccountStore *defaultStore = nil;
 
@@ -30,39 +32,48 @@ static BFBrokerageAccountStore *defaultStore = nil;
 {
     @synchronized(self)
     {
-        if (defaultStore == nil) defaultStore = [[self alloc] init];
+        if (defaultStore == nil) 
+            defaultStore = [[self alloc] init];
     }
     return defaultStore;
 }
 
 - (id)init
 {
-    if(defaultStore) return defaultStore;
+    if(defaultStore) 
+        return defaultStore;
     
     self = [super init];
     
     if(self)
     {
-        allBrokerageAccounts = [[NSMutableArray alloc] init];        
     }
     return self;
 }
 
 #pragma mark - Methods
+- (void)accountsFromJSONData:(NSData *)data;
+{
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.accounts = [BFBrokerageAccount accountsFromJSONData:data];
+}
 
 - (NSArray *)allBrokerageAccounts
 {
-    return allBrokerageAccounts;
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    return appDelegate.accounts;
 }
 
 - (void)addBrokerageAccount:(BFBrokerageAccount *)theBrokerageAccount
 {
-    [allBrokerageAccounts addObject:theBrokerageAccount];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate.accounts addObject:theBrokerageAccount];
 }
 
 - (void)clearAccounts
 {
-    [allBrokerageAccounts removeAllObjects];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate.accounts removeAllObjects];
 }
 
 @end

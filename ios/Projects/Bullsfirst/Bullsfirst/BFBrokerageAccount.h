@@ -44,6 +44,7 @@
 @property (nonatomic, retain) NSArray *positions;
 
 + (BFBrokerageAccount *)accountFromDictionary:(NSDictionary *)theDictionary;
++ (NSMutableArray *)accountsFromJSONData:(NSData *)data;
 
 - (id)initWithName:(NSString *)theName
 brokerageAccountID:(NSNumber *)theBrokerageAccountID

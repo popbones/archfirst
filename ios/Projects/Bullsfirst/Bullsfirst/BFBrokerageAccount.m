@@ -21,6 +21,7 @@
 #import "BFBrokerageAccount.h"
 #import "BFMoney.h"
 #import "BFPosition.h"
+#import "BFBrokerageAccountStore.h"
 
 @implementation BFBrokerageAccount
 
@@ -33,6 +34,26 @@
 @synthesize transferPermission; // 
 @synthesize positions;
 
++ (NSMutableArray *)accountsFromJSONData:(NSData *)data
+{
+    NSMutableArray *accounts = [[NSMutableArray alloc] init];
+    
+    NSError *err;
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+    BFDebugLog(@"jsonObject = %@", jsonObject);
+    
+    if([jsonObject isEqual:[NSNull null]] || (jsonObject == nil))
+    {
+        return accounts;        
+    }
+    for(NSDictionary *theAccount in jsonObject)
+    {
+        BFBrokerageAccount *brokerageAccount = [BFBrokerageAccount accountFromDictionary:theAccount];
+        [accounts addObject:brokerageAccount];
+    }
+    
+    return accounts;
+}
 
 + (BFBrokerageAccount *)accountFromDictionary:(NSDictionary *)theDictionary
 {

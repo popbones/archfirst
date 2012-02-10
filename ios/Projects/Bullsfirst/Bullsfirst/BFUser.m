@@ -11,10 +11,10 @@
 @implementation BFUser
 @synthesize firstName, lastName, userName;
 
-+ (BFUser *)userFromJSONData:(NSData *)jsonData
++ (BFUser *)userFromJSONData:(NSData *)data
 {
     NSError *err;
-    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonData options:0 error:&err];
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
     NSLog(@"jsonObject = %@", jsonObject);
     
     NSDictionary* nameObj=(NSDictionary*)jsonObject;

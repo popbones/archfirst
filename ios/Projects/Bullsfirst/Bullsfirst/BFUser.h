@@ -18,7 +18,7 @@
 @property (nonatomic, retain) NSString *lastName;
 @property (nonatomic, retain) NSString *userName;
 
-+ (BFUser *)userFromJSONData:(NSData *)jsonData;
++ (BFUser *)userFromJSONData:(NSData *)data;
 
 - (id)initWithName:(NSString *)first lastName:(NSString *)last username:(NSString *)user;
 

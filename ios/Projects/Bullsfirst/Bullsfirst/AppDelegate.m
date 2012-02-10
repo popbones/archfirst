@@ -26,6 +26,7 @@
 @synthesize window = _window;
 @synthesize tabBarController=_tabBarController;
 @synthesize currentUser;
+@synthesize accounts;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {

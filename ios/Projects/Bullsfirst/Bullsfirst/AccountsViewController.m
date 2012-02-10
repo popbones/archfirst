@@ -163,8 +163,23 @@ if(landscapeView.superview)
     }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
 }
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_LOGIN" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_LOGOUT" object:nil];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate removeObserver:self forKeyPath:@"accounts"];
+    // Release any retained subviews of the main view.
+    // e.g. self.myOutlet = nil;
+}
+
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -197,14 +212,16 @@ if(landscapeView.superview)
     [[BFBrokerageAccountStore defaultStore] clearAccounts];
     [self retrieveAccountData];
 }
+
 -(void) clearViewData
 {
     [[BFBrokerageAccountStore defaultStore] clearAccounts];
+    /*
     [accountsTable reloadData];
     [accountsTablePortraitView reloadData];
     [pieChartMVAccountsViewController constructPieChart];
     [pieChartMVPositionViewController constructPieChart];
-
+*/
 }
 
 
@@ -235,43 +252,10 @@ if(landscapeView.superview)
 -(void)requestSucceeded:(NSData *)data
 {
     [spinner stopAnimating];
-    jsonResponseData = [NSMutableData dataWithData:data];
-    
-    NSError *err;
-    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonResponseData options:0 error:&err];
-    BFDebugLog(@"jsonObject = %@", jsonObject);
-    
-    if([jsonObject isEqual:[NSNull null]] || (jsonObject == nil))
-    {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                     message:@"Please logout and try again"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
-        
-        return;        
-    }
-    
-    
-    
-    // Ingest the JSON data
-    for(NSDictionary *theAccount in jsonObject)
-    {
-        BFBrokerageAccount *brokerageAccount = [BFBrokerageAccount accountFromDictionary:theAccount];
-        [[BFBrokerageAccountStore defaultStore] addBrokerageAccount:brokerageAccount];
-    }
-    
-    NSLog(@"count = %d", [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] count]);
-    
-    [accountsTable reloadData];
-    [accountsTablePortraitView reloadData];
-    [pieChartMVAccountsViewController constructPieChart];
-    [pieChartMVPositionViewController constructPieChart];
-    
-    
-    
+    [[BFBrokerageAccountStore defaultStore] accountsFromJSONData:data];
+
 }
+
 #pragma mark AccountsTableViewController Delegate methods
 
 
@@ -288,6 +272,12 @@ if(landscapeView.superview)
 
 #pragma mark MVC Delegate methods
 
+-(void)userLogout:(NSNotification*)notification
+{
+    [[BFBrokerageAccountStore defaultStore] clearAccounts];
+}
+
+
 -(void)userLogin:(NSNotification*)notification
 {
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -301,5 +291,18 @@ if(landscapeView.superview)
     self.toolbarPortraitView.userName.text=fullName;
 }
 
+#pragma mark - KVO lifecycle
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"accounts"]) {
+        [accountsTable reloadData];
+        [accountsTablePortraitView reloadData];
+        [pieChartMVAccountsViewController constructPieChart];
+        [pieChartMVPositionViewController constructPieChart];
+        return;
+    }
+    
+}
 
 @end

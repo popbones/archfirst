@@ -275,7 +275,7 @@
     
     [self presentModalViewController:openAccountViewController animated:YES];
 }
-
+/*
 - (void)logout
 {
     // Clear login form
@@ -286,7 +286,7 @@
     [[BFBrokerageAccountStore defaultStore] clearAccounts]; 
 }
 
-
+*/
 
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
