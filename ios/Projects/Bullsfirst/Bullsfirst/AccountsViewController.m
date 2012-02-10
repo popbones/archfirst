@@ -180,11 +180,8 @@
 - (IBAction)createAccount:(id)sender
 {
     AddAccountViewController *addAccountViewController = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];
-    [addAccountViewController setAvc:self];
-    
     [addAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [addAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
     [self presentModalViewController:addAccountViewController animated:YES];
 }
 

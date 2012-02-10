@@ -24,7 +24,6 @@
 
 @implementation AddAccountViewController
 
-@synthesize avc;
 @synthesize restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -60,11 +59,8 @@
 -(void)requestFailed:(NSError *)error
 {   
     [spinner stopAnimating];
-    urlConnection = nil;
-    jsonResponseData = nil;
     
     NSString *errorString = [NSString stringWithString:@"Try Again!"];
-    
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
     
@@ -75,13 +71,8 @@
 -(void)requestSucceeded:(NSData *)data
 {
     [spinner stopAnimating];
-    jsonResponseData = [NSMutableData dataWithData:data];
-    [self dismissModalViewControllerAnimated:YES];
-    
-    addAccountButton.enabled = YES;
-    cancelButton.enabled = YES;
-    
-    [avc refreshAccounts:self];
+    [self dismissModalViewControllerAnimated:YES];    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 
 }
 

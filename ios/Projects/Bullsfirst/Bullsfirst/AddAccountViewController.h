@@ -20,24 +20,18 @@
 
 #import <Foundation/Foundation.h>
 
-@class AccountsViewController;
 @class BullFirstWebServiceObject;
 
 @interface AddAccountViewController : UIViewController
 {
     IBOutlet UITextField *accountName;
     IBOutlet UIActivityIndicatorView *spinner;
-    
-    NSURLConnection *urlConnection;
-    NSMutableData *jsonResponseData;
-    
+        
     IBOutlet UIButton *addAccountButton;
     IBOutlet UIButton *cancelButton;
     
-    __weak AccountsViewController *avc;
 }
 
-@property (nonatomic, weak) AccountsViewController *avc;
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 - (IBAction)addAccountButtonClicked:(id)sender;
