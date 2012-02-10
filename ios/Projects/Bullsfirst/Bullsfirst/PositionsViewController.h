@@ -21,5 +21,15 @@
 #import <Foundation/Foundation.h>
 
 @interface PositionsViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UITableView *positionTBL;
+@property (strong, nonatomic) IBOutlet UILabel *accountName;
+@property (strong, nonatomic) IBOutlet UIButton *transferBTN;
+@property (strong, nonatomic) IBOutlet UIButton *tradeBTN;
+@property (strong, nonatomic) IBOutlet UIButton *refreshBTN;
+@property (strong, nonatomic) IBOutlet UIButton *switchAcountBTN;
+- (IBAction)switchAccountBTNClicked:(id)sender;
+- (IBAction)refreshBTNClicked:(id)sender;
+- (IBAction)tradeBTNClicked:(id)sender;
+- (IBAction)transferBTNClicked:(id)sender;
 
 @end

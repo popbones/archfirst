@@ -20,8 +20,16 @@
 
 #import "PositionsViewController.h"
 #import "AppDelegate.h"
+#import "BFBrokerageAccountStore.h"
+#import "BFBrokerageAccount.h"
 
 @implementation PositionsViewController
+@synthesize positionTBL;
+@synthesize accountName;
+@synthesize transferBTN;
+@synthesize tradeBTN;
+@synthesize refreshBTN;
+@synthesize switchAcountBTN;
 
 - (id)init
 {
@@ -65,6 +73,12 @@
 
 - (void)viewDidUnload
 {
+    [self setPositionTBL:nil];
+    [self setAccountName:nil];
+    [self setTransferBTN:nil];
+    [self setTradeBTN:nil];
+    [self setRefreshBTN:nil];
+    [self setSwitchAcountBTN:nil];
     [super viewDidUnload];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate removeObserver:self forKeyPath:@"currentUser"];
@@ -74,6 +88,34 @@
 {
     // Return YES for supported orientations
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
+-(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        CGRect rect = switchAcountBTN.frame;
+        switchAcountBTN.frame = CGRectMake(610, rect.origin.y, rect.size.width, rect.size.height);
+        rect = transferBTN.frame;
+        transferBTN.frame = CGRectMake(755, rect.origin.y, rect.size.width, rect.size.height);
+        rect = tradeBTN.frame;
+        tradeBTN.frame = CGRectMake(850, rect.origin.y, rect.size.width, rect.size.height);
+        rect = refreshBTN.frame;
+        refreshBTN.frame = CGRectMake(933, rect.origin.y, rect.size.width, rect.size.height);
+    }
+    else
+    {
+        CGRect rect = switchAcountBTN.frame;
+        switchAcountBTN.frame = CGRectMake(360, rect.origin.y, rect.size.width, rect.size.height);
+        rect = transferBTN.frame;
+        transferBTN.frame = CGRectMake(505, rect.origin.y, rect.size.width, rect.size.height);
+        rect = tradeBTN.frame;
+        tradeBTN.frame = CGRectMake(600, rect.origin.y, rect.size.width, rect.size.height);
+        rect = refreshBTN.frame;
+        refreshBTN.frame = CGRectMake(683, rect.origin.y, rect.size.width, rect.size.height);
+    }
+    
+    
 }
 
 - (IBAction)logout
@@ -96,6 +138,95 @@
         
         return;
     }
+}
+
+
+- (IBAction)switchAccountBTNClicked:(id)sender {
+}
+
+- (IBAction)refreshBTNClicked:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
+}
+
+- (IBAction)tradeBTNClicked:(id)sender {
+}
+
+- (IBAction)transferBTNClicked:(id)sender {
+}
+
+
+#pragma mark - Table view data source
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    // Return the number of sections.
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    // Return the number of rows in the section.
+    return [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] count];
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *CellIdentifier = @"PositionCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+    }
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:[indexPath row]];
+    cell.textLabel.text = account.name;
+    
+    return cell;
+}
+
+/*
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
+
+/*
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ }   
+ else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }   
+ }
+ */
+
+/*
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
+ {
+ }
+ */
+
+/*
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
+ {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
+#pragma mark - Table view delegate
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
 }
 
 
