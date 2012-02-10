@@ -119,7 +119,11 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
+
+    self.navigationItem.title = @"Bullsfirst";
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+
     accountsTableViewController = [[AccountsTableViewController alloc] init];
     [accountsTableViewController setView:accountsTable];
     [accountsTableViewController setDelegate:self];
@@ -190,6 +194,16 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 }
 
+- (IBAction)logout
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
+}
+
+- (IBAction)userProfile
+{
+}
+
+
 #pragma mark AccountsTableViewController Delegate methods
 
 
@@ -219,8 +233,9 @@
         fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
         fullName=[fullName uppercaseString];
         
-        self.toolbar.userName.text=fullName;
-        self.toolbarPortraitView.userName.text=fullName;
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
+        self.navigationItem.leftBarButtonItem = barButtonItem;
+
         return;
     }
 }

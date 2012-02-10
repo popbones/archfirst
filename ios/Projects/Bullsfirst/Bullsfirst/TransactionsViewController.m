@@ -19,10 +19,9 @@
 //
 
 #import "TransactionsViewController.h"
+#import "AppDelegate.h"
 
 @implementation TransactionsViewController
-
-@synthesize toolbar;
 
 - (id)init
 {
@@ -47,13 +46,57 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+	// Do any additional setup after loading the view, typically from a nib.
+    self.navigationItem.title = @"Bullsfirst";
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate addObserver:self forKeyPath:@"currentUser" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
+    if (appDelegate.currentUser != nil) {
+        NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
+        fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
+        fullName=[fullName uppercaseString];
+        
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
+        self.navigationItem.leftBarButtonItem = barButtonItem;
+    }
+    
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate removeObserver:self forKeyPath:@"currentUser"];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+}
+
+- (IBAction)logout
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
+}
+
+#pragma mark - KVO lifecycle
+
+-(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"currentUser"]) {
+        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+        NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
+        fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
+        fullName=[fullName uppercaseString];
+        
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
+        self.navigationItem.leftBarButtonItem = barButtonItem;
+        
+        return;
+    }
 }
 
 @end

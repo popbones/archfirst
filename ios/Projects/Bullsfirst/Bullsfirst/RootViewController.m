@@ -19,7 +19,6 @@
 //
 
 #import "RootViewController.h"
-#import "BFToolbar.h"
 #import "WebServiceObject.h"
 #import "AppDelegate.h"
 #import "BFBrokerageAccountStore.h"
@@ -53,32 +52,21 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.delegate=self;
-    
+
     accountsViewController = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
-    BFToolbar *toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    accountsViewController.toolbar=toolBar; 
-    [accountsViewController.view addSubview:toolBar.view];
-    [accountsViewController.view bringSubviewToFront:toolBar.view];
-    
-    positionsViewController = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil];
-    toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    positionsViewController.toolbar=toolBar; 
-    [positionsViewController.view addSubview:toolBar.view];
-    [positionsViewController.view bringSubviewToFront:toolBar.view];
-    
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:accountsViewController];
+    NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
+    [viewControllers addObject:controller];    
+    positionsViewController = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil];    
+    controller = [[UINavigationController alloc] initWithRootViewController:positionsViewController];
+    [viewControllers addObject:controller];
     ordersViewController= [[OrdersViewController alloc] initWithNibName:@"OrdersViewController" bundle:nil];
-    toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    ordersViewController.toolbar=toolBar; 
-    [ordersViewController.view addSubview:toolBar.view];
-    [ordersViewController.view bringSubviewToFront:toolBar.view];
-    
+    controller = [[UINavigationController alloc] initWithRootViewController:ordersViewController];
+    [viewControllers addObject:controller];
     transactionsViewController = [[TransactionsViewController alloc] initWithNibName:@"TransactionsViewController" bundle:nil];
-    toolBar = [[BFToolbar alloc] initWithNibName:@"BFToolbar" bundle:nil];
-    transactionsViewController.toolbar=toolBar; 
-    [transactionsViewController.view addSubview:toolBar.view];
-    [transactionsViewController.view bringSubviewToFront:toolBar.view];
-    
-    [self setViewControllers:[NSArray arrayWithObjects:accountsViewController,positionsViewController,ordersViewController,transactionsViewController, nil]];
+    controller = [[UINavigationController alloc] initWithRootViewController:transactionsViewController];
+    [viewControllers addObject:controller];
+    [self setViewControllers:viewControllers];
 
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     

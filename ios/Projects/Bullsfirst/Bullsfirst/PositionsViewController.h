@@ -20,10 +20,6 @@
 
 #import <Foundation/Foundation.h>
 
-@class BFToolbar;
-
 @interface PositionsViewController : UIViewController
-
-@property (nonatomic, retain) BFToolbar *toolbar;
 
 @end
