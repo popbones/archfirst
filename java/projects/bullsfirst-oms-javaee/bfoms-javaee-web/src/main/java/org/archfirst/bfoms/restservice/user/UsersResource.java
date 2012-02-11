@@ -15,8 +15,6 @@
  */
 package org.archfirst.bfoms.restservice.user;
 
-import java.net.URI;
-
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
@@ -63,12 +61,8 @@ public class UsersResource {
                 .entity(new ErrorMessage("Username already exists")).build();
         }
 
-        // Create link to self
-        URI selfUri = uriInfo.getAbsolutePathBuilder()
-            .path(request.getUsername())
-            .build();
-        Link self = new Link("self", selfUri);
-
+        // Return link to self
+        Link self = new Link(uriInfo, request.getUsername());
         return Response.created(self.getUri()).entity(self).build();
     }
 

@@ -15,7 +15,6 @@
  */
 package org.archfirst.bfoms.restservice.account;
 
-import java.net.URI;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -54,12 +53,8 @@ public class BrokerageAccountsResource {
         Long id = brokerageAccountService.openNewAccount(
                 getUsername(sc), request.getAccountName());
 
-        // Create link to self
-        URI selfUri = uriInfo.getAbsolutePathBuilder()
-            .path(Long.toString(id))
-            .build();
-        Link self = new Link("self", selfUri);
-
+        // Return link to self
+        Link self = new Link(uriInfo, Long.toString(id));
         return Response.created(self.getUri()).entity(self).build();
     }
     

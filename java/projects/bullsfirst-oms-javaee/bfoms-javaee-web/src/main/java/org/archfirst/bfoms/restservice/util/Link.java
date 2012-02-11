@@ -17,8 +17,10 @@ package org.archfirst.bfoms.restservice.util;
 
 import java.net.URI;
 
+import javax.ws.rs.core.UriInfo;
+
 /**
- * Link
+ * Link to a resource
  *
  * @author Naresh Bhatia
  */
@@ -27,13 +29,17 @@ public class Link {
     public Link() {
     }
 
-    public Link(String rel, URI uri) {
-        this.rel = rel;
-        this.uri = uri;
+    public Link(UriInfo uriInfo, String id) {
+        this.rel = "self";
+        this.id = id;
+        this.uri = uriInfo.getAbsolutePathBuilder()
+            .path(id)
+            .build();
     }
 
     // ----- Attributes -----
     private String rel;
+    private String id;
     private URI uri;
 
     // ----- Getters and Setters -----
@@ -42,6 +48,12 @@ public class Link {
     }
     public void setRel(String rel) {
         this.rel = rel;
+    }
+    public String getId() {
+        return id;
+    }
+    public void setId(String id) {
+        this.id = id;
     }
     public URI getUri() {
         return uri;
