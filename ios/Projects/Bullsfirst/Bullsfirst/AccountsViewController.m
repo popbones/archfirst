@@ -157,7 +157,6 @@
         [self clearCurrentView];
         [portraitView addSubview:toolbarPortraitView.view];
         [portraitView bringSubviewToFront:toolbarPortraitView.view];
-        
         [self.view insertSubview:portraitView atIndex:0];
     }
     
@@ -185,9 +184,13 @@
 {
     AddAccountViewController *addAccountViewController = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];
     [addAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [addAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+   // [addAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:addAccountViewController animated:YES];
-}
+    addAccountViewController.view.superview.bounds=CGRectMake(0, 0, 540,185);
+    addAccountViewController.view.frame=CGRectMake(0, 0, 540,185);
+
+    }
 
 - (IBAction)refreshAccounts:(id)sender
 {

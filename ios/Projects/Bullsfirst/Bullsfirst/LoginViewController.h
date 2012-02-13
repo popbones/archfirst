@@ -36,7 +36,7 @@
     UIDeviceOrientation orientation;
     IBOutlet UIView *groupedView;
     IBOutlet UIImageView *backgroundImage;
-    IBOutlet UIButton *openAccountButton;
+    IBOutlet UIButton *loginButton;
     
 }
 

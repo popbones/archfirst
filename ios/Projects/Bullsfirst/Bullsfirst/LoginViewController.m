@@ -72,14 +72,14 @@
         groupedView.frame=CGRectMake(255, 156, groupedView.frame.size.width, groupedView.frame.size.height);
         backgroundImage.frame=CGRectMake(0, 0, 1024, 768);
         [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-landscape.png"]];
-        openAccountButton.frame=CGRectMake(433, 694, openAccountButton.frame.size.width, openAccountButton.frame.size.height);
+       
     }
     else
     {
         groupedView.frame=CGRectMake(143, 177, groupedView.frame.size.width, groupedView.frame.size.height);
          backgroundImage.frame=CGRectMake(0, 0, 768, 1024);
         [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-portrait.png"]];
-        openAccountButton.frame=CGRectMake(313, 710, openAccountButton.frame.size.width, openAccountButton.frame.size.height);
+       
     }
 
 
@@ -88,15 +88,15 @@
 {
     
     [super viewDidLoad];
-    
-    
+       
     groupedView.backgroundColor=[UIColor clearColor];
-    [password setReturnKeyType:UIReturnKeyGo];
-   
+    
+    loginButton.enabled=FALSE;
     password.delegate=self;
     username.delegate=self;
     restService = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-   
+    password.returnKeyType=UIReturnKeyGo;
+    username.returnKeyType=UIReturnKeyGo;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newBFAccountCreated:) name:@"NEW_ACCOUNT_CREATED" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsShown:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsHidden:) name:UIKeyboardDidHideNotification object:nil];
@@ -111,14 +111,14 @@
         groupedView.frame=CGRectMake(255, 156, groupedView.frame.size.width, groupedView.frame.size.height);
         backgroundImage.frame=CGRectMake(0, 0, 1024, 768);
         [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-landscape.png"]];
-        openAccountButton.frame=CGRectMake(433, 694, openAccountButton.frame.size.width, openAccountButton.frame.size.height);
+      
     }
     else
     {
         groupedView.frame=CGRectMake(143, 177, groupedView.frame.size.width, groupedView.frame.size.height);
         backgroundImage.frame=CGRectMake(0, 0, 768, 1024);
         [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-portrait.png"]];
-        openAccountButton.frame=CGRectMake(313, 710, openAccountButton.frame.size.width, openAccountButton.frame.size.height);
+    
     }
 }
 - (void)viewDidUnload
@@ -199,13 +199,18 @@
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:alertViewTitle message:alertViewMsg delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [alert show];
 }
-
+-(void) clearUserData
+{
+    password.text=@"";
+    username.text=@"";
+}
 -(void)requestSucceeded:(NSData *)data
 {
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     appDelegate.currentUser = [BFUser userFromJSONData:data];
     
     [spinner stopAnimating];
+    [self clearUserData];
     [self dismissModalViewControllerAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGIN" object:nil];
 }
@@ -214,10 +219,33 @@
 
 #pragma mark - Methods
 
--(void) textFieldDidBeginEditing:(UITextField *)textField
-{
-   
+-(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{    
+    NSString* currentUserName=[[NSString alloc]init];
+    NSString* currentPassword=[[NSString alloc]init];
+    if(textField==password&&string.length!=0)
+    {
+        currentPassword=[password.text stringByAppendingString:string];
+        currentUserName=username.text;
+    }
+    else if(textField==username&&string.length!=0)
+    {
+        currentUserName=[username.text stringByAppendingString:string];
+        currentPassword=password.text;
+    }
+    if(currentUserName.length!=0&&currentPassword.length!=0)
+    {
+        loginButton.enabled=true;
+    }
+    else
+    {
+        loginButton.enabled=false;
+    }
+    return YES;
 }
+
+
+
 -(void) loginAction
 {
     if([[username text] isEqual:@""] || [[password text] isEqual:@""])
@@ -255,7 +283,7 @@
     {
         [username resignFirstResponder];
       //  [self moveView:self.view duration:3 curve:UIViewAnimationCurveLinear x:0 y:60];
-
+        [self loginAction];
     }
     
     return YES;
@@ -287,8 +315,8 @@
 -(void) newBFAccountCreated:(NSString*) fullName
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGIN" object:nil];
+    [self clearUserData];
     [self dismissModalViewControllerAnimated:YES];
-    
 }
 
 @end

@@ -22,7 +22,7 @@
 
 @class BullFirstWebServiceObject;
 
-@interface AddAccountViewController : UIViewController
+@interface AddAccountViewController : UIViewController<UITextFieldDelegate>
 {
     IBOutlet UITextField *accountName;
     IBOutlet UIActivityIndicatorView *spinner;
