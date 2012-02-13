@@ -22,7 +22,6 @@
 #import "LoginViewController.h"
 #import "RootViewController.h"
 @implementation AppDelegate
-@synthesize loginViewController;
 @synthesize window = _window;
 @synthesize tabBarController=_tabBarController;
 @synthesize currentUser;
@@ -36,9 +35,9 @@
     self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
     
-    loginViewController = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
-    [loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
-    [self.tabBarController presentModalViewController:loginViewController animated:YES];        
+    LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
+    [self.tabBarController presentModalViewController:controller animated:YES];        
 
     return YES;
 }

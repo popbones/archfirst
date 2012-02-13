@@ -97,25 +97,6 @@
     }
 }
 
--(void) willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
-    {
-        [self clearCurrentView];
-        [landscapeView addSubview:toolbar.view];
-        [landscapeView bringSubviewToFront:toolbar.view];
-        [self.view insertSubview:landscapeView atIndex:0];
-    }
-    else
-    {
-        [self clearCurrentView];
-        [portraitView addSubview:toolbarPortraitView.view];
-        [portraitView bringSubviewToFront:toolbarPortraitView.view];
-        [self.view insertSubview:portraitView atIndex:0];
-    }
-
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -173,11 +154,32 @@
     [appDelegate removeObserver:self forKeyPath:@"accounts"];
     [appDelegate removeObserver:self forKeyPath:@"currentUser"];
 }
-
+-(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
+    {
+        [self clearCurrentView];
+        [landscapeView addSubview:toolbar.view];
+        [landscapeView bringSubviewToFront:toolbar.view];
+        [self.view insertSubview:landscapeView atIndex:0];
+    }
+    else
+    {
+        [self clearCurrentView];
+        [portraitView addSubview:toolbarPortraitView.view];
+        [portraitView bringSubviewToFront:toolbarPortraitView.view];
+        [self.view insertSubview:portraitView atIndex:0];
+    }
+    
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    return YES;
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 5) {
+        [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
+    }
+    
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 
 - (IBAction)createAccount:(id)sender

@@ -87,7 +87,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 5) {
+        [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
+    }
+    
     return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 

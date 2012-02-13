@@ -125,9 +125,9 @@
 
 -(void)userLogout:(NSNotification*)notification
 {
-    AppDelegate* appDelegate=(AppDelegate*)[UIApplication sharedApplication].delegate;
-    [appDelegate.loginViewController setModalTransitionStyle:UIModalTransitionStyleCrossDissolve]; 
-    [self presentModalViewController: appDelegate.loginViewController animated:YES];
+    LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
+    [self presentModalViewController: controller animated:YES];
     [[BFBrokerageAccountStore defaultStore] clearAccounts];
 }
 
