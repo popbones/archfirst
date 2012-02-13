@@ -34,6 +34,8 @@
 @synthesize tradeBTN;
 @synthesize refreshBTN;
 @synthesize switchAcountBTN;
+@synthesize portraitTitleBar;
+@synthesize landscrapeTitleBar;
 @synthesize positionCell;
 @synthesize selectedAccount;
 
@@ -86,6 +88,8 @@
     [self setTradeBTN:nil];
     [self setRefreshBTN:nil];
     [self setSwitchAcountBTN:nil];
+    [self setPortraitTitleBar:nil];
+    [self setLandscrapeTitleBar:nil];
     [super viewDidUnload];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate removeObserver:self forKeyPath:@"currentUser"];
@@ -166,6 +170,21 @@
 
 
 #pragma mark - Table view data source
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        return landscrapeTitleBar;
+    } else {
+        return portraitTitleBar;
+    }
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
+{
+    return 44;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -189,7 +208,6 @@
     BFPosition *position = [account.positions objectAtIndex:indexPath.row];
 
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
         UITableViewCell *cell;

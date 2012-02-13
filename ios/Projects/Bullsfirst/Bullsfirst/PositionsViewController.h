@@ -21,6 +21,8 @@
 #import <Foundation/Foundation.h>
 
 @interface PositionsViewController : UIViewController
+@property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
+@property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *positionCell;
 @property (strong, nonatomic) IBOutlet UITableView *positionTBL;
