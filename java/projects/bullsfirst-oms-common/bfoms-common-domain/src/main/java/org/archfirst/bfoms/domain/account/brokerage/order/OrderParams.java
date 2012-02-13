@@ -22,6 +22,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
 
 /**
@@ -54,6 +55,20 @@ public class OrderParams {
         this.allOrNone = allOrNone;
     }
 
+    // ----- Queries -----
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("side=").append(side);
+        builder.append(", symbol=").append(symbol);
+        builder.append(", quantity=").append(quantity);
+        builder.append(", type=").append(type);
+        builder.append(", limitPrice=").append(limitPrice);
+        builder.append(", term=").append(term);
+        builder.append(", allOrNone=").append(allOrNone);
+        return builder.toString();
+    }
+
     // ----- Attributes -----
     @XmlElement(name = "Side", required = true)
     protected OrderSide side;
@@ -70,26 +85,47 @@ public class OrderParams {
     @XmlElement(name = "AllOrNone")
     protected boolean allOrNone;
 
-    // ----- Getters -----
+    // ----- Getters and Setters -----
     public OrderSide getSide() {
         return side;
+    }
+    public void setSide(OrderSide side) {
+        this.side = side;
     }
     public String getSymbol() {
         return symbol;
     }
+    public void setSymbol(String symbol) {
+        this.symbol = symbol;
+    }
     public BigDecimal getQuantity() {
         return quantity;
+    }
+    public void setQuantity(BigDecimal quantity) {
+        this.quantity = quantity;
     }
     public OrderType getType() {
         return type;
     }
+    public void setType(OrderType type) {
+        this.type = type;
+    }
     public Money getLimitPrice() {
         return limitPrice;
+    }
+    public void setLimitPrice(Money limitPrice) {
+        this.limitPrice = limitPrice;
     }
     public OrderTerm getTerm() {
         return term;
     }
+    public void setTerm(OrderTerm term) {
+        this.term = term;
+    }
     public boolean isAllOrNone() {
         return allOrNone;
+    }
+    public void setAllOrNone(boolean allOrNone) {
+        this.allOrNone = allOrNone;
     }
 }

@@ -29,7 +29,7 @@ import org.codehaus.jackson.map.JsonDeserializer;
  *
  * @author Naresh Bhatia
  */
-public class PercentageDeserializer extends JsonDeserializer<Percentage>{
+public class PercentageDeserializer extends JsonDeserializer<Percentage> {
 
     @Override
     public Percentage deserialize(JsonParser jp, DeserializationContext ctx)

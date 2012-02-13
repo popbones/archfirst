@@ -22,4 +22,8 @@ package org.archfirst.bfoms.domain.account;
  */
 public class InvalidSymbolException  extends RuntimeException {
     private static final long serialVersionUID = 1L;
+    
+    public InvalidSymbolException() {
+        super("Invalid Symbol");
+    }
 }

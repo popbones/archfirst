@@ -60,6 +60,8 @@ public class BrokerageAccountService {
     }
 
     public Long placeOrder(String username, Long accountId, OrderParams params) {
+        
+        logger.debug("Place order in account {}: {}", accountId, params);
 
         // Check authorization on account
         BrokerageAccount account =  checkAccountAuthorization(
@@ -78,8 +80,13 @@ public class BrokerageAccountService {
     
     public void cancelOrder(String username, Long orderId) {
 
-        // Check authorization on account
+        // Find the order
         Order order = brokerageAccountRepository.findOrder(orderId);
+        if (order == null) {
+            throw new RuntimeException("Order " + orderId + " not found");
+        }
+        
+        // Check authorization on account
         checkAccountAuthorization(
                 getUser(username),
                 order.getAccount().getId(),

@@ -28,9 +28,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
 import org.archfirst.bfoms.domain.account.BaseAccountService;
-import org.archfirst.bfoms.domain.account.InsufficientFundsException;
-import org.archfirst.bfoms.domain.account.InsufficientQuantityException;
-import org.archfirst.bfoms.domain.account.InvalidSymbolException;
 import org.archfirst.bfoms.restservice.util.ErrorMessage;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
@@ -70,9 +67,9 @@ public class AccountsResource {
                     id,
                     request.getToAccountId());
         }
-        catch (InsufficientFundsException e) {
-            return Response.status(Response.Status.FORBIDDEN)
-                .entity(new ErrorMessage("Insufficient Funds")).build();
+        catch (RuntimeException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                .entity(new ErrorMessage(e.getMessage())).build();
         }
 
         return Response.ok().build();
@@ -94,13 +91,9 @@ public class AccountsResource {
                     id,
                     request.getToAccountId());
         }
-        catch (InvalidSymbolException e) {
+        catch (RuntimeException e) {
             return Response.status(Response.Status.BAD_REQUEST)
-                .entity(new ErrorMessage("Invalid Symbol")).build();
-        }
-        catch (InsufficientQuantityException e) {
-            return Response.status(Response.Status.FORBIDDEN)
-                .entity(new ErrorMessage("Insufficient Quantity")).build();
+                .entity(new ErrorMessage(e.getMessage())).build();
         }
 
         return Response.ok().build();

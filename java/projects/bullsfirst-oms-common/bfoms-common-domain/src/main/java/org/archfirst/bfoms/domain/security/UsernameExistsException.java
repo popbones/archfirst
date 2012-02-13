@@ -24,6 +24,7 @@ public class UsernameExistsException extends Exception {
     private static final long serialVersionUID = 1L;
     
     public UsernameExistsException(String username) {
+        super("Username \"" + username + "\" already exists");
         this.username = username;
     }
 

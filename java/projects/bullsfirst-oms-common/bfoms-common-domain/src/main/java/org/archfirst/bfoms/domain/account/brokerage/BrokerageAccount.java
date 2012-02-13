@@ -185,7 +185,7 @@ public class BrokerageAccount extends BaseAccount {
         OrderEstimate orderEstimate =
             this.calculateOrderEstimate(params, marketDataService);
         if (orderEstimate.getCompliance() != OrderCompliance.Compliant) {
-            throw new IllegalArgumentException("Order is not compliant with the account");
+            throw new IllegalArgumentException("Order is not compliant: " + orderEstimate.getCompliance());
         }
 
         // Place order

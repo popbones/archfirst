@@ -58,7 +58,11 @@ public class UsersResource {
         }
         catch (UsernameExistsException e) {
             return Response.status(Response.Status.CONFLICT)
-                .entity(new ErrorMessage("Username already exists")).build();
+                .entity(new ErrorMessage(e.getMessage())).build();
+        }
+        catch (RuntimeException e) {
+            return Response.status(Response.Status.BAD_REQUEST)
+                .entity(new ErrorMessage(e.getMessage())).build();
         }
 
         // Return link to self

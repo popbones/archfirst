@@ -22,4 +22,8 @@ package org.archfirst.bfoms.domain.security;
  */
 public class AuthorizationException extends RuntimeException {
     private static final long serialVersionUID = 1L;
+    
+    public AuthorizationException() {
+        super("You are not authorized to perform this operation");
+    }
 }

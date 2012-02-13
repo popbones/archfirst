@@ -23,4 +23,8 @@ package org.archfirst.bfoms.domain.account;
  */
 public class InsufficientQuantityException extends RuntimeException {
     private static final long serialVersionUID = 1L;
+    
+    public InsufficientQuantityException() {
+        super("Insufficient Quantity");
+    }
 }
