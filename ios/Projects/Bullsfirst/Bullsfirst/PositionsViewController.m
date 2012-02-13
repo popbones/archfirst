@@ -38,6 +38,7 @@
 @synthesize landscrapeTitleBar;
 @synthesize positionCell;
 @synthesize selectedAccount;
+@synthesize expandRow;
 
 - (id)init
 {
@@ -78,6 +79,7 @@
         self.navigationItem.leftBarButtonItem = barButtonItem;
     }
     selectedAccount = 0;
+    expandRow = -1;
 }
 
 - (void)viewDidUnload
@@ -186,6 +188,18 @@
     return 44;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == expandRow) {
+        NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+        BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
+        BFPosition *position = [account.positions objectAtIndex:indexPath.row];
+        return 44*(1+[position.children count]);
+    }
+    return 44;
+    
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
@@ -217,6 +231,7 @@
         expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
         [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
         expand.row = indexPath.row;
+        [expand setTitle:@"+" forState:UIControlStateNormal];
 
         UILabel *label;
         label = (UILabel *)[cell viewWithTag:2];
@@ -250,6 +265,82 @@
         [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
         trade.position = position;
         
+        if (indexPath.row == expandRow) {
+            [expand setTitle:@"-" forState:UIControlStateNormal];
+
+            CGRect frame = cell.frame;
+            cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[position.children count]));
+            
+            UILabel *label;
+            label = (UILabel *)[cell viewWithTag:2];
+            CGRect nameFrame = label.frame;
+            
+            label = (UILabel *)[cell viewWithTag:4];
+            CGRect quantityFrame = label.frame;
+            
+            label = (UILabel *)[cell viewWithTag:5];
+            CGRect lastTradeFrame = label.frame;
+            
+            label = (UILabel *)[cell viewWithTag:6];
+            CGRect marketValueFrame = label.frame;
+            
+            label = (UILabel *)[cell viewWithTag:7];
+            CGRect pricePaidFrame = label.frame;
+
+            label = (UILabel *)[cell viewWithTag:8];
+            CGRect totalCostFrame = label.frame;
+
+            label = (UILabel *)[cell viewWithTag:9];
+            CGRect qainFrame = label.frame;
+            
+            label = (UILabel *)[cell viewWithTag:10];
+            CGRect gainPercentFrame = label.frame;
+            
+            for (BFPosition *lot in position.children) {
+                nameFrame.origin.y += 44;
+                UILabel *label = [[UILabel alloc] initWithFrame:nameFrame];
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+                [dateFormat setDateFormat:@"MM/dd/yyyy"];
+                label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:lot.lotCreationTime]];
+                [cell addSubview:label];
+
+                quantityFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:quantityFrame];
+                label.text = [NSString stringWithFormat:@"%d", [lot.quantity intValue]];
+                [cell addSubview:label];
+
+                lastTradeFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:lastTradeFrame];
+                label.text = [NSString stringWithFormat:@"$%d", [lot.lastTrade.amount intValue]];
+                [cell addSubview:label];
+                
+                marketValueFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:marketValueFrame];
+                label.text = [NSString stringWithFormat:@"$%d", [lot.marketValue.amount intValue]];
+                [cell addSubview:label];
+                
+                pricePaidFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:pricePaidFrame];
+                label.text = [NSString stringWithFormat:@"$%d", [lot.pricePaid.amount intValue]];
+                [cell addSubview:label];
+
+                totalCostFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:totalCostFrame];
+                label.text = [NSString stringWithFormat:@"$%d", [lot.totalCost.amount intValue]];
+                [cell addSubview:label];
+
+                qainFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:qainFrame];
+                label.text = [NSString stringWithFormat:@"$%d", [lot.gain.amount intValue]];
+                [cell addSubview:label];
+                
+                gainPercentFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:gainPercentFrame];
+                label.text = [NSString stringWithFormat:@"%d%%", [lot.gainPercent intValue]];
+                [cell addSubview:label];
+            }
+        }
         return cell;
     }
     else
@@ -261,7 +352,8 @@
         expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
         [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
         expand.row = indexPath.row;
-
+        [expand setTitle:@"+" forState:UIControlStateNormal];
+        
         UILabel *label;
         label = (UILabel *)[cell viewWithTag:2];
         label.text = position.instrumentSymbol;
@@ -281,6 +373,47 @@
         tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:7]; // trade button
         [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
         trade.position = position;
+        
+        if (indexPath.row == expandRow) {
+            [expand setTitle:@"-" forState:UIControlStateNormal];
+            CGRect frame = cell.frame;
+            cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[position.children count]));
+            
+            UILabel *label;
+            label = (UILabel *)[cell viewWithTag:3];
+            CGRect quantityFrame = label.frame;
+            
+            label = (UILabel *)[cell viewWithTag:4];
+            CGRect marketValueFrame = label.frame;
+            
+            label = (UILabel *)[cell viewWithTag:5];
+            CGRect qainFrame = label.frame;
+            
+            label = (UILabel *)[cell viewWithTag:6];
+            CGRect gainPercentFrame = label.frame;
+            
+            for (BFPosition *lot in position.children) {
+                quantityFrame.origin.y += 44;
+                UILabel *label = [[UILabel alloc] initWithFrame:quantityFrame];
+                label.text = [NSString stringWithFormat:@"%d", [lot.quantity intValue]];
+                [cell addSubview:label];
+
+                marketValueFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:marketValueFrame];
+                label.text = [NSString stringWithFormat:@"$%d", [lot.marketValue.amount intValue]];
+                [cell addSubview:label];
+                
+                qainFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:qainFrame];
+                label.text = [NSString stringWithFormat:@"$%d", [lot.gain.amount intValue]];
+                [cell addSubview:label];
+
+                gainPercentFrame.origin.y += 44;
+                label = [[UILabel alloc] initWithFrame:gainPercentFrame];
+                label.text = [NSString stringWithFormat:@"%d%%", [lot.gainPercent intValue]];
+                [cell addSubview:label];
+            }
+        }
         
         return cell;
     }
@@ -335,6 +468,13 @@
 -(void)expandPosition:(id)sender
 {
     expandPositionBTN *button = (expandPositionBTN *)sender;
+    
+    if (button.row == expandRow) {
+        expandRow = -1;
+    } else {
+        expandRow = button.row;
+    }
+    [positionTBL reloadData];
 }
 
 -(void)tradePosition:(id)sender

@@ -68,10 +68,18 @@
     
     // TODO: Fix reading in the lotCreationTime, for now just getting null
     NSString *dateStrTemp = [theDictionary objectForKey:@"lotCreationTime"];
-    NSString *dateStr = [dateStrTemp substringToIndex:23];
+    // removed the last : in the time zone
+    NSRange zoneRange = {23, 6};
+    NSString *dateStr = [dateStrTemp stringByReplacingOccurrencesOfString:@":"
+                                                               withString:@""
+                                                                  options:0
+                                                                    range:zoneRange
+                         ];
+
     NSLog(@"*** = %@", dateStr);
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setDateFormat:@"yyyy-MM-ddTHH:mm:ss.SSS"]; //2011-11-14T12:37:22.000-05:00
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"]; //2011-11-14T12:37:22.000-05:00
     NSDate *theLotCreationTime = [dateFormat dateFromString:dateStr];
     
     NSArray *childrenArrayTemp = [theDictionary objectForKey:@"children"];    
