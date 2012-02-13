@@ -22,6 +22,10 @@
 #import "AppDelegate.h"
 #import "BFBrokerageAccountStore.h"
 #import "BFBrokerageAccount.h"
+#import "BFPosition.h"
+#import "BFMoney.h"
+#import "tradePositionBTN.h"
+#import "expandPositionBTN.h"
 
 @implementation PositionsViewController
 @synthesize positionTBL;
@@ -31,6 +35,7 @@
 @synthesize refreshBTN;
 @synthesize switchAcountBTN;
 @synthesize positionCell;
+@synthesize selectedAccount;
 
 - (id)init
 {
@@ -70,6 +75,7 @@
         UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
         self.navigationItem.leftBarButtonItem = barButtonItem;
     }
+    selectedAccount = 0;
 }
 
 - (void)viewDidUnload
@@ -118,7 +124,7 @@
         rect = refreshBTN.frame;
         refreshBTN.frame = CGRectMake(683, rect.origin.y, rect.size.width, rect.size.height);
     }
-    
+    [positionTBL reloadData];
     
 }
 
@@ -170,22 +176,97 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] count];
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
+    
+    return [account.positions count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell;
-    [[NSBundle mainBundle] loadNibNamed:@"PositionTableViewCell" owner:self options:nil];
-    cell = positionCell;
-
-    UILabel *label;
-    label = (UILabel *)[cell viewWithTag:1];
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:[indexPath row]];
-    label.text = account.name;
+    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
+    BFPosition *position = [account.positions objectAtIndex:indexPath.row];
+
+    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        UITableViewCell *cell;
+        [[NSBundle mainBundle] loadNibNamed:@"PositionLandscapeTableViewCell" owner:self options:nil];
+        cell = positionCell;
+        
+        expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
+        [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
+        expand.row = indexPath.row;
+
+        UILabel *label;
+        label = (UILabel *)[cell viewWithTag:2];
+        label.text = position.instrumentName;
+        
+        label = (UILabel *)[cell viewWithTag:3];
+        label.text = position.instrumentSymbol;
+
+        label = (UILabel *)[cell viewWithTag:4];
+        label.text = [NSString stringWithFormat:@"%d", [position.quantity intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:5];
+        label.text = [NSString stringWithFormat:@"$%d", [position.lastTrade.amount intValue]];
+
+        label = (UILabel *)[cell viewWithTag:6];
+        label.text = [NSString stringWithFormat:@"$%d", [position.marketValue.amount intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:7];
+        label.text = [NSString stringWithFormat:@"$%d", [position.pricePaid.amount intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:8];
+        label.text = [NSString stringWithFormat:@"$%d", [position.totalCost.amount intValue]];
+
+        label = (UILabel *)[cell viewWithTag:9];
+        label.text = [NSString stringWithFormat:@"$%d", [position.gain.amount intValue]];
+
+        label = (UILabel *)[cell viewWithTag:10];
+        label.text = [NSString stringWithFormat:@"%d%%", [position.gainPercent intValue]];
+        
+        tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:11]; // trade button
+        [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
+        trade.position = position;
+        
+        return cell;
+    }
+    else
+    {
+        UITableViewCell *cell;
+        [[NSBundle mainBundle] loadNibNamed:@"PositionTableViewCell" owner:self options:nil];
+        cell = positionCell;
+        
+        expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
+        [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
+        expand.row = indexPath.row;
+
+        UILabel *label;
+        label = (UILabel *)[cell viewWithTag:2];
+        label.text = position.instrumentSymbol;
+        
+        label = (UILabel *)[cell viewWithTag:3];
+        label.text = [NSString stringWithFormat:@"%d", [position.quantity intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:4];
+        label.text = [NSString stringWithFormat:@"$%d", [position.marketValue.amount intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:5];
+        label.text = [NSString stringWithFormat:@"$%d", [position.gain.amount intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:6];
+        label.text = [NSString stringWithFormat:@"%d%%", [position.gainPercent intValue]];
+        
+        tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:7]; // trade button
+        [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
+        trade.position = position;
+        
+        return cell;
+    }
     
-    return cell;
 }
 
 /*
@@ -233,5 +314,14 @@
 {
 }
 
+-(void)expandPosition:(id)sender
+{
+    expandPositionBTN *button = (expandPositionBTN *)sender;
+}
+
+-(void)tradePosition:(id)sender
+{
+    tradePositionBTN *button = (tradePositionBTN *)sender;
+}
 
 @end

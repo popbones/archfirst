@@ -29,6 +29,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *tradeBTN;
 @property (strong, nonatomic) IBOutlet UIButton *refreshBTN;
 @property (strong, nonatomic) IBOutlet UIButton *switchAcountBTN;
+@property (assign, nonatomic) int selectedAccount;
 - (IBAction)switchAccountBTNClicked:(id)sender;
 - (IBAction)refreshBTNClicked:(id)sender;
 - (IBAction)tradeBTNClicked:(id)sender;

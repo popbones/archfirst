@@ -60,6 +60,9 @@
 		545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */; };
 		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
+		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
+		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
+		54B78A6314E98956002FF1AC /* PositionLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A6214E98954002FF1AC /* PositionLandscapeTableViewCell.xib */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		95BA216F14E506B000F813E2 /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */; };
 		95BA217014E506B100F813E2 /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */; };
@@ -181,6 +184,11 @@
 		545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
+		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
+		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
+		54B78A5F14E9785D002FF1AC /* expandPositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = expandPositionBTN.h; sourceTree = "<group>"; };
+		54B78A6014E9785E002FF1AC /* expandPositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = expandPositionBTN.m; sourceTree = "<group>"; };
+		54B78A6214E98954002FF1AC /* PositionLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionLandscapeTableViewCell.xib; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-landscape.png"; sourceTree = "<group>"; };
 		95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-portrait.png"; sourceTree = "<group>"; };
@@ -433,6 +441,11 @@
 				00DFF90614808975001A4641 /* PositionsViewController.m */,
 				00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */,
 				54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */,
+				54B78A6214E98954002FF1AC /* PositionLandscapeTableViewCell.xib */,
+				54B78A5F14E9785D002FF1AC /* expandPositionBTN.h */,
+				54B78A6014E9785E002FF1AC /* expandPositionBTN.m */,
+				54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */,
+				54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */,
 			);
 			name = "Position Tab";
 			sourceTree = "<group>";
@@ -630,6 +643,7 @@
 				545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */,
 				545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */,
 				54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */,
+				54B78A6314E98956002FF1AC /* PositionLandscapeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -672,6 +686,8 @@
 				AC9F211114E13AEE0024C3D3 /* _BFCPTXYTheme.m in Sources */,
 				AC9F211214E13AEE0024C3D3 /* BFCPTTheme.m in Sources */,
 				545C5E7614E55DA6003560C8 /* BFUser.m in Sources */,
+				54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */,
+				54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
