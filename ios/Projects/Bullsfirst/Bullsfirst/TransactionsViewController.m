@@ -20,11 +20,17 @@
 
 #import "TransactionsViewController.h"
 #import "AppDelegate.h"
+#import "TradeViewController.h"
+#import "TransferViewController.h"
 
 @implementation TransactionsViewController
 @synthesize transectionTBL;
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
+@synthesize filterBTN;
+@synthesize transferBTN;
+@synthesize tradeBTN;
+@synthesize refreshBTN;
 
 - (id)init
 {
@@ -69,6 +75,10 @@
 
 - (void)viewDidUnload
 {
+    [self setFilterBTN:nil];
+    [self setTransferBTN:nil];
+    [self setTradeBTN:nil];
+    [self setRefreshBTN:nil];
     [super viewDidUnload];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate removeObserver:self forKeyPath:@"currentUser"];
@@ -87,9 +97,25 @@
 {
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
+        CGRect rect = filterBTN.frame;
+        filterBTN.frame = CGRectMake(610, rect.origin.y, rect.size.width, rect.size.height);
+        rect = transferBTN.frame;
+        transferBTN.frame = CGRectMake(755, rect.origin.y, rect.size.width, rect.size.height);
+        rect = tradeBTN.frame;
+        tradeBTN.frame = CGRectMake(850, rect.origin.y, rect.size.width, rect.size.height);
+        rect = refreshBTN.frame;
+        refreshBTN.frame = CGRectMake(933, rect.origin.y, rect.size.width, rect.size.height);
     }
     else
     {
+        CGRect rect = filterBTN.frame;
+        filterBTN.frame = CGRectMake(360, rect.origin.y, rect.size.width, rect.size.height);
+        rect = transferBTN.frame;
+        transferBTN.frame = CGRectMake(505, rect.origin.y, rect.size.width, rect.size.height);
+        rect = tradeBTN.frame;
+        tradeBTN.frame = CGRectMake(600, rect.origin.y, rect.size.width, rect.size.height);
+        rect = refreshBTN.frame;
+        refreshBTN.frame = CGRectMake(683, rect.origin.y, rect.size.width, rect.size.height);
     }
     [transectionTBL reloadData];
     
@@ -115,6 +141,33 @@
         return;
     }
 }
+
+#pragma mark - IBActions
+
+- (IBAction)refreshBTNClicked:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
+}
+
+- (IBAction)tradeBTNClicked:(id)sender {
+    TradeViewController *controller = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil];    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:controller animated:YES];
+}
+
+- (IBAction)transferBTNClicked:(id)sender {
+    TransferViewController *controller = [[TransferViewController alloc] initWithNibName:@"TransferViewController" bundle:nil];    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:controller animated:YES];
+}
+
+- (IBAction)filterBTNClicked:(id)sender {
+}
+
+
 
 #pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section

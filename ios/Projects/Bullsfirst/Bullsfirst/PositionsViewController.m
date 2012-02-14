@@ -158,6 +158,7 @@
     }
 }
 
+#pragma mark - IBActions
 
 - (IBAction)switchAccountBTNClicked:(id)sender {
 }
