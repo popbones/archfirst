@@ -97,6 +97,9 @@
     [restServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
 }
 
+
+#pragma mark - rest service call back methods
+
 -(void)receivedData:(NSData *)data
 {
     
@@ -130,7 +133,7 @@
     }
     else if(currentProcess == TransferAmount)
     {
-        if([error code] == 403)
+        if(error.code == 403)
         {
             errorString = @"Insufficient Funds";
         }
@@ -156,20 +159,18 @@
     }
     else if(currentProcess == CreateNewBrokerageAccount)
     {
-        if([jsonObject objectForKey:@"uri"])
+        if([jsonObject objectForKey:kId])
         {
-            NSArray* chunks = [[jsonObject objectForKey:@"uri"] componentsSeparatedByString:@"/"];
-            newBrokerageAccountId = [chunks lastObject];
+            newBrokerageAccountId = [jsonObject objectForKey:kId];
         }
         
         [self createExternalAccount];
     }
     else if(currentProcess == CreateExternalAccount)
     {
-        if([jsonObject objectForKey:@"uri"])
+        if([jsonObject objectForKey:kId])
         {
-            NSArray* chunks = [[jsonObject objectForKey:@"uri"] componentsSeparatedByString:@"/"];
-            newExternalAccountId = [chunks lastObject];
+            newExternalAccountId = [jsonObject objectForKey:kId];
             BFDebugLog(@"%@",newExternalAccountId);
         }
         [self transferAmount];

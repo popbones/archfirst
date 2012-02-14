@@ -31,3 +31,4 @@
 #define kAmount @"amount"
 #define kToAccountId @"toAccountId"
 #define kCurrency @"currency"
+#define kId @"id"
