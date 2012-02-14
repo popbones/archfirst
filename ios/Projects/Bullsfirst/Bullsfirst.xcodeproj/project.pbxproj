@@ -63,6 +63,10 @@
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
 		54B78A6314E98956002FF1AC /* PositionLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A6214E98954002FF1AC /* PositionLandscapeTableViewCell.xib */; };
+		54B78A6B14EAA155002FF1AC /* TradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6914EAA14E002FF1AC /* TradeViewController.m */; };
+		54B78A6C14EAA155002FF1AC /* TradeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A6A14EAA150002FF1AC /* TradeViewController.xib */; };
+		54B78A7014EAA17A002FF1AC /* TransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6E14EAA177002FF1AC /* TransferViewController.m */; };
+		54B78A7114EAA17A002FF1AC /* TransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A6F14EAA178002FF1AC /* TransferViewController.xib */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		95BA216F14E506B000F813E2 /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */; };
 		95BA217014E506B100F813E2 /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */; };
@@ -189,6 +193,12 @@
 		54B78A5F14E9785D002FF1AC /* expandPositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = expandPositionBTN.h; sourceTree = "<group>"; };
 		54B78A6014E9785E002FF1AC /* expandPositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = expandPositionBTN.m; sourceTree = "<group>"; };
 		54B78A6214E98954002FF1AC /* PositionLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionLandscapeTableViewCell.xib; sourceTree = "<group>"; };
+		54B78A6814EAA14A002FF1AC /* TradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TradeViewController.h; sourceTree = "<group>"; };
+		54B78A6914EAA14E002FF1AC /* TradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TradeViewController.m; sourceTree = "<group>"; };
+		54B78A6A14EAA150002FF1AC /* TradeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TradeViewController.xib; sourceTree = "<group>"; };
+		54B78A6D14EAA174002FF1AC /* TransferViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TransferViewController.h; sourceTree = "<group>"; };
+		54B78A6E14EAA177002FF1AC /* TransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferViewController.m; sourceTree = "<group>"; };
+		54B78A6F14EAA178002FF1AC /* TransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferViewController.xib; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-landscape.png"; sourceTree = "<group>"; };
 		95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-portrait.png"; sourceTree = "<group>"; };
@@ -446,6 +456,12 @@
 				54B78A6014E9785E002FF1AC /* expandPositionBTN.m */,
 				54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */,
 				54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */,
+				54B78A6814EAA14A002FF1AC /* TradeViewController.h */,
+				54B78A6914EAA14E002FF1AC /* TradeViewController.m */,
+				54B78A6A14EAA150002FF1AC /* TradeViewController.xib */,
+				54B78A6D14EAA174002FF1AC /* TransferViewController.h */,
+				54B78A6E14EAA177002FF1AC /* TransferViewController.m */,
+				54B78A6F14EAA178002FF1AC /* TransferViewController.xib */,
 			);
 			name = "Position Tab";
 			sourceTree = "<group>";
@@ -644,6 +660,8 @@
 				545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */,
 				54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */,
 				54B78A6314E98956002FF1AC /* PositionLandscapeTableViewCell.xib in Resources */,
+				54B78A6C14EAA155002FF1AC /* TradeViewController.xib in Resources */,
+				54B78A7114EAA17A002FF1AC /* TransferViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -688,6 +706,8 @@
 				545C5E7614E55DA6003560C8 /* BFUser.m in Sources */,
 				54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */,
 				54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */,
+				54B78A6B14EAA155002FF1AC /* TradeViewController.m in Sources */,
+				54B78A7014EAA17A002FF1AC /* TransferViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

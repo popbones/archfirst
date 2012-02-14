@@ -26,6 +26,8 @@
 #import "BFMoney.h"
 #import "tradePositionBTN.h"
 #import "expandPositionBTN.h"
+#import "TradeViewController.h"
+#import "TransferViewController.h"
 
 @implementation PositionsViewController
 @synthesize positionTBL;
@@ -165,9 +167,19 @@
 }
 
 - (IBAction)tradeBTNClicked:(id)sender {
+    TradeViewController *controller = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil];    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:controller animated:YES];
 }
 
 - (IBAction)transferBTNClicked:(id)sender {
+    TransferViewController *controller = [[TransferViewController alloc] initWithNibName:@"TransferViewController" bundle:nil];    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:controller animated:YES];
 }
 
 
@@ -480,6 +492,12 @@
 -(void)tradePosition:(id)sender
 {
     tradePositionBTN *button = (tradePositionBTN *)sender;
+    
+    TradeViewController *controller = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil position:button.position];    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:controller animated:YES];
 }
 
 @end

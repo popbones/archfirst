@@ -73,10 +73,7 @@
     NSString *dateStr = [dateStrTemp stringByReplacingOccurrencesOfString:@":"
                                                                withString:@""
                                                                   options:0
-                                                                    range:zoneRange
-                         ];
-
-    NSLog(@"*** = %@", dateStr);
+                                                                    range:zoneRange];
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
     [dateFormat setDateFormat:@"yyyy-MM-dd'T'HH:mm:ss.SSSZ"]; //2011-11-14T12:37:22.000-05:00
