@@ -24,7 +24,7 @@
 @class AccountsViewController;
 @class BullFirstWebServiceObject;
 @class check;
-@interface EditAccountNameViewController : UIViewController
+@interface EditAccountNameViewController : UIViewController<UITextFieldDelegate>
 {
     IBOutlet UITextField *accountName;
     IBOutlet UIActivityIndicatorView *spinner;

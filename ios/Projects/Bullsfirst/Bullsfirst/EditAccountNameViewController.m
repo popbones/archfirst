@@ -53,6 +53,7 @@
     // Do any additional setup after loading the view from its nib.
     
     accountName.text = oldAccountName;
+    accountName.returnKeyType = UIReturnKeyGo;
     
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
 }
@@ -103,7 +104,7 @@
 
 #pragma mark - methods
 
-- (IBAction)editAccountButtonClicked:(id)sender
+-(void) editAccountAction
 {
     // Check for errors    
     if([[accountName text] isEqual:@""])
@@ -120,12 +121,12 @@
     [spinner startAnimating]; 
     editAccountButton.enabled = NO;
     cancelButton.enabled = NO;
-
+    
     NSString* urlString = [NSString stringWithFormat:@"%@%@%@",@"http://archfirst.org/bfoms-javaee/rest/secure/accounts/",accountId,@"/change_name"];
     BFDebugLog(@"EDIT ACCOUNT NAME URL %@",urlString);
     
     NSURL *url = [NSURL URLWithString:urlString];
-      
+    
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
     [jsonDic setValue:[accountName text] forKey:kNewAccountName];
     
@@ -133,8 +134,12 @@
     NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
     
     [restServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+}
 
-    
+- (IBAction)editAccountButtonClicked:(id)sender
+{
+  
+    [self editAccountAction];
 }
 
 - (IBAction)cancelButtonClicked:(id)sender
@@ -142,6 +147,13 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark - UITextField delegate methods
 
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self editAccountAction];
+    return YES;
+}
 
 @end

@@ -191,7 +191,7 @@
 
 #pragma mark - Methods
 
-- (IBAction)openAccountButtonClicked:(id)sender
+-(void) openAccountAction
 {
     // Check for errors    
     if(![[password text] isEqual:[confirmpassword text]])
@@ -238,8 +238,11 @@
     
     //updating the webservice object about the credentials
     [WebServiceObject userLoginCredentialWithUsername:[username text] password:[password text]];
-    
-    
+}
+
+- (IBAction)openAccountButtonClicked:(id)sender
+{
+    [self openAccountAction];
 }
 
 - (IBAction)cancelButtonClicked:(id)sender
@@ -253,6 +256,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    firstName.returnKeyType = UIReturnKeyGo;
+    lastName.returnKeyType = UIReturnKeyGo;
+    username.returnKeyType = UIReturnKeyGo;
+    password.returnKeyType = UIReturnKeyGo;
+    confirmpassword.returnKeyType = UIReturnKeyGo;
     
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     
@@ -271,6 +280,15 @@
     
     return YES;
     
+}
+
+#pragma mark - UITextField delegate methods
+
+-(BOOL) textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self openAccountAction];
+    return YES;
 }
 
 

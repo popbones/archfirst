@@ -23,7 +23,7 @@
 @class LoginViewController;
 @class BullFirstWebServiceObject;
 
-@interface OpenAccountViewController : UIViewController
+@interface OpenAccountViewController : UIViewController<UITextFieldDelegate>
 {
     
     //to keep track of the responses being received from the server

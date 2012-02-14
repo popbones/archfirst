@@ -52,7 +52,7 @@
 							<object class="IBUINavigationItem" id="46852768">
 								<reference key="IBUINavigationBar" ref="893997298"/>
 								<string key="IBUITitle">Edit Account Name</string>
-								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="428206575">
+								<object class="IBUIBarButtonItem" key="IBUILeftBarButtonItem" id="211264363">
 									<string key="IBUITitle">Cancel</string>
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<int key="IBUIStyle">1</int>
@@ -200,7 +200,7 @@
 					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">cancelButton</string>
 						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="428206575"/>
+						<reference key="destination" ref="211264363"/>
 					</object>
 					<int key="connectionID">26</int>
 				</object>
@@ -214,9 +214,17 @@
 					<int key="connectionID">21</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">delegate</string>
+						<reference key="source" ref="332159133"/>
+						<reference key="destination" ref="841351856"/>
+					</object>
+					<int key="connectionID">28</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">cancelButtonClicked:</string>
-						<reference key="source" ref="428206575"/>
+						<reference key="source" ref="211264363"/>
 						<reference key="destination" ref="841351856"/>
 					</object>
 					<int key="connectionID">27</int>
@@ -279,13 +287,13 @@
 						<int key="objectID">12</int>
 						<reference key="object" ref="46852768"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="428206575"/>
+							<reference ref="211264363"/>
 						</array>
 						<reference key="parent" ref="893997298"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">25</int>
-						<reference key="object" ref="428206575"/>
+						<reference key="object" ref="211264363"/>
 						<reference key="parent" ref="46852768"/>
 					</object>
 				</array>
@@ -307,7 +315,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">27</int>
+			<int key="maxID">28</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
