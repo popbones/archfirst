@@ -45,12 +45,13 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
--(void)getRequestWithURL:(NSURL*)url body:(NSData *)body
+-(void)getRequestWithURL:(NSURL*)url body:(NSData *)body contentType:(NSString *)type
 {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:kRequestTimeout];
     [request setHTTPMethod:@"GET"];
+    [request setValue:type forHTTPHeaderField:@"Content-type"];
     [request setHTTPBody:body];
-    
+
     NSURLCredential *credential = [WebServiceObject userLoginCredential];
     NSString *authStr = [NSString stringWithFormat:@"%@:%@", credential.user, credential.password];
     NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];

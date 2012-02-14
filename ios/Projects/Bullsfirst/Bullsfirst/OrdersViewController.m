@@ -188,7 +188,7 @@
     NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
 
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
-    [restServiceObject getRequestWithURL:url body:jsonBodyData];    
+    [restServiceObject getRequestWithURL:url body:jsonBodyData contentType:@"application/json"];    
 }
 
 - (IBAction)tradeBTNClicked:(id)sender {
