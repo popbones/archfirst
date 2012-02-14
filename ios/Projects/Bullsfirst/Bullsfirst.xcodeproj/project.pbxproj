@@ -514,6 +514,7 @@
 		545C5E3214E45AEC003560C8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				54B78A7214EAB427002FF1AC /* Forms */,
 				54B78A2014E5902A002FF1AC /* Login */,
 				00DFF90E148089B6001A4641 /* Tabs */,
 			);
@@ -558,12 +559,6 @@
 				54B78A6014E9785E002FF1AC /* expandPositionBTN.m */,
 				54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */,
 				54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */,
-				54B78A6814EAA14A002FF1AC /* TradeViewController.h */,
-				54B78A6914EAA14E002FF1AC /* TradeViewController.m */,
-				54B78A6A14EAA150002FF1AC /* TradeViewController.xib */,
-				54B78A6D14EAA174002FF1AC /* TransferViewController.h */,
-				54B78A6E14EAA177002FF1AC /* TransferViewController.m */,
-				54B78A6F14EAA178002FF1AC /* TransferViewController.xib */,
 			);
 			name = "Position Tab";
 			sourceTree = "<group>";
@@ -599,6 +594,19 @@
 				00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */,
 			);
 			name = Login;
+			sourceTree = "<group>";
+		};
+		54B78A7214EAB427002FF1AC /* Forms */ = {
+			isa = PBXGroup;
+			children = (
+				54B78A6814EAA14A002FF1AC /* TradeViewController.h */,
+				54B78A6914EAA14E002FF1AC /* TradeViewController.m */,
+				54B78A6A14EAA150002FF1AC /* TradeViewController.xib */,
+				54B78A6D14EAA174002FF1AC /* TransferViewController.h */,
+				54B78A6E14EAA177002FF1AC /* TransferViewController.m */,
+				54B78A6F14EAA178002FF1AC /* TransferViewController.xib */,
+			);
+			name = Forms;
 			sourceTree = "<group>";
 		};
 		AC26C81914DBF64700ABD693 /* Web Service Object */ = {
