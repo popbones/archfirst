@@ -22,6 +22,7 @@
 #import "AppDelegate.h"
 #import "TradeViewController.h"
 #import "TransferViewController.h"
+#import "FilterViewController.h"
 
 @implementation TransactionsViewController
 @synthesize transectionTBL;
@@ -165,6 +166,11 @@
 }
 
 - (IBAction)filterBTNClicked:(id)sender {
+    FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:controller animated:YES];
 }
 
 

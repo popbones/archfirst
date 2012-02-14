@@ -169,7 +169,7 @@
 }
 
 - (IBAction)filterBTNClicked:(id)sender {
-    FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"filterViewController" bundle:nil];    
+    FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     
