@@ -22,4 +22,8 @@
 
 @interface OrdersViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
+@property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
+
+@property (strong, nonatomic) IBOutlet UITableView *orderTBL;
 @end

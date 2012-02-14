@@ -22,4 +22,9 @@
 
 @interface TransactionsViewController : UIViewController
 
+@property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
+@property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
+
+@property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
+
 @end
