@@ -22,6 +22,7 @@
 #import "AppDelegate.h"
 #import "TradeViewController.h"
 #import "TransferViewController.h"
+#import "FilterViewController.h"
 
 @implementation OrdersViewController
 @synthesize orderTBL;
@@ -168,6 +169,11 @@
 }
 
 - (IBAction)filterBTNClicked:(id)sender {
+    FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"filterViewController" bundle:nil];    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:controller animated:YES];
 }
 
 #pragma mark - Table view data source
