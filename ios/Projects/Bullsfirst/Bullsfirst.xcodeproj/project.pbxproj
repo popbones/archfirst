@@ -68,6 +68,40 @@
 		54B78A7014EAA17A002FF1AC /* TransferViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6E14EAA177002FF1AC /* TransferViewController.m */; };
 		54B78A7114EAA17A002FF1AC /* TransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A6F14EAA178002FF1AC /* TransferViewController.xib */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
+		9586FA4014EABDA100A0B28C /* AccountLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA1E14EABDA100A0B28C /* AccountLandscapeTableViewCell.xib */; };
+		9586FA4114EABDA100A0B28C /* AccountsToPosition_RowArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA1F14EABDA100A0B28C /* AccountsToPosition_RowArrow.png */; };
+		9586FA4214EABDA100A0B28C /* AccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2014EABDA100A0B28C /* AccountTableViewCell.xib */; };
+		9586FA4314EABDA100A0B28C /* AddAccountButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2114EABDA100A0B28C /* AddAccountButton_PushDownState.png */; };
+		9586FA4414EABDA100A0B28C /* AddAccountButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2214EABDA100A0B28C /* AddAccountButton.png */; };
+		9586FA4514EABDA100A0B28C /* app-icon-29x29.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2314EABDA100A0B28C /* app-icon-29x29.png */; };
+		9586FA4614EABDA100A0B28C /* app-icon-50x50.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2414EABDA100A0B28C /* app-icon-50x50.png */; };
+		9586FA4714EABDA100A0B28C /* app-icon-512x512.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2514EABDA100A0B28C /* app-icon-512x512.png */; };
+		9586FA4814EABDA100A0B28C /* BackButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2614EABDA100A0B28C /* BackButton_PushDownState.png */; };
+		9586FA4914EABDA100A0B28C /* BackButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2714EABDA100A0B28C /* BackButton.png */; };
+		9586FA4A14EABDA100A0B28C /* bullsfirst-HeaderBarLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2814EABDA100A0B28C /* bullsfirst-HeaderBarLogo.png */; };
+		9586FA4B14EABDA100A0B28C /* EditButton-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2914EABDA100A0B28C /* EditButton-PushDown.png */; };
+		9586FA4C14EABDA100A0B28C /* EditButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2A14EABDA100A0B28C /* EditButton.png */; };
+		9586FA4D14EABDA100A0B28C /* FiltersClosed_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2B14EABDA100A0B28C /* FiltersClosed_PushDownState.png */; };
+		9586FA4E14EABDA100A0B28C /* FiltersClosed.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2C14EABDA100A0B28C /* FiltersClosed.png */; };
+		9586FA4F14EABDA100A0B28C /* FiltersOpen_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2D14EABDA100A0B28C /* FiltersOpen_PushDownState.png */; };
+		9586FA5014EABDA100A0B28C /* FiltersOpen.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2E14EABDA100A0B28C /* FiltersOpen.png */; };
+		9586FA5114EABDA100A0B28C /* HeaderBar_BackgroundGradient.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA2F14EABDA100A0B28C /* HeaderBar_BackgroundGradient.jpg */; };
+		9586FA5214EABDA100A0B28C /* RefreshButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3014EABDA100A0B28C /* RefreshButton_PushDownState.png */; };
+		9586FA5314EABDA100A0B28C /* RefreshButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3114EABDA100A0B28C /* RefreshButton.png */; };
+		9586FA5414EABDA100A0B28C /* SettingsButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3214EABDA100A0B28C /* SettingsButton_PushDownState.png */; };
+		9586FA5514EABDA100A0B28C /* SettingsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3314EABDA100A0B28C /* SettingsButton.png */; };
+		9586FA5614EABDA100A0B28C /* SwitchAccountsButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3414EABDA100A0B28C /* SwitchAccountsButton_PushDownState.png */; };
+		9586FA5714EABDA100A0B28C /* SwitchAccountsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3514EABDA100A0B28C /* SwitchAccountsButton.png */; };
+		9586FA5814EABDA100A0B28C /* TabBar_Accounts.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3614EABDA100A0B28C /* TabBar_Accounts.png */; };
+		9586FA5914EABDA100A0B28C /* TabBar_Gradient.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3714EABDA100A0B28C /* TabBar_Gradient.jpg */; };
+		9586FA5A14EABDA100A0B28C /* TabBar_Orders.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3814EABDA100A0B28C /* TabBar_Orders.png */; };
+		9586FA5B14EABDA100A0B28C /* TabBar_Positions.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3914EABDA100A0B28C /* TabBar_Positions.png */; };
+		9586FA5C14EABDA100A0B28C /* TabBar_Transactions.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3A14EABDA100A0B28C /* TabBar_Transactions.png */; };
+		9586FA5D14EABDA100A0B28C /* TitleBar_BackgroundGradient.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3B14EABDA100A0B28C /* TitleBar_BackgroundGradient.jpg */; };
+		9586FA5E14EABDA100A0B28C /* TradeButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3C14EABDA100A0B28C /* TradeButton_PushDownState.png */; };
+		9586FA5F14EABDA100A0B28C /* TradeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3D14EABDA100A0B28C /* TradeButton.png */; };
+		9586FA6014EABDA100A0B28C /* TransferButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3E14EABDA100A0B28C /* TransferButton_PushDownState.png */; };
+		9586FA6114EABDA100A0B28C /* TransferButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA3F14EABDA100A0B28C /* TransferButton.png */; };
 		95BA216F14E506B000F813E2 /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */; };
 		95BA217014E506B100F813E2 /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */; };
 		95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */; };
@@ -200,6 +234,40 @@
 		54B78A6E14EAA177002FF1AC /* TransferViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TransferViewController.m; sourceTree = "<group>"; };
 		54B78A6F14EAA178002FF1AC /* TransferViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransferViewController.xib; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
+		9586FA1E14EABDA100A0B28C /* AccountLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountLandscapeTableViewCell.xib; sourceTree = "<group>"; };
+		9586FA1F14EABDA100A0B28C /* AccountsToPosition_RowArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountsToPosition_RowArrow.png; sourceTree = "<group>"; };
+		9586FA2014EABDA100A0B28C /* AccountTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTableViewCell.xib; sourceTree = "<group>"; };
+		9586FA2114EABDA100A0B28C /* AddAccountButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddAccountButton_PushDownState.png; sourceTree = "<group>"; };
+		9586FA2214EABDA100A0B28C /* AddAccountButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddAccountButton.png; sourceTree = "<group>"; };
+		9586FA2314EABDA100A0B28C /* app-icon-29x29.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-29x29.png"; sourceTree = "<group>"; };
+		9586FA2414EABDA100A0B28C /* app-icon-50x50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-50x50.png"; sourceTree = "<group>"; };
+		9586FA2514EABDA100A0B28C /* app-icon-512x512.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-512x512.png"; sourceTree = "<group>"; };
+		9586FA2614EABDA100A0B28C /* BackButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButton_PushDownState.png; sourceTree = "<group>"; };
+		9586FA2714EABDA100A0B28C /* BackButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = BackButton.png; sourceTree = "<group>"; };
+		9586FA2814EABDA100A0B28C /* bullsfirst-HeaderBarLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-HeaderBarLogo.png"; sourceTree = "<group>"; };
+		9586FA2914EABDA100A0B28C /* EditButton-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EditButton-PushDown.png"; sourceTree = "<group>"; };
+		9586FA2A14EABDA100A0B28C /* EditButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EditButton.png; sourceTree = "<group>"; };
+		9586FA2B14EABDA100A0B28C /* FiltersClosed_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FiltersClosed_PushDownState.png; sourceTree = "<group>"; };
+		9586FA2C14EABDA100A0B28C /* FiltersClosed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FiltersClosed.png; sourceTree = "<group>"; };
+		9586FA2D14EABDA100A0B28C /* FiltersOpen_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FiltersOpen_PushDownState.png; sourceTree = "<group>"; };
+		9586FA2E14EABDA100A0B28C /* FiltersOpen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = FiltersOpen.png; sourceTree = "<group>"; };
+		9586FA2F14EABDA100A0B28C /* HeaderBar_BackgroundGradient.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = HeaderBar_BackgroundGradient.jpg; sourceTree = "<group>"; };
+		9586FA3014EABDA100A0B28C /* RefreshButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RefreshButton_PushDownState.png; sourceTree = "<group>"; };
+		9586FA3114EABDA100A0B28C /* RefreshButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = RefreshButton.png; sourceTree = "<group>"; };
+		9586FA3214EABDA100A0B28C /* SettingsButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingsButton_PushDownState.png; sourceTree = "<group>"; };
+		9586FA3314EABDA100A0B28C /* SettingsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SettingsButton.png; sourceTree = "<group>"; };
+		9586FA3414EABDA100A0B28C /* SwitchAccountsButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchAccountsButton_PushDownState.png; sourceTree = "<group>"; };
+		9586FA3514EABDA100A0B28C /* SwitchAccountsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchAccountsButton.png; sourceTree = "<group>"; };
+		9586FA3614EABDA100A0B28C /* TabBar_Accounts.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBar_Accounts.png; sourceTree = "<group>"; };
+		9586FA3714EABDA100A0B28C /* TabBar_Gradient.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TabBar_Gradient.jpg; sourceTree = "<group>"; };
+		9586FA3814EABDA100A0B28C /* TabBar_Orders.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBar_Orders.png; sourceTree = "<group>"; };
+		9586FA3914EABDA100A0B28C /* TabBar_Positions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBar_Positions.png; sourceTree = "<group>"; };
+		9586FA3A14EABDA100A0B28C /* TabBar_Transactions.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TabBar_Transactions.png; sourceTree = "<group>"; };
+		9586FA3B14EABDA100A0B28C /* TitleBar_BackgroundGradient.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TitleBar_BackgroundGradient.jpg; sourceTree = "<group>"; };
+		9586FA3C14EABDA100A0B28C /* TradeButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TradeButton_PushDownState.png; sourceTree = "<group>"; };
+		9586FA3D14EABDA100A0B28C /* TradeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TradeButton.png; sourceTree = "<group>"; };
+		9586FA3E14EABDA100A0B28C /* TransferButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TransferButton_PushDownState.png; sourceTree = "<group>"; };
+		9586FA3F14EABDA100A0B28C /* TransferButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TransferButton.png; sourceTree = "<group>"; };
 		95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-landscape.png"; sourceTree = "<group>"; };
 		95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-portrait.png"; sourceTree = "<group>"; };
 		95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-logo-transparent.png"; sourceTree = "<group>"; };
@@ -353,6 +421,38 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				9586FA1F14EABDA100A0B28C /* AccountsToPosition_RowArrow.png */,
+				9586FA2114EABDA100A0B28C /* AddAccountButton_PushDownState.png */,
+				9586FA2214EABDA100A0B28C /* AddAccountButton.png */,
+				9586FA2314EABDA100A0B28C /* app-icon-29x29.png */,
+				9586FA2414EABDA100A0B28C /* app-icon-50x50.png */,
+				9586FA2514EABDA100A0B28C /* app-icon-512x512.png */,
+				9586FA2614EABDA100A0B28C /* BackButton_PushDownState.png */,
+				9586FA2714EABDA100A0B28C /* BackButton.png */,
+				9586FA2814EABDA100A0B28C /* bullsfirst-HeaderBarLogo.png */,
+				9586FA2914EABDA100A0B28C /* EditButton-PushDown.png */,
+				9586FA2A14EABDA100A0B28C /* EditButton.png */,
+				9586FA2B14EABDA100A0B28C /* FiltersClosed_PushDownState.png */,
+				9586FA2C14EABDA100A0B28C /* FiltersClosed.png */,
+				9586FA2D14EABDA100A0B28C /* FiltersOpen_PushDownState.png */,
+				9586FA2E14EABDA100A0B28C /* FiltersOpen.png */,
+				9586FA2F14EABDA100A0B28C /* HeaderBar_BackgroundGradient.jpg */,
+				9586FA3014EABDA100A0B28C /* RefreshButton_PushDownState.png */,
+				9586FA3114EABDA100A0B28C /* RefreshButton.png */,
+				9586FA3214EABDA100A0B28C /* SettingsButton_PushDownState.png */,
+				9586FA3314EABDA100A0B28C /* SettingsButton.png */,
+				9586FA3414EABDA100A0B28C /* SwitchAccountsButton_PushDownState.png */,
+				9586FA3514EABDA100A0B28C /* SwitchAccountsButton.png */,
+				9586FA3614EABDA100A0B28C /* TabBar_Accounts.png */,
+				9586FA3714EABDA100A0B28C /* TabBar_Gradient.jpg */,
+				9586FA3814EABDA100A0B28C /* TabBar_Orders.png */,
+				9586FA3914EABDA100A0B28C /* TabBar_Positions.png */,
+				9586FA3A14EABDA100A0B28C /* TabBar_Transactions.png */,
+				9586FA3B14EABDA100A0B28C /* TitleBar_BackgroundGradient.jpg */,
+				9586FA3C14EABDA100A0B28C /* TradeButton_PushDownState.png */,
+				9586FA3D14EABDA100A0B28C /* TradeButton.png */,
+				9586FA3E14EABDA100A0B28C /* TransferButton_PushDownState.png */,
+				9586FA3F14EABDA100A0B28C /* TransferButton.png */,
 				545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */,
 				545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */,
 				95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */,
@@ -424,6 +524,8 @@
 			isa = PBXGroup;
 			children = (
 				00DFF9021480893E001A4641 /* AccountsViewController.h */,
+				9586FA1E14EABDA100A0B28C /* AccountLandscapeTableViewCell.xib */,
+				9586FA2014EABDA100A0B28C /* AccountTableViewCell.xib */,
 				00DFF9031480893E001A4641 /* AccountsViewController.m */,
 				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
 				009C1A3A148D3FF400259534 /* AddAccountViewController.h */,
@@ -662,6 +764,40 @@
 				54B78A6314E98956002FF1AC /* PositionLandscapeTableViewCell.xib in Resources */,
 				54B78A6C14EAA155002FF1AC /* TradeViewController.xib in Resources */,
 				54B78A7114EAA17A002FF1AC /* TransferViewController.xib in Resources */,
+				9586FA4014EABDA100A0B28C /* AccountLandscapeTableViewCell.xib in Resources */,
+				9586FA4114EABDA100A0B28C /* AccountsToPosition_RowArrow.png in Resources */,
+				9586FA4214EABDA100A0B28C /* AccountTableViewCell.xib in Resources */,
+				9586FA4314EABDA100A0B28C /* AddAccountButton_PushDownState.png in Resources */,
+				9586FA4414EABDA100A0B28C /* AddAccountButton.png in Resources */,
+				9586FA4514EABDA100A0B28C /* app-icon-29x29.png in Resources */,
+				9586FA4614EABDA100A0B28C /* app-icon-50x50.png in Resources */,
+				9586FA4714EABDA100A0B28C /* app-icon-512x512.png in Resources */,
+				9586FA4814EABDA100A0B28C /* BackButton_PushDownState.png in Resources */,
+				9586FA4914EABDA100A0B28C /* BackButton.png in Resources */,
+				9586FA4A14EABDA100A0B28C /* bullsfirst-HeaderBarLogo.png in Resources */,
+				9586FA4B14EABDA100A0B28C /* EditButton-PushDown.png in Resources */,
+				9586FA4C14EABDA100A0B28C /* EditButton.png in Resources */,
+				9586FA4D14EABDA100A0B28C /* FiltersClosed_PushDownState.png in Resources */,
+				9586FA4E14EABDA100A0B28C /* FiltersClosed.png in Resources */,
+				9586FA4F14EABDA100A0B28C /* FiltersOpen_PushDownState.png in Resources */,
+				9586FA5014EABDA100A0B28C /* FiltersOpen.png in Resources */,
+				9586FA5114EABDA100A0B28C /* HeaderBar_BackgroundGradient.jpg in Resources */,
+				9586FA5214EABDA100A0B28C /* RefreshButton_PushDownState.png in Resources */,
+				9586FA5314EABDA100A0B28C /* RefreshButton.png in Resources */,
+				9586FA5414EABDA100A0B28C /* SettingsButton_PushDownState.png in Resources */,
+				9586FA5514EABDA100A0B28C /* SettingsButton.png in Resources */,
+				9586FA5614EABDA100A0B28C /* SwitchAccountsButton_PushDownState.png in Resources */,
+				9586FA5714EABDA100A0B28C /* SwitchAccountsButton.png in Resources */,
+				9586FA5814EABDA100A0B28C /* TabBar_Accounts.png in Resources */,
+				9586FA5914EABDA100A0B28C /* TabBar_Gradient.jpg in Resources */,
+				9586FA5A14EABDA100A0B28C /* TabBar_Orders.png in Resources */,
+				9586FA5B14EABDA100A0B28C /* TabBar_Positions.png in Resources */,
+				9586FA5C14EABDA100A0B28C /* TabBar_Transactions.png in Resources */,
+				9586FA5D14EABDA100A0B28C /* TitleBar_BackgroundGradient.jpg in Resources */,
+				9586FA5E14EABDA100A0B28C /* TradeButton_PushDownState.png in Resources */,
+				9586FA5F14EABDA100A0B28C /* TradeButton.png in Resources */,
+				9586FA6014EABDA100A0B28C /* TransferButton_PushDownState.png in Resources */,
+				9586FA6114EABDA100A0B28C /* TransferButton.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

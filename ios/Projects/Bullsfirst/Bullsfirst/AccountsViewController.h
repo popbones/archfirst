@@ -28,17 +28,17 @@
 @class PieChartMVAccountsViewController;
 @class PieChartMVPositionViewController;
 
+@protocol AccountNameEditDelegate;
+
+
+
 @interface AccountsViewController: UIViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate,
     AccountsTableViewControllerDelegate> 
 {   
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIView *headerView;
-    IBOutlet UIView *landscapeView;
-    IBOutlet UIView *portraitView;
+    
     IBOutlet UITableView *accountsTable;
-    IBOutlet UITableView *accountsTablePortraitView;
-    AccountsTableViewController *accountsTableViewController;    
-    AccountsTableViewController *accountsTablePortraitViewController; 
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
     
@@ -48,18 +48,26 @@
     PieChartMVPositionViewController *pieChartMVPositionViewController;
     IBOutlet CPTGraphHostingView *pieChartMVPositionView;
     BFToolbar *toolbar,*toolbarPortraitView;
-    IBOutlet UILabel *accountsPlotLabel;
-    IBOutlet UILabel *positionPlotLabel;
     UIDeviceOrientation orientation;
+     __weak id<AccountNameEditDelegate> accountNameEditDelegate;
 }
 
+@property (strong, nonatomic) IBOutlet UITableViewCell *accountCell;
 @property (nonatomic, retain) BFToolbar *toolbar;
 @property (nonatomic, retain) BFToolbar *toolbarPortraitView;
-@property (nonatomic, retain) UIView *landscapeView;
-@property (nonatomic, retain) UIView *portraitView;
 @property (nonatomic, retain)  PieChartMVAccountsViewController *pieChartMVAccountsViewController;
+@property (strong, nonatomic) IBOutlet UILabel *accountNameLBL;
+@property (strong, nonatomic) IBOutlet UILabel *accountNumberLBL;
+@property (strong, nonatomic) IBOutlet UILabel *marketValueLBL;
+@property (strong, nonatomic) IBOutlet UILabel *cashLBL;
+@property (strong, nonatomic) IBOutlet UILabel *actionLBL;
 
 - (IBAction)createAccount:(id)sender;
 - (IBAction)refreshAccounts:(id)sender;
-- (void) clearCurrentView;
+
+@end
+@protocol AccountNameEditDelegate <NSObject>
+
+-(void) editingStartedForAccount:(NSString*) oldAccountName withId:(NSString*) accId;
+
 @end
