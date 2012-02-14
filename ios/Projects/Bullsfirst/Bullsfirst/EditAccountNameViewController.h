@@ -29,7 +29,7 @@
     IBOutlet UITextField *accountName;
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIButton *editAccountButton;
-    IBOutlet UIButton *cancelButton;
+    IBOutlet UIBarButtonItem *cancelButton;
     NSString* oldAccountName;
     NSString* accountId;
 }

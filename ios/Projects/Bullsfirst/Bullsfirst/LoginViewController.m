@@ -299,9 +299,10 @@
     openAccountViewController = [[OpenAccountViewController alloc] initWithNibName:@"OpenAccountViewController" bundle:nil];
     
     [openAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [openAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [openAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self presentModalViewController:openAccountViewController animated:YES];
+    openAccountViewController.view.superview.bounds=CGRectMake(0, 0, 540,418);
 }
 
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController

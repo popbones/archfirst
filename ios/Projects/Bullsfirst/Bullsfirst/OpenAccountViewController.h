@@ -38,7 +38,7 @@
     IBOutlet UIActivityIndicatorView *spinner;
     
     IBOutlet UIButton* openAccountButton;
-    IBOutlet UIButton* cancelButton;
+    IBOutlet UIBarButtonItem* cancelButton;
     
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;

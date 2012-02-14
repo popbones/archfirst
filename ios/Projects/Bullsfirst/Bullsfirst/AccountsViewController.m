@@ -216,9 +216,11 @@
 {
     EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:accName withId:accId];    
     [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self presentModalViewController:editAccountViewController animated:YES];
+    editAccountViewController.view.superview.bounds=CGRectMake(0, 0, 540,185);
+    
 }
 
 #pragma mark - KVO lifecycle
