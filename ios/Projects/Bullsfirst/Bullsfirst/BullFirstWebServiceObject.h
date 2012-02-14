@@ -21,4 +21,6 @@
 
 @interface BullFirstWebServiceObject : WebServiceObject
 
+-(void)getRequestWithURL:(NSURL*)url body:(NSData *)body;
+
 @end
