@@ -136,11 +136,6 @@
     
 }
 
-- (IBAction)logout
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
-}
-
 #pragma mark - KVO lifecycle
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
@@ -159,6 +154,11 @@
 }
 
 #pragma mark - IBActions
+
+- (IBAction)logout
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
+}
 
 - (IBAction)switchAccountBTNClicked:(id)sender {
 }

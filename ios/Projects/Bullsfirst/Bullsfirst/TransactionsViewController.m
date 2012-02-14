@@ -121,10 +121,6 @@
     [transectionTBL reloadData];
     
 }
-- (IBAction)logout
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
-}
 
 #pragma mark - KVO lifecycle
 
@@ -144,6 +140,11 @@
 }
 
 #pragma mark - IBActions
+
+- (IBAction)logout
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
+}
 
 - (IBAction)refreshBTNClicked:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];

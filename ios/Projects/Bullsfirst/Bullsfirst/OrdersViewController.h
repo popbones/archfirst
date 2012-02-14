@@ -19,8 +19,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BullFirstWebServiceObject.h"
 
-@interface OrdersViewController : UIViewController
+@interface OrdersViewController : UIViewController {
+    NSMutableArray *orders;
+}
 
 @property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
 @property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
@@ -35,5 +38,8 @@
 - (IBAction)tradeBTNClicked:(id)sender;
 - (IBAction)transferBTNClicked:(id)sender;
 - (IBAction)filterBTNClicked:(id)sender;
+
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
+@property (strong, nonatomic) NSMutableArray *orders;
 
 @end

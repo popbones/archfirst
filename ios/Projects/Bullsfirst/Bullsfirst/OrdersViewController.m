@@ -32,6 +32,8 @@
 @synthesize transferBTN;
 @synthesize tradeBTN;
 @synthesize refreshBTN;
+@synthesize restServiceObject;
+@synthesize orders;
 
 - (id)init
 {
@@ -71,6 +73,8 @@
         UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
         self.navigationItem.leftBarButtonItem = barButtonItem;
     }
+
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
 
 }
 
@@ -124,9 +128,31 @@
     [orderTBL reloadData];
     
 }
-- (IBAction)logout
+#pragma mark - selectors for handling rest call callbacks
+
+-(void)receivedData:(NSData *)data
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
+    
+}
+
+-(void)responseReceived:(NSURLResponse *)data
+{
+    
+}
+
+-(void)requestFailed:(NSError *)error
+{       
+    NSString *errorString = [NSString stringWithString:@"Try Refreshing!"];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)requestSucceeded:(NSData *)data
+{
+    NSError *err;
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+    BFDebugLog(@"jsonObject = %@", jsonObject);
 }
 
 #pragma mark - KVO lifecycle
@@ -148,8 +174,21 @@
 
 #pragma mark - IBActions
 
+- (IBAction)logout
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
+}
+
 - (IBAction)refreshBTNClicked:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
+
+    NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
+    [jsonDic setValue:@"2012-01-01" forKey:@"fromDate"];
+    [jsonDic setValue:@"2012-12-31" forKey:@"toDate"];
+    NSError *err;
+    NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
+
+    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
+    [restServiceObject getRequestWithURL:url body:jsonBodyData];    
 }
 
 - (IBAction)tradeBTNClicked:(id)sender {
@@ -207,7 +246,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return [orders count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
