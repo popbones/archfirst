@@ -32,11 +32,16 @@
 #import "editAccountNameBTN.h"
 #import "showPositionsBTN.h"
 #import "PositionsViewController.h"
+#import "UserViewController.h"
+
 @implementation AccountsViewController
 
 @synthesize toolbar,pieChartMVAccountsViewController,toolbarPortraitView;
 @synthesize accountCell;
 @synthesize accountNameLBL,accountNumberLBL,marketValueLBL,cashLBL,actionLBL;
+
+@synthesize userPopOver;
+
 //- (id)init
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -217,8 +222,19 @@
 }
 - (IBAction)logout
 {
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
+    if (!userPopOver) {
+        UserViewController *controller = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
+        CGRect frame = controller.view.frame;
+        
+        userPopOver = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = userPopOver;
+        [userPopOver setPopoverContentSize:frame.size];
+    }
+    if ([userPopOver isPopoverVisible]) {
+        [userPopOver dismissPopoverAnimated:YES];
+    } else {
+        [userPopOver presentPopoverFromBarButtonItem: self.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
 }
 
 - (IBAction)userProfile

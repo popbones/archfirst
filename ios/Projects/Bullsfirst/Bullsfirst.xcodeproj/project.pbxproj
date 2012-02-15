@@ -55,6 +55,8 @@
 		54B78A7114EAA17A002FF1AC /* TransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A6F14EAA178002FF1AC /* TransferViewController.xib */; };
 		54B78A9C14EB00AB002FF1AC /* FilterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A9A14EB00A7002FF1AC /* FilterViewController.m */; };
 		54B78A9D14EB00AB002FF1AC /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A9B14EB00A9002FF1AC /* FilterViewController.xib */; };
+		54B78AED14EC4656002FF1AC /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78AEB14EC4654002FF1AC /* UserViewController.m */; };
+		54B78AEE14EC4656002FF1AC /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78AEC14EC4655002FF1AC /* UserViewController.xib */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		9586FA7314EB684300A0B28C /* AccountLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */; };
 		9586FA7414EB684300A0B28C /* AccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */; };
@@ -206,6 +208,9 @@
 		54B78A9914EB00A6002FF1AC /* FilterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FilterViewController.h; sourceTree = "<group>"; };
 		54B78A9A14EB00A7002FF1AC /* FilterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FilterViewController.m; sourceTree = "<group>"; };
 		54B78A9B14EB00A9002FF1AC /* FilterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FilterViewController.xib; sourceTree = "<group>"; };
+		54B78AEA14EC4652002FF1AC /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
+		54B78AEB14EC4654002FF1AC /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
+		54B78AEC14EC4655002FF1AC /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountLandscapeTableViewCell.xib; sourceTree = "<group>"; };
 		9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTableViewCell.xib; sourceTree = "<group>"; };
@@ -556,6 +561,9 @@
 		54B78A7214EAB427002FF1AC /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				54B78AEA14EC4652002FF1AC /* UserViewController.h */,
+				54B78AEB14EC4654002FF1AC /* UserViewController.m */,
+				54B78AEC14EC4655002FF1AC /* UserViewController.xib */,
 				54B78A6814EAA14A002FF1AC /* TradeViewController.h */,
 				54B78A6914EAA14E002FF1AC /* TradeViewController.m */,
 				54B78A6A14EAA150002FF1AC /* TradeViewController.xib */,
@@ -751,6 +759,7 @@
 				9586FAAC14EB6A2900A0B28C /* TradeButton.png in Resources */,
 				9586FAAD14EB6A2900A0B28C /* TransferButton_PushDownState.png in Resources */,
 				9586FAAE14EB6A2900A0B28C /* TransferButton.png in Resources */,
+				54B78AEE14EC4656002FF1AC /* UserViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -798,6 +807,7 @@
 				54B78A9C14EB00AB002FF1AC /* FilterViewController.m in Sources */,
 				9586FAB114EB804600A0B28C /* editAccountNameBTN.m in Sources */,
 				9586FAB414EB8F8500A0B28C /* showPositionsBTN.m in Sources */,
+				54B78AED14EC4656002FF1AC /* UserViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

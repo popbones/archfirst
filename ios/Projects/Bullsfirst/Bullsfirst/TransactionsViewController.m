@@ -23,6 +23,7 @@
 #import "TradeViewController.h"
 #import "TransferViewController.h"
 #import "FilterViewController.h"
+#import "UserViewController.h"
 
 @implementation TransactionsViewController
 @synthesize transectionTBL;
@@ -32,6 +33,7 @@
 @synthesize transferBTN;
 @synthesize tradeBTN;
 @synthesize refreshBTN;
+@synthesize userPopOver;
 
 - (id)init
 {
@@ -146,7 +148,19 @@
 
 - (IBAction)logout
 {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
+    if (!userPopOver) {
+        UserViewController *controller = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
+        CGRect frame = controller.view.frame;
+        
+        userPopOver = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = userPopOver;
+        [userPopOver setPopoverContentSize:frame.size];
+    }
+    if ([userPopOver isPopoverVisible]) {
+        [userPopOver dismissPopoverAnimated:YES];
+    } else {
+        [userPopOver presentPopoverFromBarButtonItem: self.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
 }
 
 - (IBAction)refreshBTNClicked:(id)sender {

@@ -42,4 +42,6 @@
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 @property (strong, nonatomic) NSMutableArray *orders;
 
+@property (strong, nonatomic) UIPopoverController *userPopOver;
+
 @end

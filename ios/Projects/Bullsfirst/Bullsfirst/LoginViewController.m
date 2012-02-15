@@ -186,7 +186,7 @@
 -(void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    orientation=[[UIDevice currentDevice]orientation];
+    orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(orientation==UIDeviceOrientationLandscapeLeft||orientation==UIDeviceOrientationLandscapeRight)
     {
         groupedView.frame=CGRectMake(255, 156, groupedView.frame.size.width, groupedView.frame.size.height);

@@ -61,7 +61,12 @@
 - (IBAction)createAccount:(id)sender;
 - (IBAction)refreshAccounts:(id)sender;
 - (IBAction)backBTNClicked:(id)sender;
+
+@property (strong, nonatomic) UIPopoverController *userPopOver;
+
 @end
 @protocol AccountsViewSelectionDelegate <NSObject>
 -(void) accountSelected:(int) withIndex; 
+
+
 @end

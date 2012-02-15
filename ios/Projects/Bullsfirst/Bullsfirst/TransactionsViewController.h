@@ -31,6 +31,8 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
 
+@property (strong, nonatomic) UIPopoverController *userPopOver;
+
 - (IBAction)refreshBTNClicked:(id)sender;
 - (IBAction)tradeBTNClicked:(id)sender;
 - (IBAction)transferBTNClicked:(id)sender;
