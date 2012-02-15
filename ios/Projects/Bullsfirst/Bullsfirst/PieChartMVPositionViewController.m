@@ -36,14 +36,14 @@
 -(void) performAnimation
 {
     
-    CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-    
-	rotation.removedOnCompletion = YES;
-	rotation.fromValue			 = [NSNumber numberWithFloat:M_PI * 0.5];
-	rotation.toValue			 = [NSNumber numberWithFloat:0];
-	rotation.duration			 = 1.0f;
-	rotation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    
+//    CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+//    
+//	rotation.removedOnCompletion = YES;
+//	rotation.fromValue			 = [NSNumber numberWithFloat:M_PI * 0.5];
+//	rotation.toValue			 = [NSNumber numberWithFloat:0];
+//	rotation.duration			 = 1.0f;
+//	rotation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+//    
     CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     
 	fadeInAnimation.removedOnCompletion = YES;
@@ -54,7 +54,7 @@
 	piePlot.shouldRasterize=YES;
     
     CAAnimationGroup* animationGroup=[CAAnimationGroup animation];
-    animationGroup.animations = [NSArray arrayWithObjects:fadeInAnimation,rotation, nil];
+    animationGroup.animations = [NSArray arrayWithObjects:fadeInAnimation, nil];
     
     animationGroup.delegate = self;
     animationGroup.duration = 1.0f;

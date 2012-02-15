@@ -28,7 +28,6 @@
 @class PieChartMVAccountsViewController;
 @class PieChartMVPositionViewController;
 
-@protocol AccountNameEditDelegate;
 
 
 
@@ -49,7 +48,7 @@
     IBOutlet CPTGraphHostingView *pieChartMVPositionView;
     BFToolbar *toolbar,*toolbarPortraitView;
     UIDeviceOrientation orientation;
-     __weak id<AccountNameEditDelegate> accountNameEditDelegate;
+  
 }
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *accountCell;
@@ -64,10 +63,5 @@
 
 - (IBAction)createAccount:(id)sender;
 - (IBAction)refreshAccounts:(id)sender;
-
-@end
-@protocol AccountNameEditDelegate <NSObject>
-
--(void) editingStartedForAccount:(NSString*) oldAccountName withId:(NSString*) accId;
-
+- (IBAction)backBTNClicked:(id)sender;
 @end

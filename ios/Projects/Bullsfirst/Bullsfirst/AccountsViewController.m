@@ -29,7 +29,8 @@
 #import "PieChartMVPositionViewController.h"
 #import "BullFirstWebServiceObject.h"
 #import "AppDelegate.h"
-
+#import "editAccountNameBTN.h"
+#import "showPositionsBTN.h"
 @implementation AccountsViewController
 
 @synthesize toolbar,pieChartMVAccountsViewController,toolbarPortraitView;
@@ -292,10 +293,7 @@
         [[NSBundle mainBundle] loadNibNamed:@"AccountLandscapeTableViewCell" owner:self options:nil];
         cell = accountCell;
         /*
-        expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
-        [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
-        expand.row = indexPath.row;
-        [expand setTitle:@"+" forState:UIControlStateNormal];*/
+        */
         
         UILabel *label;
         label = (UILabel *)[cell viewWithTag:1];
@@ -309,15 +307,18 @@
 
         label = (UILabel *)[cell viewWithTag:4];
         label.text = [NSString stringWithFormat:@"%@%@", currencySymbol, account.cashPosition.amount];
+       
+        editAccountNameBTN *edit = (editAccountNameBTN *)[cell viewWithTag:5]; // expand button
+        [edit addTarget:self action:@selector(editAccount:) forControlEvents:UIControlEventTouchUpInside];
+        edit.currentName=account.name;
         
-        UIButton *editBTN = (UIButton *)[cell viewWithTag:5]; // trade button
-        [editBTN addTarget:self action:@selector(editAccount) forControlEvents:UIControlEventTouchUpInside];
+        edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
+                
+        showPositionsBTN *arrowBTN = (showPositionsBTN *)[cell viewWithTag:6]; // expand button
+        [arrowBTN addTarget:self action:@selector(showPositions:) forControlEvents:UIControlEventTouchUpInside];
+        arrowBTN.positionIndex=indexPath.row;
         
-        UIButton *showPositionBTN = (UIButton *)[cell viewWithTag:6]; // trade button
-        [showPositionBTN addTarget:self action:@selector(showPositions) forControlEvents:UIControlEventTouchUpInside];
-        
-
-        
+              
         return cell;
     }
     else
@@ -339,11 +340,42 @@
         
         label = (UILabel *)[cell viewWithTag:4];
         label.text = [NSString stringWithFormat:@"%@%@", currencySymbol, account.cashPosition.amount];
+        
+        editAccountNameBTN *edit = (editAccountNameBTN *)[cell viewWithTag:5]; // edit button
+        [edit addTarget:self action:@selector(editAccount:) forControlEvents:UIControlEventTouchUpInside];
+        edit.currentName=account.name;
+        
+        edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
+        
+        showPositionsBTN *arrowBTN = (showPositionsBTN *)[cell viewWithTag:6]; // showpostions button
+        [arrowBTN addTarget:self action:@selector(showPositions:) forControlEvents:UIControlEventTouchUpInside];
+        arrowBTN.positionIndex=indexPath.row;
+        
+        edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
         return cell;
+
     }
     
 }
-
+-(void)editAccount:(id)sender
+{
+    editAccountNameBTN *button = (editAccountNameBTN *)sender;
+    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:button.currentName withId:button.accountID];    
+    [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+    [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [self presentModalViewController:editAccountViewController animated:YES];
+    editAccountViewController.view.superview.bounds=CGRectMake(0, 0, 540,185);
+}
+-(void)showPositions:(id)sender
+{
+    //self.tabBarController.selectedIndex=1
+}
+- (IBAction)backBTNClicked:(id)sender
+{
+    pieChartMVPositionViewController.view.hidden=true;
+    pieChartMVAccountsViewController.view.hidden=false;
+}
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

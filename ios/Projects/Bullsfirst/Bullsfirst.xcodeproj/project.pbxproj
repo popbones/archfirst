@@ -89,6 +89,8 @@
 		9586FAAC14EB6A2900A0B28C /* TradeButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA8F14EB6A2800A0B28C /* TradeButton.png */; };
 		9586FAAD14EB6A2900A0B28C /* TransferButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA9014EB6A2900A0B28C /* TransferButton_PushDownState.png */; };
 		9586FAAE14EB6A2900A0B28C /* TransferButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA9114EB6A2900A0B28C /* TransferButton.png */; };
+		9586FAB114EB804600A0B28C /* editAccountNameBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586FAB014EB804600A0B28C /* editAccountNameBTN.m */; };
+		9586FAB414EB8F8500A0B28C /* showPositionsBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586FAB314EB8F8400A0B28C /* showPositionsBTN.m */; };
 		95BA216F14E506B000F813E2 /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */; };
 		95BA217014E506B100F813E2 /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */; };
 		95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */; };
@@ -242,6 +244,10 @@
 		9586FA8F14EB6A2800A0B28C /* TradeButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TradeButton.png; sourceTree = "<group>"; };
 		9586FA9014EB6A2900A0B28C /* TransferButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TransferButton_PushDownState.png; sourceTree = "<group>"; };
 		9586FA9114EB6A2900A0B28C /* TransferButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TransferButton.png; sourceTree = "<group>"; };
+		9586FAAF14EB804600A0B28C /* editAccountNameBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editAccountNameBTN.h; sourceTree = "<group>"; };
+		9586FAB014EB804600A0B28C /* editAccountNameBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editAccountNameBTN.m; sourceTree = "<group>"; };
+		9586FAB214EB8F8200A0B28C /* showPositionsBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showPositionsBTN.h; sourceTree = "<group>"; };
+		9586FAB314EB8F8400A0B28C /* showPositionsBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showPositionsBTN.m; sourceTree = "<group>"; };
 		95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-landscape.png"; sourceTree = "<group>"; };
 		95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-portrait.png"; sourceTree = "<group>"; };
 		95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-logo-transparent.png"; sourceTree = "<group>"; };
@@ -483,6 +489,10 @@
 			children = (
 				00DFF9021480893E001A4641 /* AccountsViewController.h */,
 				00DFF9031480893E001A4641 /* AccountsViewController.m */,
+				9586FAAF14EB804600A0B28C /* editAccountNameBTN.h */,
+				9586FAB214EB8F8200A0B28C /* showPositionsBTN.h */,
+				9586FAB314EB8F8400A0B28C /* showPositionsBTN.m */,
+				9586FAB014EB804600A0B28C /* editAccountNameBTN.m */,
 				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
 				9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */,
 				9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */,
@@ -798,6 +808,8 @@
 				54B78A6B14EAA155002FF1AC /* TradeViewController.m in Sources */,
 				54B78A7014EAA17A002FF1AC /* TransferViewController.m in Sources */,
 				54B78A9C14EB00AB002FF1AC /* FilterViewController.m in Sources */,
+				9586FAB114EB804600A0B28C /* editAccountNameBTN.m in Sources */,
+				9586FAB414EB8F8500A0B28C /* showPositionsBTN.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
