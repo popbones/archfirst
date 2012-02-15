@@ -46,7 +46,7 @@
     {
         UITabBarItem *tbi = [self tabBarItem];
         [tbi setTitle:@"Accounts"];
-        UIImage *i = [UIImage imageNamed:@"iconAccounts.png"];
+        UIImage *i = [UIImage imageNamed:@"TabBar_Accounts.png"];
         [tbi setImage:i];                
     }
     
@@ -95,14 +95,18 @@
 {
     [super viewDidLoad];
 
-    self.navigationItem.title = @"Bullsfirst";
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"img_bg_yellow.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullsfirst-HeaderBarLogo.png"]];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshAccounts:)];
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.rightBarButtonItem = barButtonItem;
 
     barButtonItem = [[UIBarButtonItem alloc] init];
 	barButtonItem.title = @"Accounts";
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
 	self.navigationItem.backBarButtonItem = barButtonItem;
-    
+
+
     pieChartMVAccountsViewController = [[PieChartMVAccountsViewController alloc] init];
     [pieChartMVAccountsViewController setView:pieChartMVAccountsView];
     [pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
@@ -253,9 +257,9 @@
         fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
         fullName=[fullName uppercaseString];
         
-        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
+        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
+        barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
         self.navigationItem.leftBarButtonItem = barButtonItem;
-
         return;
     }
 }

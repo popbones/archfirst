@@ -50,7 +50,7 @@
     {
         UITabBarItem *tbi = [self tabBarItem];
         [tbi setTitle:@"Positions"];
-        UIImage *i = [UIImage imageNamed:@"iconPositions.png"];
+        UIImage *i = [UIImage imageNamed:@"TabBar_Positions.png"];
         [tbi setImage:i];        
     }
     
@@ -70,8 +70,11 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    self.navigationItem.title = @"Bullsfirst";
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"img_bg_yellow.png"] forBarMetrics:UIBarMetricsDefault];
+    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullsfirst-HeaderBarLogo.png"]];
+
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.rightBarButtonItem = barButtonItem;
     
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
