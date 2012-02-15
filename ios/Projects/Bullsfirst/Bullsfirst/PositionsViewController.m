@@ -476,6 +476,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
 }
 
 -(void)expandPosition:(id)sender
@@ -500,5 +501,9 @@
     
     [self presentModalViewController:controller animated:YES];
 }
-
+-(void) accountSelected:(int) withIndex
+{
+    selectedAccount=withIndex;
+    [positionTBL reloadData];
+}
 @end

@@ -9,7 +9,7 @@
 #import "showPositionsBTN.h"
 
 @implementation showPositionsBTN
-@synthesize positionIndex;
+@synthesize accountIndex;
 
 
 @end

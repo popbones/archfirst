@@ -19,8 +19,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface PositionsViewController : UIViewController
+#import "AccountsViewController.h"
+@interface PositionsViewController : UIViewController<AccountsViewSelectionDelegate>
 @property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
 @property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
 

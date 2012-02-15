@@ -36,6 +36,7 @@
 @synthesize toolbar,pieChartMVAccountsViewController,toolbarPortraitView;
 @synthesize accountCell;
 @synthesize accountNameLBL,accountNumberLBL,marketValueLBL,cashLBL,actionLBL;
+@synthesize accountsViewSelectionDelegatedelegate;
 //- (id)init
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -329,7 +330,7 @@
                 
         showPositionsBTN *arrowBTN = (showPositionsBTN *)[cell viewWithTag:6]; // expand button
         [arrowBTN addTarget:self action:@selector(showPositions:) forControlEvents:UIControlEventTouchUpInside];
-        arrowBTN.positionIndex=indexPath.row;
+        arrowBTN.accountIndex=indexPath.row;
         
               
         return cell;
@@ -361,7 +362,7 @@
        
         showPositionsBTN *arrowBTN = (showPositionsBTN *)[cell viewWithTag:6]; // showpostions button
         [arrowBTN addTarget:self action:@selector(showPositions:) forControlEvents:UIControlEventTouchUpInside];
-        arrowBTN.positionIndex=indexPath.row;
+        arrowBTN.accountIndex=indexPath.row;
         
         
         return cell;
@@ -381,7 +382,8 @@
 }
 -(void)showPositions:(id)sender
 {
-    
+    showPositionsBTN *button = (showPositionsBTN *)sender;
+    [accountsViewSelectionDelegatedelegate accountSelected:button.accountIndex];
     self.tabBarController.selectedIndex=1;
 }
 - (IBAction)backBTNClicked:(id)sender

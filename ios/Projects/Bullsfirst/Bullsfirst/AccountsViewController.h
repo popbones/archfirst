@@ -28,8 +28,7 @@
 @class PieChartMVPositionViewController;
 
 
-
-
+@protocol AccountsViewSelectionDelegate;
 @interface AccountsViewController: UIViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate> 
 {   
     IBOutlet UIActivityIndicatorView *spinner;
@@ -48,8 +47,9 @@
     BFToolbar *toolbar,*toolbarPortraitView;
     UIDeviceOrientation orientation;
     IBOutlet UIView *positionsChartView;
+    __weak id<AccountsViewSelectionDelegate> accountsViewSelectionDelegatedelegate;
 }
-
+@property(nonatomic,weak) id <AccountsViewSelectionDelegate> accountsViewSelectionDelegatedelegate;
 @property (strong, nonatomic) IBOutlet UITableViewCell *accountCell;
 @property (nonatomic, retain) BFToolbar *toolbar;
 @property (nonatomic, retain) BFToolbar *toolbarPortraitView;
@@ -63,4 +63,7 @@
 - (IBAction)createAccount:(id)sender;
 - (IBAction)refreshAccounts:(id)sender;
 - (IBAction)backBTNClicked:(id)sender;
+@end
+@protocol AccountsViewSelectionDelegate <NSObject>
+-(void) accountSelected:(int) withIndex; 
 @end

@@ -179,10 +179,11 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    if ([[UIDevice currentDevice].systemVersion intValue] >= 5) {
-        [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
-    }
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+//    if ([[UIDevice currentDevice].systemVersion intValue] >= 5) {
+//        [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
+//    }
+//    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    return YES;
 }
 -(void)viewWillAppear:(BOOL)animated
 {

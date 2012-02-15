@@ -10,7 +10,7 @@
 
 @interface showPositionsBTN : UIButton
 {
- int positionIndex;
+ int accountIndex;
 }
-@property  int positionIndex;
+@property  int accountIndex;
 @end
