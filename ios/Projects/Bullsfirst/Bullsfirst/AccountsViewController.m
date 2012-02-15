@@ -98,7 +98,11 @@
     self.navigationItem.title = @"Bullsfirst";
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
     self.navigationItem.rightBarButtonItem = barButtonItem;
-   
+
+    barButtonItem = [[UIBarButtonItem alloc] init];
+	barButtonItem.title = @"Accounts";
+	self.navigationItem.backBarButtonItem = barButtonItem;
+    
     pieChartMVAccountsViewController = [[PieChartMVAccountsViewController alloc] init];
     [pieChartMVAccountsViewController setView:pieChartMVAccountsView];
     [pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
