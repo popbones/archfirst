@@ -8,9 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		004F06CD148D421F003F35D3 /* AddAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 004F06CC148D421F003F35D3 /* AddAccountViewController.xib */; };
-		005B34B71486BF0F00C637F5 /* AccountsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */; };
 		009C1A3C148D3FF500259534 /* AddAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 009C1A3B148D3FF400259534 /* AddAccountViewController.m */; };
-		00B38DE61486CE0400DC62F2 /* BrokerageAccountCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 00B38DE51486CE0400DC62F2 /* BrokerageAccountCell.m */; };
 		00D3C409147C27120067A768 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D3C408147C27120067A768 /* UIKit.framework */; };
 		00D3C40B147C27120067A768 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D3C40A147C27120067A768 /* Foundation.framework */; };
 		00D3C40D147C27120067A768 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00D3C40C147C27120067A768 /* CoreGraphics.framework */; };
@@ -136,12 +134,8 @@
 
 /* Begin PBXFileReference section */
 		004F06CC148D421F003F35D3 /* AddAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddAccountViewController.xib; sourceTree = "<group>"; };
-		005B34B51486BF0F00C637F5 /* AccountsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsTableViewController.h; sourceTree = "<group>"; };
-		005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsTableViewController.m; sourceTree = "<group>"; };
 		009C1A3A148D3FF400259534 /* AddAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddAccountViewController.h; sourceTree = "<group>"; };
 		009C1A3B148D3FF400259534 /* AddAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddAccountViewController.m; sourceTree = "<group>"; };
-		00B38DE41486CE0400DC62F2 /* BrokerageAccountCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BrokerageAccountCell.h; sourceTree = "<group>"; };
-		00B38DE51486CE0400DC62F2 /* BrokerageAccountCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BrokerageAccountCell.m; sourceTree = "<group>"; };
 		00B38DF71488025000DC62F2 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		00D3C404147C27120067A768 /* Bullsfirst.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bullsfirst.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		00D3C408147C27120067A768 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -506,10 +500,6 @@
 				AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */,
 				AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */,
 				AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */,
-				005B34B51486BF0F00C637F5 /* AccountsTableViewController.h */,
-				005B34B61486BF0F00C637F5 /* AccountsTableViewController.m */,
-				00B38DE41486CE0400DC62F2 /* BrokerageAccountCell.h */,
-				00B38DE51486CE0400DC62F2 /* BrokerageAccountCell.m */,
 			);
 			name = "Account Tab";
 			sourceTree = "<group>";
@@ -784,8 +774,6 @@
 				00DFF96214841782001A4641 /* BFPosition.m in Sources */,
 				00DFF96614841B00001A4641 /* BFBrokerageAccount.m in Sources */,
 				00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */,
-				005B34B71486BF0F00C637F5 /* AccountsTableViewController.m in Sources */,
-				00B38DE61486CE0400DC62F2 /* BrokerageAccountCell.m in Sources */,
 				00D5191E14891DBA0049F43E /* PieChartMVAccountsViewController.m in Sources */,
 				00D51922148951370049F43E /* PieChartMVPositionViewController.m in Sources */,
 				009C1A3C148D3FF500259534 /* AddAccountViewController.m in Sources */,

@@ -229,7 +229,11 @@
 {
     [delegate pieChartMVAccountsClicked:index];
 }
-
+-(void)clearPieChart
+{
+    [contentArray removeAllObjects];
+    [piePlot reloadData];
+}
 
 #pragma mark -
 #pragma mark Plot Data Source Methods

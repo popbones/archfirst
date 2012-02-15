@@ -39,7 +39,7 @@
 
 // Plot construction methods
 -(void)constructPieChart;
-
+-(void)clearPieChart;
 
 @end
 @protocol PieChartMVAccountsViewControllerDelegate <NSObject>

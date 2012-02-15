@@ -144,7 +144,7 @@
         [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-landscape.png"]];
        
     }
-    else
+    else if(toInterfaceOrientation==UIInterfaceOrientationPortrait||toInterfaceOrientation==UIInterfaceOrientationPortraitUpsideDown)
     {
         groupedView.frame=CGRectMake(143, 177, groupedView.frame.size.width, groupedView.frame.size.height);
          backgroundImage.frame=CGRectMake(0, 0, 768, 1024);
@@ -154,10 +154,7 @@
 
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return YES;
-}
+
 
 - (void)viewDidLoad
 {
@@ -178,6 +175,14 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 5) {
+        [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
+    }
+    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
 }
 -(void)viewWillAppear:(BOOL)animated
 {

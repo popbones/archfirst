@@ -53,7 +53,8 @@
 }
 -(void) pieChartMVPositionClicked
 {
-    pieChartMVPositionViewController.view.hidden=true;
+    positionsChartView.hidden=true;
+    [pieChartMVAccountsViewController constructPieChart];
     pieChartMVAccountsViewController.view.hidden=false;
 }
 
@@ -62,7 +63,8 @@
     pieChartMVPositionViewController.accountIndex=onIndex;
     [pieChartMVPositionViewController constructPieChart];
     pieChartMVAccountsViewController.view.hidden=true;
-    pieChartMVPositionViewController.view.hidden=false;
+    positionsChartView.hidden=false;
+    
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -84,7 +86,7 @@
 }
 -(void) viewWillAppear:(BOOL)animated
 {
-    pieChartMVPositionViewController.view.hidden=true;
+    positionsChartView.hidden=true;
     pieChartMVAccountsViewController.view.hidden=false;
 }
 
@@ -101,15 +103,15 @@
     [pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
     pieChartMVAccountsViewController.delegate=self;
     CGRect chartRect= pieChartMVAccountsViewController.view.frame;
-    pieChartMVAccountsViewController.view.frame = CGRectMake(chartRect.origin.x, chartRect.origin.y,420,613);
+    pieChartMVAccountsViewController.view.frame = CGRectMake(chartRect.origin.x, chartRect.origin.y,400,613);
     
     pieChartMVPositionViewController = [[PieChartMVPositionViewController alloc] init];
     [pieChartMVPositionViewController setView:pieChartMVPositionView];
     [pieChartMVPositionViewController setPieChartView:pieChartMVPositionView];         
     pieChartMVPositionViewController.delegate=self;
     chartRect= pieChartMVPositionViewController.view.frame;
-    pieChartMVPositionViewController.view.frame=CGRectMake(chartRect.origin.x, chartRect.origin.y,420,613);
-
+    pieChartMVPositionViewController.view.frame=CGRectMake(chartRect.origin.x, chartRect.origin.y,400,613);
+    
     accountsTable.layer.borderWidth=1.0;
     
     accountsTable.layer.borderColor=[UIColor colorWithRed:(float)((0x272727&0xFF0000)/255.0) green:(float)((0x272727&0xFF00)/255.0) blue:(float)((0x272727&0xFF)/255.0) alpha:1.0].CGColor;
@@ -130,6 +132,12 @@
     [appDelegate removeObserver:self forKeyPath:@"accounts"];
     [appDelegate removeObserver:self forKeyPath:@"currentUser"];
 }
+//initialze brokerage accounts
+-(void) loadBrokerageAccounts
+{
+    brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+}
+
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
@@ -164,6 +172,7 @@
         rect = actionLBL.frame;
         actionLBL.frame = CGRectMake(700, rect.origin.y, rect.size.width, rect.size.height);
     }
+    [self loadBrokerageAccounts];
     [accountsTable reloadData];
 }
 
@@ -191,7 +200,12 @@
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 }
-
+-(void) clearViewController
+{
+    [pieChartMVAccountsViewController clearPieChart];
+    [brokerageAccounts removeAllObjects];
+    [accountsTable reloadData];
+}
 - (IBAction)logout
 {
     
@@ -222,6 +236,7 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"accounts"]) {
+        [self loadBrokerageAccounts];
         [accountsTable reloadData];
         [pieChartMVAccountsViewController constructPieChart];
         [pieChartMVPositionViewController constructPieChart];
@@ -271,15 +286,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     
-    
+       
     return [brokerageAccounts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:indexPath.row];
     NSString *currencySymbol;
     if([account.marketValue.currency isEqual:@"USD"])
@@ -344,14 +357,13 @@
         editAccountNameBTN *edit = (editAccountNameBTN *)[cell viewWithTag:5]; // edit button
         [edit addTarget:self action:@selector(editAccount:) forControlEvents:UIControlEventTouchUpInside];
         edit.currentName=account.name;
-        
         edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
-        
+       
         showPositionsBTN *arrowBTN = (showPositionsBTN *)[cell viewWithTag:6]; // showpostions button
         [arrowBTN addTarget:self action:@selector(showPositions:) forControlEvents:UIControlEventTouchUpInside];
         arrowBTN.positionIndex=indexPath.row;
         
-        edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
+        
         return cell;
 
     }
@@ -369,11 +381,12 @@
 }
 -(void)showPositions:(id)sender
 {
-    //self.tabBarController.selectedIndex=1
+    
+    self.tabBarController.selectedIndex=1;
 }
 - (IBAction)backBTNClicked:(id)sender
 {
-    pieChartMVPositionViewController.view.hidden=true;
+    positionsChartView.hidden=true;
     pieChartMVAccountsViewController.view.hidden=false;
 }
 /*

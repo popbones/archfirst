@@ -219,14 +219,17 @@
     theLegend.cornerRadius = 5.0;
     pieGraph.legend = theLegend;
     pieGraph.legendAnchor = CPTRectAnchorTop;
-    pieGraph.legendDisplacement = CGPointMake(0, -380);    
+    pieGraph.legendDisplacement = CGPointMake(0, -380);     
     
     pieGraph.title=neededAccount.name;
     pieGraph.titleDisplacement = CGPointMake(0,0);
     [self performAnimation];
     }
 }
-
+-(void)clearPieChart
+{
+    piePlot=nil;
+}
 #pragma mark -
 #pragma mark Plot Data Source Methods
 

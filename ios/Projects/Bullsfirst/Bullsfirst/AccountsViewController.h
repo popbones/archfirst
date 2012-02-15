@@ -21,7 +21,6 @@
 #import <Foundation/Foundation.h>
 #import "PieChartMVAccountsViewController.h"
 #import "PieChartMVPositionViewController.h"
-#import "AccountsTableViewController.h"
 #import "BFToolbar.h"
 @class AccountsTableViewController;
 
@@ -31,16 +30,16 @@
 
 
 
-@interface AccountsViewController: UIViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate,
-    AccountsTableViewControllerDelegate> 
+@interface AccountsViewController: UIViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate> 
 {   
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIView *headerView;
     
     IBOutlet UITableView *accountsTable;
+    IBOutlet UIButton *backBTN;
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
-    
+    NSMutableArray *brokerageAccounts;
     PieChartMVAccountsViewController *pieChartMVAccountsViewController;
     IBOutlet CPTGraphHostingView *pieChartMVAccountsView;
 
@@ -48,7 +47,7 @@
     IBOutlet CPTGraphHostingView *pieChartMVPositionView;
     BFToolbar *toolbar,*toolbarPortraitView;
     UIDeviceOrientation orientation;
-  
+    IBOutlet UIView *positionsChartView;
 }
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *accountCell;
@@ -60,7 +59,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *marketValueLBL;
 @property (strong, nonatomic) IBOutlet UILabel *cashLBL;
 @property (strong, nonatomic) IBOutlet UILabel *actionLBL;
-
+-(void) clearViewController;
 - (IBAction)createAccount:(id)sender;
 - (IBAction)refreshAccounts:(id)sender;
 - (IBAction)backBTNClicked:(id)sender;

@@ -39,7 +39,7 @@
 @property(atomic) int accountIndex;
 // Plot construction methods
 -(void)constructPieChart;
-
+-(void)clearPieChart;
 
 @end
 @protocol PieChartMVPositionViewControllerDelegate <NSObject>

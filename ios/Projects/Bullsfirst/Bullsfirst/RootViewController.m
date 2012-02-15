@@ -125,6 +125,7 @@
 
 -(void)userLogout:(NSNotification*)notification
 {
+    [accountsViewController clearViewController];
     LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
     [self presentModalViewController: controller animated:YES];
