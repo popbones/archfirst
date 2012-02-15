@@ -58,7 +58,7 @@
 -(void) keyBoardWillHideAnimation:(id) duration
 {
     NSTimeInterval animationDuration=[duration floatValue];
-    orientation=[[UIDevice currentDevice]orientation];
+    orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
     {
         CGRect viewframe= groupedView.frame;
@@ -91,11 +91,9 @@
 {
     NSTimeInterval animationDuration = [duration floatValue];
     
-    BFDebugLog(@"ACTUAL %f",animationDuration);
-    orientation=[[UIDevice currentDevice]orientation];
+    orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
     {
-        
         CGRect viewframe= groupedView.frame;
         viewframe.origin.y-=100;
         viewframe.size.height+=100;
