@@ -20,7 +20,7 @@
 
 #import <Foundation/Foundation.h>
 #import "AccountsViewController.h"
-@interface PositionsViewController : UIViewController<AccountsViewSelectionDelegate>
+@interface PositionsViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
 @property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
 
@@ -38,6 +38,6 @@
 - (IBAction)refreshBTNClicked:(id)sender;
 - (IBAction)tradeBTNClicked:(id)sender;
 - (IBAction)transferBTNClicked:(id)sender;
-
+-(void) refreshController;
 
 @end

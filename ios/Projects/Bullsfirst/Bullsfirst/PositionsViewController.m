@@ -80,7 +80,6 @@
         UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
         self.navigationItem.leftBarButtonItem = barButtonItem;
     }
-    selectedAccount = 0;
     expandRow = -1;
 }
 
@@ -501,9 +500,8 @@
     
     [self presentModalViewController:controller animated:YES];
 }
--(void) accountSelected:(int) withIndex
-{
-    selectedAccount=withIndex;
-    [positionTBL reloadData];
+-(void) refreshController{
+    NSLog(@"%d",selectedAccount);
+   [positionTBL reloadData];
 }
 @end

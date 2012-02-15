@@ -13,8 +13,10 @@
 {
     NSString *currentName;
     NSString *accountID;
+    NSInteger *index;
 }
 @property (nonatomic, retain) NSString *currentName;
 @property (nonatomic, retain) NSString *accountID;
+@property (nonatomic, assign) NSInteger *index;
 
 @end

@@ -10,6 +10,6 @@
 
 
 @implementation editAccountNameBTN
-@synthesize accountID,currentName;
+@synthesize accountID,currentName,index;
 
 @end

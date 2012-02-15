@@ -31,12 +31,12 @@
 #import "AppDelegate.h"
 #import "editAccountNameBTN.h"
 #import "showPositionsBTN.h"
+#import "PositionsViewController.h"
 @implementation AccountsViewController
 
 @synthesize toolbar,pieChartMVAccountsViewController,toolbarPortraitView;
 @synthesize accountCell;
 @synthesize accountNameLBL,accountNumberLBL,marketValueLBL,cashLBL,actionLBL;
-@synthesize accountsViewSelectionDelegatedelegate;
 //- (id)init
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -357,9 +357,11 @@
         
         editAccountNameBTN *edit = (editAccountNameBTN *)[cell viewWithTag:5]; // edit button
         [edit addTarget:self action:@selector(editAccount:) forControlEvents:UIControlEventTouchUpInside];
+      //  [edit addTarget:self action:@selector(selectionChanged:) forControlEvents:UIControlEventTouchDown];
+
         edit.currentName=account.name;
         edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
-       
+        edit.index=(NSInteger*)indexPath.row;
         showPositionsBTN *arrowBTN = (showPositionsBTN *)[cell viewWithTag:6]; // showpostions button
         [arrowBTN addTarget:self action:@selector(showPositions:) forControlEvents:UIControlEventTouchUpInside];
         arrowBTN.accountIndex=indexPath.row;
@@ -370,10 +372,18 @@
     }
     
 }
+
+-(void) selectionChanged:(id)sender
+{
+    }
+
 -(void)editAccount:(id)sender
 {
     editAccountNameBTN *button = (editAccountNameBTN *)sender;
-    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:button.currentName withId:button.accountID];    
+//    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:(NSInteger)button.index inSection:0];
+//    [accountsTable selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
+
+   EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:button.currentName withId:button.accountID];    
     [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
@@ -383,7 +393,10 @@
 -(void)showPositions:(id)sender
 {
     showPositionsBTN *button = (showPositionsBTN *)sender;
-    [accountsViewSelectionDelegatedelegate accountSelected:button.accountIndex];
+    UINavigationController *nav=[self.tabBarController.viewControllers objectAtIndex:1];
+    PositionsViewController* controller = (PositionsViewController*) [nav.childViewControllers objectAtIndex:0] ;
+    controller.selectedAccount = button.accountIndex;
+    [controller refreshController];
     self.tabBarController.selectedIndex=1;
 }
 - (IBAction)backBTNClicked:(id)sender
