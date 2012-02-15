@@ -270,10 +270,10 @@
     // Return the number of rows in the section.
     return [orders count];
 }
-
+/*
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-/*    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
     BFPosition *position = [account.positions objectAtIndex:indexPath.row];
     
@@ -473,9 +473,9 @@
         
         return cell;
     }
-    */
-}
 
+}
+*/
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
