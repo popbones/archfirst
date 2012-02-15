@@ -26,14 +26,10 @@
 #import "BullFirstWebServiceObject.h"
 
 @interface RootViewController : UITabBarController <UITabBarControllerDelegate>
-{
-    AccountsViewController *accountsViewController;
-    PositionsViewController *positionsViewController;
-    OrdersViewController *ordersViewController;
-    TransactionsViewController *transactionsViewController;
-}
 
 @property (nonatomic,retain) AccountsViewController *accountsViewController;
+@property (nonatomic,retain) OrdersViewController *ordersViewController;
+@property (nonatomic,retain) TransactionsViewController *transactionsViewController;
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 @end

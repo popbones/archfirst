@@ -25,7 +25,7 @@
 #import "BullFirstWebServiceObject.h"
 
 @implementation RootViewController
-@synthesize accountsViewController;
+@synthesize accountsViewController, ordersViewController, transactionsViewController;
 @synthesize restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -57,9 +57,6 @@
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:accountsViewController];
     NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
     [viewControllers addObject:controller];    
-    positionsViewController = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil];    
-    controller = [[UINavigationController alloc] initWithRootViewController:positionsViewController];
-    [viewControllers addObject:controller];
     ordersViewController= [[OrdersViewController alloc] initWithNibName:@"OrdersViewController" bundle:nil];
     controller = [[UINavigationController alloc] initWithRootViewController:ordersViewController];
     [viewControllers addObject:controller];

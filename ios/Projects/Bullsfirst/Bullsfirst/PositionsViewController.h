@@ -40,4 +40,6 @@
 - (IBAction)transferBTNClicked:(id)sender;
 -(void) refreshController;
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil account:(int)account;
+
 @end

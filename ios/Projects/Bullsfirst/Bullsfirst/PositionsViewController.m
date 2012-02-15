@@ -56,10 +56,14 @@
     
     return self;
 }
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil account:(int)account
 {
-    return [self init];
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.selectedAccount = account;
+    }
+    return self;
+
 }
 
 - (void)viewDidLoad
@@ -69,17 +73,11 @@
     self.navigationItem.title = @"Bullsfirst";
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
     self.navigationItem.rightBarButtonItem = barButtonItem;
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate addObserver:self forKeyPath:@"currentUser" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
-    if (appDelegate.currentUser != nil) {
-        NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
-        fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
-        fullName=[fullName uppercaseString];
-        
-        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
-        self.navigationItem.leftBarButtonItem = barButtonItem;
-    }
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
+    self.accountName.text = account.name;
+
     expandRow = -1;
 }
 
@@ -139,17 +137,6 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"currentUser"]) {
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
-        fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
-        fullName=[fullName uppercaseString];
-        
-        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
-        self.navigationItem.leftBarButtonItem = barButtonItem;
-        
-        return;
-    }
 }
 
 #pragma mark - IBActions
@@ -475,7 +462,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
 }
 
 -(void)expandPosition:(id)sender
@@ -501,7 +487,6 @@
     [self presentModalViewController:controller animated:YES];
 }
 -(void) refreshController{
-    NSLog(@"%d",selectedAccount);
    [positionTBL reloadData];
 }
 @end
