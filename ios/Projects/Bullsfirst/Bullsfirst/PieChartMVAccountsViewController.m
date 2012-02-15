@@ -209,15 +209,16 @@
     if(contentArray.count!=0)
     {
     CPTLegend *theLegend = [CPTLegend legendWithGraph:pieGraph];
-    theLegend.numberOfColumns = 1;
+    theLegend.numberOfColumns = 2;
+    theLegend.columnMargin = 30.0;
     theLegend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
     //theLegend.borderLineStyle = [CPTLineStyle lineStyle];
     theLegend.cornerRadius = 5.0;
     
     pieGraph.legend = theLegend;
         pieGraph.legend.fillMode=kCAFillModeBackwards;
-    pieGraph.legendAnchor = CPTRectAnchorBottom;
-    pieGraph.legendDisplacement = CGPointMake(0, 20.0);    
+    pieGraph.legendAnchor = CPTRectAnchorTop;
+    pieGraph.legendDisplacement = CGPointMake(0, -380);    
     pieGraph.title=kAllAccounts;
     pieGraph.titleDisplacement = CGPointMake(0,0);
     [self performAnimation];
