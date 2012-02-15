@@ -2,10 +2,10 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
+		<string key="IBDocument.SystemVersion">10K540</string>
 		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			<string key="NS.object.0">933</string>
@@ -47,7 +47,6 @@
 								<reference key="NSSuperview" ref="325900476"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="403574809"/>
-								<string key="NSReuseIdentifierKey">_NS:345</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -79,7 +78,6 @@
 								<reference key="NSSuperview" ref="325900476"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="32579543"/>
-								<string key="NSReuseIdentifierKey">_NS:345</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -101,7 +99,6 @@
 								<reference key="NSSuperview" ref="325900476"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="818117914"/>
-								<string key="NSReuseIdentifierKey">_NS:345</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -123,7 +120,6 @@
 								<string key="NSFrame">{{522, 11}, {174, 21}}</string>
 								<reference key="NSSuperview" ref="325900476"/>
 								<reference key="NSWindow"/>
-								<string key="NSReuseIdentifierKey">_NS:345</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
@@ -145,13 +141,12 @@
 								<string key="NSFrame">{{693, 3}, {53, 37}}</string>
 								<reference key="NSSuperview" ref="325900476"/>
 								<reference key="NSWindow"/>
-								<string key="NSReuseIdentifierKey">_NS:241</string>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">5</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
 								<int key="IBUIContentVerticalAlignment">0</int>
-								<object class="NSColor" key="IBUIHighlightedTitleColor" id="992641536">
+								<object class="NSColor" key="IBUIHighlightedTitleColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MQA</bytes>
 								</object>
@@ -159,7 +154,7 @@
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
-								<object class="NSColor" key="IBUINormalTitleShadowColor" id="938497740">
+								<object class="NSColor" key="IBUINormalTitleShadowColor">
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
@@ -171,47 +166,21 @@
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">EditButton.png</string>
 								</object>
-								<object class="IBUIFontDescription" key="IBUIFontDescription" id="361427430">
+								<object class="IBUIFontDescription" key="IBUIFontDescription">
 									<int key="type">2</int>
 									<double key="pointSize">15</double>
 								</object>
-								<object class="NSFont" key="IBUIFont" id="455959791">
+								<object class="NSFont" key="IBUIFont">
 									<string key="NSName">Helvetica-Bold</string>
 									<double key="NSSize">15</double>
 									<int key="NSfFlags">16</int>
 								</object>
 							</object>
-							<object class="IBUIButton" id="169441308">
-								<reference key="NSNextResponder" ref="325900476"/>
-								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{746, 3}, {18, 36}}</string>
-								<reference key="NSSuperview" ref="325900476"/>
-								<reference key="NSWindow"/>
-								<string key="NSReuseIdentifierKey">_NS:241</string>
-								<bool key="IBUIOpaque">NO</bool>
-								<int key="IBUITag">6</int>
-								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<int key="IBUIContentHorizontalAlignment">0</int>
-								<int key="IBUIContentVerticalAlignment">0</int>
-								<reference key="IBUIHighlightedTitleColor" ref="992641536"/>
-								<object class="NSColor" key="IBUINormalTitleColor">
-									<int key="NSColorSpace">1</int>
-									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
-								</object>
-								<reference key="IBUINormalTitleShadowColor" ref="938497740"/>
-								<object class="NSCustomResource" key="IBUINormalImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">AccountsToPosition_RowArrow.png</string>
-								</object>
-								<reference key="IBUIFontDescription" ref="361427430"/>
-								<reference key="IBUIFont" ref="455959791"/>
-							</object>
 						</array>
-						<string key="NSFrameSize">{766, 43}</string>
+						<string key="NSFrameSize">{746, 43}</string>
 						<reference key="NSSuperview" ref="850639286"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="738699978"/>
-						<string key="NSReuseIdentifierKey">_NS:396</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MCAwAA</bytes>
@@ -227,8 +196,8 @@
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="325900476"/>
-				<string key="NSReuseIdentifierKey">_NS:385</string>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+				<int key="IBUIAccessoryType">1</int>
 				<reference key="IBUIContentView" ref="325900476"/>
 				<string key="IBUIReuseIdentifier">account</string>
 			</object>
@@ -270,7 +239,6 @@
 							<reference ref="403574809"/>
 							<reference ref="738699978"/>
 							<reference ref="866665638"/>
-							<reference ref="169441308"/>
 							<reference ref="32579543"/>
 							<reference ref="818117914"/>
 						</array>
@@ -301,11 +269,6 @@
 						<reference key="object" ref="866665638"/>
 						<reference key="parent" ref="850639286"/>
 					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">14</int>
-						<reference key="object" ref="169441308"/>
-						<reference key="parent" ref="850639286"/>
-					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -316,8 +279,6 @@
 				<string key="13.CustomClassName">editAccountNameBTN</string>
 				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<real value="1" key="13.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
-				<string key="14.CustomClassName">showPositionsBTN</string>
-				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -336,10 +297,15 @@
 					<string key="className">AccountsViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="backBTNClicked:">id</string>
 						<string key="createAccount:">id</string>
 						<string key="refreshAccounts:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="backBTNClicked:">
+							<string key="name">backBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 						<object class="IBActionInfo" key="createAccount:">
 							<string key="name">createAccount:</string>
 							<string key="candidateClassName">id</string>
@@ -355,11 +321,13 @@
 						<string key="accountNumberLBL">UILabel</string>
 						<string key="accountsTable">UITableView</string>
 						<string key="actionLBL">UILabel</string>
+						<string key="backBTN">UIButton</string>
 						<string key="cashLBL">UILabel</string>
 						<string key="headerView">UIView</string>
 						<string key="marketValueLBL">UILabel</string>
 						<string key="pieChartMVAccountsView">CPTGraphHostingView</string>
 						<string key="pieChartMVPositionView">CPTGraphHostingView</string>
+						<string key="positionsChartView">UIView</string>
 						<string key="spinner">UIActivityIndicatorView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
@@ -383,6 +351,10 @@
 							<string key="name">actionLBL</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="backBTN">
+							<string key="name">backBTN</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="cashLBL">
 							<string key="name">cashLBL</string>
 							<string key="candidateClassName">UILabel</string>
@@ -402,6 +374,10 @@
 						<object class="IBToOneOutletInfo" key="pieChartMVPositionView">
 							<string key="name">pieChartMVPositionView</string>
 							<string key="candidateClassName">CPTGraphHostingView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="positionsChartView">
+							<string key="name">positionsChartView</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="spinner">
 							<string key="name">spinner</string>
@@ -429,14 +405,6 @@
 						<string key="minorKey">./Classes/editAccountNameBTN.h</string>
 					</object>
 				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">showPositionsBTN</string>
-					<string key="superclassName">UIButton</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/showPositionsBTN.h</string>
-					</object>
-				</object>
 			</array>
 		</object>
 		<int key="IBDocument.localizationMode">0</int>
@@ -444,7 +412,6 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="AccountsToPosition_RowArrow.png">{9, 13}</string>
 			<string key="EditButton-PushDown.png">{49, 34}</string>
 			<string key="EditButton.png">{49, 34}</string>
 		</dictionary>

@@ -331,11 +331,7 @@
         edit.currentName=account.name;
         
         edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
-                
-        showPositionsBTN *arrowBTN = (showPositionsBTN *)[cell viewWithTag:6]; // expand button
-        [arrowBTN addTarget:self action:@selector(showPositions:) forControlEvents:UIControlEventTouchUpInside];
-        arrowBTN.accountIndex=indexPath.row;
-        
+                        
               
         return cell;
     }
@@ -361,14 +357,10 @@
         
         editAccountNameBTN *edit = (editAccountNameBTN *)[cell viewWithTag:5]; // edit button
         [edit addTarget:self action:@selector(editAccount:) forControlEvents:UIControlEventTouchUpInside];
-      //  [edit addTarget:self action:@selector(selectionChanged:) forControlEvents:UIControlEventTouchDown];
 
         edit.currentName=account.name;
         edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
         edit.index=(NSInteger*)indexPath.row;
-        showPositionsBTN *arrowBTN = (showPositionsBTN *)[cell viewWithTag:6]; // showpostions button
-        [arrowBTN addTarget:self action:@selector(showPositions:) forControlEvents:UIControlEventTouchUpInside];
-        arrowBTN.accountIndex=indexPath.row;
         
         
         return cell;
@@ -397,11 +389,9 @@
 -(void)showPositions:(id)sender
 {
     showPositionsBTN *button = (showPositionsBTN *)sender;
-    UINavigationController *nav=[self.tabBarController.viewControllers objectAtIndex:1];
-    PositionsViewController* controller = (PositionsViewController*) [nav.childViewControllers objectAtIndex:0] ;
-    controller.selectedAccount = button.accountIndex;
-    [controller refreshController];
-    self.tabBarController.selectedIndex=1;
+    PositionsViewController *controller = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil account:button.accountIndex];    
+    [self.navigationController pushViewController:controller animated:YES];
+
 }
 - (IBAction)backBTNClicked:(id)sender
 {
