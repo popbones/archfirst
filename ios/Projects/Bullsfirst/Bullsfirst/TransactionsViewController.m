@@ -27,15 +27,17 @@
 
 @implementation TransactionsViewController
 @synthesize transectionTBL;
-@synthesize portraitTitleBar;
-@synthesize landscrapeTitleBar;
-@synthesize filterBTN;
-@synthesize transferBTN;
-@synthesize tradeBTN;
-@synthesize refreshBTN;
-@synthesize userPopOver;
 
 - (id)init
+{
+    self = [super init];
+    if(self)
+    {
+    }
+    return self;
+}
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nil bundle:nil];
     
@@ -50,161 +52,46 @@
     return self;
 }
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    return [self init];
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"img_bg_yellow.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullsfirst-HeaderBarLogo.png"]];
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-    self.navigationItem.rightBarButtonItem = barButtonItem;
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate addObserver:self forKeyPath:@"currentUser" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-    
-    if (appDelegate.currentUser != nil) {
-        NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
-        fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
-        fullName=[fullName uppercaseString];
-        
-        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
-        barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-        self.navigationItem.leftBarButtonItem = barButtonItem;
-    }
-    
 }
 
 - (void)viewDidUnload
 {
-    [self setFilterBTN:nil];
     [self setTransferBTN:nil];
-    [self setTradeBTN:nil];
-    [self setRefreshBTN:nil];
     [super viewDidUnload];
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate removeObserver:self forKeyPath:@"currentUser"];
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if ([[UIDevice currentDevice].systemVersion intValue] >= 5) {
-        [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
-    }
-    
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
-}
 
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-        CGRect rect = filterBTN.frame;
-        filterBTN.frame = CGRectMake(610, rect.origin.y, rect.size.width, rect.size.height);
-        rect = transferBTN.frame;
-        transferBTN.frame = CGRectMake(755, rect.origin.y, rect.size.width, rect.size.height);
-        rect = tradeBTN.frame;
-        tradeBTN.frame = CGRectMake(850, rect.origin.y, rect.size.width, rect.size.height);
-        rect = refreshBTN.frame;
-        refreshBTN.frame = CGRectMake(933, rect.origin.y, rect.size.width, rect.size.height);
-    }
-    else
-    {
-        CGRect rect = filterBTN.frame;
-        filterBTN.frame = CGRectMake(360, rect.origin.y, rect.size.width, rect.size.height);
-        rect = transferBTN.frame;
-        transferBTN.frame = CGRectMake(505, rect.origin.y, rect.size.width, rect.size.height);
-        rect = tradeBTN.frame;
-        tradeBTN.frame = CGRectMake(600, rect.origin.y, rect.size.width, rect.size.height);
-        rect = refreshBTN.frame;
-        refreshBTN.frame = CGRectMake(683, rect.origin.y, rect.size.width, rect.size.height);
-    }
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [transectionTBL reloadData];
-    
 }
 
 #pragma mark - KVO lifecycle
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"currentUser"]) {
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
-        fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
-        fullName=[fullName uppercaseString];
-        
-        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(userProfile)];
-        self.navigationItem.leftBarButtonItem = barButtonItem;
-        
-        return;
-    }
 }
 
 #pragma mark - IBActions
 
-- (IBAction)logout
-{
-    if (!userPopOver) {
-        UserViewController *controller = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
-        CGRect frame = controller.view.frame;
-        
-        userPopOver = [[UIPopoverController alloc] initWithContentViewController:controller];
-        controller.popOver = userPopOver;
-        [userPopOver setPopoverContentSize:frame.size];
-    }
-    if ([userPopOver isPopoverVisible]) {
-        [userPopOver dismissPopoverAnimated:YES];
-    } else {
-        [userPopOver presentPopoverFromBarButtonItem: self.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    }
-}
-
-- (IBAction)refreshBTNClicked:(id)sender {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
-}
-
-- (IBAction)tradeBTNClicked:(id)sender {
-    TradeViewController *controller = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil];    
-    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
-    [self presentModalViewController:controller animated:YES];
-}
-
-- (IBAction)transferBTNClicked:(id)sender {
-    TransferViewController *controller = [[TransferViewController alloc] initWithNibName:@"TransferViewController" bundle:nil];    
-    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
-    [self presentModalViewController:controller animated:YES];
-}
-
-- (IBAction)filterBTNClicked:(id)sender {
-    FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
-    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
-    [self presentModalViewController:controller animated:YES];
-}
-
-
-
 #pragma mark - Table view data source
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
-        return landscrapeTitleBar;
+        return super.landscrapeTitleBar;
     } else {
-        return portraitTitleBar;
+        return super.portraitTitleBar;
     }
 }
-
+/*
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 44;
@@ -429,9 +316,9 @@
      
      return cell;
      }
-     */
+    
 }
-
+*/
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

@@ -19,23 +19,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OrdersViewController.h"
 
-@interface TransactionsViewController : UIViewController
-
-@property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
-@property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
-@property (strong, nonatomic) IBOutlet UIButton *filterBTN;
-@property (strong, nonatomic) IBOutlet UIButton *transferBTN;
-@property (strong, nonatomic) IBOutlet UIButton *tradeBTN;
-@property (strong, nonatomic) IBOutlet UIButton *refreshBTN;
+@interface TransactionsViewController : OrdersViewController
 
 @property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
-
-@property (strong, nonatomic) UIPopoverController *userPopOver;
-
-- (IBAction)refreshBTNClicked:(id)sender;
-- (IBAction)tradeBTNClicked:(id)sender;
-- (IBAction)transferBTNClicked:(id)sender;
-- (IBAction)filterBTNClicked:(id)sender;
-
 @end

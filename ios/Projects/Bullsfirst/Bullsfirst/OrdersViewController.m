@@ -39,14 +39,10 @@
 
 - (id)init
 {
-    self = [super initWithNibName:nil bundle:nil];
+    self = [super init];
     
     if(self)
     {
-        UITabBarItem *tbi = [self tabBarItem];
-        [tbi setTitle:@"Orders"];
-        UIImage *i = [UIImage imageNamed:@"TabBar_Orders.png"];
-        [tbi setImage:i];        
     }
     
     return self;
@@ -54,7 +50,15 @@
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
-    return [self init];
+    self = [super initWithNibName:nil bundle:nil];
+    if(self)
+    {
+        UITabBarItem *tbi = [self tabBarItem];
+        [tbi setTitle:@"Orders"];
+        UIImage *i = [UIImage imageNamed:@"TabBar_Orders.png"];
+        [tbi setImage:i];        
+    }
+    return self;
 }
 
 - (void)viewDidLoad
