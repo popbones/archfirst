@@ -19,27 +19,19 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "AccountsViewController.h"
-@interface PositionsViewController : UIViewController
+#import "OrdersViewController.h"
+@interface PositionsViewController : OrdersViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil account:(int)account;
+
 @property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
 @property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *positionCell;
 @property (strong, nonatomic) IBOutlet UITableView *positionTBL;
 @property (strong, nonatomic) IBOutlet UILabel *accountName;
-@property (strong, nonatomic) IBOutlet UIButton *transferBTN;
-@property (strong, nonatomic) IBOutlet UIButton *tradeBTN;
-@property (strong, nonatomic) IBOutlet UIButton *refreshBTN;
-@property (strong, nonatomic) IBOutlet UIButton *switchAcountBTN;
+
 @property (assign, nonatomic) int selectedAccount;
 @property (assign, nonatomic) int expandRow;
-
-- (IBAction)switchAccountBTNClicked:(id)sender;
-- (IBAction)refreshBTNClicked:(id)sender;
-- (IBAction)tradeBTNClicked:(id)sender;
-- (IBAction)transferBTNClicked:(id)sender;
--(void) refreshController;
-
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil account:(int)account;
 
 @end

@@ -32,15 +32,12 @@
 @implementation PositionsViewController
 @synthesize positionTBL;
 @synthesize accountName;
-@synthesize transferBTN;
-@synthesize tradeBTN;
-@synthesize refreshBTN;
-@synthesize switchAcountBTN;
-@synthesize portraitTitleBar;
-@synthesize landscrapeTitleBar;
 @synthesize positionCell;
 @synthesize selectedAccount;
 @synthesize expandRow;
+@synthesize portraitTitleBar;
+@synthesize landscrapeTitleBar;
+
 
 - (id)init
 {
@@ -69,14 +66,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"img_bg_yellow.png"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullsfirst-HeaderBarLogo.png"]];
 
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-    self.navigationItem.rightBarButtonItem = barButtonItem;
-    
+    self.navigationItem.leftBarButtonItem = nil;
+
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
     self.accountName.text = account.name;
@@ -88,50 +80,10 @@
 {
     [self setPositionTBL:nil];
     [self setAccountName:nil];
-    [self setTransferBTN:nil];
-    [self setTradeBTN:nil];
-    [self setRefreshBTN:nil];
-    [self setSwitchAcountBTN:nil];
-    [self setPortraitTitleBar:nil];
-    [self setLandscrapeTitleBar:nil];
-    [super viewDidUnload];
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate removeObserver:self forKeyPath:@"currentUser"];
 }
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if ([[UIDevice currentDevice].systemVersion intValue] >= 5) {
-        [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
-    }
-    
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
-}
-
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-        CGRect rect = switchAcountBTN.frame;
-        switchAcountBTN.frame = CGRectMake(610, rect.origin.y, rect.size.width, rect.size.height);
-        rect = transferBTN.frame;
-        transferBTN.frame = CGRectMake(755, rect.origin.y, rect.size.width, rect.size.height);
-        rect = tradeBTN.frame;
-        tradeBTN.frame = CGRectMake(850, rect.origin.y, rect.size.width, rect.size.height);
-        rect = refreshBTN.frame;
-        refreshBTN.frame = CGRectMake(933, rect.origin.y, rect.size.width, rect.size.height);
-    }
-    else
-    {
-        CGRect rect = switchAcountBTN.frame;
-        switchAcountBTN.frame = CGRectMake(360, rect.origin.y, rect.size.width, rect.size.height);
-        rect = transferBTN.frame;
-        transferBTN.frame = CGRectMake(505, rect.origin.y, rect.size.width, rect.size.height);
-        rect = tradeBTN.frame;
-        tradeBTN.frame = CGRectMake(600, rect.origin.y, rect.size.width, rect.size.height);
-        rect = refreshBTN.frame;
-        refreshBTN.frame = CGRectMake(683, rect.origin.y, rect.size.width, rect.size.height);
-    }
+    [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
     [positionTBL reloadData];
     
 }
@@ -143,35 +95,9 @@
 }
 
 #pragma mark - IBActions
-
-- (IBAction)logout
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
-}
-
-- (IBAction)switchAccountBTNClicked:(id)sender {
-}
-
 - (IBAction)refreshBTNClicked:(id)sender {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 }
-
-- (IBAction)tradeBTNClicked:(id)sender {
-    TradeViewController *controller = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil];    
-    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
-    [self presentModalViewController:controller animated:YES];
-}
-
-- (IBAction)transferBTNClicked:(id)sender {
-    TransferViewController *controller = [[TransferViewController alloc] initWithNibName:@"TransferViewController" bundle:nil];    
-    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
-    [self presentModalViewController:controller animated:YES];
-}
-
 
 #pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -489,7 +415,5 @@
     
     [self presentModalViewController:controller animated:YES];
 }
--(void) refreshController{
-   [positionTBL reloadData];
-}
+
 @end
