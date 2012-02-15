@@ -161,6 +161,8 @@ public class BrokerageAccountService {
     
     public List<Order> getOrders(String username, OrderCriteria criteria) {
 
+        logger.debug("Get orders: {}", criteria);
+
         // Check authorization on account
         checkAccountAuthorization(
                 getUser(username), criteria.getAccountId(), BrokerageAccountPermission.View);

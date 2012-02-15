@@ -15,9 +15,12 @@
  */
 package org.archfirst.bfoms.restservice.order;
 
+import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -29,6 +32,8 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
+import org.archfirst.bfoms.domain.account.brokerage.order.Order;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.restservice.util.ErrorMessage;
 import org.archfirst.bfoms.restservice.util.Link;
@@ -78,6 +83,13 @@ public class OrderResource {
         }
 
         return Response.ok().build();
+    }
+    
+    @GET
+    public List<Order> getOrders(
+            @Context SecurityContext sc,
+            OrderCriteria criteria) {
+        return this.brokerageAccountService.getOrders(getUsername(sc), criteria);
     }
     
     private String getUsername(SecurityContext sc) {
