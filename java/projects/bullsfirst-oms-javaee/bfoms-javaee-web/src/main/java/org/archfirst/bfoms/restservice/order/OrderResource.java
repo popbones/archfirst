@@ -25,6 +25,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -88,7 +89,11 @@ public class OrderResource {
     @GET
     public List<Order> getOrders(
             @Context SecurityContext sc,
-            OrderCriteria criteria) {
+            @QueryParam("accountId") Long accountId) {
+        
+        OrderCriteria criteria = new OrderCriteria();
+        if (accountId != null)
+            criteria.setAccountId(accountId);
         return this.brokerageAccountService.getOrders(getUsername(sc), criteria);
     }
     
