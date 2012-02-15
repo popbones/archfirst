@@ -53,6 +53,75 @@
     // Release any cached data, images, etc that aren't in use.
 }
 
+#pragma mark - Handling Keyboard notifications
+
+-(void) keyBoardWillHideAnimation:(id) duration
+{
+    NSTimeInterval animationDuration=[duration floatValue];
+    orientation=[[UIDevice currentDevice]orientation];
+    if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
+    {
+        CGRect viewframe= groupedView.frame;
+        viewframe.origin.y+=100;
+        viewframe.size.height-=100;
+        groupedView.frame=viewframe;
+        CGRect imageframe= backgroundImage.frame;
+        imageframe.origin.y+=100;
+        imageframe.size.height-=100;
+        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        backgroundImage.frame=imageframe;
+        [UIView commitAnimations];
+        
+    }
+    
+}
+
+-(void) keyBoardWillHide:(NSNotification*) notification
+{
+    
+    id duration = [[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey];
+    
+    [self keyBoardWillHideAnimation:duration];
+}
+
+
+
+-(void) keyboardWillShowAnimation:(id) duration
+{
+    NSTimeInterval animationDuration = [duration floatValue];
+    
+    BFDebugLog(@"ACTUAL %f",animationDuration);
+    orientation=[[UIDevice currentDevice]orientation];
+    if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
+    {
+        
+        CGRect viewframe= groupedView.frame;
+        viewframe.origin.y-=100;
+        viewframe.size.height+=100;
+        groupedView.frame=viewframe;
+        CGRect imageframe= backgroundImage.frame;
+        imageframe.origin.y-=100;
+        imageframe.size.height+=100;
+        [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
+        [UIView setAnimationDuration:animationDuration];
+        backgroundImage.frame=imageframe;
+        [UIView commitAnimations];
+    }
+    
+}
+
+-(void) keyBoardWillShow: (NSNotification*) notification
+{
+    
+    id duration = [[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey];
+    
+    [self keyboardWillShowAnimation:duration];
+    
+}
+
+
+
 #pragma mark - View lifecycle
 -(void) moveView:(UIView *) view duration:(NSTimeInterval) duration curve:(int)curve x:(CGFloat)x y:(CGFloat)y
 {
@@ -65,6 +134,7 @@
     view.transform=transform;
     [UIView commitAnimations];
 }
+
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
@@ -82,8 +152,13 @@
        
     }
 
-
 }
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return YES;
+}
+
 - (void)viewDidLoad
 {
     
@@ -98,8 +173,10 @@
     password.returnKeyType=UIReturnKeyGo;
     username.returnKeyType=UIReturnKeyGo;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(newBFAccountCreated:) name:@"NEW_ACCOUNT_CREATED" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsShown:) name:UIKeyboardDidShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardIsHidden:) name:UIKeyboardDidHideNotification object:nil];
+   
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
 }
 -(void)viewWillAppear:(BOOL)animated
@@ -127,52 +204,7 @@
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
--(void) keyBoardIsShown: (NSNotification*) notification
-{
-    NSTimeInterval animationDuration=0.3;
-    orientation=[[UIDevice currentDevice]orientation];
-    if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
-    {
-   
-    CGRect viewframe= groupedView.frame;
-    viewframe.origin.y-=100;
-    viewframe.size.height+=100;
-       groupedView.frame=viewframe;
-        CGRect imageframe= backgroundImage.frame;
-        imageframe.origin.y-=100;
-        imageframe.size.height+=100;
-       [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-       [UIView setAnimationDuration:animationDuration];
-        backgroundImage.frame=imageframe;
-    [UIView commitAnimations];
-    }
-  
-}
--(void) keyBoardIsHidden: (NSNotification*) notification
-{
-    NSTimeInterval animationDuration=0.3;
-    orientation=[[UIDevice currentDevice]orientation];
-    if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
-    {
-        CGRect viewframe= groupedView.frame;
-        viewframe.origin.y+=100;
-        viewframe.size.height-=100;
-        groupedView.frame=viewframe;
-        CGRect imageframe= backgroundImage.frame;
-        imageframe.origin.y+=100;
-        imageframe.size.height-=100;
-       [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
-        [UIView setAnimationDuration:animationDuration];
-        backgroundImage.frame=imageframe;
-        [UIView commitAnimations];
 
-    }
-   
-}
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-        return YES;
-}
 
 #pragma mark - selectors for handling rest call callbacks
 
