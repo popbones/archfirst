@@ -110,6 +110,8 @@
 		AC26C84414DFA0B900ABD693 /* BullFirstWebServiceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C84314DFA0B900ABD693 /* BullFirstWebServiceObject.m */; };
 		AC26C84814DFA10300ABD693 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C84714DFA10300ABD693 /* NSData+Base64.m */; };
 		AC26C84A14DFA84D00ABD693 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC26C84914DFA84D00ABD693 /* Security.framework */; };
+		AC66817314ECD43C00BB02FF /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC66817014ECD43C00BB02FF /* CMPopTipView.m */; };
+		AC66817414ECD43C00BB02FF /* DataValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = AC66817214ECD43C00BB02FF /* DataValidator.m */; };
 		AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */; };
 		AC9B72D014DA755200B843AC /* EditAccountNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */; };
 		AC9B72E514DAB01800B843AC /* BFPlainWhiteTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72E414DAB01800B843AC /* BFPlainWhiteTheme.m */; };
@@ -275,6 +277,10 @@
 		AC26C84614DFA10300ABD693 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		AC26C84714DFA10300ABD693 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		AC26C84914DFA84D00ABD693 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AC66816F14ECD43C00BB02FF /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
+		AC66817014ECD43C00BB02FF /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
+		AC66817114ECD43C00BB02FF /* DataValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataValidator.h; sourceTree = "<group>"; };
+		AC66817214ECD43C00BB02FF /* DataValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataValidator.m; sourceTree = "<group>"; };
 		AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountNameViewController.h; sourceTree = "<group>"; };
 		AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAccountNameViewController.m; sourceTree = "<group>"; };
 		AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditAccountNameViewController.xib; sourceTree = "<group>"; };
@@ -337,6 +343,7 @@
 		00D3C40E147C27120067A768 /* Bullsfirst */ = {
 			isa = PBXGroup;
 			children = (
+				AC66816D14ECD43B00BB02FF /* TextFieldValidator */,
 				AC26C84514DFA0C100ABD693 /* base64 encoding */,
 				AC26C84114DFA08000ABD693 /* BullsFirstWebServiceObject */,
 				AC26C81914DBF64700ABD693 /* Web Service Object */,
@@ -614,6 +621,25 @@
 			name = "base64 encoding";
 			sourceTree = "<group>";
 		};
+		AC66816D14ECD43B00BB02FF /* TextFieldValidator */ = {
+			isa = PBXGroup;
+			children = (
+				AC66816E14ECD43C00BB02FF /* CMPopTipView */,
+				AC66817114ECD43C00BB02FF /* DataValidator.h */,
+				AC66817214ECD43C00BB02FF /* DataValidator.m */,
+			);
+			path = TextFieldValidator;
+			sourceTree = "<group>";
+		};
+		AC66816E14ECD43C00BB02FF /* CMPopTipView */ = {
+			isa = PBXGroup;
+			children = (
+				AC66816F14ECD43C00BB02FF /* CMPopTipView.h */,
+				AC66817014ECD43C00BB02FF /* CMPopTipView.m */,
+			);
+			path = CMPopTipView;
+			sourceTree = "<group>";
+		};
 		AC9B72D114DA7E3700B843AC /* BF-CorePlot Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -808,6 +834,8 @@
 				9586FAB114EB804600A0B28C /* editAccountNameBTN.m in Sources */,
 				9586FAB414EB8F8500A0B28C /* showPositionsBTN.m in Sources */,
 				54B78AED14EC4656002FF1AC /* UserViewController.m in Sources */,
+				AC66817314ECD43C00BB02FF /* CMPopTipView.m in Sources */,
+				AC66817414ECD43C00BB02FF /* DataValidator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

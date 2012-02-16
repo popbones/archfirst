@@ -252,6 +252,15 @@
 
 #pragma mark - View lifecycle
 
+-(void) registerForDataValidations
+{
+    [validator processTextField:firstName rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
+    [validator processTextField:lastName rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty]; 
+    [validator processTextField:username rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
+    [validator processTextField:password rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
+    [validator processTextField:confirmpassword rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -263,8 +272,19 @@
     password.returnKeyType = UIReturnKeyGo;
     confirmpassword.returnKeyType = UIReturnKeyGo;
     
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    validator = [[DataValidator alloc] init];
+    validator.delegate = self;
+    [self registerForDataValidations];
     
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    openAccountButton.enabled = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    
+}
+
+-(void) keyBoardDidShow:(NSNotification*) notification
+{
+    [self registerForDataValidations];
 }
 
 - (void)viewDidUnload
@@ -291,5 +311,59 @@
     return YES;
 }
 
+#pragma mark - DataValidator protocol methods
+
+-(void) formValidationSucceeded:(bool) status;
+{
+    openAccountButton.enabled = status;
+}
+
+-(NSString*) validationStatusForTextField:(UITextField*) textField;
+{
+    if(textField == firstName)
+    {
+        if(textField.text.length ==0)
+        {
+            return kStringFieldIsEmpty;
+        }
+    }
+    else if(textField == lastName)
+    {
+        if(textField.text.length == 0)
+        {
+            return kStringFieldIsEmpty;
+        }
+    }
+    else if(textField == username)
+    {
+        if(textField.text.length == 0)
+        {
+            return kStringFieldIsEmpty;
+        }
+    }
+    else if(textField == password)
+    {
+        if(textField.text.length == 0)
+        {
+            return kStringFieldIsEmpty;
+        }
+        else if(![textField.text isEqualToString:confirmpassword.text])
+        {
+            return @"The text doesnot match with the confirm password field";
+        }
+    }
+    else if(textField == confirmpassword)
+    {
+        if(textField.text.length == 0)
+        {
+            return kStringFieldIsEmpty;
+        }
+        else if(![textField.text isEqualToString:password.text])
+        {
+            return @"The text doesnot match with the password field";
+        }
+    }
+    return nil;
+}
 
 @end

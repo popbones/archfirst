@@ -19,11 +19,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DataValidator.h"
 
 @class LoginViewController;
 @class BullFirstWebServiceObject;
 
-@interface OpenAccountViewController : UIViewController<UITextFieldDelegate>
+@interface OpenAccountViewController : UIViewController<UITextFieldDelegate,DataValidatorProtocol>
 {
     
     //to keep track of the responses being received from the server
@@ -45,6 +46,8 @@
     
     NSNumber* newBrokerageAccountId;
     NSNumber* newExternalAccountId;
+    
+    DataValidator* validator;
     
 }
 

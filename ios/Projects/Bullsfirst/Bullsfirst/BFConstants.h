@@ -12,6 +12,8 @@
 
 #define kRequestTimeout 30
 
+#define kErrorIconAtEndOfTextField @"RefreshButton.png"
+#define kStringFieldIsEmpty @"Field is Empty"
 
 // Dictionary keys
 
