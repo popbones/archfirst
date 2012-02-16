@@ -32,6 +32,8 @@
 
 #pragma mark Helper methods
 
+
+
 -(void) performAnimation
 {
     
@@ -314,28 +316,28 @@
 
 -(CPTFill *)sliceFillForPieChart:(CPTPieChart *)pieChart recordIndex:(NSUInteger)index
 {
-    CPTColor *color;
-       
+
     if(index == 0)
-        color = [CPTColor magentaColor];   
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xfde79c) endingColor:CPTColorFromRGB(0Xf6bc0c)]];   
     else if(index == 1)
-        color = [CPTColor blueColor];   
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xb9d6f7) endingColor:CPTColorFromRGB(0X284b70)]];   
     else if(index == 2)
-        color = [CPTColor redColor];   
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xfbb7b5) endingColor:CPTColorFromRGB(0X702828)]];   
     else if(index == 3)
-        color = [CPTColor greenColor];   
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xb8c0ac) endingColor:CPTColorFromRGB(0X5f7143)]];  
     else if(index == 4)
-        color = [CPTColor orangeColor];   
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xa9a3bd) endingColor:CPTColorFromRGB(0X382c6c)]];   
     else if(index == 5)
-        color = [CPTColor purpleColor];
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0X98c1dc) endingColor:CPTColorFromRGB(0X0271ae)]];
     else if(index == 6)
-        color = [CPTColor yellowColor];
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0X1d7554) endingColor:CPTColorFromRGB(0X9dc2b3)]];
     else if(index == 7)
-        color = [CPTColor lightGrayColor];
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xb1a1b1) endingColor:CPTColorFromRGB(0X50224f)]];
     else if(index == 8)
-        color = [CPTColor cyanColor];// Randomize the default
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xc1c0ae) endingColor:CPTColorFromRGB(0X706341)]];
+    else
+        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xadbdc0) endingColor:CPTColorFromRGB(0X446a73)]];
     
-    return [[CPTFill alloc] initWithColor:color];;
 }
 
 @end
