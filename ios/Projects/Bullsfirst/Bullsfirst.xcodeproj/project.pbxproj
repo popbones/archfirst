@@ -31,8 +31,6 @@
 		00DFF91C1480AAF0001A4641 /* PositionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */; };
 		00DFF91E1480AB01001A4641 /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF91D1480AB01001A4641 /* OrdersViewController.xib */; };
 		00DFF9201480AB14001A4641 /* TransactionsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */; };
-		00DFF9231480AD68001A4641 /* BFToolbar.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF9221480AD68001A4641 /* BFToolbar.m */; };
-		00DFF9251480AD91001A4641 /* BFToolbar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF9241480AD91001A4641 /* BFToolbar.xib */; };
 		00DFF93C1483DE23001A4641 /* btn_openanaccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF93B1483DE23001A4641 /* btn_openanaccount.png */; };
 		00DFF93E1483ED7F001A4641 /* btn_openaccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF93D1483ED7F001A4641 /* btn_openaccount.png */; };
 		00DFF9401483EE5A001A4641 /* btn_cancel500.png in Resources */ = {isa = PBXBuildFile; fileRef = 00DFF93F1483EE5A001A4641 /* btn_cancel500.png */; };
@@ -175,9 +173,6 @@
 		00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionsViewController.xib; sourceTree = "<group>"; };
 		00DFF91D1480AB01001A4641 /* OrdersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersViewController.xib; sourceTree = "<group>"; };
 		00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionsViewController.xib; sourceTree = "<group>"; };
-		00DFF9211480AD67001A4641 /* BFToolbar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFToolbar.h; sourceTree = "<group>"; };
-		00DFF9221480AD68001A4641 /* BFToolbar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFToolbar.m; sourceTree = "<group>"; };
-		00DFF9241480AD91001A4641 /* BFToolbar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BFToolbar.xib; sourceTree = "<group>"; };
 		00DFF93B1483DE23001A4641 /* btn_openanaccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_openanaccount.png; sourceTree = "<group>"; };
 		00DFF93D1483ED7F001A4641 /* btn_openaccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_openaccount.png; sourceTree = "<group>"; };
 		00DFF93F1483EE5A001A4641 /* btn_cancel500.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_cancel500.png; sourceTree = "<group>"; };
@@ -393,9 +388,6 @@
 				54B78A1D14E58FA4002FF1AC /* Position Tab */,
 				54B78A1E14E58FD4002FF1AC /* Order Tab */,
 				54B78A1F14E58FED002FF1AC /* Transection Tab */,
-				00DFF9211480AD67001A4641 /* BFToolbar.h */,
-				00DFF9221480AD68001A4641 /* BFToolbar.m */,
-				00DFF9241480AD91001A4641 /* BFToolbar.xib */,
 				95C6A85914DBED54004F023A /* RootViewController.h */,
 				95C6A85A14DBED54004F023A /* RootViewController.m */,
 				95C6A85B14DBED54004F023A /* RootViewController.xib */,
@@ -730,7 +722,6 @@
 				00DFF91C1480AAF0001A4641 /* PositionsViewController.xib in Resources */,
 				00DFF91E1480AB01001A4641 /* OrdersViewController.xib in Resources */,
 				00DFF9201480AB14001A4641 /* TransactionsViewController.xib in Resources */,
-				00DFF9251480AD91001A4641 /* BFToolbar.xib in Resources */,
 				00DFF93C1483DE23001A4641 /* btn_openanaccount.png in Resources */,
 				00DFF93E1483ED7F001A4641 /* btn_openaccount.png in Resources */,
 				00DFF9401483EE5A001A4641 /* btn_cancel500.png in Resources */,
@@ -804,7 +795,6 @@
 				00DFF90714808975001A4641 /* PositionsViewController.m in Sources */,
 				00DFF90A14808989001A4641 /* OrdersViewController.m in Sources */,
 				00DFF90D1480899D001A4641 /* TransactionsViewController.m in Sources */,
-				00DFF9231480AD68001A4641 /* BFToolbar.m in Sources */,
 				00DFF95F14841319001A4641 /* BFMoney.m in Sources */,
 				00DFF96214841782001A4641 /* BFPosition.m in Sources */,
 				00DFF96614841B00001A4641 /* BFBrokerageAccount.m in Sources */,
