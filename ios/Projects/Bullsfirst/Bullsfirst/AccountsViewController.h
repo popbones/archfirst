@@ -56,9 +56,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *marketValueLBL;
 @property (strong, nonatomic) IBOutlet UILabel *cashLBL;
 @property (strong, nonatomic) IBOutlet UILabel *actionLBL;
--(void) clearViewController;
+- (void) clearViewController;
 - (IBAction)createAccount:(id)sender;
-- (IBAction)refreshAccounts:(id)sender;
 - (IBAction)backBTNClicked:(id)sender;
 
 @property (strong, nonatomic) UIPopoverController *userPopOver;

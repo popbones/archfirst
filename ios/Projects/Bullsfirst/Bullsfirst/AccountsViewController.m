@@ -207,34 +207,18 @@
 
     }
 
-- (IBAction)refreshAccounts:(id)sender
+- (IBAction)filterBTNClicked:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 }
+
 -(void) clearViewController
 {
     [pieChartMVAccountsViewController clearPieChart];
     [brokerageAccounts removeAllObjects];
     [accountsTable reloadData];
 }
-/*
-- (IBAction)logout
-{
-    if (!userPopOver) {
-        UserViewController *controller = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
-        CGRect frame = controller.view.frame;
-        
-        userPopOver = [[UIPopoverController alloc] initWithContentViewController:controller];
-        controller.popOver = userPopOver;
-        [userPopOver setPopoverContentSize:frame.size];
-    }
-    if ([userPopOver isPopoverVisible]) {
-        [userPopOver dismissPopoverAnimated:YES];
-    } else {
-        [userPopOver presentPopoverFromBarButtonItem: self.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-    }
-}
-*/
+
 - (IBAction)userProfile
 {
 }
