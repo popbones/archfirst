@@ -79,8 +79,11 @@
     
     [pieChartMVPositionViewController viewDidAppear:animated];
     [pieChartMVAccountsViewController viewDidAppear:animated];
-    [headerView setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"img_bg_yellow.png"]]];
-    
+    headerView.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    accountsTable.separatorStyle=UITableViewCellSeparatorStyleNone;
+    headerView.layer.borderWidth=0.5;
+    headerView.layer.borderColor=[UIColor blackColor].CGColor;
+     
 }
 
 
@@ -100,7 +103,7 @@
 {
     [super viewDidLoad];
 
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"img_bg_yellow.png"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullsfirst-HeaderBarLogo.png"]];
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshAccounts:)];
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
@@ -128,10 +131,10 @@
     
     accountsTable.layer.borderWidth=1.0;
     
-    accountsTable.layer.borderColor=[UIColor colorWithRed:(float)((0x272727&0xFF0000)/255.0) green:(float)((0x272727&0xFF00)/255.0) blue:(float)((0x272727&0xFF)/255.0) alpha:1.0].CGColor;
+    accountsTable.layer.borderColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;
 
     orientation=[[UIDevice currentDevice] orientation];
-   
+    
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
@@ -282,13 +285,10 @@
 #pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-        return headerView;
-    } else {
-        return headerView;
-    }
+    headerView.layer.borderWidth=0.5;
+    headerView.layer.borderColor=[UIColor blackColor].CGColor;
+    headerView.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    return headerView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -351,8 +351,9 @@
         edit.currentName=account.name;
         
         edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
-                        
-              
+        cell.selectionStyle=UITableViewCellSelectionStyleNone;            
+        cell.layer.borderColor=[UIColor blackColor].CGColor;
+        cell.layer.borderWidth=0.5;
         return cell;
     }
     else
@@ -381,8 +382,9 @@
         edit.currentName=account.name;
         edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
         edit.index=(NSInteger*)indexPath.row;
-        
-        
+         cell.selectionStyle=UITableViewCellSelectionStyleNone;    
+        cell.layer.borderColor=[UIColor blackColor].CGColor;
+        cell.layer.borderWidth=0.5;
         return cell;
 
     }
@@ -461,6 +463,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    accountCell=[tableView cellForRowAtIndexPath:indexPath];
+    accountCell.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
     PositionsViewController *controller = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil account:indexPath.row];    
     [self.navigationController pushViewController:controller animated:YES];
     
