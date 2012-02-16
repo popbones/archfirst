@@ -138,7 +138,7 @@
 {
     // Return the number of rows in the section.
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-    if ([brokerageAccounts count] > 0) {
+    if ([brokerageAccounts count] > 0 && [brokerageAccounts count] > selectedAccount) {
         BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
         return [account.positions count];
     }
