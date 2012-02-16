@@ -39,7 +39,6 @@
     IBOutlet UIButton *backBTN;
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
-    NSMutableArray *brokerageAccounts;
     PieChartMVAccountsViewController *pieChartMVAccountsViewController;
     IBOutlet CPTGraphHostingView *pieChartMVAccountsView;
 

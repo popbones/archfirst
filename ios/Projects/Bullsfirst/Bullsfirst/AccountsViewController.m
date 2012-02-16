@@ -142,11 +142,6 @@
     [appDelegate removeObserver:self forKeyPath:@"accounts"];
 }
 //initialze brokerage accounts
--(void) loadBrokerageAccounts
-{
-    brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-}
-
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
@@ -184,7 +179,6 @@
         rect = self.refreshBTN.frame;
         self.refreshBTN.frame = CGRectMake(720, rect.origin.y, rect.size.width, rect.size.height);
     }
-    [self loadBrokerageAccounts];
     [accountsTable reloadData];
 }
 
@@ -237,7 +231,6 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"accounts"]) {
-        [self loadBrokerageAccounts];
         [accountsTable reloadData];
         [pieChartMVAccountsViewController constructPieChart];
         [pieChartMVPositionViewController constructPieChart];
@@ -273,13 +266,13 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    
-       
+    NSMutableArray *brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     return [brokerageAccounts count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSMutableArray *brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:indexPath.row];
     NSString *currencySymbol;
     if([account.marketValue.currency isEqual:@"USD"])
