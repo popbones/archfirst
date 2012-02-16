@@ -68,6 +68,8 @@
     [super viewDidLoad];
 
     self.navigationItem.leftBarButtonItem = nil;
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate removeObserver:self forKeyPath:@"currentUser"];
 
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
@@ -80,7 +82,9 @@
 {
     [self setPositionTBL:nil];
     [self setAccountName:nil];
+    [super viewDidUnload];
 }
+
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
     [super willAnimateRotationToInterfaceOrientation:toInterfaceOrientation duration:duration];
