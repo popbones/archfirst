@@ -138,9 +138,11 @@
 {
     // Return the number of rows in the section.
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
-    
-    return [account.positions count];
+    if ([brokerageAccounts count] > 0) {
+        BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
+        return [account.positions count];
+    }
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
