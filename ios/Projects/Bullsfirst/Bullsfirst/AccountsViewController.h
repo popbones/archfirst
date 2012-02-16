@@ -19,6 +19,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "OrdersViewController.h"
+
 #import "PieChartMVAccountsViewController.h"
 #import "PieChartMVPositionViewController.h"
 #import "BFToolbar.h"
@@ -28,7 +30,7 @@
 @class PieChartMVPositionViewController;
 
 
-@interface AccountsViewController: UIViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate> 
+@interface AccountsViewController: OrdersViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate> 
 {   
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIView *headerView;
@@ -43,14 +45,11 @@
 
     PieChartMVPositionViewController *pieChartMVPositionViewController;
     IBOutlet CPTGraphHostingView *pieChartMVPositionView;
-    BFToolbar *toolbar,*toolbarPortraitView;
     UIDeviceOrientation orientation;
     IBOutlet UIView *positionsChartView;
     
 }
 @property (strong, nonatomic) IBOutlet UITableViewCell *accountCell;
-@property (nonatomic, retain) BFToolbar *toolbar;
-@property (nonatomic, retain) BFToolbar *toolbarPortraitView;
 @property (nonatomic, retain)  PieChartMVAccountsViewController *pieChartMVAccountsViewController;
 @property (strong, nonatomic) IBOutlet UILabel *accountNameLBL;
 @property (strong, nonatomic) IBOutlet UILabel *accountNumberLBL;

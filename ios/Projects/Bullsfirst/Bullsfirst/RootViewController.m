@@ -84,6 +84,7 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"DEVICE_ROTATE" object:nil];
     // Return YES for supported orientations
 	return YES;
 }

@@ -36,13 +36,12 @@
 
 @implementation AccountsViewController
 
-@synthesize toolbar,pieChartMVAccountsViewController,toolbarPortraitView;
+@synthesize pieChartMVAccountsViewController;
 @synthesize accountCell;
 @synthesize accountNameLBL,accountNumberLBL,marketValueLBL,cashLBL,actionLBL;
 
 @synthesize userPopOver;
 
-//- (id)init
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -103,13 +102,7 @@
 {
     [super viewDidLoad];
 
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullsfirst-HeaderBarLogo.png"]];
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshAccounts:)];
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-    self.navigationItem.rightBarButtonItem = barButtonItem;
-
-    barButtonItem = [[UIBarButtonItem alloc] init];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] init];
 	barButtonItem.title = @"Accounts";
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
 	self.navigationItem.backBarButtonItem = barButtonItem;
@@ -169,7 +162,8 @@
         cashLBL.frame = CGRectMake(460, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
         actionLBL.frame = CGRectMake(550, rect.origin.y, rect.size.width, rect.size.height);
-
+        rect = self.refreshBTN.frame;
+        self.refreshBTN.frame = CGRectMake(970, rect.origin.y, rect.size.width, rect.size.height);
     }
     else
     {
@@ -186,6 +180,8 @@
         cashLBL.frame = CGRectMake(590, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
         actionLBL.frame = CGRectMake(700, rect.origin.y, rect.size.width, rect.size.height);
+        rect = self.refreshBTN.frame;
+        self.refreshBTN.frame = CGRectMake(720, rect.origin.y, rect.size.width, rect.size.height);
     }
     [self loadBrokerageAccounts];
     [accountsTable reloadData];
@@ -196,7 +192,7 @@
     if ([[UIDevice currentDevice].systemVersion intValue] >= 5) {
         [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
     }
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    return YES;
 }
 
 - (IBAction)createAccount:(id)sender
@@ -221,6 +217,7 @@
     [brokerageAccounts removeAllObjects];
     [accountsTable reloadData];
 }
+/*
 - (IBAction)logout
 {
     if (!userPopOver) {
@@ -237,7 +234,7 @@
         [userPopOver presentPopoverFromBarButtonItem: self.navigationItem.leftBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
-
+*/
 - (IBAction)userProfile
 {
 }
@@ -338,7 +335,10 @@
         edit.currentName=account.name;
         
         edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
-        cell.selectionStyle=UITableViewCellSelectionStyleNone;            
+        
+        UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
+        selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
+        cell.selectedBackgroundView = selected;
         cell.layer.borderColor=[UIColor blackColor].CGColor;
         cell.layer.borderWidth=0.5;
         return cell;
@@ -369,7 +369,10 @@
         edit.currentName=account.name;
         edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
         edit.index=(NSInteger*)indexPath.row;
-         cell.selectionStyle=UITableViewCellSelectionStyleNone;    
+
+        UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
+        selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
+        cell.selectedBackgroundView = selected;
         cell.layer.borderColor=[UIColor blackColor].CGColor;
         cell.layer.borderWidth=0.5;
         return cell;
@@ -395,6 +398,7 @@
     [self presentModalViewController:editAccountViewController animated:YES];
     editAccountViewController.view.superview.bounds=CGRectMake(0, 0, 540,185);
 }
+
 -(void)showPositions:(id)sender
 {
     showPositionsBTN *button = (showPositionsBTN *)sender;
@@ -451,7 +455,6 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     accountCell=[tableView cellForRowAtIndexPath:indexPath];
-    accountCell.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
     PositionsViewController *controller = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil account:indexPath.row];    
     [self.navigationController pushViewController:controller animated:YES];
     

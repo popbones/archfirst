@@ -72,6 +72,8 @@
 
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rotateDevice) name:@"DEVICE_ROTATE" object:nil];
+
 }
 
 - (void)viewDidUnload
@@ -83,7 +85,13 @@
     [self setTransferBTN:nil];
     [self setTradeBTN:nil];
     [self setRefreshBTN:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DEVICE_ROTATE" object:nil];
     [super viewDidUnload];
+}
+
+- (void) rotateDevice
+{
+    [self willAnimateRotationToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.1];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -92,7 +100,7 @@
         [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
     }
     
-    return UIInterfaceOrientationIsLandscape(interfaceOrientation);
+    return YES;
 }
 
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration

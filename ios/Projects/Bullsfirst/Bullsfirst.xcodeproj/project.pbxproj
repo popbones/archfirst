@@ -495,11 +495,11 @@
 			children = (
 				00DFF9021480893E001A4641 /* AccountsViewController.h */,
 				00DFF9031480893E001A4641 /* AccountsViewController.m */,
+				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
 				9586FAAF14EB804600A0B28C /* editAccountNameBTN.h */,
 				9586FAB214EB8F8200A0B28C /* showPositionsBTN.h */,
 				9586FAB314EB8F8400A0B28C /* showPositionsBTN.m */,
 				9586FAB014EB804600A0B28C /* editAccountNameBTN.m */,
-				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
 				9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */,
 				9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */,
 				009C1A3A148D3FF400259534 /* AddAccountViewController.h */,
