@@ -54,10 +54,13 @@
 }
 
 #pragma mark - Handling Keyboard notifications
+static BOOL keyBoardVisible;
 
 -(void) keyBoardWillHideAnimation:(id) duration
 {
     NSTimeInterval animationDuration=[duration floatValue];
+    keyBoardVisible = NO;
+
     orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
     {
@@ -72,7 +75,6 @@
         [UIView setAnimationDuration:animationDuration];
         backgroundImage.frame=imageframe;
         [UIView commitAnimations];
-        
     }
     
 }
@@ -90,6 +92,7 @@
 -(void) keyboardWillShowAnimation:(id) duration
 {
     NSTimeInterval animationDuration = [duration floatValue];
+    keyBoardVisible = YES;
     
     orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
@@ -137,6 +140,9 @@
 {
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
+        if (keyBoardVisible == YES)
+            return;
+        
         groupedView.frame=CGRectMake(255, 156, groupedView.frame.size.width, groupedView.frame.size.height);
         backgroundImage.frame=CGRectMake(0, 0, 1024, 768);
         [backgroundImage setImage:[UIImage imageNamed:@"login-screen-background-landscape.png"]];
