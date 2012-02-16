@@ -213,7 +213,7 @@
         // Add legend
     CPTLegend *theLegend = [CPTLegend legendWithGraph:pieGraph];
     theLegend.numberOfColumns = 2;
-    theLegend.columnMargin = 30.0;
+    theLegend.columnMargin = 47.0;
     theLegend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
     //theLegend.borderLineStyle = [CPTLineStyle lineStyle];
     theLegend.cornerRadius = 5.0;

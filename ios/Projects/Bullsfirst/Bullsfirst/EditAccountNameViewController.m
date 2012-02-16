@@ -56,6 +56,7 @@
     accountName.returnKeyType = UIReturnKeyGo;
     
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    [accountName becomeFirstResponder];
 }
 
 - (void)viewDidUnload

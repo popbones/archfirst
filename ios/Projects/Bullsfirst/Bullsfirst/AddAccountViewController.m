@@ -147,6 +147,7 @@
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     accountName.returnKeyType=UIReturnKeyGo;
     accountName.delegate=self;
+    [accountName becomeFirstResponder];
 }
 
 - (void)viewDidUnload
