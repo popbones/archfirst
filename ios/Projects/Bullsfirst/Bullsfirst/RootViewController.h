@@ -19,17 +19,10 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "AccountsViewController.h"
-#import "PositionsViewController.h"
-#import "OrdersViewController.h"
-#import "TransactionsViewController.h"
 #import "BullFirstWebServiceObject.h"
 
 @interface RootViewController : UITabBarController <UITabBarControllerDelegate>
 
-@property (nonatomic,retain) AccountsViewController *accountsViewController;
-@property (nonatomic,retain) OrdersViewController *ordersViewController;
-@property (nonatomic,retain) TransactionsViewController *transactionsViewController;
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 @end

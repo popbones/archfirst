@@ -23,9 +23,12 @@
 #import "AppDelegate.h"
 #import "BFBrokerageAccountStore.h"
 #import "BullFirstWebServiceObject.h"
+#import "AccountsViewController.h"
+#import "PositionsViewController.h"
+#import "OrdersViewController.h"
+#import "TransactionsViewController.h"
 
 @implementation RootViewController
-@synthesize accountsViewController, ordersViewController, transactionsViewController;
 @synthesize restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -53,14 +56,14 @@
     // Do any additional setup after loading the view from its nib.
     self.delegate=self;
 
-    accountsViewController = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
+    AccountsViewController *accountsViewController = [[AccountsViewController alloc] initWithNibName:@"AccountsViewController" bundle:nil];
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:accountsViewController];
     NSMutableArray *viewControllers = [[NSMutableArray alloc] init];
     [viewControllers addObject:controller];    
-    ordersViewController= [[OrdersViewController alloc] initWithNibName:@"OrdersViewController" bundle:nil];
+    OrdersViewController *ordersViewController= [[OrdersViewController alloc] initWithNibName:@"OrdersViewController" bundle:nil];
     controller = [[UINavigationController alloc] initWithRootViewController:ordersViewController];
     [viewControllers addObject:controller];
-    transactionsViewController = [[TransactionsViewController alloc] initWithNibName:@"TransactionsViewController" bundle:nil];
+    TransactionsViewController *transactionsViewController = [[TransactionsViewController alloc] initWithNibName:@"TransactionsViewController" bundle:nil];
     controller = [[UINavigationController alloc] initWithRootViewController:transactionsViewController];
     [viewControllers addObject:controller];
     [self setViewControllers:viewControllers];
@@ -123,7 +126,6 @@
 
 -(void)userLogout:(NSNotification*)notification
 {
-    [accountsViewController clearViewController];
     LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
     [self presentModalViewController: controller animated:YES];
@@ -137,9 +139,8 @@
     [restServiceObject getRequestWithURL:url];    
 }
 
-/*
  #pragma mark tabBarController delegate methods
-
+/*
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
 {
     [viewController viewDidAppear:YES];

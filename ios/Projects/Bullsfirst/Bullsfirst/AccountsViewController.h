@@ -56,7 +56,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *marketValueLBL;
 @property (strong, nonatomic) IBOutlet UILabel *cashLBL;
 @property (strong, nonatomic) IBOutlet UILabel *actionLBL;
-- (void) clearViewController;
+
 - (IBAction)createAccount:(id)sender;
 - (IBAction)backBTNClicked:(id)sender;
 

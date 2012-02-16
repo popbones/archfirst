@@ -92,6 +92,7 @@
     [pieChartMVPositionViewController viewDidDisappear:animated];
     [pieChartMVAccountsViewController viewDidDisappear:animated];
 }
+
 -(void) viewWillAppear:(BOOL)animated
 {
     positionsChartView.hidden=true;
@@ -210,13 +211,6 @@
 - (IBAction)filterBTNClicked:(id)sender
 {
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
-}
-
--(void) clearViewController
-{
-    [pieChartMVAccountsViewController clearPieChart];
-    [brokerageAccounts removeAllObjects];
-    [accountsTable reloadData];
 }
 
 - (IBAction)userProfile
