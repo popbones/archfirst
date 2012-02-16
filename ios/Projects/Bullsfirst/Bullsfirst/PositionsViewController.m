@@ -67,10 +67,6 @@
 {
     [super viewDidLoad];
 
-    self.navigationItem.leftBarButtonItem = nil;
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    [appDelegate removeObserver:self forKeyPath:@"currentUser"];
-
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
     self.accountName.text = account.name;

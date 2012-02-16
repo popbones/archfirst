@@ -7,9 +7,11 @@
 //
 
 #import "UserViewController.h"
+#import "AppDelegate.h"
 
 @implementation UserViewController
 @synthesize versionLabel;
+@synthesize usernameLabel;
 @synthesize popOver;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -36,11 +38,16 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.versionLabel.text = [NSString stringWithFormat:@"Bullsfirst Verion %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
+    
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    self.usernameLabel.text = [[NSString stringWithFormat:@"%@ %@", appDelegate.currentUser.firstName, appDelegate.currentUser.lastName] uppercaseString];
+
 }
 
 - (void)viewDidUnload
 {
     [self setVersionLabel:nil];
+    [self setUsernameLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

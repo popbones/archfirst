@@ -11,6 +11,7 @@
 @interface UserViewController : UIViewController
 @property (strong, nonatomic) UIPopoverController *popOver;
 @property (strong, nonatomic) IBOutlet UILabel *versionLabel;
+@property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 - (IBAction)logoutBTNClicked:(id)sender;
 
 @end

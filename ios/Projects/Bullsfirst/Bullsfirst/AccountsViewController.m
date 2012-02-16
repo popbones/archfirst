@@ -138,7 +138,6 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-    [appDelegate addObserver:self forKeyPath:@"currentUser" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
 }
 
@@ -147,7 +146,6 @@
     [super viewDidUnload];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate removeObserver:self forKeyPath:@"accounts"];
-    [appDelegate removeObserver:self forKeyPath:@"currentUser"];
 }
 //initialze brokerage accounts
 -(void) loadBrokerageAccounts
@@ -268,17 +266,6 @@
         [accountsTable reloadData];
         [pieChartMVAccountsViewController constructPieChart];
         [pieChartMVPositionViewController constructPieChart];
-        return;
-    }
-    if ([keyPath isEqualToString:@"currentUser"]) {
-        AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-        NSString* fullName=[appDelegate.currentUser.firstName stringByAppendingString:@" "];
-        fullName=[fullName stringByAppendingString:appDelegate.currentUser.lastName];
-        fullName=[fullName uppercaseString];
-        
-        UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:fullName style:UIBarButtonItemStylePlain target:self action:@selector(logout)];
-        barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-        self.navigationItem.leftBarButtonItem = barButtonItem;
         return;
     }
 }
