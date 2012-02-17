@@ -25,7 +25,7 @@
 @synthesize activeTextField;
 @synthesize textFields;
 @synthesize dropdown;
-@synthesize allOrNoneBOOL;
+@synthesize order;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition
 {
@@ -52,8 +52,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     textFields = [NSArray arrayWithObjects:cusipText, quantity, limit, nil];
-    allOrNoneBOOL = YES;
     [allOrNone setImage:[UIImage imageNamed:@"img_bg_yellow.png"] forState:UIControlStateNormal];
+    order = [[BFOrder alloc] init];
+    order.allOrNone = YES;
+    order.term = [NSString stringWithString:@"Good for day"];
     
     if (self.position != nil) {
         cusipText.text = self.position.instrumentSymbol;
@@ -154,12 +156,12 @@
 
 - (IBAction)allOrNoneClicked:(id)sender {
     UIButton *button = sender;
-    if (allOrNoneBOOL == YES) {
+    if (order.allOrNone == YES) {
         [button setImage:[UIImage imageNamed:@"img_bg_login.png"] forState:UIControlStateNormal];
-        allOrNoneBOOL = NO;
+        order.allOrNone = NO;
     } else {
         [button setImage:[UIImage imageNamed:@"img_bg_yellow.png"] forState:UIControlStateNormal];
-        allOrNoneBOOL = YES;
+        order.allOrNone = YES;
     }
 }
 
@@ -170,8 +172,11 @@
 }
 
 - (IBAction)okBTNClicked:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
     [activeTextField resignFirstResponder];
+    order.instrumentSymbol = [NSString stringWithString:self.cusipText.text];
+    order.quantity = [NSString stringWithString:self.quantity.text];
+    order.limitPrice = [BFMoney moneyWithAmount:[NSNumber numberWithInt:[self.limit.text intValue]] currency:@"USD"];
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - text field lifecycle
@@ -223,20 +228,31 @@
 - (void)selectionChanged:(DropdownViewController *)controller
 {
     switch (controller.tag) {
-        case 1:
+        case 1: {
             accountBTN.titleLabel.text = controller.selected;
+            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+            for (BFBrokerageAccount *account in brokerageAccounts) {
+                if ([controller.selected isEqualToString:account.name] == YES) {
+                    order.brokerageAccountID = account.brokerageAccountID;
+                    order.accountName = account.name;
+                    break;
+                }
+            }
             break;
-            
+        }
         case 2:
             orderBTN.titleLabel.text = controller.selected;
+            order.side = controller.selected;
             break;
             
         case 3:
             priceBTN.titleLabel.text = controller.selected;
+            order.type = controller.selected;
             break;
             
         case 4:
             goodForDayBTN.titleLabel.text = controller.selected;
+            order.term = controller.selected;
             break;
             
         default:

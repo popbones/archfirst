@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 #import "BFPosition.h"
+#import "BFOrder.h"
 
 @interface TradeViewController : UIViewController {
     BFPosition *position;
+    BFOrder *order;
 }
 
 @property (nonatomic, retain) UITextField *activeTextField;
 @property (nonatomic, retain) NSArray *textFields;
 @property (nonatomic, retain) BFPosition *position;
+@property (nonatomic, retain) BFOrder *order;
 @property (strong, nonatomic) IBOutlet UITextField *cusipText;
 @property (strong, nonatomic) IBOutlet UITextField *quantity;
 @property (strong, nonatomic) IBOutlet UITextField *limit;
@@ -24,6 +27,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *priceBTN;
 @property (strong, nonatomic) IBOutlet UIButton *goodForDayBTN;
 @property (strong, nonatomic) IBOutlet UIButton *allOrNone;
+@property (strong, nonatomic) IBOutlet UILabel *allOrNoneLabel;
 
 - (IBAction)cancelBTNClicked:(id)sender;
 - (IBAction)okBTNClicked:(id)sender;
@@ -33,6 +37,5 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition;
 
 @property (strong, nonatomic) UIPopoverController *dropdown;
-@property (assign, nonatomic) BOOL allOrNoneBOOL;
 
 @end

@@ -410,6 +410,14 @@
 					<int key="connectionID">48</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">allOrNoneLabel</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="393153166"/>
+					</object>
+					<int key="connectionID">50</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchEventConnection" key="connection">
 						<string key="label">okBTNClicked:</string>
 						<reference key="source" ref="83299994"/>
@@ -613,7 +621,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">49</int>
+			<int key="maxID">50</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -647,6 +655,7 @@
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="accountBTN">UIButton</string>
 						<string key="allOrNone">UIButton</string>
+						<string key="allOrNoneLabel">UILabel</string>
 						<string key="cusipText">UITextField</string>
 						<string key="goodForDayBTN">UIButton</string>
 						<string key="limit">UITextField</string>
@@ -662,6 +671,10 @@
 						<object class="IBToOneOutletInfo" key="allOrNone">
 							<string key="name">allOrNone</string>
 							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="allOrNoneLabel">
+							<string key="name">allOrNoneLabel</string>
+							<string key="candidateClassName">UILabel</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="cusipText">
 							<string key="name">cusipText</string>

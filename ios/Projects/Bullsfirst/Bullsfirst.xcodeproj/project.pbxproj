@@ -46,6 +46,8 @@
 		546838B714EECAC3005C356A /* DropdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838B514EECAC3005C356A /* DropdownViewController.m */; };
 		546838B814EECAC3005C356A /* DropdownViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546838B614EECAC3005C356A /* DropdownViewController.xib */; };
 		546838BB14EEE103005C356A /* BFOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838BA14EEE103005C356A /* BFOrder.m */; };
+		546838C014EEEC83005C356A /* tradePreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838BE14EEEC83005C356A /* tradePreviewViewController.m */; };
+		546838C114EEEC83005C356A /* tradePreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546838BF14EEEC83005C356A /* tradePreviewViewController.xib */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
@@ -199,6 +201,9 @@
 		546838B614EECAC3005C356A /* DropdownViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropdownViewController.xib; sourceTree = "<group>"; };
 		546838B914EEE103005C356A /* BFOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFOrder.h; sourceTree = "<group>"; };
 		546838BA14EEE103005C356A /* BFOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFOrder.m; sourceTree = "<group>"; };
+		546838BD14EEEC83005C356A /* tradePreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePreviewViewController.h; sourceTree = "<group>"; };
+		546838BE14EEEC83005C356A /* tradePreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePreviewViewController.m; sourceTree = "<group>"; };
+		546838BF14EEEC83005C356A /* tradePreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = tradePreviewViewController.xib; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
 		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
@@ -461,9 +466,9 @@
 		00DFF9631484179D001A4641 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				00DFF95D14841317001A4641 /* BFMoney.h */,
 				546838B914EEE103005C356A /* BFOrder.h */,
 				546838BA14EEE103005C356A /* BFOrder.m */,
+				00DFF95D14841317001A4641 /* BFMoney.h */,
 				00DFF95E14841318001A4641 /* BFMoney.m */,
 				00DFF96014841780001A4641 /* BFPosition.h */,
 				00DFF96114841781001A4641 /* BFPosition.m */,
@@ -493,6 +498,22 @@
 				00DFF90E148089B6001A4641 /* Tabs */,
 			);
 			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		546838BC14EEEC3C005C356A /* Trade */ = {
+			isa = PBXGroup;
+			children = (
+				546838B414EECAC2005C356A /* DropdownViewController.h */,
+				546838B514EECAC3005C356A /* DropdownViewController.m */,
+				546838B614EECAC3005C356A /* DropdownViewController.xib */,
+				546838BD14EEEC83005C356A /* tradePreviewViewController.h */,
+				546838BE14EEEC83005C356A /* tradePreviewViewController.m */,
+				546838BF14EEEC83005C356A /* tradePreviewViewController.xib */,
+				54B78A6814EAA14A002FF1AC /* TradeViewController.h */,
+				54B78A6914EAA14E002FF1AC /* TradeViewController.m */,
+				54B78A6A14EAA150002FF1AC /* TradeViewController.xib */,
+			);
+			name = Trade;
 			sourceTree = "<group>";
 		};
 		54B78A1C14E58F74002FF1AC /* Account Tab */ = {
@@ -573,15 +594,10 @@
 		54B78A7214EAB427002FF1AC /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-				546838B414EECAC2005C356A /* DropdownViewController.h */,
-				546838B514EECAC3005C356A /* DropdownViewController.m */,
-				546838B614EECAC3005C356A /* DropdownViewController.xib */,
+				546838BC14EEEC3C005C356A /* Trade */,
 				54B78AEA14EC4652002FF1AC /* UserViewController.h */,
 				54B78AEB14EC4654002FF1AC /* UserViewController.m */,
 				54B78AEC14EC4655002FF1AC /* UserViewController.xib */,
-				54B78A6814EAA14A002FF1AC /* TradeViewController.h */,
-				54B78A6914EAA14E002FF1AC /* TradeViewController.m */,
-				54B78A6A14EAA150002FF1AC /* TradeViewController.xib */,
 				54B78A6D14EAA174002FF1AC /* TransferViewController.h */,
 				54B78A6E14EAA177002FF1AC /* TransferViewController.m */,
 				54B78A6F14EAA178002FF1AC /* TransferViewController.xib */,
@@ -795,6 +811,7 @@
 				ACC6A17114EE99BD00016AD4 /* SwitchAccountsButton_PushDownState.png in Resources */,
 				ACC6A17214EE99BD00016AD4 /* SwitchAccountsButton.png in Resources */,
 				546838B814EECAC3005C356A /* DropdownViewController.xib in Resources */,
+				546838C114EEEC83005C356A /* tradePreviewViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -846,6 +863,7 @@
 				AC66817414ECD43C00BB02FF /* DataValidator.m in Sources */,
 				546838B714EECAC3005C356A /* DropdownViewController.m in Sources */,
 				546838BB14EEE103005C356A /* BFOrder.m in Sources */,
+				546838C014EEEC83005C356A /* tradePreviewViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
