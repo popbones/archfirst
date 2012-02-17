@@ -10,6 +10,14 @@
 
 @implementation PreviewTradeViewController
 @synthesize order;
+@synthesize accountNameLabel;
+@synthesize sideLabel;
+@synthesize quantityLabel;
+@synthesize cusipLabel;
+@synthesize typeLabel;
+@synthesize termLabel;
+@synthesize allOrNoneLabel;
+@synthesize limitPriceLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil order:(BFOrder *)anOrder
 {
@@ -40,10 +48,33 @@
     barButtonItem.style = UIBarButtonItemStyleBordered;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.rightBarButtonItem = barButtonItem;
+    
+    self.accountNameLabel.text = order.accountName;
+    self.sideLabel.text = order.side;
+    self.cusipLabel.text = order.instrumentSymbol;
+    self.quantityLabel.text = [NSString stringWithFormat:@"%d share", [order.quantity intValue]];
+    self.typeLabel.text = order.type;
+    if ([order.type isEqualToString:@"Limited"])
+        self.limitPriceLabel.text = [NSString stringWithFormat:@"$%d", [order.limitPrice.amount intValue]];
+    else
+        self.limitPriceLabel.text = @"";
+    self.termLabel.text = order.term;
+    if (order.allOrNone == YES)
+        allOrNoneLabel.text = @"All or None";
+    else
+        allOrNoneLabel.text = @"";
 }
 
 - (void)viewDidUnload
 {
+    [self setAccountNameLabel:nil];
+    [self setSideLabel:nil];
+    [self setQuantityLabel:nil];
+    [self setCusipLabel:nil];
+    [self setTypeLabel:nil];
+    [self setTermLabel:nil];
+    [self setAllOrNoneLabel:nil];
+    [self setLimitPriceLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

@@ -16,6 +16,14 @@
 }
 
 @property (nonatomic, retain) BFOrder *order;
+@property (strong, nonatomic) IBOutlet UILabel *accountNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *sideLabel;
+@property (strong, nonatomic) IBOutlet UILabel *quantityLabel;
+@property (strong, nonatomic) IBOutlet UILabel *cusipLabel;
+@property (strong, nonatomic) IBOutlet UILabel *typeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *termLabel;
+@property (strong, nonatomic) IBOutlet UILabel *allOrNoneLabel;
+@property (strong, nonatomic) IBOutlet UILabel *limitPriceLabel;
 
 - (IBAction)placeOrderBTNClicked:(id)sender;
 - (IBAction)cancelBTNClicked:(id)sender;

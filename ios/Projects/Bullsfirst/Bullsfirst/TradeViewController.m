@@ -62,7 +62,7 @@
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
 	self.navigationItem.backBarButtonItem = barButtonItem;
 
-    textFields = [NSArray arrayWithObjects:cusipText, quantity, limit, nil];
+    textFields = [NSArray arrayWithObjects:quantity, cusipText, limit, nil];
     [allOrNone setImage:[UIImage imageNamed:@"img_bg_yellow.png"] forState:UIControlStateNormal];
     order = [[BFOrder alloc] init];
     order.allOrNone = YES;
