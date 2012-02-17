@@ -43,6 +43,8 @@
 		545C5E7614E55DA6003560C8 /* BFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 545C5E7514E55DA6003560C8 /* BFUser.m */; };
 		545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */; };
 		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
+		546838B714EECAC3005C356A /* DropdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838B514EECAC3005C356A /* DropdownViewController.m */; };
+		546838B814EECAC3005C356A /* DropdownViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546838B614EECAC3005C356A /* DropdownViewController.xib */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
@@ -191,6 +193,9 @@
 		545C5E7514E55DA6003560C8 /* BFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFUser.m; sourceTree = "<group>"; };
 		545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Landscape~ipad.png"; path = "../Default-Landscape~ipad.png"; sourceTree = "<group>"; };
+		546838B414EECAC2005C356A /* DropdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownViewController.h; sourceTree = "<group>"; };
+		546838B514EECAC3005C356A /* DropdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropdownViewController.m; sourceTree = "<group>"; };
+		546838B614EECAC3005C356A /* DropdownViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropdownViewController.xib; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
 		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
@@ -563,6 +568,9 @@
 		54B78A7214EAB427002FF1AC /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				546838B414EECAC2005C356A /* DropdownViewController.h */,
+				546838B514EECAC3005C356A /* DropdownViewController.m */,
+				546838B614EECAC3005C356A /* DropdownViewController.xib */,
 				54B78AEA14EC4652002FF1AC /* UserViewController.h */,
 				54B78AEB14EC4654002FF1AC /* UserViewController.m */,
 				54B78AEC14EC4655002FF1AC /* UserViewController.xib */,
@@ -781,6 +789,7 @@
 				ACC6A15614EE540700016AD4 /* warningIcon.png in Resources */,
 				ACC6A17114EE99BD00016AD4 /* SwitchAccountsButton_PushDownState.png in Resources */,
 				ACC6A17214EE99BD00016AD4 /* SwitchAccountsButton.png in Resources */,
+				546838B814EECAC3005C356A /* DropdownViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -830,6 +839,7 @@
 				54B78AED14EC4656002FF1AC /* UserViewController.m in Sources */,
 				AC66817314ECD43C00BB02FF /* CMPopTipView.m in Sources */,
 				AC66817414ECD43C00BB02FF /* DataValidator.m in Sources */,
+				546838B714EECAC3005C356A /* DropdownViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
