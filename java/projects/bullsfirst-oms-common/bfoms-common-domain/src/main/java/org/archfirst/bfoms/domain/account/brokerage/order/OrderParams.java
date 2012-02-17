@@ -22,7 +22,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import org.archfirst.common.datetime.DateTimeUtil;
 import org.archfirst.common.money.Money;
 
 /**

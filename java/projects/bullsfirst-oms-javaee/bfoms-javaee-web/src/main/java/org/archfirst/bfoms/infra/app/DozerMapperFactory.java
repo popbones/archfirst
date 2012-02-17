@@ -15,9 +15,13 @@
  */
 package org.archfirst.bfoms.infra.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
+import org.dozer.CustomConverter;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
@@ -44,11 +48,24 @@ public class DozerMapperFactory {
                         org.archfirst.bfoms.restservice.user.User.class)
                     .fields("person.firstName", "firstName")
                     .fields("person.lastName", "lastName");
+
+                mapping(org.archfirst.bfoms.domain.account.brokerage.order.Order.class,
+                        org.archfirst.bfoms.restservice.order.Order.class)
+                    .fields("account.id", "accountId")
+                    .fields("account.name", "accountName");
             }
         };        
 
         DozerBeanMapper mapper = new DozerBeanMapper();
+        
+        // Add mappings
         mapper.addMapping(builder);
+        
+        // Add converters
+        List<CustomConverter> converters = new ArrayList<CustomConverter>();
+        converters.add(new DecimalQuantityConverter());
+        mapper.setCustomConverters(converters);
+        
         return mapper;
     }
 }

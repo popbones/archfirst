@@ -15,6 +15,7 @@
  */
 package org.archfirst.bfoms.restservice.order;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -33,11 +34,11 @@ import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
-import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.restservice.util.ErrorMessage;
 import org.archfirst.bfoms.restservice.util.Link;
+import org.dozer.Mapper;
 
 /**
  * Order
@@ -94,7 +95,13 @@ public class OrderResource {
         OrderCriteria criteria = new OrderCriteria();
         if (accountId != null)
             criteria.setAccountId(accountId);
-        return this.brokerageAccountService.getOrders(getUsername(sc), criteria);
+        List<org.archfirst.bfoms.domain.account.brokerage.order.Order> orders =
+            this.brokerageAccountService.getOrders(getUsername(sc), criteria);
+        List<Order> orderDtos = new ArrayList<Order>();
+        for (org.archfirst.bfoms.domain.account.brokerage.order.Order order: orders) {
+            orderDtos.add(mapper.map(order, Order.class));
+        }
+        return orderDtos;
     }
     
     private String getUsername(SecurityContext sc) {
@@ -125,4 +132,7 @@ public class OrderResource {
 
     @Inject
     private BrokerageAccountService brokerageAccountService;
+    
+    @Inject
+    private Mapper mapper;
 }
