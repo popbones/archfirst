@@ -33,7 +33,7 @@
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
     OpenAccountViewController *openAccountViewController;
-    UIDeviceOrientation orientation;
+    UIInterfaceOrientation orientation;
     IBOutlet UIView *groupedView;
     IBOutlet UIImageView *backgroundImage;
     IBOutlet UIButton *loginButton;

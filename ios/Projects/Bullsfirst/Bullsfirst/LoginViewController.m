@@ -60,7 +60,6 @@ static BOOL keyBoardVisible;
 {
     NSTimeInterval animationDuration=[duration floatValue];
     keyBoardVisible = NO;
-
     orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
     {
@@ -73,7 +72,9 @@ static BOOL keyBoardVisible;
         imageframe.size.height-=100;
         [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
-        backgroundImage.frame=imageframe;
+        backgroundImage.frame = imageframe;
+        CGAffineTransform transform= CGAffineTransformMakeTranslation(0, 35);
+        groupedView.transform = transform;
         [UIView commitAnimations];
     }
     
@@ -93,7 +94,6 @@ static BOOL keyBoardVisible;
 {
     NSTimeInterval animationDuration = [duration floatValue];
     keyBoardVisible = YES;
-    
     orientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(orientation==UIDeviceOrientationLandscapeRight||orientation==UIDeviceOrientationLandscapeLeft)  
     {
@@ -104,9 +104,12 @@ static BOOL keyBoardVisible;
         CGRect imageframe= backgroundImage.frame;
         imageframe.origin.y-=100;
         imageframe.size.height+=100;
+        
         [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
         backgroundImage.frame=imageframe;
+        CGAffineTransform transform= CGAffineTransformMakeTranslation(0, -35);
+        groupedView.transform = transform;
         [UIView commitAnimations];
     }
     
@@ -116,7 +119,7 @@ static BOOL keyBoardVisible;
 {
     
     id duration = [[notification userInfo] valueForKey:UIKeyboardAnimationDurationUserInfoKey];
-    
+   // NSTimer* timer = [NSTimer scheduledTimerWithTimeInterval:0.15 target:self selector:@selector(keyboardWillShowAnimation:) userInfo:nil repeats:NO];
     [self keyboardWillShowAnimation:duration];
     
 }
