@@ -9,15 +9,17 @@
 #import "PreviewTradeViewController.h"
 
 @implementation PreviewTradeViewController
+@synthesize order;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil order:(BFOrder *)anOrder
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
-        // Custom initialization
+        self.order = anOrder;
     }
     return self;
 }
+
 
 - (void)didReceiveMemoryWarning
 {
@@ -32,7 +34,12 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
 - (void)viewDidUnload
@@ -49,8 +56,10 @@
 }
 
 - (IBAction)placeOrderBTNClicked:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
 }
 
 - (IBAction)cancelBTNClicked:(id)sender {
+    [self dismissModalViewControllerAnimated:YES];
 }
 @end

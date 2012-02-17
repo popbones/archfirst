@@ -228,7 +228,8 @@
 }
 
 - (IBAction)tradeBTNClicked:(id)sender {
-    TradeViewController *controller = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil];    
+    TradeViewController *tradeController = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil];    
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:tradeController];
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     

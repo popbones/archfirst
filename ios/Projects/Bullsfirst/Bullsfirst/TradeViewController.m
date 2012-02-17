@@ -52,6 +52,16 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                     initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+
+    barButtonItem.title = @"Trade";
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+	self.navigationItem.backBarButtonItem = barButtonItem;
+
     textFields = [NSArray arrayWithObjects:cusipText, quantity, limit, nil];
     [allOrNone setImage:[UIImage imageNamed:@"img_bg_yellow.png"] forState:UIControlStateNormal];
     order = [[BFOrder alloc] init];
@@ -178,10 +188,8 @@
     order.quantity = [NSString stringWithString:self.quantity.text];
     order.limitPrice = [BFMoney moneyWithAmount:[NSNumber numberWithInt:[self.limit.text intValue]] currency:@"USD"];
 
-    PreviewTradeViewController *controller = [[PreviewTradeViewController alloc] initWithNibName:@"PreviewTradeViewController" bundle:nil];    
+    PreviewTradeViewController *controller = [[PreviewTradeViewController alloc] initWithNibName:@"PreviewTradeViewController" bundle:nil order:order];    
     [self.navigationController pushViewController:controller animated:YES];
-
-    [self dismissModalViewControllerAnimated:YES];
 }
 
 #pragma mark - text field lifecycle
