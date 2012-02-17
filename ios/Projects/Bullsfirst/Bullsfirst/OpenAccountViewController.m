@@ -280,6 +280,9 @@
     openAccountButton.enabled = NO;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     
+    [password addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
+    [confirmpassword addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
+    
 }
 
 -(void) keyBoardDidShow:(NSNotification*) notification
@@ -364,6 +367,12 @@
         }
     }
     return nil;
+}
+
+#pragma mark - TextField callback methods
+-(void) passwordEditingStarted:(UITextField*) textField
+{
+    textField.text=@"";
 }
 
 @end
