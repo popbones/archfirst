@@ -7,14 +7,21 @@
 //
 
 #import "TradeViewController.h"
+#import "DropdownViewController.h"
 
 @implementation TradeViewController
 @synthesize position;
 @synthesize cusipText;
 @synthesize quantity;
 @synthesize limit;
+@synthesize accountBTN;
+@synthesize orderBTN;
+@synthesize priceBTN;
+@synthesize goodForDayBTN;
+@synthesize allOrNone;
 @synthesize activeTextField;
 @synthesize textFields;
+@synthesize dropdown;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition
 {
@@ -52,6 +59,11 @@
     [self setCusipText:nil];
     [self setQuantity:nil];
     [self setLimit:nil];
+    [self setAccountBTN:nil];
+    [self setOrderBTN:nil];
+    [self setPriceBTN:nil];
+    [self setGoodForDayBTN:nil];
+    [self setAllOrNone:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -62,6 +74,71 @@
     // Return YES for supported orientations
 	return YES;
 }
+
+- (IBAction)showDropdown:(id)sender {
+    UIButton *button = sender;
+    NSArray *selections;
+    CGSize size;
+    switch (button.tag) {
+        case 1:
+            selections = [NSArray arrayWithObjects:@"sss", @"dded", nil];
+            size = [@"ssss" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            size.height = [selections count] * 44;
+            size.width += 20;
+            break;
+            
+        case 2:
+            selections = [NSArray arrayWithObjects:@"Buy", @"Sell", nil];
+            size = [@"Buy" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            size.height = [selections count] * 44;
+            size.width += 20;
+
+            break;
+            
+        case 3:
+            selections = [NSArray arrayWithObjects:@"Market", @"Limited", nil];
+            size = [@"Limited" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            size.height = [selections count] * 44;
+            size.width += 20;
+
+            break;
+            
+        case 4:
+            selections = [NSArray arrayWithObjects:@"Good for day", @"Good til cancel", nil];
+            size = [@"Good til cancel" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            size.height = [selections count] * 44;
+            size.width += 20;
+            break;
+            
+        default:
+            break;
+    }
+    
+    if (!dropdown) {
+        DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+        
+        dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = dropdown;
+        controller.selections = selections;
+        controller.tag = button.tag;
+        controller.delegate = self;
+        [dropdown setPopoverContentSize:size];
+    }
+    if ([dropdown isPopoverVisible]) {
+        [dropdown dismissPopoverAnimated:YES];
+    } else {
+        DropdownViewController *controller = dropdown.contentViewController;
+        controller.tag = button.tag;
+        controller.selections = selections;
+        [controller.selectionsTBL reloadData];
+        [dropdown setPopoverContentSize:size];
+        [dropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    }
+}
+
+- (IBAction)allOrNoneClicked:(id)sender {
+}
+
 
 - (IBAction)cancelBTNClicked:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
@@ -117,4 +194,30 @@
     activeTextField = textField;
 }
 
+#pragma mark - dropdown lifecycle
+
+- (void)selectionChanged:(DropdownViewController *)controller
+{
+    switch (controller.tag) {
+        case 1:
+            accountBTN.titleLabel.text = controller.selected;
+            break;
+            
+        case 2:
+            orderBTN.titleLabel.text = controller.selected;
+            break;
+            
+        case 3:
+            priceBTN.titleLabel.text = controller.selected;
+            break;
+            
+        case 4:
+            goodForDayBTN.titleLabel.text = controller.selected;
+            break;
+            
+        default:
+            break;
+    }
+    
+}
 @end
