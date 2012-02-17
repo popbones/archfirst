@@ -8,6 +8,8 @@
 
 #import "TradeViewController.h"
 #import "DropdownViewController.h"
+#import "BFBrokerageAccountStore.h"
+#import "BFBrokerageAccount.h"
 
 @implementation TradeViewController
 @synthesize position;
@@ -19,9 +21,11 @@
 @synthesize priceBTN;
 @synthesize goodForDayBTN;
 @synthesize allOrNone;
+@synthesize allOrNoneLabel;
 @synthesize activeTextField;
 @synthesize textFields;
 @synthesize dropdown;
+@synthesize allOrNoneBOOL;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition
 {
@@ -48,9 +52,12 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     textFields = [NSArray arrayWithObjects:cusipText, quantity, limit, nil];
-
+    allOrNoneBOOL = YES;
+    [allOrNone setImage:[UIImage imageNamed:@"img_bg_yellow.png"] forState:UIControlStateNormal];
+    
     if (self.position != nil) {
         cusipText.text = self.position.instrumentSymbol;
+        accountBTN.titleLabel.text = self.position.accountName;
     }
 }
 
@@ -64,6 +71,7 @@
     [self setPriceBTN:nil];
     [self setGoodForDayBTN:nil];
     [self setAllOrNone:nil];
+    [self setAllOrNoneLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -80,12 +88,20 @@
     NSArray *selections;
     CGSize size;
     switch (button.tag) {
-        case 1:
-            selections = [NSArray arrayWithObjects:@"sss", @"dded", nil];
-            size = [@"ssss" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+        case 1: {
+            NSMutableArray *accountName = [[NSMutableArray alloc] init];
+            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+            for (BFBrokerageAccount *account in brokerageAccounts) {
+                [accountName addObject:account.name];
+           }
+            selections = [NSArray arrayWithArray:accountName];
             size.height = [selections count] * 44;
-            size.width += 20;
+            if ([selections count] > 5) {
+                size.height = 220;
+            }
+            size.width = 320;
             break;
+        }
             
         case 2:
             selections = [NSArray arrayWithObjects:@"Buy", @"Sell", nil];
@@ -137,6 +153,14 @@
 }
 
 - (IBAction)allOrNoneClicked:(id)sender {
+    UIButton *button = sender;
+    if (allOrNoneBOOL == YES) {
+        [button setImage:[UIImage imageNamed:@"img_bg_login.png"] forState:UIControlStateNormal];
+        allOrNoneBOOL = NO;
+    } else {
+        [button setImage:[UIImage imageNamed:@"img_bg_yellow.png"] forState:UIControlStateNormal];
+        allOrNoneBOOL = YES;
+    }
 }
 
 

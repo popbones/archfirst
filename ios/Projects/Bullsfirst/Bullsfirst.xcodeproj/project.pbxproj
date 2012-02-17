@@ -45,6 +45,7 @@
 		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
 		546838B714EECAC3005C356A /* DropdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838B514EECAC3005C356A /* DropdownViewController.m */; };
 		546838B814EECAC3005C356A /* DropdownViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546838B614EECAC3005C356A /* DropdownViewController.xib */; };
+		546838BB14EEE103005C356A /* BFOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838BA14EEE103005C356A /* BFOrder.m */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
@@ -196,6 +197,8 @@
 		546838B414EECAC2005C356A /* DropdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropdownViewController.h; sourceTree = "<group>"; };
 		546838B514EECAC3005C356A /* DropdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropdownViewController.m; sourceTree = "<group>"; };
 		546838B614EECAC3005C356A /* DropdownViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropdownViewController.xib; sourceTree = "<group>"; };
+		546838B914EEE103005C356A /* BFOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFOrder.h; sourceTree = "<group>"; };
+		546838BA14EEE103005C356A /* BFOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFOrder.m; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
 		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
@@ -459,6 +462,8 @@
 			isa = PBXGroup;
 			children = (
 				00DFF95D14841317001A4641 /* BFMoney.h */,
+				546838B914EEE103005C356A /* BFOrder.h */,
+				546838BA14EEE103005C356A /* BFOrder.m */,
 				00DFF95E14841318001A4641 /* BFMoney.m */,
 				00DFF96014841780001A4641 /* BFPosition.h */,
 				00DFF96114841781001A4641 /* BFPosition.m */,
@@ -840,6 +845,7 @@
 				AC66817314ECD43C00BB02FF /* CMPopTipView.m in Sources */,
 				AC66817414ECD43C00BB02FF /* DataValidator.m in Sources */,
 				546838B714EECAC3005C356A /* DropdownViewController.m in Sources */,
+				546838BB14EEE103005C356A /* BFOrder.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

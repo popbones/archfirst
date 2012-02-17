@@ -33,5 +33,6 @@
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition;
 
 @property (strong, nonatomic) UIPopoverController *dropdown;
+@property (assign, nonatomic) BOOL allOrNoneBOOL;
 
 @end
