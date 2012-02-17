@@ -70,7 +70,47 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SettingsButton.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.rightBarButtonItem = barButtonItem;
+/*    
+    UIToolbar *tools = [[UIToolbar alloc]
+                        initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
+    tools.clearsContextBeforeDrawing = NO;
+    tools.clipsToBounds = NO;
+    tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // closest I could get by eye to black, translucent style.
+    // anyone know how to get it perfect?
+    tools.barStyle = -1; // clear background
+    
+    NSMutableArray *buttons = [[NSMutableArray alloc] init];
+    // Add buttons to toolbar and toolbar to nav bar.
+    barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Transfer" style:UIBarButtonItemStylePlain target:self action:@selector(transferBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    [buttons addObject:barButtonItem];
 
+    // Create a spacer.
+    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    barButtonItem.width = 12.0f;
+    [buttons addObject:barButtonItem];
+
+    barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Trade" style:UIBarButtonItemStylePlain target:self action:@selector(tradeBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    [buttons addObject:barButtonItem];
+    
+    // Create a spacer.
+    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    barButtonItem.width = 12.0f;
+    [buttons addObject:barButtonItem];
+    
+    barButtonItem = [[UIBarButtonItem alloc]
+                     initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    [buttons addObject:barButtonItem];
+
+    [tools setItems:buttons animated:NO];
+    UIBarButtonItem *twoButtons = [[UIBarButtonItem alloc] initWithCustomView:tools];
+    self.navigationItem.leftBarButtonItem = twoButtons;
+*/
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rotateDevice) name:@"DEVICE_ROTATE" object:nil];
@@ -184,15 +224,7 @@
 }
 
 - (IBAction)refreshBTNClicked:(id)sender {
-
-    NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
-    [jsonDic setValue:@"2012-01-01" forKey:@"fromDate"];
-    [jsonDic setValue:@"2012-12-31" forKey:@"toDate"];
-    NSError *err;
-    NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
-
-    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
-    [restServiceObject getRequestWithURL:url body:jsonBodyData contentType:@"application/json"];    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 }
 
 - (IBAction)tradeBTNClicked:(id)sender {

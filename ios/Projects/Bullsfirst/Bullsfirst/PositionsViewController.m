@@ -70,6 +70,7 @@
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
     self.accountName.text = account.name;
+    self.navigationItem.leftBarButtonItem = nil;
 
     expandRow = -1;
 }
