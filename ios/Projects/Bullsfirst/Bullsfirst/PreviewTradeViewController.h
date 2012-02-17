@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface tradePreviewViewController : UIViewController
-
+@interface PreviewTradeViewController : UIViewController
+- (IBAction)placeOrderBTNClicked:(id)sender;
+- (IBAction)cancelBTNClicked:(id)sender;
 @end

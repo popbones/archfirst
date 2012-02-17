@@ -10,6 +10,7 @@
 #import "DropdownViewController.h"
 #import "BFBrokerageAccountStore.h"
 #import "BFBrokerageAccount.h"
+#import "PreviewTradeViewController.h"
 
 @implementation TradeViewController
 @synthesize position;
@@ -176,6 +177,10 @@
     order.instrumentSymbol = [NSString stringWithString:self.cusipText.text];
     order.quantity = [NSString stringWithString:self.quantity.text];
     order.limitPrice = [BFMoney moneyWithAmount:[NSNumber numberWithInt:[self.limit.text intValue]] currency:@"USD"];
+
+    PreviewTradeViewController *controller = [[PreviewTradeViewController alloc] initWithNibName:@"PreviewTradeViewController" bundle:nil];    
+    [self.navigationController pushViewController:controller animated:YES];
+
     [self dismissModalViewControllerAnimated:YES];
 }
 

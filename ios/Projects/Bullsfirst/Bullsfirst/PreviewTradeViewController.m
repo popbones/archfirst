@@ -6,9 +6,9 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-#import "tradePreviewViewController.h"
+#import "PreviewTradeViewController.h"
 
-@implementation tradePreviewViewController
+@implementation PreviewTradeViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,4 +48,9 @@
 	return YES;
 }
 
+- (IBAction)placeOrderBTNClicked:(id)sender {
+}
+
+- (IBAction)cancelBTNClicked:(id)sender {
+}
 @end
