@@ -37,13 +37,13 @@
 -(void) performAnimation
 {
     
-//    CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
-//    
-//	rotation.removedOnCompletion = YES;
-//	rotation.fromValue			 = [NSNumber numberWithFloat:M_PI * 0.5];
-//	rotation.toValue			 = [NSNumber numberWithFloat:0];
-//	rotation.duration			 = 1.0f;
-//	rotation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    //    CABasicAnimation *rotation = [CABasicAnimation animationWithKeyPath:@"transform.rotation"];
+    //    
+    //	rotation.removedOnCompletion = YES;
+    //	rotation.fromValue			 = [NSNumber numberWithFloat:M_PI * 0.5];
+    //	rotation.toValue			 = [NSNumber numberWithFloat:0];
+    //	rotation.duration			 = 1.0f;
+    //	rotation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
     
     CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
     
@@ -66,6 +66,32 @@
     
 }
 
+
+-(CPTColor*) middleColorForStartColor:(int)startHex endColor:(int)endHex
+{
+    
+    float red1=((float)((startHex & 0xFF0000) >> 16))/255.0;
+    float green1=((float)((startHex & 0xFF00) >> 8))/255.0;
+    float blue1=((float)(startHex & 0xFF))/255.0;
+    
+    float red2=((float)((endHex & 0xFF0000) >> 16))/255.0;
+    float green2=((float)((endHex & 0xFF00) >> 8))/255.0;
+    float blue2=((float)(endHex & 0xFF))/255.0;
+    CPTColor* color = [[CPTColor alloc] initWithComponentRed:(red2+red1)/2 green:(green2+green1)/2 blue:(blue2+blue1)/2 alpha:1.0];
+    return color;
+}
+
+-(CPTGradient *)CPTGradientWithStartColor:(int)startHex endColor:(int) endHex
+{
+	CPTGradient *newInstance = [CPTGradient gradientWithBeginningColor:CPTColorFromRGB(startHex) endingColor:CPTColorFromRGB(endHex)];
+    [newInstance addColorStop:[self middleColorForStartColor:startHex endColor:endHex] atPosition:0.2];
+    
+    newInstance.gradientType = CPTGradientTypeAxial;
+    newInstance.angle = 315;
+    return newInstance;
+}
+
+
 #pragma mark Initialization and teardown
 
 -(void)viewDidLoad
@@ -81,7 +107,7 @@
     [self performAnimation];
     [piePlot setHidden:NO];
     viewOnFront=YES;
-	}
+}
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
@@ -107,36 +133,36 @@
 
 
 /*
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-	if ( UIInterfaceOrientationIsLandscape(fromInterfaceOrientation) ) {
-		// Move the plots into place for portrait
-		pieChartView.frame	  = CGRectMake(408.0f, 644.0f, 340.0f, 340.0f);
-	}
-	else {
-		// Move the plots into place for landscape
-		pieChartView.frame	  = CGRectMake(684.0f, 408.0f, 320.0f, 320.0f);
-	}
-}
-*/
+ -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+ {
+ if ( UIInterfaceOrientationIsLandscape(fromInterfaceOrientation) ) {
+ // Move the plots into place for portrait
+ pieChartView.frame	  = CGRectMake(408.0f, 644.0f, 340.0f, 340.0f);
+ }
+ else {
+ // Move the plots into place for landscape
+ pieChartView.frame	  = CGRectMake(684.0f, 408.0f, 320.0f, 320.0f);
+ }
+ }
+ */
 
 /*
--(void)didReceiveMemoryWarning
-{
-	// Releases the view if it doesn't have a superview.
-	[super didReceiveMemoryWarning];
-    
-	// Release any cached data, images, etc that aren't in use.
-}
-*/
+ -(void)didReceiveMemoryWarning
+ {
+ // Releases the view if it doesn't have a superview.
+ [super didReceiveMemoryWarning];
+ 
+ // Release any cached data, images, etc that aren't in use.
+ }
+ */
 
 /*
--(void)viewDidUnload
-{
-	// Release any retained subviews of the main view.
-	// e.g. self.myOutlet = nil;
-}
-*/
+ -(void)viewDidUnload
+ {
+ // Release any retained subviews of the main view.
+ // e.g. self.myOutlet = nil;
+ }
+ */
 
 
 #pragma mark -
@@ -165,28 +191,28 @@
 	// Prepare a radial overlay gradient for shading/gloss
 	//CPTGradient *overlayGradient = [[[CPTGradient alloc] init] autorelease];
     CPTGradient *overlayGradient = [[CPTGradient alloc] init];
-	overlayGradient.gradientType = CPTGradientTypeRadial;
+	overlayGradient.gradientType = CPTGradientTypeAxial;
 	overlayGradient				 = [overlayGradient addColorStop:[[CPTColor blackColor] colorWithAlphaComponent:0.0] atPosition:0.0];
 	overlayGradient				 = [overlayGradient addColorStop:[[CPTColor blackColor] colorWithAlphaComponent:0.3] atPosition:0.9];
 	overlayGradient				 = [overlayGradient addColorStop:[[CPTColor blackColor] colorWithAlphaComponent:0.7] atPosition:1.0];
-    
+    overlayGradient.angle = 315;
 	// Add pie chart
 	piePlot					= [[CPTPieChart alloc] init];
     piePlot.delegate=self;
 	piePlot.dataSource		= self;
 	piePlot.pieRadius		= 130.0;
 	piePlot.identifier		= @"Pie Chart 1";
-	piePlot.startAngle		= M_PI;
-	piePlot.sliceDirection	= CPTPieDirectionCounterClockwise;
+	piePlot.startAngle		= M_PI/2;
+	piePlot.sliceDirection	= CPTPieDirectionClockwise;
 	//piePlot.borderLineStyle = [CPTLineStyle lineStyle];
 	//piePlot.labelOffset		= 5.0;
 	piePlot.overlayFill		= [CPTFill fillWithGradient:overlayGradient];
 	[pieGraph addPlot:piePlot];
 	//[piePlot release];
-   // Add some initial data
+    // Add some initial data
 	//NSMutableArray *contentArray = [NSMutableArray arrayWithObjects:[NSNumber numberWithDouble:20.0], [NSNumber numberWithDouble:30.0], [NSNumber numberWithDouble:NAN], [NSNumber numberWithDouble:60.0], nil];
     //
-   
+    
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     double total = 0.0;
     for(BFBrokerageAccount *account in [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts])
@@ -210,20 +236,23 @@
     // Add legend
     if(contentArray.count!=0)
     {
-    CPTLegend *theLegend = [CPTLegend legendWithGraph:pieGraph];
-    theLegend.numberOfColumns = 2;
-    theLegend.columnMargin = 47.0;
-    theLegend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
-    //theLegend.borderLineStyle = [CPTLineStyle lineStyle];
-    theLegend.cornerRadius = 5.0;
-    
-    pieGraph.legend = theLegend;
+        CPTLegend *theLegend = [CPTLegend legendWithGraph:pieGraph];
+        theLegend.numberOfColumns = 2;
+        theLegend.columnMargin = 47.0;
+        theLegend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
+        //theLegend.borderLineStyle = [CPTLineStyle lineStyle];
+        theLegend.cornerRadius = 5.0;
+        CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
+        lineStyle.lineColor = CPTColorFromRGB(0X272727);
+        lineStyle.lineWidth = 1;
+        theLegend.swatchBorderLineStyle = lineStyle;
+        pieGraph.legend = theLegend;
         pieGraph.legend.fillMode=kCAFillModeBackwards;
-    pieGraph.legendAnchor = CPTRectAnchorTop;
-    pieGraph.legendDisplacement = CGPointMake(0, -380);    
-    pieGraph.title=kAllAccounts;
-    pieGraph.titleDisplacement = CGPointMake(0,0);
-    [self performAnimation];
+        pieGraph.legendAnchor = CPTRectAnchorTop;
+        pieGraph.legendDisplacement = CGPointMake(0, -380);    
+        pieGraph.title=kAllAccounts;
+        pieGraph.titleDisplacement = CGPointMake(0,0);
+        [self performAnimation];
 	}
 }
 
@@ -277,34 +306,34 @@
 		return nil;
 	}
     
-//	static CPTMutableTextStyle *whiteText = nil;
-//    
-//	if ( !whiteText ) {
-//		whiteText		= [[CPTMutableTextStyle alloc] init];
-//		whiteText.color = [CPTColor whiteColor];
-//	}
-//
-//	static CPTMutableTextStyle *blackText = nil;
-//    
-//	if ( !blackText ) {
-//		blackText		= [[CPTMutableTextStyle alloc] init];
-//		blackText.color = [CPTColor blackColor];
-//	}
-//    
-//	CPTTextLayer *newLayer = nil;
-//    
-//    switch ( index ) {
-//        case 0:
-//            newLayer = (id)[NSNull null];
-//            break;
-//            
-//        default:
-//            //newLayer = [[[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", index] style:whiteText] autorelease];
-//            newLayer = [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", index] style:blackText];
-//            break;
-//    }
-//    
-//	return newLayer;
+    //	static CPTMutableTextStyle *whiteText = nil;
+    //    
+    //	if ( !whiteText ) {
+    //		whiteText		= [[CPTMutableTextStyle alloc] init];
+    //		whiteText.color = [CPTColor whiteColor];
+    //	}
+    //
+    //	static CPTMutableTextStyle *blackText = nil;
+    //    
+    //	if ( !blackText ) {
+    //		blackText		= [[CPTMutableTextStyle alloc] init];
+    //		blackText.color = [CPTColor blackColor];
+    //	}
+    //    
+    //	CPTTextLayer *newLayer = nil;
+    //    
+    //    switch ( index ) {
+    //        case 0:
+    //            newLayer = (id)[NSNull null];
+    //            break;
+    //            
+    //        default:
+    //            //newLayer = [[[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", index] style:whiteText] autorelease];
+    //            newLayer = [[CPTTextLayer alloc] initWithText:[NSString stringWithFormat:@"%lu", index] style:blackText];
+    //            break;
+    //    }
+    //    
+    //	return newLayer;
     return nil;
 }
 
@@ -316,27 +345,26 @@
 
 -(CPTFill *)sliceFillForPieChart:(CPTPieChart *)pieChart recordIndex:(NSUInteger)index
 {
-
     if(index == 0)
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xfde79c) endingColor:CPTColorFromRGB(0Xf6bc0c)]];   
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xfde79c) endColor:(0Xf6bc0c)]];   
     else if(index == 1)
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xb9d6f7) endingColor:CPTColorFromRGB(0X284b70)]];   
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xb9d6f7) endColor:(0X284b70)]];   
     else if(index == 2)
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xfbb7b5) endingColor:CPTColorFromRGB(0X702828)]];   
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xfbb7b5) endColor:(0X702828)]];   
     else if(index == 3)
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xb8c0ac) endingColor:CPTColorFromRGB(0X5f7143)]];  
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xb8c0ac) endColor:(0X5f7143)]];  
     else if(index == 4)
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xa9a3bd) endingColor:CPTColorFromRGB(0X382c6c)]];   
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xa9a3bd) endColor:(0X382c6c)]];   
     else if(index == 5)
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0X98c1dc) endingColor:CPTColorFromRGB(0X0271ae)]];
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0X98c1dc) endColor:(0X0271ae)]];
     else if(index == 6)
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0X1d7554) endingColor:CPTColorFromRGB(0X9dc2b3)]];
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0X1d7554) endColor:(0X9dc2b3)]];
     else if(index == 7)
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xb1a1b1) endingColor:CPTColorFromRGB(0X50224f)]];
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xb1a1b1) endColor:(0X50224f)]];
     else if(index == 8)
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xc1c0ae) endingColor:CPTColorFromRGB(0X706341)]];
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xc1c0ae) endColor:(0X706341)]];
     else
-        return [CPTFill fillWithGradient:[CPTGradient gradientWithBeginningColor:CPTColorFromRGB(0Xadbdc0) endingColor:CPTColorFromRGB(0X446a73)]];
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xadbdc0) endColor:(0X446a73)]];
     
 }
 
