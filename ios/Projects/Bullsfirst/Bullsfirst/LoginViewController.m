@@ -66,14 +66,15 @@ static BOOL keyBoardVisible;
         CGRect viewframe= groupedView.frame;
         viewframe.origin.y+=100;
         viewframe.size.height-=100;
-        groupedView.frame=viewframe;
+        //groupedView.frame=viewframe;
         CGRect imageframe= backgroundImage.frame;
         imageframe.origin.y+=100;
         imageframe.size.height-=100;
+        backgroundImage.frame = imageframe;
         [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
         backgroundImage.frame = imageframe;
-        CGAffineTransform transform= CGAffineTransformMakeTranslation(0, 35);
+        CGAffineTransform transform= CGAffineTransformMakeTranslation(0, 0);
         groupedView.transform = transform;
         [UIView commitAnimations];
     }
@@ -100,15 +101,15 @@ static BOOL keyBoardVisible;
         CGRect viewframe= groupedView.frame;
         viewframe.origin.y-=100;
         viewframe.size.height+=100;
-        groupedView.frame=viewframe;
+        //groupedView.frame=viewframe;
         CGRect imageframe= backgroundImage.frame;
         imageframe.origin.y-=100;
         imageframe.size.height+=100;
-        
+        backgroundImage.frame = imageframe;
         [UIView beginAnimations:@"ResizeForKeyboard" context:nil];
         [UIView setAnimationDuration:animationDuration];
         backgroundImage.frame=imageframe;
-        CGAffineTransform transform= CGAffineTransformMakeTranslation(0, -35);
+        CGAffineTransform transform= CGAffineTransformMakeTranslation(0, -100);
         groupedView.transform = transform;
         [UIView commitAnimations];
     }
