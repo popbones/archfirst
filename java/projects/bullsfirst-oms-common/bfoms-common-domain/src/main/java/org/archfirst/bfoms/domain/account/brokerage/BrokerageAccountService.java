@@ -24,6 +24,7 @@ import org.archfirst.bfoms.domain.account.InvalidSymbolException;
 import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteriaInternal;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderEstimate;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderEventPublisher;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
@@ -163,11 +164,26 @@ public class BrokerageAccountService {
 
         logger.debug("Get orders: {}", criteria);
 
-        // Check authorization on account
-        checkAccountAuthorization(
-                getUser(username), criteria.getAccountId(), BrokerageAccountPermission.View);
+        List<Long> accountIds = new ArrayList<Long>();
+        if (criteria.getAccountId() == null) {
+            // Get a list of viewable accounts
+            List<BrokerageAccount> viewableAccounts =
+                brokerageAccountRepository.findAccountsWithPermission(
+                        getUser(username), BrokerageAccountPermission.View);
+            for (BrokerageAccount account: viewableAccounts) {
+                accountIds.add(account.getId());
+            }
+        }
+        else {
+            // Check authorization on the specified account
+            checkAccountAuthorization(
+                    getUser(username), criteria.getAccountId(), BrokerageAccountPermission.View);
+            accountIds.add(criteria.getAccountId());
+        }
 
-        return brokerageAccountRepository.findOrders(criteria);
+        OrderCriteriaInternal criteriaInternal =
+            new OrderCriteriaInternal(criteria, accountIds);
+        return brokerageAccountRepository.findOrders(criteriaInternal);
     }
 
     public OrderEstimate getOrderEstimate(

@@ -29,9 +29,10 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
-import org.archfirst.bfoms.domain.account.brokerage.order.OrderEventPublisher;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order_;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteriaInternal;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderEventPublisher;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.security.User;
@@ -109,7 +110,7 @@ public class BrokerageAccountRepository extends BaseRepository {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Order> findOrders(OrderCriteria criteria) {
+    public List<Order> findOrders(OrderCriteriaInternal criteria) {
 
         // TODO: Modify this query to return executions in ascending order of id
         
@@ -125,13 +126,15 @@ public class BrokerageAccountRepository extends BaseRepository {
         // Construct a predicate for the where clause using conjunction
         Predicate predicate = builder.conjunction();
         
-        // accountId
-        if (criteria.getAccountId() != null) {
+        // accountIds
+        if (!criteria.getAccountIds().isEmpty()) {
             Path<BrokerageAccount> _account = _order.get(Order_.account);
             Path<Long> _accountId = _account.get(BrokerageAccount_.id);
-            predicate = builder.and(
-                    predicate,
-                    builder.equal(_accountId, criteria.getAccountId()));
+            CriteriaBuilder.In<Long> inExpr = builder.in(_accountId);
+            for (Long accountId : criteria.getAccountIds()) {
+                inExpr = inExpr.value(accountId);
+            }
+            predicate = builder.and(predicate, inExpr);
         }
 
         // symbol
@@ -195,6 +198,14 @@ public class BrokerageAccountRepository extends BaseRepository {
         return distinctOrderList;
     }
 
+    public List<Order> findOrders(OrderCriteria criteria) {
+        List<Long> accountIds = new ArrayList<Long>();
+        accountIds.add(criteria.getAccountId());
+        OrderCriteriaInternal criteriaInternal =
+            new OrderCriteriaInternal(criteria, accountIds);
+        return this.findOrders(criteriaInternal);
+    }
+    
     public List<Order> findActiveBuyOrders(BrokerageAccount account) {
         OrderCriteria criteria = new OrderCriteria();
 
