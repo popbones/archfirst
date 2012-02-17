@@ -182,6 +182,8 @@ static BOOL keyBoardVisible;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
+    [username addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+    [password addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -261,32 +263,6 @@ static BOOL keyBoardVisible;
 
 
 
-#pragma mark - Methods
-
--(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{    
-    NSString* currentUserName=[[NSString alloc]init];
-    NSString* currentPassword=[[NSString alloc]init];
-    if(textField==password&&string.length!=0)
-    {
-        currentPassword=[password.text stringByAppendingString:string];
-        currentUserName=username.text;
-    }
-    else if(textField==username&&string.length!=0)
-    {
-        currentUserName=[username.text stringByAppendingString:string];
-        currentPassword=password.text;
-    }
-    if(currentUserName.length!=0&&currentPassword.length!=0)
-    {
-        loginButton.enabled=true;
-    }
-    else
-    {
-        loginButton.enabled=false;
-    }
-    return YES;
-}
 
 
 
@@ -364,4 +340,17 @@ static BOOL keyBoardVisible;
     [self dismissModalViewControllerAnimated:YES];
 }
 
+#pragma mark - textField call back methods
+
+-(void) textChanged:(UITextField*) textField
+{
+    if(username.text.length ==0 || password.text.length==0)
+    {
+        loginButton.enabled = NO;
+    }
+    else
+    {
+        loginButton.enabled = YES;
+    }
+}
 @end
