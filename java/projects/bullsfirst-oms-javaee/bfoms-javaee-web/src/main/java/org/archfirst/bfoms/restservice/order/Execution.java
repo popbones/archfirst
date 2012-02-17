@@ -15,9 +15,8 @@
  */
 package org.archfirst.bfoms.restservice.order;
 
-import java.math.BigDecimal;
-
 import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
 
 /**
@@ -29,7 +28,7 @@ public class Execution {
     // ----- Attributes -----
     private Long id;
     private DateTime creationTime;
-    private BigDecimal quantity;
+    private DecimalQuantity quantity;
     private Money price;
 
     // ----- Getters and Setters -----
@@ -49,11 +48,11 @@ public class Execution {
         this.creationTime = creationTime;
     }
 
-    public BigDecimal getQuantity() {
+    public DecimalQuantity getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(DecimalQuantity quantity) {
         this.quantity = quantity;
     }
 

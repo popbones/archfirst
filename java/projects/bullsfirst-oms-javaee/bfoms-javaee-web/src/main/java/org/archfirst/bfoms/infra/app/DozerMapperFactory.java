@@ -15,13 +15,9 @@
  */
 package org.archfirst.bfoms.infra.app;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 
-import org.dozer.CustomConverter;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
@@ -52,19 +48,23 @@ public class DozerMapperFactory {
                 mapping(org.archfirst.bfoms.domain.account.brokerage.order.Order.class,
                         org.archfirst.bfoms.restservice.order.Order.class)
                     .fields("account.id", "accountId")
-                    .fields("account.name", "accountName");
+                    .fields("account.name", "accountName")
+                    .fields("quantity", "quantity", copyByReference())
+                    .fields("cumQty", "cumQty", copyByReference())
+                    .fields("limitPrice", "limitPrice", copyByReference());
+
+                mapping(org.archfirst.bfoms.domain.account.brokerage.order.Execution.class,
+                        org.archfirst.bfoms.restservice.order.Execution.class)
+                    .fields("quantity", "quantity", copyByReference())
+                    .fields("price", "price", copyByReference());
             }
         };        
 
+        // Create mapper
         DozerBeanMapper mapper = new DozerBeanMapper();
         
         // Add mappings
         mapper.addMapping(builder);
-        
-        // Add converters
-        List<CustomConverter> converters = new ArrayList<CustomConverter>();
-        converters.add(new DecimalQuantityConverter());
-        mapper.setCustomConverters(converters);
         
         return mapper;
     }

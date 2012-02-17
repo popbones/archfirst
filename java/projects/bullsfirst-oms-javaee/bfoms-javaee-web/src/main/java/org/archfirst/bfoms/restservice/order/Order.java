@@ -15,7 +15,6 @@
  */
 package org.archfirst.bfoms.restservice.order;
 
-import java.math.BigDecimal;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +23,7 @@ import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderTerm;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderType;
 import org.archfirst.common.money.Money;
+import org.archfirst.common.quantity.DecimalQuantity;
 import org.joda.time.DateTime;
 
 /**
@@ -37,8 +37,8 @@ public class Order {
     private DateTime creationTime;
     private OrderSide side;
     private String symbol;
-    private BigDecimal quantity;
-    private BigDecimal cumQty;
+    private DecimalQuantity quantity;
+    private DecimalQuantity cumQty;
     private OrderType type;
     private Money limitPrice;
     private OrderTerm term;
@@ -73,16 +73,16 @@ public class Order {
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
-    public BigDecimal getQuantity() {
+    public DecimalQuantity getQuantity() {
         return quantity;
     }
-    public void setQuantity(BigDecimal quantity) {
+    public void setQuantity(DecimalQuantity quantity) {
         this.quantity = quantity;
     }
-    public BigDecimal getCumQty() {
+    public DecimalQuantity getCumQty() {
         return cumQty;
     }
-    public void setCumQty(BigDecimal cumQty) {
+    public void setCumQty(DecimalQuantity cumQty) {
         this.cumQty = cumQty;
     }
     public OrderType getType() {
