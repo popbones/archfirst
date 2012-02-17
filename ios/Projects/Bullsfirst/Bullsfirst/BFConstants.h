@@ -12,7 +12,7 @@
 
 #define kRequestTimeout 30
 
-#define kErrorIconAtEndOfTextField @"RefreshButton.png"
+#define kErrorIconAtEndOfTextField @"warningIcon.png"
 #define kStringFieldIsEmpty @"Field is Empty"
 
 #define CPTColorFromRGB(rgbValue) [CPTColor \

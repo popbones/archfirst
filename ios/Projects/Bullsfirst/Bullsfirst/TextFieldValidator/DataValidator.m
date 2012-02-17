@@ -132,7 +132,7 @@
     
     [textFieldStatuses setObject:errorString forKey:textField];
     UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:iconName]];
-    rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 20, textField.bounds.size.height);
+    rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
     textField.rightView = rightView;
     textField.rightViewMode = UITextFieldViewModeNever;
     
