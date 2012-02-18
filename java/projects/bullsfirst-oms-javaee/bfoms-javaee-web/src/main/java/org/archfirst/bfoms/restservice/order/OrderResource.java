@@ -36,9 +36,12 @@ import javax.ws.rs.core.UriInfo;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
+import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
 import org.archfirst.bfoms.restservice.util.ErrorMessage;
 import org.archfirst.bfoms.restservice.util.Link;
 import org.dozer.Mapper;
+import org.joda.time.LocalDate;
 
 /**
  * Order
@@ -90,17 +93,49 @@ public class OrderResource {
     @GET
     public List<Order> getOrders(
             @Context SecurityContext sc,
-            @QueryParam("accountId") Long accountId) {
+            @QueryParam("accountId") Long accountId,
+            @QueryParam("symbol") String symbol,
+            @QueryParam("orderId") Long orderId,
+            @QueryParam("fromDate") String fromDate,
+            @QueryParam("toDate") String toDate,
+            @QueryParam("sides") String sides,
+            @QueryParam("statuses") String statuses) {
         
+        // Build the order criteria
         OrderCriteria criteria = new OrderCriteria();
-        if (accountId != null)
-            criteria.setAccountId(accountId);
+        criteria.setAccountId(accountId);
+        criteria.setSymbol(symbol);
+        criteria.setOrderId(orderId);
+        if (fromDate != null) {
+            criteria.setFromDate(new LocalDate(fromDate));
+        }
+        if (toDate != null) {
+            criteria.setToDate(new LocalDate(toDate));
+        }
+        if (sides != null) {
+            String[] sidesArray = sides.split(",");
+            for (String side : sidesArray) {
+                criteria.getSides().add(OrderSide.valueOf(side));
+            }
+        }
+        if (statuses != null) {
+            String[] statusesArray = statuses.split(",");
+            for (String status : statusesArray) {
+                criteria.getStatuses().add(OrderStatus.valueOf(status));
+            }
+        }
+        
+        // Get orders matching the criteria
         List<org.archfirst.bfoms.domain.account.brokerage.order.Order> orders =
             this.brokerageAccountService.getOrders(getUsername(sc), criteria);
+        
+        // Convert to DTOs in order to serialize to JSON
+        // (can't do it with domain objects because they have circular references)
         List<Order> orderDtos = new ArrayList<Order>();
         for (org.archfirst.bfoms.domain.account.brokerage.order.Order order: orders) {
             orderDtos.add(mapper.map(order, Order.class));
         }
+        
         return orderDtos;
     }
     
