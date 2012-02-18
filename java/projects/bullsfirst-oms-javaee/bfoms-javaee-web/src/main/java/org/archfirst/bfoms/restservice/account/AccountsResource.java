@@ -27,8 +27,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 
+import org.archfirst.bfcommon.restutils.ErrorMessage;
 import org.archfirst.bfoms.domain.account.BaseAccountService;
-import org.archfirst.bfoms.restservice.util.ErrorMessage;
 import org.archfirst.common.money.Money;
 import org.archfirst.common.quantity.DecimalQuantity;
 

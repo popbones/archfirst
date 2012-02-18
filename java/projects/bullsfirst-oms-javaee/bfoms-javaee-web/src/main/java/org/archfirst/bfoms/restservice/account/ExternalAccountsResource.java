@@ -30,10 +30,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
+import org.archfirst.bfcommon.restutils.Link;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountParams;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountService;
 import org.archfirst.bfoms.domain.account.external.ExternalAccountSummary;
-import org.archfirst.bfoms.restservice.util.Link;
 
 /**
  * ExternalAccountsResource

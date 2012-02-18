@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Archfirst
+ * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.restservice.util;
+package org.archfirst.bfexch.restservice.util;
 
 import javax.ws.rs.ext.ContextResolver;
 import javax.ws.rs.ext.Provider;
@@ -54,7 +54,7 @@ public class ObjectMapperProvider implements ContextResolver<ObjectMapper> {
                 JsonSerialize.Inclusion.NON_NULL);
         mapper.configure(
                 SerializationConfig.Feature.INDENT_OUTPUT, true);
-        
+
         SimpleModule conversionModule = new SimpleModule("ConversionsModule", new Version(1, 0, 0, null))
             .addSerializer(Money.class, new MoneySerializer())
             .addSerializer(DecimalQuantity.class, new DecimalQuantitySerializer())

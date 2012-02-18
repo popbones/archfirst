@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.restservice.util;
+package org.archfirst.bfcommon.restutils;
 
 /**
  * ErrorMessage
@@ -24,7 +24,7 @@ public class ErrorMessage {
     // ----- Constructors -----
     public ErrorMessage() {
     }
-    
+
     public ErrorMessage(String detail) {
         this.detail = detail;
     }

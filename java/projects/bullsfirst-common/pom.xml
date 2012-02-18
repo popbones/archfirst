@@ -14,12 +14,26 @@
         <!-- Explicitly declare source encoding to avoid Maven warning -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <jersey.version>1.9.1</jersey.version>
         <org.codehaus.jackson.version>1.7.6</org.codehaus.jackson.version>
         <org.slf4j.version>1.6.1</org.slf4j.version>
+
+        <!-- Package versions -->
+        <org.archfirst.afcommon.version>1.0-SNAPSHOT</org.archfirst.afcommon.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-json</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.sun.jersey</groupId>
+                <artifactId>jersey-server</artifactId>
+                <version>${jersey.version}</version>
+            </dependency>
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
@@ -29,6 +43,11 @@
                 <groupId>log4j</groupId>
                 <artifactId>log4j</artifactId>
                 <version>1.2.16</version>
+            </dependency>
+            <dependency>
+                <groupId>org.archfirst</groupId>
+                <artifactId>afcommon-util</artifactId>
+                <version>${org.archfirst.afcommon.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.codehaus.jackson</groupId>
@@ -88,6 +107,7 @@
 
     <modules>
         <module>bfcommon-json-trading</module>
+        <module>bfcommon-rest-utils</module>
     </modules>
 
 </project>

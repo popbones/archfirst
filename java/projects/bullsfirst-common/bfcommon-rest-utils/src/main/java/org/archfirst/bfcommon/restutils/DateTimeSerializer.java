@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.restservice.util;
+package org.archfirst.bfcommon.restutils;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 
-import org.archfirst.common.quantity.Percentage;
-import org.codehaus.jackson.JsonParser;
+import org.archfirst.common.datetime.DateTimeUtil;
+import org.codehaus.jackson.JsonGenerator;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.DeserializationContext;
-import org.codehaus.jackson.map.JsonDeserializer;
+import org.codehaus.jackson.map.JsonSerializer;
+import org.codehaus.jackson.map.SerializerProvider;
+import org.joda.time.DateTime;
 
 /**
- * PercentageDeserializer
+ * DateTimeSerializer
  *
  * @author Naresh Bhatia
  */
-public class PercentageDeserializer extends JsonDeserializer<Percentage> {
+public class DateTimeSerializer extends JsonSerializer<DateTime> {
 
     @Override
-    public Percentage deserialize(JsonParser jp, DeserializationContext ctx)
+    public void serialize(DateTime dateTime, JsonGenerator jgen, SerializerProvider provider)
             throws IOException, JsonProcessingException {
-        return new Percentage(jp.getDecimalValue(), BigDecimal.ONE, 2);
+        jgen.writeString(DateTimeUtil.toStringISODateTime(dateTime));
     }
 }

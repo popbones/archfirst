@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.archfirst.bfoms.restservice.util;
+package org.archfirst.bfcommon.restutils;
 
 import java.io.IOException;
 import java.math.BigDecimal;
 
 import org.archfirst.common.quantity.Percentage;
-import org.codehaus.jackson.JsonGenerator;
+import org.codehaus.jackson.JsonParser;
 import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.JsonSerializer;
-import org.codehaus.jackson.map.SerializerProvider;
+import org.codehaus.jackson.map.DeserializationContext;
+import org.codehaus.jackson.map.JsonDeserializer;
 
 /**
- * PercentageSerializer
+ * PercentageDeserializer
  *
  * @author Naresh Bhatia
  */
-public class PercentageSerializer extends JsonSerializer<Percentage> {
+public class PercentageDeserializer extends JsonDeserializer<Percentage> {
 
     @Override
-    public void serialize(Percentage percentage, JsonGenerator jgen, SerializerProvider provider)
+    public Percentage deserialize(JsonParser jp, DeserializationContext ctx)
             throws IOException, JsonProcessingException {
-        jgen.writeNumber((percentage == null) ? BigDecimal.ZERO : percentage.getValue());
+        return new Percentage(jp.getDecimalValue(), BigDecimal.ONE, 2);
     }
 }

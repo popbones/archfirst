@@ -49,10 +49,15 @@
             <artifactId>servlet-api</artifactId>
             <scope>provided</scope>
         </dependency>
-    
+
         <dependency>
             <groupId>net.sf.dozer</groupId>
             <artifactId>dozer</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.archfirst</groupId>
+            <artifactId>bfcommon-rest-utils</artifactId>
         </dependency>
 
         <dependency>

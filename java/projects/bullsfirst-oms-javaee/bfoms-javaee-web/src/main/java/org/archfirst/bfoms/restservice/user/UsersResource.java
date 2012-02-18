@@ -30,12 +30,12 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
+import org.archfirst.bfcommon.restutils.ErrorMessage;
+import org.archfirst.bfcommon.restutils.Link;
 import org.archfirst.bfoms.domain.security.AuthenticationResponse;
 import org.archfirst.bfoms.domain.security.RegistrationRequest;
 import org.archfirst.bfoms.domain.security.SecurityService;
 import org.archfirst.bfoms.domain.security.UsernameExistsException;
-import org.archfirst.bfoms.restservice.util.ErrorMessage;
-import org.archfirst.bfoms.restservice.util.Link;
 import org.dozer.Mapper;
 
 /**

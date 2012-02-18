@@ -33,13 +33,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.core.UriInfo;
 
+import org.archfirst.bfcommon.restutils.ErrorMessage;
+import org.archfirst.bfcommon.restutils.Link;
 import org.archfirst.bfoms.domain.account.brokerage.BrokerageAccountService;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderParams;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderSide;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderStatus;
-import org.archfirst.bfoms.restservice.util.ErrorMessage;
-import org.archfirst.bfoms.restservice.util.Link;
 import org.dozer.Mapper;
 import org.joda.time.LocalDate;
 
