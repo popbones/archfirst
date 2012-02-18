@@ -48,7 +48,7 @@ public class BaseAccountRepository extends BaseRepository {
 
     // ----- Transaction Methods -----
     @SuppressWarnings("unchecked")
-    public List<Transaction> findTransactions(TransactionCriteria criteria) {
+    public List<Transaction> findTransactions(TransactionCriteriaInternal criteria) {
         
         CriteriaBuilder builder = entityManager.getCriteriaBuilder();
         CriteriaQuery<Transaction> query = builder.createQuery(Transaction.class);
@@ -59,13 +59,15 @@ public class BaseAccountRepository extends BaseRepository {
         // Construct a predicate for the where clause using conjunction
         Predicate predicate = builder.conjunction();
         
-        // accountId
-        if (criteria.getAccountId() != null) {
+        // accountIds
+        if (!criteria.getAccountIds().isEmpty()) {
             Path<BaseAccount> _account = _transaction.get(Transaction_.account);
             Path<Long> _accountId = _account.get(BaseAccount_.id);
-            predicate = builder.and(
-                    predicate,
-                    builder.equal(_accountId, criteria.getAccountId()));
+            CriteriaBuilder.In<Long> inExpr = builder.in(_accountId);
+            for (Long accountId : criteria.getAccountIds()) {
+                inExpr = inExpr.value(accountId);
+            }
+            predicate = builder.and(predicate, inExpr);
         }
 
         // fromDate

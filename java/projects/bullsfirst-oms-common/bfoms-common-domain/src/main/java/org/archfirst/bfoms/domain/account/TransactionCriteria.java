@@ -34,6 +34,15 @@ import org.joda.time.LocalDate;
 @XmlType(name = "TransactionCriteria")
 public class TransactionCriteria {
 
+    // ----- Queries -----
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("\nAccountId: ").append(accountId);
+        sb.append("\nFromDate: ").append(fromDate);
+        sb.append("\nToDate: ").append(toDate);
+        return sb.toString();
+    }
+
     // ----- Attributes -----
     @XmlElement(name = "AccountId")
     private Long accountId;

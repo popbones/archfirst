@@ -20,7 +20,12 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.archfirst.bfoms.domain.account.BaseAccountRepository;
 import org.archfirst.bfoms.domain.account.InvalidSymbolException;
+import org.archfirst.bfoms.domain.account.Transaction;
+import org.archfirst.bfoms.domain.account.TransactionCriteria;
+import org.archfirst.bfoms.domain.account.TransactionCriteriaInternal;
+import org.archfirst.bfoms.domain.account.TransactionSummaryV2;
 import org.archfirst.bfoms.domain.account.brokerage.order.ExecutionReport;
 import org.archfirst.bfoms.domain.account.brokerage.order.Order;
 import org.archfirst.bfoms.domain.account.brokerage.order.OrderCriteria;
@@ -198,6 +203,47 @@ public class BrokerageAccountService {
         return account.calculateOrderEstimate(params, marketDataService);
     }
 
+    /**
+     * This version returns transactions for brokerage accounts only, but allows
+     * multiple brokerage accounts and has tighter security checks.
+     */
+    public List<TransactionSummaryV2> getTransactionSummaries(
+            String username, TransactionCriteria criteria) {
+        
+        logger.debug("Get transactions: {}", criteria);
+
+        List<Long> accountIds = new ArrayList<Long>();
+        if (criteria.getAccountId() == null) {
+            // Get a list of viewable accounts
+            List<BrokerageAccount> viewableAccounts =
+                brokerageAccountRepository.findAccountsWithPermission(
+                        getUser(username), BrokerageAccountPermission.View);
+            for (BrokerageAccount account: viewableAccounts) {
+                accountIds.add(account.getId());
+            }
+        }
+        else {
+            // Check authorization on the specified account
+            checkAccountAuthorization(
+                    getUser(username), criteria.getAccountId(), BrokerageAccountPermission.View);
+            accountIds.add(criteria.getAccountId());
+        }
+
+        TransactionCriteriaInternal criteriaInternal =
+            new TransactionCriteriaInternal(criteria, accountIds);
+        
+        List<Transaction> transactions =
+            baseAccountRepository.findTransactions(criteriaInternal);
+        
+        List<TransactionSummaryV2> summaries =
+            new ArrayList<TransactionSummaryV2>();
+        for (Transaction transaction : transactions) {
+            summaries.add(new TransactionSummaryV2(transaction));
+        }
+        
+        return summaries;
+    }
+    
     // ----- Helpers -----
     private BrokerageAccount checkAccountAuthorization(
             User user,
@@ -229,6 +275,7 @@ public class BrokerageAccountService {
     
     // ----- Attributes -----
     @Inject private BrokerageAccountFactory brokerageAccountFactory;
+    @Inject private BaseAccountRepository baseAccountRepository;
     @Inject private BrokerageAccountRepository brokerageAccountRepository;
     @Inject private MarketDataService marketDataService;
     @Inject private ReferenceDataService referenceDataService;

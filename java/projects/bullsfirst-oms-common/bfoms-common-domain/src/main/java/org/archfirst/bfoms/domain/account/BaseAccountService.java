@@ -142,9 +142,16 @@ public class BaseAccountService {
     }
     
     public List<Transaction> findTransactions(TransactionCriteria criteria) {
-        return baseAccountRepository.findTransactions(criteria);
+        return baseAccountRepository.findTransactions(
+                toTransactionCriteriaInternal(criteria));
     }
 
+    /**
+     * This version returns transactions for a single account, and does not
+     * implement security checks (difficult to set up security checks for
+     * mixed brokerage and external accounts). For a better implementation
+     * look at BrokerageAccountService.getTransactionSummaries().
+     */
     public List<TransactionSummary> getTransactionSummaries(
             String username, TransactionCriteria criteria) {
         
@@ -154,8 +161,8 @@ public class BaseAccountService {
         if (criteria.getAccountId() == null)
             throw new AuthorizationException();
         
-        List<Transaction> transactions =
-            baseAccountRepository.findTransactions(criteria);
+        List<Transaction> transactions = baseAccountRepository.findTransactions(
+                toTransactionCriteriaInternal(criteria));
         
         List<TransactionSummary> summaries =
             new ArrayList<TransactionSummary>();
@@ -164,6 +171,15 @@ public class BaseAccountService {
         }
         
         return summaries;
+    }
+    
+    private TransactionCriteriaInternal toTransactionCriteriaInternal(
+            TransactionCriteria criteria) {
+        List<Long> accountIds = new ArrayList<Long>();
+        if (criteria.getAccountId() != null) {
+            accountIds.add(criteria.getAccountId());
+        }
+        return new TransactionCriteriaInternal(criteria, accountIds);
     }
 
     // ----- Attributes -----
