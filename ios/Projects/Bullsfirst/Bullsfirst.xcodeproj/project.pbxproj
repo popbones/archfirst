@@ -67,6 +67,7 @@
 		9584FE2714F2234200D28154 /* Cancel-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2214F2234200D28154 /* Cancel-PushDown.png */; };
 		9584FE2814F2234200D28154 /* Cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2314F2234200D28154 /* Cancel.png */; };
 		9584FE2A14F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2914F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg */; };
+		9584FE2C14F27E2000D28154 /* AccountsView_Splitter_Gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2B14F27E1F00D28154 /* AccountsView_Splitter_Gradient.png */; };
 		9586FA7314EB684300A0B28C /* AccountLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */; };
 		9586FA7414EB684300A0B28C /* AccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */; };
 		9586FA9214EB6A2900A0B28C /* AccountsToPosition_RowArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA7514EB6A2100A0B28C /* AccountsToPosition_RowArrow.png */; };
@@ -97,7 +98,6 @@
 		9586FAAD14EB6A2900A0B28C /* TransferButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA9014EB6A2900A0B28C /* TransferButton_PushDownState.png */; };
 		9586FAAE14EB6A2900A0B28C /* TransferButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA9114EB6A2900A0B28C /* TransferButton.png */; };
 		9586FAB114EB804600A0B28C /* editAccountNameBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586FAB014EB804600A0B28C /* editAccountNameBTN.m */; };
-		9586FAB414EB8F8500A0B28C /* showPositionsBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 9586FAB314EB8F8400A0B28C /* showPositionsBTN.m */; };
 		95BA216F14E506B000F813E2 /* login-screen-background-landscape.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */; };
 		95BA217014E506B100F813E2 /* login-screen-background-portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */; };
 		95C6A84D14DBB769004F023A /* bullsfirst-logo-transparent.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */; };
@@ -236,6 +236,7 @@
 		9584FE2214F2234200D28154 /* Cancel-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel-PushDown.png"; sourceTree = "<group>"; };
 		9584FE2314F2234200D28154 /* Cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cancel.png; sourceTree = "<group>"; };
 		9584FE2914F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ModalView_TitleBar_BackgroundGradient.jpg; sourceTree = "<group>"; };
+		9584FE2B14F27E1F00D28154 /* AccountsView_Splitter_Gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountsView_Splitter_Gradient.png; sourceTree = "<group>"; };
 		9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountLandscapeTableViewCell.xib; sourceTree = "<group>"; };
 		9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTableViewCell.xib; sourceTree = "<group>"; };
 		9586FA7514EB6A2100A0B28C /* AccountsToPosition_RowArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountsToPosition_RowArrow.png; sourceTree = "<group>"; };
@@ -267,8 +268,6 @@
 		9586FA9114EB6A2900A0B28C /* TransferButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TransferButton.png; sourceTree = "<group>"; };
 		9586FAAF14EB804600A0B28C /* editAccountNameBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = editAccountNameBTN.h; sourceTree = "<group>"; };
 		9586FAB014EB804600A0B28C /* editAccountNameBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = editAccountNameBTN.m; sourceTree = "<group>"; };
-		9586FAB214EB8F8200A0B28C /* showPositionsBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = showPositionsBTN.h; sourceTree = "<group>"; };
-		9586FAB314EB8F8400A0B28C /* showPositionsBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = showPositionsBTN.m; sourceTree = "<group>"; };
 		95BA216D14E506B000F813E2 /* login-screen-background-landscape.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-landscape.png"; sourceTree = "<group>"; };
 		95BA216E14E506B000F813E2 /* login-screen-background-portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-background-portrait.png"; sourceTree = "<group>"; };
 		95C6A84514DBB769004F023A /* bullsfirst-logo-transparent.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-logo-transparent.png"; sourceTree = "<group>"; };
@@ -428,6 +427,7 @@
 			isa = PBXGroup;
 			children = (
 				9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */,
+				9584FE2B14F27E1F00D28154 /* AccountsView_Splitter_Gradient.png */,
 				9584FE2914F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg */,
 				9584FE2014F2234200D28154 /* AddAccount-PushDown.png */,
 				9584FE2114F2234200D28154 /* AddAccount.png */,
@@ -544,8 +544,6 @@
 				00DFF9031480893E001A4641 /* AccountsViewController.m */,
 				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
 				9586FAAF14EB804600A0B28C /* editAccountNameBTN.h */,
-				9586FAB214EB8F8200A0B28C /* showPositionsBTN.h */,
-				9586FAB314EB8F8400A0B28C /* showPositionsBTN.m */,
 				9586FAB014EB804600A0B28C /* editAccountNameBTN.m */,
 				9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */,
 				9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */,
@@ -840,6 +838,7 @@
 				9584FE2714F2234200D28154 /* Cancel-PushDown.png in Resources */,
 				9584FE2814F2234200D28154 /* Cancel.png in Resources */,
 				9584FE2A14F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg in Resources */,
+				9584FE2C14F27E2000D28154 /* AccountsView_Splitter_Gradient.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -885,7 +884,6 @@
 				54B78A7014EAA17A002FF1AC /* TransferViewController.m in Sources */,
 				54B78A9C14EB00AB002FF1AC /* FilterViewController.m in Sources */,
 				9586FAB114EB804600A0B28C /* editAccountNameBTN.m in Sources */,
-				9586FAB414EB8F8500A0B28C /* showPositionsBTN.m in Sources */,
 				54B78AED14EC4656002FF1AC /* UserViewController.m in Sources */,
 				AC66817314ECD43C00BB02FF /* CMPopTipView.m in Sources */,
 				AC66817414ECD43C00BB02FF /* DataValidator.m in Sources */,

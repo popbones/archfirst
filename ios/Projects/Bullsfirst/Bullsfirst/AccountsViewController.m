@@ -30,7 +30,6 @@
 #import "BullFirstWebServiceObject.h"
 #import "AppDelegate.h"
 #import "editAccountNameBTN.h"
-#import "showPositionsBTN.h"
 #import "PositionsViewController.h"
 #import "UserViewController.h"
 
@@ -123,11 +122,9 @@
     chartRect= pieChartMVPositionViewController.view.frame;
     pieChartMVPositionViewController.view.frame=CGRectMake(chartRect.origin.x, chartRect.origin.y,400,613);
     
-    accountsTable.layer.borderWidth=1.0;
     
-    accountsTable.layer.borderColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;
-
-    orientation=[[UIDevice currentDevice] orientation];
+    rightBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;
+    leftBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;    orientation=[[UIDevice currentDevice] orientation];
     
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
@@ -160,6 +157,10 @@
         actionLBL.frame = CGRectMake(550, rect.origin.y, rect.size.width, rect.size.height);
         rect = self.refreshBTN.frame;
         self.refreshBTN.frame = CGRectMake(970, rect.origin.y, rect.size.width, rect.size.height);
+        rect=leftBorderView.frame;
+        leftBorderView.frame=CGRectMake(rect.origin.x, rect.origin.y,1,612);
+        rect=rightBorderView.frame;
+        rightBorderView.frame=CGRectMake(1023, 45,1,612);
     }
     else
     {
@@ -178,6 +179,10 @@
         actionLBL.frame = CGRectMake(700, rect.origin.y, rect.size.width, rect.size.height);
         rect = self.refreshBTN.frame;
         self.refreshBTN.frame = CGRectMake(720, rect.origin.y, rect.size.width, rect.size.height);
+        rect=leftBorderView.frame;
+        leftBorderView.frame=CGRectMake(rect.origin.x, rect.origin.y,1,869);
+        rect=rightBorderView.frame;
+        rightBorderView.frame=CGRectMake(767, 45,1,869);
     }
     [accountsTable reloadData];
 }
@@ -240,8 +245,8 @@
 #pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    headerView.layer.borderWidth=0.5;
-    headerView.layer.borderColor=[UIColor blackColor].CGColor;
+    //headerView.layer.borderWidth=0.5;
+    //headerView.layer.borderColor=[UIColor blackColor].CGColor;
     headerView.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     return headerView;
 }
@@ -370,13 +375,7 @@
     editAccountViewController.view.superview.bounds=CGRectMake(0, 0, 540,185);
 }
 
--(void)showPositions:(id)sender
-{
-    showPositionsBTN *button = (showPositionsBTN *)sender;
-    PositionsViewController *controller = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil account:button.accountIndex];    
-    [self.navigationController pushViewController:controller animated:YES];
 
-}
 - (IBAction)backBTNClicked:(id)sender
 {
     positionsChartView.hidden=true;

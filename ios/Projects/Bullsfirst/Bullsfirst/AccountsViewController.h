@@ -46,7 +46,8 @@
     IBOutlet CPTGraphHostingView *pieChartMVPositionView;
     UIDeviceOrientation orientation;
     IBOutlet UIView *positionsChartView;
-    
+    IBOutlet UIView *leftBorderView;
+    IBOutlet UIView *rightBorderView;
 }
 @property (strong, nonatomic) IBOutlet UITableViewCell *accountCell;
 @property (nonatomic, retain)  PieChartMVAccountsViewController *pieChartMVAccountsViewController;
