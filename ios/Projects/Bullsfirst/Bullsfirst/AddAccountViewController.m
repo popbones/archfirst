@@ -78,6 +78,7 @@
     [av show];
     
     addAccountButton.enabled = YES;
+    cancelButton.enabled = YES;
 }
 
 -(void)requestSucceeded:(NSData *)data
@@ -108,6 +109,7 @@
     [spinner startAnimating];
     
     addAccountButton.enabled = NO;
+    cancelButton.enabled = NO;
     
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
     

@@ -97,6 +97,7 @@
 								<string key="IBUITitle">Edit Account Name</string>
 								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="1002114398">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
+									<int key="IBUIStyle">1</int>
 									<reference key="IBUICustomView" ref="495972107"/>
 									<reference key="IBUINavigationItem" ref="46852768"/>
 								</object>

@@ -72,6 +72,7 @@
         cusipText.text = self.position.instrumentSymbol;
         accountBTN.titleLabel.text = self.position.accountName;
     }
+
 }
 
 - (void)viewDidUnload

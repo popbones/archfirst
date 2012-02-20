@@ -274,6 +274,8 @@
 	}
 }
 
+
+
 -(NSNumber *)numberForPlot:(CPTPlot *)plot field:(NSUInteger)fieldEnum recordIndex:(NSUInteger)index
 {
 	NSDecimalNumber *num = nil;
