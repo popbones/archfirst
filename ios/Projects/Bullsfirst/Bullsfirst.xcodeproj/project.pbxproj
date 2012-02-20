@@ -102,6 +102,7 @@
 		95C6A85C14DBED54004F023A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C6A85A14DBED54004F023A /* RootViewController.m */; };
 		95C6A85D14DBED54004F023A /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85B14DBED54004F023A /* RootViewController.xib */; };
 		95C6A85F14DFE869004F023A /* app-icon-72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85E14DFE868004F023A /* app-icon-72x72.png */; };
+		AC1206F314F2180E00572819 /* login-button-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1206F214F2180E00572819 /* login-button-inactive.png */; };
 		AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */; };
 		AC26C82914DBF67400ABD693 /* ChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81D14DBF67400ABD693 /* ChallengeHandler.m */; };
 		AC26C82A14DBF67400ABD693 /* ClientIdentityChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81F14DBF67400ABD693 /* ClientIdentityChallengeHandler.m */; };
@@ -201,7 +202,7 @@
 		546838B614EECAC3005C356A /* DropdownViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DropdownViewController.xib; sourceTree = "<group>"; };
 		546838B914EEE103005C356A /* BFOrder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFOrder.h; sourceTree = "<group>"; };
 		546838BA14EEE103005C356A /* BFOrder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFOrder.m; sourceTree = "<group>"; };
-		546838BD14EEEC83005C356A /* PreviewTradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = PreviewTradeViewController.h; sourceTree = "<group>"; };
+		546838BD14EEEC83005C356A /* PreviewTradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewTradeViewController.h; sourceTree = "<group>"; };
 		546838BE14EEEC83005C356A /* PreviewTradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewTradeViewController.m; sourceTree = "<group>"; };
 		546838BF14EEEC83005C356A /* PreviewTradeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewTradeViewController.xib; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
@@ -267,6 +268,7 @@
 		95C6A85A14DBED54004F023A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		95C6A85B14DBED54004F023A /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		95C6A85E14DFE868004F023A /* app-icon-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-72x72.png"; sourceTree = "<group>"; };
+		AC1206F214F2180E00572819 /* login-button-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-inactive.png"; sourceTree = "<group>"; };
 		AC26C81A14DBF67400ABD693 /* AuthenticationChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationChallengeHandler.h; sourceTree = "<group>"; };
 		AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationChallengeHandler.m; sourceTree = "<group>"; };
 		AC26C81C14DBF67400ABD693 /* ChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChallengeHandler.h; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AC1206F214F2180E00572819 /* login-button-inactive.png */,
 				9586FA7514EB6A2100A0B28C /* AccountsToPosition_RowArrow.png */,
 				9586FA7614EB6A2100A0B28C /* AddAccountButton_PushDownState.png */,
 				9586FA7714EB6A2200A0B28C /* AddAccountButton.png */,
@@ -812,6 +815,7 @@
 				ACC6A17214EE99BD00016AD4 /* SwitchAccountsButton.png in Resources */,
 				546838B814EECAC3005C356A /* DropdownViewController.xib in Resources */,
 				546838C114EEEC83005C356A /* PreviewTradeViewController.xib in Resources */,
+				AC1206F314F2180E00572819 /* login-button-inactive.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
