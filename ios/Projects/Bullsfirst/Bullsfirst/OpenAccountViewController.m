@@ -283,6 +283,9 @@
     [password addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
     [confirmpassword addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
     
+    password.clearsOnBeginEditing = YES;
+    confirmpassword.clearsOnBeginEditing = YES;
+    
 }
 
 -(void) keyBoardDidShow:(NSNotification*) notification
@@ -372,7 +375,7 @@
 #pragma mark - TextField callback methods
 -(void) passwordEditingStarted:(UITextField*) textField
 {
-    textField.text=@"";
+    openAccountButton.enabled = NO;
 }
 
 @end

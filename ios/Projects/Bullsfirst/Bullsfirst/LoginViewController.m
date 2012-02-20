@@ -186,6 +186,8 @@ static BOOL keyBoardVisible;
     [username addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
     [password addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
     [password addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
+    
+    password.clearsOnBeginEditing = YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -358,6 +360,7 @@ static BOOL keyBoardVisible;
 
 -(void) passwordEditingStarted:(UITextField*) textField
 {
-    textField.text=@"";
+    if(textField == password)
+        loginButton.enabled = NO;
 }
 @end
