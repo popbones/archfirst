@@ -32,6 +32,7 @@
     IBOutlet UIBarButtonItem *cancelButton;
     NSString* oldAccountName;
     NSString* accountId;
+    IBOutlet UINavigationBar* localNavigationBar;
 }
 
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
