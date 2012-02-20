@@ -34,111 +34,124 @@
         hintView.disableTapToDismiss = YES;
         isHintViewDisplayed = NO;
         
-        textFieldStatuses = [[NSMutableDictionary alloc]init];
+        textFieldStatuses = [[NSMutableArray alloc]init];
         
     }
     return self;
 }
 
 
+-(void) removeHintView
+{
+    if(isHintViewDisplayed)
+    {
+        [hintView dismissAnimated:NO];
+    }
+    isHintViewDisplayed = NO;
+}
+
+-(void) displayHintViewForTextField:(UITextField*)textField withStatus:(NSString*)errorString
+{
+    [self removeHintView];
+    isHintViewDisplayed = YES;
+    hintView.message = errorString;
+    [hintView presentPointingAtView:textField.rightView inView:textField.superview animated:NO];
+}
+
 -(void) textEditStart:(UITextField*) textField
 {
     
     NSString* status=[delegate validationStatusForTextField:textField];
-    if(hintView  && status)
+    if(status == nil)
     {
-            hintView.message = [delegate validationStatusForTextField:textField];
-            isHintViewDisplayed = YES;
-            [hintView presentPointingAtView:textField.rightView inView:textField.superview animated:NO];
+        textField.rightViewMode = UITextFieldViewModeNever;
+        [self removeHintView];
+    }
+    else
+    {
+        textField.rightViewMode = UITextFieldViewModeAlways;
+        [self displayHintViewForTextField:textField withStatus:status];
     }
 }
 
 
 -(bool) validationSucceeded
 {
-    for (UITextField* textField in textFieldStatuses) {
-        id object = [textFieldStatuses objectForKey:textField];
-        if(object != [NSNull null])
-            return NO;
+    bool valStatus = YES;
+    for (UITextField* textField in textFieldStatuses) 
+    {
+        if([delegate validationStatusForTextField:textField]!=nil)
+        {
+            textField.rightViewMode= UITextFieldViewModeAlways;
+            valStatus = NO;
+        }
+        else
+        {
+            textField.rightViewMode= UITextFieldViewModeNever;
+        }
     }
-    return YES;
+    return valStatus;
 }
 
 
 -(void) textEditOver:(UITextField*) textField
 {
-    NSString* status=[delegate validationStatusForTextField:textField];
-    if(hintView && isHintViewDisplayed == YES)
-    {
-        isHintViewDisplayed = NO;
-        [hintView dismissAnimated:NO];
-    }
-    if(status==nil)
-    {
-        textField.rightViewMode = UITextFieldViewModeNever;
-        [textFieldStatuses setObject:[NSNull null] forKey:textField];
-    }
-    else
-    {
-        textField.rightViewMode = UITextFieldViewModeAlways;
-        [textFieldStatuses setObject:status forKey:textField];
-    }
-    [delegate formValidationSucceeded:[self validationSucceeded]];
+    [self removeHintView];
 }
 
 -(void) textChange:(UITextField*) textField
 {
+    
     NSString* status=[delegate validationStatusForTextField:textField];
-    if(status==nil)
+    if(status == nil)
     {
         textField.rightViewMode = UITextFieldViewModeNever;
-        [textFieldStatuses setObject:[NSNull null] forKey:textField];
-        if(hintView && isHintViewDisplayed == YES)
-        {
-            isHintViewDisplayed = NO;
-            [hintView dismissAnimated:NO];
-        }
+        [self removeHintView];
     }
     else
     {
         textField.rightViewMode = UITextFieldViewModeAlways;
-        [textFieldStatuses setObject:status forKey:textField];
-        if(hintView)
-        {
-            hintView.message = [delegate validationStatusForTextField:textField];
-
-            if(isHintViewDisplayed == YES)
-            {
-                [hintView dismissAnimated:NO];
-                isHintViewDisplayed=NO;
-            }
-            isHintViewDisplayed = YES;
-            [hintView presentPointingAtView:textField.rightView inView:textField.superview animated:NO];
-        }
-
+        [self displayHintViewForTextField:textField withStatus:status];
     }
     [delegate formValidationSucceeded:[self validationSucceeded]];
 
 }
+
 
 
 
 -(void) processTextField:(UITextField*)textField rightViewIconFileName:(NSString*)iconName errorStringOnNoEntry:(NSString*) errorString
 {
-    if([textFieldStatuses objectForKey:textField]!=nil)
-    {
-        [textFieldStatuses removeObjectForKey:textField];
-    }
-    
-    [textFieldStatuses setObject:errorString forKey:textField];
+    [textFieldStatuses addObject:textField];
     UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:iconName]];
     rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
     textField.rightView = rightView;
     textField.rightViewMode = UITextFieldViewModeNever;
     
     [textField addTarget:self action:@selector(textEditOver:) forControlEvents:UIControlEventEditingDidEnd];
-    [textField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingDidBegin];
+    [textField addTarget:self action:@selector(textEditStart:) forControlEvents:UIControlEventEditingDidBegin];
     [textField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
+    
+}
+
+-(void) processTextFields:(NSArray*)textFields rightViewIconFileName:(NSString*)iconName  errorStringOnNoEntry:(NSString*) errorString
+{
+    for (UITextField* textField in textFields) 
+    {
+        
+        
+        [textFieldStatuses addObject:textField];
+        UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:iconName]];
+        rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
+        textField.rightView = rightView;
+        textField.rightViewMode = UITextFieldViewModeNever;
+        
+        [textField addTarget:self action:@selector(textEditOver:) forControlEvents:UIControlEventEditingDidEnd];
+        [textField addTarget:self action:@selector(textEditStart:) forControlEvents:UIControlEventEditingDidBegin];
+        [textField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
+        
+    }
+   
     
 }
 

@@ -253,12 +253,10 @@
 #pragma mark - View lifecycle
 
 -(void) registerForDataValidations
-{
-    [validator processTextField:firstName rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
-    [validator processTextField:lastName rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty]; 
-    [validator processTextField:username rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
-    [validator processTextField:password rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
-    [validator processTextField:confirmpassword rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
+{    
+    [validator processTextFields:[NSArray arrayWithObjects:firstName,lastName,username,password,confirmpassword,nil] rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
+    
+    
 }
 
 - (void)viewDidLoad
@@ -274,11 +272,10 @@
     
     validator = [[DataValidator alloc] init];
     validator.delegate = self;
-    [self registerForDataValidations];
+    
     
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     openAccountButton.enabled = NO;
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     
     [password addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
     [confirmpassword addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
@@ -286,11 +283,8 @@
     password.clearsOnBeginEditing = YES;
     confirmpassword.clearsOnBeginEditing = YES;
     
-}
-
--(void) keyBoardDidShow:(NSNotification*) notification
-{
     [self registerForDataValidations];
+    
 }
 
 - (void)viewDidUnload
