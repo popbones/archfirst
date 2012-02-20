@@ -26,10 +26,8 @@
 {
     IBOutlet UITextField *accountName;
     IBOutlet UIActivityIndicatorView *spinner;
-        
+    IBOutlet UINavigationBar *navbar;
     IBOutlet UIButton *addAccountButton;
-    IBOutlet UIButton *cancelButton;
-    
 }
 
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;

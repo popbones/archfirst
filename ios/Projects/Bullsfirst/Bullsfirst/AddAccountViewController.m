@@ -31,7 +31,8 @@
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
-    }
+       
+        }
     return self;
 }
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -77,7 +78,6 @@
     [av show];
     
     addAccountButton.enabled = YES;
-    cancelButton.enabled = YES;
 }
 
 -(void)requestSucceeded:(NSData *)data
@@ -108,7 +108,6 @@
     [spinner startAnimating];
     
     addAccountButton.enabled = NO;
-    cancelButton.enabled = NO;
     
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
     
@@ -142,8 +141,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
-    
+   
+    self.view.layer.backgroundColor=[UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1].CGColor;
+    [navbar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     accountName.returnKeyType=UIReturnKeyGo;
     accountName.delegate=self;

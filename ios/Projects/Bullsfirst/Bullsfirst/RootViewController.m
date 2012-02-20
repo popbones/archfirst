@@ -126,6 +126,18 @@
 
 -(void)userLogout:(NSNotification*)notification
 {
+    if(self.selectedIndex==0)
+    {
+        UINavigationController *controller=(UINavigationController*)[self selectedViewController];
+        if(controller.viewControllers.count>1)
+        {
+            [controller popViewControllerAnimated:NO];
+        }
+    }
+    else
+    {
+        self.selectedIndex=0;
+    }
     LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
     [self presentModalViewController: controller animated:YES];

@@ -64,7 +64,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"img_bg_yellow.png"] forBarMetrics:UIBarMetricsDefault];
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullsfirst-HeaderBarLogo.png"]];
 
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SettingsButton.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];

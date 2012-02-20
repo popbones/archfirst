@@ -61,6 +61,12 @@
 		54B78AED14EC4656002FF1AC /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78AEB14EC4654002FF1AC /* UserViewController.m */; };
 		54B78AEE14EC4656002FF1AC /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78AEC14EC4655002FF1AC /* UserViewController.xib */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
+		9584FE2414F2234200D28154 /* AddAccount-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */; };
+		9584FE2514F2234200D28154 /* AddAccount-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2014F2234200D28154 /* AddAccount-PushDown.png */; };
+		9584FE2614F2234200D28154 /* AddAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2114F2234200D28154 /* AddAccount.png */; };
+		9584FE2714F2234200D28154 /* Cancel-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2214F2234200D28154 /* Cancel-PushDown.png */; };
+		9584FE2814F2234200D28154 /* Cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2314F2234200D28154 /* Cancel.png */; };
+		9584FE2A14F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2914F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg */; };
 		9586FA7314EB684300A0B28C /* AccountLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */; };
 		9586FA7414EB684300A0B28C /* AccountTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */; };
 		9586FA9214EB6A2900A0B28C /* AccountsToPosition_RowArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 9586FA7514EB6A2100A0B28C /* AccountsToPosition_RowArrow.png */; };
@@ -224,6 +230,12 @@
 		54B78AEB14EC4654002FF1AC /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		54B78AEC14EC4655002FF1AC /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
+		9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-Inactive.png"; sourceTree = "<group>"; };
+		9584FE2014F2234200D28154 /* AddAccount-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-PushDown.png"; sourceTree = "<group>"; };
+		9584FE2114F2234200D28154 /* AddAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AddAccount.png; sourceTree = "<group>"; };
+		9584FE2214F2234200D28154 /* Cancel-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Cancel-PushDown.png"; sourceTree = "<group>"; };
+		9584FE2314F2234200D28154 /* Cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Cancel.png; sourceTree = "<group>"; };
+		9584FE2914F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = ModalView_TitleBar_BackgroundGradient.jpg; sourceTree = "<group>"; };
 		9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountLandscapeTableViewCell.xib; sourceTree = "<group>"; };
 		9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountTableViewCell.xib; sourceTree = "<group>"; };
 		9586FA7514EB6A2100A0B28C /* AccountsToPosition_RowArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AccountsToPosition_RowArrow.png; sourceTree = "<group>"; };
@@ -415,6 +427,12 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */,
+				9584FE2914F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg */,
+				9584FE2014F2234200D28154 /* AddAccount-PushDown.png */,
+				9584FE2114F2234200D28154 /* AddAccount.png */,
+				9584FE2214F2234200D28154 /* Cancel-PushDown.png */,
+				9584FE2314F2234200D28154 /* Cancel.png */,
 				AC1206F214F2180E00572819 /* login-button-inactive.png */,
 				9586FA7514EB6A2100A0B28C /* AccountsToPosition_RowArrow.png */,
 				9586FA7614EB6A2100A0B28C /* AddAccountButton_PushDownState.png */,
@@ -816,6 +834,12 @@
 				546838B814EECAC3005C356A /* DropdownViewController.xib in Resources */,
 				546838C114EEEC83005C356A /* PreviewTradeViewController.xib in Resources */,
 				AC1206F314F2180E00572819 /* login-button-inactive.png in Resources */,
+				9584FE2414F2234200D28154 /* AddAccount-Inactive.png in Resources */,
+				9584FE2514F2234200D28154 /* AddAccount-PushDown.png in Resources */,
+				9584FE2614F2234200D28154 /* AddAccount.png in Resources */,
+				9584FE2714F2234200D28154 /* Cancel-PushDown.png in Resources */,
+				9584FE2814F2234200D28154 /* Cancel.png in Resources */,
+				9584FE2A14F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

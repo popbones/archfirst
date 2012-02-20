@@ -197,8 +197,8 @@
     
    // [addAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:addAccountViewController animated:YES];
-    addAccountViewController.view.superview.bounds=CGRectMake(0, 0, 540,185);
-    addAccountViewController.view.frame=CGRectMake(0, 0, 540,185);
+    addAccountViewController.view.superview.bounds=CGRectMake(0, 0, 500,225);
+    addAccountViewController.view.frame=CGRectMake(0, 0, 500,225);
 
     }
 
