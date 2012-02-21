@@ -19,8 +19,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OrdersViewController.h"
-@interface PositionsViewController : OrdersViewController
+#import "TabViewController.h"
+
+@interface PositionsViewController : TabViewController
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil account:(int)account;
 

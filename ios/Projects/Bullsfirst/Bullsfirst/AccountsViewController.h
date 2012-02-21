@@ -19,7 +19,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "OrdersViewController.h"
+#import "TabViewController.h"
 
 #import "PieChartMVAccountsViewController.h"
 #import "PieChartMVPositionViewController.h"
@@ -30,7 +30,7 @@
 @class PieChartMVPositionViewController;
 
 
-@interface AccountsViewController: OrdersViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate> 
+@interface AccountsViewController: TabViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate> 
 {   
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIView *headerView;

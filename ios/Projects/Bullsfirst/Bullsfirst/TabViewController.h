@@ -1,8 +1,8 @@
 //
-//  TransactionsViewController.h
+//  OrdersViewController.h
 //  Bullsfirst
 //
-//  Created by Joe Howard
+//  Created by Pong Choa
 //  Copyright 2012 Archfirst
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,9 +19,22 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "TabViewController.h"
+#import "BullFirstWebServiceObject.h"
 
-@interface TransactionsViewController : TabViewController
+@interface TabViewController : UIViewController {
+}
 
-@property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
+@property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
+@property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
+
+
+- (IBAction)refreshBTNClicked:(id)sender;
+- (IBAction)tradeBTNClicked:(id)sender;
+- (IBAction)transferBTNClicked:(id)sender;
+- (IBAction)filterBTNClicked:(id)sender;
+
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
+
+@property (strong, nonatomic) UIPopoverController *userPopOver;
+
 @end

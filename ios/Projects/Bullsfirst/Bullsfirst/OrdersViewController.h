@@ -20,8 +20,9 @@
 
 #import <Foundation/Foundation.h>
 #import "BullFirstWebServiceObject.h"
+#import "TabViewController.h"
 
-@interface OrdersViewController : UIViewController {
+@interface OrdersViewController : TabViewController {
     NSMutableArray *orders;
 }
 
@@ -31,8 +32,6 @@
 @property (strong, nonatomic) IBOutlet UITableView *orderTBL;
 
 - (IBAction)refreshBTNClicked:(id)sender;
-- (IBAction)tradeBTNClicked:(id)sender;
-- (IBAction)transferBTNClicked:(id)sender;
 - (IBAction)filterBTNClicked:(id)sender;
 
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;

@@ -49,6 +49,8 @@
 		546838C014EEEC83005C356A /* PreviewTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838BE14EEEC83005C356A /* PreviewTradeViewController.m */; };
 		546838C114EEEC83005C356A /* PreviewTradeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546838BF14EEEC83005C356A /* PreviewTradeViewController.xib */; };
 		546838EF14F3E1C9005C356A /* warningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 546838EE14F3E1C9005C356A /* warningIcon.png */; };
+		546838FE14F42398005C356A /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838FC14F42390005C356A /* TabViewController.m */; };
+		546838FF14F42398005C356A /* TabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546838FD14F42395005C356A /* TabViewController.xib */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
@@ -212,6 +214,9 @@
 		546838BE14EEEC83005C356A /* PreviewTradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewTradeViewController.m; sourceTree = "<group>"; };
 		546838BF14EEEC83005C356A /* PreviewTradeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewTradeViewController.xib; sourceTree = "<group>"; };
 		546838EE14F3E1C9005C356A /* warningIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warningIcon.png; sourceTree = "<group>"; };
+		546838FB14F4238D005C356A /* TabViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabViewController.h; sourceTree = "<group>"; };
+		546838FC14F42390005C356A /* TabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
+		546838FD14F42395005C356A /* TabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabViewController.xib; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
 		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
@@ -412,6 +417,9 @@
 		00DFF90E148089B6001A4641 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
+				546838FB14F4238D005C356A /* TabViewController.h */,
+				546838FC14F42390005C356A /* TabViewController.m */,
+				546838FD14F42395005C356A /* TabViewController.xib */,
 				54B78A1C14E58F74002FF1AC /* Account Tab */,
 				54B78A1D14E58FA4002FF1AC /* Position Tab */,
 				54B78A1E14E58FD4002FF1AC /* Order Tab */,
@@ -839,6 +847,7 @@
 				9584FE2A14F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg in Resources */,
 				9584FE2C14F27E2000D28154 /* AccountsView_Splitter_Gradient.png in Resources */,
 				546838EF14F3E1C9005C356A /* warningIcon.png in Resources */,
+				546838FF14F42398005C356A /* TabViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -890,6 +899,7 @@
 				546838B714EECAC3005C356A /* DropdownViewController.m in Sources */,
 				546838BB14EEE103005C356A /* BFOrder.m in Sources */,
 				546838C014EEEC83005C356A /* PreviewTradeViewController.m in Sources */,
+				546838FE14F42398005C356A /* TabViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
