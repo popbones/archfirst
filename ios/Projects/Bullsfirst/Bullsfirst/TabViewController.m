@@ -48,7 +48,7 @@
     {
         UITabBarItem *tbi = [self tabBarItem];
         [tbi setTitle:@"Tab"];
-        UIImage *i = [UIImage imageNamed:@"TabBar_Orders.png"];
+        UIImage *i = [UIImage imageNamed:@"warningIcon.png"];
         [tbi setImage:i];        
     }
     return self;
