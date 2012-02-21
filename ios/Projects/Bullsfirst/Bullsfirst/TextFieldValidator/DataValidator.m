@@ -136,6 +136,7 @@
 
 -(void) processTextFields:(NSArray*)textFields rightViewIconFileName:(NSString*)iconName  errorStringOnNoEntry:(NSString*) errorString
 {
+    [textFieldStatuses removeAllObjects];
     for (UITextField* textField in textFields) 
     {
         
