@@ -28,10 +28,6 @@
 @synthesize orderTBL;
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
-@synthesize filterBTN;
-@synthesize transferBTN;
-@synthesize tradeBTN;
-@synthesize refreshBTN;
 @synthesize restServiceObject;
 @synthesize orders;
 @synthesize userPopOver;
@@ -141,10 +137,6 @@
     [self setOrderTBL:nil];
     [self setPortraitTitleBar:nil];
     [self setLandscrapeTitleBar:nil];
-    [self setFilterBTN:nil];
-    [self setTransferBTN:nil];
-    [self setTradeBTN:nil];
-    [self setRefreshBTN:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DEVICE_ROTATE" object:nil];
     [super viewDidUnload];
 }
@@ -167,25 +159,9 @@
 {
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
-        CGRect rect = filterBTN.frame;
-        filterBTN.frame = CGRectMake(610, rect.origin.y, rect.size.width, rect.size.height);
-        rect = transferBTN.frame;
-        transferBTN.frame = CGRectMake(755, rect.origin.y, rect.size.width, rect.size.height);
-        rect = tradeBTN.frame;
-        tradeBTN.frame = CGRectMake(850, rect.origin.y, rect.size.width, rect.size.height);
-        rect = refreshBTN.frame;
-        refreshBTN.frame = CGRectMake(933, rect.origin.y, rect.size.width, rect.size.height);
     }
     else
     {
-        CGRect rect = filterBTN.frame;
-        filterBTN.frame = CGRectMake(360, rect.origin.y, rect.size.width, rect.size.height);
-        rect = transferBTN.frame;
-        transferBTN.frame = CGRectMake(505, rect.origin.y, rect.size.width, rect.size.height);
-        rect = tradeBTN.frame;
-        tradeBTN.frame = CGRectMake(600, rect.origin.y, rect.size.width, rect.size.height);
-        rect = refreshBTN.frame;
-        refreshBTN.frame = CGRectMake(683, rect.origin.y, rect.size.width, rect.size.height);
     }
     [orderTBL reloadData];
     

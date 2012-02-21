@@ -29,7 +29,6 @@
 
 @property (strong, nonatomic) IBOutlet UITableViewCell *positionCell;
 @property (strong, nonatomic) IBOutlet UITableView *positionTBL;
-@property (strong, nonatomic) IBOutlet UILabel *accountName;
 
 @property (assign, nonatomic) int selectedAccount;
 @property (assign, nonatomic) int expandRow;

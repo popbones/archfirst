@@ -114,16 +114,11 @@
     [pieChartMVAccountsViewController setView:pieChartMVAccountsView];
     [pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
     pieChartMVAccountsViewController.delegate=self;
-    CGRect chartRect= pieChartMVAccountsViewController.view.frame;
-    pieChartMVAccountsViewController.view.frame = CGRectMake(chartRect.origin.x, chartRect.origin.y,400,613);
     
     pieChartMVPositionViewController = [[PieChartMVPositionViewController alloc] init];
     [pieChartMVPositionViewController setView:pieChartMVPositionView];
     [pieChartMVPositionViewController setPieChartView:pieChartMVPositionView];         
     pieChartMVPositionViewController.delegate=self;
-    chartRect= pieChartMVPositionViewController.view.frame;
-    pieChartMVPositionViewController.view.frame=CGRectMake(chartRect.origin.x, chartRect.origin.y,400,613);
-    
     
     positionsChartView.hidden=true;
     pieChartMVAccountsViewController.view.hidden=false;
@@ -148,7 +143,7 @@
     if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
     {
         CGRect rect=accountsTable.frame;
-        accountsTable.frame = CGRectMake(rect.origin.x, rect.origin.y,620,612);
+        accountsTable.frame = CGRectMake(rect.origin.x, rect.origin.y,620,699);
         rect=accountNameLBL.frame;
         accountNameLBL.frame = CGRectMake(20, rect.origin.y, rect.size.width, rect.size.height);
         rect = accountNumberLBL.frame;
@@ -159,18 +154,16 @@
         cashLBL.frame = CGRectMake(446, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
         actionLBL.frame = CGRectMake(554, rect.origin.y, rect.size.width, rect.size.height);
-        rect = self.refreshBTN.frame;
-        self.refreshBTN.frame = CGRectMake(970, rect.origin.y, rect.size.width, rect.size.height);
         rect=leftBorderView.frame;
-        leftBorderView.frame=CGRectMake(rect.origin.x, rect.origin.y,1,612);
+        leftBorderView.frame=CGRectMake(rect.origin.x, rect.origin.y,1,699);
         rect=rightBorderView.frame;
-        rightBorderView.frame=CGRectMake(1023, 45,1,612);
+        rightBorderView.frame=CGRectMake(1023, 0,1,699);
     }
     else
     {
         CGRect rect=accountsTable.frame;
         
-        accountsTable.frame = CGRectMake(rect.origin.x,rect.origin.y,766, 869); 
+        accountsTable.frame = CGRectMake(rect.origin.x,rect.origin.y,766, 920); 
         rect=accountNameLBL.frame;
         accountNameLBL.frame = CGRectMake(20, rect.origin.y, rect.size.width, rect.size.height);
         rect = accountNumberLBL.frame;
@@ -181,12 +174,10 @@
         cashLBL.frame = CGRectMake(560, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
         actionLBL.frame = CGRectMake(680, rect.origin.y, rect.size.width, rect.size.height);
-        rect = self.refreshBTN.frame;
-        self.refreshBTN.frame = CGRectMake(720, rect.origin.y, rect.size.width, rect.size.height);
         rect=leftBorderView.frame;
-        leftBorderView.frame=CGRectMake(rect.origin.x, rect.origin.y,1,869);
+        leftBorderView.frame=CGRectMake(rect.origin.x, rect.origin.y,1,920);
         rect=rightBorderView.frame;
-        rightBorderView.frame=CGRectMake(767, 45,1,869);
+        rightBorderView.frame=CGRectMake(767, 0, 1, 920);
     }
     [accountsTable reloadData];
 }

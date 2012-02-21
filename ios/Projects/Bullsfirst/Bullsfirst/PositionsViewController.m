@@ -31,7 +31,6 @@
 
 @implementation PositionsViewController
 @synthesize positionTBL;
-@synthesize accountName;
 @synthesize positionCell;
 @synthesize selectedAccount;
 @synthesize expandRow;
@@ -67,28 +66,26 @@
 {
     [super viewDidLoad];
 
+    
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:20.0];
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
-    label.text = @"Positions";
+    label.text = account.name;
     [label sizeToFit];
 
     
-    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
-    self.accountName.text = account.name;
-    self.navigationItem.leftBarButtonItem = nil;
-
     expandRow = -1;
 }
 
 - (void)viewDidUnload
 {
     [self setPositionTBL:nil];
-    [self setAccountName:nil];
     [super viewDidUnload];
 }
 

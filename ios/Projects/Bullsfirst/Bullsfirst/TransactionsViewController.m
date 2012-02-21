@@ -68,7 +68,6 @@
 
 - (void)viewDidUnload
 {
-    [self setTransferBTN:nil];
     [super viewDidUnload];
 }
 
