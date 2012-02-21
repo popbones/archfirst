@@ -100,6 +100,15 @@
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
 	self.navigationItem.backBarButtonItem = barButtonItem;
 
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = @"Accounts";
+    [label sizeToFit];
+
 
     pieChartMVAccountsViewController = [[PieChartMVAccountsViewController alloc] init];
     [pieChartMVAccountsViewController setView:pieChartMVAccountsView];

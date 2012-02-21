@@ -67,6 +67,16 @@
 {
     [super viewDidLoad];
 
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = @"Positions";
+    [label sizeToFit];
+
+    
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
     self.accountName.text = account.name;

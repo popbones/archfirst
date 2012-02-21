@@ -48,6 +48,7 @@
 		546838BB14EEE103005C356A /* BFOrder.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838BA14EEE103005C356A /* BFOrder.m */; };
 		546838C014EEEC83005C356A /* PreviewTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838BE14EEEC83005C356A /* PreviewTradeViewController.m */; };
 		546838C114EEEC83005C356A /* PreviewTradeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546838BF14EEEC83005C356A /* PreviewTradeViewController.xib */; };
+		546838EF14F3E1C9005C356A /* warningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 546838EE14F3E1C9005C356A /* warningIcon.png */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
@@ -125,7 +126,6 @@
 		AC9B72E514DAB01800B843AC /* BFPlainWhiteTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72E414DAB01800B843AC /* BFPlainWhiteTheme.m */; };
 		AC9F211114E13AEE0024C3D3 /* _BFCPTXYTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F210E14E13AEE0024C3D3 /* _BFCPTXYTheme.m */; };
 		AC9F211214E13AEE0024C3D3 /* BFCPTTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F211014E13AEE0024C3D3 /* BFCPTTheme.m */; };
-		ACC6A15614EE540700016AD4 /* warningIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC6A15514EE53FE00016AD4 /* warningIcon.png */; };
 		ACC6A17114EE99BD00016AD4 /* SwitchAccountsButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC6A16F14EE998700016AD4 /* SwitchAccountsButton_PushDownState.png */; };
 		ACC6A17214EE99BD00016AD4 /* SwitchAccountsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC6A17014EE999200016AD4 /* SwitchAccountsButton.png */; };
 /* End PBXBuildFile section */
@@ -211,6 +211,7 @@
 		546838BD14EEEC83005C356A /* PreviewTradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewTradeViewController.h; sourceTree = "<group>"; };
 		546838BE14EEEC83005C356A /* PreviewTradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewTradeViewController.m; sourceTree = "<group>"; };
 		546838BF14EEEC83005C356A /* PreviewTradeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewTradeViewController.xib; sourceTree = "<group>"; };
+		546838EE14F3E1C9005C356A /* warningIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warningIcon.png; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
 		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
@@ -310,7 +311,6 @@
 		AC9F210E14E13AEE0024C3D3 /* _BFCPTXYTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = _BFCPTXYTheme.m; path = Bullsfirst/_BFCPTXYTheme.m; sourceTree = "<group>"; };
 		AC9F210F14E13AEE0024C3D3 /* BFCPTTheme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BFCPTTheme.h; path = Bullsfirst/BFCPTTheme.h; sourceTree = "<group>"; };
 		AC9F211014E13AEE0024C3D3 /* BFCPTTheme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BFCPTTheme.m; path = Bullsfirst/BFCPTTheme.m; sourceTree = "<group>"; };
-		ACC6A15514EE53FE00016AD4 /* warningIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = warningIcon.png; sourceTree = "<group>"; };
 		ACC6A16F14EE998700016AD4 /* SwitchAccountsButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchAccountsButton_PushDownState.png; sourceTree = "<group>"; };
 		ACC6A17014EE999200016AD4 /* SwitchAccountsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchAccountsButton.png; sourceTree = "<group>"; };
 		ACDA1B2014E3A3F800B3673F /* BF-CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BF-CorePlot-CocoaTouch.h"; path = "Bullsfirst/BF-CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
@@ -426,6 +426,7 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				546838EE14F3E1C9005C356A /* warningIcon.png */,
 				9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */,
 				9584FE2B14F27E1F00D28154 /* AccountsView_Splitter_Gradient.png */,
 				9584FE2914F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg */,
@@ -440,7 +441,6 @@
 				9586FA7814EB6A2200A0B28C /* BackButton_PushDownState.png */,
 				9586FA7914EB6A2300A0B28C /* BackButton.png */,
 				9586FA7A14EB6A2300A0B28C /* bullsfirst-HeaderBarLogo.png */,
-				ACC6A15514EE53FE00016AD4 /* warningIcon.png */,
 				9586FA7B14EB6A2300A0B28C /* EditButton-PushDown.png */,
 				9586FA7C14EB6A2300A0B28C /* EditButton.png */,
 				9586FA7D14EB6A2400A0B28C /* FiltersClosed_PushDownState.png */,
@@ -826,7 +826,6 @@
 				9586FAAD14EB6A2900A0B28C /* TransferButton_PushDownState.png in Resources */,
 				9586FAAE14EB6A2900A0B28C /* TransferButton.png in Resources */,
 				54B78AEE14EC4656002FF1AC /* UserViewController.xib in Resources */,
-				ACC6A15614EE540700016AD4 /* warningIcon.png in Resources */,
 				ACC6A17114EE99BD00016AD4 /* SwitchAccountsButton_PushDownState.png in Resources */,
 				ACC6A17214EE99BD00016AD4 /* SwitchAccountsButton.png in Resources */,
 				546838B814EECAC3005C356A /* DropdownViewController.xib in Resources */,
@@ -839,6 +838,7 @@
 				9584FE2814F2234200D28154 /* Cancel.png in Resources */,
 				9584FE2A14F225DF00D28154 /* ModalView_TitleBar_BackgroundGradient.jpg in Resources */,
 				9584FE2C14F27E2000D28154 /* AccountsView_Splitter_Gradient.png in Resources */,
+				546838EF14F3E1C9005C356A /* warningIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

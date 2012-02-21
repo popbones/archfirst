@@ -65,14 +65,15 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
+/*
     self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullsfirst-HeaderBarLogo.png"]];
 
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SettingsButton.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.rightBarButtonItem = barButtonItem;
-/*    
+*/    
     UIToolbar *tools = [[UIToolbar alloc]
-                        initWithFrame:CGRectMake(0.0f, 0.0f, 200.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
+                        initWithFrame:CGRectMake(0.0f, 0.0f, 260.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
     tools.clearsContextBeforeDrawing = NO;
     tools.clipsToBounds = NO;
     tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // closest I could get by eye to black, translucent style.
@@ -81,14 +82,14 @@
     
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
     // Add buttons to toolbar and toolbar to nav bar.
-    barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Transfer" style:UIBarButtonItemStylePlain target:self action:@selector(transferBTNClicked:)];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Transfer" style:UIBarButtonItemStylePlain target:self action:@selector(transferBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
 
     // Create a spacer.
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 12.0f;
+    barButtonItem.width = 10.0f;
     [buttons addObject:barButtonItem];
 
     barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Trade" style:UIBarButtonItemStylePlain target:self action:@selector(tradeBTNClicked:)];
@@ -98,7 +99,7 @@
     
     // Create a spacer.
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 12.0f;
+    barButtonItem.width = 10.0f;
     [buttons addObject:barButtonItem];
     
     barButtonItem = [[UIBarButtonItem alloc]
@@ -107,10 +108,28 @@
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
 
+    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    barButtonItem.width = 10.0f;
+    [buttons addObject:barButtonItem];
+
+    barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SettingsButton.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    [buttons addObject:barButtonItem];
+
     [tools setItems:buttons animated:NO];
     UIBarButtonItem *twoButtons = [[UIBarButtonItem alloc] initWithCustomView:tools];
-    self.navigationItem.leftBarButtonItem = twoButtons;
-*/
+    self.navigationItem.rightBarButtonItem = twoButtons;
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.textAlignment = UITextAlignmentCenter;
+    label.textColor = [UIColor whiteColor]; // change this color
+    self.navigationItem.titleView = label;
+    label.text = @"Orders";
+    [label sizeToFit];
+
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rotateDevice) name:@"DEVICE_ROTATE" object:nil];
