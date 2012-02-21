@@ -69,7 +69,7 @@
     self.navigationItem.rightBarButtonItem = barButtonItem;
 */    
     UIToolbar *tools = [[UIToolbar alloc]
-                        initWithFrame:CGRectMake(0.0f, 0.0f, 260.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
+                        initWithFrame:CGRectMake(0.0f, 0.0f, 150.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
     tools.clearsContextBeforeDrawing = NO;
     tools.clipsToBounds = NO;
     tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // closest I could get by eye to black, translucent style.
@@ -78,8 +78,9 @@
     
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
     // Add buttons to toolbar and toolbar to nav bar.
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Transfer" style:UIBarButtonItemStylePlain target:self action:@selector(transferBTNClicked:)];
-    barButtonItem.style = UIBarButtonItemStyleBordered;
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(transferBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
 
@@ -88,8 +89,9 @@
     barButtonItem.width = 10.0f;
     [buttons addObject:barButtonItem];
 
-    barButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"Trade" style:UIBarButtonItemStylePlain target:self action:@selector(tradeBTNClicked:)];
-    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem = [[UIBarButtonItem alloc]
+                     initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(tradeBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
     
@@ -100,7 +102,7 @@
     
     barButtonItem = [[UIBarButtonItem alloc]
                      initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
-    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
 
@@ -109,7 +111,7 @@
     [buttons addObject:barButtonItem];
 
     barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SettingsButton.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];
-    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
 
