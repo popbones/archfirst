@@ -66,6 +66,8 @@
     self.navigationItem.titleView = label;
     label.text = @"Orders";
     [label sizeToFit];
+    
+    [self refreshBTNClicked:nil];
 }
 
 - (void)viewDidUnload
@@ -108,10 +110,9 @@
 }
 
 -(void)requestSucceeded:(NSData *)data
-{
-    NSError *err;
-    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
-    BFDebugLog(@"jsonObject = %@", jsonObject);
+{    
+    orders = [BFOrder ordersFromJSONData:data];
+    [orderTBL reloadData];
 }
 
 #pragma mark - KVO lifecycle
@@ -168,13 +169,22 @@
     // Return the number of rows in the section.
     return [orders count];
 }
-/*
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        return cell;
-
+    static NSString *CellIdentifier = @"BookmarkCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+    }
+    
+    BFOrder *order = [orders objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = order.instrumentSymbol;
+    return cell;
 }
-*/
+
 
  // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

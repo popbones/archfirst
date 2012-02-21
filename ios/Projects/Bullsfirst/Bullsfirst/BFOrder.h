@@ -31,6 +31,9 @@
 @property (nonatomic, retain) NSString *term;
 @property (nonatomic, assign) BOOL    allOrNone;
 
++ (NSMutableArray *)ordersFromJSONData:(NSData *)data;
++ (BFOrder *)orderFromDictionary:(NSDictionary *)theDictionary;
+
 - (id)initWithAccountID:(NSNumber *)theAccountID
             accountName:(NSString *)theAccountName
                    side:(NSString *)theSide
