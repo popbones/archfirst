@@ -61,13 +61,7 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
-/*
-    self.navigationItem.titleView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"bullsfirst-HeaderBarLogo.png"]];
 
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SettingsButton.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-    self.navigationItem.rightBarButtonItem = barButtonItem;
-*/    
     UIToolbar *tools = [[UIToolbar alloc]
                         initWithFrame:CGRectMake(0.0f, 0.0f, 150.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
     tools.clearsContextBeforeDrawing = NO;
