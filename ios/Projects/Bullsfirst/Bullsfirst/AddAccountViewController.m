@@ -147,6 +147,8 @@
     self.view.layer.backgroundColor=[UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1].CGColor;
     [navbar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    CGRect rect=accountName.frame;
+    accountName.frame=CGRectMake(rect.origin.x, rect.origin.y, rect.size.width,50);
     accountName.returnKeyType=UIReturnKeyGo;
     accountName.delegate=self;
     [accountName becomeFirstResponder];
