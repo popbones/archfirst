@@ -150,6 +150,8 @@
     accountName.returnKeyType=UIReturnKeyGo;
     accountName.delegate=self;
     [accountName becomeFirstResponder];
+    navbar.layer.borderColor=[UIColor blueColor].CGColor;
+    
 }
 
 - (void)viewDidUnload

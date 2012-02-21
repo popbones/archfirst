@@ -104,7 +104,7 @@
 	[super viewDidAppear:animated];
     
 	// Add a rotation animation
-	[self performAnimation];
+	//[self performAnimation];
     [piePlot setHidden:NO];
     viewOnFront=YES;
 }

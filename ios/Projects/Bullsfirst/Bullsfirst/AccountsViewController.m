@@ -58,7 +58,6 @@
 -(void) pieChartMVPositionClicked
 {
     positionsChartView.hidden=true;
-    [pieChartMVAccountsViewController constructPieChart];
     pieChartMVAccountsViewController.view.hidden=false;
 }
 
@@ -92,12 +91,6 @@
     [pieChartMVAccountsViewController viewDidDisappear:animated];
 }
 
--(void) viewWillAppear:(BOOL)animated
-{
-    positionsChartView.hidden=true;
-    pieChartMVAccountsViewController.view.hidden=false;
-}
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -123,6 +116,8 @@
     pieChartMVPositionViewController.view.frame=CGRectMake(chartRect.origin.x, chartRect.origin.y,400,613);
     
     
+    positionsChartView.hidden=true;
+    pieChartMVAccountsViewController.view.hidden=false;
     rightBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;
     leftBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;    orientation=[[UIDevice currentDevice] orientation];
     
@@ -146,15 +141,15 @@
         CGRect rect=accountsTable.frame;
         accountsTable.frame = CGRectMake(rect.origin.x, rect.origin.y,620,612);
         rect=accountNameLBL.frame;
-        accountNameLBL.frame = CGRectMake(15, rect.origin.y, rect.size.width, rect.size.height);
+        accountNameLBL.frame = CGRectMake(20, rect.origin.y, rect.size.width, rect.size.height);
         rect = accountNumberLBL.frame;
-        accountNumberLBL.frame = CGRectMake(160, rect.origin.y, rect.size.width, rect.size.height);
+        accountNumberLBL.frame = CGRectMake(180, rect.origin.y, rect.size.width, rect.size.height);
         rect = marketValueLBL.frame;
         marketValueLBL.frame = CGRectMake(280, rect.origin.y, rect.size.width, rect.size.height);
         rect = cashLBL.frame;
-        cashLBL.frame = CGRectMake(460, rect.origin.y, rect.size.width, rect.size.height);
+        cashLBL.frame = CGRectMake(446, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
-        actionLBL.frame = CGRectMake(550, rect.origin.y, rect.size.width, rect.size.height);
+        actionLBL.frame = CGRectMake(554, rect.origin.y, rect.size.width, rect.size.height);
         rect = self.refreshBTN.frame;
         self.refreshBTN.frame = CGRectMake(970, rect.origin.y, rect.size.width, rect.size.height);
         rect=leftBorderView.frame;
@@ -170,13 +165,13 @@
         rect=accountNameLBL.frame;
         accountNameLBL.frame = CGRectMake(20, rect.origin.y, rect.size.width, rect.size.height);
         rect = accountNumberLBL.frame;
-        accountNumberLBL.frame = CGRectMake(180, rect.origin.y, rect.size.width, rect.size.height);
+        accountNumberLBL.frame = CGRectMake(230, rect.origin.y, rect.size.width, rect.size.height);
         rect = marketValueLBL.frame;
-        marketValueLBL.frame = CGRectMake(370, rect.origin.y, rect.size.width, rect.size.height);
+        marketValueLBL.frame = CGRectMake(360, rect.origin.y, rect.size.width, rect.size.height);
         rect = cashLBL.frame;
-        cashLBL.frame = CGRectMake(590, rect.origin.y, rect.size.width, rect.size.height);
+        cashLBL.frame = CGRectMake(560, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
-        actionLBL.frame = CGRectMake(700, rect.origin.y, rect.size.width, rect.size.height);
+        actionLBL.frame = CGRectMake(680, rect.origin.y, rect.size.width, rect.size.height);
         rect = self.refreshBTN.frame;
         self.refreshBTN.frame = CGRectMake(720, rect.origin.y, rect.size.width, rect.size.height);
         rect=leftBorderView.frame;
@@ -253,12 +248,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44;
+    return 50;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;
+    return 50;
     
 }
 

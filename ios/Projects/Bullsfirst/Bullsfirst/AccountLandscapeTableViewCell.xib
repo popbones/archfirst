@@ -43,8 +43,9 @@
 							<object class="IBUILabel" id="44723244">
 								<reference key="NSNextResponder" ref="453409980"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{15, 11}, {135, 21}}</string>
+								<string key="NSFrame">{{20, 11}, {150, 21}}</string>
 								<reference key="NSSuperview" ref="453409980"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="904169092"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -73,8 +74,9 @@
 							<object class="IBUILabel" id="904169092">
 								<reference key="NSNextResponder" ref="453409980"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{158, 11}, {78, 21}}</string>
+								<string key="NSFrame">{{170, 11}, {80, 21}}</string>
 								<reference key="NSSuperview" ref="453409980"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="675147365"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -94,8 +96,9 @@
 							<object class="IBUILabel" id="675147365">
 								<reference key="NSNextResponder" ref="453409980"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{244, 11}, {155, 21}}</string>
+								<string key="NSFrame">{{250, 11}, {140, 21}}</string>
 								<reference key="NSSuperview" ref="453409980"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="763500729"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -115,8 +118,9 @@
 							<object class="IBUILabel" id="763500729">
 								<reference key="NSNextResponder" ref="453409980"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{407, 11}, {143, 21}}</string>
+								<string key="NSFrame">{{390, 11}, {140, 21}}</string>
 								<reference key="NSSuperview" ref="453409980"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="357385832"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -136,8 +140,9 @@
 							<object class="IBUIButton" id="357385832">
 								<reference key="NSNextResponder" ref="453409980"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{547, 6}, {47, 32}}</string>
+								<string key="NSFrame">{{545, 6}, {47, 32}}</string>
 								<reference key="NSSuperview" ref="453409980"/>
+								<reference key="NSWindow"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">5</int>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -177,6 +182,7 @@
 						</array>
 						<string key="NSFrameSize">{600, 43}</string>
 						<reference key="NSSuperview" ref="88009124"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="44723244"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -191,6 +197,7 @@
 				</array>
 				<string key="NSFrameSize">{620, 44}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="453409980"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<int key="IBUIAccessoryType">1</int>
@@ -286,7 +293,198 @@
 			<nil key="sourceID"/>
 			<int key="maxID">13</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AccountsViewController</string>
+					<string key="superclassName">OrdersViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="backBTNClicked:">id</string>
+						<string key="createAccount:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="backBTNClicked:">
+							<string key="name">backBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="createAccount:">
+							<string key="name">createAccount:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="accountCell">UITableViewCell</string>
+						<string key="accountNameLBL">UILabel</string>
+						<string key="accountNumberLBL">UILabel</string>
+						<string key="accountsTable">UITableView</string>
+						<string key="actionLBL">UILabel</string>
+						<string key="backBTN">UIButton</string>
+						<string key="cashLBL">UILabel</string>
+						<string key="headerView">UIView</string>
+						<string key="leftBorderView">UIView</string>
+						<string key="marketValueLBL">UILabel</string>
+						<string key="pieChartMVAccountsView">CPTGraphHostingView</string>
+						<string key="pieChartMVPositionView">CPTGraphHostingView</string>
+						<string key="positionsChartView">UIView</string>
+						<string key="rightBorderView">UIView</string>
+						<string key="spinner">UIActivityIndicatorView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="accountCell">
+							<string key="name">accountCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="accountNameLBL">
+							<string key="name">accountNameLBL</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="accountNumberLBL">
+							<string key="name">accountNumberLBL</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="accountsTable">
+							<string key="name">accountsTable</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="actionLBL">
+							<string key="name">actionLBL</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="backBTN">
+							<string key="name">backBTN</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="cashLBL">
+							<string key="name">cashLBL</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="headerView">
+							<string key="name">headerView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="leftBorderView">
+							<string key="name">leftBorderView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="marketValueLBL">
+							<string key="name">marketValueLBL</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pieChartMVAccountsView">
+							<string key="name">pieChartMVAccountsView</string>
+							<string key="candidateClassName">CPTGraphHostingView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="pieChartMVPositionView">
+							<string key="name">pieChartMVPositionView</string>
+							<string key="candidateClassName">CPTGraphHostingView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="positionsChartView">
+							<string key="name">positionsChartView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="rightBorderView">
+							<string key="name">rightBorderView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="spinner">
+							<string key="name">spinner</string>
+							<string key="candidateClassName">UIActivityIndicatorView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AccountsViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">CPTGraphHostingView</string>
+					<string key="superclassName">UIView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/CPTGraphHostingView.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">OrdersViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="filterBTNClicked:">id</string>
+						<string key="refreshBTNClicked:">id</string>
+						<string key="tradeBTNClicked:">id</string>
+						<string key="transferBTNClicked:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="filterBTNClicked:">
+							<string key="name">filterBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="refreshBTNClicked:">
+							<string key="name">refreshBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="tradeBTNClicked:">
+							<string key="name">tradeBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="transferBTNClicked:">
+							<string key="name">transferBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="filterBTN">UIButton</string>
+						<string key="landscrapeTitleBar">UIView</string>
+						<string key="orderTBL">UITableView</string>
+						<string key="portraitTitleBar">UIView</string>
+						<string key="refreshBTN">UIButton</string>
+						<string key="tradeBTN">UIButton</string>
+						<string key="transferBTN">UIButton</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="filterBTN">
+							<string key="name">filterBTN</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="landscrapeTitleBar">
+							<string key="name">landscrapeTitleBar</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderTBL">
+							<string key="name">orderTBL</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="portraitTitleBar">
+							<string key="name">portraitTitleBar</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="refreshBTN">
+							<string key="name">refreshBTN</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="tradeBTN">
+							<string key="name">tradeBTN</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="transferBTN">
+							<string key="name">transferBTN</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/OrdersViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">editAccountNameBTN</string>
+					<string key="superclassName">UIButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/editAccountNameBTN.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
