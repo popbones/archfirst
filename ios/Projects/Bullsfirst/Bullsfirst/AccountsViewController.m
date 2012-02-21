@@ -231,9 +231,12 @@
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if ([keyPath isEqualToString:@"accounts"]) {
-        [accountsTable reloadData];
-        [pieChartMVAccountsViewController constructPieChart];
-        [pieChartMVPositionViewController constructPieChart];
+        NSMutableArray *brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+        if ([brokerageAccounts count] > 0) {
+            [accountsTable reloadData];
+            [pieChartMVAccountsViewController constructPieChart];
+            [pieChartMVPositionViewController constructPieChart];
+        }
         return;
     }
 }
@@ -273,6 +276,24 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSMutableArray *brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    if ([brokerageAccounts count] < 1) {
+        UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+        {
+            UITableViewCell *cell;
+            [[NSBundle mainBundle] loadNibNamed:@"AccountLandscapeTableViewCell" owner:self options:nil];
+            cell = accountCell;
+            return cell;
+        }
+        else
+        {
+            UITableViewCell *cell;
+            [[NSBundle mainBundle] loadNibNamed:@"AccountTableViewCell" owner:self options:nil];
+            cell = accountCell;
+            return cell;
+        }
+    }
+    
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:indexPath.row];
     NSString *currencySymbol;
     if([account.marketValue.currency isEqual:@"USD"])

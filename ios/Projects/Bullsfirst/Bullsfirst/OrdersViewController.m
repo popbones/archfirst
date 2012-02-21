@@ -28,9 +28,7 @@
 @synthesize orderTBL;
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
-@synthesize restServiceObject;
 @synthesize orders;
-@synthesize userPopOver;
 
 - (id)init
 {
@@ -123,6 +121,11 @@
 }
 
 #pragma mark - IBActions
+
+- (IBAction)refreshBTNClicked:(id)sender {   
+    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
+    [self.restServiceObject getRequestWithURL:url];    
+}
 
 - (IBAction)filterBTNClicked:(id)sender {
     FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    

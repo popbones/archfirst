@@ -31,12 +31,9 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *orderTBL;
 
-- (IBAction)refreshBTNClicked:(id)sender;
 - (IBAction)filterBTNClicked:(id)sender;
 
-@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 @property (strong, nonatomic) NSMutableArray *orders;
 
-@property (strong, nonatomic) UIPopoverController *userPopOver;
 
 @end

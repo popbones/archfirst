@@ -87,14 +87,6 @@
 #pragma mark - IBActions
 - (IBAction)refreshBTNClicked:(id)sender {
     
-    NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
-    [jsonDic setValue:@"2012-01-01" forKey:@"fromDate"];
-    [jsonDic setValue:@"2012-12-31" forKey:@"toDate"];
-    NSError *err;
-    NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
-    
-    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
-    [self.restServiceObject getRequestWithURL:url body:jsonBodyData contentType:@"application/json"];    
 }
 
 #pragma mark - Table view data source

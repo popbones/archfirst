@@ -66,7 +66,6 @@
 {
     [super viewDidLoad];
 
-    
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
     
@@ -78,7 +77,6 @@
     self.navigationItem.titleView = label;
     label.text = account.name;
     [label sizeToFit];
-
     
     expandRow = -1;
 }

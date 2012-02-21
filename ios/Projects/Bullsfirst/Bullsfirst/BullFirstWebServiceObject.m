@@ -45,31 +45,6 @@
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
 }
 
--(void)getRequestWithURL:(NSURL*)url body:(NSData *)body contentType:(NSString *)type
-{
-	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:kRequestTimeout];
-    [request setHTTPMethod:@"GET"];
-    [request setValue:type forHTTPHeaderField:@"Content-type"];
-    [request setHTTPBody:body];
-
-    NSURLCredential *credential = [WebServiceObject userLoginCredential];
-    NSString *authStr = [NSString stringWithFormat:@"%@:%@", credential.user, credential.password];
-    NSData *authData = [authStr dataUsingEncoding:NSUTF8StringEncoding];
-    NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodedString]];
-    [request setValue:authValue forHTTPHeaderField:@"Authorization"];
-    
-    
-	if (_connection){
-		NSLog(@"cancelling connection");
-		[_connection cancel];
-		_connection = nil;
-		[receivedData setLength:0];
-	}
-	_connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];    
-    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    
-}
-
 -(void)requestWithURL:(NSURL*)url
 {
 	NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:kRequestTimeout];
