@@ -60,7 +60,6 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:20.0];
@@ -77,20 +76,6 @@
     [self setPortraitTitleBar:nil];
     [self setLandscrapeTitleBar:nil];
     [super viewDidUnload];
-}
-
-- (void) rotateDevice
-{
-    [self willAnimateRotationToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.1];
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    if ([[UIDevice currentDevice].systemVersion intValue] >= 5) {
-        [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
-    }
-    
-    return YES;
 }
 
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -138,7 +123,6 @@
 }
 
 #pragma mark - IBActions
-
 
 - (IBAction)filterBTNClicked:(id)sender {
     FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    

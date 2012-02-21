@@ -417,13 +417,13 @@
 		00DFF90E148089B6001A4641 /* Tabs */ = {
 			isa = PBXGroup;
 			children = (
-				546838FB14F4238D005C356A /* TabViewController.h */,
-				546838FC14F42390005C356A /* TabViewController.m */,
-				546838FD14F42395005C356A /* TabViewController.xib */,
 				54B78A1C14E58F74002FF1AC /* Account Tab */,
 				54B78A1D14E58FA4002FF1AC /* Position Tab */,
 				54B78A1E14E58FD4002FF1AC /* Order Tab */,
 				54B78A1F14E58FED002FF1AC /* Transection Tab */,
+				546838FB14F4238D005C356A /* TabViewController.h */,
+				546838FC14F42390005C356A /* TabViewController.m */,
+				546838FD14F42395005C356A /* TabViewController.xib */,
 				95C6A85914DBED54004F023A /* RootViewController.h */,
 				95C6A85A14DBED54004F023A /* RootViewController.m */,
 				95C6A85B14DBED54004F023A /* RootViewController.xib */,
