@@ -32,6 +32,7 @@
 	NSMutableArray *dataForChart, *dataForPlot;
     BOOL viewOnFront;
     int accountIndex;
+    NSArray* sortedPositions;
 }
 @property(nonatomic,weak) id <PieChartMVPositionViewControllerDelegate> delegate;
 @property (nonatomic, retain) CPTGraphHostingView *pieChartView;

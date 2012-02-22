@@ -220,7 +220,7 @@
         
         NSArray *sortDescriptors = [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"marketValue" ascending:NO]];
         
-        NSArray* sortedPositions = [[neededAccount positions] sortedArrayUsingDescriptors:sortDescriptors];
+        sortedPositions = [[neededAccount positions] sortedArrayUsingDescriptors:sortDescriptors];
         
         for (BFPosition *position in sortedPositions){
             [tempArray addObject:[[position marketValue] amount]];
@@ -371,8 +371,8 @@
 {
     if(index==9)
         return @"Others";
-    if(index<=[[[[[BFBrokerageAccountStore defaultStore] allBrokerageAccountsInSortedOrder] objectAtIndex:accountIndex] positions] count])
-        return [[[[[[BFBrokerageAccountStore defaultStore] allBrokerageAccountsInSortedOrder] objectAtIndex:accountIndex] positions] objectAtIndex:index]instrumentSymbol];
+    if(index<=[sortedPositions count])
+        return [[sortedPositions objectAtIndex:index]instrumentSymbol];
     else
         return @"CASH";
 }
