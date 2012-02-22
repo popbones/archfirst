@@ -36,6 +36,14 @@
     IBOutlet UITextField *username;
     IBOutlet UITextField *password;
     IBOutlet UITextField *confirmpassword;
+    
+    IBOutlet UILabel *firstNameLBL;
+    IBOutlet UILabel *lastNameLBL;
+    IBOutlet UILabel *usernameLBL;
+    IBOutlet UILabel *passwordLBL;
+    IBOutlet UILabel *confirmPasswordFirstPartLBL;
+    IBOutlet UILabel *confirmPasswordSecondPartLBL;
+    
     IBOutlet UIActivityIndicatorView *spinner;
     
     IBOutlet UIButton* openAccountButton;
@@ -48,6 +56,8 @@
     NSNumber* newExternalAccountId;
     
     DataValidator* validator;
+    
+    IBOutlet UINavigationBar* navBar;
     
 }
 

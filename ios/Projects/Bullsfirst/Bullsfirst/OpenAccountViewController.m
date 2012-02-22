@@ -270,16 +270,38 @@
     password.returnKeyType = UIReturnKeyGo;
     confirmpassword.returnKeyType = UIReturnKeyGo;
     
+    int textFieldHeight = 45;
+    
+    [firstName setFrame:CGRectMake(195, 115,firstName.frame.size.width , textFieldHeight)];
+    [firstNameLBL setFrame:CGRectMake(100, 115, firstNameLBL.frame.size.width, textFieldHeight)];
+    
+    [lastName setFrame:CGRectMake(195, firstName.frame.origin.y+15+45,lastName.frame.size.width , textFieldHeight)];
+    [lastNameLBL setFrame:CGRectMake(100,firstName.frame.origin.y+15+45,lastNameLBL.frame.size.width , textFieldHeight)];
+    
+    [username setFrame:CGRectMake(195, lastName.frame.origin.y+15+45,username.frame.size.width , textFieldHeight)];
+    [usernameLBL setFrame:CGRectMake(100, lastName.frame.origin.y+15+45,usernameLBL.frame.size.width , textFieldHeight)];
+    
+    [password setFrame:CGRectMake(195, username.frame.origin.y+15+45,password.frame.size.width , textFieldHeight)];
+    [passwordLBL setFrame:CGRectMake(100, username.frame.origin.y+15+45,passwordLBL.frame.size.width , textFieldHeight)];
+    
+    [confirmpassword setFrame:CGRectMake(195, password.frame.origin.y+15+45,confirmpassword.frame.size.width , textFieldHeight)];
+    [confirmPasswordFirstPartLBL setFrame:CGRectMake(100, password.frame.origin.y+15+45,confirmPasswordFirstPartLBL.frame.size.width , textFieldHeight/2)];
+    [confirmPasswordSecondPartLBL setFrame:CGRectMake(100, password.frame.origin.y+15+45+textFieldHeight/2,confirmPasswordFirstPartLBL.frame.size.width , textFieldHeight/2)];
+    
     validator = [[DataValidator alloc] init];
     validator.delegate = self;
-    
+
+    [navBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     textFields=[NSArray arrayWithObjects:firstName,lastName,username,password,confirmpassword, nil];
+    
     
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     openAccountButton.enabled = NO;
     
     [password addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
     [confirmpassword addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
+    
+    self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
     
     password.clearsOnBeginEditing = YES;
     confirmpassword.clearsOnBeginEditing = YES;

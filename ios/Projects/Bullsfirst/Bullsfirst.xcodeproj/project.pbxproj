@@ -121,6 +121,9 @@
 		AC26C84414DFA0B900ABD693 /* BullFirstWebServiceObject.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C84314DFA0B900ABD693 /* BullFirstWebServiceObject.m */; };
 		AC26C84814DFA10300ABD693 /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C84714DFA10300ABD693 /* NSData+Base64.m */; };
 		AC26C84A14DFA84D00ABD693 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AC26C84914DFA84D00ABD693 /* Security.framework */; };
+		AC2F91D514F4B59900E962DF /* OpenAccount-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91D214F4B59800E962DF /* OpenAccount-Inactive.png */; };
+		AC2F91D614F4B59900E962DF /* OpenAccount-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91D314F4B59800E962DF /* OpenAccount-PushDown.png */; };
+		AC2F91D714F4B59900E962DF /* OpenAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91D414F4B59800E962DF /* OpenAccount.png */; };
 		AC66817314ECD43C00BB02FF /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC66817014ECD43C00BB02FF /* CMPopTipView.m */; };
 		AC66817414ECD43C00BB02FF /* DataValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = AC66817214ECD43C00BB02FF /* DataValidator.m */; };
 		AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */; };
@@ -303,6 +306,9 @@
 		AC26C84614DFA10300ABD693 /* NSData+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+Base64.h"; sourceTree = "<group>"; };
 		AC26C84714DFA10300ABD693 /* NSData+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+Base64.m"; sourceTree = "<group>"; };
 		AC26C84914DFA84D00ABD693 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		AC2F91D214F4B59800E962DF /* OpenAccount-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OpenAccount-Inactive.png"; sourceTree = "<group>"; };
+		AC2F91D314F4B59800E962DF /* OpenAccount-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OpenAccount-PushDown.png"; sourceTree = "<group>"; };
+		AC2F91D414F4B59800E962DF /* OpenAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpenAccount.png; sourceTree = "<group>"; };
 		AC66816F14ECD43C00BB02FF /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
 		AC66817014ECD43C00BB02FF /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
 		AC66817114ECD43C00BB02FF /* DataValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataValidator.h; sourceTree = "<group>"; };
@@ -434,6 +440,9 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AC2F91D214F4B59800E962DF /* OpenAccount-Inactive.png */,
+				AC2F91D314F4B59800E962DF /* OpenAccount-PushDown.png */,
+				AC2F91D414F4B59800E962DF /* OpenAccount.png */,
 				546838EE14F3E1C9005C356A /* warningIcon.png */,
 				9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */,
 				9584FE2B14F27E1F00D28154 /* AccountsView_Splitter_Gradient.png */,
@@ -848,6 +857,9 @@
 				9584FE2C14F27E2000D28154 /* AccountsView_Splitter_Gradient.png in Resources */,
 				546838EF14F3E1C9005C356A /* warningIcon.png in Resources */,
 				546838FF14F42398005C356A /* TabViewController.xib in Resources */,
+				AC2F91D514F4B59900E962DF /* OpenAccount-Inactive.png in Resources */,
+				AC2F91D614F4B59900E962DF /* OpenAccount-PushDown.png in Resources */,
+				AC2F91D714F4B59900E962DF /* OpenAccount.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
