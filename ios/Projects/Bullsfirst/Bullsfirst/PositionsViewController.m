@@ -423,8 +423,6 @@
     
     TradeViewController *controller = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil position:button.position];    
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
-    
     [self presentModalViewController:controller animated:YES];
 }
 

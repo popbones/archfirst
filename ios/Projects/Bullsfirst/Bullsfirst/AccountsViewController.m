@@ -197,7 +197,6 @@
     AddAccountViewController *addAccountViewController = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];
     [addAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     
-   // [addAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:addAccountViewController animated:YES];
     addAccountViewController.view.superview.bounds=CGRectMake(0, 0, 500,235);
     //addAccountViewController.view.frame=CGRectMake(0, 0, 500,235);
