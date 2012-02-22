@@ -102,8 +102,6 @@
     barButtonItem.width = 10.0f;
     [buttons addObject:barButtonItem];
     
-    
-    
     barButtonItem = [[UIBarButtonItem alloc]
                      initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStylePlain;
