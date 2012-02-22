@@ -263,7 +263,7 @@
     }
     
 	bubbleSize = CGSizeMake(textSize.width + cornerRadius*2, textSize.height + cornerRadius*2);
-	
+	    
 	CGPoint targetRelativeOrigin    = [targetView.superview convertPoint:targetView.frame.origin toView:containerView.superview];
 	CGPoint containerRelativeOrigin = [containerView.superview convertPoint:containerView.frame.origin toView:containerView.superview];
     
@@ -293,7 +293,7 @@
 	CGFloat W = containerView.frame.size.width;
 	
 	CGPoint p = [targetView.superview convertPoint:targetView.center toView:containerView];
-	CGFloat x_p = p.x;
+	CGFloat x_p = p.x+roundf(bubbleSize.width);
 	CGFloat x_b = x_p - roundf(bubbleSize.width/2);
 	if (x_b < sidePadding) {
 		x_b = sidePadding;

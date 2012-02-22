@@ -55,7 +55,7 @@
     [self removeHintView];
     isHintViewDisplayed = YES;
     hintView.message = errorString;
-    [hintView presentPointingAtView:textField.rightView inView:textField.superview animated:NO];
+    [hintView presentPointingAtView:textField inView:textField.superview animated:NO];
 }
 
 -(void) textEditStart:(UITextField*) textField
