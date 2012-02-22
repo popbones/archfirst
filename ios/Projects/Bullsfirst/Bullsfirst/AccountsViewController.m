@@ -76,10 +76,6 @@
     
     [pieChartMVPositionViewController viewDidAppear:animated];
     [pieChartMVAccountsViewController viewDidAppear:animated];
-    headerView.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
-    accountsTable.separatorStyle=UITableViewCellSeparatorStyleNone;
-    headerView.layer.borderWidth=0.5;
-    headerView.layer.borderColor=[UIColor blackColor].CGColor;
      
 }
 
@@ -244,8 +240,6 @@
 #pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    //headerView.layer.borderWidth=0.5;
-    //headerView.layer.borderColor=[UIColor blackColor].CGColor;
     headerView.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     return headerView;
 }
@@ -332,8 +326,6 @@
         UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
         selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
         cell.selectedBackgroundView = selected;
-        cell.layer.borderColor=[UIColor blackColor].CGColor;
-        cell.layer.borderWidth=0.5;
         return cell;
     }
     else
@@ -366,8 +358,6 @@
         UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
         selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
         cell.selectedBackgroundView = selected;
-        cell.layer.borderColor=[UIColor blackColor].CGColor;
-        cell.layer.borderWidth=0.5;
         return cell;
 
     }
