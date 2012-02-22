@@ -26,7 +26,7 @@
 #import "UserViewController.h"
 
 @implementation TransactionsViewController
-@synthesize transectionTBL;
+@synthesize transectionTBL,portraitTitleBar,landscrapeTitleBar;
 
 - (id)init
 {
@@ -63,6 +63,10 @@
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
     label.text = @"Transections";
+    
+    portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    
     [label sizeToFit];
 }
 
@@ -108,12 +112,12 @@
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
-        return super.landscrapeTitleBar;
+        return landscrapeTitleBar;
     } else {
-        return super.portraitTitleBar;
+        return portraitTitleBar;
     }
 }
-/*
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     return 44;
@@ -124,11 +128,21 @@
     return 44;    
 }
 
+//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    static NSString *CellIdentifier = @"BookmarkCell";
+//    
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    if (cell == nil) {
+//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
+//    }
+//    
+//    
+//    
+//    cell.textLabel.text = @"position 1";
+//    return cell;
+//}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-}
-*/
 /*
  // Override to support conditional editing of the table view.
  - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath

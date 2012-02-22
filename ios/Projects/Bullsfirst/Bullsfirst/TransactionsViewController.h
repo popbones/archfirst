@@ -24,4 +24,9 @@
 @interface TransactionsViewController : TabViewController
 
 @property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
+
+@property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
+@property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
+
+
 @end
