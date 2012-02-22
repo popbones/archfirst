@@ -23,7 +23,7 @@
 #import "TransferViewController.h"
 #import "FilterViewController.h"
 #import "UserViewController.h"
-
+#import "AddAccountViewController.h"
 @implementation TabViewController
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
@@ -71,6 +71,17 @@
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
     // Add buttons to toolbar and toolbar to nav bar.
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStylePlain;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    [buttons addObject:barButtonItem];
+    
+    // Create a spacer.
+    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    barButtonItem.width = 10.0f;
+    [buttons addObject:barButtonItem];
+    
+    barButtonItem = [[UIBarButtonItem alloc]
                      initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(transferBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
@@ -91,16 +102,7 @@
     barButtonItem.width = 10.0f;
     [buttons addObject:barButtonItem];
     
-    barButtonItem = [[UIBarButtonItem alloc]
-                     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(tradeBTNClicked:)];
-    barButtonItem.style = UIBarButtonItemStylePlain;
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-    [buttons addObject:barButtonItem];
     
-    // Create a spacer.
-    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 10.0f;
-    [buttons addObject:barButtonItem];
     
     barButtonItem = [[UIBarButtonItem alloc]
                      initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
@@ -248,6 +250,14 @@
     
     [self presentModalViewController:controller animated:YES];
 }
-
+- (IBAction)addBTNClicked:(id)sender {
+    AddAccountViewController *controller = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+    
+    [self presentModalViewController:controller animated:YES];
+    controller.view.superview.bounds=CGRectMake(0, 0, 500,235);
+    controller.view.frame=CGRectMake(0, 0, 500,235);
+}
 
 @end

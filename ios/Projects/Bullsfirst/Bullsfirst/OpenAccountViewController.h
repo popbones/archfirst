@@ -43,7 +43,7 @@
     IBOutlet UILabel *passwordLBL;
     IBOutlet UILabel *confirmPasswordFirstPartLBL;
     IBOutlet UILabel *confirmPasswordSecondPartLBL;
-    
+    IBOutlet UIScrollView *scrollview;
     IBOutlet UIActivityIndicatorView *spinner;
     
     IBOutlet UIButton* openAccountButton;

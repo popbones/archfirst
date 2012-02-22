@@ -258,7 +258,39 @@
     
     
 }
+-(void) keyBoardWillShow: (NSNotification*) notification
+{
+    UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+    if(UIDeviceOrientationIsLandscape(orientation))
+    {
+        CGRect  rect=self.view.frame;
+        scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
+        
+    }
+    else
+    {
+        CGRect  rect=self.view.frame;
+        scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
+    }
 
+        
+}
+-(void) keyBoardWillHide:(NSNotification*) notification
+{
+    
+    UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+    if(UIDeviceOrientationIsLandscape(orientation))
+    {
+        CGRect  rect=self.view.frame;
+        scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height);
+    }
+    else
+    {
+        CGRect  rect=self.view.frame;
+        scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height);
+       
+    }
+}
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -307,8 +339,15 @@
     confirmpassword.clearsOnBeginEditing = YES;
     
     [self registerForDataValidations];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    CGRect  rect=self.view.frame;
+    scrollview.contentSize=CGSizeMake(rect.size.width, rect.size.height);
+
 }
+
+
 
 - (void)viewDidUnload
 {
@@ -352,7 +391,8 @@
     return NO;
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField{
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
     UIToolbar *toolbar = [[UIToolbar alloc] init];
     [toolbar setBarStyle:UIBarStyleBlackTranslucent];
     [toolbar sizeToFit];

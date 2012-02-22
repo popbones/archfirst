@@ -148,10 +148,10 @@
     [navbar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     CGRect rect=accountName.frame;
-    accountName.frame=CGRectMake(rect.origin.x, rect.origin.y, rect.size.width,50);
+    accountName.frame=CGRectMake(rect.origin.x, rect.origin.y, rect.size.width,45);
     accountName.returnKeyType=UIReturnKeyGo;
     accountName.delegate=self;
-    //[accountName becomeFirstResponder];
+    [accountName becomeFirstResponder];
     navbar.layer.borderColor=[UIColor blueColor].CGColor;
     
 }
