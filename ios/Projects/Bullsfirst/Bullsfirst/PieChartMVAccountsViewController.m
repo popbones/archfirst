@@ -215,21 +215,36 @@
     
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     double total = 0.0;
-    for(BFBrokerageAccount *account in [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts])
+    
+    
+    NSArray* sortedBrokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccountsInSortedOrder];
+    for(BFBrokerageAccount *account in sortedBrokerageAccounts)
     {
         [tempArray addObject:[[account marketValue] amount]];
         total += [[[account marketValue] amount] doubleValue];
     }
     
     int count = 0;
+    NSNumber* others;
+    double otherValues=0;
     for(NSNumber *amount in tempArray)
     {
         if(count < 9)
         {
-            count++;
+            
             [contentArray addObject:[NSNumber numberWithDouble:(100.0*[amount doubleValue]/total)]];
         }
-    }        
+        else
+        {
+            otherValues =  otherValues + (100.0*[amount doubleValue]/total);
+        }
+        count++;
+    }
+    if(count>=9)
+    {
+        others = [NSNumber numberWithDouble:otherValues];
+        [contentArray addObject:others];
+    }
     
 	self.dataForChart = contentArray;
     
@@ -273,6 +288,7 @@
 
 -(void)pieChart:(CPTPieChart *)plot sliceWasSelectedAtRecordIndex:(NSUInteger)index
 {
+    if(index!=9)
     [delegate pieChartMVAccountsClicked:index];
 }
 -(void)clearPieChart
@@ -355,7 +371,10 @@
 -(NSString *)legendTitleForPieChart:(CPTPieChart *)pieChart
                         recordIndex:(NSUInteger)index
 {
-    return [[[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:index] name];
+    if(index == 9)
+        return @"Others";
+    else
+        return [[[[BFBrokerageAccountStore defaultStore] allBrokerageAccountsInSortedOrder] objectAtIndex:index] name];
 }
 
 -(CPTFill *)sliceFillForPieChart:(CPTPieChart *)pieChart recordIndex:(NSUInteger)index
@@ -373,7 +392,7 @@
     else if(index == 5)
         return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0X98c1dc) endColor:(0X0271ae)]];
     else if(index == 6)
-        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0X1d7554) endColor:(0X9dc2b3)]];
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0X9dc2b3) endColor:(0X1d7554)]];
     else if(index == 7)
         return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xb1a1b1) endColor:(0X50224f)]];
     else if(index == 8)

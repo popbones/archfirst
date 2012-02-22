@@ -51,4 +51,11 @@
     return [self initWithAmount:[NSNumber numberWithInt:0] currency:@""];
 }
 
+//comparison
+
+-(NSComparisonResult) compare:(BFMoney*) anotherMoney
+{
+    return [self.amount compare:anotherMoney.amount];
+}
+
 @end

@@ -47,6 +47,7 @@ static BFBrokerageAccountStore *defaultStore = nil;
     
     if(self)
     {
+            sortDescriptors = [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"marketValue" ascending:NO]];
     }
     return self;
 }
@@ -62,6 +63,12 @@ static BFBrokerageAccountStore *defaultStore = nil;
 {
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     return appDelegate.accounts;
+}
+
+- (NSArray *)allBrokerageAccountsInSortedOrder
+{
+    NSArray* sortedBrokerageAccounts = [[[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] sortedArrayUsingDescriptors:sortDescriptors] mutableCopy];
+    return sortedBrokerageAccounts;
 }
 
 - (void)addBrokerageAccount:(BFBrokerageAccount *)theBrokerageAccount

@@ -214,25 +214,40 @@
     NSMutableArray *tempArray = [[NSMutableArray alloc] init];
     double total = 0.0;
     
-    if([[BFBrokerageAccountStore defaultStore]allBrokerageAccounts].count!=0)
+    if([[BFBrokerageAccountStore defaultStore]allBrokerageAccountsInSortedOrder].count!=0)
     {
-        BFBrokerageAccount *neededAccount=[[[BFBrokerageAccountStore defaultStore]allBrokerageAccounts] objectAtIndex:accountIndex];
-        for (BFPosition *position in [neededAccount positions] ){
+        BFBrokerageAccount *neededAccount=[[[BFBrokerageAccountStore defaultStore]allBrokerageAccountsInSortedOrder] objectAtIndex:accountIndex];
+        
+        NSArray *sortDescriptors = [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"marketValue" ascending:NO]];
+        
+        NSArray* sortedPositions = [[neededAccount positions] sortedArrayUsingDescriptors:sortDescriptors];
+        
+        for (BFPosition *position in sortedPositions){
             [tempArray addObject:[[position marketValue] amount]];
             total += [[[position marketValue] amount] doubleValue];
             
         }
         total +=[[[neededAccount cashPosition]amount]doubleValue];
-        
         int count = 0;
+        double otherValues=0;
+        NSNumber* others;
         for(NSNumber *amount in tempArray)
         {
             if(count < 9)
             {
-                count++;        
                 [contentArray addObject:[NSNumber numberWithDouble:(100.0*[amount doubleValue]/total)]];
             }
-        }        
+            else
+            {
+                otherValues =  otherValues + (100.0*[amount doubleValue]/total);
+            }
+            count++; 
+        }  
+        if(count>=9)
+        {
+            others = [NSNumber numberWithDouble:otherValues];
+            [contentArray addObject:others];
+        }
         
         self.dataForChart = contentArray;
         // Add legend
@@ -310,6 +325,7 @@
 }
 -(void)pieChart:(CPTPieChart *)plot sliceWasSelectedAtRecordIndex:(NSUInteger)index
 {    
+    if(index!=9)
     [delegate pieChartMVPositionClicked];
 }
 
@@ -353,8 +369,10 @@
 -(NSString *)legendTitleForPieChart:(CPTPieChart *)pieChart
                         recordIndex:(NSUInteger)index
 {
-    if(index<=[[[[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:accountIndex] positions] count])
-        return [[[[[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:accountIndex] positions] objectAtIndex:index]instrumentSymbol];
+    if(index==9)
+        return @"Others";
+    if(index<=[[[[[BFBrokerageAccountStore defaultStore] allBrokerageAccountsInSortedOrder] objectAtIndex:accountIndex] positions] count])
+        return [[[[[[BFBrokerageAccountStore defaultStore] allBrokerageAccountsInSortedOrder] objectAtIndex:accountIndex] positions] objectAtIndex:index]instrumentSymbol];
     else
         return @"CASH";
 }
@@ -374,7 +392,7 @@
     else if(index == 5)
         return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0X98c1dc) endColor:(0X0271ae)]];
     else if(index == 6)
-        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0X1d7554) endColor:(0X9dc2b3)]];
+        return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0X9dc2b3) endColor:(0X1d7554)]];
     else if(index == 7)
         return [CPTFill fillWithGradient:[self CPTGradientWithStartColor:(0Xb1a1b1) endColor:(0X50224f)]];
     else if(index == 8)

@@ -23,12 +23,16 @@
 @class BFBrokerageAccount;
 
 @interface BFBrokerageAccountStore : NSObject {
+    
+    NSArray *sortDescriptors;
 }
 
 + (BFBrokerageAccountStore *)defaultStore;
 - (void)accountsFromJSONData:(NSData *)data;
 
 - (NSArray *)allBrokerageAccounts;
+
+- (NSArray *)allBrokerageAccountsInSortedOrder;
 
 - (void)addBrokerageAccount:(BFBrokerageAccount *)theBrokerageAccount;
 
