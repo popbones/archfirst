@@ -238,8 +238,19 @@
         // Add legend
         CPTLegend *theLegend = [CPTLegend legendWithGraph:pieGraph];
         theLegend.numberOfColumns = 2;
-        theLegend.columnMargin = 47.0;
+        //theLegend.columnMargin = 47.0;
         theLegend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
+        
+        NSNumber *rowHeight = [NSNumber numberWithInt:36];
+        theLegend.rowHeights = [NSArray arrayWithObjects:rowHeight,rowHeight,rowHeight,rowHeight,rowHeight,nil];
+        NSNumber *columnWidth = [NSNumber numberWithInt:140];
+        theLegend.columnWidths = [NSArray arrayWithObjects:columnWidth,columnWidth,nil];
+        theLegend.swatchSize = CGSizeMake(25, 25);
+        CPTMutableTextStyle *swatchTextStyle = [[CPTMutableTextStyle alloc] init];
+        swatchTextStyle.fontName=@"Helvetica";
+        swatchTextStyle.fontSize = 15;
+        theLegend.textStyle = swatchTextStyle;
+        
         //theLegend.borderLineStyle = [CPTLineStyle lineStyle];
         theLegend.cornerRadius = 5.0;
         CPTMutableLineStyle* lineStyle = [CPTMutableLineStyle lineStyle];
@@ -248,9 +259,13 @@
         theLegend.swatchBorderLineStyle = lineStyle;
         pieGraph.legend = theLegend;
         pieGraph.legendAnchor = CPTRectAnchorTop;
-        pieGraph.legendDisplacement = CGPointMake(0, -380);     
+        pieGraph.legendDisplacement = CGPointMake(0, -380);  
+        CPTMutableTextStyle *titleStyle = [[CPTMutableTextStyle alloc] init];
+        titleStyle.fontName=@"Helvetica-Bold";
+        titleStyle.fontSize = 20;
+        pieGraph.titleTextStyle = titleStyle;
         pieGraph.title=neededAccount.name;
-        pieGraph.titleDisplacement = CGPointMake(0,0);
+        pieGraph.titleDisplacement = CGPointMake(0,-30);
         [self performAnimation];
     }
 }
