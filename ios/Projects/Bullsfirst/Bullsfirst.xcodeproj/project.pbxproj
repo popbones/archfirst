@@ -124,6 +124,9 @@
 		AC2F91D514F4B59900E962DF /* OpenAccount-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91D214F4B59800E962DF /* OpenAccount-Inactive.png */; };
 		AC2F91D614F4B59900E962DF /* OpenAccount-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91D314F4B59800E962DF /* OpenAccount-PushDown.png */; };
 		AC2F91D714F4B59900E962DF /* OpenAccount.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91D414F4B59800E962DF /* OpenAccount.png */; };
+		AC2F91DB14F52A8300E962DF /* Rename-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91D814F52A7900E962DF /* Rename-Inactive.png */; };
+		AC2F91DC14F52A8300E962DF /* Rename-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91D914F52A7E00E962DF /* Rename-PushDown.png */; };
+		AC2F91DD14F52A8300E962DF /* Rename.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91DA14F52A8000E962DF /* Rename.png */; };
 		AC66817314ECD43C00BB02FF /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC66817014ECD43C00BB02FF /* CMPopTipView.m */; };
 		AC66817414ECD43C00BB02FF /* DataValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = AC66817214ECD43C00BB02FF /* DataValidator.m */; };
 		AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */; };
@@ -309,6 +312,9 @@
 		AC2F91D214F4B59800E962DF /* OpenAccount-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OpenAccount-Inactive.png"; sourceTree = "<group>"; };
 		AC2F91D314F4B59800E962DF /* OpenAccount-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "OpenAccount-PushDown.png"; sourceTree = "<group>"; };
 		AC2F91D414F4B59800E962DF /* OpenAccount.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OpenAccount.png; sourceTree = "<group>"; };
+		AC2F91D814F52A7900E962DF /* Rename-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rename-Inactive.png"; sourceTree = "<group>"; };
+		AC2F91D914F52A7E00E962DF /* Rename-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rename-PushDown.png"; sourceTree = "<group>"; };
+		AC2F91DA14F52A8000E962DF /* Rename.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rename.png; sourceTree = "<group>"; };
 		AC66816F14ECD43C00BB02FF /* CMPopTipView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMPopTipView.h; sourceTree = "<group>"; };
 		AC66817014ECD43C00BB02FF /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
 		AC66817114ECD43C00BB02FF /* DataValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataValidator.h; sourceTree = "<group>"; };
@@ -440,6 +446,9 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				AC2F91D814F52A7900E962DF /* Rename-Inactive.png */,
+				AC2F91D914F52A7E00E962DF /* Rename-PushDown.png */,
+				AC2F91DA14F52A8000E962DF /* Rename.png */,
 				AC2F91D214F4B59800E962DF /* OpenAccount-Inactive.png */,
 				AC2F91D314F4B59800E962DF /* OpenAccount-PushDown.png */,
 				AC2F91D414F4B59800E962DF /* OpenAccount.png */,
@@ -860,6 +869,9 @@
 				AC2F91D514F4B59900E962DF /* OpenAccount-Inactive.png in Resources */,
 				AC2F91D614F4B59900E962DF /* OpenAccount-PushDown.png in Resources */,
 				AC2F91D714F4B59900E962DF /* OpenAccount.png in Resources */,
+				AC2F91DB14F52A8300E962DF /* Rename-Inactive.png in Resources */,
+				AC2F91DC14F52A8300E962DF /* Rename-PushDown.png in Resources */,
+				AC2F91DD14F52A8300E962DF /* Rename.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

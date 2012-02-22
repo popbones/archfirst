@@ -54,6 +54,8 @@
     // Do any additional setup after loading the view from its nib.
    
     
+    [accountName setFrame:CGRectMake(accountName.frame.origin.x, accountName.frame.origin.y, accountName.frame.size.width,45)];
+    
     accountName.text = oldAccountName;
     accountName.returnKeyType = UIReturnKeyGo;
     self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];

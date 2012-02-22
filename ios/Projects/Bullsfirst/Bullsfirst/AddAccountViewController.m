@@ -35,19 +35,7 @@
         }
     return self;
 }
--(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
-{
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-        self.view.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    }
-    else
-    {
-        self.view.frame=CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    }
-    
-    
-}
+
 - (void)didReceiveMemoryWarning
 {
     // Releases the view if it doesn't have a superview.

@@ -200,7 +200,7 @@
    // [addAccountViewController setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     [self presentModalViewController:addAccountViewController animated:YES];
     addAccountViewController.view.superview.bounds=CGRectMake(0, 0, 500,235);
-    addAccountViewController.view.frame=CGRectMake(0, 0, 500,235);
+    //addAccountViewController.view.frame=CGRectMake(0, 0, 500,235);
 
     }
 
@@ -214,19 +214,19 @@
 }
 
 
-#pragma mark AccountsTableViewController Delegate methods
-
-
--(void) editingStartedForAccountWithName:(NSString *)accName withId:(NSString*) accId
-{
-    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:accName withId:accId];    
-    [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-    
-    [self presentModalViewController:editAccountViewController animated:YES];
-    editAccountViewController.view.superview.bounds=CGRectMake(0, 0, 540,185);
-    
-}
+//#pragma mark AccountsTableViewController Delegate methods
+//
+//
+//-(void) editingStartedForAccountWithName:(NSString *)accName withId:(NSString*) accId
+//{
+//    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:accName withId:accId];    
+//    [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
+//    [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+//    
+//    [self presentModalViewController:editAccountViewController animated:YES];
+//    editAccountViewController.view.superview.frame=CGRectMake(0, 0, 488,250);
+//    
+//}
 
 #pragma mark - KVO lifecycle
 
@@ -390,7 +390,7 @@
     [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self presentModalViewController:editAccountViewController animated:YES];
-    editAccountViewController.view.superview.bounds=CGRectMake(0, 0, 540,185);
+    editAccountViewController.view.superview.bounds=CGRectMake(0, 0, 488,250);
 }
 
 
