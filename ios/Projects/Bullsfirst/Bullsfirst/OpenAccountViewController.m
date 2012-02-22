@@ -26,7 +26,7 @@
 @implementation OpenAccountViewController
 
 @synthesize restServiceObject;
-
+@synthesize activeTextField,textFields;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -273,6 +273,7 @@
     validator = [[DataValidator alloc] init];
     validator.delegate = self;
     
+    textFields=[NSArray arrayWithObjects:firstName,lastName,username,password,confirmpassword, nil];
     
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     openAccountButton.enabled = NO;
@@ -301,15 +302,51 @@
     return YES;
     
 }
+#pragma mark - text field lifecycle
+- (void)previousBTNClicked:(id)sender {
+    NSUInteger currentTextField = [textFields indexOfObject:activeTextField];
+    if (currentTextField == 0)
+        currentTextField = [textFields count] -1;
+    else
+        currentTextField--;
+    activeTextField = [textFields objectAtIndex:currentTextField];
+    [activeTextField becomeFirstResponder];
+}
 
-#pragma mark - UITextField delegate methods
+- (void)nextBTNClicked:(id)sender {
+    NSUInteger currentTextField = [textFields indexOfObject:activeTextField];
+    if (currentTextField < [textFields count]-1)
+        currentTextField++;
+    else
+        currentTextField = 0;
+    activeTextField = [textFields objectAtIndex:currentTextField];
+    [activeTextField becomeFirstResponder];
+}
 
--(BOOL) textFieldShouldReturn:(UITextField *)textField
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
     [self openAccountAction];
-    return YES;
+    return NO;
 }
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+    [toolbar sizeToFit];
+    
+    UIBarButtonItem *previousButton = [[UIBarButtonItem alloc] initWithTitle:@"Prev" style:UIBarButtonItemStyleBordered target:self action:@selector(previousBTNClicked:)];
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(nextBTNClicked:)];    
+    NSArray *itemsArray = [NSArray arrayWithObjects:previousButton, nextButton, nil];
+    [toolbar setItems:itemsArray];
+    
+    [textField setInputAccessoryView:toolbar];
+    
+    // Set the active field. We' ll need that if we want to move properly
+    // between our textfields.
+    activeTextField = textField;
+}
+
 
 #pragma mark - DataValidator protocol methods
 

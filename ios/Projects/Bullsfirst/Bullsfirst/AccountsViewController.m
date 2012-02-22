@@ -128,7 +128,7 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
 }
 
 - (void)viewDidUnload
@@ -136,6 +136,8 @@
     [super viewDidUnload];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate removeObserver:self forKeyPath:@"accounts"];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_LOGOUT" object:nil];
+    
 }
 //initialze brokerage accounts
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
@@ -444,6 +446,16 @@
     PositionsViewController *controller = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil account:indexPath.row];    
     [self.navigationController pushViewController:controller animated:YES];
     
+}
+#pragma mark MVC Delegate methods
+
+-(void)userLogout:(NSNotification*)notification
+{
+    [pieChartMVAccountsViewController clearPieChart];
+    [pieChartMVPositionViewController clearPieChart];
+    pieChartMVPositionViewController.view.hidden=true;
+    pieChartMVAccountsView.hidden=false;
+
 }
 
 @end

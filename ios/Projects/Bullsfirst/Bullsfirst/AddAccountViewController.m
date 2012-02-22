@@ -151,7 +151,7 @@
     accountName.frame=CGRectMake(rect.origin.x, rect.origin.y, rect.size.width,50);
     accountName.returnKeyType=UIReturnKeyGo;
     accountName.delegate=self;
-    [accountName becomeFirstResponder];
+    //[accountName becomeFirstResponder];
     navbar.layer.borderColor=[UIColor blueColor].CGColor;
     
 }

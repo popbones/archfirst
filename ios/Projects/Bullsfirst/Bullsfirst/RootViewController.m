@@ -126,6 +126,7 @@
 
 -(void)userLogout:(NSNotification*)notification
 {
+    
     if(self.selectedIndex==0)
     {
         UINavigationController *controller=(UINavigationController*)[self selectedViewController];

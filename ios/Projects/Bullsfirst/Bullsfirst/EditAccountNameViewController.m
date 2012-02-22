@@ -47,11 +47,12 @@
 
 #pragma mark - View lifecycle
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    
+   
     
     accountName.text = oldAccountName;
     accountName.returnKeyType = UIReturnKeyGo;
@@ -59,8 +60,9 @@
     
     [localNavigationBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-
     [accountName becomeFirstResponder];
+    
+    
 }
 
 - (void)viewDidUnload

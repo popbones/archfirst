@@ -61,7 +61,7 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
 
     UIToolbar *tools = [[UIToolbar alloc]
-                        initWithFrame:CGRectMake(0.0f, 0.0f, 150.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
+                        initWithFrame:CGRectMake(0.0f, 0.0f, 190.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
     tools.clearsContextBeforeDrawing = NO;
     tools.clipsToBounds = NO;
     tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // closest I could get by eye to black, translucent style.
@@ -83,6 +83,16 @@
 
     barButtonItem = [[UIBarButtonItem alloc]
                      initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(tradeBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStylePlain;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    [buttons addObject:barButtonItem];
+    
+    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+    barButtonItem.width = 10.0f;
+    [buttons addObject:barButtonItem];
+    
+    barButtonItem = [[UIBarButtonItem alloc]
+                     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(tradeBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];

@@ -53,7 +53,8 @@
 
 
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
-
+@property (nonatomic, retain) UITextField *activeTextField;
+@property (nonatomic, retain) NSArray *textFields;
 
 - (IBAction)openAccountButtonClicked:(id)sender;
 - (IBAction)cancelButtonClicked:(id)sender;
