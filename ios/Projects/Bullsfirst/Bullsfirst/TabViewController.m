@@ -131,6 +131,9 @@
     self.navigationItem.titleView = label;
     label.text = @"Orders";
     [label sizeToFit];
+    
+    portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
 
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
 
@@ -230,7 +233,6 @@
     TradeViewController *tradeController = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil];    
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:tradeController];
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     
     [self presentModalViewController:controller animated:YES];
 }
@@ -238,7 +240,6 @@
 - (IBAction)transferBTNClicked:(id)sender {
     TransferViewController *controller = [[TransferViewController alloc] initWithNibName:@"TransferViewController" bundle:nil];    
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
     
     [self presentModalViewController:controller animated:YES];
 }
@@ -246,14 +247,14 @@
 - (IBAction)filterBTNClicked:(id)sender {
     FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+  
     
     [self presentModalViewController:controller animated:YES];
 }
 - (IBAction)addBTNClicked:(id)sender {
     AddAccountViewController *controller = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];    
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [controller setModalTransitionStyle:UIModalTransitionStyleFlipHorizontal];
+
     
     [self presentModalViewController:controller animated:YES];
     controller.view.superview.bounds=CGRectMake(0, 0, 500,235);
