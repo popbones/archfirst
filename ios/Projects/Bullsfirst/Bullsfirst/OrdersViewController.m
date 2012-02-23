@@ -20,9 +20,7 @@
 
 #import "OrdersViewController.h"
 #import "TradeViewController.h"
-#import "TransferViewController.h"
 #import "FilterViewController.h"
-#import "UserViewController.h"
 #import "OrderBTN.h"
 
 @implementation OrdersViewController

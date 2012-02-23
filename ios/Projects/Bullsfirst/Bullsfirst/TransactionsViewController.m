@@ -20,10 +20,7 @@
 
 #import "TransactionsViewController.h"
 #import "AppDelegate.h"
-#import "TradeViewController.h"
-#import "TransferViewController.h"
 #import "FilterViewController.h"
-#import "UserViewController.h"
 
 @implementation TransactionsViewController
 @synthesize transectionTBL,portraitTitleBar,landscrapeTitleBar;

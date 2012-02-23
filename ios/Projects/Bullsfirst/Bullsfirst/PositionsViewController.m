@@ -27,7 +27,6 @@
 #import "tradePositionBTN.h"
 #import "expandPositionBTN.h"
 #import "TradeViewController.h"
-#import "TransferViewController.h"
 
 @implementation PositionsViewController
 @synthesize positionTBL;
