@@ -64,7 +64,14 @@
 -(void) viewDidAppear:(BOOL)animated
 {
     if(selectedRow!=-1)
+    {
+        orientation=[[UIDevice currentDevice] orientation];
         [accountsTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:selectedRow inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
+        
+        UITableViewCell* cell=[accountsTable cellForRowAtIndexPath:[NSIndexPath indexPathForRow:selectedRow inSection:0]];
+        UIButton *editButton = (UIButton *)[cell viewWithTag:5];
+        editButton.highlighted = NO;
+    }
     [super viewDidAppear:animated];
     
 }
@@ -375,7 +382,10 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     accountCell=[tableView cellForRowAtIndexPath:indexPath];
+    UIButton *editButton = (UIButton *)[accountCell viewWithTag:5];
+    editButton.highlighted = NO;
     PositionsViewController *controller = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil account:indexPath.row];    
     selectedRow = indexPath.row;
     [self.navigationController pushViewController:controller animated:YES];
