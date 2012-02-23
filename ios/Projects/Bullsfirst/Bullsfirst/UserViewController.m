@@ -38,10 +38,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
     self.versionLabel.text = [NSString stringWithFormat:@"Bullsfirst Verion %@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
-    
-    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    self.usernameLabel.text = [[NSString stringWithFormat:@"%@ %@", appDelegate.currentUser.firstName, appDelegate.currentUser.lastName] uppercaseString];
-
 }
 
 - (void)viewDidUnload
@@ -57,6 +53,13 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+-(void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    self.usernameLabel.text = [[NSString stringWithFormat:@"%@ %@", appDelegate.currentUser.firstName, appDelegate.currentUser.lastName] uppercaseString];
 }
 
 - (IBAction)logoutBTNClicked:(id)sender {
