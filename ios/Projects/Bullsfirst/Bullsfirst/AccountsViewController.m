@@ -146,7 +146,7 @@
     if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
     {
         CGRect rect=accountsTable.frame;
-        accountsTable.frame = CGRectMake(rect.origin.x, rect.origin.y,620,699);
+        accountsTable.frame = CGRectMake(rect.origin.x, rect.origin.y,620,699-44);
         rect=accountNameLBL.frame;
         accountNameLBL.frame = CGRectMake(20, rect.origin.y, rect.size.width, rect.size.height);
         rect = accountNumberLBL.frame;
