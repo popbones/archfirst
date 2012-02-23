@@ -252,31 +252,37 @@
 
                 lastTradeFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:lastTradeFrame];
+                label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [NSString stringWithFormat:@"$%d", [lot.lastTrade.amount intValue]];
                 [cell addSubview:label];
                 
                 marketValueFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:marketValueFrame];
+                label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [NSString stringWithFormat:@"$%d", [lot.marketValue.amount intValue]];
                 [cell addSubview:label];
                 
                 pricePaidFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:pricePaidFrame];
+                label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [NSString stringWithFormat:@"$%d", [lot.pricePaid.amount intValue]];
                 [cell addSubview:label];
 
                 totalCostFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:totalCostFrame];
+                label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [NSString stringWithFormat:@"$%d", [lot.totalCost.amount intValue]];
                 [cell addSubview:label];
 
                 qainFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:qainFrame];
+                label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [NSString stringWithFormat:@"$%d", [lot.gain.amount intValue]];
                 [cell addSubview:label];
                 
                 gainPercentFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:gainPercentFrame];
+                label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [NSString stringWithFormat:@"%d%%", [lot.gainPercent intValue]];
                 [cell addSubview:label];
             }
@@ -336,21 +342,25 @@
                 quantityFrame.origin.y += 44;
                 UILabel *label = [[UILabel alloc] initWithFrame:quantityFrame];
                 label.text = [NSString stringWithFormat:@"%d", [lot.quantity intValue]];
+                label.font = [UIFont systemFontOfSize:13.0];
                 [cell addSubview:label];
 
                 marketValueFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:marketValueFrame];
                 label.text = [NSString stringWithFormat:@"$%d", [lot.marketValue.amount intValue]];
+                label.font = [UIFont systemFontOfSize:13.0];
                 [cell addSubview:label];
                 
                 qainFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:qainFrame];
                 label.text = [NSString stringWithFormat:@"$%d", [lot.gain.amount intValue]];
                 [cell addSubview:label];
+                label.font = [UIFont systemFontOfSize:13.0];
 
                 gainPercentFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:gainPercentFrame];
                 label.text = [NSString stringWithFormat:@"%d%%", [lot.gainPercent intValue]];
+                label.font = [UIFont systemFontOfSize:13.0];
                 [cell addSubview:label];
             }
         }

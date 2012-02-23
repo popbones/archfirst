@@ -19,29 +19,41 @@
     BFMoney *limitPrice;
     NSString *term;
     BOOL    allOrNone;
+    NSDate *creationTime;
+    NSString *status;
+    NSNumber *orderId;
+    NSNumber *cumQty;
 }
 
 @property (nonatomic, retain) NSNumber *brokerageAccountID;
 @property (nonatomic, retain) NSString *accountName;
-@property (nonatomic, retain) NSString *side;
-@property (nonatomic, retain) NSString *instrumentSymbol;
+@property (nonatomic, assign) BOOL    allOrNone;
+@property (nonatomic, retain) NSDate *creationTime;
+@property (nonatomic, retain) NSNumber *cumQty;
+@property (nonatomic, retain) NSNumber *orderId;
 @property (nonatomic, retain) NSNumber *quantity;
+@property (nonatomic, retain) NSString *side;
+@property (nonatomic, retain) NSString *status;
+@property (nonatomic, retain) NSString *instrumentSymbol;
+@property (nonatomic, retain) NSString *term;
 @property (nonatomic, retain) NSString *type;
 @property (nonatomic, retain) BFMoney *limitPrice;
-@property (nonatomic, retain) NSString *term;
-@property (nonatomic, assign) BOOL    allOrNone;
 
 + (NSMutableArray *)ordersFromJSONData:(NSData *)data;
 + (BFOrder *)orderFromDictionary:(NSDictionary *)theDictionary;
 
 - (id)initWithAccountID:(NSNumber *)theAccountID
             accountName:(NSString *)theAccountName
-                   side:(NSString *)theSide
-       instrumentSymbol:(NSString *)theInstrumentSymbol
+              allOrNone:(BOOL)theAllOrNone
+           creationTime:(NSDate *)theCreationTIme
+                 cumQty:(NSNumber *)theCumQty
+                orderId:(NSNumber *)theOrderId
                quantity:(NSNumber *)theQuantity
-                   type:(NSString *)theType
-             limitPrice:(BFMoney *)theLimitPrice
+                   side:(NSString *)theSide
+                 status:(NSString *)theStatus
+       instrumentSymbol:(NSString *)theInstrumentSymbol
                    term:(NSString*)theTerm
-              allOrNone:(BOOL)theAllOrNone;
+                   type:(NSString *)theType
+             limitPrice:(BFMoney *)theLimitPrice;
 
 @end

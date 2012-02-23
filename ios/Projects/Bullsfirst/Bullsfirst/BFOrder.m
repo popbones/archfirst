@@ -18,16 +18,24 @@
 @synthesize limitPrice;
 @synthesize term;
 @synthesize allOrNone;
+@synthesize creationTime;
+@synthesize status;
+@synthesize cumQty;
+@synthesize orderId;
 
 - (id)initWithAccountID:(NSNumber *)theAccountID
             accountName:(NSString *)theAccountName
-                   side:(NSString *)theSide
-       instrumentSymbol:(NSString *)theInstrumentSymbol
+              allOrNone:(BOOL)theAllOrNone
+           creationTime:(NSDate *)theCreationTIme
+                 cumQty:(NSNumber *)theCumQty
+                orderId:(NSNumber *)theOrderId
                quantity:(NSNumber *)theQuantity
+                   side:(NSString *)theSide
+                 status:(NSString *)theStatus
+       instrumentSymbol:(NSString *)theInstrumentSymbol
+                   term:(NSString*)theTerm
                    type:(NSString *)theType
              limitPrice:(BFMoney *)theLimitPrice
-                   term:(NSString*)theTerm
-              allOrNone:(BOOL)theAllOrNone
 {
     self = [super init];
     
@@ -35,13 +43,17 @@
     {
         self.brokerageAccountID = theAccountID;
         self.accountName = theAccountName;
-        self.side = theSide;
-        self.instrumentSymbol = theInstrumentSymbol;
+        self.allOrNone = theAllOrNone;
+        self.creationTime = theCreationTIme;
+        self.cumQty = theCumQty;
+        self.orderId = theOrderId;
         self.quantity = theQuantity;
+        self.side = theSide;
+        self.status = theStatus;
+        self.instrumentSymbol = theInstrumentSymbol;
+        self.term = theTerm;
         self.type = theType;
         self.limitPrice = theLimitPrice;
-        self.term = term;
-        self.allOrNone = theAllOrNone;
     }
     
     return self;      
@@ -51,13 +63,18 @@
 {
     return [self initWithAccountID:[NSNumber numberWithInt:0]
                        accountName:@""
-                              side:@""
-                  instrumentSymbol:@""
+                         allOrNone:NO
+                      creationTime:[NSDate date]
+                            cumQty:[NSNumber numberWithInt:0]
+                           orderId:[NSNumber numberWithInt:0]
                           quantity:[NSNumber numberWithInt:0]
-                              type:@""
-                        limitPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]
+                              side:@""
+                            status:@""
+                  instrumentSymbol:@""
                               term:@""
-                         allOrNone:NO];
+                              type:@""
+                        limitPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]];
+            
 }
 
 + (BFOrder *)orderFromDictionary:(NSDictionary *)theDictionary
@@ -83,17 +100,22 @@
     NSString *symbol = [theDictionary valueForKey:@"symbol"];
     NSString *term = [theDictionary valueForKey:@"term"];
     NSString *type = [theDictionary valueForKey:@"type"];
+    NSNumber *cumQty = [NSNumber numberWithInt:[[theDictionary valueForKey:@"cumQty"] intValue]];
     NSNumber *orderID = [NSNumber numberWithInt:[[theDictionary valueForKey:@"id"] intValue]];   
 
-    return [[BFOrder alloc] initWithAccountID:accountID 
-                                  accountName:accountName 
-                                         side:side 
-                             instrumentSymbol:symbol 
-                                     quantity:quantity 
-                                         type:type 
-                                   limitPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]
-                                         term:term 
-                                    allOrNone:[allOrNone intValue]];
+    return [[BFOrder alloc] initWithAccountID:accountID
+                                  accountName:accountName
+                                    allOrNone:[allOrNone intValue]
+                                 creationTime:creationTime
+                                       cumQty:cumQty
+                                      orderId:orderID
+                                     quantity:quantity
+                                         side:side
+                                       status:status
+                             instrumentSymbol:symbol
+                                         term:term
+                                         type:type
+                                   limitPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]];
 }
 
 + (NSMutableArray *)ordersFromJSONData:(NSData *)data
