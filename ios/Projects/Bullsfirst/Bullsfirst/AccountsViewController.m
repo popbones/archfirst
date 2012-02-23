@@ -52,48 +52,38 @@
     
     return self;
 }
-//-(void) pieChartMVPositionClicked
-//{
-//    positionsChartView.hidden=true;
-//    //pieChartMVAccountsViewController.view.hidden=false;
-//}
-//
-//-(void) pieChartMVAccountsClicked:(int) onIndex
-//{
-//    pieChartMVPositionViewController.accountIndex=onIndex;
-//    [pieChartMVPositionViewController constructPieChart];
-//    pieChartMVAccountsViewController.view.hidden=true;
-//    positionsChartView.hidden=false;
-//    
-//}
 
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    if(selectedRow!=-1)
+        [accountsTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:selectedRow inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
+    [super viewWillAppear:YES];
+}
 
 -(void) viewDidAppear:(BOOL)animated
 {
+    if(selectedRow!=-1)
+        [accountsTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:selectedRow inSection:0] animated:NO scrollPosition:UITableViewScrollPositionNone];
     [super viewDidAppear:animated];
     
-//    [pieChartMVPositionViewController viewDidAppear:animated];
-//    [pieChartMVAccountsViewController viewDidAppear:animated];
-     
 }
 
 
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-//    [pieChartMVPositionViewController viewDidDisappear:animated];
-//    [pieChartMVAccountsViewController viewDidDisappear:animated];
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] init];
 	barButtonItem.title = @"Accounts";
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
 	self.navigationItem.backBarButtonItem = barButtonItem;
-
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:20.0];
@@ -103,21 +93,12 @@
     label.text = @"Accounts";
     [label sizeToFit];
     backBTN.hidden = YES;
-
+    
+    selectedRow=-1;
+    
     pieChartViewController = [[PieChartViewController alloc] init];
     [pieChartViewController setView:chartView];
     [pieChartViewController setPieChartView:pieChartView];
-    //[pieChartMVAccountsViewController setView:pieChartMVAccountsView];
-    //[pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
-    //pieChartMVAccountsViewController.delegate=self;
-    
-//    pieChartMVPositionViewController = [[PieChartMVPositionViewController alloc] init];
-//    [pieChartMVPositionViewController setView:pieChartMVPositionView];
-//    [pieChartMVPositionViewController setPieChartView:pieChartMVPositionView];         
-//    pieChartMVPositionViewController.delegate=self;
-    
-//    positionsChartView.hidden=true;
-//    pieChartMVAccountsViewController.view.hidden=false;
     rightBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;
     leftBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;    orientation=[[UIDevice currentDevice] orientation];
     
@@ -201,8 +182,8 @@
     [self presentModalViewController:addAccountViewController animated:YES];
     addAccountViewController.view.superview.bounds=CGRectMake(0, 0, 500,235);
     //addAccountViewController.view.frame=CGRectMake(0, 0, 500,235);
-
-    }
+    
+}
 
 - (IBAction)filterBTNClicked:(id)sender
 {
@@ -213,20 +194,6 @@
 {
 }
 
-
-//#pragma mark AccountsTableViewController Delegate methods
-//
-//
-//-(void) editingStartedForAccountWithName:(NSString *)accName withId:(NSString*) accId
-//{
-//    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:accName withId:accId];    
-//    [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-//    [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
-//    
-//    [self presentModalViewController:editAccountViewController animated:YES];
-//    editAccountViewController.view.superview.frame=CGRectMake(0, 0, 488,250);
-//    
-//}
 
 #pragma mark - KVO lifecycle
 
@@ -321,7 +288,7 @@
         [[NSBundle mainBundle] loadNibNamed:@"AccountLandscapeTableViewCell" owner:self options:nil];
         cell = accountCell;
         /*
-        */
+         */
         
         UILabel *label;
         label = (UILabel *)[cell viewWithTag:1];
@@ -332,10 +299,10 @@
         
         label = (UILabel *)[cell viewWithTag:3];
         label.text = [NSString stringWithFormat:@"%@%@", currencySymbol, account.marketValue.amount];
-
+        
         label = (UILabel *)[cell viewWithTag:4];
         label.text = [NSString stringWithFormat:@"%@%@", currencySymbol, account.cashPosition.amount];
-       
+        
         editAccountNameBTN *edit = (editAccountNameBTN *)[cell viewWithTag:5]; // expand button
         [edit addTarget:self action:@selector(editAccount:) forControlEvents:UIControlEventTouchUpInside];
         edit.currentName=account.name;
@@ -352,7 +319,7 @@
         UITableViewCell *cell;
         [[NSBundle mainBundle] loadNibNamed:@"AccountTableViewCell" owner:self options:nil];
         cell = accountCell;
-              
+        
         UILabel *label;
         label = (UILabel *)[cell viewWithTag:1];
         label.text = account.name;
@@ -369,31 +336,28 @@
         
         editAccountNameBTN *edit = (editAccountNameBTN *)[cell viewWithTag:5]; // edit button
         [edit addTarget:self action:@selector(editAccount:) forControlEvents:UIControlEventTouchUpInside];
-
+        
         edit.currentName=account.name;
         edit.accountID=[NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
         edit.index=(NSInteger*)indexPath.row;
-
+        
         UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
         selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
         cell.selectedBackgroundView = selected;
         return cell;
-
+        
     }
     
 }
 
 -(void) selectionChanged:(id)sender
 {
-    }
+}
 
 -(void)editAccount:(id)sender
 {
     editAccountNameBTN *button = (editAccountNameBTN *)sender;
-//    NSIndexPath *indexPath=[NSIndexPath indexPathForRow:(NSInteger)button.index inSection:0];
-//    [accountsTable selectRowAtIndexPath:indexPath animated:YES scrollPosition:UITableViewScrollPositionBottom];
-
-   EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:button.currentName withId:button.accountID];    
+    EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:button.currentName withId:button.accountID];    
     [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
@@ -406,44 +370,6 @@
 {
     [pieChartViewController backBTNClicked];
 }
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
- {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
- }   
- else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }   
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
- {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
- {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
 
 #pragma mark - Table view delegate
 
@@ -451,6 +377,7 @@
 {
     accountCell=[tableView cellForRowAtIndexPath:indexPath];
     PositionsViewController *controller = [[PositionsViewController alloc] initWithNibName:@"PositionsViewController" bundle:nil account:indexPath.row];    
+    selectedRow = indexPath.row;
     [self.navigationController pushViewController:controller animated:YES];
     
 }
@@ -458,10 +385,6 @@
 
 -(void)userLogout:(NSNotification*)notification
 {
-//    [pieChartMVAccountsViewController clearPieChart];
-//    [pieChartMVPositionViewController clearPieChart];
-//    pieChartMVPositionViewController.view.hidden=true;
-//    pieChartMVAccountsView.hidden=false;
     [pieChartViewController clearPieChart];
 }
 

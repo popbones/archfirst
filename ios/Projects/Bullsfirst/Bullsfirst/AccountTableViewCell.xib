@@ -161,10 +161,11 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
-								<object class="NSCustomResource" key="IBUISelectedImage">
+								<object class="NSCustomResource" key="IBUIHighlightedImage" id="918212500">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">EditButton-PushDown.png</string>
 								</object>
+								<reference key="IBUISelectedImage" ref="918212500"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">EditButton.png</string>
@@ -290,7 +291,7 @@
 				<string key="-2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="13.CustomClassName">editAccountNameBTN</string>
 				<string key="13.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="3" key="13.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="1" key="13.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -330,12 +331,11 @@
 						<string key="actionLBL">UILabel</string>
 						<string key="backBTN">UIButton</string>
 						<string key="cashLBL">UILabel</string>
+						<string key="chartView">UIView</string>
 						<string key="headerView">UIView</string>
 						<string key="leftBorderView">UIView</string>
 						<string key="marketValueLBL">UILabel</string>
-						<string key="pieChartMVAccountsView">CPTGraphHostingView</string>
-						<string key="pieChartMVPositionView">CPTGraphHostingView</string>
-						<string key="positionsChartView">UIView</string>
+						<string key="pieChartView">CPTGraphHostingView</string>
 						<string key="rightBorderView">UIView</string>
 						<string key="spinner">UIActivityIndicatorView</string>
 					</dictionary>
@@ -368,6 +368,10 @@
 							<string key="name">cashLBL</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="chartView">
+							<string key="name">chartView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="headerView">
 							<string key="name">headerView</string>
 							<string key="candidateClassName">UIView</string>
@@ -380,17 +384,9 @@
 							<string key="name">marketValueLBL</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="pieChartMVAccountsView">
-							<string key="name">pieChartMVAccountsView</string>
+						<object class="IBToOneOutletInfo" key="pieChartView">
+							<string key="name">pieChartView</string>
 							<string key="candidateClassName">CPTGraphHostingView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="pieChartMVPositionView">
-							<string key="name">pieChartMVPositionView</string>
-							<string key="candidateClassName">CPTGraphHostingView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="positionsChartView">
-							<string key="name">positionsChartView</string>
-							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="rightBorderView">
 							<string key="name">rightBorderView</string>

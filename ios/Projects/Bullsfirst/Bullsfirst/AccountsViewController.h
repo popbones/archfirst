@@ -40,6 +40,7 @@
     IBOutlet UIView *chartView;
     IBOutlet UIView *leftBorderView;
     IBOutlet UIView *rightBorderView;
+    int selectedRow;
 }
 @property (strong, nonatomic) IBOutlet UITableViewCell *accountCell;
 @property (strong, nonatomic) IBOutlet UILabel *accountNameLBL;
