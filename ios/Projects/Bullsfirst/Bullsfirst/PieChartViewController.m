@@ -1,8 +1,8 @@
 //
-//  PieChartMVAccountsViewController.m
+//  PieChartViewController.m
 //  Bullsfirst
 //
-//  Created by Joe Howard
+//  Created by Vivekan Arther
 //  Copyright 2012 Archfirst
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
