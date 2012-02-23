@@ -35,6 +35,7 @@ typedef enum{AccountsChart, PositionsChart} Chart;
 	NSMutableArray *dataForChart, *dataForPlot;
     int selectedAccount;
     NSArray *sortedPositions;
+    bool loggedIn;
 }
 
 @property (nonatomic, retain) CPTGraphHostingView *pieChartView;
