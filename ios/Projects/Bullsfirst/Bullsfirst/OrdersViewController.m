@@ -26,6 +26,7 @@
 
 @implementation OrdersViewController
 @synthesize orderTBL;
+@synthesize orderTableViewCell;
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
 @synthesize orders;
@@ -78,6 +79,7 @@
     [self setOrderTBL:nil];
     [self setPortraitTitleBar:nil];
     [self setLandscrapeTitleBar:nil];
+    [self setOrderTableViewCell:nil];
     [super viewDidUnload];
 }
 
@@ -172,18 +174,82 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    static NSString *CellIdentifier = @"BookmarkCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
-    
+{    
     BFOrder *order = [orders objectAtIndex:indexPath.row];
     
-    cell.textLabel.text = order.instrumentSymbol;
-    return cell;
+    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        UITableViewCell *cell;
+        [[NSBundle mainBundle] loadNibNamed:@"OrderLandscapeTableViewCell" owner:self options:nil];
+        cell = orderTableViewCell;
+ 
+        UILabel *label;
+        label = (UILabel *)[cell viewWithTag:1];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [dateFormat setDateFormat:@"MM/dd/yyyy"];
+        label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:order.creationTime]];
+        
+        label = (UILabel *)[cell viewWithTag:2];
+        label.text = [NSString stringWithFormat:@"%d", [order.orderId intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:3];
+        label.text = order.type;
+        
+        label = (UILabel *)[cell viewWithTag:4];
+        label.text = order.instrumentSymbol;
+        
+        label = (UILabel *)[cell viewWithTag:5];
+        label.text = [NSString stringWithFormat:@"%d", [order.quantity intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:6];
+        
+        label = (UILabel *)[cell viewWithTag:7];
+        
+        label = (UILabel *)[cell viewWithTag:8];
+        label.text = order.status;
+        
+        label = (UILabel *)[cell viewWithTag:9];
+               
+        return cell;
+    }
+    else
+    {
+        UITableViewCell *cell;
+        [[NSBundle mainBundle] loadNibNamed:@"OrderTableViewCell" owner:self options:nil];
+        cell = orderTableViewCell;
+        
+        UILabel *label;
+        label = (UILabel *)[cell viewWithTag:1];
+        NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+        [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+        [dateFormat setDateFormat:@"MM/dd/yyyy"];
+        label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:order.creationTime]];
+        
+        label = (UILabel *)[cell viewWithTag:2];
+        label.text = [NSString stringWithFormat:@"%d", [order.orderId intValue]];
+
+        label = (UILabel *)[cell viewWithTag:3];
+        label.text = order.type;
+        
+        label = (UILabel *)[cell viewWithTag:4];
+        label.text = order.instrumentSymbol;
+        
+        label = (UILabel *)[cell viewWithTag:5];
+        label.text = [NSString stringWithFormat:@"%d", [order.quantity intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:6];
+
+        label = (UILabel *)[cell viewWithTag:7];
+
+        label = (UILabel *)[cell viewWithTag:8];
+        label.text = order.status;
+        
+        label = (UILabel *)[cell viewWithTag:9];
+
+        return cell;
+    }
 }
 
 

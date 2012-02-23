@@ -30,6 +30,7 @@
 @property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
 
 @property (strong, nonatomic) IBOutlet UITableView *orderTBL;
+@property (strong, nonatomic) IBOutlet UITableViewCell *orderTableViewCell;
 
 - (IBAction)filterBTNClicked:(id)sender;
 

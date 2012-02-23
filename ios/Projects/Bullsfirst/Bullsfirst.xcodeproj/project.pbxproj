@@ -50,6 +50,8 @@
 		546838FE14F42398005C356A /* TabViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 546838FC14F42390005C356A /* TabViewController.m */; };
 		546838FF14F42398005C356A /* TabViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 546838FD14F42395005C356A /* TabViewController.xib */; };
 		5468394914F6D1D3005C356A /* TableHeader_BackgroundGradient.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 5468394814F6D1D3005C356A /* TableHeader_BackgroundGradient.jpg */; };
+		5468394B14F6DB36005C356A /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5468394A14F6DB34005C356A /* OrderTableViewCell.xib */; };
+		5468394D14F6DB54005C356A /* OrderLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5468394C14F6DB51005C356A /* OrderLandscapeTableViewCell.xib */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
@@ -220,6 +222,8 @@
 		546838FC14F42390005C356A /* TabViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabViewController.m; sourceTree = "<group>"; };
 		546838FD14F42395005C356A /* TabViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TabViewController.xib; sourceTree = "<group>"; };
 		5468394814F6D1D3005C356A /* TableHeader_BackgroundGradient.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = TableHeader_BackgroundGradient.jpg; sourceTree = "<group>"; };
+		5468394A14F6DB34005C356A /* OrderTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderTableViewCell.xib; sourceTree = "<group>"; };
+		5468394C14F6DB51005C356A /* OrderLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderLandscapeTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
 		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
@@ -607,6 +611,8 @@
 				00DFF90814808988001A4641 /* OrdersViewController.h */,
 				00DFF90914808988001A4641 /* OrdersViewController.m */,
 				00DFF91D1480AB01001A4641 /* OrdersViewController.xib */,
+				5468394A14F6DB34005C356A /* OrderTableViewCell.xib */,
+				5468394C14F6DB51005C356A /* OrderLandscapeTableViewCell.xib */,
 			);
 			name = "Order Tab";
 			sourceTree = "<group>";
@@ -871,6 +877,8 @@
 				AC2F91DC14F52A8300E962DF /* Rename-PushDown.png in Resources */,
 				AC2F91DD14F52A8300E962DF /* Rename.png in Resources */,
 				5468394914F6D1D3005C356A /* TableHeader_BackgroundGradient.jpg in Resources */,
+				5468394B14F6DB36005C356A /* OrderTableViewCell.xib in Resources */,
+				5468394D14F6DB54005C356A /* OrderLandscapeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
