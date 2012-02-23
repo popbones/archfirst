@@ -23,6 +23,7 @@
 #import "TransferViewController.h"
 #import "FilterViewController.h"
 #import "UserViewController.h"
+#import "OrderBTN.h"
 
 @implementation OrdersViewController
 @synthesize orderTBL;
@@ -139,6 +140,14 @@
     [self presentModalViewController:controller animated:YES];
 }
 
+- (IBAction)orderBTNClicked:(id)sender {   
+    FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [self presentModalViewController:controller animated:YES];
+}
+
+
+
 #pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
@@ -212,7 +221,11 @@
         
         label = (UILabel *)[cell viewWithTag:9];
         label.text = order.side;
-               
+
+        OrderBTN *orderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
+        [orderBTN addTarget:self action:@selector(orderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+        orderBTN.order = order;
+
         return cell;
     }
     else
@@ -249,6 +262,10 @@
         
         label = (UILabel *)[cell viewWithTag:9];
         label.text = order.side;
+
+        OrderBTN *orderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
+        [orderBTN addTarget:self action:@selector(orderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+        orderBTN.order = order;
 
         return cell;
     }
