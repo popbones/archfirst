@@ -59,6 +59,8 @@
     
     IBOutlet UINavigationBar* navBar;
     
+    bool orientationChanged;
+    
 }
 
 

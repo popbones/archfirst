@@ -107,7 +107,7 @@
 
 -(void)responseReceived:(NSURLResponse *)data
 {
-
+    
 }
 
 -(void)requestFailed:(NSError *)error
@@ -272,8 +272,8 @@
         CGRect  rect=self.view.frame;
         scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
     }
-
-        
+    
+    
 }
 -(void) keyBoardWillHide:(NSNotification*) notification
 {
@@ -288,13 +288,15 @@
     {
         CGRect  rect=self.view.frame;
         scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height);
-       
+        
     }
 }
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+    
+    orientationChanged = YES;
     
     firstName.returnKeyType = UIReturnKeyGo;
     lastName.returnKeyType = UIReturnKeyGo;
@@ -322,7 +324,7 @@
     
     validator = [[DataValidator alloc] init];
     validator.delegate = self;
-
+    
     [navBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     textFields=[NSArray arrayWithObjects:firstName,lastName,username,password,confirmpassword, nil];
     
@@ -344,7 +346,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     CGRect  rect=self.view.frame;
     scrollview.contentSize=CGSizeMake(rect.size.width, rect.size.height);
-
+    
 }
 
 
@@ -360,9 +362,36 @@
 {
     // Return YES for supported orientations
     
+       
+    orientationChanged = YES;
+    [activeTextField resignFirstResponder];
     return YES;
     
 }
+
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if(activeTextField!=nil)
+    {
+        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+        if(UIDeviceOrientationIsLandscape(orientation))
+        {
+            CGRect  rect=self.view.frame;
+            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
+            
+        }
+        else
+        {
+            CGRect  rect=self.view.frame;
+            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
+        }
+        [activeTextField becomeFirstResponder];
+        
+        
+    }
+
+}
+
 #pragma mark - text field lifecycle
 - (void)previousBTNClicked:(id)sender {
     NSUInteger currentTextField = [textFields indexOfObject:activeTextField];
@@ -391,7 +420,7 @@
     return NO;
 }
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
 {
     UIToolbar *toolbar = [[UIToolbar alloc] init];
     [toolbar setBarStyle:UIBarStyleBlackTranslucent];
@@ -403,6 +432,30 @@
     [toolbar setItems:itemsArray];
     
     [textField setInputAccessoryView:toolbar];
+    if(orientationChanged)
+    {
+        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+        if(UIDeviceOrientationIsLandscape(orientation))
+        {
+            CGRect  rect=self.view.frame;
+            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
+            
+        }
+        else
+        {
+            CGRect  rect=self.view.frame;
+            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
+        }
+        
+        orientationChanged = NO;
+    }
+    return YES;
+    
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+
     
     // Set the active field. We' ll need that if we want to move properly
     // between our textfields.
