@@ -211,6 +211,7 @@
         label.text = order.status;
         
         label = (UILabel *)[cell viewWithTag:9];
+        label.text = order.side;
                
         return cell;
     }
@@ -247,6 +248,7 @@
         label.text = order.status;
         
         label = (UILabel *)[cell viewWithTag:9];
+        label.text = order.side;
 
         return cell;
     }
