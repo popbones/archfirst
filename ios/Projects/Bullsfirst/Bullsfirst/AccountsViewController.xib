@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<string key="IBDocument.SystemVersion">10K549</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1910</string>
+		<string key="IBDocument.AppKitVersion">1038.36</string>
+		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">911</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBUIView</string>
@@ -190,7 +190,7 @@
 								<string key="NSFrame">{{168, 660}, {63, 37}}</string>
 								<reference key="NSSuperview" ref="265562689"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="33145888"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -230,20 +230,6 @@
 						<reference key="NSSuperview" ref="1037586457"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="495896735"/>
-						<object class="NSColor" key="IBUIBackgroundColor">
-							<int key="NSColorSpace">3</int>
-							<bytes key="NSWhite">MQA</bytes>
-							<reference key="NSCustomColorSpace" ref="574959000"/>
-						</object>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-					</object>
-					<object class="IBUIView" id="33145888">
-						<reference key="NSNextResponder" ref="1037586457"/>
-						<int key="NSvFlags">-2147483359</int>
-						<string key="NSFrame">{{624, 0}, {399, 658}}</string>
-						<reference key="NSSuperview" ref="1037586457"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="876390675"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
@@ -417,35 +403,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">positionsChartView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="265562689"/>
-					</object>
-					<int key="connectionID">125</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
 						<string key="label">leftBorderView</string>
 						<reference key="source" ref="841351856"/>
 						<reference key="destination" ref="27694367"/>
 					</object>
 					<int key="connectionID">134</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">pieChartMVAccountsView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="33145888"/>
-					</object>
-					<int key="connectionID">45</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBCocoaTouchOutletConnection" key="connection">
-						<string key="label">pieChartMVPositionView</string>
-						<reference key="source" ref="841351856"/>
-						<reference key="destination" ref="495896735"/>
-					</object>
-					<int key="connectionID">48</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -462,6 +424,22 @@
 						<reference key="destination" ref="1040862972"/>
 					</object>
 					<int key="connectionID">21</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">chartView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="265562689"/>
+					</object>
+					<int key="connectionID">138</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBCocoaTouchOutletConnection" key="connection">
+						<string key="label">pieChartView</string>
+						<reference key="source" ref="841351856"/>
+						<reference key="destination" ref="495896735"/>
+					</object>
+					<int key="connectionID">139</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBCocoaTouchOutletConnection" key="connection">
@@ -513,7 +491,6 @@
 						<reference key="object" ref="1037586457"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="28276386"/>
-							<reference ref="33145888"/>
 							<reference ref="27694367"/>
 							<reference ref="370225279"/>
 							<reference ref="265562689"/>
@@ -590,11 +567,6 @@
 						<reference key="parent" ref="1037586457"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">17</int>
-						<reference key="object" ref="33145888"/>
-						<reference key="parent" ref="1037586457"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">19</int>
 						<reference key="object" ref="495896735"/>
 						<reference key="parent" ref="265562689"/>
@@ -623,8 +595,6 @@
 				<string key="132.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="133.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="135.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="17.CustomClassName">CPTGraphHostingView</string>
-				<string key="17.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="19.CustomClassName">CPTGraphHostingView</string>
 				<string key="19.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="2.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
@@ -640,7 +610,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">137</int>
+			<int key="maxID">139</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -669,12 +639,11 @@
 						<string key="actionLBL">UILabel</string>
 						<string key="backBTN">UIButton</string>
 						<string key="cashLBL">UILabel</string>
+						<string key="chartView">UIView</string>
 						<string key="headerView">UIView</string>
 						<string key="leftBorderView">UIView</string>
 						<string key="marketValueLBL">UILabel</string>
-						<string key="pieChartMVAccountsView">CPTGraphHostingView</string>
-						<string key="pieChartMVPositionView">CPTGraphHostingView</string>
-						<string key="positionsChartView">UIView</string>
+						<string key="pieChartView">CPTGraphHostingView</string>
 						<string key="rightBorderView">UIView</string>
 						<string key="spinner">UIActivityIndicatorView</string>
 					</dictionary>
@@ -707,6 +676,10 @@
 							<string key="name">cashLBL</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
+						<object class="IBToOneOutletInfo" key="chartView">
+							<string key="name">chartView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="headerView">
 							<string key="name">headerView</string>
 							<string key="candidateClassName">UIView</string>
@@ -719,17 +692,9 @@
 							<string key="name">marketValueLBL</string>
 							<string key="candidateClassName">UILabel</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="pieChartMVAccountsView">
-							<string key="name">pieChartMVAccountsView</string>
+						<object class="IBToOneOutletInfo" key="pieChartView">
+							<string key="name">pieChartView</string>
 							<string key="candidateClassName">CPTGraphHostingView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="pieChartMVPositionView">
-							<string key="name">pieChartMVPositionView</string>
-							<string key="candidateClassName">CPTGraphHostingView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="positionsChartView">
-							<string key="name">positionsChartView</string>
-							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="rightBorderView">
 							<string key="name">rightBorderView</string>
@@ -810,6 +775,6 @@
 			<string key="BackButton.png">{60, 34}</string>
 			<string key="BackButton_PushDownState.png">{60, 34}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">911</string>
 	</data>
 </archive>

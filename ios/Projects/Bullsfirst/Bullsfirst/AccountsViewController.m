@@ -25,8 +25,6 @@
 #import "AccountsTableViewController.h"
 #import "AddAccountViewController.h"
 #import "EditAccountNameViewController.h"
-#import "PieChartMVAccountsViewController.h"
-#import "PieChartMVPositionViewController.h"
 #import "BullFirstWebServiceObject.h"
 #import "AppDelegate.h"
 #import "editAccountNameBTN.h"
@@ -35,7 +33,6 @@
 
 @implementation AccountsViewController
 
-@synthesize pieChartMVAccountsViewController;
 @synthesize accountCell;
 @synthesize accountNameLBL,accountNumberLBL,marketValueLBL,cashLBL,actionLBL;
 
@@ -55,27 +52,28 @@
     
     return self;
 }
--(void) pieChartMVPositionClicked
-{
-    positionsChartView.hidden=true;
-    pieChartMVAccountsViewController.view.hidden=false;
-}
+//-(void) pieChartMVPositionClicked
+//{
+//    positionsChartView.hidden=true;
+//    //pieChartMVAccountsViewController.view.hidden=false;
+//}
+//
+//-(void) pieChartMVAccountsClicked:(int) onIndex
+//{
+//    pieChartMVPositionViewController.accountIndex=onIndex;
+//    [pieChartMVPositionViewController constructPieChart];
+//    pieChartMVAccountsViewController.view.hidden=true;
+//    positionsChartView.hidden=false;
+//    
+//}
 
--(void) pieChartMVAccountsClicked:(int) onIndex
-{
-    pieChartMVPositionViewController.accountIndex=onIndex;
-    [pieChartMVPositionViewController constructPieChart];
-    pieChartMVAccountsViewController.view.hidden=true;
-    positionsChartView.hidden=false;
-    
-}
 
 -(void) viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [pieChartMVPositionViewController viewDidAppear:animated];
-    [pieChartMVAccountsViewController viewDidAppear:animated];
+//    [pieChartMVPositionViewController viewDidAppear:animated];
+//    [pieChartMVAccountsViewController viewDidAppear:animated];
      
 }
 
@@ -83,8 +81,8 @@
 -(void) viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:animated];
-    [pieChartMVPositionViewController viewDidDisappear:animated];
-    [pieChartMVAccountsViewController viewDidDisappear:animated];
+//    [pieChartMVPositionViewController viewDidDisappear:animated];
+//    [pieChartMVAccountsViewController viewDidDisappear:animated];
 }
 
 - (void)viewDidLoad
@@ -104,20 +102,22 @@
     self.navigationItem.titleView = label;
     label.text = @"Accounts";
     [label sizeToFit];
+    backBTN.hidden = YES;
 
-
-    pieChartMVAccountsViewController = [[PieChartMVAccountsViewController alloc] init];
-    [pieChartMVAccountsViewController setView:pieChartMVAccountsView];
-    [pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
-    pieChartMVAccountsViewController.delegate=self;
+    pieChartViewController = [[PieChartViewController alloc] init];
+    [pieChartViewController setView:chartView];
+    [pieChartViewController setPieChartView:pieChartView];
+    //[pieChartMVAccountsViewController setView:pieChartMVAccountsView];
+    //[pieChartMVAccountsViewController setPieChartView:pieChartMVAccountsView];     
+    //pieChartMVAccountsViewController.delegate=self;
     
-    pieChartMVPositionViewController = [[PieChartMVPositionViewController alloc] init];
-    [pieChartMVPositionViewController setView:pieChartMVPositionView];
-    [pieChartMVPositionViewController setPieChartView:pieChartMVPositionView];         
-    pieChartMVPositionViewController.delegate=self;
+//    pieChartMVPositionViewController = [[PieChartMVPositionViewController alloc] init];
+//    [pieChartMVPositionViewController setView:pieChartMVPositionView];
+//    [pieChartMVPositionViewController setPieChartView:pieChartMVPositionView];         
+//    pieChartMVPositionViewController.delegate=self;
     
-    positionsChartView.hidden=true;
-    pieChartMVAccountsViewController.view.hidden=false;
+//    positionsChartView.hidden=true;
+//    pieChartMVAccountsViewController.view.hidden=false;
     rightBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;
     leftBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;    orientation=[[UIDevice currentDevice] orientation];
     
@@ -125,6 +125,8 @@
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
+    
+    [pieChartViewController addObserver:self forKeyPath:@"currentChart" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
 }
 
 - (void)viewDidUnload
@@ -132,6 +134,9 @@
     [super viewDidUnload];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate removeObserver:self forKeyPath:@"accounts"];
+    
+    [pieChartViewController removeObserver:self forKeyPath:@"currentChart"];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"USER_LOGOUT" object:nil];
     
 }
@@ -227,15 +232,29 @@
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-    if ([keyPath isEqualToString:@"accounts"]) {
+    if ([keyPath isEqualToString:@"accounts"]) 
+    {
         NSMutableArray *brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-        if ([brokerageAccounts count] > 0) {
+        if ([brokerageAccounts count] > 0) 
+        {
             [accountsTable reloadData];
-            [pieChartMVAccountsViewController constructPieChart];
-            [pieChartMVPositionViewController constructPieChart];
+            [pieChartViewController constructPieChart];
+            //[pieChartMVPositionViewController constructPieChart];
         }
         return;
     }
+    if([keyPath isEqualToString:@"currentChart"])
+    {
+        if([[change objectForKey:NSKeyValueChangeNewKey] intValue] == AccountsChart)
+        {
+            backBTN.hidden = YES;
+        }
+        else
+        {
+            backBTN.hidden = NO;
+        }
+    }
+    
 }
 #pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -385,8 +404,7 @@
 
 - (IBAction)backBTNClicked:(id)sender
 {
-    positionsChartView.hidden=true;
-    pieChartMVAccountsViewController.view.hidden=false;
+    [pieChartViewController backBTNClicked];
 }
 /*
  // Override to support conditional editing of the table view.
@@ -440,11 +458,11 @@
 
 -(void)userLogout:(NSNotification*)notification
 {
-    [pieChartMVAccountsViewController clearPieChart];
-    [pieChartMVPositionViewController clearPieChart];
-    pieChartMVPositionViewController.view.hidden=true;
-    pieChartMVAccountsView.hidden=false;
-
+//    [pieChartMVAccountsViewController clearPieChart];
+//    [pieChartMVPositionViewController clearPieChart];
+//    pieChartMVPositionViewController.view.hidden=true;
+//    pieChartMVAccountsView.hidden=false;
+    [pieChartViewController clearPieChart];
 }
 
 @end

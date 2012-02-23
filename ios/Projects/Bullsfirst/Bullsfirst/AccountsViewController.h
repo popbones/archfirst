@@ -21,16 +21,11 @@
 #import <Foundation/Foundation.h>
 #import "TabViewController.h"
 
-#import "PieChartMVAccountsViewController.h"
-#import "PieChartMVPositionViewController.h"
+#import "PieChartViewController.h"
 #import "BFToolbar.h"
 @class AccountsTableViewController;
 
-@class PieChartMVAccountsViewController;
-@class PieChartMVPositionViewController;
-
-
-@interface AccountsViewController: TabViewController<PieChartMVAccountsViewControllerDelegate,PieChartMVPositionViewControllerDelegate> 
+@interface AccountsViewController: TabViewController
 {   
     IBOutlet UIActivityIndicatorView *spinner;
     IBOutlet UIView *headerView;
@@ -39,18 +34,14 @@
     IBOutlet UIButton *backBTN;
     NSURLConnection *urlConnection;
     NSMutableData *jsonResponseData;
-    PieChartMVAccountsViewController *pieChartMVAccountsViewController;
-    IBOutlet CPTGraphHostingView *pieChartMVAccountsView;
-
-    PieChartMVPositionViewController *pieChartMVPositionViewController;
-    IBOutlet CPTGraphHostingView *pieChartMVPositionView;
+    PieChartViewController *pieChartViewController;
+    IBOutlet CPTGraphHostingView *pieChartView;
     UIDeviceOrientation orientation;
-    IBOutlet UIView *positionsChartView;
+    IBOutlet UIView *chartView;
     IBOutlet UIView *leftBorderView;
     IBOutlet UIView *rightBorderView;
 }
 @property (strong, nonatomic) IBOutlet UITableViewCell *accountCell;
-@property (nonatomic, retain)  PieChartMVAccountsViewController *pieChartMVAccountsViewController;
 @property (strong, nonatomic) IBOutlet UILabel *accountNameLBL;
 @property (strong, nonatomic) IBOutlet UILabel *accountNumberLBL;
 @property (strong, nonatomic) IBOutlet UILabel *marketValueLBL;

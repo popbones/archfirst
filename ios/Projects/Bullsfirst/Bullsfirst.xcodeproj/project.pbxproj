@@ -21,8 +21,6 @@
 		00D3C430147D537B0067A768 /* OpenAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D3C42E147D537B0067A768 /* OpenAccountViewController.m */; };
 		00D3C431147D537B0067A768 /* OpenAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */; };
 		00D5191B14891BD20049F43E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 00B38DF71488025000DC62F2 /* QuartzCore.framework */; };
-		00D5191E14891DBA0049F43E /* PieChartMVAccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */; };
-		00D51922148951370049F43E /* PieChartMVPositionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00D51921148951370049F43E /* PieChartMVPositionViewController.m */; };
 		00DFF9041480893E001A4641 /* AccountsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF9031480893E001A4641 /* AccountsViewController.m */; };
 		00DFF90714808975001A4641 /* PositionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF90614808975001A4641 /* PositionsViewController.m */; };
 		00DFF90A14808989001A4641 /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 00DFF90914808988001A4641 /* OrdersViewController.m */; };
@@ -111,6 +109,7 @@
 		95C6A85C14DBED54004F023A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C6A85A14DBED54004F023A /* RootViewController.m */; };
 		95C6A85D14DBED54004F023A /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85B14DBED54004F023A /* RootViewController.xib */; };
 		95C6A85F14DFE869004F023A /* app-icon-72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85E14DFE868004F023A /* app-icon-72x72.png */; };
+		AC0BAC6914F6132A005D70D3 /* PieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0BAC6814F6132A005D70D3 /* PieChartViewController.m */; };
 		AC1206F314F2180E00572819 /* login-button-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1206F214F2180E00572819 /* login-button-inactive.png */; };
 		AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */; };
 		AC26C82914DBF67400ABD693 /* ChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81D14DBF67400ABD693 /* ChallengeHandler.m */; };
@@ -178,10 +177,6 @@
 		00D3C42E147D537B0067A768 /* OpenAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OpenAccountViewController.m; sourceTree = "<group>"; };
 		00D3C42F147D537B0067A768 /* OpenAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OpenAccountViewController.xib; sourceTree = "<group>"; };
 		00D3C432147D60F20067A768 /* BFConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFConstants.h; sourceTree = "<group>"; };
-		00D5191C14891DBA0049F43E /* PieChartMVAccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartMVAccountsViewController.h; sourceTree = "<group>"; };
-		00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartMVAccountsViewController.m; sourceTree = "<group>"; };
-		00D51920148951370049F43E /* PieChartMVPositionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartMVPositionViewController.h; sourceTree = "<group>"; };
-		00D51921148951370049F43E /* PieChartMVPositionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartMVPositionViewController.m; sourceTree = "<group>"; };
 		00DFF9021480893E001A4641 /* AccountsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountsViewController.h; sourceTree = "<group>"; };
 		00DFF9031480893E001A4641 /* AccountsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountsViewController.m; sourceTree = "<group>"; };
 		00DFF90514808975001A4641 /* PositionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PositionsViewController.h; sourceTree = "<group>"; };
@@ -291,6 +286,8 @@
 		95C6A85A14DBED54004F023A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		95C6A85B14DBED54004F023A /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		95C6A85E14DFE868004F023A /* app-icon-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-72x72.png"; sourceTree = "<group>"; };
+		AC0BAC6714F6132A005D70D3 /* PieChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartViewController.h; sourceTree = "<group>"; };
+		AC0BAC6814F6132A005D70D3 /* PieChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartViewController.m; sourceTree = "<group>"; };
 		AC1206F214F2180E00572819 /* login-button-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-inactive.png"; sourceTree = "<group>"; };
 		AC26C81A14DBF67400ABD693 /* AuthenticationChallengeHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthenticationChallengeHandler.h; sourceTree = "<group>"; };
 		AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthenticationChallengeHandler.m; sourceTree = "<group>"; };
@@ -576,13 +573,11 @@
 				009C1A3A148D3FF400259534 /* AddAccountViewController.h */,
 				009C1A3B148D3FF400259534 /* AddAccountViewController.m */,
 				004F06CC148D421F003F35D3 /* AddAccountViewController.xib */,
-				00D5191C14891DBA0049F43E /* PieChartMVAccountsViewController.h */,
-				00D5191D14891DBA0049F43E /* PieChartMVAccountsViewController.m */,
-				00D51920148951370049F43E /* PieChartMVPositionViewController.h */,
-				00D51921148951370049F43E /* PieChartMVPositionViewController.m */,
 				AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */,
 				AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */,
 				AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */,
+				AC0BAC6714F6132A005D70D3 /* PieChartViewController.h */,
+				AC0BAC6814F6132A005D70D3 /* PieChartViewController.m */,
 			);
 			name = "Account Tab";
 			sourceTree = "<group>";
@@ -894,8 +889,6 @@
 				00DFF96214841782001A4641 /* BFPosition.m in Sources */,
 				00DFF96614841B00001A4641 /* BFBrokerageAccount.m in Sources */,
 				00DFF96D14855012001A4641 /* BFBrokerageAccountStore.m in Sources */,
-				00D5191E14891DBA0049F43E /* PieChartMVAccountsViewController.m in Sources */,
-				00D51922148951370049F43E /* PieChartMVPositionViewController.m in Sources */,
 				009C1A3C148D3FF500259534 /* AddAccountViewController.m in Sources */,
 				AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */,
 				AC9B72E514DAB01800B843AC /* BFPlainWhiteTheme.m in Sources */,
@@ -924,6 +917,7 @@
 				546838BB14EEE103005C356A /* BFOrder.m in Sources */,
 				546838C014EEEC83005C356A /* PreviewTradeViewController.m in Sources */,
 				546838FE14F42398005C356A /* TabViewController.m in Sources */,
+				AC0BAC6914F6132A005D70D3 /* PieChartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
