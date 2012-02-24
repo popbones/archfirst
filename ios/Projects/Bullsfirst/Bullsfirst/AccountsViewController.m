@@ -56,8 +56,6 @@
 
 -(void) viewWillAppear:(BOOL)animated
 {
-    if(selectedRow!=-1)
-        [accountsTable selectRowAtIndexPath:[NSIndexPath indexPathForRow:selectedRow inSection:0] animated:YES scrollPosition:UITableViewScrollPositionNone];
     [super viewWillAppear:YES];
 }
 
