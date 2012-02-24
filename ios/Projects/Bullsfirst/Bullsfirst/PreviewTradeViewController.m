@@ -18,6 +18,9 @@
 @synthesize termLabel;
 @synthesize allOrNoneLabel;
 @synthesize limitPriceLabel;
+@synthesize spinner;
+
+@synthesize restServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil order:(BFOrder *)anOrder
 {
@@ -63,6 +66,14 @@
         allOrNoneLabel.text = @"All or None";
     else
         allOrNoneLabel.text = @"";
+
+    [spinner stopAnimating];
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self 
+                                                        responseSelector:@selector(responseReceived:) 
+                                                     receiveDataSelector:@selector(receivedData:) 
+                                                         successSelector:@selector(requestSucceeded:) 
+                                                           errorSelector:@selector(requestFailed:)];
+
 }
 
 - (void)viewDidUnload
@@ -75,6 +86,7 @@
     [self setTermLabel:nil];
     [self setAllOrNoneLabel:nil];
     [self setLimitPriceLabel:nil];
+    [self setSpinner:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -86,11 +98,50 @@
 	return YES;
 }
 
+#pragma mark - IBActions
+
 - (IBAction)placeOrderBTNClicked:(id)sender {
-    [self dismissModalViewControllerAnimated:YES];
+    [spinner startAnimating];
+    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
+    [self.restServiceObject getRequestWithURL:url];    
 }
 
 - (IBAction)cancelBTNClicked:(id)sender {
     [self dismissModalViewControllerAnimated:YES];
 }
+
+#pragma mark - selectors for handling rest call callbacks
+
+-(void)receivedData:(NSData *)data
+{
+    
+}
+
+-(void)responseReceived:(NSURLResponse *)data
+{
+    
+}
+
+-(void)requestFailed:(NSError *)error
+{       
+    [spinner stopAnimating];
+    
+    NSString *errorString = [NSString stringWithString:@"Can't submit the trade order!"];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)requestSucceeded:(NSData *)data
+{
+    NSError *err;
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+    BFDebugLog(@"jsonObject = %@", jsonObject);
+
+    [spinner stopAnimating];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"TRADE_ORDER_SUBMITTED" object:nil];
+    
+    [self dismissModalViewControllerAnimated:YES];
+}
+
 @end

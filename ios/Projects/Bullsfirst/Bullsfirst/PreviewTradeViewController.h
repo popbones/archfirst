@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BFOrder.h"
+#import "BullFirstWebServiceObject.h"
 
 @interface PreviewTradeViewController : UIViewController
 {
@@ -24,6 +25,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *termLabel;
 @property (strong, nonatomic) IBOutlet UILabel *allOrNoneLabel;
 @property (strong, nonatomic) IBOutlet UILabel *limitPriceLabel;
+@property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 - (IBAction)placeOrderBTNClicked:(id)sender;
 - (IBAction)cancelBTNClicked:(id)sender;

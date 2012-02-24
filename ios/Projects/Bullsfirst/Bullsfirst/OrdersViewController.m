@@ -69,7 +69,9 @@
     
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
-    
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBTNClicked:) name:@"TRADE_ORDER_SUBMITTED" object:nil];
+
     [self refreshBTNClicked:nil];
 }
 
@@ -79,6 +81,7 @@
     [self setPortraitTitleBar:nil];
     [self setLandscrapeTitleBar:nil];
     [self setOrderTableViewCell:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TRADE_ORDER_SUBMITTED" object:nil];
     [super viewDidUnload];
 }
 
