@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+@class DatePickerViewController;
+
+@protocol DatePickerViewControllerDelegate
+- (void)selectionChanged:(DatePickerViewController *)controller;
+@end
 
 @interface DatePickerViewController : UIViewController
+- (IBAction)pickerValueChanged:(id)sender;
+- (IBAction)doneBTNClicked:(id)sender;
 
 @end

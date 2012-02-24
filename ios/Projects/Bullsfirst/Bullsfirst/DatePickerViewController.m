@@ -48,4 +48,9 @@
 	return YES;
 }
 
+- (IBAction)pickerValueChanged:(id)sender {
+}
+
+- (IBAction)doneBTNClicked:(id)sender {
+}
 @end
