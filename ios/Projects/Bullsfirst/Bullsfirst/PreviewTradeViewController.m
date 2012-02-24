@@ -109,7 +109,7 @@
         
     NSMutableDictionary *orderDic = [[NSMutableDictionary alloc] init];
     [orderDic setValue:order.side forKey:@"side"];
-    [orderDic setValue:order.instrumentSymbol forKey:@"symbol"];
+    [orderDic setValue:[order.instrumentSymbol uppercaseString] forKey:@"symbol"];
     [orderDic setValue:order.quantity forKey:@"quantity"];
     [orderDic setValue:order.type forKey:@"type"];
     if ([order.term isEqualToString:@"Good for day"])
@@ -134,8 +134,8 @@
     NSError *err;
     NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
     
-    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:jsonBodyData options:0 error:&err];
-    BFDebugLog(@"jsonObject = %@", jsonObject);
+	NSString *responseData = [[NSString alloc] initWithData:jsonBodyData  encoding:NSMacOSRomanStringEncoding];
+    BFDebugLog(@"jsonObject = %@", responseData);
 
     [restServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
 }

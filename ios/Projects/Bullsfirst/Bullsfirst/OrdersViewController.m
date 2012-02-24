@@ -26,6 +26,7 @@
 @implementation OrdersViewController
 @synthesize orderTBL;
 @synthesize orderTableViewCell;
+@synthesize orderFilterView;
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
 @synthesize orders;
@@ -82,6 +83,7 @@
     [self setLandscrapeTitleBar:nil];
     [self setOrderTableViewCell:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TRADE_ORDER_SUBMITTED" object:nil];
+    [self setOrderFilterView:nil];
     [super viewDidUnload];
 }
 

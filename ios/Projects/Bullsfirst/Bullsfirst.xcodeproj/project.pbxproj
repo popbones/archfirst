@@ -53,6 +53,8 @@
 		5468394B14F6DB36005C356A /* OrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5468394A14F6DB34005C356A /* OrderTableViewCell.xib */; };
 		5468394D14F6DB54005C356A /* OrderLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5468394C14F6DB51005C356A /* OrderLandscapeTableViewCell.xib */; };
 		5468395014F6E8A4005C356A /* OrderBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 5468394F14F6E89D005C356A /* OrderBTN.m */; };
+		5468395414F827A0005C356A /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5468395214F82797005C356A /* DatePickerViewController.m */; };
+		5468395514F827A0005C356A /* DatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5468395314F8279D005C356A /* DatePickerViewController.xib */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
@@ -227,6 +229,9 @@
 		5468394C14F6DB51005C356A /* OrderLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrderLandscapeTableViewCell.xib; sourceTree = "<group>"; };
 		5468394E14F6E899005C356A /* OrderBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderBTN.h; sourceTree = "<group>"; };
 		5468394F14F6E89D005C356A /* OrderBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderBTN.m; sourceTree = "<group>"; };
+		5468395114F82791005C356A /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
+		5468395214F82797005C356A /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
+		5468395314F8279D005C356A /* DatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerViewController.xib; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
 		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
@@ -557,9 +562,6 @@
 		546838BC14EEEC3C005C356A /* Trade */ = {
 			isa = PBXGroup;
 			children = (
-				546838B414EECAC2005C356A /* DropdownViewController.h */,
-				546838B514EECAC3005C356A /* DropdownViewController.m */,
-				546838B614EECAC3005C356A /* DropdownViewController.xib */,
 				546838BD14EEEC83005C356A /* PreviewTradeViewController.h */,
 				546838BE14EEEC83005C356A /* PreviewTradeViewController.m */,
 				546838BF14EEEC83005C356A /* PreviewTradeViewController.xib */,
@@ -648,6 +650,9 @@
 		54B78A7214EAB427002FF1AC /* Forms */ = {
 			isa = PBXGroup;
 			children = (
+				546838B414EECAC2005C356A /* DropdownViewController.h */,
+				546838B514EECAC3005C356A /* DropdownViewController.m */,
+				546838B614EECAC3005C356A /* DropdownViewController.xib */,
 				546838BC14EEEC3C005C356A /* Trade */,
 				54B78AEA14EC4652002FF1AC /* UserViewController.h */,
 				54B78AEB14EC4654002FF1AC /* UserViewController.m */,
@@ -658,6 +663,9 @@
 				54B78A9914EB00A6002FF1AC /* FilterViewController.h */,
 				54B78A9A14EB00A7002FF1AC /* FilterViewController.m */,
 				54B78A9B14EB00A9002FF1AC /* FilterViewController.xib */,
+				5468395114F82791005C356A /* DatePickerViewController.h */,
+				5468395214F82797005C356A /* DatePickerViewController.m */,
+				5468395314F8279D005C356A /* DatePickerViewController.xib */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -884,6 +892,7 @@
 				5468394914F6D1D3005C356A /* TableHeader_BackgroundGradient.jpg in Resources */,
 				5468394B14F6DB36005C356A /* OrderTableViewCell.xib in Resources */,
 				5468394D14F6DB54005C356A /* OrderLandscapeTableViewCell.xib in Resources */,
+				5468395514F827A0005C356A /* DatePickerViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -936,6 +945,7 @@
 				546838FE14F42398005C356A /* TabViewController.m in Sources */,
 				AC0BAC6914F6132A005D70D3 /* PieChartViewController.m in Sources */,
 				5468395014F6E8A4005C356A /* OrderBTN.m in Sources */,
+				5468395414F827A0005C356A /* DatePickerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

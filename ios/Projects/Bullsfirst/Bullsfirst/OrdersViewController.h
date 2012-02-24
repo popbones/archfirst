@@ -31,6 +31,7 @@
 
 @property (strong, nonatomic) IBOutlet UITableView *orderTBL;
 @property (strong, nonatomic) IBOutlet UITableViewCell *orderTableViewCell;
+@property (strong, nonatomic) IBOutlet UIView *orderFilterView;
 
 - (IBAction)filterBTNClicked:(id)sender;
 
