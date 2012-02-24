@@ -126,7 +126,7 @@
             break;
             
         case 3:
-            selections = [NSArray arrayWithObjects:@"Market", @"Limited", nil];
+            selections = [NSArray arrayWithObjects:@"Market", @"Limit", nil];
             size = [@"Limited" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
             size.width += 20;

@@ -59,7 +59,7 @@
     label.textAlignment = UITextAlignmentCenter;
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
-    label.text = @"Transections";
+    label.text = @"Transactions";
     
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
