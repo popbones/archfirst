@@ -17,4 +17,7 @@
 - (IBAction)pickerValueChanged:(id)sender;
 - (IBAction)doneBTNClicked:(id)sender;
 
+@property (retain, nonatomic) UIPopoverController *popOver;
+@property (retain, nonatomic) id <DatePickerViewControllerDelegate> delegate;
+
 @end

@@ -16,11 +16,11 @@
 
 @interface DropdownViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UITableView *selectionsTBL;
-@property (strong, nonatomic) UIPopoverController *popOver;
+@property (retain, nonatomic) UIPopoverController *popOver;
 @property (strong, nonatomic) NSArray *selections;
 @property (strong, nonatomic) NSString *selected;
 @property (assign, nonatomic) int tag;
-@property (strong, nonatomic) id <DropdownViewControllerDelegate> delegate;
+@property (retain, nonatomic) id <DropdownViewControllerDelegate> delegate;
 
 @end
 

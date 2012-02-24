@@ -52,4 +52,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *resetBTN;
 @property (strong, nonatomic) IBOutlet UIButton *applyBTN;
 
+@property (strong, nonatomic) UIPopoverController *datedropdown;
+
 @end

@@ -9,6 +9,8 @@
 #import "DatePickerViewController.h"
 
 @implementation DatePickerViewController
+@synthesize popOver;
+@synthesize delegate;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {

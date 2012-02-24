@@ -22,6 +22,7 @@
 #import "TradeViewController.h"
 #import "FilterViewController.h"
 #import "OrderBTN.h"
+#import "DatePickerViewController.h"
 
 @implementation OrdersViewController
 @synthesize allAccountBTN;
@@ -37,6 +38,7 @@
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
 @synthesize orders;
+@synthesize datedropdown;
 
 - (id)init
 {
@@ -164,6 +166,22 @@
 }
 
 - (IBAction)fromDateBTNClicked:(id)sender {
+    UIButton *button = sender;
+    if (!datedropdown) {
+        DatePickerViewController *controller = [[DatePickerViewController alloc] initWithNibName:@"DatePickerViewController" bundle:nil];
+        
+        datedropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = datedropdown;
+        controller.delegate = self;
+        [datedropdown setPopoverContentSize:controller.view.frame.size];
+    }
+    if ([datedropdown isPopoverVisible]) {
+        [datedropdown dismissPopoverAnimated:YES];
+    } else {
+        DatePickerViewController *controller = datedropdown.contentViewController;
+        [datedropdown setPopoverContentSize:controller.view.frame.size];
+        [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    }
 }
 
 - (IBAction)toDateBTNClicked:(id)sender {
