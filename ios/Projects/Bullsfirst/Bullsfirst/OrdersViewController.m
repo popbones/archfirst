@@ -24,6 +24,13 @@
 #import "OrderBTN.h"
 
 @implementation OrdersViewController
+@synthesize allAccountBTN;
+@synthesize orderBTN;
+@synthesize orderStatusBTN;
+@synthesize fromDateBTN;
+@synthesize toDateBTN;
+@synthesize resetBTN;
+@synthesize applyBTN;
 @synthesize orderTBL;
 @synthesize orderTableViewCell;
 @synthesize orderFilterView;
@@ -84,6 +91,13 @@
     [self setOrderTableViewCell:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TRADE_ORDER_SUBMITTED" object:nil];
     [self setOrderFilterView:nil];
+    [self setAllAccountBTN:nil];
+    [self setOrderBTN:nil];
+    [self setOrderStatusBTN:nil];
+    [self setFromDateBTN:nil];
+    [self setToDateBTN:nil];
+    [self setResetBTN:nil];
+    [self setApplyBTN:nil];
     [super viewDidUnload];
 }
 
@@ -138,15 +152,34 @@
 }
 
 - (IBAction)filterBTNClicked:(id)sender {
-    FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
+ /*   FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [self presentModalViewController:controller animated:YES];
+    [self presentModalViewController:controller animated:YES];*/
 }
 
 - (IBAction)orderBTNClicked:(id)sender {   
-    FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
-    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [self presentModalViewController:controller animated:YES];
+}
+
+- (IBAction)orderStatusBTNClicked:(id)sender {
+}
+
+- (IBAction)fromDateBTNClicked:(id)sender {
+}
+
+- (IBAction)toDateBTNClicked:(id)sender {
+}
+
+- (IBAction)resetBTNClicked:(id)sender {
+}
+
+- (IBAction)applyBTNClicked:(id)sender {
+}
+
+
+- (IBAction)accountBTNClicked:(id)sender {
+}
+
+- (IBAction)cancelOrderBTNClicked:(id)sender {
 }
 
 
@@ -195,7 +228,7 @@
         UITableViewCell *cell;
         [[NSBundle mainBundle] loadNibNamed:@"OrderLandscapeTableViewCell" owner:self options:nil];
         cell = orderTableViewCell;
- 
+        
         UILabel *label;
         label = (UILabel *)[cell viewWithTag:1];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
@@ -225,9 +258,9 @@
         label = (UILabel *)[cell viewWithTag:9];
         label.text = order.side;
 
-        OrderBTN *orderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
-        [orderBTN addTarget:self action:@selector(orderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
-        orderBTN.order = order;
+        OrderBTN *cancelOrderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
+        [cancelOrderBTN addTarget:self action:@selector(cancelOrderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+        cancelOrderBTN.order = order;
 
         return cell;
     }
@@ -266,9 +299,9 @@
         label = (UILabel *)[cell viewWithTag:9];
         label.text = order.side;
 
-        OrderBTN *orderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
-        [orderBTN addTarget:self action:@selector(orderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
-        orderBTN.order = order;
+        OrderBTN *cancelOrderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
+        [cancelOrderBTN addTarget:self action:@selector(cancelOrderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+        cancelOrderBTN.order = order;
 
         return cell;
     }
@@ -312,7 +345,6 @@
  return YES;
  }
  */
-
 
 
 
