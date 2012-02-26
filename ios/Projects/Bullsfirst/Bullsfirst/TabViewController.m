@@ -61,7 +61,7 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
 
     UIToolbar *tools = [[UIToolbar alloc]
-                        initWithFrame:CGRectMake(0.0f, 0.0f, 190.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
+                        initWithFrame:CGRectMake(0.0f, 0.0f, 280.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
     tools.clearsContextBeforeDrawing = NO;
     tools.clipsToBounds = NO;
     tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // closest I could get by eye to black, translucent style.
@@ -78,7 +78,7 @@
     
     // Create a spacer.
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 10.0f;
+    barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
     
     barButtonItem = [[UIBarButtonItem alloc]
@@ -89,7 +89,7 @@
 
     // Create a spacer.
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 10.0f;
+    barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
 
     barButtonItem = [[UIBarButtonItem alloc]
@@ -99,7 +99,7 @@
     [buttons addObject:barButtonItem];
     
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 10.0f;
+    barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
     
     barButtonItem = [[UIBarButtonItem alloc]
@@ -109,10 +109,10 @@
     [buttons addObject:barButtonItem];
 
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 10.0f;
+    barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
 
-    barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"SettingsButton.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];
+    barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"HeaderBar_Settings.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
