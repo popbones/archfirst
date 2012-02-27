@@ -34,14 +34,10 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *orderTableViewCell;
 @property (strong, nonatomic) IBOutlet UIView *orderFilterView;
 
-- (IBAction)filterBTNClicked:(id)sender;
-
-@property (strong, nonatomic) NSMutableArray *orders;
-
-- (IBAction)accountBTNClicked:(id)sender;
 - (IBAction)dateDropdownClicked:(id)sender;
 - (IBAction)resetBTNClicked:(id)sender;
 - (IBAction)applyBTNClicked:(id)sender;
+- (IBAction)dropDownClicked:(id)sender;
 
 @property (strong, nonatomic) IBOutlet UILabel *fromDateLabel;
 @property (strong, nonatomic) IBOutlet UILabel *toDateLabel;
@@ -61,5 +57,7 @@
 @property (retain, nonatomic) NSString *accountSelected;
 @property (retain, nonatomic) NSString *orderType;
 @property (retain, nonatomic) NSString *orderStatus;
+
+@property (strong, nonatomic) NSMutableArray *orders;
 
 @end
