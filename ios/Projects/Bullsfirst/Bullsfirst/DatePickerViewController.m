@@ -12,6 +12,7 @@
 @synthesize popOver;
 @synthesize delegate;
 @synthesize datePicker;
+@synthesize tag;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -58,6 +59,8 @@
 
 - (IBAction)doneBTNClicked:(id)sender 
 {   
+    if (delegate != nil)
+        [delegate selectionChanged:self];
     [popOver dismissPopoverAnimated:YES];
 }
 @end

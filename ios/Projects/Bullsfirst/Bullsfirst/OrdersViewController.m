@@ -28,8 +28,8 @@
 @synthesize allAccountBTN;
 @synthesize orderBTN;
 @synthesize orderStatusBTN;
-@synthesize fromDateBTN;
-@synthesize toDateBTN;
+@synthesize fromDateLabel;
+@synthesize toDateLabel;
 @synthesize resetBTN;
 @synthesize applyBTN;
 @synthesize orderTBL;
@@ -96,8 +96,8 @@
     [self setAllAccountBTN:nil];
     [self setOrderBTN:nil];
     [self setOrderStatusBTN:nil];
-    [self setFromDateBTN:nil];
-    [self setToDateBTN:nil];
+    [self setFromDateLabel:nil];
+    [self setToDateLabel:nil];
     [self setResetBTN:nil];
     [self setApplyBTN:nil];
     [super viewDidUnload];
@@ -165,26 +165,25 @@
 - (IBAction)orderStatusBTNClicked:(id)sender {
 }
 
-- (IBAction)fromDateBTNClicked:(id)sender {
-    UIButton *button = sender;
+- (IBAction)dateDropdownClicked:(id)sender {
+    UITapGestureRecognizer *tapGesture = sender;
     if (!datedropdown) {
         DatePickerViewController *controller = [[DatePickerViewController alloc] initWithNibName:@"DatePickerViewController" bundle:nil];
         
         datedropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = datedropdown;
         controller.delegate = self;
+        controller.tag = tapGesture.view.tag;
         [datedropdown setPopoverContentSize:controller.view.frame.size];
     }
     if ([datedropdown isPopoverVisible]) {
         [datedropdown dismissPopoverAnimated:YES];
     } else {
         DatePickerViewController *controller = (DatePickerViewController*)datedropdown.contentViewController;
+        controller.tag = tapGesture.view.tag;
         [datedropdown setPopoverContentSize:controller.view.frame.size];
-        [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+        [datedropdown presentPopoverFromRect: tapGesture.view.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
     }
-}
-
-- (IBAction)toDateBTNClicked:(id)sender {
 }
 
 - (IBAction)resetBTNClicked:(id)sender {
@@ -371,7 +370,17 @@
     NSDate* date = controller.datePicker.date;
     NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
-    fromDateBTN.titleLabel.text = [NSString stringWithFormat:@" From: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+    switch (controller.tag) {
+        case 1:
+            fromDateLabel.text = [NSString stringWithFormat:@"From: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+            break;
+            
+        case 2:
+            toDateLabel.text = [NSString stringWithFormat:@"To: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+            break;
+        default:
+            break;
+    }
 }
 
 

@@ -41,15 +41,14 @@
 - (IBAction)accountBTNClicked:(id)sender;
 - (IBAction)orderBTNClicked:(id)sender;
 - (IBAction)orderStatusBTNClicked:(id)sender;
-- (IBAction)fromDateBTNClicked:(id)sender;
-- (IBAction)toDateBTNClicked:(id)sender;
+- (IBAction)dateDropdownClicked:(id)sender;
 - (IBAction)resetBTNClicked:(id)sender;
 - (IBAction)applyBTNClicked:(id)sender;
 @property (strong, nonatomic) IBOutlet UIButton *allAccountBTN;
 @property (strong, nonatomic) IBOutlet UIButton *orderBTN;
 @property (strong, nonatomic) IBOutlet UIButton *orderStatusBTN;
-@property (strong, nonatomic) IBOutlet UIButton *fromDateBTN;
-@property (strong, nonatomic) IBOutlet UIButton *toDateBTN;
+@property (strong, nonatomic) IBOutlet UILabel *fromDateLabel;
+@property (strong, nonatomic) IBOutlet UILabel *toDateLabel;
 @property (strong, nonatomic) IBOutlet UIButton *resetBTN;
 @property (strong, nonatomic) IBOutlet UIButton *applyBTN;
 
