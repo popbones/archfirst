@@ -28,13 +28,13 @@
 #import "BFBrokerageAccount.h"
 
 @implementation OrdersViewController
-@synthesize allAccountBTN;
-@synthesize orderBTN;
-@synthesize orderStatusBTN;
 @synthesize fromDateLabel;
 @synthesize toDateLabel;
 @synthesize resetBTN;
 @synthesize applyBTN;
+@synthesize accountLabel;
+@synthesize orderLabel;
+@synthesize orderStatusLabel;
 @synthesize orderTBL;
 @synthesize orderTableViewCell;
 @synthesize orderFilterView;
@@ -97,13 +97,13 @@
     [self setOrderTableViewCell:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TRADE_ORDER_SUBMITTED" object:nil];
     [self setOrderFilterView:nil];
-    [self setAllAccountBTN:nil];
-    [self setOrderBTN:nil];
-    [self setOrderStatusBTN:nil];
     [self setFromDateLabel:nil];
     [self setToDateLabel:nil];
     [self setResetBTN:nil];
     [self setApplyBTN:nil];
+    [self setAccountLabel:nil];
+    [self setOrderLabel:nil];
+    [self setOrderStatusLabel:nil];
     [super viewDidUnload];
 }
 
@@ -188,6 +188,67 @@
 - (IBAction)applyBTNClicked:(id)sender {
 }
 
+- (IBAction)dropDownClicked:(id)sender {
+    UITapGestureRecognizer *tapGesture = sender;
+    NSArray *selections;
+    CGSize size;
+    switch (tapGesture.view.tag) {
+        case 3: {
+            NSMutableArray *accountName = [[NSMutableArray alloc] init];
+            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+            for (BFBrokerageAccount *account in brokerageAccounts) {
+                [accountName addObject:account.name];
+            }
+            selections = [NSArray arrayWithArray:accountName];
+            size.height = [selections count] * 44;
+            if ([selections count] > 5) {
+                size.height = 220;
+            }
+            size.width = 320;
+            break;
+        }
+            
+        case 4:
+            selections = [NSArray arrayWithObjects:@"Buy", @"Sell", nil];
+            size = [@"Buy" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            size.height = [selections count] * 44;
+            size.width += 20;
+            
+            break;
+            
+        case 5:
+            selections = [NSArray arrayWithObjects:@"Market", @"Limit", nil];
+            size = [@"Limited" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            size.height = [selections count] * 44;
+            size.width += 20;
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+    if (!dropdown) {
+        DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+        
+        dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = dropdown;
+        controller.selections = selections;
+        controller.tag = tapGesture.view.tag;
+        controller.delegate = self;
+        [dropdown setPopoverContentSize:size];
+    }
+    if ([dropdown isPopoverVisible]) {
+        [dropdown dismissPopoverAnimated:YES];
+    } else {
+        DropdownViewController *controller = dropdown.contentViewController;
+        controller.tag = tapGesture.view.tag;
+        controller.selections = selections;
+        [controller.selectionsTBL reloadData];
+        [dropdown setPopoverContentSize:size];
+        [dropdown presentPopoverFromRect: tapGesture.view.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
+}
 
 - (IBAction)accountBTNClicked:(id)sender {
     UIButton *button = sender;
@@ -247,7 +308,7 @@
         controller.selections = selections;
         [controller.selectionsTBL reloadData];
         [dropdown setPopoverContentSize:size];
-        [dropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+        [dropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 
@@ -423,15 +484,17 @@
 - (void)dateSelectionChanged:(DatePickerViewController *)controller
 {
     NSDate* date = controller.datePicker.date;
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+
     switch (controller.tag) {
         case 1:
-            fromDateLabel.text = [NSString stringWithFormat:@"From: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+            fromDateLabel.text = [dateFormat stringFromDate:date];
             break;
             
         case 2:
-            toDateLabel.text = [NSString stringWithFormat:@"To: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+            toDateLabel.text = [dateFormat stringFromDate:date];
             break;
         default:
             break;
@@ -442,7 +505,7 @@
 {
     switch (controller.tag) {
         case 3: {
-            allAccountBTN.titleLabel.text = controller.selected;
+            accountLabel.text = controller.selected;
             NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
             for (BFBrokerageAccount *account in brokerageAccounts) {
                 if ([controller.selected isEqualToString:account.name] == YES) {
@@ -452,11 +515,11 @@
             break;
         }
         case 4:
-            orderBTN.titleLabel.text = controller.selected;
+            orderLabel.text = [NSString stringWithFormat:@"Order: %@", controller.selected];
             break;
             
         case 5:
-            orderStatusBTN.titleLabel.text = controller.selected;
+            orderStatusLabel.text = [NSString stringWithFormat:@"Order Status: %@", controller.selected];
             break;
                         
         default:
