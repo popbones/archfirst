@@ -35,6 +35,8 @@
 @synthesize accountLabel;
 @synthesize orderLabel;
 @synthesize orderStatusLabel;
+@synthesize orderId;
+@synthesize symbod;
 @synthesize orderTBL;
 @synthesize orderTableViewCell;
 @synthesize orderFilterView;
@@ -43,6 +45,11 @@
 @synthesize orders;
 @synthesize datedropdown;
 @synthesize dropdown;
+@synthesize fromDate;
+@synthesize toDate;
+@synthesize accountSelected;
+@synthesize orderType;
+@synthesize orderStatus;
 
 - (id)init
 {
@@ -87,6 +94,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBTNClicked:) name:@"TRADE_ORDER_SUBMITTED" object:nil];
 
     [self refreshBTNClicked:nil];
+    [self resetBTNClicked:nil];
 }
 
 - (void)viewDidUnload
@@ -104,6 +112,8 @@
     [self setAccountLabel:nil];
     [self setOrderLabel:nil];
     [self setOrderStatusLabel:nil];
+    [self setOrderId:nil];
+    [self setSymbod:nil];
     [super viewDidUnload];
 }
 
@@ -157,12 +167,6 @@
     [self.restServiceObject getRequestWithURL:url];    
 }
 
-- (IBAction)filterBTNClicked:(id)sender {
- /*   FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
-    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-    [self presentModalViewController:controller animated:YES];*/
-}
-
 - (IBAction)dateDropdownClicked:(id)sender {
     UITapGestureRecognizer *tapGesture = sender;
     if (!datedropdown) {
@@ -183,9 +187,67 @@
 }
 
 - (IBAction)resetBTNClicked:(id)sender {
+    fromDate = [NSDate date];
+    toDate = [NSDate date];
+    accountSelected = @"All";
+    orderType = @"All";
+    orderStatus = @"All";
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    fromDateLabel.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:fromDate]];
+    toDateLabel.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:toDate]];
+    accountLabel.text = [NSString stringWithFormat:@"Account: %@", accountSelected];
+    orderLabel.text = [NSString stringWithFormat:@"Order: %@", orderType];
+    orderStatusLabel.text = [NSString stringWithFormat:@"Order Status: %@", orderStatus];
 }
 
 - (IBAction)applyBTNClicked:(id)sender {
+    
+    NSString *brokerageAccountIDParam = @"";
+    if ([accountSelected isEqualToString:@"All"] != YES) {
+        NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+        for (BFBrokerageAccount *account in brokerageAccounts) {
+            if ([accountSelected isEqualToString:account.name] == YES) {
+                brokerageAccountIDParam = [NSString stringWithFormat:@"&accountId=%d", [account.brokerageAccountID intValue]];
+                break;
+            }
+        }
+    }
+
+    NSString *symbodParam = @"";
+    if ([symbod.text length]>0) {
+        symbodParam = [NSString stringWithFormat:@"&symbol=%@",[symbod.text uppercaseString]];
+    }
+    
+    NSString *orderIdParam = @"";
+    if ([orderId.text length]>0) {
+        orderIdParam = [NSString stringWithFormat:@"&orderId=%@",orderId.text];
+    }
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+
+    NSString *fromDateParam = [NSString stringWithFormat:@"&fromDate=%@",[dateFormat stringFromDate:fromDate]];
+
+    NSString *toDateParam = [NSString stringWithFormat:@"&toDate=%@",[dateFormat stringFromDate:toDate]];
+
+    NSString *orderTypeParam = @"";
+    if ([orderType isEqualToString:@"All"] != YES) {
+        orderTypeParam = [NSString stringWithFormat:@"&sides=%@",orderType];
+    }
+
+    NSString *orderStatusParam = @"";
+    if ([orderStatus isEqualToString:@"All"] != YES) {
+        orderTypeParam = [NSString stringWithFormat:@"&statuses=%@",orderStatus];
+    }
+
+    NSString *filter = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/orders?%@%@%@%@%@%@%@", fromDateParam, toDateParam, brokerageAccountIDParam, symbodParam, orderIdParam, orderTypeParam, orderStatusParam];
+    BFDebugLog(@"filter = %@", filter);
+    NSURL *url = [NSURL URLWithString:filter];
+    [self.restServiceObject getRequestWithURL:url];    
 }
 
 - (IBAction)dropDownClicked:(id)sender {
@@ -217,8 +279,8 @@
             break;
             
         case 5:
-            selections = [NSArray arrayWithObjects:@"Market", @"Limit", nil];
-            size = [@"Limited" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            selections = [NSArray arrayWithObjects:@"PendingNew", @"New", @"PartiallyFilled", @"Filled", @"PendingCancel", @"Canceled", @"DoneForDay", nil];
+            size = [@"PartiallyFilled" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
             size.width += 20;
             
@@ -490,11 +552,13 @@
 
     switch (controller.tag) {
         case 1:
-            fromDateLabel.text = [dateFormat stringFromDate:date];
+            fromDateLabel.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:date]];
+            fromDate = [date copy];
             break;
             
         case 2:
-            toDateLabel.text = [dateFormat stringFromDate:date];
+            toDateLabel.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:date]];
+            toDate = [date copy];;
             break;
         default:
             break;
@@ -505,21 +569,18 @@
 {
     switch (controller.tag) {
         case 3: {
-            accountLabel.text = controller.selected;
-            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-            for (BFBrokerageAccount *account in brokerageAccounts) {
-                if ([controller.selected isEqualToString:account.name] == YES) {
-                    break;
-                }
-            }
+            accountLabel.text = [NSString stringWithFormat:@"Account: %@", controller.selected];
+            accountSelected = [NSString stringWithString:controller.selected];
             break;
         }
         case 4:
             orderLabel.text = [NSString stringWithFormat:@"Order: %@", controller.selected];
+            orderType = [NSString stringWithString:controller.selected];
             break;
             
         case 5:
             orderStatusLabel.text = [NSString stringWithFormat:@"Order Status: %@", controller.selected];
+            orderStatus = [NSString stringWithString:controller.selected];
             break;
                         
         default:

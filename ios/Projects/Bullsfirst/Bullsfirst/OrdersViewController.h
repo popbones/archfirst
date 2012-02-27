@@ -50,8 +50,16 @@
 @property (strong, nonatomic) IBOutlet UILabel *accountLabel;
 @property (strong, nonatomic) IBOutlet UILabel *orderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *orderStatusLabel;
+@property (strong, nonatomic) IBOutlet UITextField *orderId;
+@property (strong, nonatomic) IBOutlet UITextField *symbod;
 
 @property (strong, nonatomic) UIPopoverController *datedropdown;
 @property (strong, nonatomic) UIPopoverController *dropdown;
+
+@property (retain, nonatomic) NSDate *fromDate;
+@property (retain, nonatomic) NSDate *toDate;
+@property (retain, nonatomic) NSString *accountSelected;
+@property (retain, nonatomic) NSString *orderType;
+@property (retain, nonatomic) NSString *orderStatus;
 
 @end
