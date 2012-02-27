@@ -11,6 +11,7 @@
 @implementation DatePickerViewController
 @synthesize popOver;
 @synthesize delegate;
+@synthesize dateInRequiredFormat;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -53,6 +54,16 @@
 - (IBAction)pickerValueChanged:(id)sender {
 }
 
-- (IBAction)doneBTNClicked:(id)sender {
+- (IBAction)doneBTNClicked:(id)sender 
+{
+    NSDate* date = datePicker.date;
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
+    int day = [dateComponents day];
+    int month = [dateComponents month];
+    int year = [dateComponents year];
+    dateInRequiredFormat = [NSString stringWithFormat:@"%d-%d-%d",year,month,day];
+    BFDebugLog(@"DATE %@ DATE",dateInRequiredFormat);
+    [delegate selectionChanged:self];
 }
 @end

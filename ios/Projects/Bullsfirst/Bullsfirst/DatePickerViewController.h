@@ -14,10 +14,14 @@
 @end
 
 @interface DatePickerViewController : UIViewController
+{
+    IBOutlet UIDatePicker* datePicker;
+}
 - (IBAction)pickerValueChanged:(id)sender;
 - (IBAction)doneBTNClicked:(id)sender;
 
 @property (retain, nonatomic) UIPopoverController *popOver;
-@property (retain, nonatomic) id <DatePickerViewControllerDelegate> delegate;
+@property (weak, nonatomic) id <DatePickerViewControllerDelegate> delegate;
+@property (retain, nonatomic) NSString *dateInRequiredFormat;
 
 @end

@@ -28,7 +28,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define kLastName @"lastName"
 #define kUsername @"username"
 #define kPassword @"password"
-#define kUrl @"url"
+#define kUrl @"uri"
 #define kRel @"rel"
 #define kDetail @"detail"
 #define kAccountName @"accountName"
