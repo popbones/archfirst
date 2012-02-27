@@ -74,7 +74,7 @@
     // Add buttons to toolbar and toolbar to nav bar.
     UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_AddNewAccount.png"] style:UIBarButtonItemStylePlain target:self action:@selector(addBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStylePlain;
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
     
     // Create a spacer.
@@ -84,7 +84,7 @@
     
     barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_Transfer.png"] style:UIBarButtonItemStylePlain target:self action:@selector(transferBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStylePlain;
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
 
     // Create a spacer.
@@ -96,7 +96,7 @@
     barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_Trade.png"] style:UIBarButtonItemStylePlain target:self action:@selector(tradeBTNClicked:)];
     
     barButtonItem.style = UIBarButtonItemStylePlain;
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
     
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
@@ -106,7 +106,7 @@
     barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_Refresh.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshBTNClicked:)];
     
     barButtonItem.style = UIBarButtonItemStylePlain;
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
 
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
@@ -115,7 +115,7 @@
 
     barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"HeaderBar_Settings.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];
     barButtonItem.style = UIBarButtonItemStylePlain;
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
     
     //Create a final 20pixel spacer
