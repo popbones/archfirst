@@ -60,6 +60,7 @@
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
     label.text = @"Transactions";
+    label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];

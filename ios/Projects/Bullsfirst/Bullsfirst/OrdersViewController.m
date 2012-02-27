@@ -75,6 +75,7 @@
     label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
     label.text = @"Orders";
+    label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [label sizeToFit];
     
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
