@@ -53,6 +53,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:20.0];
@@ -179,7 +180,88 @@
  }
  */
 
+#pragma mark - selectors for handling rest call callbacks
 
+-(void)receivedData:(NSData *)data
+{
+    
+}
+
+-(void)responseReceived:(NSURLResponse *)data
+{
+    
+}
+
+-(void)requestFailed:(NSError *)error
+{   
+
+    NSString *errorString = [NSString stringWithString:@"Try Again!"];
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+ }
+
+-(void)requestSucceeded:(NSData *)data
+{
+    
+}
+
+
+
+#pragma mark - handling the filter view click events
+
+-(IBAction)dateBTNClicked:(id)sender
+{
+    UIButton *button = sender;
+    if(button == toDateBTN)
+    {
+        currentSelectedDateType = ToDate;
+    }
+    else
+    {
+        currentSelectedDateType = FromDate;
+    }
+    if (!datedropdown) {
+        DatePickerViewController *controller = [[DatePickerViewController alloc] initWithNibName:@"DatePickerViewController" bundle:nil];
+        
+        datedropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = datedropdown;
+        controller.delegate = self;
+        [datedropdown setPopoverContentSize:controller.view.frame.size];
+    }
+    if ([datedropdown isPopoverVisible]) {
+        [datedropdown dismissPopoverAnimated:YES];
+    } else {
+        DatePickerViewController *controller = (DatePickerViewController*)datedropdown.contentViewController;
+        [datedropdown setPopoverContentSize:controller.view.frame.size];
+        [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+    }
+}
+
+
+-(IBAction)accountsBTNClicked:(id)sender
+{
+    
+}
+
+-(IBAction)clearBTNClicked:(id)sender
+{
+    
+}
+
+-(IBAction)applyBTNClicked:(id)sender
+{
+    NSLog(@"TO: %@, FROM: %@",toDate,fromDate);
+}
+
+#pragma mark - DatePickerViewController delegate methods
+
+- (void)selectionChanged:(DatePickerViewController *)controller
+{
+    if(currentSelectedDateType == ToDate)
+        toDate = controller.dateInRequiredFormat;
+    else
+        fromDate = controller.dateInRequiredFormat;
+}
 
 
 

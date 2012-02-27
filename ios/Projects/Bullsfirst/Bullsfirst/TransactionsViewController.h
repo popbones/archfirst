@@ -20,13 +20,31 @@
 
 #import <Foundation/Foundation.h>
 #import "TabViewController.h"
+#import "DatePickerViewController.h"
 
-@interface TransactionsViewController : TabViewController<UITableViewDataSource>
+@interface TransactionsViewController : TabViewController<UITableViewDataSource,DatePickerViewControllerDelegate>
+{
+    enum {FromDate, ToDate} currentSelectedDateType;
+
+    IBOutlet UIButton* toDateBTN;
+    IBOutlet UIButton* fromDateBTN;
+    
+    NSString* toDate;
+    NSString* fromDate;
+    NSString* accountName;
+    UIPopoverController* datedropdown;
+    
+}
 
 @property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
 
 @property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
 @property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
 
+
+-(IBAction)dateBTNClicked:(id)sender;
+-(IBAction)accountsBTNClicked:(id)sender;
+-(IBAction)clearBTNClicked:(id)sender;
+-(IBAction)applyBTNClicked:(id)sender;
 
 @end

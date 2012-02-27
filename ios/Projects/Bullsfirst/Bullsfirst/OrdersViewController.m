@@ -22,7 +22,7 @@
 #import "TradeViewController.h"
 #import "FilterViewController.h"
 #import "OrderBTN.h"
-#import "DatePickerViewController.h"
+
 
 @implementation OrdersViewController
 @synthesize allAccountBTN;
@@ -178,7 +178,7 @@
     if ([datedropdown isPopoverVisible]) {
         [datedropdown dismissPopoverAnimated:YES];
     } else {
-        DatePickerViewController *controller = datedropdown.contentViewController;
+        DatePickerViewController *controller = (DatePickerViewController*)datedropdown.contentViewController;
         [datedropdown setPopoverContentSize:controller.view.frame.size];
         [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
     }
