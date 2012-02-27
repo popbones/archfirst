@@ -72,7 +72,7 @@
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
     
     // Add buttons to toolbar and toolbar to nav bar.
-    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_AddNewAccount.png"] style:UIBarButtonItemStylePlain target:self action:@selector(addBTNClicked:)];
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
@@ -103,7 +103,7 @@
     barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
     
-    barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_Refresh.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshBTNClicked:)];
+    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
     
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
