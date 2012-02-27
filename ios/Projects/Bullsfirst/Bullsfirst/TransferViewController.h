@@ -7,9 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BullFirstWebServiceObject.h"
 @interface TransferViewController : UIViewController
-- (IBAction)okBTNClicked:(id)sender;
-- (IBAction)cancelBTNClicked:(id)sender;
 
+- (IBAction)transferBTNClicked:(id)sender;
+- (IBAction)cancelBTNClicked:(id)sender;
+@property (nonatomic,assign) IBOutlet UISegmentedControl *segmentedControl;
+
+@property (strong, nonatomic) BullFirstWebServiceObject *restServiceObject;
 @end

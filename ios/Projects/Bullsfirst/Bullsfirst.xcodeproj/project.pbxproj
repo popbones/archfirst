@@ -72,6 +72,8 @@
 		54B78A9D14EB00AB002FF1AC /* FilterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A9B14EB00A9002FF1AC /* FilterViewController.xib */; };
 		54B78AED14EC4656002FF1AC /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78AEB14EC4654002FF1AC /* UserViewController.m */; };
 		54B78AEE14EC4656002FF1AC /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78AEC14EC4655002FF1AC /* UserViewController.xib */; };
+		952B7A5914FBA61C005B3C98 /* BFExternalAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */; };
+		952B7A5C14FBABD5005B3C98 /* BFExternalAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		9584FE2414F2234200D28154 /* AddAccount-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */; };
 		9584FE2514F2234200D28154 /* AddAccount-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2014F2234200D28154 /* AddAccount-PushDown.png */; };
@@ -260,6 +262,10 @@
 		54B78AEA14EC4652002FF1AC /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		54B78AEB14EC4654002FF1AC /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		54B78AEC14EC4655002FF1AC /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
+		952B7A5714FBA61B005B3C98 /* BFExternalAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccount.h; sourceTree = "<group>"; };
+		952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExternalAccount.m; sourceTree = "<group>"; };
+		952B7A5A14FBABD5005B3C98 /* BFExternalAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccountStore.h; sourceTree = "<group>"; };
+		952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExternalAccountStore.m; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-Inactive.png"; sourceTree = "<group>"; };
 		9584FE2014F2234200D28154 /* AddAccount-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-PushDown.png"; sourceTree = "<group>"; };
@@ -547,7 +553,11 @@
 				00DFF96414841B00001A4641 /* BFBrokerageAccount.h */,
 				00DFF96514841B00001A4641 /* BFBrokerageAccount.m */,
 				00DFF96B14855010001A4641 /* BFBrokerageAccountStore.h */,
+				952B7A5A14FBABD5005B3C98 /* BFExternalAccountStore.h */,
+				952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */,
 				00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */,
+				952B7A5714FBA61B005B3C98 /* BFExternalAccount.h */,
+				952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */,
 				545C5E7414E55DA6003560C8 /* BFUser.h */,
 				545C5E7514E55DA6003560C8 /* BFUser.m */,
 			);
@@ -966,6 +976,8 @@
 				AC0BAC6914F6132A005D70D3 /* PieChartViewController.m in Sources */,
 				5468395014F6E8A4005C356A /* OrderBTN.m in Sources */,
 				5468395414F827A0005C356A /* DatePickerViewController.m in Sources */,
+				952B7A5914FBA61C005B3C98 /* BFExternalAccount.m in Sources */,
+				952B7A5C14FBABD5005B3C98 /* BFExternalAccountStore.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

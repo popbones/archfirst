@@ -27,7 +27,7 @@
 #import "PositionsViewController.h"
 #import "OrdersViewController.h"
 #import "TransactionsViewController.h"
-
+#import "BFExternalAccountStore.h"
 @implementation RootViewController
 @synthesize restServiceObject;
 
@@ -68,8 +68,7 @@
     [viewControllers addObject:controller];
     [self setViewControllers:viewControllers];
 
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-    
+        
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"REFRESH_ACCOUNT" object:nil];
@@ -96,7 +95,7 @@
 {
 }
 
-#pragma mark - selectors for handling rest call callbacks
+#pragma mark - selectors for handling rest call callbacks for BrokerageAcccounts
 
 -(void)receivedData:(NSData *)data
 {
@@ -121,6 +120,30 @@
     [[BFBrokerageAccountStore defaultStore] accountsFromJSONData:data];
 }
 
+#pragma mark - selectors for handling rest call callbacks for ExternalAcccounts
+
+-(void)receivedDataExternalAccounts:(NSData *)data
+{
+    
+}
+
+-(void)responseReceivedExternalAccounts:(NSURLResponse *)data
+{
+    
+}
+
+-(void)requestFailedExternalAccounts:(NSError *)error
+{       
+    NSString *errorString = [NSString stringWithString:@"Try Refreshing!"];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)requestSucceededExternalAccounts:(NSData *)data
+{
+    [[BFExternalAccountStore defaultStore] accountsFromJSONData:data];
+}
 
 #pragma mark MVC Delegate methods
 
@@ -149,7 +172,13 @@
 -(void)userLogin:(NSNotification*)notification
 {
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
-    [restServiceObject getRequestWithURL:url];    
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+
+    [restServiceObject getRequestWithURL:url];
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceivedExternalAccounts:) receiveDataSelector:@selector(receivedDataExternalAccounts:) successSelector:@selector(requestSucceededExternalAccounts:) errorSelector:@selector(requestFailedExternalAccounts:)];
+    url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/external_accounts"];
+    [restServiceObject getRequestWithURL:url];
+    
 }
 
  #pragma mark tabBarController delegate methods
