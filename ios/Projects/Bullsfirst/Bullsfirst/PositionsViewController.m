@@ -72,7 +72,6 @@
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:20.0];
     label.textAlignment = UITextAlignmentCenter;
-    label.textColor = [UIColor whiteColor]; // change this color
     self.navigationItem.titleView = label;
     label.text = account.name;
     label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
