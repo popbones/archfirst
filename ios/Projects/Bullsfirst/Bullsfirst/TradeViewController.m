@@ -71,6 +71,7 @@
     if (self.position != nil) {
         cusipText.text = self.position.instrumentSymbol;
         accountBTN.titleLabel.text = self.position.accountName;
+        quantity.text = [NSString stringWithFormat:@"%d", [self.position.quantity intValue]];
     }
 
 }

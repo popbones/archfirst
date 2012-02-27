@@ -430,8 +430,10 @@
 {
     tradePositionBTN *button = (tradePositionBTN *)sender;
     
-    TradeViewController *controller = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil position:button.position];    
+    TradeViewController *tradeController = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil position:button.position];    
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:tradeController];
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    
     [self presentModalViewController:controller animated:YES];
 }
 
