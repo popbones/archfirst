@@ -21,7 +21,7 @@
 - (IBAction)doneBTNClicked:(id)sender;
 
 @property (retain, nonatomic) UIPopoverController *popOver;
+@property (retain, nonatomic) UIDatePicker* datePicker;
 @property (weak, nonatomic) id <DatePickerViewControllerDelegate> delegate;
-@property (retain, nonatomic) NSString *dateInRequiredFormat;
 
 @end

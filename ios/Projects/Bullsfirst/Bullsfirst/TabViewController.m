@@ -142,7 +142,11 @@
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
 
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    restServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self 
+                                                         responseSelector:@selector(responseReceived:) 
+                                                      receiveDataSelector:@selector(receivedData:) 
+                                                          successSelector:@selector(requestSucceeded:) 
+                                                            errorSelector:@selector(requestFailed:)];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rotateDevice) name:@"DEVICE_ROTATE" object:nil];
 

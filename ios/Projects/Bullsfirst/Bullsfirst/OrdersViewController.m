@@ -368,7 +368,10 @@
 
 - (void)selectionChanged:(DatePickerViewController *)controller
 {
-    
+    NSDate* date = controller.datePicker.date;
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
+    fromDateBTN.titleLabel.text = [NSString stringWithFormat:@" From: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
 }
 
 
