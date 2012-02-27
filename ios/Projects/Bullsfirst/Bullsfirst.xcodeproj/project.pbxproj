@@ -137,6 +137,8 @@
 		AC2F91DD14F52A8300E962DF /* Rename.png in Resources */ = {isa = PBXBuildFile; fileRef = AC2F91DA14F52A8000E962DF /* Rename.png */; };
 		AC66817314ECD43C00BB02FF /* CMPopTipView.m in Sources */ = {isa = PBXBuildFile; fileRef = AC66817014ECD43C00BB02FF /* CMPopTipView.m */; };
 		AC66817414ECD43C00BB02FF /* DataValidator.m in Sources */ = {isa = PBXBuildFile; fileRef = AC66817214ECD43C00BB02FF /* DataValidator.m */; };
+		AC8A02FE14FBA3B900025BA6 /* TransactionsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC8A02FD14FBA3B900025BA6 /* TransactionsTableViewCell.xib */; };
+		AC8A030014FBAA6600025BA6 /* TransactionsLandscapeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC8A02FF14FBAA6600025BA6 /* TransactionsLandscapeTableViewCell.xib */; };
 		AC9B72CF14DA755200B843AC /* EditAccountNameViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */; };
 		AC9B72D014DA755200B843AC /* EditAccountNameViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */; };
 		AC9B72E514DAB01800B843AC /* BFPlainWhiteTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9B72E414DAB01800B843AC /* BFPlainWhiteTheme.m */; };
@@ -336,6 +338,8 @@
 		AC66817014ECD43C00BB02FF /* CMPopTipView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMPopTipView.m; sourceTree = "<group>"; };
 		AC66817114ECD43C00BB02FF /* DataValidator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataValidator.h; sourceTree = "<group>"; };
 		AC66817214ECD43C00BB02FF /* DataValidator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataValidator.m; sourceTree = "<group>"; };
+		AC8A02FD14FBA3B900025BA6 /* TransactionsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionsTableViewCell.xib; sourceTree = "<group>"; };
+		AC8A02FF14FBAA6600025BA6 /* TransactionsLandscapeTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TransactionsLandscapeTableViewCell.xib; sourceTree = "<group>"; };
 		AC9B72CC14DA755100B843AC /* EditAccountNameViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditAccountNameViewController.h; sourceTree = "<group>"; };
 		AC9B72CD14DA755100B843AC /* EditAccountNameViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditAccountNameViewController.m; sourceTree = "<group>"; };
 		AC9B72CE14DA755200B843AC /* EditAccountNameViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditAccountNameViewController.xib; sourceTree = "<group>"; };
@@ -639,6 +643,8 @@
 				00DFF90B1480899D001A4641 /* TransactionsViewController.h */,
 				00DFF90C1480899D001A4641 /* TransactionsViewController.m */,
 				00DFF91F1480AB14001A4641 /* TransactionsViewController.xib */,
+				AC8A02FD14FBA3B900025BA6 /* TransactionsTableViewCell.xib */,
+				AC8A02FF14FBAA6600025BA6 /* TransactionsLandscapeTableViewCell.xib */,
 			);
 			name = "Transection Tab";
 			sourceTree = "<group>";
@@ -905,6 +911,8 @@
 				1030AAA314FA6C7B0095FED8 /* HeaderBar_Settings.png in Resources */,
 				1030AAA414FA6C7B0095FED8 /* HeaderBar_Trade.png in Resources */,
 				1030AAA514FA6C7B0095FED8 /* HeaderBar_Transfer.png in Resources */,
+				AC8A02FE14FBA3B900025BA6 /* TransactionsTableViewCell.xib in Resources */,
+				AC8A030014FBAA6600025BA6 /* TransactionsLandscapeTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
