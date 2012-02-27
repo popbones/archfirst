@@ -250,17 +250,25 @@
 
 -(IBAction)applyBTNClicked:(id)sender
 {
-    NSLog(@"TO: %@, FROM: %@",toDate,fromDate);
+
 }
 
 #pragma mark - DatePickerViewController delegate methods
 
 - (void)selectionChanged:(DatePickerViewController *)controller
 {
+    NSDate* date = controller.datePicker.date;
+    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
     if(currentSelectedDateType == ToDate)
-        toDate = controller.dateInRequiredFormat;
+    {
+        fromDateBTN.titleLabel.text = [NSString stringWithFormat:@" From: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+
+    }
     else
-        fromDate = controller.dateInRequiredFormat;
+    {
+        toDateBTN.titleLabel.text = [NSString stringWithFormat:@" From: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+    }
 }
 
 

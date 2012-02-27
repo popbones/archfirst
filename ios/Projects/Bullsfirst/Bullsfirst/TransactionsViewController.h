@@ -28,9 +28,7 @@
 
     IBOutlet UIButton* toDateBTN;
     IBOutlet UIButton* fromDateBTN;
-    
-    NSString* toDate;
-    NSString* fromDate;
+
     NSString* accountName;
     UIPopoverController* datedropdown;
     
