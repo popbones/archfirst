@@ -173,8 +173,6 @@
         datedropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = datedropdown;
         controller.delegate = self;
-        controller.tag = tapGesture.view.tag;
-        [datedropdown setPopoverContentSize:controller.view.frame.size];
     }
     if ([datedropdown isPopoverVisible]) {
         [datedropdown dismissPopoverAnimated:YES];
@@ -182,7 +180,7 @@
         DatePickerViewController *controller = (DatePickerViewController*)datedropdown.contentViewController;
         controller.tag = tapGesture.view.tag;
         [datedropdown setPopoverContentSize:controller.view.frame.size];
-        [datedropdown presentPopoverFromRect: tapGesture.view.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+        [datedropdown presentPopoverFromRect: tapGesture.view.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 
