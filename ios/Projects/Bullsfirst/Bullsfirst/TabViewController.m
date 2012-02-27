@@ -61,17 +61,18 @@
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
 
     UIToolbar *tools = [[UIToolbar alloc]
-                        initWithFrame:CGRectMake(0.0f, 0.0f, 280.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
+                        initWithFrame:CGRectMake(0.0f, 0.0f, 290.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
     tools.clearsContextBeforeDrawing = NO;
     tools.clipsToBounds = NO;
     tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // closest I could get by eye to black, translucent style.
     // anyone know how to get it perfect?
     tools.barStyle = -1; // clear background
+    tools.contentMode = UIViewContentModeCenter;
     
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
+    
     // Add buttons to toolbar and toolbar to nav bar.
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
-                     initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBTNClicked:)];
+    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_AddNewAccount.png"] style:UIBarButtonItemStylePlain target:self action:@selector(addBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
@@ -81,8 +82,7 @@
     barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
     
-    barButtonItem = [[UIBarButtonItem alloc]
-                     initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(transferBTNClicked:)];
+    barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_Transfer.png"] style:UIBarButtonItemStylePlain target:self action:@selector(transferBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
@@ -92,8 +92,9 @@
     barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
 
-    barButtonItem = [[UIBarButtonItem alloc]
-                     initWithBarButtonSystemItem:UIBarButtonSystemItemCompose target:self action:@selector(tradeBTNClicked:)];
+
+    barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_Trade.png"] style:UIBarButtonItemStylePlain target:self action:@selector(tradeBTNClicked:)];
+    
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
@@ -102,8 +103,8 @@
     barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
     
-    barButtonItem = [[UIBarButtonItem alloc]
-                     initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
+    barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_Refresh.png"] style:UIBarButtonItemStylePlain target:self action:@selector(refreshBTNClicked:)];
+    
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
@@ -116,11 +117,19 @@
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     [buttons addObject:barButtonItem];
+    
+    //Create a final 20pixel spacer
+    
+//    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
+//    barButtonItem.width = 20.0f;
+//    [buttons addObject:barButtonItem];
 
+    
+    
     [tools setItems:buttons animated:NO];
     UIBarButtonItem *twoButtons = [[UIBarButtonItem alloc] initWithCustomView:tools];
     self.navigationItem.rightBarButtonItem = twoButtons;
-
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:20.0];
