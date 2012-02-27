@@ -364,6 +364,13 @@
  }
  */
 
+#pragma mark - DatePickerViewController delegate methods
+
+- (void)selectionChanged:(DatePickerViewController *)controller
+{
+    
+}
+
 
 
 @end

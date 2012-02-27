@@ -64,6 +64,9 @@
     int year = [dateComponents year];
     dateInRequiredFormat = [NSString stringWithFormat:@"%d-%d-%d",year,month,day];
     BFDebugLog(@"DATE %@ DATE",dateInRequiredFormat);
+    
     [delegate selectionChanged:self];
+    
+    [popOver dismissPopoverAnimated:YES];
 }
 @end

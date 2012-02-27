@@ -21,7 +21,7 @@
 #import <Foundation/Foundation.h>
 #import "TabViewController.h"
 
-@interface TransactionsViewController : TabViewController
+@interface TransactionsViewController : TabViewController<UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
 
