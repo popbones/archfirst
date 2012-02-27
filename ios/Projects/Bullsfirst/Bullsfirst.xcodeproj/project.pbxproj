@@ -60,6 +60,7 @@
 		5468395014F6E8A4005C356A /* OrderBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 5468394F14F6E89D005C356A /* OrderBTN.m */; };
 		5468395414F827A0005C356A /* DatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5468395214F82797005C356A /* DatePickerViewController.m */; };
 		5468395514F827A0005C356A /* DatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5468395314F8279D005C356A /* DatePickerViewController.xib */; };
+		5468399714FC1D07005C356A /* TableHeader_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5468399614FC1D07005C356A /* TableHeader_Background.png */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
@@ -244,6 +245,7 @@
 		5468395114F82791005C356A /* DatePickerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DatePickerViewController.h; sourceTree = "<group>"; };
 		5468395214F82797005C356A /* DatePickerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatePickerViewController.m; sourceTree = "<group>"; };
 		5468395314F8279D005C356A /* DatePickerViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DatePickerViewController.xib; sourceTree = "<group>"; };
+		5468399614FC1D07005C356A /* TableHeader_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableHeader_Background.png; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
 		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
@@ -531,6 +533,7 @@
 				9586FA8B14EB6A2700A0B28C /* TabBar_Positions.png */,
 				9586FA8C14EB6A2800A0B28C /* TabBar_Transactions.png */,
 				5468394814F6D1D3005C356A /* TableHeader_BackgroundGradient.jpg */,
+				5468399614FC1D07005C356A /* TableHeader_Background.png */,
 				9586FA8D14EB6A2800A0B28C /* TitleBar_BackgroundGradient.jpg */,
 				9586FA8F14EB6A2800A0B28C /* TradeButton.png */,
 				9586FA8E14EB6A2800A0B28C /* TradeButton_PushDownState.png */,
@@ -923,6 +926,7 @@
 				1030AAA514FA6C7B0095FED8 /* HeaderBar_Transfer.png in Resources */,
 				AC8A02FE14FBA3B900025BA6 /* TransactionsTableViewCell.xib in Resources */,
 				AC8A030014FBAA6600025BA6 /* TransactionsLandscapeTableViewCell.xib in Resources */,
+				5468399714FC1D07005C356A /* TableHeader_Background.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
