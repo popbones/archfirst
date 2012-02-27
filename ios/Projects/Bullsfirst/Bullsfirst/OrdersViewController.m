@@ -23,6 +23,9 @@
 #import "FilterViewController.h"
 #import "OrderBTN.h"
 #import "DatePickerViewController.h"
+#import "DropdownViewController.h"
+#import "BFBrokerageAccountStore.h"
+#import "BFBrokerageAccount.h"
 
 @implementation OrdersViewController
 @synthesize allAccountBTN;
@@ -39,6 +42,7 @@
 @synthesize landscrapeTitleBar;
 @synthesize orders;
 @synthesize datedropdown;
+@synthesize dropdown;
 
 - (id)init
 {
@@ -159,12 +163,6 @@
     [self presentModalViewController:controller animated:YES];*/
 }
 
-- (IBAction)orderBTNClicked:(id)sender {   
-}
-
-- (IBAction)orderStatusBTNClicked:(id)sender {
-}
-
 - (IBAction)dateDropdownClicked:(id)sender {
     UITapGestureRecognizer *tapGesture = sender;
     if (!datedropdown) {
@@ -192,6 +190,65 @@
 
 
 - (IBAction)accountBTNClicked:(id)sender {
+    UIButton *button = sender;
+    NSArray *selections;
+    CGSize size;
+    switch (button.tag) {
+        case 3: {
+            NSMutableArray *accountName = [[NSMutableArray alloc] init];
+            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+            for (BFBrokerageAccount *account in brokerageAccounts) {
+                [accountName addObject:account.name];
+            }
+            selections = [NSArray arrayWithArray:accountName];
+            size.height = [selections count] * 44;
+            if ([selections count] > 5) {
+                size.height = 220;
+            }
+            size.width = 320;
+            break;
+        }
+            
+        case 4:
+            selections = [NSArray arrayWithObjects:@"Buy", @"Sell", nil];
+            size = [@"Buy" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            size.height = [selections count] * 44;
+            size.width += 20;
+            
+            break;
+            
+        case 5:
+            selections = [NSArray arrayWithObjects:@"Market", @"Limit", nil];
+            size = [@"Limited" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            size.height = [selections count] * 44;
+            size.width += 20;
+            
+            break;
+                        
+        default:
+            break;
+    }
+    
+    if (!dropdown) {
+        DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+        
+        dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = dropdown;
+        controller.selections = selections;
+        controller.tag = button.tag;
+        controller.delegate = self;
+        [dropdown setPopoverContentSize:size];
+    }
+    if ([dropdown isPopoverVisible]) {
+        [dropdown dismissPopoverAnimated:YES];
+    } else {
+        DropdownViewController *controller = dropdown.contentViewController;
+        controller.tag = button.tag;
+        controller.selections = selections;
+        [controller.selectionsTBL reloadData];
+        [dropdown setPopoverContentSize:size];
+        [dropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    }
 }
 
 - (IBAction)cancelOrderBTNClicked:(id)sender {
@@ -363,7 +420,7 @@
 
 #pragma mark - DatePickerViewController delegate methods
 
-- (void)selectionChanged:(DatePickerViewController *)controller
+- (void)dateSelectionChanged:(DatePickerViewController *)controller
 {
     NSDate* date = controller.datePicker.date;
     NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
@@ -381,6 +438,32 @@
     }
 }
 
+- (void)selectionChanged:(DropdownViewController *)controller
+{
+    switch (controller.tag) {
+        case 3: {
+            allAccountBTN.titleLabel.text = controller.selected;
+            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+            for (BFBrokerageAccount *account in brokerageAccounts) {
+                if ([controller.selected isEqualToString:account.name] == YES) {
+                    break;
+                }
+            }
+            break;
+        }
+        case 4:
+            orderBTN.titleLabel.text = controller.selected;
+            break;
+            
+        case 5:
+            orderStatusBTN.titleLabel.text = controller.selected;
+            break;
+                        
+        default:
+            break;
+    }
+    
+}
 
 
 @end

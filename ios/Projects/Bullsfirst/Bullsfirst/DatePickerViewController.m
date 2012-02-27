@@ -54,13 +54,13 @@
 
 - (IBAction)pickerValueChanged:(id)sender {
     if (delegate != nil)
-        [delegate selectionChanged:self];
+        [delegate dateSelectionChanged:self];
 }
 
 - (IBAction)doneBTNClicked:(id)sender 
 {   
     if (delegate != nil)
-        [delegate selectionChanged:self];
+        [delegate dateSelectionChanged:self];
     [popOver dismissPopoverAnimated:YES];
 }
 @end

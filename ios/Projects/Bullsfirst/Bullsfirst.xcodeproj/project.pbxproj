@@ -675,9 +675,6 @@
 		54B78A7214EAB427002FF1AC /* Forms */ = {
 			isa = PBXGroup;
 			children = (
-				546838B414EECAC2005C356A /* DropdownViewController.h */,
-				546838B514EECAC3005C356A /* DropdownViewController.m */,
-				546838B614EECAC3005C356A /* DropdownViewController.xib */,
 				546838BC14EEEC3C005C356A /* Trade */,
 				54B78AEA14EC4652002FF1AC /* UserViewController.h */,
 				54B78AEB14EC4654002FF1AC /* UserViewController.m */,
@@ -688,6 +685,9 @@
 				54B78A9914EB00A6002FF1AC /* FilterViewController.h */,
 				54B78A9A14EB00A7002FF1AC /* FilterViewController.m */,
 				54B78A9B14EB00A9002FF1AC /* FilterViewController.xib */,
+				546838B414EECAC2005C356A /* DropdownViewController.h */,
+				546838B514EECAC3005C356A /* DropdownViewController.m */,
+				546838B614EECAC3005C356A /* DropdownViewController.xib */,
 				5468395114F82791005C356A /* DatePickerViewController.h */,
 				5468395214F82797005C356A /* DatePickerViewController.m */,
 				5468395314F8279D005C356A /* DatePickerViewController.xib */,

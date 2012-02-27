@@ -39,8 +39,6 @@
 @property (strong, nonatomic) NSMutableArray *orders;
 
 - (IBAction)accountBTNClicked:(id)sender;
-- (IBAction)orderBTNClicked:(id)sender;
-- (IBAction)orderStatusBTNClicked:(id)sender;
 - (IBAction)dateDropdownClicked:(id)sender;
 - (IBAction)resetBTNClicked:(id)sender;
 - (IBAction)applyBTNClicked:(id)sender;
@@ -53,5 +51,6 @@
 @property (strong, nonatomic) IBOutlet UIButton *applyBTN;
 
 @property (strong, nonatomic) UIPopoverController *datedropdown;
+@property (strong, nonatomic) UIPopoverController *dropdown;
 
 @end

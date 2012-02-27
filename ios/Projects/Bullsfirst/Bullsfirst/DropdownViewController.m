@@ -129,7 +129,8 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     selected =[selections objectAtIndex:indexPath.row];
-    [self.delegate selectionChanged:self];
+    if (self.delegate != nil)
+        [self.delegate selectionChanged:self];
     [self.popOver dismissPopoverAnimated:YES];
 }
 

@@ -10,7 +10,7 @@
 @class DatePickerViewController;
 
 @protocol DatePickerViewControllerDelegate
-- (void)selectionChanged:(DatePickerViewController *)controller;
+- (void)dateSelectionChanged:(DatePickerViewController *)controller;
 @end
 
 @interface DatePickerViewController : UIViewController
