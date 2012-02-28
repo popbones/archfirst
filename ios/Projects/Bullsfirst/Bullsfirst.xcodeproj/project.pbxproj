@@ -149,6 +149,7 @@
 		AC9F211214E13AEE0024C3D3 /* BFCPTTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F211014E13AEE0024C3D3 /* BFCPTTheme.m */; };
 		ACC6A17114EE99BD00016AD4 /* SwitchAccountsButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC6A16F14EE998700016AD4 /* SwitchAccountsButton_PushDownState.png */; };
 		ACC6A17214EE99BD00016AD4 /* SwitchAccountsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC6A17014EE999200016AD4 /* SwitchAccountsButton.png */; };
+		ACE51D2114FCAA9500B48390 /* BFTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE51D2014FCAA9500B48390 /* BFTransaction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -360,6 +361,8 @@
 		ACC6A16F14EE998700016AD4 /* SwitchAccountsButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchAccountsButton_PushDownState.png; sourceTree = "<group>"; };
 		ACC6A17014EE999200016AD4 /* SwitchAccountsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchAccountsButton.png; sourceTree = "<group>"; };
 		ACDA1B2014E3A3F800B3673F /* BF-CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BF-CorePlot-CocoaTouch.h"; path = "Bullsfirst/BF-CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
+		ACE51D1F14FCAA9500B48390 /* BFTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTransaction.h; sourceTree = "<group>"; };
+		ACE51D2014FCAA9500B48390 /* BFTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTransaction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -563,6 +566,8 @@
 				952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */,
 				545C5E7414E55DA6003560C8 /* BFUser.h */,
 				545C5E7514E55DA6003560C8 /* BFUser.m */,
+				ACE51D1F14FCAA9500B48390 /* BFTransaction.h */,
+				ACE51D2014FCAA9500B48390 /* BFTransaction.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -982,6 +987,7 @@
 				5468395414F827A0005C356A /* DatePickerViewController.m in Sources */,
 				952B7A5914FBA61C005B3C98 /* BFExternalAccount.m in Sources */,
 				952B7A5C14FBABD5005B3C98 /* BFExternalAccountStore.m in Sources */,
+				ACE51D2114FCAA9500B48390 /* BFTransaction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

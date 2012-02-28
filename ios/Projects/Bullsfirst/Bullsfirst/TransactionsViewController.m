@@ -21,9 +21,10 @@
 #import "TransactionsViewController.h"
 #import "AppDelegate.h"
 #import "FilterViewController.h"
+#import "BFTransaction.h"
 
 @implementation TransactionsViewController
-@synthesize transectionTBL,portraitTitleBar,landscrapeTitleBar;
+@synthesize transectionTBL,portraitTitleBar,landscrapeTitleBar,transactions;
 
 - (id)init
 {
@@ -70,6 +71,7 @@
 
 - (void)viewDidUnload
 {
+    
     [super viewDidUnload];
 }
 
@@ -102,7 +104,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return 0;
+    return transactions.count;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -126,20 +128,48 @@
     return 44;    
 }
 
-//- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    static NSString *CellIdentifier = @"BookmarkCell";
-//    
-//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-//    if (cell == nil) {
-//        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-//    }
-//    
-//    
-//    
-//    cell.textLabel.text = @"position 1";
-//    return cell;
-//}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIInterfaceOrientation toOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    BFTransaction* transaction = [transactions objectAtIndex:indexPath.row];
+    UITableViewCell* cell = transactionCell;
+    if(toOrientation ==UIInterfaceOrientationLandscapeLeft || toOrientation ==UIInterfaceOrientationLandscapeRight)
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"TransactionsLandscapeTableViewCell" owner:self options:nil];
+        cell = transactionCell;
+        
+        UILabel* label = (UILabel*) [cell viewWithTag:1];
+        label.text = @"date";
+        //label.text = transaction.creationTime;
+        label = (UILabel*) [cell viewWithTag:2];
+        label.text = transaction.transactionType;
+        label = (UILabel*) [cell viewWithTag:3];
+        label.text = transaction.accountName;
+        label = (UILabel*) [cell viewWithTag:4];
+        label.text = transaction.description;
+        label = (UILabel*) [cell viewWithTag:5];
+        label.text = [transaction.amount.amount stringValue];
+        
+    }
+    else
+    {
+        [[NSBundle mainBundle] loadNibNamed:@"TransactionsTableViewCell" owner:self options:nil];
+        cell = transactionCell;
+        
+        UILabel* label = (UILabel*) [cell viewWithTag:1];
+        label.text = @"date";
+        //label.text = transaction.creationTime;
+        label = (UILabel*) [cell viewWithTag:2];
+        label.text = transaction.transactionType;
+        label = (UILabel*) [cell viewWithTag:3];
+        label.text = transaction.accountName;
+        label = (UILabel*) [cell viewWithTag:4];
+        label.text = transaction.description;
+        label = (UILabel*) [cell viewWithTag:5];
+        label.text = [transaction.amount.amount stringValue];
+    }
+    return  cell;
+}
 
 /*
  // Override to support conditional editing of the table view.
@@ -180,6 +210,21 @@
  }
  */
 
+#pragma mark - helper methods
+
+-(NSString*) convertDateToRequiredFormat:(NSDate*) date
+{
+    if(date)
+    {
+        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
+        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
+        return [NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+    }
+    else
+        return  nil;
+}
+
 #pragma mark - selectors for handling rest call callbacks
 
 -(void)receivedData:(NSData *)data
@@ -194,16 +239,18 @@
 
 -(void)requestFailed:(NSError *)error
 {   
-
+    
     NSString *errorString = [NSString stringWithString:@"Try Again!"];
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
     [av show];
- }
+}
 
 -(void)requestSucceeded:(NSData *)data
 {
-    
+    transactions = [BFTransaction transactionsFromJSONData:data];
+    [transectionTBL reloadData];
 }
+
 
 
 
@@ -250,24 +297,26 @@
 
 -(IBAction)applyBTNClicked:(id)sender
 {
-
+    NSString* urlString = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/transactions?fromDate=%@&toDate=%@",[self convertDateToRequiredFormat:fromDate],[self convertDateToRequiredFormat:toDate]];
+    BFDebugLog(@"url string: %@",urlString);
+    [self.restServiceObject getRequestWithURL:[NSURL URLWithString:urlString]];
 }
+
+
+
 
 #pragma mark - DatePickerViewController delegate methods
 
-- (void)selectionChanged:(DatePickerViewController *)controller
+- (void)dateSelectionChanged:(DatePickerViewController *)controller
 {
-    NSDate* date = controller.datePicker.date;
-    NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
     if(currentSelectedDateType == ToDate)
     {
-        fromDateBTN.titleLabel.text = [NSString stringWithFormat:@" From: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
-
+        toDate = controller.datePicker.date;
+        
     }
     else
     {
-        toDateBTN.titleLabel.text = [NSString stringWithFormat:@" From: %d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+        fromDate = controller.datePicker.date;
     }
 }
 

@@ -32,12 +32,19 @@
     NSString* accountName;
     UIPopoverController* datedropdown;
     
+    IBOutlet UITableViewCell *transactionCell;
+    
+    NSDate *fromDate;
+    NSDate *toDate;
+    
+    NSMutableArray* transactions;
+    
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
-
 @property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
 @property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
+@property (retain,nonatomic) NSMutableArray* transactions;
 
 
 -(IBAction)dateBTNClicked:(id)sender;
