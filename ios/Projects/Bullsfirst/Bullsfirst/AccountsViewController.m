@@ -208,14 +208,6 @@
         rect=rightBorderView.frame;
         rightBorderView.frame=CGRectMake(1023, 0,1,699);
 
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-        label.backgroundColor = [UIColor clearColor];
-        label.font = [UIFont boldSystemFontOfSize:20.0];
-        label.textAlignment = UITextAlignmentCenter;
-        self.navigationItem.titleView = label;
-        label.text = @"Accounts";
-        label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
-        [label sizeToFit];
     }
     else
     {
@@ -236,8 +228,6 @@
         leftBorderView.frame=CGRectMake(rect.origin.x, rect.origin.y,1,920);
         rect=rightBorderView.frame;
         rightBorderView.frame=CGRectMake(767, 0, 1, 920);
-        
-        self.navigationItem.titleView = nil;
 
     }
     [accountsTable reloadData];
