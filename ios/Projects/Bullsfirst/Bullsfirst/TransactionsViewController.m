@@ -34,7 +34,7 @@
     {
         NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
-        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
+//        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
         return [NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
     }
     else
@@ -46,9 +46,19 @@
     if(date)
     {
         NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
-        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d/%d/%d/ %d:%d:%d",[dateComponents year],[dateComponents month],[dateComponents day],[dateComponents hour],[dateComponents minute],[dateComponents second]]);
-        return [NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit) fromDate:date];
+        NSString* meridianString;
+        if ([dateComponents hour] >= 12)
+        {
+            meridianString = [NSString stringWithString:@"PM"];
+            if([dateComponents hour]>12)
+                dateComponents.hour = dateComponents.hour - 12;
+        }
+        else
+            meridianString = [NSString stringWithString:@"AM"];
+                              
+//        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d/%d/%d %d:%d:%d %@",[dateComponents year],[dateComponents month],[dateComponents day],[dateComponents hour],[dateComponents minute],[dateComponents second],meridianString]);
+        return [NSString stringWithFormat:@"%02d/%02d/%04d %02d:%02d:%02d %@",[dateComponents month],[dateComponents day],[dateComponents year],[dateComponents hour],[dateComponents minute],[dateComponents second],meridianString];
     }
     else
         return  nil;
@@ -82,6 +92,25 @@
     return self;
 }
 
+-(void) startUpRoutine
+{
+    //Finding the date 2 months back
+    
+    toDate = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components= [[NSDateComponents alloc]init];
+    [components setMonth:-2];
+    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    
+    fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
+    toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
+    
+    
+    //populating the table with data for the last two months for all accounts
+    [self applyBTNClicked:nil];
+
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -94,30 +123,24 @@
     self.navigationItem.titleView = label;
     label.text = @"Transactions";
     label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
-    
+    [label sizeToFit];
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     
-    toDate = [NSDate date];
-    
-    //Finding the date 2 months back
-    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components= [[NSDateComponents alloc]init];
-    [components setMonth:-2];
-    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
-    
-    fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
-    toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
-    [label sizeToFit];
-    
-    //populating the table with data for the last two months for all accounts
-    [self applyBTNClicked:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
+}
+
+-(void) viewDidAppear:(BOOL)animated
+{
+    [self startUpRoutine];
 }
 
 - (void)viewDidUnload
 {
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [super viewDidUnload];
+    
 }
 
 
@@ -357,6 +380,19 @@
         fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
     }
 }
+
+#pragma mark MVC Delegate methods
+
+-(void)userLogout:(NSNotification*)notification
+{
+    [transactions removeAllObjects];
+    [transectionTBL reloadData];
+}
+
+-(void)userLogin:(NSNotification*)notification
+{
+}
+
 
 
 
