@@ -11,6 +11,7 @@
 #import "BFBrokerageAccountStore.h"
 #import "BFBrokerageAccount.h"
 #import "PreviewTradeViewController.h"
+#import "AccountDropDownViewControiller.h"
 
 @implementation TradeViewController
 @synthesize position;
@@ -27,6 +28,7 @@
 @synthesize textFields;
 @synthesize dropdown;
 @synthesize order;
+@synthesize accountDropdown;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition
 {
@@ -98,32 +100,49 @@
 	return YES;
 }
 
+- (IBAction)showAccountDropdown:(id)sender {
+    UIButton *button = sender;
+    CGSize size;
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    size.height = [brokerageAccounts count] * 44;
+    if ([brokerageAccounts count] > 5) {
+        size.height = 220;
+    }
+    size.width = 320;
+    
+    if (!accountDropdown) {
+        AccountDropDownViewControiller *controller = [[AccountDropDownViewControiller alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+        
+        accountDropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = accountDropdown;
+        controller.selections = brokerageAccounts;
+        controller.tag = button.tag;
+        controller.accountDelegate = self;
+        [accountDropdown setPopoverContentSize:size];
+    }
+    if ([accountDropdown isPopoverVisible]) {
+        [accountDropdown dismissPopoverAnimated:YES];
+    } else {
+        AccountDropDownViewControiller *controller = accountDropdown.contentViewController;
+        controller.tag = button.tag;
+        controller.selections = brokerageAccounts;
+        [controller.selectionsTBL reloadData];
+        [accountDropdown setPopoverContentSize:size];
+        [accountDropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+    }
+}
+
+
 - (IBAction)showDropdown:(id)sender {
     UIButton *button = sender;
     NSArray *selections;
     CGSize size;
-    switch (button.tag) {
-        case 1: {
-            NSMutableArray *accountName = [[NSMutableArray alloc] init];
-            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-            for (BFBrokerageAccount *account in brokerageAccounts) {
-                [accountName addObject:account.name];
-           }
-            selections = [NSArray arrayWithArray:accountName];
-            size.height = [selections count] * 44;
-            if ([selections count] > 5) {
-                size.height = 220;
-            }
-            size.width = 320;
-            break;
-        }
-            
+    switch (button.tag) {            
         case 2:
             selections = [NSArray arrayWithObjects:@"Buy", @"Sell", nil];
             size = [@"Buy" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
             size.width += 20;
-
             break;
             
         case 3:
@@ -243,18 +262,6 @@
 - (void)selectionChanged:(DropdownViewController *)controller
 {
     switch (controller.tag) {
-        case 1: {
-            accountBTN.titleLabel.text = controller.selected;
-            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-            for (BFBrokerageAccount *account in brokerageAccounts) {
-                if ([controller.selected isEqualToString:account.name] == YES) {
-                    order.brokerageAccountID = account.brokerageAccountID;
-                    order.accountName = account.name;
-                    break;
-                }
-            }
-            break;
-        }
         case 2:
             orderBTN.titleLabel.text = controller.selected;
             order.side = controller.selected;
@@ -275,4 +282,23 @@
     }
     
 }
+
+- (void)accountSelectionChanged:(AccountDropDownViewControiller *)controller
+{
+    switch (controller.tag) {
+        case 1: {
+            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+            BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:controller.selectedIndex];
+            order.brokerageAccountID = account.brokerageAccountID;
+            order.accountName = account.name;
+            accountBTN.titleLabel.text = account.name;
+            break;
+        }
+            
+        default:
+            break;
+    }
+    
+}
+
 @end
