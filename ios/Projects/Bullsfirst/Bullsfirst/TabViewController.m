@@ -231,7 +231,8 @@
 }
 
 - (IBAction)transferBTNClicked:(id)sender {
-    TransferViewController *controller = [[TransferViewController alloc] initWithNibName:@"TransferViewController" bundle:nil];    
+    TransferViewController *transferController = [[TransferViewController alloc] initWithNibName:@"TransferViewController" bundle:nil];    
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:transferController];
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     
     [self presentModalViewController:controller animated:YES];

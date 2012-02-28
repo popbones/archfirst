@@ -12,7 +12,7 @@
 #import "BFExternalAccountStore.h"
 #import "BFExternalAccount.h"
 #import "BFMoney.h"
-#import "AddAccountViewController.h"
+#import "AddExternalAccountViewController.h"
 
 @implementation TransferViewController
 @synthesize segmentedControl,restServiceObject,symbol,amount,quantity,pricePaid;
@@ -40,10 +40,33 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];
-    [self.navigationController pushViewController:self animated:YES];
+    [super viewDidLoad];    
+
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    self.navigationItem.leftBarButtonItem = barButtonItem;
     
-    // Do any additional setup after loading the view from its nib.
+    barButtonItem = [[UIBarButtonItem alloc]
+                     initWithTitle:@"Add Ext Account" style:UIBarButtonItemStylePlain target:self action:@selector(addExternalAccountBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+    
+    barButtonItem = [[UIBarButtonItem alloc] init];
+    barButtonItem.title = @"Transfer";
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+	self.navigationItem.backBarButtonItem = barButtonItem;
+
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
+    label.backgroundColor = [UIColor clearColor];
+    label.font = [UIFont boldSystemFontOfSize:20.0];
+    label.textAlignment = UITextAlignmentCenter;
+    self.navigationItem.titleView = label;
+    label.text = @"Transfer";
+    label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
+    [label sizeToFit];
 }
 
 - (void)viewDidUnload
@@ -338,7 +361,7 @@
 
 - (IBAction)addExternalAccountBTNClicked:(id)sender
 {
-    AddAccountViewController *controller= [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];
+    AddExternalAccountViewController *controller= [[AddExternalAccountViewController alloc] initWithNibName:@"AddExternalAccountViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 
 }

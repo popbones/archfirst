@@ -76,6 +76,12 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    self.navigationItem.rightBarButtonItem = barButtonItem;
 }
 
 - (void)viewDidUnload
@@ -89,6 +95,11 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+-(IBAction)cancelBTNClicked:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];  
 }
 
 @end
