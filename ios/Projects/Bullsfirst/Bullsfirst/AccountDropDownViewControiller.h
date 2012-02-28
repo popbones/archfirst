@@ -18,5 +18,6 @@
 @interface AccountDropDownViewControiller : DropdownViewController
 
 @property (retain, nonatomic) id <AccountDropdownViewControllerDelegate> accountDelegate;
+@property (strong, nonatomic) IBOutlet UITableViewCell *accountTableViewCell;
 
 @end

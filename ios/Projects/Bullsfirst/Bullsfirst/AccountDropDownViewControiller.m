@@ -11,6 +11,7 @@
 
 @implementation AccountDropDownViewControiller
 @synthesize accountDelegate;
+@synthesize accountTableViewCell;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -48,6 +49,7 @@
 
 - (void)viewDidUnload
 {
+    [self setAccountTableViewCell:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -61,16 +63,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"DropDownCell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:CellIdentifier];
-    }
-    
+    UITableViewCell *cell;
+    [[NSBundle mainBundle] loadNibNamed:@"AccountDropDownTableCell" owner:self options:nil];
+    cell = accountTableViewCell;
+
     BFBrokerageAccount *account = [super.selections objectAtIndex:indexPath.row];
-    cell.textLabel.font=[UIFont fontWithName:@"Helvetica" size:13.0];
-    cell.textLabel.text = [NSString stringWithFormat:@"%d %@", [account.brokerageAccountID intValue], account.name];
+
+    UILabel *label;
+    label = (UILabel *)[cell viewWithTag:1];
+    label.text = [NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
+    
+    label = (UILabel *)[cell viewWithTag:2];
+    label.text = [NSString stringWithString: account.name];
     return cell;
 }
 

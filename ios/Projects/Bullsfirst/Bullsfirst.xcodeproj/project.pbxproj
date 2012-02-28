@@ -62,6 +62,7 @@
 		5468395514F827A0005C356A /* DatePickerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5468395314F8279D005C356A /* DatePickerViewController.xib */; };
 		5468399714FC1D07005C356A /* TableHeader_Background.png in Resources */ = {isa = PBXBuildFile; fileRef = 5468399614FC1D07005C356A /* TableHeader_Background.png */; };
 		549591C614FD4E3600D76424 /* AccountDropDownViewControiller.m in Sources */ = {isa = PBXBuildFile; fileRef = 549591C514FD4E3600D76424 /* AccountDropDownViewControiller.m */; };
+		549591C814FD58A600D76424 /* AccountDropDownTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 549591C714FD58A600D76424 /* AccountDropDownTableCell.xib */; };
 		54B78A4014E5C91F002FF1AC /* PositionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */; };
 		54B78A5E14E976DC002FF1AC /* tradePositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */; };
 		54B78A6114E9785F002FF1AC /* expandPositionBTN.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78A6014E9785E002FF1AC /* expandPositionBTN.m */; };
@@ -252,6 +253,7 @@
 		5468399614FC1D07005C356A /* TableHeader_Background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = TableHeader_Background.png; sourceTree = "<group>"; };
 		549591C414FD4E3600D76424 /* AccountDropDownViewControiller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AccountDropDownViewControiller.h; sourceTree = "<group>"; };
 		549591C514FD4E3600D76424 /* AccountDropDownViewControiller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AccountDropDownViewControiller.m; sourceTree = "<group>"; };
+		549591C714FD58A600D76424 /* AccountDropDownTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AccountDropDownTableCell.xib; sourceTree = "<group>"; };
 		54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PositionTableViewCell.xib; sourceTree = "<group>"; };
 		54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tradePositionBTN.h; sourceTree = "<group>"; };
 		54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = tradePositionBTN.m; sourceTree = "<group>"; };
@@ -709,6 +711,7 @@
 				546838B614EECAC3005C356A /* DropdownViewController.xib */,
 				549591C414FD4E3600D76424 /* AccountDropDownViewControiller.h */,
 				549591C514FD4E3600D76424 /* AccountDropDownViewControiller.m */,
+				549591C714FD58A600D76424 /* AccountDropDownTableCell.xib */,
 				5468395114F82791005C356A /* DatePickerViewController.h */,
 				5468395214F82797005C356A /* DatePickerViewController.m */,
 				5468395314F8279D005C356A /* DatePickerViewController.xib */,
@@ -946,6 +949,7 @@
 				AC8A030014FBAA6600025BA6 /* TransactionsLandscapeTableViewCell.xib in Resources */,
 				5468399714FC1D07005C356A /* TableHeader_Background.png in Resources */,
 				952B7A8114FCF1D4005B3C98 /* AddExternalAccountViewController.xib in Resources */,
+				549591C814FD58A600D76424 /* AccountDropDownTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
