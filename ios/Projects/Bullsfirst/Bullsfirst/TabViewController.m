@@ -24,6 +24,8 @@
 #import "FilterViewController.h"
 #import "UserViewController.h"
 #import "AddAccountViewController.h"
+#import "AccountsViewController.h"
+
 @implementation TabViewController
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
@@ -59,9 +61,8 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
-
-    UIToolbar *tools = [[UIToolbar alloc]
-                        initWithFrame:CGRectMake(0.0f, 0.0f, 210.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
+    
+    UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 210.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
     tools.clearsContextBeforeDrawing = NO;
     tools.clipsToBounds = NO;
     tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // closest I could get by eye to black, translucent style.
@@ -71,25 +72,14 @@
     
     NSMutableArray *buttons = [[NSMutableArray alloc] init];
     
-    // Add buttons to toolbar and toolbar to nav bar.
-    UIBarButtonItem* barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addBTNClicked:)];
-    barButtonItem.style = UIBarButtonItemStylePlain;
-    barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
-    [buttons addObject:barButtonItem];
-    
-    // Create a spacer.
-    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 15.0f;
-    [buttons addObject:barButtonItem];
-    
-    barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_Transfer.png"] style:UIBarButtonItemStylePlain target:self action:@selector(transferBTNClicked:)];
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed: @"HeaderBar_Transfer.png"] style:UIBarButtonItemStylePlain target:self action:@selector(transferBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
 
     // Create a spacer.
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 15.0f;
+    barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
 
 
@@ -100,7 +90,7 @@
     [buttons addObject:barButtonItem];
     
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 15.0f;
+    barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
     
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshBTNClicked:)];
@@ -110,22 +100,14 @@
     [buttons addObject:barButtonItem];
 
     barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-    barButtonItem.width = 15.0f;
+    barButtonItem.width = 30.0f;
     [buttons addObject:barButtonItem];
 
     barButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"HeaderBar_Settings.png"] style:UIBarButtonItemStyleBordered target:(id)self action:@selector(logout)];
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
-    
-    //Create a final 20pixel spacer
-    
-//    barButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFixedSpace target:nil action:nil];
-//    barButtonItem.width = 20.0f;
-//    [buttons addObject:barButtonItem];
-
-    
-    
+        
     [tools setItems:buttons animated:NO];
     UIBarButtonItem *twoButtons = [[UIBarButtonItem alloc] initWithCustomView:tools];
     self.navigationItem.rightBarButtonItem = twoButtons;
