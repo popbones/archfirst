@@ -15,7 +15,7 @@
 @synthesize selected;
 @synthesize tag;
 @synthesize delegate;
-
+@synthesize selectedIndex;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -129,6 +129,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     selected =[selections objectAtIndex:indexPath.row];
+    selectedIndex=indexPath.row;
     if (self.delegate != nil)
         [self.delegate selectionChanged:self];
     [self.popOver dismissPopoverAnimated:YES];

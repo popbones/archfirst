@@ -19,6 +19,7 @@
 @property (retain, nonatomic) UIPopoverController *popOver;
 @property (strong, nonatomic) NSArray *selections;
 @property (strong, nonatomic) NSString *selected;
+@property (assign, nonatomic) int selectedIndex;
 @property (assign, nonatomic) int tag;
 @property (retain, nonatomic) id <DropdownViewControllerDelegate> delegate;
 

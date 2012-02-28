@@ -75,6 +75,9 @@
 		54B78AEE14EC4656002FF1AC /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78AEC14EC4655002FF1AC /* UserViewController.xib */; };
 		952B7A5914FBA61C005B3C98 /* BFExternalAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */; };
 		952B7A5C14FBABD5005B3C98 /* BFExternalAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */; };
+		952B7A8014FCF1D4005B3C98 /* AddExternalAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */; };
+		952B7A8114FCF1D4005B3C98 /* AddExternalAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952B7A7F14FCF1D4005B3C98 /* AddExternalAccountViewController.xib */; };
+		952B7A8414FCF97A005B3C98 /* BFTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A8314FCF979005B3C98 /* BFTransaction.m */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		9584FE2414F2234200D28154 /* AddAccount-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */; };
 		9584FE2514F2234200D28154 /* AddAccount-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2014F2234200D28154 /* AddAccount-PushDown.png */; };
@@ -149,7 +152,6 @@
 		AC9F211214E13AEE0024C3D3 /* BFCPTTheme.m in Sources */ = {isa = PBXBuildFile; fileRef = AC9F211014E13AEE0024C3D3 /* BFCPTTheme.m */; };
 		ACC6A17114EE99BD00016AD4 /* SwitchAccountsButton_PushDownState.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC6A16F14EE998700016AD4 /* SwitchAccountsButton_PushDownState.png */; };
 		ACC6A17214EE99BD00016AD4 /* SwitchAccountsButton.png in Resources */ = {isa = PBXBuildFile; fileRef = ACC6A17014EE999200016AD4 /* SwitchAccountsButton.png */; };
-		ACE51D2114FCAA9500B48390 /* BFTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = ACE51D2014FCAA9500B48390 /* BFTransaction.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -269,6 +271,11 @@
 		952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExternalAccount.m; sourceTree = "<group>"; };
 		952B7A5A14FBABD5005B3C98 /* BFExternalAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccountStore.h; sourceTree = "<group>"; };
 		952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExternalAccountStore.m; sourceTree = "<group>"; };
+		952B7A7D14FCF1D2005B3C98 /* AddExternalAccountViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddExternalAccountViewController.h; sourceTree = "<group>"; };
+		952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddExternalAccountViewController.m; sourceTree = "<group>"; };
+		952B7A7F14FCF1D4005B3C98 /* AddExternalAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddExternalAccountViewController.xib; sourceTree = "<group>"; };
+		952B7A8214FCF979005B3C98 /* BFTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTransaction.h; sourceTree = "<group>"; };
+		952B7A8314FCF979005B3C98 /* BFTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTransaction.m; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-Inactive.png"; sourceTree = "<group>"; };
 		9584FE2014F2234200D28154 /* AddAccount-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-PushDown.png"; sourceTree = "<group>"; };
@@ -361,8 +368,6 @@
 		ACC6A16F14EE998700016AD4 /* SwitchAccountsButton_PushDownState.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchAccountsButton_PushDownState.png; sourceTree = "<group>"; };
 		ACC6A17014EE999200016AD4 /* SwitchAccountsButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = SwitchAccountsButton.png; sourceTree = "<group>"; };
 		ACDA1B2014E3A3F800B3673F /* BF-CorePlot-CocoaTouch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "BF-CorePlot-CocoaTouch.h"; path = "Bullsfirst/BF-CorePlot-CocoaTouch.h"; sourceTree = "<group>"; };
-		ACE51D1F14FCAA9500B48390 /* BFTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTransaction.h; sourceTree = "<group>"; };
-		ACE51D2014FCAA9500B48390 /* BFTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTransaction.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -550,6 +555,8 @@
 		00DFF9631484179D001A4641 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				952B7A8214FCF979005B3C98 /* BFTransaction.h */,
+				952B7A8314FCF979005B3C98 /* BFTransaction.m */,
 				546838B914EEE103005C356A /* BFOrder.h */,
 				546838BA14EEE103005C356A /* BFOrder.m */,
 				00DFF95D14841317001A4641 /* BFMoney.h */,
@@ -566,8 +573,6 @@
 				952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */,
 				545C5E7414E55DA6003560C8 /* BFUser.h */,
 				545C5E7514E55DA6003560C8 /* BFUser.m */,
-				ACE51D1F14FCAA9500B48390 /* BFTransaction.h */,
-				ACE51D2014FCAA9500B48390 /* BFTransaction.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -690,6 +695,9 @@
 				54B78A6D14EAA174002FF1AC /* TransferViewController.h */,
 				54B78A6E14EAA177002FF1AC /* TransferViewController.m */,
 				54B78A6F14EAA178002FF1AC /* TransferViewController.xib */,
+				952B7A7D14FCF1D2005B3C98 /* AddExternalAccountViewController.h */,
+				952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */,
+				952B7A7F14FCF1D4005B3C98 /* AddExternalAccountViewController.xib */,
 				54B78A9914EB00A6002FF1AC /* FilterViewController.h */,
 				54B78A9A14EB00A7002FF1AC /* FilterViewController.m */,
 				54B78A9B14EB00A9002FF1AC /* FilterViewController.xib */,
@@ -932,6 +940,7 @@
 				AC8A02FE14FBA3B900025BA6 /* TransactionsTableViewCell.xib in Resources */,
 				AC8A030014FBAA6600025BA6 /* TransactionsLandscapeTableViewCell.xib in Resources */,
 				5468399714FC1D07005C356A /* TableHeader_Background.png in Resources */,
+				952B7A8114FCF1D4005B3C98 /* AddExternalAccountViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -987,7 +996,8 @@
 				5468395414F827A0005C356A /* DatePickerViewController.m in Sources */,
 				952B7A5914FBA61C005B3C98 /* BFExternalAccount.m in Sources */,
 				952B7A5C14FBABD5005B3C98 /* BFExternalAccountStore.m in Sources */,
-				ACE51D2114FCAA9500B48390 /* BFTransaction.m in Sources */,
+				952B7A8014FCF1D4005B3C98 /* AddExternalAccountViewController.m in Sources */,
+				952B7A8414FCF97A005B3C98 /* BFTransaction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
