@@ -109,6 +109,9 @@
     fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
     toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
     [label sizeToFit];
+    
+    //populating the table with data for the last two months for all accounts
+    [self applyBTNClicked:nil];
 }
 
 - (void)viewDidUnload
