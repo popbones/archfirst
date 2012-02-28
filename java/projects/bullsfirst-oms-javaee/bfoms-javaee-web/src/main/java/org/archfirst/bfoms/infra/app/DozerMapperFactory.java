@@ -49,12 +49,14 @@ public class DozerMapperFactory {
                         org.archfirst.bfoms.restservice.order.Order.class)
                     .fields("account.id", "accountId")
                     .fields("account.name", "accountName")
+                    .fields("creationTime", "creationTime", copyByReference())
                     .fields("quantity", "quantity", copyByReference())
                     .fields("cumQty", "cumQty", copyByReference())
                     .fields("limitPrice", "limitPrice", copyByReference());
 
                 mapping(org.archfirst.bfoms.domain.account.brokerage.order.Execution.class,
                         org.archfirst.bfoms.restservice.order.Execution.class)
+                    .fields("creationTime", "creationTime", copyByReference())
                     .fields("quantity", "quantity", copyByReference())
                     .fields("price", "price", copyByReference());
             }
