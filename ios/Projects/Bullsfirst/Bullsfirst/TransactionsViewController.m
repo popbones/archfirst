@@ -26,6 +26,38 @@
 @implementation TransactionsViewController
 @synthesize transectionTBL,portraitTitleBar,landscrapeTitleBar,transactions;
 
+#pragma mark - helper methods
+
+-(NSString*) convertDateToRequiredFormat:(NSDate*) date
+{
+    if(date)
+    {
+        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
+        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
+        return [NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+    }
+    else
+        return  nil;
+}
+
+-(NSString*) convertDateTimeToRequiredFormat:(NSDate*) date
+{
+    if(date)
+    {
+        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
+        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d/%d/%d/ %d:%d:%d",[dateComponents year],[dateComponents month],[dateComponents day],[dateComponents hour],[dateComponents minute],[dateComponents second]]);
+        return [NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
+    }
+    else
+        return  nil;
+}
+
+
+
+#pragma  mark - view controller life cycle
+
 - (id)init
 {
     self = [super init];
@@ -66,6 +98,16 @@
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     
+    toDate = [NSDate date];
+    
+    //Finding the date 2 months back
+    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components= [[NSDateComponents alloc]init];
+    [components setMonth:-2];
+    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    
+    fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
+    toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
     [label sizeToFit];
 }
 
@@ -139,7 +181,7 @@
         cell = transactionCell;
         
         UILabel* label = (UILabel*) [cell viewWithTag:1];
-        label.text = @"date";
+        label.text = [self convertDateTimeToRequiredFormat:transaction.creationTime];
         //label.text = transaction.creationTime;
         label = (UILabel*) [cell viewWithTag:2];
         label.text = transaction.transactionType;
@@ -157,7 +199,7 @@
         cell = transactionCell;
         
         UILabel* label = (UILabel*) [cell viewWithTag:1];
-        label.text = @"date";
+        label.text = [self convertDateTimeToRequiredFormat:transaction.creationTime];
         //label.text = transaction.creationTime;
         label = (UILabel*) [cell viewWithTag:2];
         label.text = transaction.transactionType;
@@ -210,20 +252,6 @@
  }
  */
 
-#pragma mark - helper methods
-
--(NSString*) convertDateToRequiredFormat:(NSDate*) date
-{
-    if(date)
-    {
-        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
-        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
-        return [NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
-    }
-    else
-        return  nil;
-}
 
 #pragma mark - selectors for handling rest call callbacks
 
@@ -258,6 +286,7 @@
 
 -(IBAction)dateBTNClicked:(id)sender
 {
+
     UIButton *button = sender;
     if(button == toDateBTN)
     {
@@ -282,6 +311,10 @@
         [datedropdown setPopoverContentSize:controller.view.frame.size];
         [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
+    fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
+    toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
+    
+
 }
 
 
@@ -312,11 +345,13 @@
     if(currentSelectedDateType == ToDate)
     {
         toDate = controller.datePicker.date;
+        toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
         
     }
     else
     {
         fromDate = controller.datePicker.date;
+        fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
     }
 }
 
