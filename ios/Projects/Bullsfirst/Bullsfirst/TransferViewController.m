@@ -12,8 +12,8 @@
 #import "BFExternalAccountStore.h"
 #import "BFExternalAccount.h"
 #import "BFMoney.h"
-#import "DropdownViewController.h"
 #import "AddAccountViewController.h"
+
 @implementation TransferViewController
 @synthesize segmentedControl,restServiceObject,symbol,amount,quantity,pricePaid;
 @synthesize fromAccountBTN,toAccountBTN,dropdown;
@@ -302,7 +302,7 @@
     if ([dropdown isPopoverVisible]) {
         [dropdown dismissPopoverAnimated:YES];
     } else {
-        DropdownViewController *controller = dropdown.contentViewController;
+        DropdownViewController *controller = (DropdownViewController *)dropdown.contentViewController;
         controller.tag = button.tag;
         controller.selections = selections;
         [controller.selectionsTBL reloadData];

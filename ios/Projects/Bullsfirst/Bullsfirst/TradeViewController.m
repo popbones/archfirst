@@ -7,11 +7,9 @@
 //
 
 #import "TradeViewController.h"
-#import "DropdownViewController.h"
 #import "BFBrokerageAccountStore.h"
 #import "BFBrokerageAccount.h"
 #import "PreviewTradeViewController.h"
-#import "AccountDropDownViewControiller.h"
 
 @implementation TradeViewController
 @synthesize position;
@@ -123,7 +121,7 @@
     if ([accountDropdown isPopoverVisible]) {
         [accountDropdown dismissPopoverAnimated:YES];
     } else {
-        AccountDropDownViewControiller *controller = accountDropdown.contentViewController;
+        AccountDropDownViewControiller *controller = (AccountDropDownViewControiller *) accountDropdown.contentViewController;
         controller.tag = button.tag;
         controller.selections = brokerageAccounts;
         [controller.selectionsTBL reloadData];
@@ -177,7 +175,7 @@
     if ([dropdown isPopoverVisible]) {
         [dropdown dismissPopoverAnimated:YES];
     } else {
-        DropdownViewController *controller = dropdown.contentViewController;
+        DropdownViewController *controller = (DropdownViewController *)dropdown.contentViewController;
         controller.tag = button.tag;
         controller.selections = selections;
         [controller.selectionsTBL reloadData];

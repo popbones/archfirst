@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "BFPosition.h"
 #import "BFOrder.h"
+#import "AccountDropDownViewControiller.h"
+#import "DropdownViewController.h"
 
-@interface TradeViewController : UIViewController {
+@interface TradeViewController : UIViewController <DropdownViewControllerDelegate, AccountDropdownViewControllerDelegate> {
     BFPosition *position;
     BFOrder *order;
 }

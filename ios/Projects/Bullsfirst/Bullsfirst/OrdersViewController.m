@@ -23,7 +23,6 @@
 #import "FilterViewController.h"
 #import "OrderBTN.h"
 #import "DatePickerViewController.h"
-#import "DropdownViewController.h"
 #import "BFBrokerageAccountStore.h"
 #import "BFBrokerageAccount.h"
 
@@ -296,7 +295,7 @@
     if ([dropdown isPopoverVisible]) {
         [dropdown dismissPopoverAnimated:YES];
     } else {
-        DropdownViewController *controller = dropdown.contentViewController;
+        DropdownViewController *controller = (DropdownViewController *)dropdown.contentViewController;
         controller.tag = tapGesture.view.tag;
         controller.selections = selections;
         [controller.selectionsTBL reloadData];

@@ -22,8 +22,9 @@
 #import "BullFirstWebServiceObject.h"
 #import "TabViewController.h"
 #import "DatePickerViewController.h"
+#import "DropdownViewController.h"
 
-@interface OrdersViewController : TabViewController<DatePickerViewControllerDelegate> {
+@interface OrdersViewController : TabViewController<DatePickerViewControllerDelegate, DropdownViewControllerDelegate> {
     NSMutableArray *orders;
 }
 

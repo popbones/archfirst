@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "BullFirstWebServiceObject.h"
-@interface TransferViewController : UIViewController    
+#import "DropdownViewController.h"
+
+@interface TransferViewController : UIViewController <DropdownViewControllerDelegate>   
 {
     NSNumber *fromAccountID;
     NSNumber *toAccountID;
