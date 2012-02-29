@@ -248,7 +248,8 @@
     [self presentModalViewController:controller animated:YES];
 }
 - (IBAction)addBTNClicked:(id)sender {
-    AddAccountViewController *controller = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];    
+    AddAccountViewController *addAccointController = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];    
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:addAccointController];
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
 
     
