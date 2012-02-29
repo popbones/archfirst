@@ -43,6 +43,13 @@
 		1030AAA314FA6C7B0095FED8 /* HeaderBar_Settings.png in Resources */ = {isa = PBXBuildFile; fileRef = 1030AA9E14FA6C7B0095FED8 /* HeaderBar_Settings.png */; };
 		1030AAA414FA6C7B0095FED8 /* HeaderBar_Trade.png in Resources */ = {isa = PBXBuildFile; fileRef = 1030AA9F14FA6C7B0095FED8 /* HeaderBar_Trade.png */; };
 		1030AAA514FA6C7B0095FED8 /* HeaderBar_Transfer.png in Resources */ = {isa = PBXBuildFile; fileRef = 1030AAA014FA6C7B0095FED8 /* HeaderBar_Transfer.png */; };
+		540129D014FEC2D2008D38BD /* Trade-Dropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129CF14FEC2CE008D38BD /* Trade-Dropdown.png */; };
+		540129D214FEC482008D38BD /* Trade-AccountDropdown.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D114FEC47E008D38BD /* Trade-AccountDropdown.png */; };
+		540129D514FEC5C8008D38BD /* CheckBox-Checked.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D314FEC5C6008D38BD /* CheckBox-Checked.png */; };
+		540129D614FEC5C8008D38BD /* CheckBox-Unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D414FEC5C7008D38BD /* CheckBox-Unchecked.png */; };
+		540129DA14FEC65C008D38BD /* PreviewOrder-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D714FEC65A008D38BD /* PreviewOrder-Inactive.png */; };
+		540129DB14FEC65C008D38BD /* PreviewOrder-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D814FEC65B008D38BD /* PreviewOrder-PushDown.png */; };
+		540129DC14FEC65C008D38BD /* PreviewOrder.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D914FEC65B008D38BD /* PreviewOrder.png */; };
 		545C5E7614E55DA6003560C8 /* BFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 545C5E7514E55DA6003560C8 /* BFUser.m */; };
 		545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */; };
 		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
@@ -226,6 +233,13 @@
 		1030AA9E14FA6C7B0095FED8 /* HeaderBar_Settings.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HeaderBar_Settings.png; sourceTree = "<group>"; };
 		1030AA9F14FA6C7B0095FED8 /* HeaderBar_Trade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HeaderBar_Trade.png; sourceTree = "<group>"; };
 		1030AAA014FA6C7B0095FED8 /* HeaderBar_Transfer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = HeaderBar_Transfer.png; sourceTree = "<group>"; };
+		540129CF14FEC2CE008D38BD /* Trade-Dropdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trade-Dropdown.png"; sourceTree = "<group>"; };
+		540129D114FEC47E008D38BD /* Trade-AccountDropdown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Trade-AccountDropdown.png"; sourceTree = "<group>"; };
+		540129D314FEC5C6008D38BD /* CheckBox-Checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CheckBox-Checked.png"; sourceTree = "<group>"; };
+		540129D414FEC5C7008D38BD /* CheckBox-Unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "CheckBox-Unchecked.png"; sourceTree = "<group>"; };
+		540129D714FEC65A008D38BD /* PreviewOrder-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PreviewOrder-Inactive.png"; sourceTree = "<group>"; };
+		540129D814FEC65B008D38BD /* PreviewOrder-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PreviewOrder-PushDown.png"; sourceTree = "<group>"; };
+		540129D914FEC65B008D38BD /* PreviewOrder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PreviewOrder.png; sourceTree = "<group>"; };
 		545C5E7414E55DA6003560C8 /* BFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFUser.h; sourceTree = "<group>"; };
 		545C5E7514E55DA6003560C8 /* BFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFUser.m; sourceTree = "<group>"; };
 		545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -488,6 +502,13 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				540129D714FEC65A008D38BD /* PreviewOrder-Inactive.png */,
+				540129D814FEC65B008D38BD /* PreviewOrder-PushDown.png */,
+				540129D914FEC65B008D38BD /* PreviewOrder.png */,
+				540129D314FEC5C6008D38BD /* CheckBox-Checked.png */,
+				540129D414FEC5C7008D38BD /* CheckBox-Unchecked.png */,
+				540129D114FEC47E008D38BD /* Trade-AccountDropdown.png */,
+				540129CF14FEC2CE008D38BD /* Trade-Dropdown.png */,
 				9586FA7514EB6A2100A0B28C /* AccountsToPosition_RowArrow.png */,
 				9584FE2B14F27E1F00D28154 /* AccountsView_Splitter_Gradient.png */,
 				9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */,
@@ -950,6 +971,13 @@
 				5468399714FC1D07005C356A /* TableHeader_Background.png in Resources */,
 				952B7A8114FCF1D4005B3C98 /* AddExternalAccountViewController.xib in Resources */,
 				549591C814FD58A600D76424 /* AccountDropDownTableCell.xib in Resources */,
+				540129D014FEC2D2008D38BD /* Trade-Dropdown.png in Resources */,
+				540129D214FEC482008D38BD /* Trade-AccountDropdown.png in Resources */,
+				540129D514FEC5C8008D38BD /* CheckBox-Checked.png in Resources */,
+				540129D614FEC5C8008D38BD /* CheckBox-Unchecked.png in Resources */,
+				540129DA14FEC65C008D38BD /* PreviewOrder-Inactive.png in Resources */,
+				540129DB14FEC65C008D38BD /* PreviewOrder-PushDown.png in Resources */,
+				540129DC14FEC65C008D38BD /* PreviewOrder.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,6 +27,7 @@
 @synthesize dropdown;
 @synthesize order;
 @synthesize accountDropdown;
+@synthesize accountLabel;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition
 {
@@ -64,7 +65,6 @@
 	self.navigationItem.backBarButtonItem = barButtonItem;
 
     textFields = [NSArray arrayWithObjects:quantity, cusipText, limit, nil];
-    [allOrNone setImage:[UIImage imageNamed:@"img_bg_yellow.png"] forState:UIControlStateNormal];
     order = [[BFOrder alloc] init];
     order.allOrNone = YES;
     order.term = [NSString stringWithString:@"Good for day"];
@@ -73,8 +73,11 @@
         cusipText.text = self.position.instrumentSymbol;
         accountBTN.titleLabel.text = self.position.accountName;
         quantity.text = [NSString stringWithFormat:@"%d", [self.position.quantity intValue]];
-    }
-
+        
+        accountLabel.text = self.position.accountName;
+    } 
+    accountLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"]];
+    accountLabel.text = @"Acount";
 }
 
 - (void)viewDidUnload
@@ -88,6 +91,7 @@
     [self setGoodForDayBTN:nil];
     [self setAllOrNone:nil];
     [self setAllOrNoneLabel:nil];
+    [self setAccountLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;

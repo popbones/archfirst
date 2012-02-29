@@ -41,4 +41,5 @@
 @property (strong, nonatomic) UIPopoverController *dropdown;
 @property (strong, nonatomic) UIPopoverController *accountDropdown;
 
+@property (strong, nonatomic) IBOutlet UILabel *accountLabel;
 @end
