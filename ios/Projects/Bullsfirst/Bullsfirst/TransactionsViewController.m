@@ -22,9 +22,11 @@
 #import "AppDelegate.h"
 #import "FilterViewController.h"
 #import "BFTransaction.h"
+#import "BFBrokerageAccount.h"
+#import "BFBrokerageAccountStore.h"
 
 @implementation TransactionsViewController
-@synthesize transectionTBL,portraitTableHeaderView,landscrapeTableHeaderView,transactions;
+@synthesize transectionTBL,portraitTableHeaderView,landscrapeTableHeaderView,transactions,datedropdown,dropdown;
 
 #pragma mark - helper methods
 
@@ -414,6 +416,35 @@
 
 -(IBAction)accountsBTNClicked:(id)sender
 {
+    UIButton* button = (UIButton*) sender;
+    NSArray *selections;
+    CGSize size;
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    selections = [NSArray arrayWithArray:brokerageAccounts];
+    size.height = [selections count] * 44;
+    if ([selections count] > 5) {
+        size.height = 220;
+    }
+    size.width = 320;
+    
+    if (!dropdown) {
+        AccountDropDownViewControiller *controller = [[AccountDropDownViewControiller alloc] initWithNibName:@"DropDownViewController" bundle:nil];
+        
+        dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = dropdown;
+        controller.selections = selections;
+        controller.delegate = self;
+        [dropdown setPopoverContentSize:size];
+    }
+    if ([dropdown isPopoverVisible]) {
+        [dropdown dismissPopoverAnimated:YES];
+    } else {
+        DropdownViewController *controller = (DropdownViewController *)dropdown.contentViewController;
+        controller.selections = selections;
+        [controller.selectionsTBL reloadData];
+        [dropdown setPopoverContentSize:size];
+        [dropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
     
 }
 
@@ -447,6 +478,14 @@
         fromDate = controller.datePicker.date;
         fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
     }
+}
+
+#pragma mark - DropDownViewController delegate methods
+
+-(void) accountSelectionChanged:(AccountDropDownViewControiller *)controller
+{
+    BFBrokerageAccount* brokerageAccount =  [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:controller.selectedIndex];
+    selectedAccountId = [brokerageAccount.brokerageAccountID intValue];
 }
 
 #pragma mark MVC Delegate methods
