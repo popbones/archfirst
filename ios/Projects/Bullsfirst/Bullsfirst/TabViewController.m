@@ -251,7 +251,6 @@
     AddAccountViewController *addAccointController = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];    
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:addAccointController];
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-
     
     [self presentModalViewController:controller animated:YES];
     controller.view.superview.bounds=CGRectMake(0, 0, 500,235);

@@ -424,11 +424,12 @@
 {
     editAccountNameBTN *button = (editAccountNameBTN *)sender;
     EditAccountNameViewController *editAccountViewController = [[EditAccountNameViewController alloc] initWithNibName:@"EditAccountNameViewController" bundle:nil oldAccountName:button.currentName withId:button.accountID];    
-    [editAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
-    [editAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:editAccountViewController];
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
-    [self presentModalViewController:editAccountViewController animated:YES];
-    editAccountViewController.view.superview.bounds=CGRectMake(0, 0, 488,250);
+    [self presentModalViewController:controller animated:YES];
+    controller.view.superview.bounds=CGRectMake(0, 0, 488,250);
 }
 
 
