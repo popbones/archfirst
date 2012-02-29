@@ -43,26 +43,17 @@
 {
     [super viewDidLoad];    
 
-    UIBarButtonItem *barButtonItem;
-//    = [[UIBarButtonItem alloc]
-//                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
-//    barButtonItem.style = UIBarButtonItemStyleBordered;
-//    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-//    self.navigationItem.leftBarButtonItem = barButtonItem;
-    CGRect  rect=self.view.frame;
-    scrollView.contentSize=CGSizeMake(rect.size.width, rect.size.height);
-    UIButton *cancelBTN=[UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelBTN setImage:[UIImage imageNamed:@"Cancel.png"] forState:UIControlStateNormal];
-    [cancelBTN addTarget:self action:@selector(cancelBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
-    [cancelBTN setFrame:CGRectMake(0, 0, 57, 33)];
-    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:cancelBTN];
-    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+    self.navigationItem.rightBarButtonItem=barButtonItem;
     
     barButtonItem = [[UIBarButtonItem alloc]
                      initWithTitle:@"Add Ext Account" style:UIBarButtonItemStylePlain target:self action:@selector(addExternalAccountBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
     barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-    self.navigationItem.rightBarButtonItem = barButtonItem;
+    self.navigationItem.leftBarButtonItem = barButtonItem;
     
     barButtonItem = [[UIBarButtonItem alloc] init];
     barButtonItem.title = @"Transfer";
