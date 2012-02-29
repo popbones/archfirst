@@ -68,7 +68,8 @@
     order = [[BFOrder alloc] init];
     order.allOrNone = YES;
     order.term = [NSString stringWithString:@"Good for day"];
-    
+    accountBTN.titleLabel.text = @"Accounts";
+   
     if (self.position != nil) {
         cusipText.text = self.position.instrumentSymbol;
         accountBTN.titleLabel.text = self.position.accountName;
@@ -77,7 +78,7 @@
         accountLabel.text = self.position.accountName;
     } 
     accountLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"]];
-    accountLabel.text = @"Acount";
+    accountLabel.text = @"Accounts";
 }
 
 - (void)viewDidUnload
