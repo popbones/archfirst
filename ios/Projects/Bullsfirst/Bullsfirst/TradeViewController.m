@@ -51,16 +51,18 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
+
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+//    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.rightBarButtonItem = barButtonItem;
 
     barButtonItem = [[UIBarButtonItem alloc] init];
     barButtonItem.title = @"Trade";
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+//    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
 	self.navigationItem.backBarButtonItem = barButtonItem;
 
     textFields = [NSArray arrayWithObjects:quantity, cusipText, limit, nil];

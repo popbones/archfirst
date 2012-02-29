@@ -131,31 +131,31 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
- 
+
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
+    
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
                                       initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+//    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.rightBarButtonItem = barButtonItem;
-
+    
+    self.navigationItem.title = @"Add New Account";
+/*
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:20.0];
     label.textAlignment = UITextAlignmentCenter;
     self.navigationItem.titleView = label;
     label.text = @"Add New Account";
-    label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
+//    label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [label sizeToFit];
-/*
-    self.view.layer.backgroundColor=[UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1].CGColor;
-    [navbar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-    CGRect rect=accountName.frame;
-    accountName.frame=CGRectMake(rect.origin.x, rect.origin.y, rect.size.width,45);
+ */   
+
     accountName.returnKeyType=UIReturnKeyGo;
     accountName.delegate=self;
     [accountName becomeFirstResponder];
-    navbar.layer.borderColor=[UIColor blueColor].CGColor;*/
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     
 }
 
