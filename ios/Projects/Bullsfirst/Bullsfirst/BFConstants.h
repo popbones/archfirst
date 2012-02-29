@@ -23,7 +23,7 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 
 // Dictionary keys
-
+#define kPricePaidPerShare @"pricePaidPerShare"
 #define kFirstName @"firstName"
 #define kLastName @"lastName"
 #define kUsername @"username"
@@ -41,3 +41,5 @@ blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 #define kToAccountId @"toAccountId"
 #define kCurrency @"currency"
 #define kId @"id"
+#define kQuantity @"quantity"
+#define kSymbol @"symbol"

@@ -236,6 +236,8 @@
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     
     [self presentModalViewController:controller animated:YES];
+    controller.view.superview.bounds=CGRectMake(0, 0, 400,470);
+    controller.view.frame=CGRectMake(0, 0, 400,470);
 }
 
 - (IBAction)filterBTNClicked:(id)sender {

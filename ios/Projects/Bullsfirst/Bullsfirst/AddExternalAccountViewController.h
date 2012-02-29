@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BullFirstWebServiceObject.h"
 @interface AddExternalAccountViewController : UIViewController
+{
+    IBOutlet UIActivityIndicatorView *spinner;
+
+}
+
+@property (strong, nonatomic) IBOutlet UITextField *accountName;
+@property (strong, nonatomic) IBOutlet UITextField *accountNumber;
+@property (strong, nonatomic) IBOutlet UITextField *routingNumber;
+@property (strong, nonatomic) IBOutlet UIButton *addAccountBTN;
+@property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 @end

@@ -13,12 +13,13 @@
 #import "BFExternalAccount.h"
 #import "BFMoney.h"
 #import "AddExternalAccountViewController.h"
-
+#import "BFConstants.h"
 @implementation TransferViewController
 @synthesize segmentedControl,restServiceObject,symbol,amount,quantity,pricePaid;
-@synthesize fromAccountBTN,toAccountBTN,dropdown;
+@synthesize fromAccountBTN,toAccountBTN,dropdown,transferBTN;
 @synthesize amountLBL,quantityLBL,pricePaidLBL,symbolLBL;
-@synthesize navBar;
+@synthesize scrollView;
+@synthesize activeTextField,textFields;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,11 +43,20 @@
 {
     [super viewDidLoad];    
 
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
-                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
-    barButtonItem.style = UIBarButtonItemStyleBordered;
-    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
-    self.navigationItem.leftBarButtonItem = barButtonItem;
+    UIBarButtonItem *barButtonItem;
+//    = [[UIBarButtonItem alloc]
+//                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
+//    barButtonItem.style = UIBarButtonItemStyleBordered;
+//    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
+//    self.navigationItem.leftBarButtonItem = barButtonItem;
+    CGRect  rect=self.view.frame;
+    scrollView.contentSize=CGSizeMake(rect.size.width, rect.size.height);
+    UIButton *cancelBTN=[UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelBTN setImage:[UIImage imageNamed:@"Cancel.png"] forState:UIControlStateNormal];
+    [cancelBTN addTarget:self action:@selector(cancelBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+    [cancelBTN setFrame:CGRectMake(0, 0, 57, 33)];
+    self.navigationItem.leftBarButtonItem=[[UIBarButtonItem alloc]initWithCustomView:cancelBTN];
+    
     
     barButtonItem = [[UIBarButtonItem alloc]
                      initWithTitle:@"Add Ext Account" style:UIBarButtonItemStylePlain target:self action:@selector(addExternalAccountBTNClicked:)];
@@ -67,8 +77,45 @@
     label.text = @"Transfer";
     label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [label sizeToFit];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    orientationChanged=YES;
 }
-
+-(void) keyBoardWillShow: (NSNotification*) notification
+{
+    UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+    if(UIDeviceOrientationIsLandscape(orientation))
+    {
+        CGRect  rect=self.view.frame;
+        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-50);
+        
+    }
+    else
+    {
+        CGRect  rect=self.view.frame;
+        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-5);
+    }
+    
+    
+}
+-(void) keyBoardWillHide:(NSNotification*) notification
+{
+    
+    UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+    if(UIDeviceOrientationIsLandscape(orientation))
+    {
+        CGRect  rect=self.view.frame;
+        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height);
+    }
+    else
+    {
+        CGRect  rect=self.view.frame;
+        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height);
+        
+    }
+}
 - (void)viewDidUnload
 {
     [super viewDidUnload];
@@ -79,33 +126,56 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-	return YES;
+    orientationChanged = YES;
+    [activeTextField resignFirstResponder];
+    return YES;
 }
-
+-(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    if(activeTextField!=nil)
+    {
+        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+        if(UIDeviceOrientationIsLandscape(orientation))
+        {
+            CGRect  rect=self.view.frame;
+            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
+            
+        }
+        else
+        {
+            CGRect  rect=self.view.frame;
+            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
+        }
+        [activeTextField becomeFirstResponder];
+        
+        
+    }
+    
+}
 -(void) doSecuritiesTransfer
 {
-//    if([[accountName text] isEqual:@""])
-//    {
-//        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                     message:@"Account Name is required"
-//                                                    delegate:nil
-//                                           cancelButtonTitle:@"OK"
-//                                           otherButtonTitles:nil];
-//        [av show];
-//        return;        
-//    }
-   // [spinner startAnimating];
+    if(symbol.text==@""||fromAccountID==NULL||toAccountID==NULL||quantity.text==@""||pricePaid.text==@"")
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"All fields are necessary"
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;        
+    }
+    [spinner startAnimating];
     NSString* urlString = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/accounts/%@/transfer_securities",fromAccountID];
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
     NSMutableDictionary *amountDic = [[NSMutableDictionary alloc] init];    
     
-    [amountDic setValue:[NSNumber numberWithInt:[pricePaid.text intValue]] forKey:@"amount"];
-    [amountDic setValue:@"USD" forKey:@"currency"];
+    [amountDic setValue:[NSNumber numberWithInt:[pricePaid.text intValue]] forKey:kAmount];
+    [amountDic setValue:@"USD" forKey:kCurrency];
     NSLog(@"%@",toAccountID);
-    [jsonDic setValue:toAccountID forKey:@"toAccountId"];
-    [jsonDic setValue:amountDic forKey:@"pricePaidPerShare"];
-    [jsonDic setValue:[NSNumber numberWithInt:[quantity.text intValue]] forKey:@"quantity"];
-    [jsonDic setValue:symbol.text forKey:@"symbol"];
+    [jsonDic setValue:toAccountID forKey:kToAccountId];
+    [jsonDic setValue:amountDic forKey:kPricePaidPerShare];
+    [jsonDic setValue:[NSNumber numberWithInt:[quantity.text intValue]] forKey:kQuantity];
+    [jsonDic setValue:symbol.text forKey:kSymbol];
     NSLog(@"%@",jsonDic);
     NSError *err;
     NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
@@ -128,9 +198,9 @@
         [av show];
         return;        
     }
-//    
-//    [spinner startAnimating];
-//    
+    
+     [spinner startAnimating];
+   
     
     NSString* urlString = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/accounts/%@/transfer_cash",fromAccountID];
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
@@ -176,6 +246,7 @@
 
 -(void)requestFailedSecuritiesTransfer:(NSError *)error
 {       
+    [spinner stopAnimating];
     NSString *errorString = [NSString stringWithString:@"Try Again!"];
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -184,6 +255,7 @@
 
 -(void)requestSucceededSecuritiesTransfer:(NSData *)data
 {
+    [spinner stopAnimating];
     [self dismissModalViewControllerAnimated:YES];    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 
@@ -203,7 +275,8 @@
 }
 
 -(void)requestFailedCashTransfer:(NSError *)error
-{       
+{    
+    [spinner stopAnimating];
     NSString *errorString = [NSString stringWithString:@"Try Again!"];
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -212,6 +285,7 @@
 
 -(void)requestSucceededCashTransfer:(NSData *)data
 {
+    [spinner stopAnimating];
     [self dismissModalViewControllerAnimated:YES];    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 
@@ -345,6 +419,10 @@
         pricePaid.hidden=YES;
         amountLBL.hidden=NO;
         amount.hidden=NO;
+        CGRect rect=transferBTN.frame;
+        transferBTN.frame=CGRectMake(rect.origin.x, rect.origin.y-100, rect.size.width, rect.size.height);
+        rect=spinner.frame;
+        spinner.frame=CGRectMake(rect.origin.x, rect.origin.y-100, rect.size.width, rect.size.height);
     }
     else
     {
@@ -356,13 +434,90 @@
         pricePaid.hidden=NO;
         amountLBL.hidden=YES;
         amount.hidden=YES;
+        CGRect rect=transferBTN.frame;
+        transferBTN.frame=CGRectMake(rect.origin.x, rect.origin.y+100, rect.size.width, rect.size.height);
+        rect=spinner.frame;
+        spinner.frame=CGRectMake(rect.origin.x, rect.origin.y+100, rect.size.width, rect.size.height);
     }
 }
 
-- (IBAction)addExternalAccountBTNClicked:(id)sender
+- (void)addExternalAccountBTNClicked:(id)sender
 {
     AddExternalAccountViewController *controller= [[AddExternalAccountViewController alloc] initWithNibName:@"AddExternalAccountViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 
 }
+
+#pragma mark - text field lifecycle
+- (void)previousBTNClicked:(id)sender {
+    NSUInteger currentTextField = [textFields indexOfObject:activeTextField];
+    if (currentTextField == 0)
+        currentTextField = [textFields count] -1;
+    else
+        currentTextField--;
+    activeTextField = [textFields objectAtIndex:currentTextField];
+    [activeTextField becomeFirstResponder];
+}
+
+- (void)nextBTNClicked:(id)sender {
+    NSUInteger currentTextField = [textFields indexOfObject:activeTextField];
+    if (currentTextField < [textFields count]-1)
+        currentTextField++;
+    else
+        currentTextField = 0;
+    activeTextField = [textFields objectAtIndex:currentTextField];
+    [activeTextField becomeFirstResponder];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    
+    return NO;
+}
+
+-(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
+{
+    UIToolbar *toolbar = [[UIToolbar alloc] init];
+    [toolbar setBarStyle:UIBarStyleBlackTranslucent];
+    [toolbar sizeToFit];
+    
+    UIBarButtonItem *previousButton = [[UIBarButtonItem alloc] initWithTitle:@"Prev" style:UIBarButtonItemStyleBordered target:self action:@selector(previousBTNClicked:)];
+    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(nextBTNClicked:)];    
+    NSArray *itemsArray = [NSArray arrayWithObjects:previousButton, nextButton, nil];
+    [toolbar setItems:itemsArray];
+    
+    [textField setInputAccessoryView:toolbar];
+    if(orientationChanged)
+    {
+        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+        if(UIDeviceOrientationIsLandscape(orientation))
+        {
+            CGRect  rect=self.view.frame;
+            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
+            
+        }
+        else
+        {
+            CGRect  rect=self.view.frame;
+            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
+        }
+        
+        orientationChanged = NO;
+    }
+    return YES;
+    
+}
+
+-(void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    
+    
+    // Set the active field. We' ll need that if we want to move properly
+    // between our textfields.
+    activeTextField = textField;
+}
+
+
+
 @end
