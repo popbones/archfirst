@@ -58,19 +58,9 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
                                       initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelButtonClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
-//    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.rightBarButtonItem = barButtonItem;
     self.navigationItem.title =  @"Edit Account";
-/*    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:20.0];
-    label.textAlignment = UITextAlignmentCenter;
-    self.navigationItem.titleView = label;
-    label.text = @"Edit Account";
-    label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
-    [label sizeToFit];
- */
+
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     accountName.text = oldAccountName;
     accountName.returnKeyType = UIReturnKeyGo;

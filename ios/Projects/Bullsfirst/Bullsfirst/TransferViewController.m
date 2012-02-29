@@ -48,31 +48,17 @@
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
                                       initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
-//    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.rightBarButtonItem=barButtonItem;
     
     barButtonItem = [[UIBarButtonItem alloc]
                      initWithTitle:@"Add Ext Account" style:UIBarButtonItemStylePlain target:self action:@selector(addExternalAccountBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
-//    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
     barButtonItem = [[UIBarButtonItem alloc] init];
     barButtonItem.title = @"Transfer";
-//    barButtonItem.tintColor = [UIColor colorWithRed:0.81 green:0.64 blue:0.14 alpha:0.5];
 	self.navigationItem.backBarButtonItem = barButtonItem;
 	self.navigationItem.title = @"Transfer";
-
-    /*
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
-    label.backgroundColor = [UIColor clearColor];
-    label.font = [UIFont boldSystemFontOfSize:20.0];
-    label.textAlignment = UITextAlignmentCenter;
-    self.navigationItem.titleView = label;
-    label.text = @"Transfer";
-    label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
-    [label sizeToFit];
-     */
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
