@@ -36,14 +36,14 @@
     
     NSDate *fromDate;
     NSDate *toDate;
-    
+
     NSMutableArray* transactions;
     
 }
 
 @property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
-@property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
-@property (strong, nonatomic) IBOutlet UIView *landscrapeTitleBar;
+@property (strong, nonatomic) IBOutlet UIView *portraitTableHeaderView;
+@property (strong, nonatomic) IBOutlet UIView *landscrapeTableHeaderView;
 @property (retain,nonatomic) NSMutableArray* transactions;
 
 

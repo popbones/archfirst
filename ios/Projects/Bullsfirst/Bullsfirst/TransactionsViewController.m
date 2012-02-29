@@ -24,7 +24,7 @@
 #import "BFTransaction.h"
 
 @implementation TransactionsViewController
-@synthesize transectionTBL,portraitTitleBar,landscrapeTitleBar,transactions;
+@synthesize transectionTBL,portraitTableHeaderView,landscrapeTableHeaderView,transactions;
 
 #pragma mark - helper methods
 
@@ -34,7 +34,7 @@
     {
         NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
-//        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
+        //        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
         return [NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
     }
     else
@@ -56,8 +56,8 @@
         }
         else
             meridianString = [NSString stringWithString:@"AM"];
-                              
-//        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d/%d/%d %d:%d:%d %@",[dateComponents year],[dateComponents month],[dateComponents day],[dateComponents hour],[dateComponents minute],[dateComponents second],meridianString]);
+        
+        //        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d/%d/%d %d:%d:%d %@",[dateComponents year],[dateComponents month],[dateComponents day],[dateComponents hour],[dateComponents minute],[dateComponents second],meridianString]);
         return [NSString stringWithFormat:@"%02d/%02d/%04d %02d:%02d:%02d %@",[dateComponents month],[dateComponents day],[dateComponents year],[dateComponents hour],[dateComponents minute],[dateComponents second],meridianString];
     }
     else
@@ -106,9 +106,20 @@
     toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
     
     
+    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        transectionTBL.tableHeaderView = landscrapeTableHeaderView;
+    } 
+    else 
+    {
+        transectionTBL.tableHeaderView = portraitTableHeaderView;
+    }
+    
+    
     //populating the table with data for the last two months for all accounts
     [self applyBTNClicked:nil];
-
+    
 }
 
 - (void)viewDidLoad
@@ -124,11 +135,14 @@
     label.text = @"Transactions";
     label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [label sizeToFit];
-    portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
-    landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    portraitTableHeaderView.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    landscrapeTableHeaderView.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
+    
+    
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -146,6 +160,14 @@
 
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        transectionTBL.tableHeaderView = landscrapeTableHeaderView;
+    } 
+    else 
+    {
+        transectionTBL.tableHeaderView = portraitTableHeaderView;
+    }
     [self.transectionTBL reloadData];
 }
 
@@ -162,28 +184,41 @@
 
 #pragma mark - Table view data source
 
+-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+{
+    BFTransaction* transaction = [[transactions objectAtIndex:section] objectAtIndex:0];
+    return [NSString stringWithFormat:@"%@ - %d",transaction.accountName,transaction.accountId.intValue];
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return transactions.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return transactions.count;
+    return ((NSArray*)[transactions objectAtIndex:section]).count;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-        return landscrapeTitleBar;
-    } else {
-        return portraitTitleBar;
-    }
-}
+//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+//{
+//    //    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+//    //    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+//    //    {
+//    //        return landscrapeTableHeaderView;
+//    //    } else {
+//    //        return portraitTableHeaderView;
+//    //    }
+//    
+//    UILabel* label = [[UILabel alloc]init];
+//    label.text = @"HEADING";
+//    [label sizeToFit];
+//    return label;
+//}
+
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
@@ -198,7 +233,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIInterfaceOrientation toOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    BFTransaction* transaction = [transactions objectAtIndex:indexPath.row];
+    BFTransaction* transaction = [((NSArray*)[transactions objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
     UITableViewCell* cell = transactionCell;
     if(toOrientation ==UIInterfaceOrientationLandscapeLeft || toOrientation ==UIInterfaceOrientationLandscapeRight)
     {
@@ -300,7 +335,41 @@
 
 -(void)requestSucceeded:(NSData *)data
 {
-    transactions = [BFTransaction transactionsFromJSONData:data];
+    NSMutableArray* tempTransactions = [BFTransaction transactionsFromJSONData:data];
+    
+    NSSortDescriptor* sortByAccountName=[[NSSortDescriptor alloc] initWithKey:@"accountName" ascending:YES];
+    NSSortDescriptor* sortByAccountId = [[NSSortDescriptor alloc] initWithKey:@"accountId" ascending:NO];
+    
+    [tempTransactions sortUsingDescriptors:[NSArray arrayWithObjects:sortByAccountName,sortByAccountId, nil]];
+    
+    transactions = [[NSMutableArray alloc]init];
+    NSNumber* currentAccountId;
+    NSNumber* previousAccountId = [NSNumber numberWithInt:-1];
+    NSMutableArray* subArray=[[NSMutableArray alloc] init];
+    for (BFTransaction *tempTransaction in tempTransactions) 
+    {
+        currentAccountId = tempTransaction.accountId;
+        if(currentAccountId.intValue != previousAccountId.intValue)
+        {
+            if(subArray.count !=0)
+            {
+                BFDebugLog(@"Adding to Array");
+                [transactions addObject:subArray];
+                subArray=[[NSMutableArray alloc] init];
+            }
+        }
+        BFDebugLog(@"Adding to SubArray %d",tempTransaction.accountId.intValue);
+        [subArray addObject:tempTransaction];
+        
+        previousAccountId = tempTransaction.accountId;
+    }
+    if(subArray.count !=0)
+    {
+        BFDebugLog(@"Adding to Array");
+        [transactions addObject:subArray];
+    }
+    
+    
     [transectionTBL reloadData];
 }
 
@@ -311,7 +380,7 @@
 
 -(IBAction)dateBTNClicked:(id)sender
 {
-
+    
     UIButton *button = sender;
     if(button == toDateBTN)
     {
@@ -339,7 +408,7 @@
     fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
     toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
     
-
+    
 }
 
 
