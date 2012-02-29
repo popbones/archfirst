@@ -179,8 +179,8 @@
 }
 
 - (IBAction)resetBTNClicked:(id)sender {
-    fromDate = [NSDate date];
-    toDate = [NSDate date];
+    fromDate = nil;
+    toDate = nil;
     accountSelected = @"All";
     orderType = @"All";
     orderStatus = @"All";
@@ -188,8 +188,8 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
-    fromDateLabel.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:fromDate]];
-    toDateLabel.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:toDate]];
+    fromDateLabel.text = [NSString stringWithString:@"From: All"];
+    toDateLabel.text = [NSString stringWithString:@"To: All"];
     accountLabel.text = [NSString stringWithFormat:@"Account: %@", accountSelected];
     orderLabel.text = [NSString stringWithFormat:@"Order: %@", orderType];
     orderStatusLabel.text = [NSString stringWithFormat:@"Order Status: %@", orderStatus];
@@ -222,9 +222,13 @@
     [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
 
-    NSString *fromDateParam = [NSString stringWithFormat:@"&fromDate=%@",[dateFormat stringFromDate:fromDate]];
+    NSString *fromDateParam;
+    if (fromDate !=nil)
+        fromDateParam = [NSString stringWithFormat:@"&fromDate=%@",[dateFormat stringFromDate:fromDate]];
 
-    NSString *toDateParam = [NSString stringWithFormat:@"&toDate=%@",[dateFormat stringFromDate:toDate]];
+    NSString *toDateParam;
+    if (toDate !=nil)
+        toDateParam = [NSString stringWithFormat:@"&toDate=%@",[dateFormat stringFromDate:toDate]];
 
     NSString *orderTypeParam = @"";
     if ([orderType isEqualToString:@"All"] != YES) {
@@ -484,12 +488,21 @@
         case 1:
             fromDateLabel.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:date]];
             fromDate = [date copy];
+            
+            if (toDate == nil) {
+                toDate = [fromDate copy];
+                toDateLabel.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:toDate]];
+            }
             break;
             
         case 2:
             toDateLabel.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:date]];
             toDate = [date copy];;
-            break;
+            if (fromDate == nil) {
+                fromDate = [toDate copy];
+                fromDateLabel.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:fromDate]];
+            }
+           break;
         default:
             break;
     }
