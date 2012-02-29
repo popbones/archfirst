@@ -29,6 +29,8 @@
 
     IBOutlet UIButton* toDateBTN;
     IBOutlet UIButton* fromDateBTN;
+    
+    IBOutlet UIButton* accountBTN;
 
     int selectedAccountId;
     IBOutlet UITableViewCell *transactionCell;

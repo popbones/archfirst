@@ -96,18 +96,6 @@
 
 -(void) startUpRoutine
 {
-    //Finding the date 2 months back
-    
-    toDate = [NSDate date];
-    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components= [[NSDateComponents alloc]init];
-    [components setMonth:-2];
-    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
-    
-    fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
-    toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
-    
-    
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
@@ -129,6 +117,24 @@
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
     
+    //Finding the date 2 months back
+    
+    toDate = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components= [[NSDateComponents alloc]init];
+    [components setMonth:-2];
+    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    
+    [accountBTN.titleLabel sizeToFit];
+    accountBTN.titleLabel.textAlignment = UITextAlignmentCenter;
+    [toDateBTN.titleLabel sizeToFit];
+    toDateBTN.titleLabel.textAlignment = UITextAlignmentCenter;
+    [fromDateBTN.titleLabel sizeToFit];
+    fromDateBTN.titleLabel.textAlignment = UITextAlignmentCenter;
+
+    [fromDateBTN setTitle:[self convertDateToRequiredFormat:fromDate] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[self convertDateToRequiredFormat:toDate] forState:UIControlStateNormal];
+    
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
     label.font = [UIFont boldSystemFontOfSize:20.0];
@@ -143,8 +149,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
-    
-    
+    selectedAccountId = -1;
 }
 
 -(void) viewDidAppear:(BOOL)animated
@@ -407,8 +412,10 @@
         [datedropdown setPopoverContentSize:controller.view.frame.size];
         [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-    fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
-    toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
+
+    
+    [fromDateBTN setTitle:[self convertDateToRequiredFormat:fromDate] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[self convertDateToRequiredFormat:toDate] forState:UIControlStateNormal];
     
     
 }
@@ -433,7 +440,7 @@
         dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = dropdown;
         controller.selections = selections;
-        controller.delegate = self;
+        controller.accountDelegate = self;
         [dropdown setPopoverContentSize:size];
     }
     if ([dropdown isPopoverVisible]) {
@@ -455,7 +462,16 @@
 
 -(IBAction)applyBTNClicked:(id)sender
 {
-    NSString* urlString = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/transactions?fromDate=%@&toDate=%@",[self convertDateToRequiredFormat:fromDate],[self convertDateToRequiredFormat:toDate]];
+    NSString* urlString;
+    BFDebugLog(@"ACC ID %d",selectedAccountId);
+    if(selectedAccountId == -1)
+    {
+        urlString= [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/transactions?fromDate=%@&toDate=%@",[self convertDateToRequiredFormat:fromDate],[self convertDateToRequiredFormat:toDate]];
+    }
+    else
+    {
+        urlString= [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/transactions?fromDate=%@&toDate=%@&accountId=%d",[self convertDateToRequiredFormat:fromDate],[self convertDateToRequiredFormat:toDate],selectedAccountId];
+    }
     BFDebugLog(@"url string: %@",urlString);
     [self.restServiceObject getRequestWithURL:[NSURL URLWithString:urlString]];
 }
@@ -470,13 +486,13 @@
     if(currentSelectedDateType == ToDate)
     {
         toDate = controller.datePicker.date;
-        toDateBTN.titleLabel.text = [self convertDateToRequiredFormat:toDate];
+        [toDateBTN setTitle:[self convertDateToRequiredFormat:toDate] forState:UIControlStateNormal];
         
     }
     else
     {
         fromDate = controller.datePicker.date;
-        fromDateBTN.titleLabel.text = [self convertDateToRequiredFormat:fromDate];
+        [fromDateBTN setTitle:[self convertDateToRequiredFormat:fromDate] forState:UIControlStateNormal];
     }
 }
 
@@ -486,6 +502,7 @@
 {
     BFBrokerageAccount* brokerageAccount =  [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:controller.selectedIndex];
     selectedAccountId = [brokerageAccount.brokerageAccountID intValue];
+    [accountBTN setTitle:brokerageAccount.name forState:UIControlStateNormal];
 }
 
 #pragma mark MVC Delegate methods
@@ -494,6 +511,19 @@
 {
     [transactions removeAllObjects];
     [transectionTBL reloadData];
+    selectedAccountId = -1;
+    toDate = [NSDate date];
+    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components= [[NSDateComponents alloc]init];
+    [components setMonth:-2];
+    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    
+
+    [fromDateBTN setTitle:[self convertDateToRequiredFormat:fromDate] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[self convertDateToRequiredFormat:toDate] forState:UIControlStateNormal];
+    
+
+    [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
 }
 
 -(void)userLogin:(NSNotification*)notification
