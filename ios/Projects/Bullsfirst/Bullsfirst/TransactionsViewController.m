@@ -108,23 +108,7 @@
     return self;
 }
 
--(void) startUpRoutine
-{
-    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-        transectionTBL.tableHeaderView = landscrapeTableHeaderView;
-    } 
-    else 
-    {
-        transectionTBL.tableHeaderView = portraitTableHeaderView;
-    }
-    
-    
-    //populating the table with data for the last two months for all accounts
-    [self applyBTNClicked:nil];
-    
-}
+
 
 - (void)viewDidLoad
 {
@@ -168,7 +152,19 @@
 
 -(void) viewDidAppear:(BOOL)animated
 {
-    [self startUpRoutine];
+    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    {
+        transectionTBL.tableHeaderView = landscrapeTableHeaderView;
+    } 
+    else 
+    {
+        transectionTBL.tableHeaderView = portraitTableHeaderView;
+    }
+    
+    
+    //populating the table with data for the last two months for all accounts
+    [self applyBTNClicked:nil];
 }
 
 - (void)viewDidUnload
@@ -199,8 +195,9 @@
 }
 
 #pragma mark - IBActions
-- (IBAction)refreshBTNClicked:(id)sender {
-    
+- (IBAction)refreshBTNClicked:(id)sender 
+{
+    [self applyBTNClicked:nil];
 }
 
 #pragma mark - Table view data source
@@ -423,8 +420,13 @@
         [datedropdown dismissPopoverAnimated:YES];
     } else {
         DatePickerViewController *controller = (DatePickerViewController*)datedropdown.contentViewController;
+        if(currentSelectedDateType == ToDate)
+            [controller.datePicker setDate:toDate];
+        else
+            [controller.datePicker setDate:fromDate];
+
         [datedropdown setPopoverContentSize:controller.view.frame.size];
-        [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+         [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     
     
@@ -471,7 +473,16 @@
 
 -(IBAction)clearBTNClicked:(id)sender
 {
+    toDate = [NSDate date];
+    [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
+    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    NSDateComponents *components= [[NSDateComponents alloc]init];
+    [components setMonth:-2];
+    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
     
+    [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
+    selectedAccountId = -1;
 }
 
 -(IBAction)applyBTNClicked:(id)sender
