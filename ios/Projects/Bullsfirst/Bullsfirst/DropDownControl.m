@@ -11,6 +11,7 @@
 @implementation DropDownControl
 @synthesize responseTarget;
 @synthesize label;
+@synthesize arrowRect;
 
 - (id)initWithFrame:(CGRect)aRect
 {
@@ -26,12 +27,13 @@
         label = [[UILabel alloc] initWithFrame:CGRectMake(5, 2, aRect.size.width-10, aRect.size.height-4)];
         label.backgroundColor = [UIColor clearColor];
         label.textAlignment = UITextAlignmentLeft;
+        label.lineBreakMode = UILineBreakModeTailTruncation;
         [self addSubview:label];
         
-        UIImageView *arrow = [[UIImageView alloc] initWithFrame:CGRectMake(aRect.size.width-32, 0, 32, 32)];
+        arrowRect = CGRectMake(aRect.size.width-32, 0, 32, 32);
+        UIImageView *arrow = [[UIImageView alloc] initWithFrame:arrowRect];
         arrow.image = [UIImage imageNamed:@"img_bg_yellow.png"];
         [self addSubview:arrow];
-        
         responseTarget = nil;
     }
     return self;

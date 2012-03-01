@@ -117,6 +117,9 @@
     }
     size.width = 320;
     
+    CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+    CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
+    
     if (!accountDropdown) {
         AccountDropDownViewControiller *controller = [[AccountDropDownViewControiller alloc] initWithNibName:@"DropdownViewController" bundle:nil];
         
@@ -135,7 +138,7 @@
         controller.selections = brokerageAccounts;
         [controller.selectionsTBL reloadData];
         [accountDropdown setPopoverContentSize:size];
-        [accountDropdown presentPopoverFromRect: dropdownCTL.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+        [accountDropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 

@@ -12,10 +12,12 @@
     id responseTarget;
     SEL responseSelector;
     UILabel *label;
+    CGRect arrowRect;
 }
 
 @property (nonatomic, strong) id responseTarget;
 @property (nonatomic, strong) UILabel *label;
+@property (nonatomic, assign) CGRect arrowRect;
 
 - (void)addTarget:(id)target action:(SEL)action;
 - (id)initWithFrame:(CGRect)aRect target:(id)target action:(SEL)action;
