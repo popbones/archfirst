@@ -130,8 +130,8 @@
     [fromDateBTN.titleLabel sizeToFit];
     fromDateBTN.titleLabel.textAlignment = UITextAlignmentCenter;
     
-    [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
-    [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
+    [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
@@ -430,8 +430,8 @@
     }
     
     
-    [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
-    [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
+    [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
     
     
 }
@@ -474,12 +474,12 @@
 -(IBAction)clearBTNClicked:(id)sender
 {
     toDate = [NSDate date];
-    [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
     NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
     NSDateComponents *components= [[NSDateComponents alloc]init];
     [components setMonth:-2];
     fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
-    [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
+    [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
     
     [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
     selectedAccountId = -1;
@@ -511,13 +511,13 @@
     if(currentSelectedDateType == ToDate)
     {
         toDate = controller.datePicker.date;
-        [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
+        [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
         
     }
     else
     {
         fromDate = controller.datePicker.date;
-        [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
+        [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
     }
 }
 
@@ -552,8 +552,8 @@
     fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
     
     
-    [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
-    [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
+    [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
     
     
     [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
