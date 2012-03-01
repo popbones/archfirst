@@ -185,9 +185,6 @@
     orderType = @"All";
     orderStatus = @"All";
     
-    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
-    [dateFormat setDateFormat:@"yyyy-MM-dd"];
     fromDateLabel.text = [NSString stringWithString:@"From: All"];
     toDateLabel.text = [NSString stringWithString:@"To: All"];
     accountLabel.text = [NSString stringWithFormat:@"Account: %@", accountSelected];

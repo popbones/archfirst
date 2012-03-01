@@ -51,6 +51,8 @@
 		540129DB14FEC65C008D38BD /* PreviewOrder-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D814FEC65B008D38BD /* PreviewOrder-PushDown.png */; };
 		540129DC14FEC65C008D38BD /* PreviewOrder.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D914FEC65B008D38BD /* PreviewOrder.png */; };
 		54012A0214FFC136008D38BD /* DropDownControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 54012A0114FFC136008D38BD /* DropDownControl.m */; settings = {COMPILER_FLAGS = "-Wno-arc-performSelector-leaks"; }; };
+		54012A1614FFF359008D38BD /* OrderCancel_PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 54012A1414FFF354008D38BD /* OrderCancel_PushDown.png */; };
+		54012A1714FFF359008D38BD /* OrderCancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 54012A1514FFF356008D38BD /* OrderCancel.png */; };
 		545C5E7614E55DA6003560C8 /* BFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 545C5E7514E55DA6003560C8 /* BFUser.m */; };
 		545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */; };
 		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
@@ -245,6 +247,8 @@
 		540129D914FEC65B008D38BD /* PreviewOrder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PreviewOrder.png; sourceTree = "<group>"; };
 		54012A0014FFC136008D38BD /* DropDownControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownControl.h; sourceTree = "<group>"; };
 		54012A0114FFC136008D38BD /* DropDownControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownControl.m; sourceTree = "<group>"; };
+		54012A1414FFF354008D38BD /* OrderCancel_PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrderCancel_PushDown.png; sourceTree = "<group>"; };
+		54012A1514FFF356008D38BD /* OrderCancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = OrderCancel.png; sourceTree = "<group>"; };
 		545C5E7414E55DA6003560C8 /* BFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFUser.h; sourceTree = "<group>"; };
 		545C5E7514E55DA6003560C8 /* BFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFUser.m; sourceTree = "<group>"; };
 		545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -510,6 +514,8 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				54012A1414FFF354008D38BD /* OrderCancel_PushDown.png */,
+				54012A1514FFF356008D38BD /* OrderCancel.png */,
 				952B7ADF14FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png */,
 				952B7AE014FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png */,
 				540129D714FEC65A008D38BD /* PreviewOrder-Inactive.png */,
@@ -1015,6 +1021,8 @@
 				540129DC14FEC65C008D38BD /* PreviewOrder.png in Resources */,
 				952B7AE114FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png in Resources */,
 				952B7AE214FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png in Resources */,
+				54012A1614FFF359008D38BD /* OrderCancel_PushDown.png in Resources */,
+				54012A1714FFF359008D38BD /* OrderCancel.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
