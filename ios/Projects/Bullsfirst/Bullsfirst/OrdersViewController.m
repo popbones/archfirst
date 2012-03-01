@@ -49,6 +49,7 @@
 @synthesize accountSelected;
 @synthesize orderType;
 @synthesize orderStatus;
+@synthesize cancelOrderServiceObject;
 
 - (id)init
 {
@@ -91,6 +92,12 @@
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBTNClicked:) name:@"TRADE_ORDER_SUBMITTED" object:nil];
+
+    cancelOrderServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self 
+                                                                responseSelector:nil 
+                                                             receiveDataSelector:nil
+                                                                 successSelector:@selector(cancelRequestSucceeded:) 
+                                                                   errorSelector:@selector(cancelRequestFailed:)];
 
     [self refreshBTNClicked:nil];
     [self resetBTNClicked:nil];
@@ -144,6 +151,19 @@
 {    
     orders = [BFOrder ordersFromJSONData:data];
     [orderTBL reloadData];
+}
+
+-(void)cancelRequestFailed:(NSError *)error
+{       
+    NSString *errorString = [NSString stringWithString:@"Can't cancel this order!"];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)cancelRequestSucceeded:(NSData *)data
+{    
+    [self applyBTNClicked:nil];
 }
 
 #pragma mark - KVO lifecycle
@@ -306,6 +326,13 @@
 }
 
 - (IBAction)cancelOrderBTNClicked:(id)sender {
+    OrderBTN *button = (OrderBTN *)sender;
+    BFOrder *order = button.order;
+    
+    NSString *urlString = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/orders/%d/cancel", [order.orderId intValue]];
+    BFDebugLog(@"cancel order = %@", urlString);
+    NSURL *url = [NSURL URLWithString:urlString];
+    [self.cancelOrderServiceObject postRequestWithURL:url body:nil contentType:@"application/json"];
 }
 
 

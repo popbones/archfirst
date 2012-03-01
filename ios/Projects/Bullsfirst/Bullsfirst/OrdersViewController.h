@@ -61,4 +61,6 @@
 
 @property (strong, nonatomic) NSMutableArray *orders;
 
+@property (strong, nonatomic) BullFirstWebServiceObject* cancelOrderServiceObject;
+
 @end
