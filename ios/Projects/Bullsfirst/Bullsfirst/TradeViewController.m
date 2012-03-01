@@ -107,6 +107,7 @@
         quantity.text = [NSString stringWithFormat:@"%d", [self.position.quantity intValue]];
     }
     
+    self.limit.hidden = YES;
 }
 
 - (void)viewDidUnload
@@ -241,8 +242,44 @@
 
 - (IBAction)okBTNClicked:(id)sender {
     [activeTextField resignFirstResponder];
+
+    if ([order.accountName length] < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Need to chose an acount." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
+    if ([order.side length] < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Action" message:@"Need to chose an action." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    
+    if ([self.cusipText.text length] < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Symbol" message:@"Need to enter a security symbol." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     order.instrumentSymbol = [NSString stringWithString:self.cusipText.text];
+
+    if ([order.type length] < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Order" message:@"Need to chose an order type." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+
+    if ([self.quantity.text length] < 1) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Quanity" message:@"Need to enter a quantity." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     order.quantity = [NSString stringWithString:self.quantity.text];
+    
+    if ([self.limit.text length] < 1 && [order.type isEqualToString:@"Limit"]) {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Limited Price" message:@"Need to enter a limited price." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
     order.limitPrice = [BFMoney moneyWithAmount:[NSNumber numberWithInt:[self.limit.text intValue]] currency:@"USD"];
 
     PreviewTradeViewController *controller = [[PreviewTradeViewController alloc] initWithNibName:@"PreviewTradeViewController" bundle:nil order:order];    
@@ -306,6 +343,9 @@
         case 3:
             priceDropDownCTL.label.text = controller.selected;
             order.type = controller.selected;
+            self.limit.hidden = YES;
+            if ([order.type isEqualToString:@"Limit"] == YES)
+                self.limit.hidden = NO;
             break;
             
         case 4:
