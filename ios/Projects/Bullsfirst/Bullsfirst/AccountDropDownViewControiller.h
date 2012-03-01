@@ -19,5 +19,6 @@
 
 @property (retain, nonatomic) id <AccountDropdownViewControllerDelegate> accountDelegate;
 @property (strong, nonatomic) IBOutlet UITableViewCell *accountTableViewCell;
+@property BOOL allAccountsOption;
 
 @end

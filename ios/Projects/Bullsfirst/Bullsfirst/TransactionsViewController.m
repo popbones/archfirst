@@ -43,6 +43,20 @@
         return  nil;
 }
 
+-(NSString*) convertDateToRequiredFormatToBeDisplayed:(NSDate*) date
+{
+    if(date)
+    {
+        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
+        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
+        //        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
+        return [NSString stringWithFormat:@"%02d/%02d/%04d",[dateComponents month],[dateComponents day],[dateComponents year]];
+    }
+    else
+        return  nil;
+}
+
+
 -(NSString*) convertDateTimeToRequiredFormat:(NSDate*) date
 {
     if(date)
@@ -131,9 +145,9 @@
     toDateBTN.titleLabel.textAlignment = UITextAlignmentCenter;
     [fromDateBTN.titleLabel sizeToFit];
     fromDateBTN.titleLabel.textAlignment = UITextAlignmentCenter;
-
-    [fromDateBTN setTitle:[self convertDateToRequiredFormat:fromDate] forState:UIControlStateNormal];
-    [toDateBTN setTitle:[self convertDateToRequiredFormat:toDate] forState:UIControlStateNormal];
+    
+    [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
@@ -412,10 +426,10 @@
         [datedropdown setPopoverContentSize:controller.view.frame.size];
         [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
-
     
-    [fromDateBTN setTitle:[self convertDateToRequiredFormat:fromDate] forState:UIControlStateNormal];
-    [toDateBTN setTitle:[self convertDateToRequiredFormat:toDate] forState:UIControlStateNormal];
+    
+    [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
     
     
 }
@@ -436,7 +450,7 @@
     
     if (!dropdown) {
         AccountDropDownViewControiller *controller = [[AccountDropDownViewControiller alloc] initWithNibName:@"DropDownViewController" bundle:nil];
-        
+        controller.allAccountsOption = YES;
         dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = dropdown;
         controller.selections = selections;
@@ -486,13 +500,13 @@
     if(currentSelectedDateType == ToDate)
     {
         toDate = controller.datePicker.date;
-        [toDateBTN setTitle:[self convertDateToRequiredFormat:toDate] forState:UIControlStateNormal];
+        [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
         
     }
     else
     {
         fromDate = controller.datePicker.date;
-        [fromDateBTN setTitle:[self convertDateToRequiredFormat:fromDate] forState:UIControlStateNormal];
+        [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
     }
 }
 
@@ -500,9 +514,17 @@
 
 -(void) accountSelectionChanged:(AccountDropDownViewControiller *)controller
 {
-    BFBrokerageAccount* brokerageAccount =  [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:controller.selectedIndex];
-    selectedAccountId = [brokerageAccount.brokerageAccountID intValue];
-    [accountBTN setTitle:brokerageAccount.name forState:UIControlStateNormal];
+    if(controller.selectedIndex == -1)
+    {
+        selectedAccountId = -1;
+        [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
+    }
+    else
+    {
+        BFBrokerageAccount* brokerageAccount =  [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:controller.selectedIndex];
+        selectedAccountId = [brokerageAccount.brokerageAccountID intValue];
+        [accountBTN setTitle:brokerageAccount.name forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark MVC Delegate methods
@@ -518,11 +540,11 @@
     [components setMonth:-2];
     fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
     
-
-    [fromDateBTN setTitle:[self convertDateToRequiredFormat:fromDate] forState:UIControlStateNormal];
-    [toDateBTN setTitle:[self convertDateToRequiredFormat:toDate] forState:UIControlStateNormal];
     
-
+    [fromDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:fromDate] forState:UIControlStateNormal];
+    [toDateBTN setTitle:[self convertDateToRequiredFormatToBeDisplayed:toDate] forState:UIControlStateNormal];
+    
+    
     [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
 }
 
