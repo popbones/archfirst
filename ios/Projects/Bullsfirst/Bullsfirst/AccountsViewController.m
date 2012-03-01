@@ -175,6 +175,8 @@
     [pieChartViewController addObserver:self forKeyPath:@"chartTitle" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [pieChartViewController addObserver:self forKeyPath:@"currentChart" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [pieChartViewController viewDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
 }
 
 - (void)viewDidUnload
@@ -458,6 +460,14 @@
     [self.navigationController pushViewController:controller animated:YES];
     
 }
+
+#pragma mark MVC Delegate methods
+
+-(void)userLogout:(NSNotification*)notification
+{
+    self.chartTitle.text = nil;
+}
+
 
 
 @end
