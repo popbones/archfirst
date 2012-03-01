@@ -25,13 +25,17 @@
 @property (strong, nonatomic) IBOutlet UITextField *cusipText;
 @property (strong, nonatomic) IBOutlet UITextField *quantity;
 @property (strong, nonatomic) IBOutlet UITextField *limit;
-@property (strong, nonatomic) IBOutlet UIButton *orderBTN;
-@property (strong, nonatomic) IBOutlet UIButton *priceBTN;
-@property (strong, nonatomic) IBOutlet UIButton *goodForDayBTN;
 @property (strong, nonatomic) IBOutlet UIButton *allOrNone;
 @property (strong, nonatomic) IBOutlet UILabel *allOrNoneLabel;
 
+@property (strong, nonatomic) IBOutlet UIView *actionDropDownView;
+@property (nonatomic, retain) DropDownControl *actionDropDownCTL;
+@property (strong, nonatomic) IBOutlet UIView *accountDropDownView;
 @property (nonatomic, retain) DropDownControl *accountDropDownCTL;
+@property (strong, nonatomic) IBOutlet UIView *priceDropDownView;
+@property (nonatomic, retain) DropDownControl *priceDropDownCTL;
+@property (strong, nonatomic) IBOutlet UIView *goodForDayDropDownView;
+@property (nonatomic, retain) DropDownControl *goodForDayDropDownCTL;
 
 - (IBAction)cancelBTNClicked:(id)sender;
 - (IBAction)okBTNClicked:(id)sender;
@@ -43,5 +47,4 @@
 @property (strong, nonatomic) UIPopoverController *dropdown;
 @property (strong, nonatomic) UIPopoverController *accountDropdown;
 
-@property (strong, nonatomic) IBOutlet UIView *accountDropDownView;
 @end

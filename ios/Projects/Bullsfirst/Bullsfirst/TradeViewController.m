@@ -16,11 +16,9 @@
 @synthesize cusipText;
 @synthesize quantity;
 @synthesize limit;
-@synthesize orderBTN;
-@synthesize priceBTN;
-@synthesize goodForDayBTN;
 @synthesize allOrNone;
 @synthesize allOrNoneLabel;
+@synthesize actionDropDownView;
 @synthesize activeTextField;
 @synthesize textFields;
 @synthesize dropdown;
@@ -28,6 +26,12 @@
 @synthesize accountDropdown;
 @synthesize accountDropDownView;
 @synthesize accountDropDownCTL;
+@synthesize priceDropDownView;
+@synthesize goodForDayDropDownView;
+@synthesize actionDropDownCTL;
+@synthesize priceDropDownCTL;
+@synthesize goodForDayDropDownCTL;
+
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition
 {
@@ -76,11 +80,31 @@
     accountDropDownCTL.tag = 1;
     [accountDropDownView addSubview:accountDropDownCTL];
 
+    actionDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, actionDropDownView.frame.size.width, actionDropDownView.frame.size.height)
+                                                         target:self
+                                                         action:@selector(showDropdown:)];
+    actionDropDownCTL.label.text = @"Action";
+    actionDropDownCTL.tag = 2;
+    [actionDropDownView addSubview:actionDropDownCTL];
+
+    priceDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, priceDropDownView.frame.size.width, priceDropDownView.frame.size.height)
+                                                        target:self
+                                                        action:@selector(showDropdown:)];
+    priceDropDownCTL.label.text = @"Price";
+    priceDropDownCTL.tag = 3;
+    [priceDropDownView addSubview:priceDropDownCTL];
+    
+    goodForDayDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, goodForDayDropDownView.frame.size.width, goodForDayDropDownView.frame.size.height)
+                                                       target:self
+                                                       action:@selector(showDropdown:)];
+    goodForDayDropDownCTL.label.text = @"Good for day";
+    goodForDayDropDownCTL.tag = 4;
+    [goodForDayDropDownView addSubview:goodForDayDropDownCTL];
+    
     if (self.position != nil) {
-        cusipText.text = self.position.instrumentSymbol;
         accountDropDownCTL.label.text = self.position.accountName;
+        cusipText.text = self.position.instrumentSymbol;
         quantity.text = [NSString stringWithFormat:@"%d", [self.position.quantity intValue]];
-        
     }
     
 }
@@ -90,12 +114,12 @@
     [self setCusipText:nil];
     [self setQuantity:nil];
     [self setLimit:nil];
-    [self setOrderBTN:nil];
-    [self setPriceBTN:nil];
-    [self setGoodForDayBTN:nil];
     [self setAllOrNone:nil];
     [self setAllOrNoneLabel:nil];
     [self setAccountDropDownView:nil];
+    [self setActionDropDownView:nil];
+    [self setPriceDropDownView:nil];
+    [self setGoodForDayDropDownView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -143,10 +167,10 @@
 }
 
 - (IBAction)showDropdown:(id)sender {
-    UIButton *button = sender;
+    DropDownControl *dropdownCTL = (DropDownControl *)sender;
     NSArray *selections;
     CGSize size;
-    switch (button.tag) {            
+    switch (dropdownCTL.tag) {            
         case 2:
             selections = [NSArray arrayWithObjects:@"Buy", @"Sell", nil];
             size = [@"Buy" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
@@ -172,14 +196,17 @@
         default:
             break;
     }
-    
+
+    CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+    CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
+
     if (!dropdown) {
         DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
         
         dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = dropdown;
         controller.selections = selections;
-        controller.tag = button.tag;
+        controller.tag = dropdownCTL.tag;
         controller.delegate = self;
         [dropdown setPopoverContentSize:size];
     }
@@ -187,11 +214,11 @@
         [dropdown dismissPopoverAnimated:YES];
     } else {
         DropdownViewController *controller = (DropdownViewController *)dropdown.contentViewController;
-        controller.tag = button.tag;
+        controller.tag = dropdownCTL.tag;
         controller.selections = selections;
         [controller.selectionsTBL reloadData];
         [dropdown setPopoverContentSize:size];
-        [dropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+        [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 
@@ -272,17 +299,17 @@
 {
     switch (controller.tag) {
         case 2:
-            orderBTN.titleLabel.text = controller.selected;
+            actionDropDownCTL.label.text = controller.selected;
             order.side = controller.selected;
             break;
             
         case 3:
-            priceBTN.titleLabel.text = controller.selected;
+            priceDropDownCTL.label.text = controller.selected;
             order.type = controller.selected;
             break;
             
         case 4:
-            goodForDayBTN.titleLabel.text = controller.selected;
+            goodForDayDropDownCTL.label.text = controller.selected;
             order.term = controller.selected;
             break;
             
