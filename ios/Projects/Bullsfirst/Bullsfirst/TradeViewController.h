@@ -11,6 +11,7 @@
 #import "BFOrder.h"
 #import "AccountDropDownViewControiller.h"
 #import "DropdownViewController.h"
+#import "DropDownControl.h"
 
 @interface TradeViewController : UIViewController <DropdownViewControllerDelegate, AccountDropdownViewControllerDelegate> {
     BFPosition *position;
@@ -24,12 +25,13 @@
 @property (strong, nonatomic) IBOutlet UITextField *cusipText;
 @property (strong, nonatomic) IBOutlet UITextField *quantity;
 @property (strong, nonatomic) IBOutlet UITextField *limit;
-@property (strong, nonatomic) IBOutlet UIButton *accountBTN;
 @property (strong, nonatomic) IBOutlet UIButton *orderBTN;
 @property (strong, nonatomic) IBOutlet UIButton *priceBTN;
 @property (strong, nonatomic) IBOutlet UIButton *goodForDayBTN;
 @property (strong, nonatomic) IBOutlet UIButton *allOrNone;
 @property (strong, nonatomic) IBOutlet UILabel *allOrNoneLabel;
+
+@property (nonatomic, retain) DropDownControl *accountDropDownCTL;
 
 - (IBAction)cancelBTNClicked:(id)sender;
 - (IBAction)okBTNClicked:(id)sender;
@@ -41,5 +43,5 @@
 @property (strong, nonatomic) UIPopoverController *dropdown;
 @property (strong, nonatomic) UIPopoverController *accountDropdown;
 
-@property (strong, nonatomic) IBOutlet UILabel *accountLabel;
+@property (strong, nonatomic) IBOutlet UIView *accountDropDownView;
 @end

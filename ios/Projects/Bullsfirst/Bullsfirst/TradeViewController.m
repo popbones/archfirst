@@ -16,7 +16,6 @@
 @synthesize cusipText;
 @synthesize quantity;
 @synthesize limit;
-@synthesize accountBTN;
 @synthesize orderBTN;
 @synthesize priceBTN;
 @synthesize goodForDayBTN;
@@ -27,7 +26,8 @@
 @synthesize dropdown;
 @synthesize order;
 @synthesize accountDropdown;
-@synthesize accountLabel;
+@synthesize accountDropDownView;
+@synthesize accountDropDownCTL;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition
 {
@@ -68,17 +68,21 @@
     order = [[BFOrder alloc] init];
     order.allOrNone = YES;
     order.term = [NSString stringWithString:@"Good for day"];
-    accountBTN.titleLabel.text = @"Accounts";
-   
+
+    accountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, accountDropDownView.frame.size.width, accountDropDownView.frame.size.height)
+                                                        target:self
+                                                        action:@selector(showAccountDropdownMenu:)];
+    accountDropDownCTL.label.text = @"Accounts";
+    accountDropDownCTL.tag = 1;
+    [accountDropDownView addSubview:accountDropDownCTL];
+
     if (self.position != nil) {
         cusipText.text = self.position.instrumentSymbol;
-        accountBTN.titleLabel.text = self.position.accountName;
+        accountDropDownCTL.label.text = self.position.accountName;
         quantity.text = [NSString stringWithFormat:@"%d", [self.position.quantity intValue]];
         
-        accountLabel.text = self.position.accountName;
-    } 
-    accountLabel.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"]];
-    accountLabel.text = @"Accounts";
+    }
+    
 }
 
 - (void)viewDidUnload
@@ -86,13 +90,12 @@
     [self setCusipText:nil];
     [self setQuantity:nil];
     [self setLimit:nil];
-    [self setAccountBTN:nil];
     [self setOrderBTN:nil];
     [self setPriceBTN:nil];
     [self setGoodForDayBTN:nil];
     [self setAllOrNone:nil];
     [self setAllOrNoneLabel:nil];
-    [self setAccountLabel:nil];
+    [self setAccountDropDownView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -104,8 +107,8 @@
 	return YES;
 }
 
-- (IBAction)showAccountDropdown:(id)sender {
-    UIButton *button = sender;
+- (IBAction)showAccountDropdownMenu:(id)sender {
+    DropDownControl *dropdownCTL = (DropDownControl *)sender;
     CGSize size;
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     size.height = [brokerageAccounts count] * 44;
@@ -120,7 +123,7 @@
         accountDropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = accountDropdown;
         controller.selections = brokerageAccounts;
-        controller.tag = button.tag;
+        controller.tag = dropdownCTL.tag;
         controller.accountDelegate = self;
         [accountDropdown setPopoverContentSize:size];
     }
@@ -128,14 +131,13 @@
         [accountDropdown dismissPopoverAnimated:YES];
     } else {
         AccountDropDownViewControiller *controller = (AccountDropDownViewControiller *) accountDropdown.contentViewController;
-        controller.tag = button.tag;
+        controller.tag = dropdownCTL.tag;
         controller.selections = brokerageAccounts;
         [controller.selectionsTBL reloadData];
         [accountDropdown setPopoverContentSize:size];
-        [accountDropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+        [accountDropdown presentPopoverFromRect: dropdownCTL.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
     }
 }
-
 
 - (IBAction)showDropdown:(id)sender {
     UIButton *button = sender;
@@ -295,7 +297,7 @@
             BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:controller.selectedIndex];
             order.brokerageAccountID = account.brokerageAccountID;
             order.accountName = account.name;
-            accountBTN.titleLabel.text = account.name;
+            accountDropDownCTL.label.text = account.name;
             break;
         }
             

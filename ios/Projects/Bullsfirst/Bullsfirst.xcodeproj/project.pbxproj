@@ -50,6 +50,7 @@
 		540129DA14FEC65C008D38BD /* PreviewOrder-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D714FEC65A008D38BD /* PreviewOrder-Inactive.png */; };
 		540129DB14FEC65C008D38BD /* PreviewOrder-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D814FEC65B008D38BD /* PreviewOrder-PushDown.png */; };
 		540129DC14FEC65C008D38BD /* PreviewOrder.png in Resources */ = {isa = PBXBuildFile; fileRef = 540129D914FEC65B008D38BD /* PreviewOrder.png */; };
+		54012A0214FFC136008D38BD /* DropDownControl.m in Sources */ = {isa = PBXBuildFile; fileRef = 54012A0114FFC136008D38BD /* DropDownControl.m */; settings = {COMPILER_FLAGS = "-Wno-arc-performSelector-leaks"; }; };
 		545C5E7614E55DA6003560C8 /* BFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 545C5E7514E55DA6003560C8 /* BFUser.m */; };
 		545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */; };
 		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
@@ -242,6 +243,8 @@
 		540129D714FEC65A008D38BD /* PreviewOrder-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PreviewOrder-Inactive.png"; sourceTree = "<group>"; };
 		540129D814FEC65B008D38BD /* PreviewOrder-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PreviewOrder-PushDown.png"; sourceTree = "<group>"; };
 		540129D914FEC65B008D38BD /* PreviewOrder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PreviewOrder.png; sourceTree = "<group>"; };
+		54012A0014FFC136008D38BD /* DropDownControl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DropDownControl.h; sourceTree = "<group>"; };
+		54012A0114FFC136008D38BD /* DropDownControl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DropDownControl.m; sourceTree = "<group>"; };
 		545C5E7414E55DA6003560C8 /* BFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFUser.h; sourceTree = "<group>"; };
 		545C5E7514E55DA6003560C8 /* BFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFUser.m; sourceTree = "<group>"; };
 		545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -449,6 +452,7 @@
 				AC26C81914DBF64700ABD693 /* Web Service Object */,
 				00D3C417147C27120067A768 /* AppDelegate.h */,
 				00D3C418147C27120067A768 /* AppDelegate.m */,
+				540129FF14FFBF2D008D38BD /* Custom buttons */,
 				545C5E3214E45AEC003560C8 /* View Controllers */,
 				AC9B72D114DA7E3700B843AC /* BF-CorePlot Extensions */,
 				00DFF9631484179D001A4641 /* Model */,
@@ -617,6 +621,39 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		540129FE14FFBEC4008D38BD /* Drop Down Views */ = {
+			isa = PBXGroup;
+			children = (
+				546838B414EECAC2005C356A /* DropdownViewController.h */,
+				546838B514EECAC3005C356A /* DropdownViewController.m */,
+				546838B614EECAC3005C356A /* DropdownViewController.xib */,
+				549591C414FD4E3600D76424 /* AccountDropDownViewControiller.h */,
+				549591C514FD4E3600D76424 /* AccountDropDownViewControiller.m */,
+				549591C714FD58A600D76424 /* AccountDropDownTableCell.xib */,
+				5468395114F82791005C356A /* DatePickerViewController.h */,
+				5468395214F82797005C356A /* DatePickerViewController.m */,
+				5468395314F8279D005C356A /* DatePickerViewController.xib */,
+			);
+			name = "Drop Down Views";
+			sourceTree = "<group>";
+		};
+		540129FF14FFBF2D008D38BD /* Custom buttons */ = {
+			isa = PBXGroup;
+			children = (
+				9586FAAF14EB804600A0B28C /* editAccountNameBTN.h */,
+				9586FAB014EB804600A0B28C /* editAccountNameBTN.m */,
+				54B78A5F14E9785D002FF1AC /* expandPositionBTN.h */,
+				54B78A6014E9785E002FF1AC /* expandPositionBTN.m */,
+				54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */,
+				54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */,
+				5468394E14F6E899005C356A /* OrderBTN.h */,
+				5468394F14F6E89D005C356A /* OrderBTN.m */,
+				54012A0014FFC136008D38BD /* DropDownControl.h */,
+				54012A0114FFC136008D38BD /* DropDownControl.m */,
+			);
+			name = "Custom buttons";
+			sourceTree = "<group>";
+		};
 		545C5E3214E45AEC003560C8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -646,8 +683,6 @@
 				00DFF9021480893E001A4641 /* AccountsViewController.h */,
 				00DFF9031480893E001A4641 /* AccountsViewController.m */,
 				00DFF9191480AAC6001A4641 /* AccountsViewController.xib */,
-				9586FAAF14EB804600A0B28C /* editAccountNameBTN.h */,
-				9586FAB014EB804600A0B28C /* editAccountNameBTN.m */,
 				9586FA7114EB684300A0B28C /* AccountLandscapeTableViewCell.xib */,
 				9586FA7214EB684300A0B28C /* AccountTableViewCell.xib */,
 				009C1A3A148D3FF400259534 /* AddAccountViewController.h */,
@@ -670,10 +705,6 @@
 				00DFF91B1480AAF0001A4641 /* PositionsViewController.xib */,
 				54B78A3F14E5C91F002FF1AC /* PositionTableViewCell.xib */,
 				54B78A6214E98954002FF1AC /* PositionLandscapeTableViewCell.xib */,
-				54B78A5F14E9785D002FF1AC /* expandPositionBTN.h */,
-				54B78A6014E9785E002FF1AC /* expandPositionBTN.m */,
-				54B78A5C14E976DA002FF1AC /* tradePositionBTN.h */,
-				54B78A5D14E976DB002FF1AC /* tradePositionBTN.m */,
 			);
 			name = "Position Tab";
 			sourceTree = "<group>";
@@ -686,8 +717,6 @@
 				00DFF91D1480AB01001A4641 /* OrdersViewController.xib */,
 				5468394A14F6DB34005C356A /* OrderTableViewCell.xib */,
 				5468394C14F6DB51005C356A /* OrderLandscapeTableViewCell.xib */,
-				5468394E14F6E899005C356A /* OrderBTN.h */,
-				5468394F14F6E89D005C356A /* OrderBTN.m */,
 			);
 			name = "Order Tab";
 			sourceTree = "<group>";
@@ -721,22 +750,14 @@
 			isa = PBXGroup;
 			children = (
 				546838BC14EEEC3C005C356A /* Trade */,
+				952B7ADE14FF573F005B3C98 /* Transfer */,
+				540129FE14FFBEC4008D38BD /* Drop Down Views */,
 				54B78AEA14EC4652002FF1AC /* UserViewController.h */,
 				54B78AEB14EC4654002FF1AC /* UserViewController.m */,
 				54B78AEC14EC4655002FF1AC /* UserViewController.xib */,
-				952B7ADE14FF573F005B3C98 /* Transfer */,
 				54B78A9914EB00A6002FF1AC /* FilterViewController.h */,
 				54B78A9A14EB00A7002FF1AC /* FilterViewController.m */,
 				54B78A9B14EB00A9002FF1AC /* FilterViewController.xib */,
-				546838B414EECAC2005C356A /* DropdownViewController.h */,
-				546838B514EECAC3005C356A /* DropdownViewController.m */,
-				546838B614EECAC3005C356A /* DropdownViewController.xib */,
-				549591C414FD4E3600D76424 /* AccountDropDownViewControiller.h */,
-				549591C514FD4E3600D76424 /* AccountDropDownViewControiller.m */,
-				549591C714FD58A600D76424 /* AccountDropDownTableCell.xib */,
-				5468395114F82791005C356A /* DatePickerViewController.h */,
-				5468395214F82797005C356A /* DatePickerViewController.m */,
-				5468395314F8279D005C356A /* DatePickerViewController.xib */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -1052,6 +1073,7 @@
 				952B7A8014FCF1D4005B3C98 /* AddExternalAccountViewController.m in Sources */,
 				952B7A8414FCF97A005B3C98 /* BFTransaction.m in Sources */,
 				549591C614FD4E3600D76424 /* AccountDropDownViewControiller.m in Sources */,
+				54012A0214FFC136008D38BD /* DropDownControl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
