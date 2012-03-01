@@ -250,7 +250,7 @@
     UITapGestureRecognizer *tapGesture = sender;
     NSArray *selections;
     CGSize size;
-    switch (tapGesture.view.tag) {
+    switch ([[tapGesture view] tag]) {
         case 3: {
             NSMutableArray *accountName = [[NSMutableArray alloc] init];
             NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
