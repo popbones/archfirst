@@ -12,15 +12,15 @@
 
 #define kRequestTimeout 30
 
-#define kErrorIconAtEndOfTextField @"warningIcon.png"
 #define kStringFieldIsEmpty @"Field is Empty"
-
+#define kStringFieldValid @"Valid"
 #define CPTColorFromRGB(rgbValue) [CPTColor \
 colorWithComponentRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 \
 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
-
+#define kErrorIconInvalidAtEndOfTextField @"ErrorHandling_AlertIcon.png"
+#define kErrorIconValidAtEndOfTextField @"ErrorHandling_CheckIcon.png"
 
 // Dictionary keys
 #define kPricePaidPerShare @"pricePaidPerShare"

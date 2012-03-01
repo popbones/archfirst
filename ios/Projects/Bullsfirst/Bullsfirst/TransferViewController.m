@@ -64,6 +64,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     orientationChanged=YES;
+    
+    textFields=[NSArray arrayWithObjects:symbol,quantity,pricePaid,nil];
+    
 }
 -(void) keyBoardWillShow: (NSNotification*) notification
 {
@@ -136,7 +139,7 @@
 }
 -(void) doSecuritiesTransfer
 {
-    if(symbol.text==@""||fromAccountID==NULL||toAccountID==NULL||quantity.text==@""||pricePaid.text==@"")
+    if([symbol.text isEqual:@""]||fromAccountID==NULL||toAccountID==NULL||[quantity.text isEqual:@""]||[pricePaid.text isEqual:@""])
     {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
                                                      message:@"All fields are necessary"
@@ -170,7 +173,7 @@
 
 -(void) doCashTransfer
 {
-    if([[amount text] isEqual:@""]||fromAccountID==NULL||toAccountID==NULL)
+    if([amount.text isEqual:@""]||fromAccountID==NULL||toAccountID==NULL)
     {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
                                                      message:@"All fields are necessary"
@@ -211,8 +214,6 @@
         restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceivedSecuritiesTransfer:) receiveDataSelector:@selector(receivedDataSecuritiesTransfer:) successSelector:@selector(requestSucceededSecuritiesTransfer:) errorSelector:@selector(requestFailedSecuritiesTransfer:)];
         [self doSecuritiesTransfer];
     }
-    
-    [self dismissModalViewControllerAnimated:YES];   
 }
 #pragma mark - selectors for handling rest call callbacks for SecuritiesTransfer
 
@@ -432,6 +433,8 @@
 
 #pragma mark - text field lifecycle
 - (void)previousBTNClicked:(id)sender {
+   if(segmentedControl.selectedSegmentIndex==1)
+   {
     NSUInteger currentTextField = [textFields indexOfObject:activeTextField];
     if (currentTextField == 0)
         currentTextField = [textFields count] -1;
@@ -439,9 +442,12 @@
         currentTextField--;
     activeTextField = [textFields objectAtIndex:currentTextField];
     [activeTextField becomeFirstResponder];
+   }
 }
 
 - (void)nextBTNClicked:(id)sender {
+    if(segmentedControl.selectedSegmentIndex==1)
+    {
     NSUInteger currentTextField = [textFields indexOfObject:activeTextField];
     if (currentTextField < [textFields count]-1)
         currentTextField++;
@@ -449,6 +455,7 @@
         currentTextField = 0;
     activeTextField = [textFields objectAtIndex:currentTextField];
     [activeTextField becomeFirstResponder];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

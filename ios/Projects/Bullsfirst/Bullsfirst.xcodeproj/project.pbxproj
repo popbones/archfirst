@@ -87,6 +87,8 @@
 		952B7A8014FCF1D4005B3C98 /* AddExternalAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */; };
 		952B7A8114FCF1D4005B3C98 /* AddExternalAccountViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 952B7A7F14FCF1D4005B3C98 /* AddExternalAccountViewController.xib */; };
 		952B7A8414FCF97A005B3C98 /* BFTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A8314FCF979005B3C98 /* BFTransaction.m */; };
+		952B7AE114FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7ADF14FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png */; };
+		952B7AE214FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AE014FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		9584FE2414F2234200D28154 /* AddAccount-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */; };
 		9584FE2514F2234200D28154 /* AddAccount-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2014F2234200D28154 /* AddAccount-PushDown.png */; };
@@ -295,6 +297,8 @@
 		952B7A7F14FCF1D4005B3C98 /* AddExternalAccountViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddExternalAccountViewController.xib; sourceTree = "<group>"; };
 		952B7A8214FCF979005B3C98 /* BFTransaction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFTransaction.h; sourceTree = "<group>"; };
 		952B7A8314FCF979005B3C98 /* BFTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTransaction.m; sourceTree = "<group>"; };
+		952B7ADF14FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ErrorHandling_AlertIcon.png; sourceTree = "<group>"; };
+		952B7AE014FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ErrorHandling_CheckIcon.png; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-Inactive.png"; sourceTree = "<group>"; };
 		9584FE2014F2234200D28154 /* AddAccount-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-PushDown.png"; sourceTree = "<group>"; };
@@ -502,6 +506,8 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				952B7ADF14FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png */,
+				952B7AE014FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png */,
 				540129D714FEC65A008D38BD /* PreviewOrder-Inactive.png */,
 				540129D814FEC65B008D38BD /* PreviewOrder-PushDown.png */,
 				540129D914FEC65B008D38BD /* PreviewOrder.png */,
@@ -718,12 +724,7 @@
 				54B78AEA14EC4652002FF1AC /* UserViewController.h */,
 				54B78AEB14EC4654002FF1AC /* UserViewController.m */,
 				54B78AEC14EC4655002FF1AC /* UserViewController.xib */,
-				54B78A6D14EAA174002FF1AC /* TransferViewController.h */,
-				54B78A6E14EAA177002FF1AC /* TransferViewController.m */,
-				54B78A6F14EAA178002FF1AC /* TransferViewController.xib */,
-				952B7A7D14FCF1D2005B3C98 /* AddExternalAccountViewController.h */,
-				952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */,
-				952B7A7F14FCF1D4005B3C98 /* AddExternalAccountViewController.xib */,
+				952B7ADE14FF573F005B3C98 /* Transfer */,
 				54B78A9914EB00A6002FF1AC /* FilterViewController.h */,
 				54B78A9A14EB00A7002FF1AC /* FilterViewController.m */,
 				54B78A9B14EB00A9002FF1AC /* FilterViewController.xib */,
@@ -738,6 +739,19 @@
 				5468395314F8279D005C356A /* DatePickerViewController.xib */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		952B7ADE14FF573F005B3C98 /* Transfer */ = {
+			isa = PBXGroup;
+			children = (
+				952B7A7D14FCF1D2005B3C98 /* AddExternalAccountViewController.h */,
+				952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */,
+				952B7A7F14FCF1D4005B3C98 /* AddExternalAccountViewController.xib */,
+				54B78A6D14EAA174002FF1AC /* TransferViewController.h */,
+				54B78A6E14EAA177002FF1AC /* TransferViewController.m */,
+				54B78A6F14EAA178002FF1AC /* TransferViewController.xib */,
+			);
+			name = Transfer;
 			sourceTree = "<group>";
 		};
 		AC26C81914DBF64700ABD693 /* Web Service Object */ = {
@@ -978,6 +992,8 @@
 				540129DA14FEC65C008D38BD /* PreviewOrder-Inactive.png in Resources */,
 				540129DB14FEC65C008D38BD /* PreviewOrder-PushDown.png in Resources */,
 				540129DC14FEC65C008D38BD /* PreviewOrder.png in Resources */,
+				952B7AE114FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png in Resources */,
+				952B7AE214FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

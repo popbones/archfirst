@@ -64,7 +64,7 @@
 #pragma mark - Methods
 -(void) addAccountAction
 {
-    if(accountName.text==@""||accountNumber.text==@""||routingNumber.text==@"")
+    if([accountName.text isEqual:@""]||[accountNumber.text isEqual:@""]||[routingNumber.text isEqual:@""])
     {
         UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
                                                      message:@"All fields required"
@@ -98,10 +98,6 @@
     [self addAccountAction];
     
 }
-- (IBAction)cancelButtonClicked:(id)sender
-{
-    [self dismissModalViewControllerAnimated:YES];
-}
 
 
 #pragma mark - View lifecycle
@@ -134,8 +130,8 @@
 
 -(IBAction)cancelBTNClicked:(id)sender
 {
-    [self.navigationController popViewControllerAnimated:YES];
-   // [self dismissModalViewControllerAnimated:YES];  
+    //[self.navigationController popViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES];  
 }
 
 @end

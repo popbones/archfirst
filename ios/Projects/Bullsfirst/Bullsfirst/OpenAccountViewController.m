@@ -254,7 +254,7 @@
 
 -(void) registerForDataValidations
 {    
-    [validator processTextFields:[NSArray arrayWithObjects:firstName,lastName,username,password,confirmpassword,nil] rightViewIconFileName:kErrorIconAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
+    [validator processTextFields:[NSArray arrayWithObjects:firstName,lastName,username,password,confirmpassword,nil] rightViewValidIconFileName:kErrorIconValidAtEndOfTextField rightViewInvalidIconFileName:kErrorIconInvalidAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
     
     
 }
@@ -460,6 +460,10 @@
         {
             return kStringFieldIsEmpty;
         }
+//        else
+//        {
+//            return kStringFieldValid;
+//        }
     }
     else if(textField == lastName)
     {
@@ -467,13 +471,18 @@
         {
             return kStringFieldIsEmpty;
         }
-    }
+//        else
+//        {
+//            return kStringFieldValid;
+//        }
+     }
     else if(textField == username)
     {
         if(textField.text.length == 0)
         {
             return kStringFieldIsEmpty;
         }
+        
     }
     else if(textField == password)
     {
@@ -481,20 +490,13 @@
         {
             return kStringFieldIsEmpty;
         }
-        else if(![textField.text isEqualToString:confirmpassword.text])
-        {
-            return @"The text doesnot match with the confirm password field";
-        }
+        
     }
     else if(textField == confirmpassword)
     {
         if(textField.text.length == 0)
         {
             return kStringFieldIsEmpty;
-        }
-        else if(![textField.text isEqualToString:password.text])
-        {
-            return @"The text doesnot match with the password field";
         }
     }
     return nil;

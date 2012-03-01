@@ -40,11 +40,14 @@
     __weak id<DataValidatorProtocol> delegate;
     CMPopTipView* hintView;
     bool isHintViewDisplayed;
-    NSMutableArray *textFieldStatuses;
+    NSMutableArray *textFields;
+    NSMutableArray *isAlreadyEntered;
+    NSMutableArray *validIconFileNames;
+    NSMutableArray *invalidIconFileNames;
 }
 
 @property (weak, nonatomic) id<DataValidatorProtocol> delegate;
--(void) processTextField:(UITextField*)textField rightViewIconFileName:(NSString*)iconName  errorStringOnNoEntry:(NSString*) errorString;
+-(void) processTextField:(UITextField*)textField rightViewValidIconFileName:(NSString*)validIconName rightViewInvalidIconFileName:(NSString*)invalidIconName  errorStringOnNoEntry:(NSString*) errorString;
 
--(void) processTextFields:(NSArray*)textFields rightViewIconFileName:(NSString*)iconName  errorStringOnNoEntry:(NSString*) errorString;
+-(void) processTextFields:(NSArray*)textFields rightViewValidIconFileName:(NSString*)validIconName rightViewInvalidIconFileName:(NSString*)invalidIconName  errorStringOnNoEntry:(NSString*) errorString;
 @end

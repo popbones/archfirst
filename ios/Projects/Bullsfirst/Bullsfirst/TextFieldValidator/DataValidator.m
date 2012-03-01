@@ -34,8 +34,10 @@
         hintView.disableTapToDismiss = YES;
         isHintViewDisplayed = NO;
         
-        textFieldStatuses = [[NSMutableArray alloc]init];
-        
+        textFields = [[NSMutableArray alloc]init];
+        isAlreadyEntered=[[NSMutableArray alloc]init];
+         validIconFileNames=[[NSMutableArray alloc]init];
+         invalidIconFileNames=[[NSMutableArray alloc]init];
     }
     return self;
 }
@@ -62,15 +64,41 @@
 {
     
     NSString* status=[delegate validationStatusForTextField:textField];
+    int index=[textFields indexOfObject:textField];
     if(status == nil)
     {
         textField.rightViewMode = UITextFieldViewModeNever;
         [self removeHintView];
+        if([[isAlreadyEntered objectAtIndex:index] isEqual:@"1"])
+        {
+            UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[validIconFileNames objectAtIndex:index]]];
+            rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
+            textField.rightView = rightView;
+            textField.rightViewMode = UITextFieldViewModeAlways;
+        }
     }
     else
     {
-        textField.rightViewMode = UITextFieldViewModeAlways;
-        [self displayHintViewForTextField:textField withStatus:status];
+        
+        if([[isAlreadyEntered objectAtIndex:index] isEqual:@"1"] )
+        {
+            if(status==kStringFieldIsEmpty)
+            {
+            [self displayHintViewForTextField:textField withStatus:status];
+            UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[invalidIconFileNames objectAtIndex:index]]];
+            rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
+            textField.rightView = rightView;
+            textField.rightViewMode = UITextFieldViewModeAlways;
+            }
+        }
+        else
+        {
+            [isAlreadyEntered replaceObjectAtIndex:index withObject:@"1"];
+        }
+        for(int i=0;i<textFields.count;i++)
+        {
+            NSLog(@"%@ dsfafdas %@",[textFields objectAtIndex:i],[isAlreadyEntered objectAtIndex:i]);
+        }
     }
 }
 
@@ -78,16 +106,16 @@
 -(bool) validationSucceeded
 {
     bool valStatus = YES;
-    for (UITextField* textField in textFieldStatuses) 
+    for (UITextField* textField in textFields) 
     {
         if([delegate validationStatusForTextField:textField]!=nil)
         {
-            textField.rightViewMode= UITextFieldViewModeAlways;
+            //textField.rightViewMode= UITextFieldViewModeAlways;
             valStatus = NO;
         }
         else
         {
-            textField.rightViewMode= UITextFieldViewModeNever;
+           // textField.rightViewMode= UITextFieldViewModeNever;
         }
     }
     return valStatus;
@@ -96,6 +124,30 @@
 
 -(void) textEditOver:(UITextField*) textField
 {
+    NSString* status=[delegate validationStatusForTextField:textField];
+    int index=[textFields indexOfObject:textField];
+    if(status == nil)
+    {
+//        textField.rightViewMode = UITextFieldViewModeNever;
+//        [self removeHintView];
+//    }
+//    else if([status isEqual:kStringFieldValid])
+//    {
+        
+        UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[validIconFileNames objectAtIndex:index]]];
+        rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
+        textField.rightView = rightView;
+        textField.rightViewMode = UITextFieldViewModeAlways;    
+    }
+    else
+    {
+        UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[invalidIconFileNames objectAtIndex:index]]];
+        rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
+        textField.rightView = rightView;
+        textField.rightViewMode = UITextFieldViewModeAlways;
+        [self displayHintViewForTextField:textField withStatus:status];
+    }
+    [delegate formValidationSucceeded:[self validationSucceeded]];
     [self removeHintView];
 }
 
@@ -103,13 +155,26 @@
 {
     
     NSString* status=[delegate validationStatusForTextField:textField];
+    int index=[textFields indexOfObject:textField];
     if(status == nil)
     {
-        textField.rightViewMode = UITextFieldViewModeNever;
+//        textField.rightViewMode = UITextFieldViewModeNever;
+//        [self removeHintView];
+//    }
+//    else if([status isEqual:kStringFieldValid])
+//    {
+    
+        UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[validIconFileNames objectAtIndex:index]]];
+        rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
+        textField.rightView = rightView;
+        textField.rightViewMode = UITextFieldViewModeAlways;    
         [self removeHintView];
     }
     else
     {
+        UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:[invalidIconFileNames objectAtIndex:index]]];
+        rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
+        textField.rightView = rightView;
         textField.rightViewMode = UITextFieldViewModeAlways;
         [self displayHintViewForTextField:textField withStatus:status];
     }
@@ -120,32 +185,35 @@
 
 
 
--(void) processTextField:(UITextField*)textField rightViewIconFileName:(NSString*)iconName errorStringOnNoEntry:(NSString*) errorString
+-(void) processTextField:(UITextField*)textField rightViewValidIconFileName:(NSString*)validIconName rightViewInvalidIconFileName:(NSString*)invalidIconName  errorStringOnNoEntry:(NSString*) errorString
 {
-    [textFieldStatuses addObject:textField];
-    UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:iconName]];
-    rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
-    textField.rightView = rightView;
-    textField.rightViewMode = UITextFieldViewModeNever;
-    
+    [textFields addObject:textField];
+//    UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:invalidIconName]];
+//    rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
+//    textField.rightView = rightView;
+//    textField.rightViewMode = UITextFieldViewModeNever;
+    [validIconFileNames addObject:validIconName];
+    [invalidIconFileNames addObject:invalidIconName];
     [textField addTarget:self action:@selector(textEditOver:) forControlEvents:UIControlEventEditingDidEnd];
     [textField addTarget:self action:@selector(textEditStart:) forControlEvents:UIControlEventEditingDidBegin];
     [textField addTarget:self action:@selector(textChange:) forControlEvents:UIControlEventEditingChanged];
     
 }
 
--(void) processTextFields:(NSArray*)textFields rightViewIconFileName:(NSString*)iconName  errorStringOnNoEntry:(NSString*) errorString
+-(void) processTextFields:(NSArray*)textFieldsfromFile rightViewValidIconFileName:(NSString*)validIconName rightViewInvalidIconFileName:(NSString*)invalidIconName  errorStringOnNoEntry:(NSString*) errorString
 {
-    [textFieldStatuses removeAllObjects];
-    for (UITextField* textField in textFields) 
+    [textFields removeAllObjects];
+    for (UITextField* textField in textFieldsfromFile) 
     {
+        [textFields addObject:textField];
+        [isAlreadyEntered addObject:@"0"];
+//        UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:invalidIconName]];
+//        rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
+//        textField.rightView = rightView;
+//        textField.rightViewMode = UITextFieldViewModeNever;
+        [validIconFileNames addObject:validIconName];
+        [invalidIconFileNames addObject:invalidIconName];
         
-        
-        [textFieldStatuses addObject:textField];
-        UIImageView* rightView = [[UIImageView alloc]initWithImage:[UIImage imageNamed:iconName]];
-        rightView.frame = CGRectMake(textField.bounds.origin.x+textField.bounds.size.width-20, textField.bounds.origin.y, 32, textField.bounds.size.height-4);
-        textField.rightView = rightView;
-        textField.rightViewMode = UITextFieldViewModeNever;
         
         [textField addTarget:self action:@selector(textEditOver:) forControlEvents:UIControlEventEditingDidEnd];
         [textField addTarget:self action:@selector(textEditStart:) forControlEvents:UIControlEventEditingDidBegin];
