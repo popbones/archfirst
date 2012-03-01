@@ -464,7 +464,6 @@
 				545C5E3214E45AEC003560C8 /* View Controllers */,
 				AC9B72D114DA7E3700B843AC /* BF-CorePlot Extensions */,
 				00DFF9631484179D001A4641 /* Model */,
-				00D5191F148932BD0049F43E /* old */,
 				00D3C424147C285D0067A768 /* Resources */,
 				00D3C40F147C27120067A768 /* Supporting Files */,
 			);
@@ -489,13 +488,6 @@
 				00DFF9171480A8D7001A4641 /* images */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
-		};
-		00D5191F148932BD0049F43E /* old */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = old;
 			sourceTree = "<group>";
 		};
 		00DFF90E148089B6001A4641 /* Tabs */ = {

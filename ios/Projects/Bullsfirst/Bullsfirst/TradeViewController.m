@@ -70,7 +70,7 @@
 
     textFields = [NSArray arrayWithObjects:quantity, cusipText, limit, nil];
     order = [[BFOrder alloc] init];
-    order.allOrNone = YES;
+    order.allOrNone = NO;
     order.term = [NSString stringWithString:@"Good for day"];
 
     accountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, accountDropDownView.frame.size.width, accountDropDownView.frame.size.height)
@@ -225,10 +225,10 @@
 - (IBAction)allOrNoneClicked:(id)sender {
     UIButton *button = sender;
     if (order.allOrNone == YES) {
-        [button setImage:[UIImage imageNamed:@"img_bg_login.png"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"CheckBox-Unchecked.png"] forState:UIControlStateNormal];
         order.allOrNone = NO;
     } else {
-        [button setImage:[UIImage imageNamed:@"img_bg_yellow.png"] forState:UIControlStateNormal];
+        [button setImage:[UIImage imageNamed:@"CheckBox-Checked.png"] forState:UIControlStateNormal];
         order.allOrNone = YES;
     }
 }
