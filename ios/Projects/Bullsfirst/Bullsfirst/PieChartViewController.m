@@ -29,6 +29,7 @@
 
 @synthesize pieChartView;
 @synthesize dataForChart, dataForPlot;
+@synthesize chartTitle;
 
 #pragma mark -
 
@@ -145,10 +146,9 @@
         pieGraph.paddingLeft   = 20.0;
         pieGraph.paddingTop	   = 20.0;
         pieGraph.paddingRight  = 20.0;
-        pieGraph.paddingBottom = 220.0;
+        pieGraph.paddingBottom = 300.0;
         
         pieGraph.plotAreaFrame.borderWidth = 0.0f;
-        
         pieGraph.axisSet = nil;
         
         // Prepare a radial overlay gradient for shading/gloss
@@ -175,7 +175,8 @@
         if(currentChart == AccountsChart)
         {
             NSArray* sortedBrokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccountsInSortedOrder];
-            pieGraph.title = kAllAccounts;
+            pieGraph.title = nil;
+            self.chartTitle = kAllAccounts;
             for(BFBrokerageAccount *account in sortedBrokerageAccounts)
             {
                 [tempArray addObject:[[account marketValue] amount]];
@@ -186,7 +187,7 @@
         {
             BFBrokerageAccount *neededAccount=[[[BFBrokerageAccountStore defaultStore]allBrokerageAccountsInSortedOrder] objectAtIndex:selectedAccount];
             
-            pieGraph.title = neededAccount.name;
+            self.chartTitle = neededAccount.name;
             
             NSArray *sortDescriptors = [NSArray arrayWithObject:[[NSSortDescriptor alloc] initWithKey:@"marketValue" ascending:NO]];
             
@@ -246,7 +247,7 @@
             pieGraph.legend = theLegend;
             pieGraph.legend.fillMode=kCAFillModeBackwards;
             pieGraph.legendAnchor = CPTRectAnchorTop;
-            pieGraph.legendDisplacement = CGPointMake(0, -380);
+            pieGraph.legendDisplacement = CGPointMake(0, -330);
             CPTMutableTextStyle *titleStyle = [[CPTMutableTextStyle alloc] init];
             titleStyle.fontName=@"Helvetica-Bold";
             titleStyle.fontSize = 20;

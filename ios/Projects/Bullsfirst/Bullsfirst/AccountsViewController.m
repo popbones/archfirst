@@ -33,7 +33,7 @@
 
 @implementation AccountsViewController
 
-@synthesize accountCell;
+@synthesize accountCell,chartTitle;
 @synthesize accountNameLBL,accountNumberLBL,marketValueLBL,cashLBL,actionLBL;
 
 @synthesize userPopOver;
@@ -161,16 +161,18 @@
     
     selectedRow=-1;
     
+    chartTitle.textAlignment = UITextAlignmentCenter;
+    [chartTitle setCenter:chartTitleView.center];
+    
     pieChartViewController = [[PieChartViewController alloc] init];
     [pieChartViewController setView:chartView];
     [pieChartViewController setPieChartView:pieChartView];
     rightBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;
     leftBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;    orientation=[[UIDevice currentDevice] orientation];
     
-    
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-    
+    [pieChartViewController addObserver:self forKeyPath:@"chartTitle" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [pieChartViewController addObserver:self forKeyPath:@"currentChart" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     [pieChartViewController viewDidLoad];
 }
@@ -287,6 +289,11 @@
         {
             backBTN.hidden = NO;
         }
+    }
+    if([keyPath isEqualToString:@"chartTitle"])
+    {
+        chartTitle.text = [change objectForKey:NSKeyValueChangeNewKey];
+//        [chartTitle sizeToFit];
     }
     
 }

@@ -41,8 +41,10 @@
     IBOutlet UIView *leftBorderView;
     IBOutlet UIView *rightBorderView;
     int selectedRow;
+    IBOutlet UIView *chartTitleView;
 }
 @property (strong, nonatomic) IBOutlet UITableViewCell *accountCell;
+@property (strong, nonatomic) IBOutlet UILabel *chartTitle;
 @property (strong, nonatomic) IBOutlet UILabel *accountNameLBL;
 @property (strong, nonatomic) IBOutlet UILabel *accountNumberLBL;
 @property (strong, nonatomic) IBOutlet UILabel *marketValueLBL;
