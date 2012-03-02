@@ -17,7 +17,7 @@
 {
     self = [super initWithFrame:aRect];
     if (self){
-        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"]];
+        self.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"Dropdown_Strechable.png"]];
         self.multipleTouchEnabled = YES;
         self.userInteractionEnabled = YES;
         UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTap:)];
@@ -30,10 +30,16 @@
         label.lineBreakMode = UILineBreakModeTailTruncation;
         [self addSubview:label];
         
-        arrowRect = CGRectMake(aRect.size.width-32, 0, 32, 32);
+        arrowRect = CGRectMake(aRect.size.width-26, 0, 32, 32);
         UIImageView *arrow = [[UIImageView alloc] initWithFrame:arrowRect];
-        arrow.image = [UIImage imageNamed:@"img_bg_yellow.png"];
+        arrow.image = [UIImage imageNamed:@"Dropdown_RightCap.png"];
         [self addSubview:arrow];
+
+        CGRect leftCapRect = CGRectMake(-6, 0, 6, 32);
+        UIImageView *leftCap = [[UIImageView alloc] initWithFrame:leftCapRect];
+        leftCap.image = [UIImage imageNamed:@"Dropdown_LeftCap.png"];
+        [self addSubview:leftCap];
+
         responseTarget = nil;
     }
     return self;
