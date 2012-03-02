@@ -251,6 +251,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
     AppDelegate* appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
     appDelegate.tabBarController.selectedIndex = 2;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_TRANSACTIONS" object:nil];
 
 }
 
@@ -285,6 +286,7 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
     AppDelegate* appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
     appDelegate.tabBarController.selectedIndex = 2;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_TRANSACTIONS" object:nil];
 
 }
 -(IBAction)cancelBTNClicked:(id)sender
