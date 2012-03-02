@@ -242,13 +242,6 @@
     controller.view.frame=CGRectMake(0, 0, 400,470);
 }
 
-- (IBAction)filterBTNClicked:(id)sender {
-    FilterViewController *controller = [[FilterViewController alloc] initWithNibName:@"FilterViewController" bundle:nil];    
-    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
-  
-    
-    [self presentModalViewController:controller animated:YES];
-}
 - (IBAction)addBTNClicked:(id)sender {
     AddAccountViewController *addAccointController = [[AddAccountViewController alloc] initWithNibName:@"AddAccountViewController" bundle:nil];    
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:addAccointController];

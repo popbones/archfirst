@@ -31,7 +31,6 @@
 - (IBAction)refreshBTNClicked:(id)sender;
 - (IBAction)tradeBTNClicked:(id)sender;
 - (IBAction)transferBTNClicked:(id)sender;
-- (IBAction)filterBTNClicked:(id)sender;
 
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 

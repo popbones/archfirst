@@ -256,16 +256,6 @@
     
 }
 
-- (IBAction)filterBTNClicked:(id)sender
-{
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
-}
-
-- (IBAction)userProfile
-{
-}
-
-
 #pragma mark - KVO lifecycle
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
