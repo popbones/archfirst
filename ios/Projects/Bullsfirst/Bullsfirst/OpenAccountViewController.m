@@ -193,10 +193,62 @@
 
 -(void) openAccountAction
 {
-    // Check for errors    
+    // Check for errors
+    
+    if([firstName.text isEqualToString:@""])
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"First Name field must not be empty."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;
+    }
+    if([lastName.text isEqualToString:@""])
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"Last Name field must not be empty."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;
+    }
+    if([username.text isEqualToString:@""])
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"Username field must not be empty."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;
+    }
+    if([password.text isEqualToString:@""])
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"Password field must not be empty."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;
+    }
+    if([confirmpassword.text isEqualToString:@""])
+    {
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                     message:@"Confirm Password field must not be empty."
+                                                    delegate:nil
+                                           cancelButtonTitle:@"OK"
+                                           otherButtonTitles:nil];
+        [av show];
+        return;
+    }
+
     if(![[password text] isEqual:[confirmpassword text]])
     {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Check Passwords"
+        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
                                                      message:@"Passwords do not match"
                                                     delegate:nil
                                            cancelButtonTitle:@"OK"
@@ -204,17 +256,7 @@
         [av show];
         return;
     }
-    else if([[firstName text] isEqual:@""] || [[lastName text] isEqual:@""] || [[username text] isEqual:@""] || [[password text] isEqual:@""])
-    {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                     message:@"All fields are required"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
-        return;        
-    }
-    
+        
     [spinner startAnimating];
     
     currentProcess = CreateNewBFAccount;
@@ -242,6 +284,8 @@
 
 - (IBAction)openAccountButtonClicked:(id)sender
 {
+    
+    
     [self openAccountAction];
 }
 
@@ -252,12 +296,7 @@
 
 #pragma mark - View lifecycle
 
--(void) registerForDataValidations
-{    
-    [validator processTextFields:[NSArray arrayWithObjects:firstName,lastName,username,password,confirmpassword,nil] rightViewValidIconFileName:kErrorIconValidAtEndOfTextField rightViewInvalidIconFileName:kErrorIconInvalidAtEndOfTextField errorStringOnNoEntry:kStringFieldIsEmpty];
-    
-    
-}
+
 -(void) keyBoardWillShow: (NSNotification*) notification
 {
     UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
@@ -304,15 +343,13 @@
     password.returnKeyType = UIReturnKeyGo;
     confirmpassword.returnKeyType = UIReturnKeyGo;
 
-    validator = [[DataValidator alloc] init];
-    validator.delegate = self;
     
     [navBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     textFields=[NSArray arrayWithObjects:firstName,lastName,username,password,confirmpassword, nil];
     
     
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
-    openAccountButton.enabled = NO;
+    
     
     [password addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
     [confirmpassword addTarget:self action:@selector(passwordEditingStarted:) forControlEvents:UIControlEventEditingDidBegin];
@@ -322,7 +359,6 @@
     password.clearsOnBeginEditing = YES;
     confirmpassword.clearsOnBeginEditing = YES;
     
-    [self registerForDataValidations];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -445,67 +481,12 @@
 }
 
 
-#pragma mark - DataValidator protocol methods
 
--(void) formValidationSucceeded:(bool) status;
-{
-    openAccountButton.enabled = status;
-}
-
--(NSString*) validationStatusForTextField:(UITextField*) textField;
-{
-    if(textField == firstName)
-    {
-        if(textField.text.length ==0)
-        {
-            return kStringFieldIsEmpty;
-        }
-//        else
-//        {
-//            return kStringFieldValid;
-//        }
-    }
-    else if(textField == lastName)
-    {
-        if(textField.text.length == 0)
-        {
-            return kStringFieldIsEmpty;
-        }
-//        else
-//        {
-//            return kStringFieldValid;
-//        }
-     }
-    else if(textField == username)
-    {
-        if(textField.text.length == 0)
-        {
-            return kStringFieldIsEmpty;
-        }
-        
-    }
-    else if(textField == password)
-    {
-        if(textField.text.length == 0)
-        {
-            return kStringFieldIsEmpty;
-        }
-        
-    }
-    else if(textField == confirmpassword)
-    {
-        if(textField.text.length == 0)
-        {
-            return kStringFieldIsEmpty;
-        }
-    }
-    return nil;
-}
 
 #pragma mark - TextField callback methods
 -(void) passwordEditingStarted:(UITextField*) textField
 {
-    openAccountButton.enabled = NO;
+//    openAccountButton.enabled = NO;
 }
 
 @end
