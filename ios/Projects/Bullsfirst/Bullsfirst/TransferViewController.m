@@ -14,6 +14,7 @@
 #import "BFMoney.h"
 #import "AddExternalAccountViewController.h"
 #import "BFConstants.h"
+#import "AppDelegate.h"
 @implementation TransferViewController
 @synthesize segmentedControl,restServiceObject,symbol,amount,quantity,pricePaid;
 @synthesize fromAccountBTN,toAccountBTN,dropdown,transferBTN;
@@ -248,6 +249,8 @@
     spinner.hidden = YES;
     [self dismissModalViewControllerAnimated:YES];    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
+    AppDelegate* appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+    appDelegate.tabBarController.selectedIndex = 2;
 
 }
 
@@ -280,6 +283,8 @@
     spinner.hidden = YES;
     [self dismissModalViewControllerAnimated:YES];    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
+    AppDelegate* appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+    appDelegate.tabBarController.selectedIndex = 2;
 
 }
 -(IBAction)cancelBTNClicked:(id)sender
