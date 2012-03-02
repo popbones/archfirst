@@ -27,12 +27,8 @@
 #import "BFBrokerageAccount.h"
 
 @implementation OrdersViewController
-@synthesize fromDateLabel;
-@synthesize toDateLabel;
 @synthesize resetBTN;
 @synthesize applyBTN;
-@synthesize accountLabel;
-@synthesize orderLabel;
 @synthesize orderStatusLabel;
 @synthesize orderId;
 @synthesize symbod;
@@ -50,6 +46,16 @@
 @synthesize orderType;
 @synthesize orderStatus;
 @synthesize cancelOrderServiceObject;
+@synthesize accountDropdownView;
+@synthesize fromDateDropdownView;
+@synthesize fromDateDropdownCTL;
+@synthesize toDateDropdownView;
+@synthesize toDateDropdownCTL;
+@synthesize orderDropdownView;
+@synthesize accountDropdownCTL;
+@synthesize orderDropdownCTL;
+@synthesize orderStatusDropdownView;
+@synthesize orderStatusDropdownCTL;
 
 - (id)init
 {
@@ -99,6 +105,43 @@
                                                                  successSelector:@selector(cancelRequestSucceeded:) 
                                                                    errorSelector:@selector(cancelRequestFailed:)];
 
+
+
+    fromDateDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, fromDateDropdownView.frame.size.width, fromDateDropdownView.frame.size.height)
+                                                         target:self
+                                                         action:@selector(dateDropdownClicked:)];
+    fromDateDropdownCTL.tag = 1;
+    fromDateDropdownCTL.label.font = [UIFont systemFontOfSize:13];
+    [fromDateDropdownView addSubview:fromDateDropdownCTL];
+
+    toDateDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, toDateDropdownView.frame.size.width, toDateDropdownView.frame.size.height)
+                                                          target:self
+                                                          action:@selector(dateDropdownClicked:)];
+    toDateDropdownCTL.tag = 2;
+    toDateDropdownCTL.label.font = [UIFont systemFontOfSize:13];
+    [toDateDropdownView addSubview:toDateDropdownCTL];
+
+    accountDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, accountDropdownView.frame.size.width, accountDropdownView.frame.size.height)
+                                                        target:self
+                                                        action:@selector(dropDownClicked:)];
+    accountDropdownCTL.tag = 3;
+    accountDropdownCTL.label.font = [UIFont systemFontOfSize:13];
+    [accountDropdownView addSubview:accountDropdownCTL];
+
+    orderDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, orderDropdownView.frame.size.width, orderDropdownView.frame.size.height)
+                                                         target:self
+                                                         action:@selector(dropDownClicked:)];
+    orderDropdownCTL.tag = 4;
+    orderDropdownCTL.label.font = [UIFont systemFontOfSize:13];
+    [orderDropdownView addSubview:orderDropdownCTL];
+    
+    orderStatusDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, orderStatusDropdownView.frame.size.width, orderStatusDropdownView.frame.size.height)
+                                                       target:self
+                                                       action:@selector(dropDownClicked:)];
+    orderStatusDropdownCTL.tag = 5;
+    orderStatusDropdownCTL.label.font = [UIFont systemFontOfSize:13];
+    [orderStatusDropdownView addSubview:orderStatusDropdownCTL];
+    
     [self refreshBTNClicked:nil];
     [self resetBTNClicked:nil];
 }
@@ -111,15 +154,15 @@
     [self setOrderTableViewCell:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"TRADE_ORDER_SUBMITTED" object:nil];
     [self setOrderFilterView:nil];
-    [self setFromDateLabel:nil];
-    [self setToDateLabel:nil];
     [self setResetBTN:nil];
     [self setApplyBTN:nil];
-    [self setAccountLabel:nil];
-    [self setOrderLabel:nil];
     [self setOrderStatusLabel:nil];
     [self setOrderId:nil];
     [self setSymbod:nil];
+    [self setFromDateDropdownView:nil];
+    [self setToDateDropdownView:nil];
+    [self setAccountDropdownView:nil];
+    [self setOrderDropdownView:nil];
     [super viewDidUnload];
 }
 
@@ -180,7 +223,8 @@
 }
 
 - (IBAction)dateDropdownClicked:(id)sender {
-    UITapGestureRecognizer *tapGesture = sender;
+    DropDownControl *dropdownCTL = sender;
+    
     if (!datedropdown) {
         DatePickerViewController *controller = [[DatePickerViewController alloc] initWithNibName:@"DatePickerViewController" bundle:nil];
         
@@ -191,10 +235,13 @@
     if ([datedropdown isPopoverVisible]) {
         [datedropdown dismissPopoverAnimated:YES];
     } else {
+        CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+        CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
+        
         DatePickerViewController *controller = (DatePickerViewController*)datedropdown.contentViewController;
-        controller.tag = tapGesture.view.tag;
+        controller.tag = dropdownCTL.tag;
         [datedropdown setPopoverContentSize:controller.view.frame.size];
-        [datedropdown presentPopoverFromRect: tapGesture.view.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [datedropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 
@@ -205,11 +252,11 @@
     orderType = @"All";
     orderStatus = @"All";
     
-    fromDateLabel.text = [NSString stringWithString:@"From: All"];
-    toDateLabel.text = [NSString stringWithString:@"To: All"];
-    accountLabel.text = [NSString stringWithFormat:@"Account: %@", accountSelected];
-    orderLabel.text = [NSString stringWithFormat:@"Order: %@", orderType];
-    orderStatusLabel.text = [NSString stringWithFormat:@"Order Status: %@", orderStatus];
+    fromDateDropdownCTL.label.text = @"From: All";
+    toDateDropdownCTL.label.text = @"To: All";
+    accountDropdownCTL.label.text = [NSString stringWithFormat:@"Account: %@", accountSelected];
+    orderDropdownCTL.label.text = [NSString stringWithFormat:@"Order: %@", orderType];
+    orderStatusDropdownCTL.label.text = [NSString stringWithFormat:@"Order Status: %@", orderStatus];    
 }
 
 - (IBAction)applyBTNClicked:(id)sender {
@@ -264,10 +311,10 @@
 }
 
 - (IBAction)dropDownClicked:(id)sender {
-    UITapGestureRecognizer *tapGesture = sender;
+    DropDownControl *dropdownCTL = sender;
     NSArray *selections;
     CGSize size;
-    switch ([[tapGesture view] tag]) {
+    switch (dropdownCTL.tag) {
         case 3: {
             NSMutableArray *accountName = [[NSMutableArray alloc] init];
             NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
@@ -302,26 +349,29 @@
         default:
             break;
     }
-    
+
     if (!dropdown) {
         DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
         
         dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = dropdown;
         controller.selections = selections;
-        controller.tag = tapGesture.view.tag;
+        controller.tag = dropdownCTL.tag;
         controller.delegate = self;
         [dropdown setPopoverContentSize:size];
     }
     if ([dropdown isPopoverVisible]) {
         [dropdown dismissPopoverAnimated:YES];
     } else {
+        CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+        CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
+        
         DropdownViewController *controller = (DropdownViewController *)dropdown.contentViewController;
-        controller.tag = tapGesture.view.tag;
+        controller.tag = dropdownCTL.tag;
         controller.selections = selections;
         [controller.selectionsTBL reloadData];
         [dropdown setPopoverContentSize:size];
-        [dropdown presentPopoverFromRect: tapGesture.view.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 
@@ -510,21 +560,21 @@
 
     switch (controller.tag) {
         case 1:
-            fromDateLabel.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:date]];
+            fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:date]];
             fromDate = [date copy];
             
             if (toDate == nil) {
                 toDate = [fromDate copy];
-                toDateLabel.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:toDate]];
+                toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:toDate]];
             }
             break;
             
         case 2:
-            toDateLabel.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:date]];
+            toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:date]];
             toDate = [date copy];;
             if (fromDate == nil) {
                 fromDate = [toDate copy];
-                fromDateLabel.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:fromDate]];
+                fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:fromDate]];
             }
            break;
         default:
@@ -532,21 +582,26 @@
     }
 }
 
+- (void)datePickerCleared
+{
+    
+}
+
 - (void)selectionChanged:(DropdownViewController *)controller
 {
     switch (controller.tag) {
         case 3: {
-            accountLabel.text = [NSString stringWithFormat:@"Account: %@", controller.selected];
+            accountDropdownCTL.label.text = [NSString stringWithFormat:@"Account: %@", controller.selected];
             accountSelected = [NSString stringWithString:controller.selected];
             break;
         }
         case 4:
-            orderLabel.text = [NSString stringWithFormat:@"Order: %@", controller.selected];
+            orderDropdownCTL.label.text = [NSString stringWithFormat:@"Order: %@", controller.selected];
             orderType = [NSString stringWithString:controller.selected];
             break;
             
         case 5:
-            orderStatusLabel.text = [NSString stringWithFormat:@"Order Status: %@", controller.selected];
+            orderStatusDropdownCTL.label.text = [NSString stringWithFormat:@"Order Status: %@", controller.selected];
             orderStatus = [NSString stringWithString:controller.selected];
             break;
                         

@@ -23,6 +23,7 @@
 #import "TabViewController.h"
 #import "DatePickerViewController.h"
 #import "DropdownViewController.h"
+#import "DropDownControl.h"
 
 @interface OrdersViewController : TabViewController<DatePickerViewControllerDelegate, DropdownViewControllerDelegate> {
     NSMutableArray *orders;
@@ -40,12 +41,8 @@
 - (IBAction)applyBTNClicked:(id)sender;
 - (IBAction)dropDownClicked:(id)sender;
 
-@property (strong, nonatomic) IBOutlet UILabel *fromDateLabel;
-@property (strong, nonatomic) IBOutlet UILabel *toDateLabel;
 @property (strong, nonatomic) IBOutlet UIButton *resetBTN;
 @property (strong, nonatomic) IBOutlet UIButton *applyBTN;
-@property (strong, nonatomic) IBOutlet UILabel *accountLabel;
-@property (strong, nonatomic) IBOutlet UILabel *orderLabel;
 @property (strong, nonatomic) IBOutlet UILabel *orderStatusLabel;
 @property (strong, nonatomic) IBOutlet UITextField *orderId;
 @property (strong, nonatomic) IBOutlet UITextField *symbod;
@@ -63,4 +60,14 @@
 
 @property (strong, nonatomic) BullFirstWebServiceObject* cancelOrderServiceObject;
 
+@property (strong, nonatomic) IBOutlet UIView *accountDropdownView;
+@property (retain, nonatomic) DropDownControl *accountDropdownCTL;
+@property (strong, nonatomic) IBOutlet UIView *fromDateDropdownView;
+@property (retain, nonatomic) DropDownControl *fromDateDropdownCTL;
+@property (strong, nonatomic) IBOutlet UIView *toDateDropdownView;
+@property (retain, nonatomic) DropDownControl *toDateDropdownCTL;
+@property (strong, nonatomic) IBOutlet UIView *orderDropdownView;
+@property (retain, nonatomic) DropDownControl *orderDropdownCTL;
+@property (strong, nonatomic) IBOutlet UIView *orderStatusDropdownView;
+@property (retain, nonatomic) DropDownControl *orderStatusDropdownCTL;
 @end
