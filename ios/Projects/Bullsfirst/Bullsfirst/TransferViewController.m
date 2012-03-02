@@ -41,7 +41,9 @@
 
 - (void)viewDidLoad
 {
-    [super viewDidLoad];    
+    [super viewDidLoad];
+    
+    spinner.hidden = YES;
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
 
@@ -149,6 +151,7 @@
         [av show];
         return;        
     }
+    spinner.hidden = NO;
     [spinner startAnimating];
     NSString* urlString = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/accounts/%@/transfer_securities",fromAccountID];
     NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
@@ -183,6 +186,7 @@
         [av show];
         return;        
     }
+    spinner.hidden = NO;
     
      [spinner startAnimating];
    
@@ -229,7 +233,9 @@
 
 -(void)requestFailedSecuritiesTransfer:(NSError *)error
 {       
+    
     [spinner stopAnimating];
+    spinner.hidden = YES;
     NSString *errorString = [NSString stringWithString:@"Try Again!"];
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -239,6 +245,7 @@
 -(void)requestSucceededSecuritiesTransfer:(NSData *)data
 {
     [spinner stopAnimating];
+    spinner.hidden = YES;
     [self dismissModalViewControllerAnimated:YES];    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 
@@ -260,6 +267,7 @@
 -(void)requestFailedCashTransfer:(NSError *)error
 {    
     [spinner stopAnimating];
+    spinner.hidden  = YES;
     NSString *errorString = [NSString stringWithString:@"Try Again!"];
     
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -269,6 +277,7 @@
 -(void)requestSucceededCashTransfer:(NSData *)data
 {
     [spinner stopAnimating];
+    spinner.hidden = YES;
     [self dismissModalViewControllerAnimated:YES];    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
 

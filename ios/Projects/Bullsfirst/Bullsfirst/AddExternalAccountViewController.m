@@ -41,6 +41,7 @@
 -(void)requestFailed:(NSError *)error
 {   
     [spinner stopAnimating];
+    spinner.hidden = YES;
     
     NSString *errorString = [NSString stringWithString:@"Try Again!"];
     UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -53,6 +54,7 @@
 -(void)requestSucceeded:(NSData *)data
 {
     [spinner stopAnimating];
+    spinner.hidden = YES;
     [self.navigationController popViewControllerAnimated:YES];    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
     
@@ -75,6 +77,7 @@
         return;        
     }
     
+    spinner.hidden = NO;
     [spinner startAnimating];
     
     addAccountBTN.enabled = NO;
@@ -105,6 +108,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    spinner.hidden = YES;
     // Do any additional setup after loading the view from its nib.
 
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
