@@ -522,5 +522,41 @@
 }
 
 
+-(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet* cs;
+    NSString* filtered;
+    
+    
+    if(textField == pricePaid || textField == amount)
+    {
+    
+    if ([textField.text rangeOfString:@"."].location == NSNotFound)
+    {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+        filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+    }
+    
+    cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+    filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+    return [string isEqualToString:filtered];
+        
+    }
+    
+    if(textField == quantity)
+    {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+
+    }
+    
+    
+    return YES;
+}
+
+
+
 
 @end

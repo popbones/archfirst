@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "BullFirstWebServiceObject.h"
-@interface AddExternalAccountViewController : UIViewController
+@interface AddExternalAccountViewController : UIViewController<UITextFieldDelegate>
 {
     IBOutlet UIActivityIndicatorView *spinner;
 

@@ -116,6 +116,8 @@
     barButtonItem.style = UIBarButtonItemStyleBordered;
     self.navigationItem.rightBarButtonItem = barButtonItem;
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    routingNumber.delegate = self;
+    accountNumber.delegate = self;
 
 }
 
@@ -137,5 +139,23 @@
     //[self.navigationController popViewControllerAnimated:YES];
     [self dismissModalViewControllerAnimated:YES];  
 }
+
+-(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet* cs;
+    NSString* filtered;
+    
+    if(textField == routingNumber || textField == accountNumber)
+    {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+        
+    }
+    
+    
+    return YES;
+}
+
 
 @end
