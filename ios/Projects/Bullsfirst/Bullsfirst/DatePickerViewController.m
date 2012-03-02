@@ -36,7 +36,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    datePicker.maximumDate = [NSDate date];
     // Do any additional setup after loading the view from its nib.
 }
 
