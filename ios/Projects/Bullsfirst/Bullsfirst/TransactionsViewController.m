@@ -139,7 +139,7 @@
     toDateDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, toDateDropDownView.frame.size.width, toDateDropDownView.frame.size.height)
                                                           target:self
                                                           action:@selector(showDateDropdownMenu:)];
-    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
+    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
     [toDateDropDownView addSubview:toDateDropDownCTL];
 
     
