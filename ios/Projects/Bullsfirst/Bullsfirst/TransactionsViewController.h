@@ -56,8 +56,6 @@
 @property (strong, nonatomic) UIPopoverController *datedropdown;
 
 
--(IBAction)dateBTNClicked:(id)sender;
--(IBAction)accountsBTNClicked:(id)sender;
 -(IBAction)resetBTNClicked:(id)sender;
 -(IBAction)applyBTNClicked:(id)sender;
 
