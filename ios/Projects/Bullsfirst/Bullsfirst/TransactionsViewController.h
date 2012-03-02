@@ -52,7 +52,7 @@
 
 -(IBAction)dateBTNClicked:(id)sender;
 -(IBAction)accountsBTNClicked:(id)sender;
--(IBAction)clearBTNClicked:(id)sender;
+-(IBAction)resetBTNClicked:(id)sender;
 -(IBAction)applyBTNClicked:(id)sender;
 
 @end

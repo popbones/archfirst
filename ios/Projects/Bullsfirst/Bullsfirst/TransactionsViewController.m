@@ -53,7 +53,7 @@
         return [NSString stringWithFormat:@"%02d/%02d/%04d",[dateComponents month],[dateComponents day],[dateComponents year]];
     }
     else
-        return  nil;
+        return  @"";
 }
 
 
@@ -118,17 +118,18 @@
     //Finding the date 2 months back
     
     toDate = [NSDate date];
-    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components= [[NSDateComponents alloc]init];
-    [components setMonth:-2];
-    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    //    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    //    NSDateComponents *components= [[NSDateComponents alloc]init];
+    //    [components setMonth:-2];
+    //    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    fromDate = [NSDate date];
     
     [accountBTN.titleLabel sizeToFit];
     accountBTN.titleLabel.textAlignment = UITextAlignmentCenter;
     [toDateBTN.titleLabel sizeToFit];
-    toDateBTN.titleLabel.textAlignment = UITextAlignmentCenter;
+    toDateBTN.titleLabel.textAlignment = UITextAlignmentLeft;
     [fromDateBTN.titleLabel sizeToFit];
-    fromDateBTN.titleLabel.textAlignment = UITextAlignmentCenter;
+    fromDateBTN.titleLabel.textAlignment = UITextAlignmentLeft;
     
     [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
     [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
@@ -421,12 +422,22 @@
     } else {
         DatePickerViewController *controller = (DatePickerViewController*)datedropdown.contentViewController;
         if(currentSelectedDateType == ToDate)
-            [controller.datePicker setDate:toDate];
+        {
+            if(toDate == nil)
+                [controller.datePicker setDate:[NSDate date]];
+            else
+                [controller.datePicker setDate:toDate];
+        }
         else
-            [controller.datePicker setDate:fromDate];
-
+        {
+            if(fromDate == nil)
+                [controller.datePicker setDate:[NSDate date]];
+            else
+                [controller.datePicker setDate:fromDate];
+        }
+        
         [datedropdown setPopoverContentSize:controller.view.frame.size];
-         [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     
     
@@ -471,14 +482,15 @@
     
 }
 
--(IBAction)clearBTNClicked:(id)sender
+-(IBAction)resetBTNClicked:(id)sender
 {
     toDate = [NSDate date];
     [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
-    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components= [[NSDateComponents alloc]init];
-    [components setMonth:-2];
-    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    //    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    //    NSDateComponents *components= [[NSDateComponents alloc]init];
+    //    [components setMonth:-2];
+    //    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    fromDate = [NSDate date];
     [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
     
     [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
@@ -488,15 +500,42 @@
 -(IBAction)applyBTNClicked:(id)sender
 {
     NSString* urlString;
-    BFDebugLog(@"ACC ID %d",selectedAccountId);
+    
+    NSString* accountParam;
+    NSString* fromDateParam;
+    NSString* toDateParam;
+    
     if(selectedAccountId == -1)
     {
-        urlString= [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/transactions?fromDate=%@&toDate=%@",[self convertDateToRequiredFormat:fromDate],[self convertDateToRequiredFormat:toDate]];
+        accountParam = [NSString stringWithString:@""];
     }
     else
     {
-        urlString= [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/transactions?fromDate=%@&toDate=%@&accountId=%d",[self convertDateToRequiredFormat:fromDate],[self convertDateToRequiredFormat:toDate],selectedAccountId];
+        accountParam = [NSString stringWithFormat:@"&accountId=%d",selectedAccountId];
     }
+    
+    if(fromDate == nil)
+    {
+        fromDateParam = [NSString stringWithString:@""];
+    }
+    else
+    {
+        fromDateParam = [NSString stringWithFormat:@"&fromDate=%@",[self convertDateToRequiredFormat:fromDate]];
+    }
+    
+    if(toDate == nil)
+    {
+        toDateParam = [NSString stringWithString:@""];
+    }
+    else
+    {
+        toDateParam = [NSString stringWithFormat:@"&toDate=%@",[self convertDateToRequiredFormat:toDate]];
+    }
+    
+    
+    BFDebugLog(@"ACC ID %d",selectedAccountId);
+    
+    urlString= [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/transactions?%@%@%@",accountParam,fromDateParam,toDateParam];
     BFDebugLog(@"url string: %@",urlString);
     [self.restServiceObject getRequestWithURL:[NSURL URLWithString:urlString]];
 }
@@ -518,6 +557,20 @@
     {
         fromDate = controller.datePicker.date;
         [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
+    }
+}
+
+-(void) datePickerCleared
+{
+    if(currentSelectedDateType == ToDate)
+    {
+        toDate = nil;
+        [toDateBTN setTitle:@"To:" forState:UIControlStateNormal];
+    }
+    else if (currentSelectedDateType == FromDate)
+    {
+        fromDate = nil;
+        [fromDateBTN setTitle:@"From:" forState:UIControlStateNormal];
     }
 }
 
@@ -546,12 +599,12 @@
     [transectionTBL reloadData];
     selectedAccountId = -1;
     toDate = [NSDate date];
-    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    NSDateComponents *components= [[NSDateComponents alloc]init];
-    [components setMonth:-2];
-    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
+    //    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
+    //    NSDateComponents *components= [[NSDateComponents alloc]init];
+    //    [components setMonth:-2];
+    //    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
     
-    
+    fromDate = [NSDate date];
     [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
     [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
     

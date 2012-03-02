@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 @class DatePickerViewController;
 
-@protocol DatePickerViewControllerDelegate
+@protocol DatePickerViewControllerDelegate<NSObject>
 - (void)dateSelectionChanged:(DatePickerViewController *)controller;
+- (void)datePickerCleared;
 @end
 
 @interface DatePickerViewController : UIViewController
@@ -19,6 +20,7 @@
 }
 - (IBAction)pickerValueChanged:(id)sender;
 - (IBAction)doneBTNClicked:(id)sender;
+- (IBAction)clearBTNClicked:(id) sender;
 
 @property (retain, nonatomic) UIPopoverController *popOver;
 @property (retain, nonatomic) UIDatePicker* datePicker;

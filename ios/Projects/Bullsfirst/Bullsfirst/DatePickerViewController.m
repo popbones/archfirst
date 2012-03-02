@@ -54,14 +54,26 @@
 }
 
 - (IBAction)pickerValueChanged:(id)sender {
-    if (delegate != nil)
-        [delegate dateSelectionChanged:self];
+//    if (delegate != nil)
+//        [delegate dateSelectionChanged:self];
 }
 
 - (IBAction)doneBTNClicked:(id)sender 
 {   
-    if (delegate != nil)
+    if (delegate != nil && [[self delegate] respondsToSelector:@selector(dateSelectionChanged:)])
+    {
         [delegate dateSelectionChanged:self];
+    }
     [popOver dismissPopoverAnimated:YES];
 }
+
+- (IBAction)clearBTNClicked:(id) sender
+{
+    if(delegate != nil&& [[self delegate] respondsToSelector:@selector(datePickerCleared)])
+    {
+        [delegate datePickerCleared];
+    }
+    [popOver dismissPopoverAnimated:YES];
+}
+
 @end
