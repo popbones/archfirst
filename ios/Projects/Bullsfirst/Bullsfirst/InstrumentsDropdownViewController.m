@@ -97,7 +97,7 @@
     self.selectedInstrument=[instruments objectAtIndex:indexPath.row];
     if (self.instrumentDelegate != nil)
         [self.instrumentDelegate instrumentSelectionChanged:self];
-//    [self.popOver dismissPopoverAnimated:YES];
+    [self.popOver dismissPopoverAnimated:YES];
 }
 
 -(void)filterInstrumentsWithString:(NSString *)string

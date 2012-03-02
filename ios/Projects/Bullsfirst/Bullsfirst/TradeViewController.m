@@ -70,7 +70,7 @@
     barButtonItem.title = @"Trade";
 	self.navigationItem.backBarButtonItem = barButtonItem;
 
-    textFields = [NSArray arrayWithObjects:quantity, cusipText, limit, nil];
+    textFields = [NSArray arrayWithObjects:cusipText, quantity, limit, nil];
     order = [[BFOrder alloc] init];
     order.allOrNone = NO;
     order.term = [NSString stringWithString:@"Good for day"];
@@ -463,5 +463,6 @@
 {
     BFInstrument *instrument = controller.selectedInstrument;
     self.cusipText.text = instrument.symbol;
+    [self nextBTNClicked:nil];
 }
 @end
