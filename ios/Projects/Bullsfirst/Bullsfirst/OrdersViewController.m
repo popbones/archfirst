@@ -20,7 +20,6 @@
 
 #import "OrdersViewController.h"
 #import "TradeViewController.h"
-#import "FilterViewController.h"
 #import "OrderBTN.h"
 #import "DatePickerViewController.h"
 #import "BFBrokerageAccountStore.h"

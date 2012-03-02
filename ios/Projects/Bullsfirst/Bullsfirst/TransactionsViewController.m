@@ -20,7 +20,6 @@
 
 #import "TransactionsViewController.h"
 #import "AppDelegate.h"
-#import "FilterViewController.h"
 #import "BFTransaction.h"
 #import "BFBrokerageAccount.h"
 #import "BFBrokerageAccountStore.h"

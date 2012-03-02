@@ -21,7 +21,6 @@
 #import "TabViewController.h"
 #import "TradeViewController.h"
 #import "TransferViewController.h"
-#import "FilterViewController.h"
 #import "UserViewController.h"
 #import "AddAccountViewController.h"
 #import "AccountsViewController.h"
