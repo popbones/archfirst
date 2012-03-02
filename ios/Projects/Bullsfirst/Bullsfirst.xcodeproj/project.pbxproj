@@ -58,6 +58,7 @@
 		54012A2A15010FB0008D38BD /* Dropdown_LeftCap.png in Resources */ = {isa = PBXBuildFile; fileRef = 54012A2715010FB0008D38BD /* Dropdown_LeftCap.png */; };
 		54012A2B15010FB0008D38BD /* Dropdown_RightCap.png in Resources */ = {isa = PBXBuildFile; fileRef = 54012A2815010FB0008D38BD /* Dropdown_RightCap.png */; };
 		54012A2C15010FB0008D38BD /* Dropdown_Strechable.png in Resources */ = {isa = PBXBuildFile; fileRef = 54012A2915010FB0008D38BD /* Dropdown_Strechable.png */; };
+		54012A2F15011B14008D38BD /* BFInstrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54012A2E15011B14008D38BD /* BFInstrument.m */; };
 		545C5E7614E55DA6003560C8 /* BFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 545C5E7514E55DA6003560C8 /* BFUser.m */; };
 		545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */; };
 		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
@@ -259,6 +260,8 @@
 		54012A2715010FB0008D38BD /* Dropdown_LeftCap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dropdown_LeftCap.png; sourceTree = "<group>"; };
 		54012A2815010FB0008D38BD /* Dropdown_RightCap.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dropdown_RightCap.png; sourceTree = "<group>"; };
 		54012A2915010FB0008D38BD /* Dropdown_Strechable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dropdown_Strechable.png; sourceTree = "<group>"; };
+		54012A2D15011B14008D38BD /* BFInstrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFInstrument.h; sourceTree = "<group>"; };
+		54012A2E15011B14008D38BD /* BFInstrument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFInstrument.m; sourceTree = "<group>"; };
 		545C5E7414E55DA6003560C8 /* BFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFUser.h; sourceTree = "<group>"; };
 		545C5E7514E55DA6003560C8 /* BFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFUser.m; sourceTree = "<group>"; };
 		545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -615,13 +618,15 @@
 				00DFF96414841B00001A4641 /* BFBrokerageAccount.h */,
 				00DFF96514841B00001A4641 /* BFBrokerageAccount.m */,
 				00DFF96B14855010001A4641 /* BFBrokerageAccountStore.h */,
+				00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */,
 				952B7A5A14FBABD5005B3C98 /* BFExternalAccountStore.h */,
 				952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */,
-				00DFF96C14855011001A4641 /* BFBrokerageAccountStore.m */,
 				952B7A5714FBA61B005B3C98 /* BFExternalAccount.h */,
 				952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */,
 				545C5E7414E55DA6003560C8 /* BFUser.h */,
 				545C5E7514E55DA6003560C8 /* BFUser.m */,
+				54012A2D15011B14008D38BD /* BFInstrument.h */,
+				54012A2E15011B14008D38BD /* BFInstrument.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1094,6 +1099,7 @@
 				952B7A8414FCF97A005B3C98 /* BFTransaction.m in Sources */,
 				549591C614FD4E3600D76424 /* AccountDropDownViewControiller.m in Sources */,
 				54012A0214FFC136008D38BD /* DropDownControl.m in Sources */,
+				54012A2F15011B14008D38BD /* BFInstrument.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

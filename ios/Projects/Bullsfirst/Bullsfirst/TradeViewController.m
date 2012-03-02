@@ -10,6 +10,8 @@
 #import "BFBrokerageAccountStore.h"
 #import "BFBrokerageAccount.h"
 #import "PreviewTradeViewController.h"
+#import "BFInstrument.h"
+
 
 @implementation TradeViewController
 @synthesize position;
@@ -31,6 +33,7 @@
 @synthesize actionDropDownCTL;
 @synthesize priceDropDownCTL;
 @synthesize goodForDayDropDownCTL;
+@synthesize restServiceObject;
 
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition
@@ -108,6 +111,19 @@
     }
     
     self.limit.hidden = YES;
+
+    restServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self 
+                                                         responseSelector:@selector(responseReceived:) 
+                                                      receiveDataSelector:@selector(receivedData:) 
+                                                          successSelector:@selector(requestSucceeded:) 
+                                                            errorSelector:@selector(requestFailed:)];
+
+    NSArray *instruments = [BFInstrument getAllInstruments];
+    if (instruments == nil) {
+        NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfexch-javaee/rest/instruments"];        
+        [restServiceObject getRequestWithURL:url];
+    }
+    
 }
 
 - (void)viewDidUnload
@@ -130,6 +146,35 @@
 {
     // Return YES for supported orientations
 	return YES;
+}
+
+#pragma mark - selectors for handling rest call callbacks
+
+-(void)receivedData:(NSData *)data
+{
+    
+}
+
+-(void)responseReceived:(NSURLResponse *)data
+{
+    
+}
+
+-(void)requestFailed:(NSError *)error
+{       
+    NSString *errorString = [NSString stringWithString:@"Try Refreshing!"];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)requestSucceeded:(NSData *)data
+{
+    NSError *err;
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+    BFDebugLog(@"jsonObject = %@", jsonObject);
+    NSArray *instruments = [BFInstrument instrumentsFromJSONData:data];
+    [BFInstrument setAllInstruments:instruments];
 }
 
 - (IBAction)showAccountDropdownMenu:(id)sender {
