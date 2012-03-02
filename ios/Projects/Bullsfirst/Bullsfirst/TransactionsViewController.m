@@ -26,7 +26,7 @@
 #import "BFBrokerageAccountStore.h"
 
 @implementation TransactionsViewController
-@synthesize transectionTBL,portraitTableHeaderView,landscrapeTableHeaderView,transactions,datedropdown,dropdown;
+@synthesize transectionTBL,portraitTableHeaderView,landscrapeTableHeaderView,transactions,datedropdown,dropdown,toDateDropDownCTL,toDateDropDownView,fromDateDropDownCTL,fromDateDropDownView,accountDropDownCTL,accountDropDownView;
 
 #pragma mark - helper methods
 
@@ -124,15 +124,24 @@
     //    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
     fromDate = [NSDate date];
     
-    [accountBTN.titleLabel sizeToFit];
-    accountBTN.titleLabel.textAlignment = UITextAlignmentCenter;
-    [toDateBTN.titleLabel sizeToFit];
-    toDateBTN.titleLabel.textAlignment = UITextAlignmentLeft;
-    [fromDateBTN.titleLabel sizeToFit];
-    fromDateBTN.titleLabel.textAlignment = UITextAlignmentLeft;
+    accountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, accountDropDownView.frame.size.width, accountDropDownView.frame.size.height)
+                                                         target:self
+                                                         action:@selector(showAccountDropdownMenu:)];
+    accountDropDownCTL.label.text = @"All Accounts";
+    [accountDropDownView addSubview:accountDropDownCTL];
     
-    [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
-    [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
+    fromDateDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, fromDateDropDownView.frame.size.width, fromDateDropDownView.frame.size.height)
+                                                         target:self
+                                                         action:@selector(showDateDropdownMenu:)];
+    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
+    [fromDateDropDownView addSubview:fromDateDropDownCTL];
+    
+    toDateDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, toDateDropDownView.frame.size.width, toDateDropDownView.frame.size.height)
+                                                          target:self
+                                                          action:@selector(showDateDropdownMenu:)];
+    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
+    [toDateDropDownView addSubview:toDateDropDownCTL];
+
     
     UILabel *label = [[UILabel alloc] initWithFrame:CGRectZero];
     label.backgroundColor = [UIColor clearColor];
@@ -397,11 +406,11 @@
 
 #pragma mark - handling the filter view click events
 
--(IBAction)dateBTNClicked:(id)sender
+-(IBAction)showDateDropdownMenu:(id)sender
 {
     
-    UIButton *button = sender;
-    if(button == toDateBTN)
+    DropDownControl *dropdownCTL = sender;
+    if(dropdownCTL == toDateDropDownCTL)
     {
         currentSelectedDateType = ToDate;
     }
@@ -409,6 +418,9 @@
     {
         currentSelectedDateType = FromDate;
     }
+    
+    CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+    CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
     if (!datedropdown) {
         DatePickerViewController *controller = [[DatePickerViewController alloc] initWithNibName:@"DatePickerViewController" bundle:nil];
         
@@ -437,20 +449,22 @@
         }
         
         [datedropdown setPopoverContentSize:controller.view.frame.size];
-        [datedropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+        [datedropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     
+    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
     
-    [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
-    [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
+    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
+    
+   
     
     
 }
 
 
--(IBAction)accountsBTNClicked:(id)sender
+-(void)showAccountDropdownMenu:(id)sender
 {
-    UIButton* button = (UIButton*) sender;
+    DropDownControl* dropdownCTL = sender;
     NSArray *selections;
     CGSize size;
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
@@ -460,6 +474,9 @@
         size.height = 220;
     }
     size.width = 320;
+    
+    CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+    CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
     
     if (!dropdown) {
         AccountDropDownViewControiller *controller = [[AccountDropDownViewControiller alloc] initWithNibName:@"DropDownViewController" bundle:nil];
@@ -477,7 +494,7 @@
         controller.selections = selections;
         [controller.selectionsTBL reloadData];
         [dropdown setPopoverContentSize:size];
-        [dropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
     
 }
@@ -485,15 +502,12 @@
 -(IBAction)resetBTNClicked:(id)sender
 {
     toDate = [NSDate date];
-    [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
-    //    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    //    NSDateComponents *components= [[NSDateComponents alloc]init];
-    //    [components setMonth:-2];
-    //    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
-    fromDate = [NSDate date];
-    [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
-    
-    [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
+    fromDate= [NSDate date];
+    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
+     
+     toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
+        
+    accountDropDownCTL.label.text = @"All Accounts";
     selectedAccountId = -1;
 }
 
@@ -550,13 +564,14 @@
     if(currentSelectedDateType == ToDate)
     {
         toDate = controller.datePicker.date;
-        [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
+        toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
         
     }
     else
     {
         fromDate = controller.datePicker.date;
-        [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
+        fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
+    
     }
 }
 
@@ -565,12 +580,13 @@
     if(currentSelectedDateType == ToDate)
     {
         toDate = nil;
-        [toDateBTN setTitle:@"To:" forState:UIControlStateNormal];
+        toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: "];
     }
     else if (currentSelectedDateType == FromDate)
     {
         fromDate = nil;
-        [fromDateBTN setTitle:@"From:" forState:UIControlStateNormal];
+        fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: "];
+        
     }
 }
 
@@ -581,13 +597,13 @@
     if(controller.selectedIndex == -1)
     {
         selectedAccountId = -1;
-        [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
+        accountDropDownCTL.label.text = @"All Accounts";
     }
     else
     {
         BFBrokerageAccount* brokerageAccount =  [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:controller.selectedIndex];
         selectedAccountId = [brokerageAccount.brokerageAccountID intValue];
-        [accountBTN setTitle:brokerageAccount.name forState:UIControlStateNormal];
+        accountDropDownCTL.label.text = brokerageAccount.name;
     }
 }
 
@@ -605,11 +621,12 @@
     //    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
     
     fromDate = [NSDate date];
-    [fromDateBTN setTitle:[NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]] forState:UIControlStateNormal];
-    [toDateBTN setTitle:[NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]] forState:UIControlStateNormal];
+    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
+    
+    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
     
     
-    [accountBTN setTitle:@"All Accounts" forState:UIControlStateNormal];
+    accountDropDownCTL.label.text = @"All Accounts";
 }
 
 -(void)userLogin:(NSNotification*)notification

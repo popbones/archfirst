@@ -22,15 +22,11 @@
 #import "TabViewController.h"
 #import "DatePickerViewController.h"
 #import "AccountDropDownViewControiller.h"
+#import "DropDownControl.h"
 
 @interface TransactionsViewController : TabViewController<UITableViewDataSource,DatePickerViewControllerDelegate,AccountDropdownViewControllerDelegate>
 {
     enum {FromDate, ToDate} currentSelectedDateType;
-
-    IBOutlet UIButton* toDateBTN;
-    IBOutlet UIButton* fromDateBTN;
-    
-    IBOutlet UIButton* accountBTN;
 
     int selectedAccountId;
     IBOutlet UITableViewCell *transactionCell;
@@ -41,6 +37,16 @@
     NSMutableArray* transactions;
     
 }
+
+
+@property (strong, nonatomic) IBOutlet UIView *toDateDropDownView;
+@property (nonatomic, retain) DropDownControl *toDateDropDownCTL;
+
+@property (strong, nonatomic) IBOutlet UIView *fromDateDropDownView;
+@property (nonatomic, retain) DropDownControl *fromDateDropDownCTL;
+
+@property (strong, nonatomic) IBOutlet UIView *accountDropDownView;
+@property (nonatomic, retain) DropDownControl *accountDropDownCTL;
 
 @property (strong, nonatomic) IBOutlet UITableView *transectionTBL;
 @property (strong, nonatomic) IBOutlet UIView *portraitTableHeaderView;
