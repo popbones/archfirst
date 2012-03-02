@@ -22,4 +22,6 @@
 @property (strong, nonatomic) IBOutlet UITableViewCell *instrumentTableViewCell;
 @property (retain, nonatomic) NSMutableArray *instruments;
 @property (retain, nonatomic) BFInstrument *selectedInstrument;
+
+-(void)filterInstrumentsWithString:(NSString *)string;
 @end

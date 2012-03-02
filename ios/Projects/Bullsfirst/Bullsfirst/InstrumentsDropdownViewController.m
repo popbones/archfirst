@@ -97,7 +97,31 @@
     self.selectedInstrument=[instruments objectAtIndex:indexPath.row];
     if (self.instrumentDelegate != nil)
         [self.instrumentDelegate instrumentSelectionChanged:self];
-    [self.popOver dismissPopoverAnimated:YES];
+//    [self.popOver dismissPopoverAnimated:YES];
 }
 
+-(void)filterInstrumentsWithString:(NSString *)string
+{
+    NSArray *allInstruments = [BFInstrument getAllInstruments];
+    [instruments removeAllObjects];
+    for(BFInstrument *instrument in allInstruments)
+	{
+        
+		NSComparisonResult result = [instrument.symbol compare:string options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [string length])];
+		if (result == NSOrderedSame)
+		{
+			[self.instruments addObject:instrument];
+		}
+		else
+		{
+			result = [instrument.name compare:string options:(NSCaseInsensitiveSearch|NSDiacriticInsensitiveSearch) range:NSMakeRange(0, [string length])];
+			if (result == NSOrderedSame)
+			{
+				[self.instruments addObject:instrument];
+			}
+		}
+    }
+
+    [super.selectionsTBL reloadData];
+}
 @end

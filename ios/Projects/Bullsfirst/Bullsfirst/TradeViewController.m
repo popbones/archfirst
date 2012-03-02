@@ -397,6 +397,19 @@
     
     if (activeTextField == self.cusipText)
         [self showInstrumentDropdownMenu];
+    else {
+        if (instrumentDropdown.popoverVisible == YES)
+            [instrumentDropdown dismissPopoverAnimated:YES];
+    }
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    if (instrumentDropdown.popoverVisible == YES) {
+        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
+        [controller filterInstrumentsWithString:[textField.text stringByAppendingString:string]];
+    }
+    return YES;
 }
 
 #pragma mark - dropdown lifecycle
