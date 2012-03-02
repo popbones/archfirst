@@ -12,7 +12,6 @@
 #import "PreviewTradeViewController.h"
 #import "BFInstrument.h"
 
-
 @implementation TradeViewController
 @synthesize position;
 @synthesize cusipText;
@@ -34,7 +33,7 @@
 @synthesize priceDropDownCTL;
 @synthesize goodForDayDropDownCTL;
 @synthesize restServiceObject;
-
+@synthesize instrumentDropdown;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil position:(BFPosition *)aPosition
 {
@@ -175,6 +174,28 @@
     BFDebugLog(@"jsonObject = %@", jsonObject);
     NSArray *instruments = [BFInstrument instrumentsFromJSONData:data];
     [BFInstrument setAllInstruments:instruments];
+}
+
+- (void)showInstrumentDropdownMenu {
+    NSArray *instruments = [BFInstrument getAllInstruments];
+    if ([instruments count] < 1)
+        return;
+    
+    CGSize size = CGSizeMake(320, 220);
+
+    if (!instrumentDropdown) {
+        InstrumentsDropdownViewController *controller = [[InstrumentsDropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+        
+        instrumentDropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = instrumentDropdown;
+        controller.instrumentDelegate = self;
+        [instrumentDropdown setPopoverContentSize:size];
+    }
+    if ([instrumentDropdown isPopoverVisible]) {
+        [instrumentDropdown dismissPopoverAnimated:YES];
+    } else {
+        [instrumentDropdown presentPopoverFromRect:self.cusipText.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
 }
 
 - (IBAction)showAccountDropdownMenu:(id)sender {
@@ -373,6 +394,9 @@
     // Set the active field. We' ll need that if we want to move properly
     // between our textfields.
     activeTextField = textField;
+    
+    if (activeTextField == self.cusipText)
+        [self showInstrumentDropdownMenu];
 }
 
 #pragma mark - dropdown lifecycle
@@ -422,4 +446,9 @@
     
 }
 
+- (void)instrumentSelectionChanged:(InstrumentsDropdownViewController *)controller
+{
+    BFInstrument *instrument = controller.selectedInstrument;
+    self.cusipText.text = instrument.symbol;
+}
 @end

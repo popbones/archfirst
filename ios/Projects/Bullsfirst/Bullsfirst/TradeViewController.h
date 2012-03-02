@@ -13,8 +13,9 @@
 #import "DropdownViewController.h"
 #import "DropDownControl.h"
 #import "BullFirstWebServiceObject.h"
+#import "InstrumentsDropdownViewController.h"
 
-@interface TradeViewController : UIViewController <DropdownViewControllerDelegate, AccountDropdownViewControllerDelegate> {
+@interface TradeViewController : UIViewController <DropdownViewControllerDelegate, AccountDropdownViewControllerDelegate, InstrumentsDropdownViewControllerDelegate> {
     BFPosition *position;
     BFOrder *order;
 }
@@ -47,6 +48,7 @@
 
 @property (strong, nonatomic) UIPopoverController *dropdown;
 @property (strong, nonatomic) UIPopoverController *accountDropdown;
+@property (strong, nonatomic) UIPopoverController *instrumentDropdown;
 
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 

@@ -59,6 +59,8 @@
 		54012A2B15010FB0008D38BD /* Dropdown_RightCap.png in Resources */ = {isa = PBXBuildFile; fileRef = 54012A2815010FB0008D38BD /* Dropdown_RightCap.png */; };
 		54012A2C15010FB0008D38BD /* Dropdown_Strechable.png in Resources */ = {isa = PBXBuildFile; fileRef = 54012A2915010FB0008D38BD /* Dropdown_Strechable.png */; };
 		54012A2F15011B14008D38BD /* BFInstrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54012A2E15011B14008D38BD /* BFInstrument.m */; };
+		54012A32150127DA008D38BD /* InstrumentsDropdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54012A31150127D8008D38BD /* InstrumentsDropdownViewController.m */; };
+		54012A3415012989008D38BD /* InstrumentDropDownTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54012A3315012987008D38BD /* InstrumentDropDownTableCell.xib */; };
 		545C5E7614E55DA6003560C8 /* BFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 545C5E7514E55DA6003560C8 /* BFUser.m */; };
 		545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */; };
 		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
@@ -262,6 +264,9 @@
 		54012A2915010FB0008D38BD /* Dropdown_Strechable.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Dropdown_Strechable.png; sourceTree = "<group>"; };
 		54012A2D15011B14008D38BD /* BFInstrument.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFInstrument.h; sourceTree = "<group>"; };
 		54012A2E15011B14008D38BD /* BFInstrument.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFInstrument.m; sourceTree = "<group>"; };
+		54012A30150127D7008D38BD /* InstrumentsDropdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentsDropdownViewController.h; sourceTree = "<group>"; };
+		54012A31150127D8008D38BD /* InstrumentsDropdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentsDropdownViewController.m; sourceTree = "<group>"; };
+		54012A3315012987008D38BD /* InstrumentDropDownTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentDropDownTableCell.xib; sourceTree = "<group>"; };
 		545C5E7414E55DA6003560C8 /* BFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFUser.h; sourceTree = "<group>"; };
 		545C5E7514E55DA6003560C8 /* BFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFUser.m; sourceTree = "<group>"; };
 		545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -648,6 +653,9 @@
 				549591C414FD4E3600D76424 /* AccountDropDownViewControiller.h */,
 				549591C514FD4E3600D76424 /* AccountDropDownViewControiller.m */,
 				549591C714FD58A600D76424 /* AccountDropDownTableCell.xib */,
+				54012A30150127D7008D38BD /* InstrumentsDropdownViewController.h */,
+				54012A31150127D8008D38BD /* InstrumentsDropdownViewController.m */,
+				54012A3315012987008D38BD /* InstrumentDropDownTableCell.xib */,
 				5468395114F82791005C356A /* DatePickerViewController.h */,
 				5468395214F82797005C356A /* DatePickerViewController.m */,
 				5468395314F8279D005C356A /* DatePickerViewController.xib */,
@@ -1040,6 +1048,7 @@
 				54012A2A15010FB0008D38BD /* Dropdown_LeftCap.png in Resources */,
 				54012A2B15010FB0008D38BD /* Dropdown_RightCap.png in Resources */,
 				54012A2C15010FB0008D38BD /* Dropdown_Strechable.png in Resources */,
+				54012A3415012989008D38BD /* InstrumentDropDownTableCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1100,6 +1109,7 @@
 				549591C614FD4E3600D76424 /* AccountDropDownViewControiller.m in Sources */,
 				54012A0214FFC136008D38BD /* DropDownControl.m in Sources */,
 				54012A2F15011B14008D38BD /* BFInstrument.m in Sources */,
+				54012A32150127DA008D38BD /* InstrumentsDropdownViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
