@@ -140,7 +140,9 @@
     self.navigationItem.rightBarButtonItem = barButtonItem;
     
     self.navigationItem.title = @"Add New Account";
-
+    
+    self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
+    
     accountName.returnKeyType=UIReturnKeyGo;
     accountName.delegate=self;
     [accountName becomeFirstResponder];
