@@ -62,6 +62,8 @@
     barButtonItem.title = @"Transfer";
 	self.navigationItem.backBarButtonItem = barButtonItem;
 	self.navigationItem.title = @"Transfer";
+    self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
+    
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     

@@ -41,8 +41,9 @@
 					<object class="IBUITextField" id="399143159">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{153, 20}, {190, 31}}</string>
+						<string key="NSFrame">{{161, 20}, {190, 31}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="206639399"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -50,7 +51,6 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
 						<int key="IBUIBorderStyle">3</int>
-						<string key="IBUIPlaceholder">Account Name</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -76,8 +76,9 @@
 					<object class="IBUIButton" id="117889127">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{38, 173}, {305, 45}}</string>
+						<string key="NSFrame">{{46, 173}, {305, 45}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="434567119"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -120,8 +121,9 @@
 					<object class="IBUILabel" id="660877542">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{43, 25}, {126, 21}}</string>
+						<string key="NSFrame">{{51, 25}, {126, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="399143159"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -136,11 +138,11 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<object class="IBUIFontDescription" key="IBUIFontDescription" id="897243086">
+						<object class="IBUIFontDescription" key="IBUIFontDescription" id="582415354">
 							<int key="type">1</int>
 							<double key="pointSize">13</double>
 						</object>
-						<object class="NSFont" key="IBUIFont" id="572803337">
+						<object class="NSFont" key="IBUIFont" id="479281568">
 							<string key="NSName">Helvetica</string>
 							<double key="NSSize">13</double>
 							<int key="NSfFlags">16</int>
@@ -149,8 +151,9 @@
 					<object class="IBUITextField" id="613225729">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{153, 71}, {190, 31}}</string>
+						<string key="NSFrame">{{161, 71}, {190, 31}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="783774920"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -158,7 +161,6 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
 						<int key="IBUIBorderStyle">3</int>
-						<string key="IBUIPlaceholder">Routing Number</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -176,8 +178,9 @@
 					<object class="IBUILabel" id="206639399">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{43, 76}, {126, 21}}</string>
+						<string key="NSFrame">{{51, 76}, {126, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="613225729"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -189,14 +192,15 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="897243086"/>
-						<reference key="IBUIFont" ref="572803337"/>
+						<reference key="IBUIFontDescription" ref="582415354"/>
+						<reference key="IBUIFont" ref="479281568"/>
 					</object>
 					<object class="IBUITextField" id="287573557">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{153, 122}, {190, 31}}</string>
+						<string key="NSFrame">{{161, 122}, {190, 31}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="117889127"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -204,7 +208,6 @@
 						<int key="IBUIContentVerticalAlignment">0</int>
 						<string key="IBUIText"/>
 						<int key="IBUIBorderStyle">3</int>
-						<string key="IBUIPlaceholder">Account Number</string>
 						<object class="NSColor" key="IBUITextColor">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MAA</bytes>
@@ -222,8 +225,9 @@
 					<object class="IBUILabel" id="783774920">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{43, 127}, {126, 21}}</string>
+						<string key="NSFrame">{{51, 127}, {126, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="287573557"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
@@ -235,14 +239,15 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="897243086"/>
-						<reference key="IBUIFont" ref="572803337"/>
+						<reference key="IBUIFontDescription" ref="582415354"/>
+						<reference key="IBUIFont" ref="479281568"/>
 					</object>
 					<object class="IBUIActivityIndicatorView" id="434567119">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{180, 226}, {20, 20}}</string>
+						<string key="NSFrame">{{188, 226}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -252,6 +257,7 @@
 				</array>
 				<string key="NSFrame">{{0, 20}, {380, 393}}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="660877542"/>
 				<object class="NSColor" key="IBUIBackgroundColor">
 					<int key="NSColorSpace">3</int>
@@ -348,10 +354,10 @@
 							<reference ref="399143159"/>
 							<reference ref="660877542"/>
 							<reference ref="613225729"/>
-							<reference ref="206639399"/>
 							<reference ref="287573557"/>
 							<reference ref="783774920"/>
 							<reference ref="434567119"/>
+							<reference ref="206639399"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -419,7 +425,47 @@
 			<nil key="sourceID"/>
 			<int key="maxID">16</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">AddExternalAccountViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="accountName">UITextField</string>
+						<string key="accountNumber">UITextField</string>
+						<string key="addAccountBTN">UIButton</string>
+						<string key="routingNumber">UITextField</string>
+						<string key="spinner">UIActivityIndicatorView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="accountName">
+							<string key="name">accountName</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="accountNumber">
+							<string key="name">accountNumber</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="addAccountBTN">
+							<string key="name">addAccountBTN</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="routingNumber">
+							<string key="name">routingNumber</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="spinner">
+							<string key="name">spinner</string>
+							<string key="candidateClassName">UIActivityIndicatorView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/AddExternalAccountViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
