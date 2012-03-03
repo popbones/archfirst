@@ -119,6 +119,10 @@
     routingNumber.delegate = self;
     accountNumber.delegate = self;
 
+    self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
+    
+
+
 }
 
 - (void)viewDidUnload
