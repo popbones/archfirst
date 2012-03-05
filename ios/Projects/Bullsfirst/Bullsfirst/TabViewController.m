@@ -247,8 +247,7 @@
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     
     [self presentModalViewController:controller animated:YES];
-    controller.view.superview.bounds=CGRectMake(0, 0, 500,235);
-    controller.view.frame=CGRectMake(0, 0, 500,235);
+    controller.view.superview.bounds=CGRectMake(0, 0, 500,157+controller.navigationBar.frame.size.height);
 }
 
 @end

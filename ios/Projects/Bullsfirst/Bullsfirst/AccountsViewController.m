@@ -251,7 +251,7 @@
     [addAccountViewController setModalPresentationStyle:UIModalPresentationFormSheet];
     
     [self presentModalViewController:addAccountViewController animated:YES];
-    addAccountViewController.view.superview.bounds=CGRectMake(0, 0, 500,235);
+    addAccountViewController.view.superview.bounds=CGRectMake(0, 0, 500,157);
     //addAccountViewController.view.frame=CGRectMake(0, 0, 500,235);
     
 }
@@ -428,7 +428,7 @@
     [controller setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self presentModalViewController:controller animated:YES];
-    controller.view.superview.bounds=CGRectMake(0, 0, 488,250);
+    controller.view.superview.bounds=CGRectMake(0, 0, 488,177+controller.navigationBar.frame.size.height);
 }
 
 
