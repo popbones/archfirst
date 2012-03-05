@@ -98,6 +98,10 @@
 		952B7A8414FCF97A005B3C98 /* BFTransaction.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A8314FCF979005B3C98 /* BFTransaction.m */; };
 		952B7AE114FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7ADF14FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png */; };
 		952B7AE214FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AE014FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png */; };
+		952B7AEC15049466005B3C98 /* SegmentControl-CashSelected-Cash.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AE815049466005B3C98 /* SegmentControl-CashSelected-Cash.png */; };
+		952B7AED15049466005B3C98 /* SegmentControl-CashSelected-Securities.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AE915049466005B3C98 /* SegmentControl-CashSelected-Securities.png */; };
+		952B7AEE15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AEA15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png */; };
+		952B7AEF15049466005B3C98 /* SegmentControl-SecuritiesSelected-Securities.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AEB15049466005B3C98 /* SegmentControl-SecuritiesSelected-Securities.png */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		9584FE2414F2234200D28154 /* AddAccount-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */; };
 		9584FE2514F2234200D28154 /* AddAccount-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2014F2234200D28154 /* AddAccount-PushDown.png */; };
@@ -319,6 +323,10 @@
 		952B7A8314FCF979005B3C98 /* BFTransaction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFTransaction.m; sourceTree = "<group>"; };
 		952B7ADF14FF9F2A005B3C98 /* ErrorHandling_AlertIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ErrorHandling_AlertIcon.png; sourceTree = "<group>"; };
 		952B7AE014FF9F2A005B3C98 /* ErrorHandling_CheckIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ErrorHandling_CheckIcon.png; sourceTree = "<group>"; };
+		952B7AE815049466005B3C98 /* SegmentControl-CashSelected-Cash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SegmentControl-CashSelected-Cash.png"; sourceTree = "<group>"; };
+		952B7AE915049466005B3C98 /* SegmentControl-CashSelected-Securities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SegmentControl-CashSelected-Securities.png"; sourceTree = "<group>"; };
+		952B7AEA15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SegmentControl-SecuritiesSelected-Cash.png"; sourceTree = "<group>"; };
+		952B7AEB15049466005B3C98 /* SegmentControl-SecuritiesSelected-Securities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SegmentControl-SecuritiesSelected-Securities.png"; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-Inactive.png"; sourceTree = "<group>"; };
 		9584FE2014F2234200D28154 /* AddAccount-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-PushDown.png"; sourceTree = "<group>"; };
@@ -519,6 +527,10 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				952B7AE815049466005B3C98 /* SegmentControl-CashSelected-Cash.png */,
+				952B7AE915049466005B3C98 /* SegmentControl-CashSelected-Securities.png */,
+				952B7AEA15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png */,
+				952B7AEB15049466005B3C98 /* SegmentControl-SecuritiesSelected-Securities.png */,
 				54012A2715010FB0008D38BD /* Dropdown_LeftCap.png */,
 				54012A2815010FB0008D38BD /* Dropdown_RightCap.png */,
 				54012A2915010FB0008D38BD /* Dropdown_Strechable.png */,
@@ -1040,6 +1052,10 @@
 				54012A2B15010FB0008D38BD /* Dropdown_RightCap.png in Resources */,
 				54012A2C15010FB0008D38BD /* Dropdown_Strechable.png in Resources */,
 				54012A3415012989008D38BD /* InstrumentDropDownTableCell.xib in Resources */,
+				952B7AEC15049466005B3C98 /* SegmentControl-CashSelected-Cash.png in Resources */,
+				952B7AED15049466005B3C98 /* SegmentControl-CashSelected-Securities.png in Resources */,
+				952B7AEE15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png in Resources */,
+				952B7AEF15049466005B3C98 /* SegmentControl-SecuritiesSelected-Securities.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

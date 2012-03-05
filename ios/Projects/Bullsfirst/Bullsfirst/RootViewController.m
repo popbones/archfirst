@@ -28,6 +28,7 @@
 #import "OrdersViewController.h"
 #import "TransactionsViewController.h"
 #import "BFExternalAccountStore.h"
+#import "BFInstrument.h"
 @implementation RootViewController
 @synthesize restServiceObject;
 
@@ -67,11 +68,12 @@
     controller = [[UINavigationController alloc] initWithRootViewController:transactionsViewController];
     [viewControllers addObject:controller];
     [self setViewControllers:viewControllers];
-
-        
+           
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"REFRESH_ACCOUNT" object:nil];
+    
+    
 }
 
 - (void)viewDidUnload
@@ -144,7 +146,34 @@
 {
     [[BFExternalAccountStore defaultStore] accountsFromJSONData:data];
 }
+#pragma mark - selectors for handling rest call callbacks for BFInstruments
 
+-(void)receivedDataInstruments:(NSData *)data
+{
+    
+}
+
+-(void)responseReceivedInstruments:(NSURLResponse *)data
+{
+    
+}
+
+-(void)requestFailedInstruments:(NSError *)error
+{       
+    NSString *errorString = [NSString stringWithString:@"Try Refreshing!"];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)requestSucceededInstruments:(NSData *)data
+{
+    NSError *err;
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+    BFDebugLog(@"jsonObject = %@", jsonObject);
+    NSArray *instruments = [BFInstrument instrumentsFromJSONData:data];
+    [BFInstrument setAllInstruments:instruments];
+}
 #pragma mark MVC Delegate methods
 
 -(void)userLogout:(NSNotification*)notification
@@ -179,6 +208,9 @@
     url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/external_accounts"];
     [restServiceObject getRequestWithURL:url];
     
+  restServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self                                            responseSelector:@selector(responseReceivedInstruments:)                                                       receiveDataSelector:@selector(receivedDataInstruments:)                                                           successSelector:@selector(requestSucceededInstruments:)                                                             errorSelector:@selector(requestFailedInstruments:)];
+    url = [NSURL URLWithString:@"http://archfirst.org/bfexch-javaee/rest/instruments"];
+    [restServiceObject getRequestWithURL:url];   
 }
 
  #pragma mark tabBarController delegate methods

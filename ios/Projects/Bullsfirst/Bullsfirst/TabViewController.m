@@ -237,8 +237,8 @@
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     
     [self presentModalViewController:controller animated:YES];
-    controller.view.superview.bounds=CGRectMake(0, 0, 400,470);
-    controller.view.frame=CGRectMake(0, 0, 400,470);
+    controller.view.superview.bounds=CGRectMake(0, 0, 575,470);
+    controller.view.frame=CGRectMake(0, 0, 575,470);
 }
 
 - (IBAction)addBTNClicked:(id)sender {

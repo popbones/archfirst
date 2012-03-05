@@ -17,8 +17,9 @@
 #import "AppDelegate.h"
 @implementation TransferViewController
 @synthesize segmentedControl,restServiceObject,symbol,amount,quantity,pricePaid;
-@synthesize fromAccountBTN,toAccountBTN,dropdown,transferBTN;
-@synthesize amountLBL,quantityLBL,pricePaidLBL,symbolLBL;
+@synthesize fromAccountDropDownCTL,toAccountDropDownCTL,dropdown,transferBTN;
+@synthesize fromAccountDropDownView,toAccountDropDownView;
+@synthesize amountLBL,quantityLBL,pricePaidLBL,symbolLBL,instrumentDropdown;
 @synthesize scrollView;
 @synthesize activeTextField,textFields;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -71,6 +72,23 @@
     orientationChanged=YES;
     
     textFields=[NSArray arrayWithObjects:symbol,quantity,pricePaid,nil];
+    CGRect rect=segmentedControl.frame;
+    segmentedControl.frame=CGRectMake(rect.origin.x, rect.origin.y, 199, 31);
+    [segmentedControl setImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Cash.png"] forSegmentAtIndex:0];
+    [segmentedControl setImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Securities.png"] forSegmentAtIndex:1];
+    fromAccountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0,fromAccountDropDownView.frame.size.width, fromAccountDropDownView.frame.size.height)
+                                                       target:self
+                                                       action:@selector(showDropdown:)];
+    fromAccountDropDownCTL.label.text = @"From Account";
+    fromAccountDropDownCTL.tag = 1;
+    [fromAccountDropDownView addSubview:fromAccountDropDownCTL];
+    
+    toAccountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0,toAccountDropDownView.frame.size.width, toAccountDropDownView.frame.size.height)
+                                                             target:self
+                                                             action:@selector(showDropdown:)];
+    toAccountDropDownCTL.label.text = @"To Account";
+    toAccountDropDownCTL.tag = 2;
+    [toAccountDropDownView addSubview:toAccountDropDownCTL];
     
 }
 -(void) keyBoardWillShow: (NSNotification*) notification
@@ -144,15 +162,37 @@
 }
 -(void) doSecuritiesTransfer
 {
-    if([symbol.text isEqual:@""]||fromAccountID==NULL||toAccountID==NULL||[quantity.text isEqual:@""]||[pricePaid.text isEqual:@""])
+    if(fromAccountID==NULL)
     {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                     message:@"All fields are necessary"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
-        return;        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"From Account" message:@"Need to chose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }        
+    if(toAccountID==NULL)
+    {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"To Account" message:@"Need to chose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }
+    if([symbol.text isEqual:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Symbol" message:@"Need to enter a security symbol." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }            
+    if([quantity.text isEqual:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Quantity" message:@"Need to enter some quantity." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }                
+                    
+    if([pricePaid.text isEqual:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Price Paid Per Share" message:@"Need to enter some price." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;   
     }
     spinner.hidden = NO;
     [spinner startAnimating];
@@ -179,16 +219,26 @@
 
 -(void) doCashTransfer
 {
-    if([amount.text isEqual:@""]||fromAccountID==NULL||toAccountID==NULL)
+    
+    if(fromAccountID==NULL)
     {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                     message:@"All fields are necessary"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
-        return;        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"From Account" message:@"Need to chose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }        
+    if(toAccountID==NULL)
+    {
+        
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"To Account" message:@"Need to chose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
     }
+    if([amount.text isEqual:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Amount" message:@"Need to enter some amount." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }           
     spinner.hidden = NO;
     
      [spinner startAnimating];
@@ -302,7 +352,7 @@
     NSArray *brokerageAccounts;
     switch (controller.tag) {
         case 1:
-            fromAccountBTN.titleLabel.text = controller.selected;
+            fromAccountDropDownCTL.label.text = controller.selected;
              brokerageAccounts= [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
 
             if(controller.selectedIndex<=brokerageAccounts.count-1)
@@ -319,7 +369,7 @@
             break;
         
         case 2:
-            toAccountBTN.titleLabel.text = controller.selected;
+            toAccountDropDownCTL.label.text = controller.selected;
             brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
             
             if(controller.selectedIndex<=brokerageAccounts.count-1)
@@ -341,6 +391,7 @@
 }
 
 - (IBAction)showDropdown:(id)sender {
+     DropDownControl *dropdownCTL = (DropDownControl *)sender;
     UIButton *button = sender;
     NSArray *selections;
     CGSize size;
@@ -386,7 +437,9 @@
         default:
             break;
     }
-    
+    CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+    CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
+
     if (!dropdown) {
         DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
         
@@ -405,13 +458,16 @@
         controller.selections = selections;
         [controller.selectionsTBL reloadData];
         [dropdown setPopoverContentSize:size];
-        [dropdown presentPopoverFromRect: button.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionRight animated:YES];
+        [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 - (IBAction)segmentedControlValueChanged:(id)sender
 {
     if(segmentedControl.selectedSegmentIndex==0)
     {
+        [segmentedControl removeAllSegments];
+       [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Cash.png"] atIndex:0 animated:NO];
+        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Securities.png"] atIndex:1 animated:NO];
         symbolLBL.hidden=YES;
         symbol.hidden=YES;
         quantityLBL.hidden=YES;
@@ -427,6 +483,10 @@
     }
     else
     {
+       
+        [segmentedControl removeAllSegments];
+        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Cash.png"] atIndex:0 animated:NO];
+        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Securities.png"] atIndex:1 animated:NO];              
         symbolLBL.hidden=NO;
         symbol.hidden=NO;
         quantityLBL.hidden=NO;
@@ -447,6 +507,27 @@
     AddExternalAccountViewController *controller= [[AddExternalAccountViewController alloc] initWithNibName:@"AddExternalAccountViewController" bundle:nil];
     [self.navigationController pushViewController:controller animated:YES];
 
+}
+- (void)showInstrumentDropdownMenu {
+    NSArray *instruments = [BFInstrument getAllInstruments];
+    if ([instruments count] < 1)
+        return;
+    
+    CGSize size = CGSizeMake(320, 220);
+    
+    if (!instrumentDropdown) {
+        InstrumentsDropdownViewController *controller = [[InstrumentsDropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+        
+        instrumentDropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = instrumentDropdown;
+        controller.instrumentDelegate = self;
+        [instrumentDropdown setPopoverContentSize:size];
+    }
+    if ([instrumentDropdown isPopoverVisible]) {
+        [instrumentDropdown dismissPopoverAnimated:YES];
+    } else {
+        [instrumentDropdown presentPopoverFromRect:self.symbol.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
 }
 
 #pragma mark - text field lifecycle
@@ -523,6 +604,12 @@
     // Set the active field. We' ll need that if we want to move properly
     // between our textfields.
     activeTextField = textField;
+    if (activeTextField == self.symbol)
+        [self showInstrumentDropdownMenu];
+    else {
+        if (instrumentDropdown.popoverVisible == YES)
+            [instrumentDropdown dismissPopoverAnimated:YES];
+    }
 }
 
 
@@ -555,12 +642,21 @@
         return [string isEqualToString:filtered];
 
     }
-    
+    if (instrumentDropdown.popoverVisible == YES) {
+        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
+        [controller filterInstrumentsWithString:[textField.text stringByAppendingString:string]];
+    }
+    return YES;
     
     return YES;
 }
 
-
+- (void)instrumentSelectionChanged:(InstrumentsDropdownViewController *)controller
+{
+    BFInstrument *instrument = controller.selectedInstrument;
+    self.symbol.text = instrument.symbol;
+    [self nextBTNClicked:nil];
+}
 
 
 @end
