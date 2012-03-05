@@ -477,7 +477,7 @@
     CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
     
     if (!dropdown) {
-        AccountDropDownViewControiller *controller = [[AccountDropDownViewControiller alloc] initWithNibName:@"DropDownViewController" bundle:nil];
+        AccountDropDownViewControiller *controller = [[AccountDropDownViewControiller alloc] initWithNibName:@"DropdownViewController" bundle:nil];
         controller.allAccountsOption = YES;
         dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = dropdown;
