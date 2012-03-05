@@ -168,6 +168,7 @@
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
         transectionTBL.tableHeaderView = landscrapeTableHeaderView;
+        transectionTBL.tableHeaderView.
     } 
     else 
     {
@@ -276,10 +277,8 @@
         label = (UILabel*) [cell viewWithTag:2];
         label.text = transaction.transactionType;
         label = (UILabel*) [cell viewWithTag:3];
-        label.text = transaction.accountName;
-        label = (UILabel*) [cell viewWithTag:4];
         label.text = transaction.description;
-        label = (UILabel*) [cell viewWithTag:5];
+        label = (UILabel*) [cell viewWithTag:4];
         label.text = [transaction.amount.amount stringValue];
         
     }
@@ -294,10 +293,8 @@
         label = (UILabel*) [cell viewWithTag:2];
         label.text = transaction.transactionType;
         label = (UILabel*) [cell viewWithTag:3];
-        label.text = transaction.accountName;
-        label = (UILabel*) [cell viewWithTag:4];
         label.text = transaction.description;
-        label = (UILabel*) [cell viewWithTag:5];
+        label = (UILabel*) [cell viewWithTag:4];
         label.text = [transaction.amount.amount stringValue];
     }
     return  cell;

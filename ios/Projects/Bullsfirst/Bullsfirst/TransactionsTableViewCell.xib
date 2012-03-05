@@ -69,10 +69,10 @@
 					<object class="IBUILabel" id="893330691">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{174, 11}, {66, 21}}</string>
+						<string key="NSFrame">{{193, 11}, {66, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="974210483"/>
+						<reference key="NSNextKeyView" ref="702173646"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
@@ -87,38 +87,17 @@
 						<reference key="IBUIFontDescription" ref="1062942566"/>
 						<reference key="IBUIFont" ref="668246790"/>
 					</object>
-					<object class="IBUILabel" id="974210483">
-						<reference key="NSNextResponder" ref="191373211"/>
-						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{243, 11}, {150, 21}}</string>
-						<reference key="NSSuperview" ref="191373211"/>
-						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView" ref="702173646"/>
-						<bool key="IBUIOpaque">NO</bool>
-						<bool key="IBUIClipsSubviews">YES</bool>
-						<int key="IBUIContentMode">7</int>
-						<int key="IBUITag">3</int>
-						<bool key="IBUIUserInteractionEnabled">NO</bool>
-						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-						<string key="IBUIText">Account</string>
-						<reference key="IBUITextColor" ref="340228403"/>
-						<nil key="IBUIHighlightedColor"/>
-						<int key="IBUIBaselineAdjustment">1</int>
-						<float key="IBUIMinimumFontSize">10</float>
-						<reference key="IBUIFontDescription" ref="1062942566"/>
-						<reference key="IBUIFont" ref="668246790"/>
-					</object>
 					<object class="IBUILabel" id="702173646">
 						<reference key="NSNextResponder" ref="191373211"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{401, 11}, {268, 21}}</string>
+						<string key="NSFrame">{{314, 11}, {268, 21}}</string>
 						<reference key="NSSuperview" ref="191373211"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="485783022"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
-						<int key="IBUITag">4</int>
+						<int key="IBUITag">3</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<string key="IBUIText">Description</string>
@@ -139,7 +118,7 @@
 						<bool key="IBUIOpaque">NO</bool>
 						<bool key="IBUIClipsSubviews">YES</bool>
 						<int key="IBUIContentMode">7</int>
-						<int key="IBUITag">5</int>
+						<int key="IBUITag">4</int>
 						<bool key="IBUIUserInteractionEnabled">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<string key="IBUIText">Amount</string>
@@ -199,7 +178,6 @@
 							<reference ref="485783022"/>
 							<reference ref="702173646"/>
 							<reference ref="893330691"/>
-							<reference ref="974210483"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
@@ -225,11 +203,6 @@
 						<reference key="parent" ref="191373211"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">5</int>
-						<reference key="object" ref="974210483"/>
-						<reference key="parent" ref="191373211"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">6</int>
 						<reference key="object" ref="702173646"/>
 						<reference key="parent" ref="191373211"/>
@@ -250,7 +223,6 @@
 				<string key="1.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 			</dictionary>
@@ -266,16 +238,11 @@
 					<string key="className">TabViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="filterBTNClicked:">id</string>
 						<string key="refreshBTNClicked:">id</string>
 						<string key="tradeBTNClicked:">id</string>
 						<string key="transferBTNClicked:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="filterBTNClicked:">
-							<string key="name">filterBTNClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="refreshBTNClicked:">
 							<string key="name">refreshBTNClicked:</string>
 							<string key="candidateClassName">id</string>
@@ -312,53 +279,48 @@
 					<string key="className">TransactionsViewController</string>
 					<string key="superclassName">TabViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="accountsBTNClicked:">id</string>
 						<string key="applyBTNClicked:">id</string>
-						<string key="clearBTNClicked:">id</string>
-						<string key="dateBTNClicked:">id</string>
+						<string key="resetBTNClicked:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="accountsBTNClicked:">
-							<string key="name">accountsBTNClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="applyBTNClicked:">
 							<string key="name">applyBTNClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
-						<object class="IBActionInfo" key="clearBTNClicked:">
-							<string key="name">clearBTNClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="dateBTNClicked:">
-							<string key="name">dateBTNClicked:</string>
+						<object class="IBActionInfo" key="resetBTNClicked:">
+							<string key="name">resetBTNClicked:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="fromDateBTN">UIButton</string>
-						<string key="landscrapeTitleBar">UIView</string>
-						<string key="portraitTitleBar">UIView</string>
-						<string key="toDateBTN">UIButton</string>
+						<string key="accountDropDownView">UIView</string>
+						<string key="fromDateDropDownView">UIView</string>
+						<string key="landscrapeTableHeaderView">UIView</string>
+						<string key="portraitTableHeaderView">UIView</string>
+						<string key="toDateDropDownView">UIView</string>
 						<string key="transactionCell">UITableViewCell</string>
 						<string key="transectionTBL">UITableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="fromDateBTN">
-							<string key="name">fromDateBTN</string>
-							<string key="candidateClassName">UIButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="landscrapeTitleBar">
-							<string key="name">landscrapeTitleBar</string>
+						<object class="IBToOneOutletInfo" key="accountDropDownView">
+							<string key="name">accountDropDownView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="portraitTitleBar">
-							<string key="name">portraitTitleBar</string>
+						<object class="IBToOneOutletInfo" key="fromDateDropDownView">
+							<string key="name">fromDateDropDownView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="toDateBTN">
-							<string key="name">toDateBTN</string>
-							<string key="candidateClassName">UIButton</string>
+						<object class="IBToOneOutletInfo" key="landscrapeTableHeaderView">
+							<string key="name">landscrapeTableHeaderView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="portraitTableHeaderView">
+							<string key="name">portraitTableHeaderView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="toDateDropDownView">
+							<string key="name">toDateDropDownView</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="transactionCell">
 							<string key="name">transactionCell</string>
