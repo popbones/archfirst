@@ -168,7 +168,6 @@
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
         transectionTBL.tableHeaderView = landscrapeTableHeaderView;
-        transectionTBL.tableHeaderView.
     } 
     else 
     {
