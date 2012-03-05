@@ -17,6 +17,7 @@
     NSNumber *quantity;
     NSString *type;
     BFMoney *limitPrice;
+    BFMoney *executionPrice;
     NSString *term;
     BOOL    allOrNone;
     NSDate *creationTime;
@@ -38,6 +39,7 @@
 @property (nonatomic, retain) NSString *term;
 @property (nonatomic, retain) NSString *type;
 @property (nonatomic, retain) BFMoney *limitPrice;
+@property (nonatomic, retain) BFMoney *executionPrice;
 
 + (NSMutableArray *)ordersFromJSONData:(NSData *)data;
 + (BFOrder *)orderFromDictionary:(NSDictionary *)theDictionary;
@@ -54,6 +56,7 @@
        instrumentSymbol:(NSString *)theInstrumentSymbol
                    term:(NSString*)theTerm
                    type:(NSString *)theType
-             limitPrice:(BFMoney *)theLimitPrice;
+             limitPrice:(BFMoney *)theLimitPrice
+         executionPrice:(BFMoney *)theExecutionPrice;
 
 @end

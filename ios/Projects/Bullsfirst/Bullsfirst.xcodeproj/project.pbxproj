@@ -478,6 +478,7 @@
 				00D3C417147C27120067A768 /* AppDelegate.h */,
 				00D3C418147C27120067A768 /* AppDelegate.m */,
 				540129FF14FFBF2D008D38BD /* Custom buttons */,
+				54B78A7214EAB427002FF1AC /* Forms */,
 				545C5E3214E45AEC003560C8 /* View Controllers */,
 				AC9B72D114DA7E3700B843AC /* BF-CorePlot Extensions */,
 				00DFF9631484179D001A4641 /* Model */,
@@ -690,7 +691,6 @@
 		545C5E3214E45AEC003560C8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				54B78A7214EAB427002FF1AC /* Forms */,
 				54B78A2014E5902A002FF1AC /* Login */,
 				00DFF90E148089B6001A4641 /* Tabs */,
 			);

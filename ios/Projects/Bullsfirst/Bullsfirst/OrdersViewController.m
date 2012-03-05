@@ -450,9 +450,15 @@
         label = (UILabel *)[cell viewWithTag:5];
         label.text = [NSString stringWithFormat:@"%d", [order.quantity intValue]];
         
-        label = (UILabel *)[cell viewWithTag:6];
+        if (order.limitPrice != nil) {
+            label = (UILabel *)[cell viewWithTag:6];
+            label.text = [NSString stringWithFormat:@"$%d", [order.limitPrice.amount intValue]];
+        }
         
-        label = (UILabel *)[cell viewWithTag:7];
+        if (order.executionPrice != nil) {
+            label = (UILabel *)[cell viewWithTag:7];
+            label.text = [NSString stringWithFormat:@"$%d", [order.executionPrice.amount intValue]];
+        }
         
         label = (UILabel *)[cell viewWithTag:8];
         label.text = order.status;
@@ -461,9 +467,12 @@
         label.text = order.side;
 
         OrderBTN *cancelOrderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
-        [cancelOrderBTN addTarget:self action:@selector(cancelOrderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
-        cancelOrderBTN.order = order;
-
+        if ([order.status isEqualToString:@"New"] == YES) {
+            [cancelOrderBTN addTarget:self action:@selector(cancelOrderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+            cancelOrderBTN.order = order;
+        } else {
+            cancelOrderBTN.hidden = YES;
+        }
         return cell;
     }
     else
@@ -491,9 +500,15 @@
         label = (UILabel *)[cell viewWithTag:5];
         label.text = [NSString stringWithFormat:@"%d", [order.quantity intValue]];
         
-        label = (UILabel *)[cell viewWithTag:6];
-
-        label = (UILabel *)[cell viewWithTag:7];
+        if (order.limitPrice != nil) {
+            label = (UILabel *)[cell viewWithTag:6];
+            label.text = [NSString stringWithFormat:@"$%d", [order.limitPrice.amount intValue]];
+        }
+        
+        if (order.executionPrice != nil) {
+            label = (UILabel *)[cell viewWithTag:7];
+            label.text = [NSString stringWithFormat:@"$%d", [order.executionPrice.amount intValue]];
+        }
 
         label = (UILabel *)[cell viewWithTag:8];
         label.text = order.status;
@@ -502,8 +517,12 @@
         label.text = order.side;
 
         OrderBTN *cancelOrderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
-        [cancelOrderBTN addTarget:self action:@selector(cancelOrderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
-        cancelOrderBTN.order = order;
+        if ([order.status isEqualToString:@"New"] == YES) {
+            [cancelOrderBTN addTarget:self action:@selector(cancelOrderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+            cancelOrderBTN.order = order;
+        } else {
+            cancelOrderBTN.hidden = YES;
+        }
 
         return cell;
     }

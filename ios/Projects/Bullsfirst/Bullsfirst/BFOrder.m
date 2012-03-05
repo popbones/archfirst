@@ -22,6 +22,7 @@
 @synthesize status;
 @synthesize cumQty;
 @synthesize orderId;
+@synthesize executionPrice;
 
 - (id)initWithAccountID:(NSNumber *)theAccountID
             accountName:(NSString *)theAccountName
@@ -36,6 +37,7 @@
                    term:(NSString*)theTerm
                    type:(NSString *)theType
              limitPrice:(BFMoney *)theLimitPrice
+         executionPrice:(BFMoney *)theExecutionPrice
 {
     self = [super init];
     
@@ -54,6 +56,7 @@
         self.term = theTerm;
         self.type = theType;
         self.limitPrice = theLimitPrice;
+        self.executionPrice = theExecutionPrice;
     }
     
     return self;      
@@ -73,7 +76,8 @@
                   instrumentSymbol:@""
                               term:@""
                               type:@""
-                        limitPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]];
+                        limitPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]
+                    executionPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]];
             
 }
 
@@ -102,6 +106,27 @@
     NSString *type = [theDictionary valueForKey:@"type"];
     NSNumber *cumQty = [NSNumber numberWithInt:[[theDictionary valueForKey:@"cumQty"] intValue]];
     NSNumber *orderID = [NSNumber numberWithInt:[[theDictionary valueForKey:@"id"] intValue]];   
+    
+    NSDictionary *limitedPriceDic = [theDictionary objectForKey:@"limitPrice"];
+    BFMoney *limitedPrice;
+    if (limitedPriceDic != nil && [limitedPriceDic count] > 0) {
+        limitedPrice = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:[[limitedPriceDic valueForKey:@"amount"] floatValue]] currency:[limitedPriceDic valueForKey:@"currency"]];
+    }
+
+    NSDictionary *executionsPriceDic = [theDictionary objectForKey:@"executions"];
+    BFMoney *executionPrice;
+    if (executionsPriceDic != nil && [executionsPriceDic count] > 0) {
+        float totalAmount = 0;
+        float totalQty = 0;
+        for (NSDictionary *execution in executionsPriceDic) {
+            NSDictionary *priceDic = [execution objectForKey:@"price"];
+            NSNumber *amount = [NSNumber numberWithFloat:[[priceDic valueForKey:@"amount"] floatValue]];
+            totalAmount += [amount floatValue];
+            NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] floatValue]];
+            totalQty += [quantity floatValue];
+        }
+        executionPrice = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:totalAmount/totalQty] currency:@""];
+    }
 
     return [[BFOrder alloc] initWithAccountID:accountID
                                   accountName:accountName
@@ -115,7 +140,8 @@
                              instrumentSymbol:symbol
                                          term:term
                                          type:type
-                                   limitPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]];
+                                   limitPrice:limitedPrice
+                               executionPrice:executionPrice];
 }
 
 + (NSMutableArray *)ordersFromJSONData:(NSData *)data
