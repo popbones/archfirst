@@ -3,12 +3,12 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
 		<string key="IBDocument.SystemVersion">10K549</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1910</string>
 		<string key="IBDocument.AppKitVersion">1038.36</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">911</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
@@ -251,7 +251,7 @@
 							<object class="IBUILabel" id="1059449330">
 								<reference key="NSNextResponder" ref="877711285"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{64.5, 69}, {431, 21}}</string>
+								<string key="NSFrame">{{65, 69}, {431, 21}}</string>
 								<reference key="NSSuperview" ref="877711285"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="494302206"/>
@@ -411,7 +411,6 @@
 								<string key="NSFrame">{{496, 7}, {57, 29}}</string>
 								<reference key="NSSuperview" ref="40172618"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -458,7 +457,7 @@
 						</array>
 					</object>
 				</array>
-				<string key="NSFrame">{{0, 20}, {560, 485}}</string>
+				<string key="NSFrame">{{0, 20}, {560, 455}}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="877711285"/>
@@ -982,6 +981,6 @@
 			<string key="OpenAccount-PushDown.png">{380, 48}</string>
 			<string key="OpenAccount.png">{380, 48}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">911</string>
 	</data>
 </archive>

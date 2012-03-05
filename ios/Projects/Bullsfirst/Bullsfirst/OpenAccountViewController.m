@@ -303,13 +303,13 @@
     if(UIDeviceOrientationIsLandscape(orientation))
     {
         CGRect  rect=self.view.frame;
-        scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
+        scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-100);
         
     }
     else
     {
         CGRect  rect=self.view.frame;
-        scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
+        scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-30);
     }
     
     
@@ -395,13 +395,13 @@
         if(UIDeviceOrientationIsLandscape(orientation))
         {
             CGRect  rect=self.view.frame;
-            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
+            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-100);
             
         }
         else
         {
             CGRect  rect=self.view.frame;
-            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
+            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-30);
         }
         [activeTextField becomeFirstResponder];
         
@@ -456,13 +456,13 @@
         if(UIDeviceOrientationIsLandscape(orientation))
         {
             CGRect  rect=self.view.frame;
-            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
+            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-100);
             
         }
         else
         {
             CGRect  rect=self.view.frame;
-            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
+            scrollview.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-30);
         }
         
         orientationChanged = NO;

@@ -326,7 +326,7 @@ static BOOL keyBoardVisible;
     [openAccountViewController setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self presentModalViewController:openAccountViewController animated:YES];
-    openAccountViewController.view.superview.bounds=CGRectMake(0, 0, 560,500);
+    openAccountViewController.view.superview.bounds=CGRectMake(0, 0, 560,455);
 }
 
 -(void) tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController
