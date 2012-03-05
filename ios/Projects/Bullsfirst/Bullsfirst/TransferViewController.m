@@ -15,6 +15,7 @@
 #import "AddExternalAccountViewController.h"
 #import "BFConstants.h"
 #import "AppDelegate.h"
+#import "BFInstrument.h"
 @implementation TransferViewController
 @synthesize segmentedControl,restServiceObject,symbol,amount,quantity,pricePaid;
 @synthesize fromAccountDropDownCTL,toAccountDropDownCTL,dropdown,transferBTN;
@@ -73,9 +74,10 @@
     
     textFields=[NSArray arrayWithObjects:symbol,quantity,pricePaid,nil];
     CGRect rect=segmentedControl.frame;
-    segmentedControl.frame=CGRectMake(rect.origin.x, rect.origin.y, 199, 31);
+    segmentedControl.frame=CGRectMake(rect.origin.x, rect.origin.y, 192, 31);
     [segmentedControl setImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Cash.png"] forSegmentAtIndex:0];
     [segmentedControl setImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Securities.png"] forSegmentAtIndex:1];
+    segmentedControl.segmentedControlStyle=UISegmentedControlStyleBar;
     fromAccountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0,fromAccountDropDownView.frame.size.width, fromAccountDropDownView.frame.size.height)
                                                        target:self
                                                        action:@selector(showDropdown:)];
@@ -89,7 +91,8 @@
     toAccountDropDownCTL.label.text = @"To Account";
     toAccountDropDownCTL.tag = 2;
     [toAccountDropDownView addSubview:toAccountDropDownCTL];
-    
+    rect=self.view.frame;
+    scrollView.contentSize=CGSizeMake(rect.size.width, rect.size.height);
 }
 -(void) keyBoardWillShow: (NSNotification*) notification
 {
@@ -97,13 +100,13 @@
     if(UIDeviceOrientationIsLandscape(orientation))
     {
         CGRect  rect=self.view.frame;
-        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-50);
+        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y+11, rect.size.width, rect.size.height-130);
         
     }
     else
     {
         CGRect  rect=self.view.frame;
-        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-5);
+        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y+11, rect.size.width, rect.size.height-40);
     }
     
     
@@ -140,24 +143,24 @@
 }
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
-    if(activeTextField!=nil)
-    {
-        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
-        if(UIDeviceOrientationIsLandscape(orientation))
-        {
-            CGRect  rect=self.view.frame;
-            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
-            
-        }
-        else
-        {
-            CGRect  rect=self.view.frame;
-            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
-        }
-        [activeTextField becomeFirstResponder];
-        
-        
-    }
+//    if(activeTextField!=nil)
+//    {
+//        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+//        if(UIDeviceOrientationIsLandscape(orientation))
+//        {
+//            CGRect  rect=self.view.frame;
+//            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
+//            
+//        }
+//        else
+//        {
+//            CGRect  rect=self.view.frame;
+//            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
+//        }
+//        [activeTextField becomeFirstResponder];
+//        
+//        
+//    }
     
 }
 -(void) doSecuritiesTransfer
@@ -180,7 +183,24 @@
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Symbol" message:@"Need to enter a security symbol." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
-    }            
+    } 
+    else
+    {
+        bool flag=false;
+        NSArray *instruments= [BFInstrument getAllInstruments];
+        for (BFInstrument *instrument in instruments )
+        {
+            if([symbol.text isEqual:instrument.name])
+                flag=true;
+        }
+        if(!flag)
+        {
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Symbol" message:@"Need to enter a valid security symbol." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+            [alert show];
+            return;
+        }
+        
+    }
     if([quantity.text isEqual:@""])
     {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Quantity" message:@"Need to enter some quantity." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
@@ -468,6 +488,7 @@
         [segmentedControl removeAllSegments];
        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Cash.png"] atIndex:0 animated:NO];
         [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Securities.png"] atIndex:1 animated:NO];
+        segmentedControl.selectedSegmentIndex=0;
         symbolLBL.hidden=YES;
         symbol.hidden=YES;
         quantityLBL.hidden=YES;
@@ -486,7 +507,8 @@
        
         [segmentedControl removeAllSegments];
         [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Cash.png"] atIndex:0 animated:NO];
-        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Securities.png"] atIndex:1 animated:NO];              
+        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Securities.png"] atIndex:1 animated:NO];   
+        segmentedControl.selectedSegmentIndex=1;
         symbolLBL.hidden=NO;
         symbol.hidden=NO;
         quantityLBL.hidden=NO;
@@ -576,23 +598,23 @@
     [toolbar setItems:itemsArray];
     
     [textField setInputAccessoryView:toolbar];
-    if(orientationChanged)
-    {
-        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
-        if(UIDeviceOrientationIsLandscape(orientation))
-        {
-            CGRect  rect=self.view.frame;
-            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-150);
-            
-        }
-        else
-        {
-            CGRect  rect=self.view.frame;
-            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-55);
-        }
-        
-        orientationChanged = NO;
-    }
+//    if(orientationChanged)
+//    {
+//        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
+//        if(UIDeviceOrientationLandscapeLeft==orientation||UIDeviceOrientationLandscapeRight==orientation)
+//        {
+//            CGRect  rect=self.view.frame;
+//            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-200);
+//            
+//        }
+//        else
+//        {
+//            CGRect  rect=self.view.frame;
+//            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-155);
+//        }
+//        
+//        orientationChanged = NO;
+//    }
     return YES;
     
 }
