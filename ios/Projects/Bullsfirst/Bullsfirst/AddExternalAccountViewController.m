@@ -144,22 +144,4 @@
     [self dismissModalViewControllerAnimated:YES];  
 }
 
--(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
-{
-    NSCharacterSet* cs;
-    NSString* filtered;
-    
-    if(textField == routingNumber || textField == accountNumber)
-    {
-        cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
-        filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
-        return [string isEqualToString:filtered];
-        
-    }
-    
-    
-    return YES;
-}
-
-
 @end
