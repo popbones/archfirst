@@ -467,7 +467,9 @@
         label.text = order.side;
 
         OrderBTN *cancelOrderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
-        if ([order.status isEqualToString:@"New"] == YES) {
+        if ([order.status isEqualToString:@"New"] == YES ||
+            [order.status isEqualToString:@"PendingNew"] == YES ||
+            [order.status isEqualToString:@"PartiallyFilled"] == YES) {
             [cancelOrderBTN addTarget:self action:@selector(cancelOrderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
             cancelOrderBTN.order = order;
         } else {
@@ -517,7 +519,9 @@
         label.text = order.side;
 
         OrderBTN *cancelOrderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
-        if ([order.status isEqualToString:@"New"] == YES) {
+        if ([order.status isEqualToString:@"New"] == YES ||
+            [order.status isEqualToString:@"PendingNew"] == YES ||
+            [order.status isEqualToString:@"PartiallyFilled"] == YES) {
             [cancelOrderBTN addTarget:self action:@selector(cancelOrderBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
             cancelOrderBTN.order = order;
         } else {
