@@ -69,6 +69,8 @@
     barButtonItem = [[UIBarButtonItem alloc] init];
     barButtonItem.title = @"Trade";
 	self.navigationItem.backBarButtonItem = barButtonItem;
+    self.navigationItem.title = @"Trade";
+    self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
 
     textFields = [NSArray arrayWithObjects:cusipText, quantity, limit, nil];
     order = [[BFOrder alloc] init];
@@ -92,7 +94,7 @@
     priceDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, priceDropDownView.frame.size.width, priceDropDownView.frame.size.height)
                                                         target:self
                                                         action:@selector(showDropdown:)];
-    priceDropDownCTL.label.text = @"Price";
+    priceDropDownCTL.label.text = @"Order Type";
     priceDropDownCTL.tag = 3;
     [priceDropDownView addSubview:priceDropDownCTL];
     
@@ -194,7 +196,13 @@
     if ([instrumentDropdown isPopoverVisible]) {
         [instrumentDropdown dismissPopoverAnimated:YES];
     } else {
-        [instrumentDropdown presentPopoverFromRect:self.cusipText.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+        {
+            [instrumentDropdown presentPopoverFromRect:self.cusipText.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+        } else {
+            [instrumentDropdown presentPopoverFromRect:self.cusipText.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        }
     }
 }
 
@@ -254,7 +262,7 @@
             break;
             
         case 4:
-            selections = [NSArray arrayWithObjects:@"Good for day", @"Good til cancel", nil];
+            selections = [NSArray arrayWithObjects:@"Good for the day", @"Good till cancel", nil];
             size = [@"Good til cancel" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
             size.width += 20;
@@ -285,7 +293,13 @@
         controller.selections = selections;
         [controller.selectionsTBL reloadData];
         [dropdown setPopoverContentSize:size];
-        [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+        {
+            [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
+        } else {
+            [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        }
     }
 }
 
@@ -310,7 +324,7 @@
     [activeTextField resignFirstResponder];
 
     if ([order.accountName length] < 1) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Need to chose an acount." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Account field is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }
@@ -346,7 +360,7 @@
         [alert show];
         return;
     }
-    order.limitPrice = [BFMoney moneyWithAmount:[NSNumber numberWithInt:[self.limit.text intValue]] currency:@"USD"];
+    order.limitPrice = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:[self.limit.text floatValue]] currency:@"USD"];
 
     PreviewTradeViewController *controller = [[PreviewTradeViewController alloc] initWithNibName:@"PreviewTradeViewController" bundle:nil order:order];    
     [self.navigationController pushViewController:controller animated:YES];
@@ -405,6 +419,33 @@
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
 {
+    NSCharacterSet* cs;
+    NSString* filtered;
+    
+    
+    if(textField == limit)
+    {
+        
+        if ([textField.text rangeOfString:@"."].location == NSNotFound)
+        {
+            cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789."] invertedSet];
+            filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+            return [string isEqualToString:filtered];
+        }
+        
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+        
+    }
+    
+    if(textField == quantity)
+    {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+        
+    }
     if (instrumentDropdown.popoverVisible == YES) {
         InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
         [controller filterInstrumentsWithString:[textField.text stringByAppendingString:string]];
@@ -449,7 +490,7 @@
             BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:controller.selectedIndex];
             order.brokerageAccountID = account.brokerageAccountID;
             order.accountName = account.name;
-            accountDropDownCTL.label.text = account.name;
+            accountDropDownCTL.label.text = [NSString stringWithFormat:@"%@ - $%d", account.name, [account.cashPosition.amount intValue]];
             break;
         }
             

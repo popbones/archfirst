@@ -8,6 +8,7 @@
 
 #import "AccountDropDownViewControiller.h"
 #import "BFBrokerageAccount.h"
+#import "BFMoney.h"
 
 @implementation AccountDropDownViewControiller
 @synthesize accountDelegate;
@@ -102,6 +103,9 @@
     label = (UILabel *)[cell viewWithTag:2];
     label.text = [NSString stringWithString: account.name];
     
+    label = (UILabel *)[cell viewWithTag:3];
+    label.text = [NSString stringWithFormat:@"$%d", [account.cashPosition.amount intValue]];
+
     return cell;
 }
 
@@ -116,7 +120,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        self.selectedIndex=indexPath.row;
+    self.selectedIndex=indexPath.row;
     if (self.accountDelegate != nil)
         [self.accountDelegate accountSelectionChanged:self];
     [self.popOver dismissPopoverAnimated:YES];

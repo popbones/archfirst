@@ -57,7 +57,7 @@
     self.quantityLabel.text = [NSString stringWithFormat:@"%d share", [order.quantity intValue]];
     self.typeLabel.text = order.type;
     if ([order.type isEqualToString:@"Limit"])
-        self.limitPriceLabel.text = [NSString stringWithFormat:@"$%d", [order.limitPrice.amount intValue]];
+        self.limitPriceLabel.text = [NSString stringWithFormat:@"$%.3f", [order.limitPrice.amount floatValue]];
     else
         self.limitPriceLabel.text = @"";
     self.termLabel.text = order.term;
