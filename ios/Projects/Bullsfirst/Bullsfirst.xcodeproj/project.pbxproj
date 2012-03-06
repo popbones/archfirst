@@ -64,6 +64,7 @@
 		543840FA15065FE6001D6598 /* PlaceOrder-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 543840F815065FE6001D6598 /* PlaceOrder-PushDown.png */; };
 		543840FB15065FE6001D6598 /* PlaceOrder.png in Resources */ = {isa = PBXBuildFile; fileRef = 543840F915065FE6001D6598 /* PlaceOrder.png */; };
 		5438411C15066F9C001D6598 /* BFMarketPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5438411B15066F9C001D6598 /* BFMarketPrice.m */; };
+		5438411F1506764F001D6598 /* BFOrderEstimate.m in Sources */ = {isa = PBXBuildFile; fileRef = 5438411E1506764F001D6598 /* BFOrderEstimate.m */; };
 		545C5E7614E55DA6003560C8 /* BFUser.m in Sources */ = {isa = PBXBuildFile; fileRef = 545C5E7514E55DA6003560C8 /* BFUser.m */; };
 		545C5E7C14E574D5003560C8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */; };
 		545C5E7E14E574FF003560C8 /* Default-Landscape~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 545C5E7D14E574FF003560C8 /* Default-Landscape~ipad.png */; };
@@ -282,6 +283,8 @@
 		543840F915065FE6001D6598 /* PlaceOrder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceOrder.png; sourceTree = "<group>"; };
 		5438411A15066F9C001D6598 /* BFMarketPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMarketPrice.h; sourceTree = "<group>"; };
 		5438411B15066F9C001D6598 /* BFMarketPrice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFMarketPrice.m; sourceTree = "<group>"; };
+		5438411D1506764E001D6598 /* BFOrderEstimate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFOrderEstimate.h; sourceTree = "<group>"; };
+		5438411E1506764F001D6598 /* BFOrderEstimate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFOrderEstimate.m; sourceTree = "<group>"; };
 		545C5E7414E55DA6003560C8 /* BFUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFUser.h; sourceTree = "<group>"; };
 		545C5E7514E55DA6003560C8 /* BFUser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFUser.m; sourceTree = "<group>"; };
 		545C5E7B14E574D5003560C8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Default-Portrait~ipad.png"; path = "../Default-Portrait~ipad.png"; sourceTree = "<group>"; };
@@ -669,6 +672,8 @@
 				54012A2E15011B14008D38BD /* BFInstrument.m */,
 				5438411A15066F9C001D6598 /* BFMarketPrice.h */,
 				5438411B15066F9C001D6598 /* BFMarketPrice.m */,
+				5438411D1506764E001D6598 /* BFOrderEstimate.h */,
+				5438411E1506764F001D6598 /* BFOrderEstimate.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1154,6 +1159,7 @@
 				54012A2F15011B14008D38BD /* BFInstrument.m in Sources */,
 				54012A32150127DA008D38BD /* InstrumentsDropdownViewController.m in Sources */,
 				5438411C15066F9C001D6598 /* BFMarketPrice.m in Sources */,
+				5438411F1506764F001D6598 /* BFOrderEstimate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

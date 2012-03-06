@@ -8,6 +8,7 @@
 
 #import "PreviewTradeViewController.h"
 #import "BFMarketPrice.h"
+#import "BFOrderEstimate.h"
 
 @implementation PreviewTradeViewController
 @synthesize order;
@@ -123,7 +124,7 @@
 	NSString *responseData = [[NSString alloc] initWithData:jsonBodyData  encoding:NSMacOSRomanStringEncoding];
     BFDebugLog(@"jsonObject = %@", responseData);
     
-//    [estimateOrderServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+    [estimateOrderServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
 
     lastTradeServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self 
                                                                   responseSelector:nil
@@ -235,22 +236,18 @@
 -(void)estimateRequestFailed:(NSError *)error
 {       
     [spinner stopAnimating];
-    
-    NSString *errorString = [NSString stringWithString:@"Can't get order estimate!"];
-    
-    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    [av show];
+    estValue.text =  @"NA";
+    fee.text =  @"NA";
+    totalInclFee.text =  @"NA";
 }
 
 -(void)estimateRequestSucceeded:(NSData *)data
 {
-    NSError *err;
-    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
-    BFDebugLog(@"jsonObject = %@", jsonObject);
-    
     [spinner stopAnimating];
-    
-    [self dismissModalViewControllerAnimated:YES];
+    BFOrderEstimate *estimate = [BFOrderEstimate estimateValueFromJSONData:data];
+    estValue.text = [NSString stringWithFormat:@"$%.3f",  [estimate.estimatedValue.amount floatValue]];
+    fee.text = [NSString stringWithFormat:@"$%.3f",  [estimate.fees.amount floatValue]];
+    totalInclFee.text = [NSString stringWithFormat:@"$%.3f",  [estimate.estimatedValueIncFee.amount floatValue]];
 }
 
 -(void)lastTradeRequestFailed:(NSError *)error
