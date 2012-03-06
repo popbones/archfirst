@@ -37,6 +37,7 @@ typedef enum{AccountsChart, PositionsChart} Chart;
     NSArray *sortedPositions;
     bool loggedIn;
     NSString* chartTitle;
+    UIPinchGestureRecognizer* pinchGesture;
 }
 
 @property (nonatomic, retain) CPTGraphHostingView *pieChartView;

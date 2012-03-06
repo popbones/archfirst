@@ -148,6 +148,12 @@
         pieGraph.paddingRight  = 20.0;
         pieGraph.paddingBottom = 300.0;
         
+        if(!pinchGesture)
+        {
+            pinchGesture = [[UIPinchGestureRecognizer alloc]initWithTarget:self action:@selector(handlePinchGesture:)];
+        }
+        [pieChartView addGestureRecognizer:pinchGesture];
+        
         pieGraph.plotAreaFrame.borderWidth = 0.0f;
         pieGraph.axisSet = nil;
         
@@ -284,7 +290,20 @@
     [piePlot reloadData];
 }
 
+#pragma mark - handling gestures
 
+-(void) handlePinchGesture:(UIPinchGestureRecognizer*) pinch
+{
+    if(pinch.scale<1)
+    {
+        if(currentChart == PositionsChart)
+        {
+            self.currentChart = AccountsChart;
+            [self clearPieChart];
+            [self constructPieChart];
+        }
+    }
+}
 
 #pragma mark -
 #pragma mark Plot Data Source Methods
