@@ -66,17 +66,26 @@
 #pragma mark - Methods
 -(void) addAccountAction
 {
-    if([accountName.text isEqual:@""]||[accountNumber.text isEqual:@""]||[routingNumber.text isEqual:@""])
+    if([accountName.text isEqual:@""])
     {
-        UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                     message:@"All fields required"
-                                                    delegate:nil
-                                           cancelButtonTitle:@"OK"
-                                           otherButtonTitles:nil];
-        [av show];
-        return;        
-    }
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account Name" message:@"Need to enter an account name." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;
+    }                
     
+       if([routingNumber.text isEqual:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Routing Number" message:@"Need to enter a routing number." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;   
+    }
+    if([accountNumber.text isEqual:@""])
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account Number" message:@"Need to enter an account number." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        return;   
+    }
+
     spinner.hidden = NO;
     [spinner startAnimating];
     
@@ -111,10 +120,13 @@
     spinner.hidden = YES;
     // Do any additional setup after loading the view from its nib.
 
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
-                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
-    barButtonItem.style = UIBarButtonItemStyleBordered;
-    self.navigationItem.rightBarButtonItem = barButtonItem;
+    UIButton *cancelBTN=[UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelBTN setImage:[UIImage imageNamed:@"Cancel.png"] forState:UIControlStateNormal];
+    [cancelBTN setImage:[UIImage imageNamed:@"Cancel-PushDown.png"] forState:UIControlStateHighlighted];
+    [cancelBTN addTarget:self action:@selector(cancelBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+    cancelBTN.frame=CGRectMake(0, 0, 57, 29);
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:cancelBTN];
+    self.navigationItem.rightBarButtonItem.style=UIBarButtonItemStylePlain;
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     routingNumber.delegate = self;
     accountNumber.delegate = self;
@@ -142,6 +154,21 @@
 {
     //[self.navigationController popViewControllerAnimated:YES];
     [self dismissModalViewControllerAnimated:YES];  
+}
+-(BOOL) textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSCharacterSet* cs;
+    NSString* filtered;
+           
+    if(textField == accountNumber||textField==routingNumber)
+    {
+        cs = [[NSCharacterSet characterSetWithCharactersInString:@"0123456789"] invertedSet];
+        filtered = [[string componentsSeparatedByCharactersInSet:cs] componentsJoinedByString:@""];
+        return [string isEqualToString:filtered];
+        
+    }
+   
+    return YES;
 }
 
 @end

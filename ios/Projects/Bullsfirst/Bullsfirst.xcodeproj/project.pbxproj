@@ -102,6 +102,9 @@
 		952B7AED15049466005B3C98 /* SegmentControl-CashSelected-Securities.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AE915049466005B3C98 /* SegmentControl-CashSelected-Securities.png */; };
 		952B7AEE15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AEA15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png */; };
 		952B7AEF15049466005B3C98 /* SegmentControl-SecuritiesSelected-Securities.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AEB15049466005B3C98 /* SegmentControl-SecuritiesSelected-Securities.png */; };
+		952B7AFA150501C1005B3C98 /* Transfer-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AF7150501BD005B3C98 /* Transfer-Inactive.png */; };
+		952B7AFB150501C1005B3C98 /* Transfer-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AF8150501BD005B3C98 /* Transfer-PushDown.png */; };
+		952B7AFC150501C1005B3C98 /* Transfer.png in Resources */ = {isa = PBXBuildFile; fileRef = 952B7AF9150501BF005B3C98 /* Transfer.png */; };
 		9575360C14E41FDA002A3E52 /* login-screen-form-fields.png in Resources */ = {isa = PBXBuildFile; fileRef = 9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */; };
 		9584FE2414F2234200D28154 /* AddAccount-Inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */; };
 		9584FE2514F2234200D28154 /* AddAccount-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 9584FE2014F2234200D28154 /* AddAccount-PushDown.png */; };
@@ -327,6 +330,9 @@
 		952B7AE915049466005B3C98 /* SegmentControl-CashSelected-Securities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SegmentControl-CashSelected-Securities.png"; sourceTree = "<group>"; };
 		952B7AEA15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SegmentControl-SecuritiesSelected-Cash.png"; sourceTree = "<group>"; };
 		952B7AEB15049466005B3C98 /* SegmentControl-SecuritiesSelected-Securities.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SegmentControl-SecuritiesSelected-Securities.png"; sourceTree = "<group>"; };
+		952B7AF7150501BD005B3C98 /* Transfer-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Transfer-Inactive.png"; sourceTree = "<group>"; };
+		952B7AF8150501BD005B3C98 /* Transfer-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Transfer-PushDown.png"; sourceTree = "<group>"; };
+		952B7AF9150501BF005B3C98 /* Transfer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Transfer.png; sourceTree = "<group>"; };
 		9575360B14E41FDA002A3E52 /* login-screen-form-fields.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-screen-form-fields.png"; sourceTree = "<group>"; };
 		9584FE1F14F2234200D28154 /* AddAccount-Inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-Inactive.png"; sourceTree = "<group>"; };
 		9584FE2014F2234200D28154 /* AddAccount-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "AddAccount-PushDown.png"; sourceTree = "<group>"; };
@@ -528,6 +534,9 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				952B7AF7150501BD005B3C98 /* Transfer-Inactive.png */,
+				952B7AF8150501BD005B3C98 /* Transfer-PushDown.png */,
+				952B7AF9150501BF005B3C98 /* Transfer.png */,
 				952B7AE815049466005B3C98 /* SegmentControl-CashSelected-Cash.png */,
 				952B7AE915049466005B3C98 /* SegmentControl-CashSelected-Securities.png */,
 				952B7AEA15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png */,
@@ -1056,6 +1065,9 @@
 				952B7AED15049466005B3C98 /* SegmentControl-CashSelected-Securities.png in Resources */,
 				952B7AEE15049466005B3C98 /* SegmentControl-SecuritiesSelected-Cash.png in Resources */,
 				952B7AEF15049466005B3C98 /* SegmentControl-SecuritiesSelected-Securities.png in Resources */,
+				952B7AFA150501C1005B3C98 /* Transfer-Inactive.png in Resources */,
+				952B7AFB150501C1005B3C98 /* Transfer-PushDown.png in Resources */,
+				952B7AFC150501C1005B3C98 /* Transfer.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

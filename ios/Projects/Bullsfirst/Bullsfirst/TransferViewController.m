@@ -50,12 +50,15 @@
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
 
-    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
-                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
-    barButtonItem.style = UIBarButtonItemStyleBordered;
-    self.navigationItem.rightBarButtonItem=barButtonItem;
+    UIButton *cancelBTN=[UIButton buttonWithType:UIButtonTypeCustom];
+    [cancelBTN setImage:[UIImage imageNamed:@"Cancel.png"] forState:UIControlStateNormal];
+    [cancelBTN setImage:[UIImage imageNamed:@"Cancel-PushDown.png"] forState:UIControlStateHighlighted];
+    [cancelBTN addTarget:self action:@selector(cancelBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+    cancelBTN.frame=CGRectMake(0, 0, 57, 29);
+    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:cancelBTN];
+    self.navigationItem.rightBarButtonItem.style=UIBarButtonItemStylePlain;
     
-    barButtonItem = [[UIBarButtonItem alloc]
+   UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
                      initWithTitle:@"Add Ext Account" style:UIBarButtonItemStylePlain target:self action:@selector(addExternalAccountBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
     self.navigationItem.leftBarButtonItem = barButtonItem;
@@ -118,12 +121,12 @@
     if(UIDeviceOrientationIsLandscape(orientation))
     {
         CGRect  rect=self.view.frame;
-        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height);
+        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y+11, rect.size.width, rect.size.height);
     }
     else
     {
         CGRect  rect=self.view.frame;
-        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height);
+        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y+11, rect.size.width, rect.size.height);
         
     }
 }
@@ -190,7 +193,7 @@
         NSArray *instruments= [BFInstrument getAllInstruments];
         for (BFInstrument *instrument in instruments )
         {
-            if([symbol.text isEqual:instrument.name])
+            if([symbol.text isEqual:instrument.symbol])
                 flag=true;
         }
         if(!flag)
@@ -597,7 +600,7 @@
     NSArray *itemsArray = [NSArray arrayWithObjects:previousButton, nextButton, nil];
     [toolbar setItems:itemsArray];
     
-    [textField setInputAccessoryView:toolbar];
+   [textField setInputAccessoryView:toolbar];
 //    if(orientationChanged)
 //    {
 //        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
@@ -668,8 +671,6 @@
         InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
         [controller filterInstrumentsWithString:[textField.text stringByAppendingString:string]];
     }
-    return YES;
-    
     return YES;
 }
 

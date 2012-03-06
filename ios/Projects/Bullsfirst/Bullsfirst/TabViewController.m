@@ -213,7 +213,7 @@
     if ([userPopOver isPopoverVisible]) {
         [userPopOver dismissPopoverAnimated:YES];
     } else {
-        [userPopOver presentPopoverFromBarButtonItem: self.navigationItem.rightBarButtonItem permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [userPopOver presentPopoverFromRect:CGRectMake(764, 0, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 
