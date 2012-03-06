@@ -32,6 +32,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *positionTBL;
 
 @property (assign, nonatomic) int selectedAccount;
-@property (assign, nonatomic) int expandRow;
+@property (retain, nonatomic) NSMutableArray *expanedRowSet;
+
 
 @end

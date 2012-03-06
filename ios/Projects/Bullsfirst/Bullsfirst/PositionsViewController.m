@@ -32,10 +32,9 @@
 @synthesize positionTBL;
 @synthesize positionCell;
 @synthesize selectedAccount;
-@synthesize expandRow;
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
-
+@synthesize expanedRowSet;
 
 - (id)init
 {
@@ -77,7 +76,10 @@
     label.textColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [label sizeToFit];
     
-    expandRow = -1;
+    expanedRowSet = [[NSMutableArray alloc] init];
+    for (int i=0; i<[account.positions count];i++){
+        [expanedRowSet addObject:[NSNumber numberWithBool:NO]];
+    }
     
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
@@ -125,13 +127,22 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSNumber *expand = [expanedRowSet objectAtIndex:indexPath.row];
+    if (expand == nil || [expand boolValue] == NO)
+        return 44;
+    
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
+    BFPosition *position = [account.positions objectAtIndex:indexPath.row];
+    return 44*(1+[position.children count]);
+/*
     if (indexPath.row == expandRow) {
         NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
         BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
         BFPosition *position = [account.positions objectAtIndex:indexPath.row];
         return 44*(1+[position.children count]);
     }
-    return 44;
+    return 44;*/
     
 }
 
@@ -233,7 +244,9 @@
         }
         
         
-        if (indexPath.row == expandRow) {
+        NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
+        if (expand_Row != nil && [expand_Row boolValue] == YES) 
+        {
             [expand setTitle:@"-" forState:UIControlStateNormal];
 
             CGRect frame = cell.frame;
@@ -377,9 +390,9 @@
             expand.hidden = YES;
         }
  
-
         
-        if (indexPath.row == expandRow) {
+        NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
+        if (expand_Row != nil && [expand_Row boolValue] == YES) {
             [expand setTitle:@"-" forState:UIControlStateNormal];
             CGRect frame = cell.frame;
             cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[position.children count]));
@@ -480,10 +493,11 @@
 {
     expandPositionBTN *button = (expandPositionBTN *)sender;
     
-    if (button.row == expandRow) {
-        expandRow = -1;
+    NSNumber *expand_Row = [expanedRowSet objectAtIndex:button.row];
+    if (expand_Row != nil && [expand_Row boolValue] == YES) {
+        [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:NO]];
     } else {
-        expandRow = button.row;
+        [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:YES]];
     }
     [positionTBL reloadData];
 }
