@@ -500,6 +500,11 @@
     
 }
 
+- (void)allAccountsClicked:(AccountDropDownViewControiller*) controller
+{
+    
+}
+
 - (void)instrumentSelectionChanged:(InstrumentsDropdownViewController *)controller
 {
     BFInstrument *instrument = controller.selectedInstrument;

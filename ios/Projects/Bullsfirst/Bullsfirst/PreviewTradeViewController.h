@@ -28,7 +28,13 @@
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
 
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
+@property (strong, nonatomic) BullFirstWebServiceObject* estimateOrderServiceObject;
+@property (strong, nonatomic) BullFirstWebServiceObject* lastTradeServiceObject;
+@property (strong, nonatomic) IBOutlet UILabel *estValue;
+@property (strong, nonatomic) IBOutlet UILabel *fee;
+@property (strong, nonatomic) IBOutlet UILabel *totalInclFee;
 
+@property (strong, nonatomic) IBOutlet UILabel *lastTrade;
 - (IBAction)placeOrderBTNClicked:(id)sender;
 - (IBAction)cancelBTNClicked:(id)sender;
 

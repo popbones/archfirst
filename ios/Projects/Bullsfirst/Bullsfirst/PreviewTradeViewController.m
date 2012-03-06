@@ -7,6 +7,7 @@
 //
 
 #import "PreviewTradeViewController.h"
+#import "BFMarketPrice.h"
 
 @implementation PreviewTradeViewController
 @synthesize order;
@@ -19,8 +20,13 @@
 @synthesize allOrNoneLabel;
 @synthesize limitPriceLabel;
 @synthesize spinner;
-
+@synthesize estimateOrderServiceObject;
+@synthesize estValue;
+@synthesize fee;
+@synthesize totalInclFee;
+@synthesize lastTrade;
 @synthesize restServiceObject;
+@synthesize lastTradeServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil order:(BFOrder *)anOrder
 {
@@ -70,11 +76,63 @@
 
     [spinner stopAnimating];
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self 
-                                                        responseSelector:@selector(responseReceived:) 
-                                                     receiveDataSelector:@selector(receivedData:) 
+                                                        responseSelector:nil 
+                                                     receiveDataSelector:nil 
                                                          successSelector:@selector(requestSucceeded:) 
                                                            errorSelector:@selector(requestFailed:)];
+    
+    estimateOrderServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self 
+                                                                  responseSelector:nil
+                                                               receiveDataSelector:nil
+                                                                   successSelector:@selector(estimateRequestSucceeded:) 
+                                                                     errorSelector:@selector(estimateRequestFailed:)];
 
+
+    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/order_estimates"];
+    
+    NSMutableDictionary *jsonDic = [[NSMutableDictionary alloc] init];    
+    [jsonDic setValue:order.brokerageAccountID forKey:@"brokerageAccountId"];
+    
+    NSMutableDictionary *orderDic = [[NSMutableDictionary alloc] init];
+    [orderDic setValue:order.side forKey:@"side"];
+    [orderDic setValue:[order.instrumentSymbol uppercaseString] forKey:@"symbol"];
+    [orderDic setValue:order.quantity forKey:@"quantity"];
+    [orderDic setValue:order.type forKey:@"type"];
+    if ([order.term isEqualToString:@"Good for day"])
+        [orderDic setValue:@"GoodForTheDay" forKey:@"term"];
+    else
+        [orderDic setValue:@"GoodTilCanceled" forKey:@"term"];
+    
+    if (order.allOrNone == YES) 
+        [orderDic setValue:@"true" forKey:@"allOrNone"];
+    else
+        [orderDic setValue:@"false" forKey:@"allOrNone"];
+    
+    if ([order.type isEqualToString:@"Limit"]) {
+        NSMutableDictionary *limitedOrderDic = [[NSMutableDictionary alloc] init];
+        [limitedOrderDic setValue:order.limitPrice.amount forKey:@"amount"];
+        [limitedOrderDic setValue:order.limitPrice.currency forKey:@"currency"];
+        [orderDic setValue:limitedOrderDic forKey:@"limitPrice"];
+    }
+    
+    [jsonDic setValue:orderDic forKey:@"orderParams"];
+    
+    NSError *err;
+    NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
+    
+	NSString *responseData = [[NSString alloc] initWithData:jsonBodyData  encoding:NSMacOSRomanStringEncoding];
+    BFDebugLog(@"jsonObject = %@", responseData);
+    
+//    [estimateOrderServiceObject postRequestWithURL:url body:jsonBodyData contentType:@"application/json"];
+
+    lastTradeServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self 
+                                                                  responseSelector:nil
+                                                               receiveDataSelector:nil
+                                                                   successSelector:@selector(lastTradeRequestSucceeded:) 
+                                                                     errorSelector:@selector(lastTradeRequestFailed:)];
+
+    NSURL *lastTradeUrl = [NSURL URLWithString:[NSString stringWithFormat: @"http://archfirst.org/bfexch-javaee/rest/market_prices/%@", [order.instrumentSymbol uppercaseString]]];
+    [lastTradeServiceObject getRequestWithURL:lastTradeUrl];
 }
 
 - (void)viewDidUnload
@@ -88,6 +146,10 @@
     [self setAllOrNoneLabel:nil];
     [self setLimitPriceLabel:nil];
     [self setSpinner:nil];
+    [self setLastTrade:nil];
+    [self setEstValue:nil];
+    [self setFee:nil];
+    [self setTotalInclFee:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -147,15 +209,6 @@
 
 #pragma mark - selectors for handling rest call callbacks
 
--(void)receivedData:(NSData *)data
-{
-    
-}
-
--(void)responseReceived:(NSURLResponse *)data
-{
-    
-}
 
 -(void)requestFailed:(NSError *)error
 {       
@@ -177,6 +230,41 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TRADE_ORDER_SUBMITTED" object:nil];
     
     [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)estimateRequestFailed:(NSError *)error
+{       
+    [spinner stopAnimating];
+    
+    NSString *errorString = [NSString stringWithString:@"Can't get order estimate!"];
+    
+    UIAlertView *av = [[UIAlertView alloc] initWithTitle:@"Error" message:errorString delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [av show];
+}
+
+-(void)estimateRequestSucceeded:(NSData *)data
+{
+    NSError *err;
+    NSArray *jsonObject = [NSJSONSerialization JSONObjectWithData:data options:0 error:&err];
+    BFDebugLog(@"jsonObject = %@", jsonObject);
+    
+    [spinner stopAnimating];
+    
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+-(void)lastTradeRequestFailed:(NSError *)error
+{       
+    [spinner stopAnimating];
+    lastTrade.text = @"NA";
+    
+}
+
+-(void)lastTradeRequestSucceeded:(NSData *)data
+{
+    [spinner stopAnimating];
+    BFMarketPrice *price = [BFMarketPrice marketPriceFromJSONData:data];
+    lastTrade.text = [NSString stringWithFormat:@"$%.3f",  [price.price.amount floatValue]];
 }
 
 @end
