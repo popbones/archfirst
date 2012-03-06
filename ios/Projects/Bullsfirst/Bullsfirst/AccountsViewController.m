@@ -177,6 +177,8 @@
     [pieChartViewController viewDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
+    
+    
 }
 
 - (void)viewDidUnload
