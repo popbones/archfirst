@@ -25,6 +25,8 @@
 #import "BFPosition.h"
 #import "BFConstants.h"
 
+#define animationTime 0.4f
+
 @implementation PieChartViewController
 
 @synthesize pieChartView;
@@ -52,14 +54,14 @@
 
 
 
--(void) performAnimation
+-(void) performFadeInAnimation
 {
+    currentAnimation = FadeIn;
     CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    
 	fadeInAnimation.removedOnCompletion = YES;
 	fadeInAnimation.fromValue			 = [NSNumber numberWithFloat:0.0];
 	fadeInAnimation.toValue			 = [NSNumber numberWithFloat:1];
-	fadeInAnimation.duration			 = 1.0f;
+	fadeInAnimation.duration			 = animationTime;
 	fadeInAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
 	piePlot.shouldRasterize=YES;
     
@@ -67,13 +69,57 @@
     animationGroup.animations = [NSArray arrayWithObjects:fadeInAnimation,nil];
     
     animationGroup.delegate = self;
-    animationGroup.duration = 1.0f;
+    animationGroup.duration = animationTime;
     
 	[piePlot addAnimation:animationGroup forKey:@"FadeIn"];
     
 	piePlotIsRotating = YES;
     
 }
+
+-(void) performFadeOutAnimation
+{
+    currentAnimation = FadeOut;
+    CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+	fadeOutAnimation.removedOnCompletion = YES;
+	fadeOutAnimation.fromValue			 = [NSNumber numberWithFloat:1.0];
+	fadeOutAnimation.toValue			 = [NSNumber numberWithFloat:0];
+	fadeOutAnimation.duration			 = animationTime;
+	fadeOutAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+	piePlot.shouldRasterize=YES;
+    
+    CAAnimationGroup* animationGroup=[CAAnimationGroup animation];
+    animationGroup.animations = [NSArray arrayWithObjects:fadeOutAnimation,nil];
+    
+    animationGroup.delegate = self;
+    animationGroup.duration = animationTime;
+    
+	[piePlot addAnimation:animationGroup forKey:@"FadeIn"];
+    
+	piePlotIsRotating = YES;
+    
+}
+
+-(void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
+{
+    if(flag)
+    {
+        
+        if(currentAnimation == FadeOut)
+        {
+            
+            //[self clearPieChart];
+            piePlot.opacity = 0.0;
+            [self constructPieChart];
+        }
+        else if(currentAnimation == FadeIn)
+        {
+            piePlotIsRotating = NO;
+            piePlot.opacity = 1.0;
+        }
+    }
+}
+
 
 
 -(CPTColor*) middleColorForStartColor:(int)startHex endColor:(int)endHex
@@ -119,10 +165,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
--(void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
-{
-	piePlotIsRotating = NO;
-}
 
 
 #pragma mark -
@@ -134,7 +176,7 @@
     
     if(loggedIn)
     {
-        
+
         contentArray = [[NSMutableArray alloc] init];
         // Create pieChart from theme
         pieGraph = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
@@ -259,7 +301,7 @@
             titleStyle.fontSize = 20;
             pieGraph.titleTextStyle = titleStyle;
             pieGraph.titleDisplacement = CGPointMake(0,-30);
-            [self performAnimation];
+            [self performFadeInAnimation];
         }
     }
 }
@@ -278,8 +320,8 @@
         {
             self.currentChart = AccountsChart;
         }
-        [self clearPieChart];
-        [self constructPieChart];
+        //        [self clearPieChart];
+        [self performFadeOutAnimation];
     }
 }
 -(void)clearPieChart
@@ -299,8 +341,8 @@
         if(currentChart == PositionsChart)
         {
             self.currentChart = AccountsChart;
-            [self clearPieChart];
-            [self constructPieChart];
+            //[self clearPieChart];
+            [self performFadeOutAnimation];
         }
     }
 }
@@ -347,9 +389,9 @@
 
 -(CPTLayer *)dataLabelForPlot:(CPTPlot *)plot recordIndex:(NSUInteger)index
 {
-	if ( piePlotIsRotating ) {
-		return nil;
-	}
+    //	if ( piePlotIsRotating ) {
+    //		return nil;
+    //	}
     return nil;
 }
 
@@ -413,8 +455,8 @@
 -(void) backBTNClicked
 {
     self.currentChart = AccountsChart;
-    [self clearPieChart];
-    [self constructPieChart];
+    //[self clearPieChart];
+    [self performFadeOutAnimation];
     
 }
 
