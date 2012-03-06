@@ -43,8 +43,9 @@
 							<object class="IBUILabel" id="54435519">
 								<reference key="NSNextResponder" ref="652645050"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{653, 11}, {58, 21}}</string>
+								<string key="NSFrame">{{640, 11}, {58, 21}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="967464766"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -73,8 +74,9 @@
 							<object class="IBUILabel" id="654656186">
 								<reference key="NSNextResponder" ref="652645050"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{221, 11}, {50, 21}}</string>
+								<string key="NSFrame">{{200, 11}, {50, 21}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="667882012"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -93,8 +95,9 @@
 							<object class="IBUILabel" id="70301018">
 								<reference key="NSNextResponder" ref="652645050"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{143, 11}, {62, 21}}</string>
+								<string key="NSFrame">{{125, 11}, {62, 21}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="654656186"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -113,8 +116,9 @@
 							<object class="IBUILabel" id="1021333668">
 								<reference key="NSNextResponder" ref="652645050"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{553, 11}, {119, 21}}</string>
+								<string key="NSFrame">{{540, 11}, {90, 21}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="54435519"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -127,14 +131,16 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="183500181"/>
 								<reference key="IBUIFont" ref="404993918"/>
 							</object>
 							<object class="IBUILabel" id="559456546">
 								<reference key="NSNextResponder" ref="652645050"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{475, 11}, {80, 21}}</string>
+								<string key="NSFrame">{{445, 11}, {80, 21}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="1021333668"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -147,14 +153,16 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="183500181"/>
 								<reference key="IBUIFont" ref="404993918"/>
 							</object>
 							<object class="IBUILabel" id="912712730">
 								<reference key="NSNextResponder" ref="652645050"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{48, 11}, {80, 21}}</string>
+								<string key="NSFrame">{{13, 11}, {80, 21}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="70301018"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -173,8 +181,9 @@
 							<object class="IBUILabel" id="782528062">
 								<reference key="NSNextResponder" ref="652645050"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{330, 11}, {49, 21}}</string>
+								<string key="NSFrame">{{320, 11}, {49, 21}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="50382561"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -193,8 +202,9 @@
 							<object class="IBUILabel" id="50382561">
 								<reference key="NSNextResponder" ref="652645050"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{400, 11}, {64, 21}}</string>
+								<string key="NSFrame">{{390, 11}, {50, 21}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="559456546"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -207,14 +217,16 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="183500181"/>
 								<reference key="IBUIFont" ref="404993918"/>
 							</object>
 							<object class="IBUILabel" id="667882012">
 								<reference key="NSNextResponder" ref="652645050"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{270, 11}, {52, 21}}</string>
+								<string key="NSFrame">{{260, 11}, {52, 21}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="782528062"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
@@ -235,6 +247,7 @@
 								<int key="NSvFlags">292</int>
 								<string key="NSFrame">{{710, 5}, {49, 34}}</string>
 								<reference key="NSSuperview" ref="652645050"/>
+								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<int key="IBUITag">10</int>
@@ -275,6 +288,7 @@
 						</array>
 						<string key="NSFrameSize">{786, 43}</string>
 						<reference key="NSSuperview" ref="905233709"/>
+						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="912712730"/>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
@@ -289,6 +303,7 @@
 				</array>
 				<string key="NSFrameSize">{786, 44}</string>
 				<reference key="NSSuperview"/>
+				<reference key="NSWindow"/>
 				<reference key="NSNextKeyView" ref="652645050"/>
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<reference key="IBUIContentView" ref="652645050"/>
@@ -418,7 +433,170 @@
 			<nil key="sourceID"/>
 			<int key="maxID">14</int>
 		</object>
-		<object class="IBClassDescriber" key="IBDocument.Classes"/>
+		<object class="IBClassDescriber" key="IBDocument.Classes">
+			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">OrderBTN</string>
+					<string key="superclassName">UIButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/OrderBTN.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">OrdersViewController</string>
+					<string key="superclassName">TabViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="applyBTNClicked:">id</string>
+						<string key="dateDropdownClicked:">id</string>
+						<string key="dropDownClicked:">id</string>
+						<string key="resetBTNClicked:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="applyBTNClicked:">
+							<string key="name">applyBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="dateDropdownClicked:">
+							<string key="name">dateDropdownClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="dropDownClicked:">
+							<string key="name">dropDownClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="resetBTNClicked:">
+							<string key="name">resetBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="accountDropdownView">UIView</string>
+						<string key="applyBTN">UIButton</string>
+						<string key="fromDateDropdownView">UIView</string>
+						<string key="landscrapeTitleBar">UIView</string>
+						<string key="orderDropdownView">UIView</string>
+						<string key="orderFilterView">UIView</string>
+						<string key="orderId">UITextField</string>
+						<string key="orderStatusDropdownView">UIView</string>
+						<string key="orderStatusLabel">UILabel</string>
+						<string key="orderTBL">UITableView</string>
+						<string key="orderTableViewCell">UITableViewCell</string>
+						<string key="portraitTitleBar">UIView</string>
+						<string key="resetBTN">UIButton</string>
+						<string key="symbod">UITextField</string>
+						<string key="toDateDropdownView">UIView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="accountDropdownView">
+							<string key="name">accountDropdownView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="applyBTN">
+							<string key="name">applyBTN</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="fromDateDropdownView">
+							<string key="name">fromDateDropdownView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="landscrapeTitleBar">
+							<string key="name">landscrapeTitleBar</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderDropdownView">
+							<string key="name">orderDropdownView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderFilterView">
+							<string key="name">orderFilterView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderId">
+							<string key="name">orderId</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderStatusDropdownView">
+							<string key="name">orderStatusDropdownView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderStatusLabel">
+							<string key="name">orderStatusLabel</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderTBL">
+							<string key="name">orderTBL</string>
+							<string key="candidateClassName">UITableView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderTableViewCell">
+							<string key="name">orderTableViewCell</string>
+							<string key="candidateClassName">UITableViewCell</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="portraitTitleBar">
+							<string key="name">portraitTitleBar</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="resetBTN">
+							<string key="name">resetBTN</string>
+							<string key="candidateClassName">UIButton</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="symbod">
+							<string key="name">symbod</string>
+							<string key="candidateClassName">UITextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="toDateDropdownView">
+							<string key="name">toDateDropdownView</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/OrdersViewController.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">TabViewController</string>
+					<string key="superclassName">UIViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="refreshBTNClicked:">id</string>
+						<string key="tradeBTNClicked:">id</string>
+						<string key="transferBTNClicked:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="refreshBTNClicked:">
+							<string key="name">refreshBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="tradeBTNClicked:">
+							<string key="name">tradeBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="transferBTNClicked:">
+							<string key="name">transferBTNClicked:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="landscrapeTitleBar">UIView</string>
+						<string key="portraitTitleBar">UIView</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="landscrapeTitleBar">
+							<string key="name">landscrapeTitleBar</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="portraitTitleBar">
+							<string key="name">portraitTitleBar</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+					</dictionary>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/TabViewController.h</string>
+					</object>
+				</object>
+			</array>
+		</object>
 		<int key="IBDocument.localizationMode">0</int>
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>

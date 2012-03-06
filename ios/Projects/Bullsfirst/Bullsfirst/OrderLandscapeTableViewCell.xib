@@ -61,6 +61,7 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="911276170">
 									<int key="type">1</int>
 									<double key="pointSize">12</double>
@@ -74,7 +75,7 @@
 							<object class="IBUILabel" id="1009626243">
 								<reference key="NSNextResponder" ref="433257846"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{432, 10}, {107, 21}}</string>
+								<string key="NSFrame">{{432, 10}, {51, 21}}</string>
 								<reference key="NSSuperview" ref="433257846"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="934521126"/>
@@ -89,6 +90,7 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="911276170"/>
 								<reference key="IBUIFont" ref="641206428"/>
 							</object>
@@ -165,6 +167,7 @@
 								<bool key="IBUIOpaque">NO</bool>
 								<bool key="IBUIClipsSubviews">YES</bool>
 								<int key="IBUIContentMode">7</int>
+								<int key="IBUITag">8</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<string key="IBUIText">Status</string>
@@ -178,7 +181,7 @@
 							<object class="IBUILabel" id="680326632">
 								<reference key="NSNextResponder" ref="433257846"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{662, 10}, {119, 21}}</string>
+								<string key="NSFrame">{{689, 10}, {119, 21}}</string>
 								<reference key="NSSuperview" ref="433257846"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="537603288"/>
@@ -193,6 +196,7 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="911276170"/>
 								<reference key="IBUIFont" ref="641206428"/>
 							</object>
@@ -467,36 +471,41 @@
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="accountLabel">UILabel</string>
+						<string key="accountDropdownView">UIView</string>
 						<string key="applyBTN">UIButton</string>
-						<string key="fromDateLabel">UILabel</string>
+						<string key="fromDateDropdownView">UIView</string>
 						<string key="landscrapeTitleBar">UIView</string>
+						<string key="orderDropdownView">UIView</string>
 						<string key="orderFilterView">UIView</string>
 						<string key="orderId">UITextField</string>
-						<string key="orderLabel">UILabel</string>
+						<string key="orderStatusDropdownView">UIView</string>
 						<string key="orderStatusLabel">UILabel</string>
 						<string key="orderTBL">UITableView</string>
 						<string key="orderTableViewCell">UITableViewCell</string>
 						<string key="portraitTitleBar">UIView</string>
 						<string key="resetBTN">UIButton</string>
 						<string key="symbod">UITextField</string>
-						<string key="toDateLabel">UILabel</string>
+						<string key="toDateDropdownView">UIView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="accountLabel">
-							<string key="name">accountLabel</string>
-							<string key="candidateClassName">UILabel</string>
+						<object class="IBToOneOutletInfo" key="accountDropdownView">
+							<string key="name">accountDropdownView</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="applyBTN">
 							<string key="name">applyBTN</string>
 							<string key="candidateClassName">UIButton</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="fromDateLabel">
-							<string key="name">fromDateLabel</string>
-							<string key="candidateClassName">UILabel</string>
+						<object class="IBToOneOutletInfo" key="fromDateDropdownView">
+							<string key="name">fromDateDropdownView</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="landscrapeTitleBar">
 							<string key="name">landscrapeTitleBar</string>
+							<string key="candidateClassName">UIView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="orderDropdownView">
+							<string key="name">orderDropdownView</string>
 							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="orderFilterView">
@@ -507,9 +516,9 @@
 							<string key="name">orderId</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="orderLabel">
-							<string key="name">orderLabel</string>
-							<string key="candidateClassName">UILabel</string>
+						<object class="IBToOneOutletInfo" key="orderStatusDropdownView">
+							<string key="name">orderStatusDropdownView</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="orderStatusLabel">
 							<string key="name">orderStatusLabel</string>
@@ -535,9 +544,9 @@
 							<string key="name">symbod</string>
 							<string key="candidateClassName">UITextField</string>
 						</object>
-						<object class="IBToOneOutletInfo" key="toDateLabel">
-							<string key="name">toDateLabel</string>
-							<string key="candidateClassName">UILabel</string>
+						<object class="IBToOneOutletInfo" key="toDateDropdownView">
+							<string key="name">toDateDropdownView</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -549,16 +558,11 @@
 					<string key="className">TabViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="filterBTNClicked:">id</string>
 						<string key="refreshBTNClicked:">id</string>
 						<string key="tradeBTNClicked:">id</string>
 						<string key="transferBTNClicked:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="filterBTNClicked:">
-							<string key="name">filterBTNClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="refreshBTNClicked:">
 							<string key="name">refreshBTNClicked:</string>
 							<string key="candidateClassName">id</string>
