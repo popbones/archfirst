@@ -551,7 +551,7 @@
     if ([instrumentDropdown isPopoverVisible]) {
         [instrumentDropdown dismissPopoverAnimated:YES];
     } else {
-        [instrumentDropdown presentPopoverFromRect:self.symbol.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [instrumentDropdown presentPopoverFromRect:self.symbol.frame  inView: self.scrollView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 
