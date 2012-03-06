@@ -285,48 +285,56 @@
                 [dateFormat setDateFormat:@"MM/dd/yyyy"];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:lot.lotCreationTime]];
+                label.textAlignment = UITextAlignmentLeft;
                 [cell addSubview:label];
 
                 quantityFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:quantityFrame];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [NSString stringWithFormat:@"%d", [lot.quantity intValue]];
+                label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
 
                 lastTradeFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:lastTradeFrame];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [formatter stringFromNumber:lot.lastTrade.amount];
+                label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
                 
                 marketValueFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:marketValueFrame];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [formatter stringFromNumber:lot.marketValue.amount];
+                label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
                 
                 pricePaidFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:pricePaidFrame];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [formatter stringFromNumber:lot.pricePaid.amount];
+                label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
 
                 totalCostFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:totalCostFrame];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [formatter stringFromNumber:lot.totalCost.amount];
-               [cell addSubview:label];
+                label.textAlignment = UITextAlignmentRight;
+                [cell addSubview:label];
 
                 qainFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:qainFrame];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [formatter stringFromNumber:lot.gain.amount];
+                label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
                 
                 gainPercentFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:gainPercentFrame];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.text = [NSString stringWithFormat:@"%d%%", [lot.gainPercent intValue]];
+                label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
             }
         }
@@ -415,24 +423,28 @@
                 UILabel *label = [[UILabel alloc] initWithFrame:quantityFrame];
                 label.text = [NSString stringWithFormat:@"%d", [lot.quantity intValue]];
                 label.font = [UIFont systemFontOfSize:13.0];
+                label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
 
                 marketValueFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:marketValueFrame];
                 label.text = [formatter stringFromNumber:position.marketValue.amount];
                 label.font = [UIFont systemFontOfSize:13.0];
+                label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
                 
                 qainFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:qainFrame];
                 label.text = [formatter stringFromNumber:position.gain.amount];
-                [cell addSubview:label];
                 label.font = [UIFont systemFontOfSize:13.0];
+                label.textAlignment = UITextAlignmentRight;
+                [cell addSubview:label];
 
                 gainPercentFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:gainPercentFrame];
                 label.text = [NSString stringWithFormat:@"%d%%", [lot.gainPercent intValue]];
                 label.font = [UIFont systemFontOfSize:13.0];
+                label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
             }
         }
