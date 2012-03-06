@@ -41,13 +41,34 @@
  }
  */
 
-/*
- // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
- - (void)viewDidLoad
- {
- [super viewDidLoad];
- }
- */
+-(void)allAccountsBTNClicked:(id) sender
+{
+    [accountDelegate allAccountsClicked:self];
+    [self.popOver dismissPopoverAnimated:YES];
+}
+
+
+// Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    if(allAccountsOption)
+    {
+        CGRect rect = self.view.frame;
+        
+        
+        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"TableHeader_BackgroundGradient.jpg"]]];
+        self.selectionsTBL.frame = CGRectMake(rect.origin.x,40, rect.size.width, rect.size.height-40);
+        UIButton* clearButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+        [clearButton addTarget:self action:@selector(allAccountsBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
+        clearButton.frame = CGRectMake(180,6,110,30);
+        [clearButton setTitle:@"All Accounts" forState:UIControlStateNormal];
+        
+        [self.view addSubview:clearButton];
+    }
+    
+}
+
 
 - (void)viewDidUnload
 {
@@ -73,33 +94,20 @@
     
     UILabel *label;
     
-    if(indexPath.row >= self.selections.count)
-    {
-        label = (UILabel *)[cell viewWithTag:1];
-        label.text = [NSString stringWithString:@"All"];
-        
-        label = (UILabel *)[cell viewWithTag:2];
-        label.text = [NSString stringWithString: @"All Accounts"];
-    }
-    else
-    {
-        BFBrokerageAccount *account = [super.selections objectAtIndex:indexPath.row];
-        label = (UILabel *)[cell viewWithTag:1];
-        label.text = [NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
-        
-        label = (UILabel *)[cell viewWithTag:2];
-        label.text = [NSString stringWithString: account.name];
-    }
+    
+    BFBrokerageAccount *account = [super.selections objectAtIndex:indexPath.row];
+    label = (UILabel *)[cell viewWithTag:1];
+    label.text = [NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
+    
+    label = (UILabel *)[cell viewWithTag:2];
+    label.text = [NSString stringWithString: account.name];
+    
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    // Return the number of rows in the section.
-    if(self.allAccountsOption == YES)
-        return self.selections.count+1;
-    else
-        return self.selections.count;
+         return self.selections.count;
 }
 
 
@@ -108,14 +116,7 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(indexPath.row >= self.selections.count)
-    {
-        self.selectedIndex = -1;
-    }
-    else
-    {
         self.selectedIndex=indexPath.row;
-    }
     if (self.accountDelegate != nil)
         [self.accountDelegate accountSelectionChanged:self];
     [self.popOver dismissPopoverAnimated:YES];

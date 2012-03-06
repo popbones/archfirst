@@ -592,17 +592,15 @@
 
 -(void) accountSelectionChanged:(AccountDropDownViewControiller *)controller
 {
-    if(controller.selectedIndex == -1)
-    {
-        selectedAccountId = -1;
-        accountDropDownCTL.label.text = @"All Accounts";
-    }
-    else
-    {
         BFBrokerageAccount* brokerageAccount =  [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:controller.selectedIndex];
         selectedAccountId = [brokerageAccount.brokerageAccountID intValue];
         accountDropDownCTL.label.text = brokerageAccount.name;
-    }
+}
+
+- (void)allAccountsClicked:(AccountDropDownViewControiller*) controller
+{
+    selectedAccountId = -1;
+    accountDropDownCTL.label.text = @"All Accounts";
 }
 
 #pragma mark MVC Delegate methods

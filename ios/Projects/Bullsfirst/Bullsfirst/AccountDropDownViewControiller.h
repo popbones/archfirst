@@ -13,6 +13,7 @@
 
 @protocol AccountDropdownViewControllerDelegate
 - (void)accountSelectionChanged:(AccountDropDownViewControiller *)controller;
+- (void)allAccountsClicked:(AccountDropDownViewControiller*) controller;
 @end
 
 @interface AccountDropDownViewControiller : DropdownViewController
