@@ -60,7 +60,7 @@
 {
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    self.usernameLabel.text = [NSString stringWithFormat:@"Account Name:%@ %@", [appDelegate.currentUser.firstName uppercaseString], [appDelegate.currentUser.lastName uppercaseString]];
+    self.usernameLabel.text = [NSString stringWithFormat:@"Account Name:  %@ %@", [appDelegate.currentUser.firstName uppercaseString], [appDelegate.currentUser.lastName uppercaseString]];
 }
 
 - (IBAction)logoutBTNClicked:(id)sender {

@@ -61,7 +61,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     
-    UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 240.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
+    UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 220.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
     tools.clearsContextBeforeDrawing = NO;
     tools.clipsToBounds = NO;
     tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // closest I could get by eye to black, translucent style.
@@ -107,7 +107,9 @@
     barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
     
-   
+    
+    
+
     
     [tools setItems:buttons animated:NO];
     UIBarButtonItem *twoButtons = [[UIBarButtonItem alloc] initWithCustomView:tools];
@@ -146,6 +148,9 @@
 - (void) rotateDevice
 {
     [self willAnimateRotationToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.1];
+    if ([userPopOver isPopoverVisible]) {
+        [userPopOver dismissPopoverAnimated:NO];
+    } 
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -159,13 +164,10 @@
 
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-    }
-    else
-    {
-    }
-    
+    if ([userPopOver isPopoverVisible]) {
+    [userPopOver dismissPopoverAnimated:NO];
+    } 
+        
 }
 #pragma mark - selectors for handling rest call callbacks
 
@@ -219,9 +221,16 @@
     if ([userPopOver isPopoverVisible]) {
         [userPopOver dismissPopoverAnimated:YES];
     } else {
-       
-        
-        [userPopOver presentPopoverFromRect:CGRectMake(770, -15, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        UIDeviceOrientation orientation= [[UIDevice currentDevice] orientation];
+        if(orientation==UIDeviceOrientationLandscapeLeft||orientation==UIDeviceOrientationLandscapeRight)
+        {
+            [userPopOver presentPopoverFromRect:CGRectMake(1015, -15, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        }
+        else
+        {
+            [userPopOver presentPopoverFromRect:CGRectMake(765, -15, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+            
+        }
     }
 }
 
