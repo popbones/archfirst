@@ -67,7 +67,7 @@
     self.navigationItem.rightBarButtonItem = barButtonItem;
 
     barButtonItem = [[UIBarButtonItem alloc] init];
-    barButtonItem.title = @"Trade";
+    barButtonItem.title = @"Edit Order";
 	self.navigationItem.backBarButtonItem = barButtonItem;
     self.navigationItem.title = @"Trade";
     self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
@@ -321,8 +321,6 @@
 }
 
 - (IBAction)okBTNClicked:(id)sender {
-    [activeTextField resignFirstResponder];
-
     if ([order.accountName length] < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Account" message:@"Account field is required." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -363,7 +361,9 @@
     order.limitPrice = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:[self.limit.text floatValue]] currency:@"USD"];
 
     PreviewTradeViewController *controller = [[PreviewTradeViewController alloc] initWithNibName:@"PreviewTradeViewController" bundle:nil order:order];    
+    [activeTextField resignFirstResponder];
     [self.navigationController pushViewController:controller animated:YES];
+
 }
 
 #pragma mark - text field lifecycle

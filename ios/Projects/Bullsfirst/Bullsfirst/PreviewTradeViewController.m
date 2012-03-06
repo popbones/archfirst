@@ -50,6 +50,8 @@
                                       initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
     self.navigationItem.rightBarButtonItem = barButtonItem;
+    self.navigationItem.title = @"Preview Order";
+    self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
     
     self.accountNameLabel.text = order.accountName;
     self.sideLabel.text = order.side;
@@ -62,9 +64,9 @@
         self.limitPriceLabel.text = @"";
     self.termLabel.text = order.term;
     if (order.allOrNone == YES)
-        allOrNoneLabel.text = @"All or None";
+        allOrNoneLabel.text = @"Yes";
     else
-        allOrNoneLabel.text = @"";
+        allOrNoneLabel.text = @"No";
 
     [spinner stopAnimating];
     restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self 
