@@ -151,6 +151,8 @@
 		95C6A85C14DBED54004F023A /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 95C6A85A14DBED54004F023A /* RootViewController.m */; };
 		95C6A85D14DBED54004F023A /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85B14DBED54004F023A /* RootViewController.xib */; };
 		95C6A85F14DFE869004F023A /* app-icon-72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85E14DFE868004F023A /* app-icon-72x72.png */; };
+		95D5003D150649E80076DB86 /* LogOut-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D5003B150649E70076DB86 /* LogOut-PushDown.png */; };
+		95D5003E150649E80076DB86 /* LogOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D5003C150649E80076DB86 /* LogOut.png */; };
 		AC0BAC6914F6132A005D70D3 /* PieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0BAC6814F6132A005D70D3 /* PieChartViewController.m */; };
 		AC1206F314F2180E00572819 /* login-button-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1206F214F2180E00572819 /* login-button-inactive.png */; };
 		AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */; };
@@ -382,6 +384,8 @@
 		95C6A85A14DBED54004F023A /* RootViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		95C6A85B14DBED54004F023A /* RootViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		95C6A85E14DFE868004F023A /* app-icon-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-72x72.png"; sourceTree = "<group>"; };
+		95D5003B150649E70076DB86 /* LogOut-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LogOut-PushDown.png"; sourceTree = "<group>"; };
+		95D5003C150649E80076DB86 /* LogOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogOut.png; sourceTree = "<group>"; };
 		AC0BAC6714F6132A005D70D3 /* PieChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartViewController.h; sourceTree = "<group>"; };
 		AC0BAC6814F6132A005D70D3 /* PieChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartViewController.m; sourceTree = "<group>"; };
 		AC1206F214F2180E00572819 /* login-button-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-inactive.png"; sourceTree = "<group>"; };
@@ -537,6 +541,8 @@
 			isa = PBXGroup;
 			children = (
 				ACAD662615063C1A00B9CB09 /* zoom.tiff */,
+				95D5003B150649E70076DB86 /* LogOut-PushDown.png */,
+				95D5003C150649E80076DB86 /* LogOut.png */,
 				952B7AF7150501BD005B3C98 /* Transfer-Inactive.png */,
 				952B7AF8150501BD005B3C98 /* Transfer-PushDown.png */,
 				952B7AF9150501BF005B3C98 /* Transfer.png */,
@@ -1071,6 +1077,8 @@
 				952B7AFA150501C1005B3C98 /* Transfer-Inactive.png in Resources */,
 				952B7AFB150501C1005B3C98 /* Transfer-PushDown.png in Resources */,
 				952B7AFC150501C1005B3C98 /* Transfer.png in Resources */,
+				95D5003D150649E80076DB86 /* LogOut-PushDown.png in Resources */,
+				95D5003E150649E80076DB86 /* LogOut.png in Resources */,
 				ACAD662715063C1A00B9CB09 /* zoom.tiff in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

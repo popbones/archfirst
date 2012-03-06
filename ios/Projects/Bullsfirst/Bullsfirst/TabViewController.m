@@ -61,7 +61,7 @@
 	// Do any additional setup after loading the view, typically from a nib.
     [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"HeaderBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     
-    UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 210.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
+    UIToolbar *tools = [[UIToolbar alloc] initWithFrame:CGRectMake(0.0f, 0.0f, 240.0f, 44.01f)]; // 44.01 shifts it up 1px for some reason
     tools.clearsContextBeforeDrawing = NO;
     tools.clipsToBounds = NO;
     tools.tintColor = [UIColor colorWithWhite:0.305f alpha:0.0f]; // closest I could get by eye to black, translucent style.
@@ -106,7 +106,9 @@
     barButtonItem.style = UIBarButtonItemStylePlain;
     barButtonItem.tintColor = [UIColor colorWithRed:153.0/255.0 green:102.0/255.0 blue:0 alpha:1];
     [buttons addObject:barButtonItem];
-        
+    
+   
+    
     [tools setItems:buttons animated:NO];
     UIBarButtonItem *twoButtons = [[UIBarButtonItem alloc] initWithCustomView:tools];
     self.navigationItem.rightBarButtonItem = twoButtons;
@@ -205,15 +207,21 @@
     if (!userPopOver) {
         UserViewController *controller = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
         CGRect frame = controller.view.frame;
+         UINavigationController *container=[[UINavigationController alloc]initWithRootViewController:controller];
+       // container.navigationBar.backgroundColor=[UIColor colorWithRed:0.0 green:0 blue:0 alpha:1];
+        [container.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        userPopOver = [[UIPopoverController alloc] initWithContentViewController:container];
         
-        userPopOver = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = userPopOver;
+        controller.title=@"Settings";
         [userPopOver setPopoverContentSize:frame.size];
     }
     if ([userPopOver isPopoverVisible]) {
         [userPopOver dismissPopoverAnimated:YES];
     } else {
-        [userPopOver presentPopoverFromRect:CGRectMake(764, 0, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+       
+        
+        [userPopOver presentPopoverFromRect:CGRectMake(770, -15, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 
