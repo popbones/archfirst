@@ -74,7 +74,7 @@
 							<object class="IBUIButton" id="109420210">
 								<reference key="NSNextResponder" ref="217104686"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{694, 5}, {49, 34}}</string>
+								<string key="NSFrame">{{696, 5}, {49, 34}}</string>
 								<reference key="NSSuperview" ref="217104686"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView"/>
@@ -96,14 +96,11 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
-								<object class="NSCustomResource" key="IBUISelectedImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">TradeButton_PushDownState.png</string>
-								</object>
-								<object class="NSCustomResource" key="IBUINormalImage">
+								<object class="NSCustomResource" key="IBUISelectedImage" id="393904791">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">Trade.png</string>
 								</object>
+								<reference key="IBUINormalImage" ref="393904791"/>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="205039916">
 									<int key="type">2</int>
 									<double key="pointSize">15</double>
@@ -388,16 +385,11 @@
 					<string key="className">TabViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="filterBTNClicked:">id</string>
 						<string key="refreshBTNClicked:">id</string>
 						<string key="tradeBTNClicked:">id</string>
 						<string key="transferBTNClicked:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="filterBTNClicked:">
-							<string key="name">filterBTNClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="refreshBTNClicked:">
 							<string key="name">refreshBTNClicked:</string>
 							<string key="candidateClassName">id</string>
@@ -452,10 +444,10 @@
 		<string key="IBDocument.TargetRuntimeIdentifier">IBIPadFramework</string>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="Trade.png">{49, 34}</string>
-			<string key="TradeButton_PushDownState.png">{85, 35}</string>
-		</dictionary>
+		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NS.key.0">Trade.png</string>
+			<string key="NS.object.0">{49, 34}</string>
+		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
 </archive>
