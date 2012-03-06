@@ -423,7 +423,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     BFOrder *order = [orders objectAtIndex:indexPath.row];
-    
+
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
@@ -452,12 +455,12 @@
         
         if (order.limitPrice != nil) {
             label = (UILabel *)[cell viewWithTag:6];
-            label.text = [NSString stringWithFormat:@"$%d", [order.limitPrice.amount intValue]];
+            label.text = [formatter stringFromNumber:order.limitPrice.amount];
         }
         
         if (order.executionPrice != nil) {
             label = (UILabel *)[cell viewWithTag:7];
-            label.text = [NSString stringWithFormat:@"$%d", [order.executionPrice.amount intValue]];
+            label.text = [formatter stringFromNumber:order.executionPrice.amount];
         }
         
         label = (UILabel *)[cell viewWithTag:8];
@@ -504,12 +507,12 @@
         
         if (order.limitPrice != nil) {
             label = (UILabel *)[cell viewWithTag:6];
-            label.text = [NSString stringWithFormat:@"$%d", [order.limitPrice.amount intValue]];
+            label.text = [formatter stringFromNumber:order.limitPrice.amount];
         }
         
         if (order.executionPrice != nil) {
             label = (UILabel *)[cell viewWithTag:7];
-            label.text = [NSString stringWithFormat:@"$%d", [order.executionPrice.amount intValue]];
+            label.text = [formatter stringFromNumber:order.executionPrice.amount];
         }
 
         label = (UILabel *)[cell viewWithTag:8];

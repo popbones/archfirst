@@ -65,8 +65,12 @@
     self.cusipLabel.text = order.instrumentSymbol;
     self.quantityLabel.text = [NSString stringWithFormat:@"%d share", [order.quantity intValue]];
     self.typeLabel.text = order.type;
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
     if ([order.type isEqualToString:@"Limit"])
-        self.limitPriceLabel.text = [NSString stringWithFormat:@"$%.3f", [order.limitPrice.amount floatValue]];
+        self.limitPriceLabel.text = [formatter stringFromNumber:order.limitPrice.amount];
     else
         self.limitPriceLabel.text = @"";
     self.termLabel.text = order.term;
@@ -245,9 +249,12 @@
 {
     [spinner stopAnimating];
     BFOrderEstimate *estimate = [BFOrderEstimate estimateValueFromJSONData:data];
-    estValue.text = [NSString stringWithFormat:@"$%.3f",  [estimate.estimatedValue.amount floatValue]];
-    fee.text = [NSString stringWithFormat:@"$%.3f",  [estimate.fees.amount floatValue]];
-    totalInclFee.text = [NSString stringWithFormat:@"$%.3f",  [estimate.estimatedValueIncFee.amount floatValue]];
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    estValue.text = [formatter stringFromNumber:estimate.estimatedValue.amount];
+    fee.text = [formatter stringFromNumber:estimate.fees.amount];
+    totalInclFee.text = [formatter stringFromNumber:estimate.estimatedValueIncFee.amount];
 }
 
 -(void)lastTradeRequestFailed:(NSError *)error
@@ -261,7 +268,10 @@
 {
     [spinner stopAnimating];
     BFMarketPrice *price = [BFMarketPrice marketPriceFromJSONData:data];
-    lastTrade.text = [NSString stringWithFormat:@"$%.3f",  [price.price.amount floatValue]];
+    
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    lastTrade.text = [formatter stringFromNumber:price.price.amount];
 }
 
 @end

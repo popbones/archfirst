@@ -335,13 +335,12 @@
             return cell;
         }
     }
-    
+
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:indexPath.row];
-    NSString *currencySymbol;
-    if([account.marketValue.currency isEqual:@"USD"])
-    {
-        currencySymbol = @"$";
-    }
+
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
@@ -359,10 +358,10 @@
         label.text = [NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
         
         label = (UILabel *)[cell viewWithTag:3];
-        label.text = [NSString stringWithFormat:@"%@%@", currencySymbol, account.marketValue.amount];
+        label.text = [formatter stringFromNumber:account.marketValue.amount];
         
         label = (UILabel *)[cell viewWithTag:4];
-        label.text = [NSString stringWithFormat:@"%@%@", currencySymbol, account.cashPosition.amount];
+        label.text = [formatter stringFromNumber:account.cashPosition.amount];
         
         editAccountNameBTN *edit = (editAccountNameBTN *)[cell viewWithTag:5]; // expand button
         [edit addTarget:self action:@selector(editAccount:) forControlEvents:UIControlEventTouchUpInside];
@@ -389,12 +388,12 @@
         label.text = [NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
         
         label = (UILabel *)[cell viewWithTag:3];
-        label.text = [NSString stringWithFormat:@"%@%@", currencySymbol, account.marketValue.amount];
+        label.text = [formatter stringFromNumber:account.marketValue.amount];
         
         
         label = (UILabel *)[cell viewWithTag:4];
-        label.text = [NSString stringWithFormat:@"%@%@", currencySymbol, account.cashPosition.amount];
-        
+        label.text = [formatter stringFromNumber:account.cashPosition.amount];
+       
         editAccountNameBTN *edit = (editAccountNameBTN *)[cell viewWithTag:5]; // edit button
         [edit addTarget:self action:@selector(editAccount:) forControlEvents:UIControlEventTouchUpInside];
         

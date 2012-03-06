@@ -264,6 +264,10 @@
 {
     UIInterfaceOrientation toOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     BFTransaction* transaction = [((NSArray*)[transactions objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
+
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+
     UITableViewCell* cell = transactionCell;
     if(toOrientation ==UIInterfaceOrientationLandscapeLeft || toOrientation ==UIInterfaceOrientationLandscapeRight)
     {
@@ -278,7 +282,7 @@
         label = (UILabel*) [cell viewWithTag:3];
         label.text = transaction.description;
         label = (UILabel*) [cell viewWithTag:4];
-        label.text = [transaction.amount.amount stringValue];
+        label.text = [formatter stringFromNumber:transaction.amount.amount];
         
     }
     else
@@ -294,7 +298,7 @@
         label = (UILabel*) [cell viewWithTag:3];
         label.text = transaction.description;
         label = (UILabel*) [cell viewWithTag:4];
-        label.text = [transaction.amount.amount stringValue];
+        label.text = [formatter stringFromNumber:transaction.amount.amount];
     }
     return  cell;
 }
