@@ -283,6 +283,10 @@
         label.text = transaction.description;
         label = (UILabel*) [cell viewWithTag:4];
         label.text = [formatter stringFromNumber:transaction.amount.amount];
+        UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
+        selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
+        cell.selectedBackgroundView = selected;
+        
         
     }
     else
@@ -299,7 +303,11 @@
         label.text = transaction.description;
         label = (UILabel*) [cell viewWithTag:4];
         label.text = [formatter stringFromNumber:transaction.amount.amount];
+        UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
+        selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
+        cell.selectedBackgroundView = selected;
     }
+    
     return  cell;
 }
 
