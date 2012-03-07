@@ -9,6 +9,7 @@
 #import "PreviewTradeViewController.h"
 #import "BFMarketPrice.h"
 #import "BFOrderEstimate.h"
+#import "AppDelegate.h"
 
 @implementation PreviewTradeViewController
 @synthesize order;
@@ -235,6 +236,11 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:@"TRADE_ORDER_SUBMITTED" object:nil];
     
     [self dismissModalViewControllerAnimated:YES];
+
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_ACCOUNT" object:nil];
+    AppDelegate* appDelegate = (AppDelegate*) [[UIApplication sharedApplication] delegate];
+    appDelegate.tabBarController.selectedIndex = 1;
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"REFRESH_TRANSACTIONS" object:nil];
 }
 
 -(void)estimateRequestFailed:(NSError *)error
