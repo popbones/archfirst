@@ -28,9 +28,11 @@ typedef enum{FadeIn,FadeOut} Animation;
 {
     Chart currentChart;
     Animation currentAnimation;
+    
     CPTGraphHostingView *pieChartView;
 	CPTXYGraph *pieGraph;
 	CPTPieChart *piePlot;
+    CPTLegend* theLegend;
 	BOOL piePlotIsRotating;
     NSMutableArray *contentArray;
     BOOL viewOnFront;
@@ -40,12 +42,15 @@ typedef enum{FadeIn,FadeOut} Animation;
     bool loggedIn;
     NSString* chartTitle;
     UIPinchGestureRecognizer* pinchGesture;
+    
+    __weak UILabel* chartTitleLabel;
 }
 
 @property (nonatomic, retain) CPTGraphHostingView *pieChartView;
 @property (nonatomic, retain) NSMutableArray *dataForChart, *dataForPlot;
 @property Chart currentChart;
 @property (nonatomic, retain) NSString* chartTitle;
+@property (nonatomic, weak) UILabel* chartTitleLabel;
 
 // Plot construction methods
 -(void)constructPieChart;

@@ -165,6 +165,7 @@
     [chartTitle setCenter:chartTitleView.center];
     
     pieChartViewController = [[PieChartViewController alloc] init];
+    pieChartViewController.chartTitleLabel = chartTitle;
     [pieChartViewController setView:chartView];
     [pieChartViewController setPieChartView:pieChartView];
     rightBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;

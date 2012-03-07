@@ -25,13 +25,14 @@
 #import "BFPosition.h"
 #import "BFConstants.h"
 
-#define animationTime 0.4f
+#define animationTime 0.5f
 
 @implementation PieChartViewController
 
 @synthesize pieChartView;
 @synthesize dataForChart, dataForPlot;
 @synthesize chartTitle;
+@synthesize chartTitleLabel;
 
 #pragma mark -
 
@@ -57,46 +58,56 @@
 -(void) performFadeInAnimation
 {
     currentAnimation = FadeIn;
-    CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-	fadeInAnimation.removedOnCompletion = YES;
-	fadeInAnimation.fromValue			 = [NSNumber numberWithFloat:0.0];
-	fadeInAnimation.toValue			 = [NSNumber numberWithFloat:1];
-	fadeInAnimation.duration			 = animationTime;
-	fadeInAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-	piePlot.shouldRasterize=YES;
+    piePlotIsRotating = YES;
+        CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    	fadeInAnimation.removedOnCompletion = YES;
+    	fadeInAnimation.fromValue			 = [NSNumber numberWithFloat:0.0];
+    	fadeInAnimation.toValue			 = [NSNumber numberWithFloat:1];
+    	fadeInAnimation.duration			 = animationTime;
+    	fadeInAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    	pieGraph.shouldRasterize=YES;
+        
+        fadeInAnimation.delegate = self;
+        
     
-    CAAnimationGroup* animationGroup=[CAAnimationGroup animation];
-    animationGroup.animations = [NSArray arrayWithObjects:fadeInAnimation,nil];
-    
-    animationGroup.delegate = self;
-    animationGroup.duration = animationTime;
-    
-	[piePlot addAnimation:animationGroup forKey:@"FadeIn"];
-    
-	piePlotIsRotating = YES;
+    	[pieGraph addAnimation:fadeInAnimation forKey:@"FadeIn"];
     
 }
 
 -(void) performFadeOutAnimation
 {
-    currentAnimation = FadeOut;
-    CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-	fadeOutAnimation.removedOnCompletion = YES;
-	fadeOutAnimation.fromValue			 = [NSNumber numberWithFloat:1.0];
-	fadeOutAnimation.toValue			 = [NSNumber numberWithFloat:0];
-	fadeOutAnimation.duration			 = animationTime;
-	fadeOutAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-	piePlot.shouldRasterize=YES;
-    
-    CAAnimationGroup* animationGroup=[CAAnimationGroup animation];
-    animationGroup.animations = [NSArray arrayWithObjects:fadeOutAnimation,nil];
-    
-    animationGroup.delegate = self;
-    animationGroup.duration = animationTime;
-    
-	[piePlot addAnimation:animationGroup forKey:@"FadeIn"];
+        currentAnimation = FadeOut;
+        CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    	fadeOutAnimation.removedOnCompletion = YES;
+    	fadeOutAnimation.fromValue			 = [NSNumber numberWithFloat:1.0];
+    	fadeOutAnimation.toValue			 = [NSNumber numberWithFloat:0];
+    	fadeOutAnimation.duration			 = animationTime;
+    	fadeOutAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    	pieGraph.shouldRasterize=YES;
+        
+        fadeOutAnimation.delegate = self;
+    	[pieGraph addAnimation:fadeOutAnimation forKey:@"FadeIn"];
     
 	piePlotIsRotating = YES;
+    
+    //Chart Title Animation
+    
+    [UIView animateWithDuration:animationTime delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+        chartTitleLabel.alpha = 0.0;
+    }completion:^(BOOL finished){
+        if(finished)
+        {
+            chartTitleLabel.alpha = 0.0;
+            [UIView animateWithDuration:animationTime delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+                chartTitleLabel.alpha = 1.0;
+            }completion:^(BOOL finished){
+                if(finished)
+                {
+                    theLegend.opacity = 1.0;
+                }
+            }];
+        }
+    }];
     
 }
 
@@ -109,13 +120,13 @@
         {
             
             //[self clearPieChart];
-            piePlot.opacity = 0.0;
+            pieGraph.opacity = 0.0;
             [self constructPieChart];
         }
         else if(currentAnimation == FadeIn)
         {
             piePlotIsRotating = NO;
-            piePlot.opacity = 1.0;
+            pieGraph.opacity = 1.0;
         }
     }
 }
@@ -176,7 +187,7 @@
     
     if(loggedIn)
     {
-
+        
         contentArray = [[NSMutableArray alloc] init];
         // Create pieChart from theme
         pieGraph = [[CPTXYGraph alloc] initWithFrame:CGRectZero];
@@ -275,7 +286,7 @@
         // Add legend
         if(contentArray.count!=0)
         {
-            CPTLegend *theLegend = [CPTLegend legendWithGraph:pieGraph];
+            theLegend = [CPTLegend legendWithGraph:pieGraph];
             theLegend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
             NSNumber *rowHeight = [NSNumber numberWithInt:36];
             theLegend.rowHeights = [NSArray arrayWithObjects:rowHeight,rowHeight,rowHeight,rowHeight,rowHeight,nil];
@@ -304,7 +315,7 @@
             if(contentArray.count == 1)
             {
                 pieGraph.legendDisplacement = CGPointMake(-70, -330);
-            
+                
             }
             else
             {
