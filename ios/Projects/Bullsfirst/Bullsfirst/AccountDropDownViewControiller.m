@@ -57,8 +57,7 @@
     {
         CGRect rect = self.view.frame;
         
-        
-        [self.view setBackgroundColor:[UIColor colorWithPatternImage:[UIImage imageNamed:@"TableHeader_BackgroundGradient.jpg"]]];
+        self.view.backgroundColor  = [UIColor darkTextColor];
         self.selectionsTBL.frame = CGRectMake(rect.origin.x,40, rect.size.width, rect.size.height-40);
         UIButton* clearButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
         [clearButton addTarget:self action:@selector(allAccountsBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
