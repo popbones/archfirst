@@ -37,7 +37,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.versionLabel.text = [NSString stringWithFormat:@"Bullsfirst v%@", [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
+    self.versionLabel.text = [NSString stringWithFormat:@"Bullsfirst v%@"
+                              , [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
     self.view.backgroundColor=[UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
 }
 
@@ -60,7 +61,7 @@
 {
     [super viewWillAppear:animated];
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    self.usernameLabel.text = [NSString stringWithFormat:@"Account Name:  %@ %@", [appDelegate.currentUser.firstName uppercaseString], [appDelegate.currentUser.lastName uppercaseString]];
+    self.usernameLabel.text = [NSString stringWithFormat:@"User:  %@ %@", appDelegate.currentUser.firstName, appDelegate.currentUser.lastName];
 }
 
 - (IBAction)logoutBTNClicked:(id)sender {
