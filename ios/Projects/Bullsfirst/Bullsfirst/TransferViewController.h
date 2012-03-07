@@ -17,9 +17,9 @@
     NSNumber *toAccountID;
     IBOutlet UIActivityIndicatorView *spinner;
     bool orientationChanged;
+    UITextField *activeTextField;
+    Boolean isKeyBoardVisible;
 }
-@property (nonatomic, retain) UITextField *activeTextField;
-@property (nonatomic, retain) NSArray *textFields;
 
 @property (nonatomic,assign) IBOutlet UISegmentedControl *segmentedControl;
 @property (strong, nonatomic) IBOutlet UIView *fromAccountDropDownView;
@@ -27,13 +27,11 @@
 
 @property (strong, nonatomic) IBOutlet UIView *toAccountDropDownView;
 @property (nonatomic, retain) DropDownControl *toAccountDropDownCTL;
-
 @property (strong, nonatomic) IBOutlet UIButton *transferBTN;
 @property (strong, nonatomic) IBOutlet UITextField *amount;
 @property (strong, nonatomic) IBOutlet UITextField *symbol;
 @property (strong, nonatomic) IBOutlet UITextField *quantity;
 @property (strong, nonatomic) IBOutlet UITextField *pricePaid;
-@property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (strong, nonatomic) IBOutlet UILabel *amountLBL;
 @property (strong, nonatomic) IBOutlet UILabel *symbolLBL;
 @property (strong, nonatomic) IBOutlet UILabel *quantityLBL;

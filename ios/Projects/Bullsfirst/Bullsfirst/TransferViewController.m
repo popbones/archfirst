@@ -21,8 +21,6 @@
 @synthesize fromAccountDropDownCTL,toAccountDropDownCTL,dropdown,transferBTN;
 @synthesize fromAccountDropDownView,toAccountDropDownView;
 @synthesize amountLBL,quantityLBL,pricePaidLBL,symbolLBL,instrumentDropdown;
-@synthesize scrollView;
-@synthesize activeTextField,textFields;
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -50,16 +48,14 @@
 
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
 
-    UIButton *cancelBTN=[UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelBTN setImage:[UIImage imageNamed:@"Cancel.png"] forState:UIControlStateNormal];
-    [cancelBTN setImage:[UIImage imageNamed:@"Cancel-PushDown.png"] forState:UIControlStateHighlighted];
-    [cancelBTN addTarget:self action:@selector(cancelBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
-    cancelBTN.frame=CGRectMake(0, 0, 57, 29);
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:cancelBTN];
-    self.navigationItem.rightBarButtonItem.style=UIBarButtonItemStylePlain;
+     
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                                      initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    self.navigationItem.rightBarButtonItem = barButtonItem;
     
-   UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
-                     initWithTitle:@"Add Ext Account" style:UIBarButtonItemStylePlain target:self action:@selector(addExternalAccountBTNClicked:)];
+    barButtonItem = [[UIBarButtonItem alloc]
+                     initWithTitle:@"Add External Account" style:UIBarButtonItemStylePlain target:self action:@selector(addExternalAccountBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
     self.navigationItem.leftBarButtonItem = barButtonItem;
     
@@ -68,14 +64,13 @@
 	self.navigationItem.backBarButtonItem = barButtonItem;
 	self.navigationItem.title = @"Transfer";
     self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
+    isKeyBoardVisible=false;
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidShow:) name:UIKeyboardDidShowNotification object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyBoardDidHide:) name:UIKeyboardDidHideNotification object:nil];
     orientationChanged=YES;
     
-    textFields=[NSArray arrayWithObjects:symbol,quantity,pricePaid,nil];
     CGRect rect=segmentedControl.frame;
     segmentedControl.frame=CGRectMake(rect.origin.x, rect.origin.y, 192, 31);
     [segmentedControl setImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Cash.png"] forSegmentAtIndex:0];
@@ -95,44 +90,14 @@
     toAccountDropDownCTL.tag = 2;
     [toAccountDropDownView addSubview:toAccountDropDownCTL];
     rect=self.view.frame;
-    scrollView.contentSize=CGSizeMake(rect.size.width, rect.size.height);
-}
--(void) keyBoardWillShow: (NSNotification*) notification
-{
-    UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
-    if(UIDeviceOrientationIsLandscape(orientation))
-    {
-        CGRect  rect=self.view.frame;
-        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y+11, rect.size.width, rect.size.height-130);
-        
-    }
-    else
-    {
-        CGRect  rect=self.view.frame;
-        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y+11, rect.size.width, rect.size.height-40);
-    }
-    
     
 }
--(void) keyBoardWillHide:(NSNotification*) notification
-{
-    
-    UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
-    if(UIDeviceOrientationIsLandscape(orientation))
-    {
-        CGRect  rect=self.view.frame;
-        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y+11, rect.size.width, rect.size.height);
-    }
-    else
-    {
-        CGRect  rect=self.view.frame;
-        scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y+11, rect.size.width, rect.size.height);
-        
-    }
-}
+
 - (void)viewDidUnload
 {
+    activeTextField=nil;
     [super viewDidUnload];
+    
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
 }
@@ -140,8 +105,8 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    orientationChanged = YES;
-    [activeTextField resignFirstResponder];
+    if (instrumentDropdown.popoverVisible == YES)
+        [instrumentDropdown dismissPopoverAnimated:NO];
     return YES;
 }
 -(void) didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
@@ -366,7 +331,10 @@
 }
 -(IBAction)cancelBTNClicked:(id)sender
 {
-    [self dismissModalViewControllerAnimated:YES];  
+    [activeTextField resignFirstResponder];
+    activeTextField=nil;
+    [self dismissModalViewControllerAnimated:YES];
+    
 }
 #pragma mark - dropdown lifecycle
 
@@ -492,18 +460,18 @@
        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Cash.png"] atIndex:0 animated:NO];
         [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Securities.png"] atIndex:1 animated:NO];
         segmentedControl.selectedSegmentIndex=0;
-        symbolLBL.hidden=YES;
+        //symbolLBL.hidden=YES;
         symbol.hidden=YES;
-        quantityLBL.hidden=YES;
+//        quantityLBL.hidden=YES;
         quantity.hidden=YES;
-        pricePaidLBL.hidden=YES;
+//        pricePaidLBL.hidden=YES;
         pricePaid.hidden=YES;
-        amountLBL.hidden=NO;
+//        amountLBL.hidden=NO;
         amount.hidden=NO;
         CGRect rect=transferBTN.frame;
-        transferBTN.frame=CGRectMake(rect.origin.x, rect.origin.y-100, rect.size.width, rect.size.height);
+        transferBTN.frame=CGRectMake(rect.origin.x, rect.origin.y-50, rect.size.width, rect.size.height);
         rect=spinner.frame;
-        spinner.frame=CGRectMake(rect.origin.x, rect.origin.y-100, rect.size.width, rect.size.height);
+        spinner.frame=CGRectMake(rect.origin.x, rect.origin.y-50, rect.size.width, rect.size.height);
     }
     else
     {
@@ -512,18 +480,18 @@
         [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Cash.png"] atIndex:0 animated:NO];
         [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Securities.png"] atIndex:1 animated:NO];   
         segmentedControl.selectedSegmentIndex=1;
-        symbolLBL.hidden=NO;
+//        symbolLBL.hidden=NO;
         symbol.hidden=NO;
-        quantityLBL.hidden=NO;
+//        quantityLBL.hidden=NO;
         quantity.hidden=NO;
-        pricePaidLBL.hidden=NO;
+//        pricePaidLBL.hidden=NO;
         pricePaid.hidden=NO;
-        amountLBL.hidden=YES;
+//        amountLBL.hidden=YES;
         amount.hidden=YES;
         CGRect rect=transferBTN.frame;
-        transferBTN.frame=CGRectMake(rect.origin.x, rect.origin.y+100, rect.size.width, rect.size.height);
+        transferBTN.frame=CGRectMake(rect.origin.x, rect.origin.y+50, rect.size.width, rect.size.height);
         rect=spinner.frame;
-        spinner.frame=CGRectMake(rect.origin.x, rect.origin.y+100, rect.size.width, rect.size.height);
+        spinner.frame=CGRectMake(rect.origin.x, rect.origin.y+50, rect.size.width, rect.size.height);
     }
 }
 
@@ -551,37 +519,11 @@
     if ([instrumentDropdown isPopoverVisible]) {
         [instrumentDropdown dismissPopoverAnimated:YES];
     } else {
-        [instrumentDropdown presentPopoverFromRect:self.symbol.frame  inView: self.scrollView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        [instrumentDropdown presentPopoverFromRect:self.symbol.frame  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionLeft animated:YES];
     }
 }
 
 #pragma mark - text field lifecycle
-- (void)previousBTNClicked:(id)sender {
-   if(segmentedControl.selectedSegmentIndex==1)
-   {
-    NSUInteger currentTextField = [textFields indexOfObject:activeTextField];
-    if (currentTextField == 0)
-        currentTextField = [textFields count] -1;
-    else
-        currentTextField--;
-    activeTextField = [textFields objectAtIndex:currentTextField];
-    [activeTextField becomeFirstResponder];
-   }
-}
-
-- (void)nextBTNClicked:(id)sender {
-    if(segmentedControl.selectedSegmentIndex==1)
-    {
-    NSUInteger currentTextField = [textFields indexOfObject:activeTextField];
-    if (currentTextField < [textFields count]-1)
-        currentTextField++;
-    else
-        currentTextField = 0;
-    activeTextField = [textFields objectAtIndex:currentTextField];
-    [activeTextField becomeFirstResponder];
-    }
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
@@ -589,38 +531,6 @@
     return NO;
 }
 
--(BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
-    UIToolbar *toolbar = [[UIToolbar alloc] init];
-    [toolbar setBarStyle:UIBarStyleBlackTranslucent];
-    [toolbar sizeToFit];
-    
-    UIBarButtonItem *previousButton = [[UIBarButtonItem alloc] initWithTitle:@"Prev" style:UIBarButtonItemStyleBordered target:self action:@selector(previousBTNClicked:)];
-    UIBarButtonItem *nextButton = [[UIBarButtonItem alloc] initWithTitle:@"Next" style:UIBarButtonItemStyleBordered target:self action:@selector(nextBTNClicked:)];    
-    NSArray *itemsArray = [NSArray arrayWithObjects:previousButton, nextButton, nil];
-    [toolbar setItems:itemsArray];
-    
-   [textField setInputAccessoryView:toolbar];
-//    if(orientationChanged)
-//    {
-//        UIDeviceOrientation orientation=[[UIDevice currentDevice]orientation];
-//        if(UIDeviceOrientationLandscapeLeft==orientation||UIDeviceOrientationLandscapeRight==orientation)
-//        {
-//            CGRect  rect=self.view.frame;
-//            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-200);
-//            
-//        }
-//        else
-//        {
-//            CGRect  rect=self.view.frame;
-//            scrollView.frame=CGRectMake(rect.origin.x,rect.origin.y, rect.size.width, rect.size.height-155);
-//        }
-//        
-//        orientationChanged = NO;
-//    }
-    return YES;
-    
-}
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
@@ -628,7 +538,8 @@
     
     // Set the active field. We' ll need that if we want to move properly
     // between our textfields.
-    activeTextField = textField;
+    activeTextField=textField;
+   if(isKeyBoardVisible==true)
     if (activeTextField == self.symbol)
         [self showInstrumentDropdownMenu];
     else {
@@ -678,8 +589,25 @@
 {
     BFInstrument *instrument = controller.selectedInstrument;
     self.symbol.text = instrument.symbol;
-    [self nextBTNClicked:nil];
 }
 
+-(void) keyBoardDidShow: (NSNotification*) notification
+{
+    isKeyBoardVisible=true;
+    if (activeTextField == self.symbol)
+        [self showInstrumentDropdownMenu];
+    else {
+        if (instrumentDropdown.popoverVisible == YES)
+            [instrumentDropdown dismissPopoverAnimated:YES];
+    }
+    
+}
+-(void) keyBoardDidHide:(NSNotification*) notification
+{
+     isKeyBoardVisible=false;
+    if (instrumentDropdown.popoverVisible == YES)
+        [instrumentDropdown dismissPopoverAnimated:YES];
 
+    
+}
 @end

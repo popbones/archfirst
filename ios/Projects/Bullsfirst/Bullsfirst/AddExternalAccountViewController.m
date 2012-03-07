@@ -119,15 +119,12 @@
     [super viewDidLoad];
     spinner.hidden = YES;
     // Do any additional setup after loading the view from its nib.
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                                      initWithTitle:@"Cancel" style:UIBarButtonItemStylePlain target:self action:@selector(cancelBTNClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    self.navigationItem.rightBarButtonItem = barButtonItem;
 
-    UIButton *cancelBTN=[UIButton buttonWithType:UIButtonTypeCustom];
-    [cancelBTN setImage:[UIImage imageNamed:@"Cancel.png"] forState:UIControlStateNormal];
-    [cancelBTN setImage:[UIImage imageNamed:@"Cancel-PushDown.png"] forState:UIControlStateHighlighted];
-    [cancelBTN addTarget:self action:@selector(cancelBTNClicked:) forControlEvents:UIControlEventTouchUpInside];
-    cancelBTN.frame=CGRectMake(0, 0, 57, 29);
-    self.navigationItem.rightBarButtonItem=[[UIBarButtonItem alloc] initWithCustomView:cancelBTN];
-    self.navigationItem.rightBarButtonItem.style=UIBarButtonItemStylePlain;
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+   restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
     routingNumber.delegate = self;
     accountNumber.delegate = self;
 
