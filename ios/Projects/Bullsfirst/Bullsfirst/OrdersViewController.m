@@ -167,6 +167,21 @@
 
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
+    CGRect rect=orderFilterView.frame;
+    if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
+    {
+        rect=resetBTN.frame;
+        resetBTN.frame = CGRectMake(912, rect.origin.y,rect.size.width, rect.size.height);
+        rect=applyBTN.frame;
+        applyBTN.frame = CGRectMake(912, rect.origin.y,rect.size.width, rect.size.height);
+    }
+    else
+    {        
+        rect=resetBTN.frame;
+        resetBTN.frame = CGRectMake(630, rect.origin.y,rect.size.width, rect.size.height);
+        rect=applyBTN.frame;
+        applyBTN.frame = CGRectMake(630, rect.origin.y,rect.size.width, rect.size.height);
+    }
     [orderTBL reloadData];    
 }
 #pragma mark - selectors for handling rest call callbacks
