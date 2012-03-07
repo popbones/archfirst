@@ -57,36 +57,36 @@
 
 -(void) performFadeInAnimation
 {
-    currentAnimation = FadeIn;
-    piePlotIsRotating = YES;
-        CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    	fadeInAnimation.removedOnCompletion = YES;
-    	fadeInAnimation.fromValue			 = [NSNumber numberWithFloat:0.0];
-    	fadeInAnimation.toValue			 = [NSNumber numberWithFloat:1];
-    	fadeInAnimation.duration			 = animationTime;
-    	fadeInAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    	pieGraph.shouldRasterize=YES;
-        
-        fadeInAnimation.delegate = self;
-        
     
-    	[pieGraph addAnimation:fadeInAnimation forKey:@"FadeIn"];
+    piePlotIsRotating = YES;
+    CABasicAnimation *fadeInAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeInAnimation.removedOnCompletion = NO;
+    fadeInAnimation.fromValue			 = [NSNumber numberWithFloat:0.0];
+    fadeInAnimation.toValue			 = [NSNumber numberWithFloat:1];
+    fadeInAnimation.duration			 = animationTime;
+    fadeInAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    pieGraph.shouldRasterize=YES;
+    
+    fadeInAnimation.delegate = self;
+    
+    
+    [pieGraph addAnimation:fadeInAnimation forKey:@"FadeIn"];
     
 }
 
 -(void) performFadeOutAnimation
 {
-        currentAnimation = FadeOut;
-        CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
-    	fadeOutAnimation.removedOnCompletion = YES;
-    	fadeOutAnimation.fromValue			 = [NSNumber numberWithFloat:1.0];
-    	fadeOutAnimation.toValue			 = [NSNumber numberWithFloat:0];
-    	fadeOutAnimation.duration			 = animationTime;
-    	fadeOutAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
-    	pieGraph.shouldRasterize=YES;
-        
-        fadeOutAnimation.delegate = self;
-    	[pieGraph addAnimation:fadeOutAnimation forKey:@"FadeIn"];
+    
+    CABasicAnimation *fadeOutAnimation = [CABasicAnimation animationWithKeyPath:@"opacity"];
+    fadeOutAnimation.removedOnCompletion = NO;
+    fadeOutAnimation.fromValue			 = [NSNumber numberWithFloat:1.0];
+    fadeOutAnimation.toValue			 = [NSNumber numberWithFloat:0];
+    fadeOutAnimation.duration			 = animationTime;
+    fadeOutAnimation.timingFunction		 = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    pieGraph.shouldRasterize=YES;
+    
+    fadeOutAnimation.delegate = self;
+    [pieGraph addAnimation:fadeOutAnimation forKey:@"FadeOut"];
     
 	piePlotIsRotating = YES;
     
@@ -95,40 +95,32 @@
     [UIView animateWithDuration:animationTime delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
         chartTitleLabel.alpha = 0.0;
     }completion:^(BOOL finished){
-        if(finished)
-        {
-            chartTitleLabel.alpha = 0.0;
-            [UIView animateWithDuration:animationTime delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
-                chartTitleLabel.alpha = 1.0;
-            }completion:^(BOOL finished){
-                if(finished)
-                {
-                    theLegend.opacity = 1.0;
-                }
-            }];
-        }
+        chartTitleLabel.alpha = 0.0;
+        [UIView animateWithDuration:animationTime delay:0.0 options:UIViewAnimationOptionCurveLinear animations:^{
+            chartTitleLabel.alpha = 1.0;
+        }completion:^(BOOL finished){
+            theLegend.opacity = 1.0;
+        }];
     }];
     
 }
 
 -(void)animationDidStop:(CAAnimation *)theAnimation finished:(BOOL)flag
 {
-    if(flag)
+    
+    
+    if(theAnimation == [pieGraph animationForKey:@"FadeOut"])
     {
-        
-        if(currentAnimation == FadeOut)
-        {
-            
-            //[self clearPieChart];
-            pieGraph.opacity = 0.0;
-            [self constructPieChart];
-        }
-        else if(currentAnimation == FadeIn)
-        {
-            piePlotIsRotating = NO;
-            pieGraph.opacity = 1.0;
-        }
+        //[self clearPieChart];
+        pieGraph.opacity = 0.0;
+        [self constructPieChart];
     }
+    else if(theAnimation == [pieGraph animationForKey:@"FadeIn"])
+    {
+        piePlotIsRotating = NO;
+        pieGraph.opacity = 1.0;
+    }
+    
 }
 
 

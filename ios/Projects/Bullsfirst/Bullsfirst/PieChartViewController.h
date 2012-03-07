@@ -23,11 +23,9 @@
 
 
 typedef enum{AccountsChart, PositionsChart} Chart;
-typedef enum{FadeIn,FadeOut} Animation;
 @interface PieChartViewController : UIViewController <CPTPieChartDataSource,CPTPieChartDelegate>
 {
     Chart currentChart;
-    Animation currentAnimation;
     
     CPTGraphHostingView *pieChartView;
 	CPTXYGraph *pieGraph;
