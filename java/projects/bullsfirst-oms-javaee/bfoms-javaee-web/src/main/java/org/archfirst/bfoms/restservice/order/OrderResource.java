@@ -44,7 +44,7 @@ import org.dozer.Mapper;
 import org.joda.time.LocalDate;
 
 /**
- * Order
+ * OrderResource
  *
  * @author Naresh Bhatia
  */
