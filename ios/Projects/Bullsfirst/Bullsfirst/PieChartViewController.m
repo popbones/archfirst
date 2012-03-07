@@ -276,7 +276,6 @@
         if(contentArray.count!=0)
         {
             CPTLegend *theLegend = [CPTLegend legendWithGraph:pieGraph];
-            theLegend.numberOfColumns = 2;
             theLegend.fill = [CPTFill fillWithColor:[CPTColor whiteColor]];
             NSNumber *rowHeight = [NSNumber numberWithInt:36];
             theLegend.rowHeights = [NSArray arrayWithObjects:rowHeight,rowHeight,rowHeight,rowHeight,rowHeight,nil];
@@ -301,6 +300,16 @@
             titleStyle.fontSize = 20;
             pieGraph.titleTextStyle = titleStyle;
             pieGraph.titleDisplacement = CGPointMake(0,-30);
+            theLegend.numberOfColumns = 2;
+            if(contentArray.count == 1)
+            {
+                pieGraph.legendDisplacement = CGPointMake(-70, -330);
+            
+            }
+            else
+            {
+                
+            }
             [self performFadeInAnimation];
         }
     }
