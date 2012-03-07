@@ -69,6 +69,7 @@
     
     fadeInAnimation.delegate = self;
     
+    pieGraph.hidden = NO;
     
     [pieGraph addAnimation:fadeInAnimation forKey:@"FadeIn"];
     
@@ -87,6 +88,7 @@
     
     fadeOutAnimation.delegate = self;
     [pieGraph addAnimation:fadeOutAnimation forKey:@"FadeOut"];
+    pieGraph.hidden = YES;
     
 	piePlotIsRotating = YES;
     
