@@ -174,6 +174,14 @@
         resetBTN.frame = CGRectMake(912, rect.origin.y,rect.size.width, rect.size.height);
         rect=applyBTN.frame;
         applyBTN.frame = CGRectMake(912, rect.origin.y,rect.size.width, rect.size.height);
+        rect=fromDateDropdownView.frame;
+        fromDateDropdownView.frame = CGRectMake(375, rect.origin.y,rect.size.width, rect.size.height);
+        rect=toDateDropdownView.frame;
+        toDateDropdownView.frame = CGRectMake(700, rect.origin.y,rect.size.width, rect.size.height);
+        rect=orderDropdownView.frame;
+        orderDropdownView.frame = CGRectMake(375, rect.origin.y,rect.size.width, rect.size.height);
+        rect=orderStatusDropdownView.frame;
+        orderStatusDropdownView.frame = CGRectMake(650, rect.origin.y,rect.size.width, rect.size.height);
     }
     else
     {        
@@ -181,6 +189,14 @@
         resetBTN.frame = CGRectMake(630, rect.origin.y,rect.size.width, rect.size.height);
         rect=applyBTN.frame;
         applyBTN.frame = CGRectMake(630, rect.origin.y,rect.size.width, rect.size.height);
+        rect=fromDateDropdownView.frame;
+        fromDateDropdownView.frame = CGRectMake(245, rect.origin.y,rect.size.width, rect.size.height);
+        rect=toDateDropdownView.frame;
+        toDateDropdownView.frame = CGRectMake(440, rect.origin.y,rect.size.width, rect.size.height);
+        rect=orderDropdownView.frame;
+        orderDropdownView.frame = CGRectMake(245, rect.origin.y,rect.size.width, rect.size.height);
+        rect=orderStatusDropdownView.frame;
+        orderStatusDropdownView.frame = CGRectMake(390, rect.origin.y,rect.size.width, rect.size.height);
     }
     [orderTBL reloadData];    
 }
