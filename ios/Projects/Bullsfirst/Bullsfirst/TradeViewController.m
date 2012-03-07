@@ -106,8 +106,13 @@
     [goodForDayDropDownView addSubview:goodForDayDropDownCTL];
     
     if (self.position != nil) {
+        order.accountName = self.position.accountName;
         accountDropDownCTL.label.text = self.position.accountName;
+        
+        order.instrumentSymbol = self.position.instrumentSymbol;
         cusipText.text = self.position.instrumentSymbol;
+        
+        order.quantity = self.position.quantity;
         quantity.text = [NSString stringWithFormat:@"%d", [self.position.quantity intValue]];
     }
     
