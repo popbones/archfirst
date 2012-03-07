@@ -478,6 +478,9 @@
         } else {
             cancelOrderBTN.hidden = YES;
         }
+        UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
+        selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
+        cell.selectedBackgroundView = selected;
         return cell;
     }
     else
@@ -530,7 +533,9 @@
         } else {
             cancelOrderBTN.hidden = YES;
         }
-
+        UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
+        selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
+        cell.selectedBackgroundView = selected;
         return cell;
     }
 }
