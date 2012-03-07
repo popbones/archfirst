@@ -339,7 +339,7 @@
 					<object class="IBUILabel" id="338404835">
 						<reference key="NSNextResponder" ref="256494877"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{540, 11}, {90, 21}}</string>
+						<string key="NSFrame">{{520, 11}, {90, 21}}</string>
 						<reference key="NSSuperview" ref="256494877"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="45990502"/>
@@ -360,7 +360,7 @@
 					<object class="IBUILabel" id="45990502">
 						<reference key="NSNextResponder" ref="256494877"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{640, 11}, {58, 21}}</string>
+						<string key="NSFrame">{{610, 11}, {100, 21}}</string>
 						<reference key="NSSuperview" ref="256494877"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="730129006"/>
@@ -374,6 +374,7 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
 						<reference key="IBUIFontDescription" ref="490803248"/>
 						<reference key="IBUIFont" ref="426791658"/>
 					</object>
@@ -480,7 +481,7 @@
 					<object class="IBUILabel" id="330998559">
 						<reference key="NSNextResponder" ref="256494877"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{390, 11}, {50, 21}}</string>
+						<string key="NSFrame">{{385, 11}, {50, 21}}</string>
 						<reference key="NSSuperview" ref="256494877"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="424983282"/>
@@ -501,7 +502,7 @@
 					<object class="IBUILabel" id="424983282">
 						<reference key="NSNextResponder" ref="256494877"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{445, 11}, {80, 21}}</string>
+						<string key="NSFrame">{{435, 11}, {80, 21}}</string>
 						<reference key="NSSuperview" ref="256494877"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="338404835"/>
@@ -697,7 +698,7 @@
 					<object class="IBUILabel" id="44973951">
 						<reference key="NSNextResponder" ref="878465712"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{689, 11}, {119, 21}}</string>
+						<string key="NSFrame">{{629, 11}, {119, 21}}</string>
 						<reference key="NSSuperview" ref="878465712"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="558361246"/>
@@ -718,7 +719,7 @@
 					<object class="IBUILabel" id="255650167">
 						<reference key="NSNextResponder" ref="878465712"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{547, 11}, {107, 21}}</string>
+						<string key="NSFrame">{{500, 11}, {107, 21}}</string>
 						<reference key="NSSuperview" ref="878465712"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="44973951"/>
@@ -739,7 +740,7 @@
 					<object class="IBUILabel" id="558361246">
 						<reference key="NSNextResponder" ref="878465712"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{854, 11}, {58, 21}}</string>
+						<string key="NSFrame">{{824, 11}, {100, 21}}</string>
 						<reference key="NSSuperview" ref="878465712"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="921096245"/>
@@ -753,6 +754,7 @@
 						<nil key="IBUIHighlightedColor"/>
 						<int key="IBUIBaselineAdjustment">1</int>
 						<float key="IBUIMinimumFontSize">10</float>
+						<int key="IBUITextAlignment">1</int>
 						<reference key="IBUIFontDescription" ref="404261116"/>
 						<reference key="IBUIFont" ref="183853527"/>
 					</object>
@@ -977,7 +979,6 @@
 						<reference key="object" ref="256494877"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="730129006"/>
-							<reference ref="338404835"/>
 							<reference ref="208042992"/>
 							<reference ref="397182360"/>
 							<reference ref="13221035"/>
@@ -987,6 +988,7 @@
 							<reference ref="280936426"/>
 							<reference ref="97675444"/>
 							<reference ref="424983282"/>
+							<reference ref="338404835"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
