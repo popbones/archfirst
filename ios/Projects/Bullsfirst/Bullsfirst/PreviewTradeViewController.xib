@@ -276,7 +276,6 @@
 						<string key="NSFrame">{{260, 316}, {20, 20}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<bool key="IBUIOpaque">NO</bool>
 						<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 						<bool key="IBUIAnimating">YES</bool>
@@ -325,7 +324,7 @@
 					<object class="IBUILabel" id="803477040">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{14, 11}, {121, 21}}</string>
+						<string key="NSFrame">{{50, 11}, {121, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="955347331"/>
@@ -412,7 +411,7 @@
 					<object class="IBUILabel" id="955347331">
 						<reference key="NSNextResponder" ref="766721923"/>
 						<int key="NSvFlags">292</int>
-						<string key="NSFrame">{{253, 11}, {121, 21}}</string>
+						<string key="NSFrame">{{277, 11}, {121, 21}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="650717150"/>
@@ -760,7 +759,6 @@
 						<reference key="object" ref="766721923"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="315816125"/>
-							<reference ref="803477040"/>
 							<reference ref="831227359"/>
 							<reference ref="147248948"/>
 							<reference ref="969353508"/>
@@ -776,7 +774,6 @@
 							<reference ref="709747916"/>
 							<reference ref="506147196"/>
 							<reference ref="578542154"/>
-							<reference ref="955347331"/>
 							<reference ref="650188932"/>
 							<reference ref="175160268"/>
 							<reference ref="587241405"/>
@@ -785,6 +782,8 @@
 							<reference ref="368043559"/>
 							<reference ref="236802887"/>
 							<reference ref="822022233"/>
+							<reference ref="803477040"/>
+							<reference ref="955347331"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>

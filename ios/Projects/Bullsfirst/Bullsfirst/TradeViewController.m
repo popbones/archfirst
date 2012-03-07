@@ -75,7 +75,7 @@
     textFields = [NSArray arrayWithObjects:cusipText, quantity, limit, nil];
     order = [[BFOrder alloc] init];
     order.allOrNone = NO;
-    order.term = [NSString stringWithString:@"Good for day"];
+    order.term = [NSString stringWithString:@"Good for the day"];
 
     accountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, accountDropDownView.frame.size.width, accountDropDownView.frame.size.height)
                                                         target:self
