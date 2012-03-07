@@ -2,13 +2,13 @@
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
 		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">10K549</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1910</string>
+		<string key="IBDocument.SystemVersion">10K540</string>
+		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
 		<string key="IBDocument.AppKitVersion">1038.36</string>
 		<string key="IBDocument.HIToolboxVersion">461.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">911</string>
+			<string key="NS.object.0">933</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBUITableViewCell</string>
@@ -111,7 +111,7 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
-								<int key="IBUITextAlignment">1</int>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="565569707"/>
 								<reference key="IBUIFont" ref="188767983"/>
 							</object>
@@ -133,7 +133,7 @@
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
 								<float key="IBUIMinimumFontSize">10</float>
-								<int key="IBUITextAlignment">1</int>
+								<int key="IBUITextAlignment">2</int>
 								<reference key="IBUIFontDescription" ref="565569707"/>
 								<reference key="IBUIFont" ref="188767983"/>
 							</object>
@@ -181,7 +181,7 @@
 								</object>
 							</object>
 						</array>
-						<string key="NSFrameSize">{746, 44}</string>
+						<string key="NSFrameSize">{746, 43}</string>
 						<reference key="NSSuperview" ref="850639286"/>
 						<reference key="NSWindow"/>
 						<reference key="NSNextKeyView" ref="738699978"/>
@@ -203,15 +203,6 @@
 				<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 				<int key="IBUIAccessoryType">1</int>
 				<reference key="IBUIContentView" ref="325900476"/>
-				<object class="IBUIFontDescription" key="IBUIFontDescription">
-					<int key="type">1</int>
-					<int key="size">4</int>
-				</object>
-				<object class="NSFont" key="IBUIFont">
-					<string key="NSName">Helvetica</string>
-					<double key="NSSize">14</double>
-					<int key="NSfFlags">16</int>
-				</object>
 				<string key="IBUIReuseIdentifier">account</string>
 			</object>
 		</array>
@@ -331,6 +322,8 @@
 						<string key="actionLBL">UILabel</string>
 						<string key="backBTN">UIButton</string>
 						<string key="cashLBL">UILabel</string>
+						<string key="chartTitle">UILabel</string>
+						<string key="chartTitleView">UIView</string>
 						<string key="chartView">UIView</string>
 						<string key="headerView">UIView</string>
 						<string key="leftBorderView">UIView</string>
@@ -367,6 +360,14 @@
 						<object class="IBToOneOutletInfo" key="cashLBL">
 							<string key="name">cashLBL</string>
 							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="chartTitle">
+							<string key="name">chartTitle</string>
+							<string key="candidateClassName">UILabel</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="chartTitleView">
+							<string key="name">chartTitleView</string>
+							<string key="candidateClassName">UIView</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="chartView">
 							<string key="name">chartView</string>
@@ -414,16 +415,11 @@
 					<string key="className">TabViewController</string>
 					<string key="superclassName">UIViewController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="filterBTNClicked:">id</string>
 						<string key="refreshBTNClicked:">id</string>
 						<string key="tradeBTNClicked:">id</string>
 						<string key="transferBTNClicked:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="filterBTNClicked:">
-							<string key="name">filterBTNClicked:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="refreshBTNClicked:">
 							<string key="name">refreshBTNClicked:</string>
 							<string key="candidateClassName">id</string>
@@ -474,6 +470,6 @@
 			<string key="EditButton-PushDown.png">{49, 34}</string>
 			<string key="EditButton.png">{49, 34}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">911</string>
+		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
 </archive>

@@ -205,9 +205,9 @@
         rect = accountNumberLBL.frame;
         accountNumberLBL.frame = CGRectMake(180, rect.origin.y, rect.size.width, rect.size.height);
         rect = marketValueLBL.frame;
-        marketValueLBL.frame = CGRectMake(280, rect.origin.y, rect.size.width, rect.size.height);
+        marketValueLBL.frame = CGRectMake(220, rect.origin.y, rect.size.width, rect.size.height);
         rect = cashLBL.frame;
-        cashLBL.frame = CGRectMake(446, rect.origin.y, rect.size.width, rect.size.height);
+        cashLBL.frame = CGRectMake(360, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
         actionLBL.frame = CGRectMake(554, rect.origin.y, rect.size.width, rect.size.height);
         rect=leftBorderView.frame;
@@ -226,9 +226,9 @@
         rect = accountNumberLBL.frame;
         accountNumberLBL.frame = CGRectMake(230, rect.origin.y, rect.size.width, rect.size.height);
         rect = marketValueLBL.frame;
-        marketValueLBL.frame = CGRectMake(360, rect.origin.y, rect.size.width, rect.size.height);
+        marketValueLBL.frame = CGRectMake(320, rect.origin.y, rect.size.width, rect.size.height);
         rect = cashLBL.frame;
-        cashLBL.frame = CGRectMake(560, rect.origin.y, rect.size.width, rect.size.height);
+        cashLBL.frame = CGRectMake(490, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
         actionLBL.frame = CGRectMake(680, rect.origin.y, rect.size.width, rect.size.height);
         rect=leftBorderView.frame;
