@@ -150,7 +150,12 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
-    // Return YES for supported orientations
+    if ([instrumentDropdown isPopoverVisible])
+        [instrumentDropdown dismissPopoverAnimated:YES];
+    if ([dropdown isPopoverVisible])
+        [dropdown dismissPopoverAnimated:YES];
+    if ([accountDropdown isPopoverVisible])
+        [accountDropdown dismissPopoverAnimated:YES];
 	return YES;
 }
 
