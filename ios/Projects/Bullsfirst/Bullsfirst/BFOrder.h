@@ -24,6 +24,7 @@
     NSString *status;
     NSNumber *orderId;
     NSNumber *cumQty;
+    NSDictionary *executionsPrice;
 }
 
 @property (nonatomic, retain) NSNumber *brokerageAccountID;
@@ -40,6 +41,7 @@
 @property (nonatomic, retain) NSString *type;
 @property (nonatomic, retain) BFMoney *limitPrice;
 @property (nonatomic, retain) BFMoney *executionPrice;
+@property (nonatomic, retain) NSDictionary *executionsPrice;
 
 + (NSMutableArray *)ordersFromJSONData:(NSData *)data;
 + (BFOrder *)orderFromDictionary:(NSDictionary *)theDictionary;

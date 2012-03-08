@@ -24,6 +24,7 @@
 #import "DatePickerViewController.h"
 #import "BFBrokerageAccountStore.h"
 #import "BFBrokerageAccount.h"
+#import "expandPositionBTN.h"
 
 @implementation OrdersViewController
 @synthesize resetBTN;
@@ -246,6 +247,21 @@
 }
 
 #pragma mark - IBActions
+
+-(void)expandPosition:(id)sender
+{
+    expandPositionBTN *button = (expandPositionBTN *)sender;
+    /*
+    NSNumber *expand_Row = [expanedRowSet objectAtIndex:button.row];
+    if (expand_Row != nil && [expand_Row boolValue] == YES) {
+        [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:NO]];
+    } else {
+        [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:YES]];
+    }
+     */
+    [orderTBL reloadData];
+}
+
 
 - (IBAction)refreshBTNClicked:(id)sender {   
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
@@ -489,9 +505,15 @@
             label.text = [formatter stringFromNumber:order.limitPrice.amount];
         }
         
+        expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:11]; // expand button
         if (order.executionPrice != nil) {
             label = (UILabel *)[cell viewWithTag:7];
             label.text = [formatter stringFromNumber:order.executionPrice.amount];
+            [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
+            expand.row = indexPath.row;
+            [expand setTitle:@"+" forState:UIControlStateNormal];
+        } else {
+            expand.hidden = YES;
         }
         
         label = (UILabel *)[cell viewWithTag:8];
@@ -544,9 +566,15 @@
             label.text = [formatter stringFromNumber:order.limitPrice.amount];
         }
         
+        expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:11]; // expand button
         if (order.executionPrice != nil) {
             label = (UILabel *)[cell viewWithTag:7];
             label.text = [formatter stringFromNumber:order.executionPrice.amount];
+            [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
+            expand.row = indexPath.row;
+            [expand setTitle:@"+" forState:UIControlStateNormal];
+        } else {
+            expand.hidden = YES;
         }
 
         label = (UILabel *)[cell viewWithTag:8];

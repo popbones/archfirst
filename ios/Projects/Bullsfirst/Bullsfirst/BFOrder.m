@@ -23,6 +23,7 @@
 @synthesize cumQty;
 @synthesize orderId;
 @synthesize executionPrice;
+@synthesize executionsPrice;
 
 - (id)initWithAccountID:(NSNumber *)theAccountID
             accountName:(NSString *)theAccountName
@@ -38,6 +39,7 @@
                    type:(NSString *)theType
              limitPrice:(BFMoney *)theLimitPrice
          executionPrice:(BFMoney *)theExecutionPrice
+         executionsPrice:(NSDictionary *)theExecutionsPrice
 {
     self = [super init];
     
@@ -57,6 +59,7 @@
         self.type = theType;
         self.limitPrice = theLimitPrice;
         self.executionPrice = theExecutionPrice;
+        self.executionsPrice = theExecutionsPrice;
     }
     
     return self;      
@@ -77,7 +80,8 @@
                               term:@""
                               type:@""
                         limitPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]
-                    executionPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]];
+                    executionPrice:[BFMoney moneyWithAmount:[NSNumber numberWithInt:0] currency:@""]
+                   executionsPrice:nil];
             
 }
 
@@ -141,7 +145,8 @@
                                          term:term
                                          type:type
                                    limitPrice:limitedPrice
-                               executionPrice:executionPrice];
+                               executionPrice:executionPrice
+                              executionsPrice:executionsPriceDic];
 }
 
 + (NSMutableArray *)ordersFromJSONData:(NSData *)data
