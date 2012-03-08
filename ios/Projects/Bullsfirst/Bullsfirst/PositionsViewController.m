@@ -286,7 +286,7 @@
                 quantityFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:quantityFrame];
                 label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [NSString stringWithFormat:@"%d", [lot.quantity intValue]];
+                label.text = [decemalFormatter stringFromNumber:lot.quantity];
                 label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
 
@@ -426,7 +426,7 @@
 
                 quantityFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:quantityFrame];
-                label.text = [NSString stringWithFormat:@"%d", [lot.quantity intValue]];
+                label.text = [decemalFormatter stringFromNumber:lot.quantity];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
