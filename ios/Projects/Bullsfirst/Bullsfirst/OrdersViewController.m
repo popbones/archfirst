@@ -520,7 +520,7 @@
             label.text = [formatter stringFromNumber:order.executionPrice.amount];
             [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
             expand.row = indexPath.row;
-            [expand setTitle:@"+" forState:UIControlStateNormal];
+            [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
         } else {
             expand.hidden = YES;
         }
@@ -543,7 +543,7 @@
         
         NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
         if (expand_Row != nil && [expand_Row boolValue] == YES) {
-            [expand setTitle:@"-" forState:UIControlStateNormal];
+            [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
             CGRect frame = cell.frame;
             cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[order.executionsPrice count]));
             
@@ -614,7 +614,7 @@
             label.text = [formatter stringFromNumber:order.executionPrice.amount];
             [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
             expand.row = indexPath.row;
-            [expand setTitle:@"+" forState:UIControlStateNormal];
+            [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
         } else {
             expand.hidden = YES;
         }
@@ -638,7 +638,7 @@
         
         NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
         if (expand_Row != nil && [expand_Row boolValue] == YES) {
-            [expand setTitle:@"-" forState:UIControlStateNormal];
+            [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
             CGRect frame = cell.frame;
             cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[order.executionsPrice count]));
             

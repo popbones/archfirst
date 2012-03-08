@@ -170,7 +170,7 @@
         expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
         [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
         expand.row = indexPath.row;
-        [expand setTitle:@"+" forState:UIControlStateNormal];
+        [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
 
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
         [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -238,13 +238,13 @@
         NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
         if (expand_Row != nil && [expand_Row boolValue] == YES) 
         {
-            [expand setTitle:@"-" forState:UIControlStateNormal];
+            [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
 
             CGRect frame = cell.frame;
             cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[position.children count]));
             
             UILabel *label;
-            label = (UILabel *)[cell viewWithTag:2];
+            label = (UILabel *)[cell viewWithTag:3];
             CGRect nameFrame = label.frame;
             
             label = (UILabel *)[cell viewWithTag:4];
@@ -343,7 +343,7 @@
         expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
         [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
         expand.row = indexPath.row;
-        [expand setTitle:@"+" forState:UIControlStateNormal];
+        [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
         
         NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
         [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -392,11 +392,14 @@
         
         NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
         if (expand_Row != nil && [expand_Row boolValue] == YES) {
-            [expand setTitle:@"-" forState:UIControlStateNormal];
+            [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
             CGRect frame = cell.frame;
             cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[position.children count]));
             
             UILabel *label;
+            label = (UILabel *)[cell viewWithTag:2];
+            CGRect dateFrame = label.frame;
+
             label = (UILabel *)[cell viewWithTag:3];
             CGRect quantityFrame = label.frame;
             
@@ -410,8 +413,18 @@
             CGRect gainPercentFrame = label.frame;
             
             for (BFPosition *lot in position.children) {
+                dateFrame.origin.y += 44;
+                UILabel *label = [[UILabel alloc] initWithFrame:dateFrame];
+                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+                [dateFormat setDateFormat:@"MM/dd/yyyy"];
+                label.font = [UIFont systemFontOfSize:13.0];
+                label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:lot.lotCreationTime]];
+                label.textAlignment = UITextAlignmentLeft;
+                [cell addSubview:label];
+
                 quantityFrame.origin.y += 44;
-                UILabel *label = [[UILabel alloc] initWithFrame:quantityFrame];
+                label = [[UILabel alloc] initWithFrame:quantityFrame];
                 label.text = [NSString stringWithFormat:@"%d", [lot.quantity intValue]];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.textAlignment = UITextAlignmentRight;

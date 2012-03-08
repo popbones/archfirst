@@ -96,6 +96,8 @@
 		54B78AED14EC4656002FF1AC /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78AEB14EC4654002FF1AC /* UserViewController.m */; };
 		54B78AEE14EC4656002FF1AC /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78AEC14EC4655002FF1AC /* UserViewController.xib */; };
 		54C2964A15095441004530D5 /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C2964915095441004530D5 /* UINavigationController+KeyboardDismiss.m */; };
+		54C2965D15095EFA004530D5 /* Minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C2965B15095EFA004530D5 /* Minus.png */; };
+		54C2965E15095EFA004530D5 /* Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C2965C15095EFA004530D5 /* Plus.png */; };
 		952B7A5914FBA61C005B3C98 /* BFExternalAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */; };
 		952B7A5C14FBABD5005B3C98 /* BFExternalAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */; };
 		952B7A8014FCF1D4005B3C98 /* AddExternalAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */; };
@@ -331,6 +333,8 @@
 		54B78AEC14EC4655002FF1AC /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
 		54C2964815095441004530D5 /* UINavigationController+KeyboardDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KeyboardDismiss.h"; sourceTree = "<group>"; };
 		54C2964915095441004530D5 /* UINavigationController+KeyboardDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+KeyboardDismiss.m"; sourceTree = "<group>"; };
+		54C2965B15095EFA004530D5 /* Minus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Minus.png; sourceTree = "<group>"; };
+		54C2965C15095EFA004530D5 /* Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Plus.png; sourceTree = "<group>"; };
 		952B7A5714FBA61B005B3C98 /* BFExternalAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccount.h; sourceTree = "<group>"; };
 		952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExternalAccount.m; sourceTree = "<group>"; };
 		952B7A5A14FBABD5005B3C98 /* BFExternalAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccountStore.h; sourceTree = "<group>"; };
@@ -554,6 +558,8 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				54C2965B15095EFA004530D5 /* Minus.png */,
+				54C2965C15095EFA004530D5 /* Plus.png */,
 				543840F815065FE6001D6598 /* PlaceOrder-PushDown.png */,
 				543840F915065FE6001D6598 /* PlaceOrder.png */,
 				ACAD662615063C1A00B9CB09 /* zoom.tiff */,
@@ -1111,6 +1117,8 @@
 				ACAD662715063C1A00B9CB09 /* zoom.tiff in Resources */,
 				543840FA15065FE6001D6598 /* PlaceOrder-PushDown.png in Resources */,
 				543840FB15065FE6001D6598 /* PlaceOrder.png in Resources */,
+				54C2965D15095EFA004530D5 /* Minus.png in Resources */,
+				54C2965E15095EFA004530D5 /* Plus.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
