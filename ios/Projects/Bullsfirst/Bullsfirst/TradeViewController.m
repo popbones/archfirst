@@ -101,7 +101,7 @@
     goodForDayDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, goodForDayDropDownView.frame.size.width, goodForDayDropDownView.frame.size.height)
                                                        target:self
                                                        action:@selector(showDropdown:)];
-    goodForDayDropDownCTL.label.text = @"Good for day";
+    goodForDayDropDownCTL.label.text = order.term;
     goodForDayDropDownCTL.tag = 4;
     [goodForDayDropDownView addSubview:goodForDayDropDownCTL];
     
@@ -276,7 +276,7 @@
             selections = [NSArray arrayWithObjects:@"Good for the day", @"Good till cancel", nil];
             size = [@"Good til cancel" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
-            size.width += 20;
+            size.width += 60;
             break;
             
         default:
