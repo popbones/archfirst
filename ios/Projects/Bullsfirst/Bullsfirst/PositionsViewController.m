@@ -135,15 +135,6 @@
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
     BFPosition *position = [account.positions objectAtIndex:indexPath.row];
     return 44*(1+[position.children count]);
-/*
-    if (indexPath.row == expandRow) {
-        NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-        BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
-        BFPosition *position = [account.positions objectAtIndex:indexPath.row];
-        return 44*(1+[position.children count]);
-    }
-    return 44;*/
-    
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView

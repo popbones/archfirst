@@ -70,4 +70,7 @@
 @property (retain, nonatomic) DropDownControl *orderDropdownCTL;
 @property (strong, nonatomic) IBOutlet UIView *orderStatusDropdownView;
 @property (retain, nonatomic) DropDownControl *orderStatusDropdownCTL;
+
+@property (retain, nonatomic) NSMutableArray *expanedRowSet;
+
 @end

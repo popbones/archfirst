@@ -56,6 +56,7 @@
 @synthesize orderDropdownCTL;
 @synthesize orderStatusDropdownView;
 @synthesize orderStatusDropdownCTL;
+@synthesize expanedRowSet;
 
 - (id)init
 {
@@ -224,6 +225,10 @@
 -(void)requestSucceeded:(NSData *)data
 {    
     orders = [BFOrder ordersFromJSONData:data];
+    expanedRowSet = [[NSMutableArray alloc] init];
+    for (int i=0; i<[orders count];i++){
+        [expanedRowSet addObject:[NSNumber numberWithBool:NO]];
+    }
     [orderTBL reloadData];
 }
 
@@ -251,14 +256,13 @@
 -(void)expandPosition:(id)sender
 {
     expandPositionBTN *button = (expandPositionBTN *)sender;
-    /*
+    
     NSNumber *expand_Row = [expanedRowSet objectAtIndex:button.row];
     if (expand_Row != nil && [expand_Row boolValue] == YES) {
         [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:NO]];
     } else {
         [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:YES]];
     }
-     */
     [orderTBL reloadData];
 }
 
@@ -452,7 +456,12 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44;    
+    NSNumber *expand = [expanedRowSet objectAtIndex:indexPath.row];
+    if (expand == nil || [expand boolValue] == NO)
+        return 44;
+    
+    BFOrder *order = [orders objectAtIndex:indexPath.row];
+    return 44*(1+[order.executionsPrice count]);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -531,6 +540,39 @@
         } else {
             cancelOrderBTN.hidden = YES;
         }
+        
+        NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
+        if (expand_Row != nil && [expand_Row boolValue] == YES) {
+            [expand setTitle:@"-" forState:UIControlStateNormal];
+            CGRect frame = cell.frame;
+            cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[order.executionsPrice count]));
+            
+            UILabel *label;
+            label = (UILabel *)[cell viewWithTag:5];
+            CGRect quantityFrame = CGRectMake(label.frame.origin.x, label.frame.origin.y+44 ,label.frame.size.width, label.frame.size.height);
+            label = (UILabel *)[cell viewWithTag:7];
+            CGRect priceFrame = CGRectMake(label.frame.origin.x, label.frame.origin.y+44 ,label.frame.size.width, label.frame.size.height);
+            
+            for (NSDictionary *execution in order.executionsPrice) {
+                NSDictionary *priceDic = [execution objectForKey:@"price"];
+                UILabel *label = [[UILabel alloc] initWithFrame:priceFrame];
+                NSNumber *amount = [NSNumber numberWithFloat:[[priceDic valueForKey:@"amount"] floatValue]];
+                label.text = [formatter stringFromNumber:amount];
+                label.font = [UIFont systemFontOfSize:13.0];
+                label.textAlignment = UITextAlignmentRight;
+                [cell addSubview:label];
+                priceFrame.origin.y += 44;
+                
+                NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] floatValue]];
+                label = [[UILabel alloc] initWithFrame:quantityFrame];
+                label.text = [NSString stringWithFormat:@"%d", [quantity intValue]];
+                label.font = [UIFont systemFontOfSize:13.0];
+                label.textAlignment = UITextAlignmentRight;
+                [cell addSubview:label];
+                quantityFrame.origin.y += 44;
+            }
+        }
+
         UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
         selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
         cell.selectedBackgroundView = selected;
@@ -592,6 +634,40 @@
         } else {
             cancelOrderBTN.hidden = YES;
         }
+        
+        
+        NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
+        if (expand_Row != nil && [expand_Row boolValue] == YES) {
+            [expand setTitle:@"-" forState:UIControlStateNormal];
+            CGRect frame = cell.frame;
+            cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[order.executionsPrice count]));
+            
+            UILabel *label;
+            label = (UILabel *)[cell viewWithTag:5];
+            CGRect quantityFrame = CGRectMake(label.frame.origin.x, label.frame.origin.y+44 ,label.frame.size.width, label.frame.size.height);
+            label = (UILabel *)[cell viewWithTag:7];
+            CGRect priceFrame = CGRectMake(label.frame.origin.x, label.frame.origin.y+44 ,label.frame.size.width, label.frame.size.height);
+                        
+            for (NSDictionary *execution in order.executionsPrice) {
+                NSDictionary *priceDic = [execution objectForKey:@"price"];
+                UILabel *label = [[UILabel alloc] initWithFrame:priceFrame];
+                NSNumber *amount = [NSNumber numberWithFloat:[[priceDic valueForKey:@"amount"] floatValue]];
+                label.text = [formatter stringFromNumber:amount];
+                label.font = [UIFont systemFontOfSize:13.0];
+                label.textAlignment = UITextAlignmentRight;
+                [cell addSubview:label];
+                priceFrame.origin.y += 44;
+                
+                NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] floatValue]];
+                label = [[UILabel alloc] initWithFrame:quantityFrame];
+                label.text = [NSString stringWithFormat:@"%d", [quantity intValue]];
+                label.font = [UIFont systemFontOfSize:13.0];
+                label.textAlignment = UITextAlignmentRight;
+                [cell addSubview:label];
+                quantityFrame.origin.y += 44;
+            }
+        }
+
         UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
         selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
         cell.selectedBackgroundView = selected;
