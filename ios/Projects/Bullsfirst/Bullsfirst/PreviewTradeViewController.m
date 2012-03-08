@@ -64,7 +64,7 @@
     self.accountNameLabel.text = order.accountName;
     self.sideLabel.text = order.side;
     self.cusipLabel.text = order.instrumentSymbol;
-    self.quantityLabel.text = [NSString stringWithFormat:@"%d share", [order.quantity intValue]];
+    self.quantityLabel.text = [NSString stringWithFormat:@"%d", [order.quantity intValue]];
     self.typeLabel.text = order.type;
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
