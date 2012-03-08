@@ -95,6 +95,7 @@
 		54B78A7114EAA17A002FF1AC /* TransferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78A6F14EAA178002FF1AC /* TransferViewController.xib */; };
 		54B78AED14EC4656002FF1AC /* UserViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54B78AEB14EC4654002FF1AC /* UserViewController.m */; };
 		54B78AEE14EC4656002FF1AC /* UserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54B78AEC14EC4655002FF1AC /* UserViewController.xib */; };
+		54C2964A15095441004530D5 /* UINavigationController+KeyboardDismiss.m in Sources */ = {isa = PBXBuildFile; fileRef = 54C2964915095441004530D5 /* UINavigationController+KeyboardDismiss.m */; };
 		952B7A5914FBA61C005B3C98 /* BFExternalAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */; };
 		952B7A5C14FBABD5005B3C98 /* BFExternalAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */; };
 		952B7A8014FCF1D4005B3C98 /* AddExternalAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */; };
@@ -328,6 +329,8 @@
 		54B78AEA14EC4652002FF1AC /* UserViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserViewController.h; sourceTree = "<group>"; };
 		54B78AEB14EC4654002FF1AC /* UserViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserViewController.m; sourceTree = "<group>"; };
 		54B78AEC14EC4655002FF1AC /* UserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserViewController.xib; sourceTree = "<group>"; };
+		54C2964815095441004530D5 /* UINavigationController+KeyboardDismiss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UINavigationController+KeyboardDismiss.h"; sourceTree = "<group>"; };
+		54C2964915095441004530D5 /* UINavigationController+KeyboardDismiss.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UINavigationController+KeyboardDismiss.m"; sourceTree = "<group>"; };
 		952B7A5714FBA61B005B3C98 /* BFExternalAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccount.h; sourceTree = "<group>"; };
 		952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExternalAccount.m; sourceTree = "<group>"; };
 		952B7A5A14FBABD5005B3C98 /* BFExternalAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccountStore.h; sourceTree = "<group>"; };
@@ -493,6 +496,7 @@
 		00D3C40E147C27120067A768 /* Bullsfirst */ = {
 			isa = PBXGroup;
 			children = (
+				54C2964B1509558E004530D5 /* UINavigationController+KeyboardDismiss */,
 				AC66816D14ECD43B00BB02FF /* TextFieldValidator */,
 				AC26C84514DFA0C100ABD693 /* base64 encoding */,
 				AC26C84114DFA08000ABD693 /* BullsFirstWebServiceObject */,
@@ -824,6 +828,15 @@
 				54B78AEC14EC4655002FF1AC /* UserViewController.xib */,
 			);
 			name = Forms;
+			sourceTree = "<group>";
+		};
+		54C2964B1509558E004530D5 /* UINavigationController+KeyboardDismiss */ = {
+			isa = PBXGroup;
+			children = (
+				54C2964815095441004530D5 /* UINavigationController+KeyboardDismiss.h */,
+				54C2964915095441004530D5 /* UINavigationController+KeyboardDismiss.m */,
+			);
+			name = "UINavigationController+KeyboardDismiss";
 			sourceTree = "<group>";
 		};
 		952B7ADE14FF573F005B3C98 /* Transfer */ = {
@@ -1160,6 +1173,7 @@
 				54012A32150127DA008D38BD /* InstrumentsDropdownViewController.m in Sources */,
 				5438411C15066F9C001D6598 /* BFMarketPrice.m in Sources */,
 				5438411F1506764F001D6598 /* BFOrderEstimate.m in Sources */,
+				54C2964A15095441004530D5 /* UINavigationController+KeyboardDismiss.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
