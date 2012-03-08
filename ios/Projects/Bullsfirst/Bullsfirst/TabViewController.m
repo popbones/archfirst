@@ -241,7 +241,7 @@
 - (IBAction)tradeBTNClicked:(id)sender {
     TradeViewController *tradeController = [[TradeViewController alloc] initWithNibName:@"TradeViewController" bundle:nil];    
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:tradeController];
-    [controller setModalPresentationStyle:UIModalPresentationPageSheet];
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     
     [self presentModalViewController:controller animated:YES];
     controller.view.superview.bounds=CGRectMake(0, 0, 500,400);
