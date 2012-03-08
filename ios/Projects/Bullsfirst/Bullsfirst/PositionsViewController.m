@@ -160,6 +160,12 @@
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
     BFPosition *position = [account.positions objectAtIndex:indexPath.row];
 
+    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    
+    NSNumberFormatter *decemalFormatter = [[NSNumberFormatter alloc] init];  
+    [decemalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
@@ -172,8 +178,6 @@
         expand.row = indexPath.row;
         [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
 
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
-        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 
         UILabel *label;
         label = (UILabel *)[cell viewWithTag:3];
@@ -181,7 +185,7 @@
         
         if ([position.instrumentSymbol isEqualToString:@"CASH"] != YES) {
             label = (UILabel *)[cell viewWithTag:4];
-            label.text = [NSString stringWithFormat:@"%d", [position.quantity intValue]];
+            label.text = [decemalFormatter stringFromNumber:position.quantity];
             
             label = (UILabel *)[cell viewWithTag:5];
             label.text = [formatter stringFromNumber:position.lastTrade.amount];
@@ -345,16 +349,13 @@
         expand.row = indexPath.row;
         [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
         
-        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
-        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
-
         UILabel *label;
         label = (UILabel *)[cell viewWithTag:2];
         label.text = position.instrumentSymbol;
         if ([position.instrumentSymbol isEqualToString:@"CASH"] != YES) {
             
             label = (UILabel *)[cell viewWithTag:3];
-            label.text = [NSString stringWithFormat:@"%d", [position.quantity intValue]];
+            label.text = [decemalFormatter stringFromNumber:position.quantity];
             
             label = (UILabel *)[cell viewWithTag:4];
             label.text = [formatter stringFromNumber:position.marketValue.amount];

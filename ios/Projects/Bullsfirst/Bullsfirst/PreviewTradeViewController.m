@@ -64,7 +64,9 @@
     self.accountNameLabel.text = order.accountName;
     self.sideLabel.text = order.side;
     self.cusipLabel.text = order.instrumentSymbol;
-    self.quantityLabel.text = [NSString stringWithFormat:@"%d", [order.quantity intValue]];
+    NSNumberFormatter *decemalFormatter = [[NSNumberFormatter alloc] init];  
+    [decemalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+    self.quantityLabel.text = [decemalFormatter stringFromNumber:order.quantity];
     self.typeLabel.text = order.type;
     
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  

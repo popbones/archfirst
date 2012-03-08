@@ -362,7 +362,7 @@
         [alert show];
         return;
     }
-    order.quantity = [NSString stringWithString:self.quantity.text];
+    order.quantity = [NSNumber numberWithInt:[[NSString stringWithString:self.quantity.text] intValue]];
     
     if ([self.limit.text length] < 1 && [order.type isEqualToString:@"Limit"]) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Limited Price" message:@"Need to enter a limited price." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

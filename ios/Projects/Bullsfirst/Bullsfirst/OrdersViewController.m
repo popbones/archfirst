@@ -482,6 +482,9 @@
 
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
     [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
+    
+    NSNumberFormatter *decemalFormatter = [[NSNumberFormatter alloc] init];  
+    [decemalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
 
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
@@ -507,7 +510,7 @@
         label.text = order.instrumentSymbol;
         
         label = (UILabel *)[cell viewWithTag:5];
-        label.text = [NSString stringWithFormat:@"%d", [order.quantity intValue]];
+        label.text = [decemalFormatter stringFromNumber:order.quantity];
         
         if (order.limitPrice != nil) {
             label = (UILabel *)[cell viewWithTag:6];
@@ -565,7 +568,7 @@
                 
                 NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] floatValue]];
                 label = [[UILabel alloc] initWithFrame:quantityFrame];
-                label.text = [NSString stringWithFormat:@"%d", [quantity intValue]];
+                label.text = [decemalFormatter stringFromNumber:order.quantity];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
@@ -601,7 +604,7 @@
         label.text = order.instrumentSymbol;
         
         label = (UILabel *)[cell viewWithTag:5];
-        label.text = [NSString stringWithFormat:@"%d", [order.quantity intValue]];
+        label.text = [decemalFormatter stringFromNumber:order.quantity];
         
         if (order.limitPrice != nil) {
             label = (UILabel *)[cell viewWithTag:6];
@@ -660,7 +663,7 @@
                 
                 NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] floatValue]];
                 label = [[UILabel alloc] initWithFrame:quantityFrame];
-                label.text = [NSString stringWithFormat:@"%d", [quantity intValue]];
+                label.text = [decemalFormatter stringFromNumber:order.quantity];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
