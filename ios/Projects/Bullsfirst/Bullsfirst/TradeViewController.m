@@ -107,6 +107,7 @@
     
     if (self.position != nil) {
         order.accountName = self.position.accountName;
+        order.brokerageAccountID = self.position.accountID;
         accountDropDownCTL.label.text = self.position.accountName;
         
         order.instrumentSymbol = self.position.instrumentSymbol;
