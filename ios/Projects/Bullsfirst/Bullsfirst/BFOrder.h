@@ -59,6 +59,7 @@
                    term:(NSString*)theTerm
                    type:(NSString *)theType
              limitPrice:(BFMoney *)theLimitPrice
-         executionPrice:(BFMoney *)theExecutionPrice;
+         executionPrice:(BFMoney *)theExecutionPrice
+        executionsPrice:(NSDictionary *)theExecutionsPrice;
 
 @end

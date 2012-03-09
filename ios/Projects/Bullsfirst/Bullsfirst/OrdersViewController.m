@@ -566,7 +566,6 @@
                 [cell addSubview:label];
                 priceFrame.origin.y += 44;
                 
-                NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] floatValue]];
                 label = [[UILabel alloc] initWithFrame:quantityFrame];
                 label.text = [decemalFormatter stringFromNumber:order.quantity];
                 label.font = [UIFont systemFontOfSize:13.0];
@@ -661,7 +660,6 @@
                 [cell addSubview:label];
                 priceFrame.origin.y += 44;
                 
-                NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] floatValue]];
                 label = [[UILabel alloc] initWithFrame:quantityFrame];
                 label.text = [decemalFormatter stringFromNumber:order.quantity];
                 label.font = [UIFont systemFontOfSize:13.0];
