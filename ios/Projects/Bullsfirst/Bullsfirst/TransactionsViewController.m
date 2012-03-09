@@ -214,11 +214,27 @@
 
 #pragma mark - Table view data source
 
--(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+-(UIView *) tableView:(UITableView*) tableView viewForHeaderInSection:(NSInteger)section
 {
+    UIView* sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 30)];
+    sectionHeaderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"AccountDivider-Background.jpg"]];
+    
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(20, 8, 748, 22)];
     BFTransaction* transaction = [[transactions objectAtIndex:section] objectAtIndex:0];
-    return [NSString stringWithFormat:@"%@ - %d",transaction.accountName,transaction.accountId.intValue];
+    label.text = [NSString stringWithFormat:@"%@ - %d",transaction.accountName,transaction.accountId.intValue];
+    label.font = [UIFont systemFontOfSize:13];
+    label.textAlignment = UITextAlignmentLeft;
+    label.backgroundColor = [UIColor clearColor];
+    [label sizeToFit];
+    [sectionHeaderView addSubview:label];
+    return sectionHeaderView;
 }
+
+//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
+//{
+//    BFTransaction* transaction = [[transactions objectAtIndex:section] objectAtIndex:0];
+//    return [NSString stringWithFormat:@"%@ - %d",transaction.accountName,transaction.accountId.intValue];
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -252,7 +268,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44;
+    return 30;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
