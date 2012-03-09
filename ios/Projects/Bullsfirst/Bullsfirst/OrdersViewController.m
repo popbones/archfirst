@@ -143,8 +143,8 @@
     orderStatusDropdownCTL.label.font = [UIFont systemFontOfSize:13];
     [orderStatusDropdownView addSubview:orderStatusDropdownCTL];
     
-    [self refreshBTNClicked:nil];
     [self resetBTNClicked:nil];
+    [self applyBTNClicked:nil];
 }
 
 - (void)viewDidUnload
@@ -267,9 +267,10 @@
 }
 
 
-- (IBAction)refreshBTNClicked:(id)sender {   
-    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
-    [self.restServiceObject getRequestWithURL:url];    
+- (IBAction)refreshBTNClicked:(id)sender { 
+    [self applyBTNClicked:nil];
+//    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
+//    [self.restServiceObject getRequestWithURL:url];    
 }
 
 - (IBAction)dateDropdownClicked:(id)sender {
@@ -296,14 +297,18 @@
 }
 
 - (IBAction)resetBTNClicked:(id)sender {
-    fromDate = nil;
-    toDate = nil;
+    fromDate = [NSDate date];
+    toDate = [NSDate date];
     accountSelected = @"All";
     orderType = @"All";
     orderStatus = @"All";
+
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
     
-    fromDateDropdownCTL.label.text = @"From: All";
-    toDateDropdownCTL.label.text = @"To: All";
+    fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
+    toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
     accountDropdownCTL.label.text = [NSString stringWithFormat:@"Account: %@", accountSelected];
     orderDropdownCTL.label.text = [NSString stringWithFormat:@"Order: %@", orderType];
     orderStatusDropdownCTL.label.text = [NSString stringWithFormat:@"Order Status: %@", orderStatus];    
