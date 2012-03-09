@@ -26,6 +26,10 @@
 @property (strong, nonatomic) IBOutlet UILabel *allOrNoneLabel;
 @property (strong, nonatomic) IBOutlet UILabel *limitPriceLabel;
 @property (strong, nonatomic) IBOutlet UIActivityIndicatorView *spinner;
+@property (strong, nonatomic) IBOutlet UILabel *orderTypeLabel;
+@property (strong, nonatomic) IBOutlet UILabel *limitedPrice;
+@property (strong, nonatomic) IBOutlet UILabel *term;
+@property (strong, nonatomic) IBOutlet UILabel *allOrNone;
 
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 @property (strong, nonatomic) BullFirstWebServiceObject* estimateOrderServiceObject;

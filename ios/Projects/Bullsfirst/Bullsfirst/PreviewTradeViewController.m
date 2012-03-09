@@ -22,6 +22,10 @@
 @synthesize allOrNoneLabel;
 @synthesize limitPriceLabel;
 @synthesize spinner;
+@synthesize orderTypeLabel;
+@synthesize limitedPrice;
+@synthesize term;
+@synthesize allOrNone;
 @synthesize estimateOrderServiceObject;
 @synthesize estValue;
 @synthesize fee;
@@ -67,15 +71,27 @@
     NSNumberFormatter *decemalFormatter = [[NSNumberFormatter alloc] init];  
     [decemalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
     self.quantityLabel.text = [decemalFormatter stringFromNumber:order.quantity];
-    self.typeLabel.text = order.type;
-    
+    self.orderTypeLabel.text =order.type;
+
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
     [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 
-    if ([order.type isEqualToString:@"Limit"])
-        self.limitPriceLabel.text = [formatter stringFromNumber:order.limitPrice.amount];
-    else
-        self.limitPriceLabel.text = @"";
+    if ([order.type isEqualToString:@"Limit"]) {
+        limitPriceLabel.text = [formatter stringFromNumber:order.limitPrice.amount];
+        limitPriceLabel.hidden = NO;
+        limitedPrice.hidden = NO;
+        CGRect frame = CGRectMake(self.term.frame.origin.x, self.term.frame.origin.y+25, self.term.frame.size.width, self.term.frame.size.height);
+        self.term.frame = frame;
+        frame = CGRectMake(self.termLabel.frame.origin.x, self.termLabel.frame.origin.y+25, self.termLabel.frame.size.width, self.termLabel.frame.size.height);
+        self.termLabel.frame = frame;
+        frame = CGRectMake(self.allOrNoneLabel.frame.origin.x, self.allOrNoneLabel.frame.origin.y+25, self.allOrNoneLabel.frame.size.width, self.allOrNoneLabel.frame.size.height);
+        self.allOrNoneLabel.frame = frame;
+        frame = CGRectMake(self.allOrNone.frame.origin.x, self.allOrNone.frame.origin.y+25, self.allOrNone.frame.size.width, self.allOrNone.frame.size.height);
+        self.allOrNone.frame = frame;
+   } else {
+        limitPriceLabel.hidden = YES;
+        limitedPrice.hidden = YES;
+    }
     self.termLabel.text = order.term;
     if (order.allOrNone == YES)
         allOrNoneLabel.text = @"Yes";
@@ -158,6 +174,10 @@
     [self setEstValue:nil];
     [self setFee:nil];
     [self setTotalInclFee:nil];
+    [self setOrderTypeLabel:nil];
+    [self setLimitedPrice:nil];
+    [self setTerm:nil];
+    [self setAllOrNone:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
