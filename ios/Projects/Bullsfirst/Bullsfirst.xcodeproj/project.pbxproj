@@ -160,6 +160,12 @@
 		95C6A85F14DFE869004F023A /* app-icon-72x72.png in Resources */ = {isa = PBXBuildFile; fileRef = 95C6A85E14DFE868004F023A /* app-icon-72x72.png */; };
 		95D5003D150649E80076DB86 /* LogOut-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D5003B150649E70076DB86 /* LogOut-PushDown.png */; };
 		95D5003E150649E80076DB86 /* LogOut.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D5003C150649E80076DB86 /* LogOut.png */; };
+		95D6DCD3150A0F44004AEC63 /* AccountDivider-Background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95D6DCCD150A0F44004AEC63 /* AccountDivider-Background.jpg */; };
+		95D6DCD4150A0F44004AEC63 /* ApplyFilters-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D6DCCE150A0F44004AEC63 /* ApplyFilters-PushDown.png */; };
+		95D6DCD5150A0F44004AEC63 /* ApplyFilters.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D6DCCF150A0F44004AEC63 /* ApplyFilters.png */; };
+		95D6DCD6150A0F44004AEC63 /* Orders-FilterBar-Background.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 95D6DCD0150A0F44004AEC63 /* Orders-FilterBar-Background.jpg */; };
+		95D6DCD7150A0F44004AEC63 /* Reset-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D6DCD1150A0F44004AEC63 /* Reset-PushDown.png */; };
+		95D6DCD8150A0F44004AEC63 /* Reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 95D6DCD2150A0F44004AEC63 /* Reset.png */; };
 		AC0BAC6914F6132A005D70D3 /* PieChartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AC0BAC6814F6132A005D70D3 /* PieChartViewController.m */; };
 		AC1206F314F2180E00572819 /* login-button-inactive.png in Resources */ = {isa = PBXBuildFile; fileRef = AC1206F214F2180E00572819 /* login-button-inactive.png */; };
 		AC26C82814DBF67400ABD693 /* AuthenticationChallengeHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = AC26C81B14DBF67400ABD693 /* AuthenticationChallengeHandler.m */; };
@@ -403,6 +409,12 @@
 		95C6A85E14DFE868004F023A /* app-icon-72x72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "app-icon-72x72.png"; sourceTree = "<group>"; };
 		95D5003B150649E70076DB86 /* LogOut-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "LogOut-PushDown.png"; sourceTree = "<group>"; };
 		95D5003C150649E80076DB86 /* LogOut.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LogOut.png; sourceTree = "<group>"; };
+		95D6DCCD150A0F44004AEC63 /* AccountDivider-Background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "AccountDivider-Background.jpg"; sourceTree = "<group>"; };
+		95D6DCCE150A0F44004AEC63 /* ApplyFilters-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ApplyFilters-PushDown.png"; sourceTree = "<group>"; };
+		95D6DCCF150A0F44004AEC63 /* ApplyFilters.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ApplyFilters.png; sourceTree = "<group>"; };
+		95D6DCD0150A0F44004AEC63 /* Orders-FilterBar-Background.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "Orders-FilterBar-Background.jpg"; sourceTree = "<group>"; };
+		95D6DCD1150A0F44004AEC63 /* Reset-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Reset-PushDown.png"; sourceTree = "<group>"; };
+		95D6DCD2150A0F44004AEC63 /* Reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Reset.png; sourceTree = "<group>"; };
 		AC0BAC6714F6132A005D70D3 /* PieChartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PieChartViewController.h; sourceTree = "<group>"; };
 		AC0BAC6814F6132A005D70D3 /* PieChartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PieChartViewController.m; sourceTree = "<group>"; };
 		AC1206F214F2180E00572819 /* login-button-inactive.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "login-button-inactive.png"; sourceTree = "<group>"; };
@@ -558,6 +570,12 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				95D6DCCD150A0F44004AEC63 /* AccountDivider-Background.jpg */,
+				95D6DCCE150A0F44004AEC63 /* ApplyFilters-PushDown.png */,
+				95D6DCCF150A0F44004AEC63 /* ApplyFilters.png */,
+				95D6DCD0150A0F44004AEC63 /* Orders-FilterBar-Background.jpg */,
+				95D6DCD1150A0F44004AEC63 /* Reset-PushDown.png */,
+				95D6DCD2150A0F44004AEC63 /* Reset.png */,
 				54C2965B15095EFA004530D5 /* Minus.png */,
 				54C2965C15095EFA004530D5 /* Plus.png */,
 				543840F815065FE6001D6598 /* PlaceOrder-PushDown.png */,
@@ -1119,6 +1137,12 @@
 				543840FB15065FE6001D6598 /* PlaceOrder.png in Resources */,
 				54C2965D15095EFA004530D5 /* Minus.png in Resources */,
 				54C2965E15095EFA004530D5 /* Plus.png in Resources */,
+				95D6DCD3150A0F44004AEC63 /* AccountDivider-Background.jpg in Resources */,
+				95D6DCD4150A0F44004AEC63 /* ApplyFilters-PushDown.png in Resources */,
+				95D6DCD5150A0F44004AEC63 /* ApplyFilters.png in Resources */,
+				95D6DCD6150A0F44004AEC63 /* Orders-FilterBar-Background.jpg in Resources */,
+				95D6DCD7150A0F44004AEC63 /* Reset-PushDown.png in Resources */,
+				95D6DCD8150A0F44004AEC63 /* Reset.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
