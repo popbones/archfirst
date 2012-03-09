@@ -58,15 +58,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
-    
-    //Finding the date 2 months back
-    
     toDate = [NSDate date];
-    //    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    //    NSDateComponents *components= [[NSDateComponents alloc]init];
-    //    [components setMonth:-2];
-    //    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
     fromDate = [NSDate date];
     
     accountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, accountDropDownView.frame.size.width, accountDropDownView.frame.size.height)
@@ -181,11 +173,6 @@
     return sectionHeaderView;
 }
 
-//-(NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
-//{
-//    BFTransaction* transaction = [[transactions objectAtIndex:section] objectAtIndex:0];
-//    return [NSString stringWithFormat:@"%@ - %d",transaction.accountName,transaction.accountId.intValue];
-//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -198,23 +185,6 @@
     // Return the number of rows in the section.
     return ((NSArray*)[transactions objectAtIndex:section]).count;
 }
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    //    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-//    //    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-//    //    {
-//    //        return landscrapeTableHeaderView;
-//    //    } else {
-//    //        return portraitTableHeaderView;
-//    //    }
-//    
-//    UILabel* label = [[UILabel alloc]init];
-//    label.text = @"HEADING";
-//    [label sizeToFit];
-//    return label;
-//}
-
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
