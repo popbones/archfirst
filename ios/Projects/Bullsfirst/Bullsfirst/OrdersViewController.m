@@ -173,9 +173,9 @@
     if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
     {
         rect=resetBTN.frame;
-        resetBTN.frame = CGRectMake(912, rect.origin.y,rect.size.width, rect.size.height);
+        resetBTN.frame = CGRectMake(892, rect.origin.y,rect.size.width, rect.size.height);
         rect=applyBTN.frame;
-        applyBTN.frame = CGRectMake(912, rect.origin.y,rect.size.width, rect.size.height);
+        applyBTN.frame = CGRectMake(892, rect.origin.y,rect.size.width, rect.size.height);
         rect=fromDateDropdownView.frame;
         fromDateDropdownView.frame = CGRectMake(375, rect.origin.y,rect.size.width, rect.size.height);
         rect=toDateDropdownView.frame;
