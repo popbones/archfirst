@@ -27,60 +27,6 @@
 @implementation TransactionsViewController
 @synthesize transectionTBL,portraitTableHeaderView,landscrapeTableHeaderView,transactions,datedropdown,dropdown,toDateDropDownCTL,toDateDropDownView,fromDateDropDownCTL,fromDateDropDownView,accountDropDownCTL,accountDropDownView;
 
-#pragma mark - helper methods
-
--(NSString*) convertDateToRequiredFormat:(NSDate*) date
-{
-    if(date)
-    {
-        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
-        //        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
-        return [NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]];
-    }
-    else
-        return  nil;
-}
-
--(NSString*) convertDateToRequiredFormatToBeDisplayed:(NSDate*) date
-{
-    if(date)
-    {
-        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit) fromDate:date];
-        //        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d-%d-%d",[dateComponents year],[dateComponents month],[dateComponents day]]);
-        return [NSString stringWithFormat:@"%02d/%02d/%04d",[dateComponents month],[dateComponents day],[dateComponents year]];
-    }
-    else
-        return  @"";
-}
-
-
--(NSString*) convertDateTimeToRequiredFormat:(NSDate*) date
-{
-    if(date)
-    {
-        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
-        NSDateComponents* dateComponents = [gregorianCalendar components:(NSDayCalendarUnit|NSMonthCalendarUnit|NSYearCalendarUnit|NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit) fromDate:date];
-        NSString* meridianString;
-        if ([dateComponents hour] >= 12)
-        {
-            meridianString = [NSString stringWithString:@"PM"];
-            if([dateComponents hour]>12)
-                dateComponents.hour = dateComponents.hour - 12;
-        }
-        else
-            meridianString = [NSString stringWithString:@"AM"];
-        
-        //        BFDebugLog(@"DATE:%@",[NSString stringWithFormat:@"%d/%d/%d %d:%d:%d %@",[dateComponents year],[dateComponents month],[dateComponents day],[dateComponents hour],[dateComponents minute],[dateComponents second],meridianString]);
-        return [NSString stringWithFormat:@"%02d/%02d/%04d %02d:%02d:%02d %@",[dateComponents month],[dateComponents day],[dateComponents year],[dateComponents hour],[dateComponents minute],[dateComponents second],meridianString];
-    }
-    else
-        return  nil;
-}
-
-
-
 #pragma  mark - view controller life cycle
 
 - (id)init
@@ -132,13 +78,18 @@
     fromDateDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, fromDateDropDownView.frame.size.width, fromDateDropDownView.frame.size.height)
                                                          target:self
                                                          action:@selector(showDateDropdownMenu:)];
-    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+
+    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
     [fromDateDropDownView addSubview:fromDateDropDownCTL];
     
     toDateDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, toDateDropDownView.frame.size.width, toDateDropDownView.frame.size.height)
                                                           target:self
                                                           action:@selector(showDateDropdownMenu:)];
-    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
+    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
     [toDateDropDownView addSubview:toDateDropDownCTL];
 
     
@@ -284,6 +235,10 @@
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
     [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
 
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy/MM/dd hh:mm a"];
+
     UITableViewCell* cell = transactionCell;
     if(toOrientation ==UIInterfaceOrientationLandscapeLeft || toOrientation ==UIInterfaceOrientationLandscapeRight)
     {
@@ -291,7 +246,7 @@
         cell = transactionCell;
         
         UILabel* label = (UILabel*) [cell viewWithTag:1];
-        label.text = [self convertDateTimeToRequiredFormat:transaction.creationTime];
+        label.text = [dateFormat stringFromDate:transaction.creationTime];
         //label.text = transaction.creationTime;
         label = (UILabel*) [cell viewWithTag:2];
         label.text = transaction.transactionType;
@@ -311,7 +266,7 @@
         cell = transactionCell;
         
         UILabel* label = (UILabel*) [cell viewWithTag:1];
-        label.text = [self convertDateTimeToRequiredFormat:transaction.creationTime];
+        label.text = [dateFormat stringFromDate:transaction.creationTime];
         //label.text = transaction.creationTime;
         label = (UILabel*) [cell viewWithTag:2];
         label.text = transaction.transactionType;
@@ -478,9 +433,11 @@
         [datedropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
     }
     
-    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
-    
-    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
+    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
     
    
     
@@ -529,9 +486,12 @@
 {
     toDate = [NSDate date];
     fromDate= [NSDate date];
-    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
-     
-     toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
+    
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
+    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
         
     accountDropDownCTL.label.text = @"All Accounts";
     selectedAccountId = -1;
@@ -554,13 +514,17 @@
         accountParam = [NSString stringWithFormat:@"&accountId=%d",selectedAccountId];
     }
     
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+
     if(fromDate == nil)
     {
         fromDateParam = [NSString stringWithString:@""];
     }
     else
     {
-        fromDateParam = [NSString stringWithFormat:@"&fromDate=%@",[self convertDateToRequiredFormat:fromDate]];
+        fromDateParam = [NSString stringWithFormat:@"&fromDate=%@",[dateFormat stringFromDate:fromDate]];
     }
     
     if(toDate == nil)
@@ -569,7 +533,7 @@
     }
     else
     {
-        toDateParam = [NSString stringWithFormat:@"&toDate=%@",[self convertDateToRequiredFormat:toDate]];
+        toDateParam = [NSString stringWithFormat:@"&toDate=%@",[dateFormat stringFromDate:toDate]];
     }
     
     
@@ -587,17 +551,18 @@
 
 - (void)dateSelectionChanged:(DatePickerViewController *)controller
 {
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
     if(currentSelectedDateType == ToDate)
     {
         toDate = controller.datePicker.date;
-        toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
-        
+        toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
     }
     else
     {
         fromDate = controller.datePicker.date;
-        fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
-    
+        fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
     }
 }
 
@@ -639,15 +604,14 @@
     [transectionTBL reloadData];
     selectedAccountId = -1;
     toDate = [NSDate date];
-    //    NSCalendar *gregorian = [[NSCalendar alloc]initWithCalendarIdentifier:NSGregorianCalendar];
-    //    NSDateComponents *components= [[NSDateComponents alloc]init];
-    //    [components setMonth:-2];
-    //    fromDate = [gregorian dateByAddingComponents:components toDate:toDate options:0];
     
+    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+    [dateFormat setDateFormat:@"yyyy-MM-dd"];
+
     fromDate = [NSDate date];
-    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[self convertDateToRequiredFormatToBeDisplayed:fromDate]];
-    
-    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[self convertDateToRequiredFormatToBeDisplayed:toDate]];
+    fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
+    toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
     
     
     accountDropDownCTL.label.text = @"All Accounts";
