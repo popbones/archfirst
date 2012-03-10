@@ -234,11 +234,45 @@
 
 -(void)requestSucceeded:(NSData *)data
 {    
-    orders = [BFOrder ordersFromJSONData:data];
+    NSMutableArray* tempOrders = [BFOrder ordersFromJSONData:data];
+    
+    NSSortDescriptor* sortByAccountName=[[NSSortDescriptor alloc] initWithKey:@"accountName" ascending:YES];
+    NSSortDescriptor* sortByAccountId = [[NSSortDescriptor alloc] initWithKey:@"brokerageAccountID" ascending:NO];
+    
+    [tempOrders sortUsingDescriptors:[NSArray arrayWithObjects:sortByAccountName,sortByAccountId, nil]];
+    
     expanedRowSet = [[NSMutableArray alloc] init];
-    for (int i=0; i<[orders count];i++){
-        [expanedRowSet addObject:[NSNumber numberWithBool:NO]];
+    orders = [[NSMutableArray alloc]init];
+    NSNumber* currentAccountId;
+    NSNumber* previousAccountId = [NSNumber numberWithInt:-1];
+    NSMutableArray* subArray=[[NSMutableArray alloc] init];
+    NSMutableArray* subExpandArray=[[NSMutableArray alloc] init];
+    for (BFOrder *order in tempOrders) 
+    {
+        currentAccountId = order.brokerageAccountID;
+        if(currentAccountId.intValue != previousAccountId.intValue)
+        {
+            if(subArray.count !=0)
+            {
+                [orders addObject:subArray];
+                subArray=[[NSMutableArray alloc] init];
+                [expanedRowSet addObject:subExpandArray];
+                subExpandArray=[[NSMutableArray alloc] init];
+            }
+        }
+        BFDebugLog(@"Adding to SubArray %d",order.brokerageAccountID.intValue);
+        [subArray addObject:order];
+        [subExpandArray addObject:[NSNumber numberWithBool:NO]];
+        
+        previousAccountId = order.brokerageAccountID;
     }
+    if(subArray.count !=0)
+    {
+        BFDebugLog(@"Adding to Array");
+        [orders addObject:subArray];
+        [expanedRowSet addObject:subExpandArray];
+    }
+
     [orderTBL reloadData];
 }
 
@@ -267,11 +301,13 @@
 {
     expandPositionBTN *button = (expandPositionBTN *)sender;
     
-    NSNumber *expand_Row = [expanedRowSet objectAtIndex:button.row];
+    NSNumber *expand_Row = [((NSArray*)[expanedRowSet objectAtIndex:button.indexPath.section]) objectAtIndex:button.indexPath.row];
     if (expand_Row != nil && [expand_Row boolValue] == YES) {
-        [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:NO]];
+        NSMutableArray *tempArray =[expanedRowSet objectAtIndex:button.indexPath.section];
+        [tempArray replaceObjectAtIndex:button.indexPath.row withObject:[NSNumber numberWithBool:NO]];
     } else {
-        [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:YES]];
+        NSMutableArray *tempArray =[expanedRowSet objectAtIndex:button.indexPath.section];
+        [tempArray replaceObjectAtIndex:button.indexPath.row withObject:[NSNumber numberWithBool:YES]];
     }
     [orderTBL reloadData];
 }
@@ -455,46 +491,50 @@
 #pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {   
-    return nil;
-    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
-    {
-        return landscrapeTitleBar;
-    } else {
-        return portraitTitleBar;
-    }
+    UIView* sectionHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 1024, 30)];
+    sectionHeaderView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"AccountDivider-Background.jpg"]];
+    
+    UILabel* label = [[UILabel alloc] initWithFrame:CGRectMake(20, 8, 748, 22)];
+    BFOrder *order = [[orders objectAtIndex:section] objectAtIndex:0];
+    label.text = [NSString stringWithFormat:@"%@ - %d",order.accountName,order.brokerageAccountID.intValue];
+    label.font = [UIFont systemFontOfSize:13];
+    label.textAlignment = UITextAlignmentLeft;
+    label.backgroundColor = [UIColor clearColor];
+    [label sizeToFit];
+    [sectionHeaderView addSubview:label];
+    return sectionHeaderView;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 0;
+    return 30;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSNumber *expand = [expanedRowSet objectAtIndex:indexPath.row];
+    NSNumber *expand = [((NSArray*)[expanedRowSet objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
     if (expand == nil || [expand boolValue] == NO)
         return 44;
     
-    BFOrder *order = [orders objectAtIndex:indexPath.row];
+    BFOrder *order = [((NSArray*)[orders objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
     return 44*(1+[order.executionsPrice count]);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     // Return the number of sections.
-    return 1;
+    return [orders count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     // Return the number of rows in the section.
-    return [orders count];
+    return  ((NSArray*)[orders objectAtIndex:section]).count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
-    BFOrder *order = [orders objectAtIndex:indexPath.row];
+    BFOrder *order = [((NSArray*)[orders objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
 
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
     [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
@@ -538,7 +578,7 @@
             label = (UILabel *)[cell viewWithTag:7];
             label.text = [formatter stringFromNumber:order.executionPrice.amount];
             [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
-            expand.row = indexPath.row;
+            expand.indexPath = indexPath;
             [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
         } else {
             expand.hidden = YES;
@@ -560,7 +600,7 @@
             cancelOrderBTN.hidden = YES;
         }
         
-        NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
+        NSNumber *expand_Row = [((NSArray*)[expanedRowSet objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
         if (expand_Row != nil && [expand_Row boolValue] == YES) {
             [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
             CGRect frame = cell.frame;
@@ -631,7 +671,7 @@
             label = (UILabel *)[cell viewWithTag:7];
             label.text = [formatter stringFromNumber:order.executionPrice.amount];
             [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
-            expand.row = indexPath.row;
+            expand.indexPath = indexPath;
             [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
         } else {
             expand.hidden = YES;
@@ -654,7 +694,7 @@
         }
         
         
-        NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
+        NSNumber *expand_Row = [((NSArray*)[expanedRowSet objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
         if (expand_Row != nil && [expand_Row boolValue] == YES) {
             [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
             CGRect frame = cell.frame;

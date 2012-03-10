@@ -10,7 +10,9 @@
 
 @interface expandPositionBTN : UIButton {
     int row;
+    NSIndexPath *indexPath;
 }
 @property (nonatomic, assign) int row;
+@property (nonatomic, retain) NSIndexPath *indexPath;
 
 @end
