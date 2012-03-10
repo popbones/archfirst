@@ -172,33 +172,43 @@
     CGRect rect=orderFilterView.frame;
     if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
     {
+        rect=symbod.frame;
+        symbod.frame = CGRectMake(rect.origin.x, rect.origin.y,80, rect.size.height);
         rect=resetBTN.frame;
-        resetBTN.frame = CGRectMake(892, rect.origin.y,rect.size.width, rect.size.height);
+        resetBTN.frame = CGRectMake(885, rect.origin.y,rect.size.width, rect.size.height);
         rect=applyBTN.frame;
-        applyBTN.frame = CGRectMake(892, rect.origin.y,rect.size.width, rect.size.height);
+        applyBTN.frame = CGRectMake(885, rect.origin.y,rect.size.width, rect.size.height);
+        rect=accountDropdownView.frame;
+        accountDropdownView.frame = CGRectMake(204, rect.origin.y,rect.size.width, rect.size.height);
         rect=fromDateDropdownView.frame;
-        fromDateDropdownView.frame = CGRectMake(375, rect.origin.y,rect.size.width, rect.size.height);
+        fromDateDropdownView.frame = CGRectMake(475, rect.origin.y,rect.size.width, rect.size.height);
         rect=toDateDropdownView.frame;
-        toDateDropdownView.frame = CGRectMake(700, rect.origin.y,rect.size.width, rect.size.height);
+        toDateDropdownView.frame = CGRectMake(655, rect.origin.y,rect.size.width, rect.size.height);
         rect=orderDropdownView.frame;
-        orderDropdownView.frame = CGRectMake(375, rect.origin.y,rect.size.width, rect.size.height);
+        orderDropdownView.frame = CGRectMake(204, rect.origin.y,rect.size.width, rect.size.height);
         rect=orderStatusDropdownView.frame;
-        orderStatusDropdownView.frame = CGRectMake(650, rect.origin.y,rect.size.width, rect.size.height);
+        orderStatusDropdownView.frame = CGRectMake(475, rect.origin.y,rect.size.width, rect.size.height);
+        orderTBL.tableHeaderView = landscrapeTitleBar;
     }
     else
     {        
+        rect=symbod.frame;
+        symbod.frame = CGRectMake(rect.origin.x, rect.origin.y,40, rect.size.height);
         rect=resetBTN.frame;
-        resetBTN.frame = CGRectMake(630, rect.origin.y,rect.size.width, rect.size.height);
+        resetBTN.frame = CGRectMake(640, rect.origin.y,rect.size.width, rect.size.height);
         rect=applyBTN.frame;
-        applyBTN.frame = CGRectMake(630, rect.origin.y,rect.size.width, rect.size.height);
+        applyBTN.frame = CGRectMake(640, rect.origin.y,rect.size.width, rect.size.height);
+        rect=accountDropdownView.frame;
+        accountDropdownView.frame = CGRectMake(114, rect.origin.y,rect.size.width, rect.size.height);
         rect=fromDateDropdownView.frame;
-        fromDateDropdownView.frame = CGRectMake(245, rect.origin.y,rect.size.width, rect.size.height);
+        fromDateDropdownView.frame = CGRectMake(287, rect.origin.y,rect.size.width, rect.size.height);
         rect=toDateDropdownView.frame;
-        toDateDropdownView.frame = CGRectMake(440, rect.origin.y,rect.size.width, rect.size.height);
+        toDateDropdownView.frame = CGRectMake(467, rect.origin.y,rect.size.width, rect.size.height);
         rect=orderDropdownView.frame;
-        orderDropdownView.frame = CGRectMake(245, rect.origin.y,rect.size.width, rect.size.height);
+        orderDropdownView.frame = CGRectMake(114, rect.origin.y,rect.size.width, rect.size.height);
         rect=orderStatusDropdownView.frame;
-        orderStatusDropdownView.frame = CGRectMake(390, rect.origin.y,rect.size.width, rect.size.height);
+        orderStatusDropdownView.frame = CGRectMake(287, rect.origin.y,rect.size.width, rect.size.height);
+        orderTBL.tableHeaderView = portraitTitleBar;
     }
     [orderTBL reloadData];    
 }
@@ -310,7 +320,7 @@
     fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
     toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
     accountDropdownCTL.label.text = [NSString stringWithFormat:@"Account: %@", accountSelected];
-    orderDropdownCTL.label.text = [NSString stringWithFormat:@"Order: %@", orderType];
+    orderDropdownCTL.label.text = [NSString stringWithFormat:@"Action: %@", orderType];
     orderStatusDropdownCTL.label.text = [NSString stringWithFormat:@"Order Status: %@", orderStatus];    
 }
 
@@ -444,7 +454,8 @@
 
 #pragma mark - Table view data source
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+{   
+    return nil;
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
@@ -456,7 +467,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 44;
+    return 0;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -502,7 +513,7 @@
         label = (UILabel *)[cell viewWithTag:1];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
-        [dateFormat setDateFormat:@"MM/dd/yyyy"];
+        [dateFormat setDateFormat:@"MM-dd-yyyy"];
         label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:order.creationTime]];
         
         label = (UILabel *)[cell viewWithTag:2];
@@ -595,7 +606,7 @@
         label = (UILabel *)[cell viewWithTag:1];
         NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
         [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
-        [dateFormat setDateFormat:@"MM/dd/yyyy"];
+        [dateFormat setDateFormat:@"MM-dd-yyyy"];
         label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:order.creationTime]];
         
         label = (UILabel *)[cell viewWithTag:2];
@@ -767,7 +778,7 @@
             break;
         }
         case 4:
-            orderDropdownCTL.label.text = [NSString stringWithFormat:@"Order: %@", controller.selected];
+            orderDropdownCTL.label.text = [NSString stringWithFormat:@"Action: %@", controller.selected];
             orderType = [NSString stringWithString:controller.selected];
             break;
             
