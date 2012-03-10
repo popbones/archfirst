@@ -175,7 +175,7 @@
         
         expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
         [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
-        expand.row = indexPath.row;
+        expand.indexPath = indexPath;
         [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
 
 
@@ -346,7 +346,7 @@
         
         expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
         [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
-        expand.row = indexPath.row;
+        expand.indexPath = indexPath;
         [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
         
         UILabel *label;
@@ -510,11 +510,11 @@
 {
     expandPositionBTN *button = (expandPositionBTN *)sender;
     
-    NSNumber *expand_Row = [expanedRowSet objectAtIndex:button.row];
+    NSNumber *expand_Row = [expanedRowSet objectAtIndex:button.indexPath.row];
     if (expand_Row != nil && [expand_Row boolValue] == YES) {
-        [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:NO]];
+        [expanedRowSet replaceObjectAtIndex:button.indexPath.row withObject:[NSNumber numberWithBool:NO]];
     } else {
-        [expanedRowSet replaceObjectAtIndex:button.row withObject:[NSNumber numberWithBool:YES]];
+        [expanedRowSet replaceObjectAtIndex:button.indexPath.row withObject:[NSNumber numberWithBool:YES]];
     }
     [positionTBL reloadData];
 }

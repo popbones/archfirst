@@ -9,7 +9,6 @@
 #import "expandPositionBTN.h"
 
 @implementation expandPositionBTN
-@synthesize row;
 @synthesize indexPath;
 
 @end
