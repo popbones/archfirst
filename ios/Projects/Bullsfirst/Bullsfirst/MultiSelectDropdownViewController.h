@@ -24,5 +24,6 @@
 @interface MultiSelectDropdownViewController : DropdownViewController
 
 @property (strong, nonatomic) NSMutableSet *selectedSet;
+@property (strong, nonatomic) NSMutableSet *selectedCells;
 
 @end
