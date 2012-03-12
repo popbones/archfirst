@@ -97,14 +97,16 @@
 									<int key="NSColorSpace">3</int>
 									<bytes key="NSWhite">MC41AA</bytes>
 								</object>
+								<object class="NSCustomResource" key="IBUIHighlightedImage" id="258700560">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">Reset-PushDown.png</string>
+								</object>
+								<reference key="IBUISelectedImage" ref="258700560"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">Reset.png</string>
 								</object>
-								<object class="NSCustomResource" key="IBUIHighlightedBackgroundImage">
-									<string key="NSClassName">NSImage</string>
-									<string key="NSResourceName">Reset-PushDown.png</string>
-								</object>
+								<reference key="IBUIHighlightedBackgroundImage" ref="258700560"/>
 								<object class="IBUIFontDescription" key="IBUIFontDescription" id="315028600">
 									<int key="type">1</int>
 									<double key="pointSize">15</double>
@@ -132,6 +134,11 @@
 									<bytes key="NSRGB">MC4xOTYwNzg0MzQ2IDAuMzA5ODAzOTMyOSAwLjUyMTU2ODY1NgA</bytes>
 								</object>
 								<reference key="IBUINormalTitleShadowColor" ref="823680134"/>
+								<object class="NSCustomResource" key="IBUIHighlightedImage" id="133107065">
+									<string key="NSClassName">NSImage</string>
+									<string key="NSResourceName">ApplyFilters-PushDown.png</string>
+								</object>
+								<reference key="IBUISelectedImage" ref="133107065"/>
 								<object class="NSCustomResource" key="IBUINormalImage">
 									<string key="NSClassName">NSImage</string>
 									<string key="NSResourceName">ApplyFilters.png</string>
@@ -712,8 +719,9 @@
 				<string key="78.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="8.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
 				<string key="82.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-				<real value="0.0" key="82.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
+				<real value="2" key="82.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 				<string key="83.IBPluginDependency">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
+				<real value="2" key="83.IBUIButtonInspectorSelectedStateConfigurationMetadataKey"/>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
@@ -832,6 +840,7 @@
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="ApplyFilters-PushDown.png">{120, 34}</string>
 			<string key="ApplyFilters.png">{120, 34}</string>
 			<string key="Reset-PushDown.png">{120, 34}</string>
 			<string key="Reset.png">{120, 34}</string>
