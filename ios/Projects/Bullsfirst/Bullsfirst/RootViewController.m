@@ -2,7 +2,7 @@
 //  RootViewController.h
 //  Bullsfirst
 //
-//  Created by Subramanian R
+//  Created by Subramanian Ravi
 //  Copyright 2012 Archfirst
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
