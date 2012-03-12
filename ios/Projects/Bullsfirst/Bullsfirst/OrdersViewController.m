@@ -668,8 +668,9 @@
                 [cell addSubview:label];
                 priceFrame.origin.y += 44;
                 
+                NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] intValue]];
                 label = [[UILabel alloc] initWithFrame:quantityFrame];
-                label.text = [decemalFormatter stringFromNumber:order.quantity];
+                label.text = [decemalFormatter stringFromNumber:quantity];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
@@ -762,8 +763,9 @@
                 [cell addSubview:label];
                 priceFrame.origin.y += 44;
                 
+                NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] intValue]];
                 label = [[UILabel alloc] initWithFrame:quantityFrame];
-                label.text = [decemalFormatter stringFromNumber:order.quantity];
+                label.text = [decemalFormatter stringFromNumber:quantity];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];

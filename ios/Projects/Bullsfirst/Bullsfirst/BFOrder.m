@@ -141,7 +141,7 @@
             NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] floatValue]];
             totalQty += [quantity floatValue];
         }
-        executionPrice = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:totalAmount/totalQty] currency:@""];
+        executionPrice = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:(totalAmount/totalQty)*totalQty] currency:@""];
     }
 
     return [[BFOrder alloc] initWithAccountID:accountID
