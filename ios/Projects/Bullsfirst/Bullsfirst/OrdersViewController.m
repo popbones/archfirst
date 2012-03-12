@@ -336,6 +336,20 @@
         CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
         
         DatePickerViewController *controller = (DatePickerViewController*)datedropdown.contentViewController;
+        if(dropdownCTL.tag == 1)
+        {
+            if(fromDate == nil)
+                [controller.datePicker setDate:[NSDate date]];
+            else
+                [controller.datePicker setDate:fromDate];
+        }
+        else if (dropdownCTL.tag == 2)
+        {
+            if(toDate == nil)
+                [controller.datePicker setDate:[NSDate date]];
+            else
+                [controller.datePicker setDate:toDate];
+        }
         controller.tag = dropdownCTL.tag;
         [datedropdown setPopoverContentSize:controller.view.frame.size];
         [datedropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
