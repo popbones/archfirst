@@ -49,6 +49,7 @@
 
 @property (strong, nonatomic) UIPopoverController *datedropdown;
 @property (strong, nonatomic) UIPopoverController *dropdown;
+@property (strong, nonatomic) UIPopoverController *multiSelectdropdown;
 
 @property (retain, nonatomic) NSDate *fromDate;
 @property (retain, nonatomic) NSDate *toDate;

@@ -25,6 +25,7 @@
 #import "BFBrokerageAccountStore.h"
 #import "BFBrokerageAccount.h"
 #import "expandPositionBTN.h"
+#import "MultiSelectDropdownViewController.h"
 
 @implementation OrdersViewController
 @synthesize resetBTN;
@@ -57,6 +58,7 @@
 @synthesize orderStatusDropdownView;
 @synthesize orderStatusDropdownCTL;
 @synthesize expanedRowSet;
+@synthesize multiSelectdropdown;
 
 - (id)init
 {
@@ -138,7 +140,7 @@
     
     orderStatusDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, orderStatusDropdownView.frame.size.width, orderStatusDropdownView.frame.size.height)
                                                              target:self
-                                                             action:@selector(dropDownClicked:)];
+                                                             action:@selector(multSelectDropDownClicked:)];
     orderStatusDropdownCTL.tag = 5;
     orderStatusDropdownCTL.label.font = [UIFont systemFontOfSize:13];
     [orderStatusDropdownView addSubview:orderStatusDropdownCTL];
@@ -449,14 +451,6 @@
             
             break;
             
-        case 5:
-            selections = [NSArray arrayWithObjects:@"All", @"PendingNew", @"New", @"PartiallyFilled", @"Filled", @"PendingCancel", @"Canceled", @"DoneForDay", nil];
-            size = [@"PartiallyFilled" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
-            size.height = [selections count] * 44;
-            size.width += 20;
-            
-            break;
-            
         default:
             break;
     }
@@ -469,9 +463,6 @@
         controller.selections = selections;
         controller.tag = dropdownCTL.tag;
         controller.delegate = self;
-        controller.multiSelect = NO;
-        if (dropdownCTL.tag == 5)
-            controller.multiSelect = YES;
         [dropdown setPopoverContentSize:size];
     }
     if ([dropdown isPopoverVisible]) {
@@ -486,6 +477,48 @@
         [controller.selectionsTBL reloadData];
         [dropdown setPopoverContentSize:size];
         [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
+}
+
+- (IBAction)multSelectDropDownClicked:(id)sender {
+    DropDownControl *dropdownCTL = sender;
+    NSArray *selections;
+    CGSize size;
+    switch (dropdownCTL.tag) {
+        case 5:
+            selections = [NSArray arrayWithObjects:@"All", @"PendingNew", @"New", @"PartiallyFilled", @"Filled", @"PendingCancel", @"Canceled", @"DoneForDay", nil];
+            size = [@"PartiallyFilled" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
+            size.height = [selections count] * 44;
+            size.width += 20;
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+    if (!multiSelectdropdown) {
+        MultiSelectDropdownViewController *controller = [[MultiSelectDropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+        
+        multiSelectdropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = multiSelectdropdown;
+        controller.selections = selections;
+        controller.tag = dropdownCTL.tag;
+        controller.delegate = self;
+        [multiSelectdropdown setPopoverContentSize:size];
+    }
+    if ([multiSelectdropdown isPopoverVisible]) {
+        [multiSelectdropdown dismissPopoverAnimated:YES];
+    } else {
+        CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+        CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
+        
+        MultiSelectDropdownViewController *controller = (MultiSelectDropdownViewController *)dropdown.contentViewController;
+        controller.tag = dropdownCTL.tag;
+        controller.selections = selections;
+        [controller.selectionsTBL reloadData];
+        [multiSelectdropdown setPopoverContentSize:size];
+        [multiSelectdropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
 }
 
@@ -824,26 +857,44 @@
 
 - (void)selectionChanged:(DropdownViewController *)controller
 {
-    switch (controller.tag) {
-        case 3: {
-            accountDropdownCTL.label.text = [NSString stringWithFormat:@"Account: %@", controller.selected];
-            accountSelected = [NSString stringWithString:controller.selected];
-            break;
+    // Make sure this test happen first becasue MultiSelectDropdownViewController is a subclass of DropdownViewController
+    if ([controller isKindOfClass:[MultiSelectDropdownViewController class]]){
+        
+        switch (controller.tag) {
+            case 5: {
+                MultiSelectDropdownViewController *multiSelect = (MultiSelectDropdownViewController *)controller;
+                NSString *selected = @"";
+                for (NSString *tmp in multiSelect.selectedSet) {
+                    selected = [selected stringByAppendingFormat:@"%@, ", tmp]; 
+                }
+                orderStatusDropdownCTL.label.text = [NSString stringWithFormat:@"Order Status: %@", selected];
+                break;
+            } 
+            default:
+                break;
         }
-        case 4:
-            orderDropdownCTL.label.text = [NSString stringWithFormat:@"Action: %@", controller.selected];
-            orderType = [NSString stringWithString:controller.selected];
-            break;
-            
-        case 5:
-            orderStatusDropdownCTL.label.text = [NSString stringWithFormat:@"Order Status: %@", controller.selected];
-            orderStatus = [NSString stringWithString:controller.selected];
-            break;
-            
-        default:
-            break;
+        return;
     }
     
+    if ([controller isKindOfClass:[DropdownViewController class]]){
+        
+        switch (controller.tag) {
+            case 3: {
+                accountDropdownCTL.label.text = [NSString stringWithFormat:@"Account: %@", controller.selected];
+                accountSelected = [NSString stringWithString:controller.selected];
+                break;
+            }
+            case 4:
+                orderDropdownCTL.label.text = [NSString stringWithFormat:@"Action: %@", controller.selected];
+                orderType = [NSString stringWithString:controller.selected];
+                break;
+                
+            default:
+                break;
+        }
+        return;
+    }
+ 
 }
 
 -(void) datePickerCleared:(DatePickerViewController *) controller
