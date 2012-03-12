@@ -168,8 +168,6 @@
     pieChartViewController.chartTitleLabel = chartTitle;
     [pieChartViewController setView:chartView];
     [pieChartViewController setPieChartView:pieChartView];
-    rightBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;
-    leftBorderView.layer.backgroundColor=[UIColor colorWithRed:39/255.0 green:39/255.0 blue:39/255.0 alpha:1].CGColor;    orientation=[[UIDevice currentDevice] orientation];
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
@@ -199,7 +197,7 @@
     if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
     {
         CGRect rect=accountsTable.frame;
-        accountsTable.frame = CGRectMake(rect.origin.x, rect.origin.y,620,699-44);
+        accountsTable.frame = CGRectMake(rect.origin.x, rect.origin.y,620,655);
         rect=accountNameLBL.frame;
         accountNameLBL.frame = CGRectMake(20, rect.origin.y, rect.size.width, rect.size.height);
         rect = accountNumberLBL.frame;
@@ -210,11 +208,7 @@
         cashLBL.frame = CGRectMake(360, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
         actionLBL.frame = CGRectMake(554, rect.origin.y, rect.size.width, rect.size.height);
-        rect=leftBorderView.frame;
-        leftBorderView.frame=CGRectMake(rect.origin.x, rect.origin.y,1,699);
-        rect=rightBorderView.frame;
-        rightBorderView.frame=CGRectMake(1023, 0,1,699);
-
+        chartView.hidden = NO;
     }
     else
     {
@@ -231,11 +225,7 @@
         cashLBL.frame = CGRectMake(490, rect.origin.y, rect.size.width, rect.size.height);
         rect = actionLBL.frame;
         actionLBL.frame = CGRectMake(680, rect.origin.y, rect.size.width, rect.size.height);
-        rect=leftBorderView.frame;
-        leftBorderView.frame=CGRectMake(rect.origin.x, rect.origin.y,1,920);
-        rect=rightBorderView.frame;
-        rightBorderView.frame=CGRectMake(767, 0, 1, 920);
-
+        chartView.hidden = YES;
     }
     [accountsTable reloadData];
 }
