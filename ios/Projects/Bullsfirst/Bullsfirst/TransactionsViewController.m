@@ -335,19 +335,16 @@
         {
             if(subArray.count !=0)
             {
-                BFDebugLog(@"Adding to Array");
                 [transactions addObject:subArray];
                 subArray=[[NSMutableArray alloc] init];
             }
         }
-        BFDebugLog(@"Adding to SubArray %d",tempTransaction.accountId.intValue);
         [subArray addObject:tempTransaction];
         
         previousAccountId = tempTransaction.accountId;
     }
     if(subArray.count !=0)
     {
-        BFDebugLog(@"Adding to Array");
         [transactions addObject:subArray];
     }
     

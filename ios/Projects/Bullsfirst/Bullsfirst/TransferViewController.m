@@ -207,12 +207,10 @@
     
     [amountDic setValue:[NSNumber numberWithInt:[pricePaid.text intValue]] forKey:kAmount];
     [amountDic setValue:@"USD" forKey:kCurrency];
-    NSLog(@"%@",toAccountID);
     [jsonDic setValue:toAccountID forKey:kToAccountId];
     [jsonDic setValue:amountDic forKey:kPricePaidPerShare];
     [jsonDic setValue:[NSNumber numberWithInt:[quantity.text intValue]] forKey:kQuantity];
     [jsonDic setValue:symbol.text forKey:kSymbol];
-    NSLog(@"%@",jsonDic);
     NSError *err;
     NSData *jsonBodyData = [NSJSONSerialization dataWithJSONObject:jsonDic options:0 error:&err];
     NSURL *url= [NSURL URLWithString:urlString];

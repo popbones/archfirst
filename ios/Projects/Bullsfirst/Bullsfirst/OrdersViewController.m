@@ -258,7 +258,6 @@
                 subExpandArray=[[NSMutableArray alloc] init];
             }
         }
-        BFDebugLog(@"Adding to SubArray %d",order.brokerageAccountID.intValue);
         [subArray addObject:order];
         [subExpandArray addObject:[NSNumber numberWithBool:NO]];
         
@@ -266,7 +265,6 @@
     }
     if(subArray.count !=0)
     {
-        BFDebugLog(@"Adding to Array");
         [orders addObject:subArray];
         [expanedRowSet addObject:subExpandArray];
     }
