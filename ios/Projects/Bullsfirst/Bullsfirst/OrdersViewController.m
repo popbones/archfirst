@@ -442,7 +442,7 @@
         }
             
         case 4:
-            selections = [NSArray arrayWithObjects:@"Buy", @"Sell", nil];
+            selections = [NSArray arrayWithObjects:@"All", @"Buy", @"Sell", nil];
             size = [@"Buy" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
             size.width += 20;
@@ -450,7 +450,7 @@
             break;
             
         case 5:
-            selections = [NSArray arrayWithObjects:@"PendingNew", @"New", @"PartiallyFilled", @"Filled", @"PendingCancel", @"Canceled", @"DoneForDay", nil];
+            selections = [NSArray arrayWithObjects:@"All", @"PendingNew", @"New", @"PartiallyFilled", @"Filled", @"PendingCancel", @"Canceled", @"DoneForDay", nil];
             size = [@"PartiallyFilled" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
             size.width += 20;
@@ -469,6 +469,9 @@
         controller.selections = selections;
         controller.tag = dropdownCTL.tag;
         controller.delegate = self;
+        controller.multiSelect = NO;
+        if (dropdownCTL.tag == 5)
+            controller.multiSelect = YES;
         [dropdown setPopoverContentSize:size];
     }
     if ([dropdown isPopoverVisible]) {
