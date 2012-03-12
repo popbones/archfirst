@@ -80,6 +80,7 @@
                                                        target:self
                                                        action:@selector(showDropdown:)];
     fromAccountDropDownCTL.label.text = @"From Account";
+    fromAccountDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     fromAccountDropDownCTL.tag = 1;
     [fromAccountDropDownView addSubview:fromAccountDropDownCTL];
     
@@ -87,6 +88,7 @@
                                                              target:self
                                                              action:@selector(showDropdown:)];
     toAccountDropDownCTL.label.text = @"To Account";
+    toAccountDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     toAccountDropDownCTL.tag = 2;
     [toAccountDropDownView addSubview:toAccountDropDownCTL];
     rect=self.view.frame;
