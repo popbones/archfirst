@@ -81,6 +81,7 @@
                                                         target:self
                                                         action:@selector(showAccountDropdownMenu:)];
     accountDropDownCTL.label.text = @"Accounts";
+    accountDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     accountDropDownCTL.tag = 1;
     [accountDropDownView addSubview:accountDropDownCTL];
 
@@ -88,6 +89,7 @@
                                                          target:self
                                                          action:@selector(showDropdown:)];
     actionDropDownCTL.label.text = @"Action";
+    actionDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     actionDropDownCTL.tag = 2;
     [actionDropDownView addSubview:actionDropDownCTL];
 
@@ -95,6 +97,7 @@
                                                         target:self
                                                         action:@selector(showDropdown:)];
     priceDropDownCTL.label.text = @"Order Type";
+    priceDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     priceDropDownCTL.tag = 3;
     [priceDropDownView addSubview:priceDropDownCTL];
     
@@ -102,6 +105,7 @@
                                                        target:self
                                                        action:@selector(showDropdown:)];
     goodForDayDropDownCTL.label.text = order.term;
+    goodForDayDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     goodForDayDropDownCTL.tag = 4;
     [goodForDayDropDownView addSubview:goodForDayDropDownCTL];
     
