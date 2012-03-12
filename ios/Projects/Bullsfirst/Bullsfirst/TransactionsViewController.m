@@ -65,6 +65,7 @@
                                                          target:self
                                                          action:@selector(showAccountDropdownMenu:)];
     accountDropDownCTL.label.text = @"All Accounts";
+    accountDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     [accountDropDownView addSubview:accountDropDownCTL];
     
     fromDateDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, fromDateDropDownView.frame.size.width, fromDateDropDownView.frame.size.height)
@@ -76,12 +77,14 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
 
     fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
+    fromDateDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     [fromDateDropDownView addSubview:fromDateDropDownCTL];
     
     toDateDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, toDateDropDownView.frame.size.width, toDateDropDownView.frame.size.height)
                                                           target:self
                                                           action:@selector(showDateDropdownMenu:)];
     toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
+    toDateDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     [toDateDropDownView addSubview:toDateDropDownCTL];
 
     
