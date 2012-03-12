@@ -84,10 +84,13 @@
     orientationChanged=YES;
     
     CGRect rect=segmentedControl.frame;
-    segmentedControl.frame=CGRectMake(rect.origin.x, rect.origin.y, 192, 31);
+    segmentedControl.frame=CGRectMake(rect.origin.x, rect.origin.y, 199, 31);
     [segmentedControl setImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Cash.png"] forSegmentAtIndex:0];
     [segmentedControl setImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Securities.png"] forSegmentAtIndex:1];
-    segmentedControl.segmentedControlStyle=UISegmentedControlStyleBar;
+    segmentedControl.segmentedControlStyle=UISegmentedControlStylePlain;
+    
+    [segmentedControl setDividerImage:[UIImage imageNamed:@"SegmentedControl_Divider.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+    [segmentedControl setDividerImage:[UIImage imageNamed:@"SegmentedControl_Divider.png"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
     fromAccountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0,fromAccountDropDownView.frame.size.width, fromAccountDropDownView.frame.size.height)
                                                        target:self
                                                        action:@selector(showDropdown:)];
@@ -471,18 +474,24 @@
     if(segmentedControl.selectedSegmentIndex==0)
     {
         [segmentedControl removeAllSegments];
-       [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Cash.png"] atIndex:0 animated:NO];
+//        [segmentedControl insertSegmentWithTitle:@"" atIndex:0 animated:NO];
+//        [segmentedControl insertSegmentWithTitle:@"" atIndex:1 animated:NO];
+       CGRect rect=segmentedControl.frame;
+        segmentedControl.frame=CGRectMake(rect.origin.x, rect.origin.y, 199, 31);
+               
+    
+        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Cash.png"] atIndex:0 animated:NO];
         [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-CashSelected-Securities.png"] atIndex:1 animated:NO];
         segmentedControl.selectedSegmentIndex=0;
-        //symbolLBL.hidden=YES;
+        segmentedControl.segmentedControlStyle=UISegmentedControlStylePlain;
+        [segmentedControl setDividerImage:[UIImage imageNamed:@"SegmentedControl_Divider.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+        [segmentedControl setDividerImage:[UIImage imageNamed:@"SegmentedControl_Divider.png"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+
         symbol.hidden=YES;
-//        quantityLBL.hidden=YES;
         quantity.hidden=YES;
-//        pricePaidLBL.hidden=YES;
         pricePaid.hidden=YES;
-//        amountLBL.hidden=NO;
         amount.hidden=NO;
-        CGRect rect=transferBTN.frame;
+        rect=transferBTN.frame;
         transferBTN.frame=CGRectMake(rect.origin.x, rect.origin.y-50, rect.size.width, rect.size.height);
         rect=spinner.frame;
         spinner.frame=CGRectMake(rect.origin.x, rect.origin.y-50, rect.size.width, rect.size.height);
@@ -491,18 +500,25 @@
     {
        
         [segmentedControl removeAllSegments];
+     
+        CGRect rect=segmentedControl.frame;
+        segmentedControl.frame=CGRectMake(rect.origin.x, rect.origin.y, 199, 31);
+
         [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Cash.png"] atIndex:0 animated:NO];
-        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Securities.png"] atIndex:1 animated:NO];   
+        [segmentedControl insertSegmentWithImage:[UIImage imageNamed:@"SegmentControl-SecuritiesSelected-Securities.png"] atIndex:1 animated:NO];
+        segmentedControl.segmentedControlStyle=UISegmentedControlStylePlain;
+    
+        [segmentedControl setDividerImage:[UIImage imageNamed:@"SegmentedControl_Divider.png"] forLeftSegmentState:UIControlStateNormal rightSegmentState:UIControlStateSelected barMetrics:UIBarMetricsDefault];
+        [segmentedControl setDividerImage:[UIImage imageNamed:@"SegmentedControl_Divider.png"] forLeftSegmentState:UIControlStateSelected rightSegmentState:UIControlStateNormal barMetrics:UIBarMetricsDefault];
+
+        
         segmentedControl.selectedSegmentIndex=1;
-//        symbolLBL.hidden=NO;
+        
         symbol.hidden=NO;
-//        quantityLBL.hidden=NO;
         quantity.hidden=NO;
-//        pricePaidLBL.hidden=NO;
         pricePaid.hidden=NO;
-//        amountLBL.hidden=YES;
         amount.hidden=YES;
-        CGRect rect=transferBTN.frame;
+        rect=transferBTN.frame;
         transferBTN.frame=CGRectMake(rect.origin.x, rect.origin.y+50, rect.size.width, rect.size.height);
         rect=spinner.frame;
         spinner.frame=CGRectMake(rect.origin.x, rect.origin.y+50, rect.size.width, rect.size.height);
