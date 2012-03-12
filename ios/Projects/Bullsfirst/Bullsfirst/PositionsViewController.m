@@ -219,7 +219,7 @@
             label.text = [formatter stringFromNumber:position.gain.amount];
             
             label = (UILabel *)[cell viewWithTag:10];
-            label.text = [NSString stringWithFormat:@"%d%%", [position.gainPercent intValue]];
+            label.text = [NSString stringWithFormat:@"%.2f%%", [position.gainPercent floatValue]];
             
             tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:11]; // trade button
             [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
@@ -344,7 +344,7 @@
                 gainPercentFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:gainPercentFrame];
                 label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [NSString stringWithFormat:@"%d%%", [lot.gainPercent intValue]];
+                label.text = [NSString stringWithFormat:@"%.2f%%", [lot.gainPercent floatValue]];
                 label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
             }
@@ -380,7 +380,7 @@
             label.text = [formatter stringFromNumber:position.gain.amount];
             
             label = (UILabel *)[cell viewWithTag:6];
-            label.text = [NSString stringWithFormat:@"%d%%", [position.gainPercent intValue]];
+            label.text = [NSString stringWithFormat:@"%.2f%%", [position.gainPercent floatValue]];
             
             tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:7]; // trade button
             [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
@@ -463,7 +463,7 @@
 
                 gainPercentFrame.origin.y += 44;
                 label = [[UILabel alloc] initWithFrame:gainPercentFrame];
-                label.text = [NSString stringWithFormat:@"%d%%", [lot.gainPercent intValue]];
+                label.text = [NSString stringWithFormat:@"%.2f%%", [lot.gainPercent floatValue]];
                 label.font = [UIFont systemFontOfSize:13.0];
                 label.textAlignment = UITextAlignmentRight;
                 [cell addSubview:label];
