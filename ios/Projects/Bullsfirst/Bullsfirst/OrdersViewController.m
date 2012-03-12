@@ -172,8 +172,6 @@
     CGRect rect=orderFilterView.frame;
     if(toInterfaceOrientation==UIDeviceOrientationLandscapeRight||toInterfaceOrientation==UIDeviceOrientationLandscapeLeft)
     {
-        rect=symbod.frame;
-        symbod.frame = CGRectMake(rect.origin.x, rect.origin.y,80, rect.size.height);
         rect=resetBTN.frame;
         resetBTN.frame = CGRectMake(885, rect.origin.y,rect.size.width, rect.size.height);
         rect=applyBTN.frame;
@@ -192,8 +190,6 @@
     }
     else
     {        
-        rect=symbod.frame;
-        symbod.frame = CGRectMake(rect.origin.x, rect.origin.y,40, rect.size.height);
         rect=resetBTN.frame;
         resetBTN.frame = CGRectMake(640, rect.origin.y,rect.size.width, rect.size.height);
         rect=applyBTN.frame;
