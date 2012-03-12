@@ -486,7 +486,7 @@
     CGSize size;
     switch (dropdownCTL.tag) {
         case 5:
-            selections = [NSArray arrayWithObjects:@"PendingNew", @"New", @"PartiallyFilled", @"Filled", @"PendingCancel", @"Canceled", @"DoneForDay", nil];
+            selections = [NSArray arrayWithObjects:@"All", @"PendingNew", @"New", @"PartiallyFilled", @"Filled", @"PendingCancel", @"Canceled", @"DoneForDay", nil];
             size = [@"PartiallyFilled" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
             size.width += 20;
@@ -865,7 +865,11 @@
                 MultiSelectDropdownViewController *multiSelect = (MultiSelectDropdownViewController *)controller;
                 orderStatus = @"";
                 for (NSString *tmp in multiSelect.selectedSet) {
-                    orderStatus = [orderStatus stringByAppendingFormat:@"%@,", tmp]; 
+                    if ([tmp isEqualToString:@"All"]) {
+                        orderStatus = @"All";
+                        break;
+                    } else
+                        orderStatus = [orderStatus stringByAppendingFormat:@"%@,", tmp]; 
                 }
                 NSRange zoneRange = {[orderStatus length]-1, 1};
                 orderStatus = [orderStatus stringByReplacingOccurrencesOfString:@","
