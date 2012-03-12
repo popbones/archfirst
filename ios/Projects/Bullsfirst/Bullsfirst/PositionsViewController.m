@@ -84,10 +84,16 @@
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
+
+    
 }
 
 - (void)viewDidUnload
 {
+    AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    [appDelegate removeObserver:self forKeyPath:@"accounts"];
     [self setPositionTBL:nil];
     [super viewDidUnload];
 }
@@ -99,8 +105,18 @@
 
 #pragma mark - KVO lifecycle
 
+
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
+    if ([keyPath isEqualToString:@"accounts"]) 
+    {
+        NSMutableArray *brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+        if ([brokerageAccounts count] > 0) 
+        {
+            [positionTBL reloadData];
+        }
+        return;
+    }
 }
 
 #pragma mark - IBActions
