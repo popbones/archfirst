@@ -865,11 +865,7 @@
                 MultiSelectDropdownViewController *multiSelect = (MultiSelectDropdownViewController *)controller;
                 orderStatus = @"";
                 for (NSString *tmp in multiSelect.selectedSet) {
-                    if ([tmp isEqualToString:@"All"]) {
-                        orderStatus = @"All";
-                        break;
-                    } else
-                        orderStatus = [orderStatus stringByAppendingFormat:@"%@,", tmp]; 
+                    orderStatus = [orderStatus stringByAppendingFormat:@"%@,", tmp]; 
                 }
                 NSRange zoneRange = {[orderStatus length]-1, 1};
                 orderStatus = [orderStatus stringByReplacingOccurrencesOfString:@","
