@@ -539,7 +539,7 @@
     }
 }
 
--(void) datePickerCleared
+-(void) datePickerCleared:(DatePickerViewController *) controller
 {
     if(currentSelectedDateType == ToDate)
     {

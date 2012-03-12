@@ -11,7 +11,7 @@
 
 @protocol DatePickerViewControllerDelegate<NSObject>
 - (void)dateSelectionChanged:(DatePickerViewController *)controller;
-- (void)datePickerCleared;
+- (void)datePickerCleared:(DatePickerViewController *) controller;
 @end
 
 @interface DatePickerViewController : UIViewController

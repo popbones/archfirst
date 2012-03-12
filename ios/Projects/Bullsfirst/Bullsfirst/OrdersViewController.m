@@ -97,48 +97,48 @@
     
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
-
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBTNClicked:) name:@"TRADE_ORDER_SUBMITTED" object:nil];
-
+    
     cancelOrderServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self 
                                                                 responseSelector:nil 
                                                              receiveDataSelector:nil
                                                                  successSelector:@selector(cancelRequestSucceeded:) 
                                                                    errorSelector:@selector(cancelRequestFailed:)];
-
-
-
+    
+    
+    
     fromDateDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, fromDateDropdownView.frame.size.width, fromDateDropdownView.frame.size.height)
-                                                         target:self
-                                                         action:@selector(dateDropdownClicked:)];
+                                                          target:self
+                                                          action:@selector(dateDropdownClicked:)];
     fromDateDropdownCTL.tag = 1;
     fromDateDropdownCTL.label.font = [UIFont systemFontOfSize:13];
     [fromDateDropdownView addSubview:fromDateDropdownCTL];
-
+    
     toDateDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, toDateDropdownView.frame.size.width, toDateDropdownView.frame.size.height)
-                                                          target:self
-                                                          action:@selector(dateDropdownClicked:)];
+                                                        target:self
+                                                        action:@selector(dateDropdownClicked:)];
     toDateDropdownCTL.tag = 2;
     toDateDropdownCTL.label.font = [UIFont systemFontOfSize:13];
     [toDateDropdownView addSubview:toDateDropdownCTL];
-
+    
     accountDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, accountDropdownView.frame.size.width, accountDropdownView.frame.size.height)
-                                                        target:self
-                                                        action:@selector(dropDownClicked:)];
+                                                         target:self
+                                                         action:@selector(dropDownClicked:)];
     accountDropdownCTL.tag = 3;
     accountDropdownCTL.label.font = [UIFont systemFontOfSize:13];
     [accountDropdownView addSubview:accountDropdownCTL];
-
+    
     orderDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, orderDropdownView.frame.size.width, orderDropdownView.frame.size.height)
-                                                         target:self
-                                                         action:@selector(dropDownClicked:)];
+                                                       target:self
+                                                       action:@selector(dropDownClicked:)];
     orderDropdownCTL.tag = 4;
     orderDropdownCTL.label.font = [UIFont systemFontOfSize:13];
     [orderDropdownView addSubview:orderDropdownCTL];
     
     orderStatusDropdownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, orderStatusDropdownView.frame.size.width, orderStatusDropdownView.frame.size.height)
-                                                       target:self
-                                                       action:@selector(dropDownClicked:)];
+                                                             target:self
+                                                             action:@selector(dropDownClicked:)];
     orderStatusDropdownCTL.tag = 5;
     orderStatusDropdownCTL.label.font = [UIFont systemFontOfSize:13];
     [orderStatusDropdownView addSubview:orderStatusDropdownCTL];
@@ -272,7 +272,7 @@
         [orders addObject:subArray];
         [expanedRowSet addObject:subExpandArray];
     }
-
+    
     [orderTBL reloadData];
 }
 
@@ -315,8 +315,8 @@
 
 - (IBAction)refreshBTNClicked:(id)sender { 
     [self applyBTNClicked:nil];
-//    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
-//    [self.restServiceObject getRequestWithURL:url];    
+    //    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
+    //    [self.restServiceObject getRequestWithURL:url];    
 }
 
 - (IBAction)dateDropdownClicked:(id)sender {
@@ -362,7 +362,7 @@
     accountSelected = @"All";
     orderType = @"All";
     orderStatus = @"All";
-
+    
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
@@ -386,7 +386,7 @@
             }
         }
     }
-
+    
     NSString *symbodParam = @"";
     if ([symbod.text length]>0) {
         symbodParam = [NSString stringWithFormat:@"&symbol=%@",[symbod.text uppercaseString]];
@@ -400,25 +400,25 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
-
+    
     NSString *fromDateParam;
     if (fromDate !=nil)
         fromDateParam = [NSString stringWithFormat:@"&fromDate=%@",[dateFormat stringFromDate:fromDate]];
-
+    
     NSString *toDateParam;
     if (toDate !=nil)
         toDateParam = [NSString stringWithFormat:@"&toDate=%@",[dateFormat stringFromDate:toDate]];
-
+    
     NSString *orderTypeParam = @"";
     if ([orderType isEqualToString:@"All"] != YES) {
         orderTypeParam = [NSString stringWithFormat:@"&sides=%@",orderType];
     }
-
+    
     NSString *orderStatusParam = @"";
     if ([orderStatus isEqualToString:@"All"] != YES) {
         orderTypeParam = [NSString stringWithFormat:@"&statuses=%@",orderStatus];
     }
-
+    
     NSString *filter = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/orders?%@%@%@%@%@%@%@", fromDateParam, toDateParam, brokerageAccountIDParam, symbodParam, orderIdParam, orderTypeParam, orderStatusParam];
     BFDebugLog(@"filter = %@", filter);
     NSURL *url = [NSURL URLWithString:filter];
@@ -464,7 +464,7 @@
         default:
             break;
     }
-
+    
     if (!dropdown) {
         DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
         
@@ -549,13 +549,13 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {    
     BFOrder *order = [((NSArray*)[orders objectAtIndex:indexPath.section]) objectAtIndex:indexPath.row];
-
+    
     NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
     [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
     NSNumberFormatter *decemalFormatter = [[NSNumberFormatter alloc] init];  
     [decemalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-
+    
     UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
     if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
     {
@@ -603,7 +603,7 @@
         
         label = (UILabel *)[cell viewWithTag:9];
         label.text = order.side;
-
+        
         OrderBTN *cancelOrderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
         if ([order.status isEqualToString:@"New"] == YES ||
             [order.status isEqualToString:@"PendingNew"] == YES ||
@@ -644,7 +644,7 @@
                 quantityFrame.origin.y += 44;
             }
         }
-
+        
         UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
         selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
         cell.selectedBackgroundView = selected;
@@ -665,7 +665,7 @@
         
         label = (UILabel *)[cell viewWithTag:2];
         label.text = [NSString stringWithFormat:@"%d", [order.orderId intValue]];
-
+        
         label = (UILabel *)[cell viewWithTag:3];
         label.text = order.type;
         
@@ -690,13 +690,13 @@
         } else {
             expand.hidden = YES;
         }
-
+        
         label = (UILabel *)[cell viewWithTag:8];
         label.text = order.status;
         
         label = (UILabel *)[cell viewWithTag:9];
         label.text = order.side;
-
+        
         OrderBTN *cancelOrderBTN = (OrderBTN *)[cell viewWithTag:10]; // cancel button
         if ([order.status isEqualToString:@"New"] == YES ||
             [order.status isEqualToString:@"PendingNew"] == YES ||
@@ -719,7 +719,7 @@
             CGRect quantityFrame = CGRectMake(label.frame.origin.x, label.frame.origin.y+44 ,label.frame.size.width, label.frame.size.height);
             label = (UILabel *)[cell viewWithTag:7];
             CGRect priceFrame = CGRectMake(label.frame.origin.x, label.frame.origin.y+44 ,label.frame.size.width, label.frame.size.height);
-                        
+            
             for (NSDictionary *execution in order.executionsPrice) {
                 NSDictionary *priceDic = [execution objectForKey:@"price"];
                 UILabel *label = [[UILabel alloc] initWithFrame:priceFrame];
@@ -738,7 +738,7 @@
                 quantityFrame.origin.y += 44;
             }
         }
-
+        
         UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
         selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
         cell.selectedBackgroundView = selected;
@@ -747,13 +747,13 @@
 }
 
 
- // Override to support conditional editing of the table view.
+// Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
     return YES;
 }
- 
+
 
 /*
  // Override to support editing the table view.
@@ -793,26 +793,26 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
-
+    
     switch (controller.tag) {
         case 1:
             fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:date]];
             fromDate = [date copy];
             
-            if (toDate == nil) {
-                toDate = [fromDate copy];
-                toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:toDate]];
-            }
+//            if (toDate == nil) {
+//                toDate = [fromDate copy];
+//                toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:toDate]];
+//            }
             break;
             
         case 2:
             toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:date]];
             toDate = [date copy];;
-            if (fromDate == nil) {
-                fromDate = [toDate copy];
-                fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:fromDate]];
-            }
-           break;
+//            if (fromDate == nil) {
+//                fromDate = [toDate copy];
+//                fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:fromDate]];
+//            }
+            break;
         default:
             break;
     }
@@ -840,12 +840,27 @@
             orderStatusDropdownCTL.label.text = [NSString stringWithFormat:@"Order Status: %@", controller.selected];
             orderStatus = [NSString stringWithString:controller.selected];
             break;
-                        
+            
         default:
             break;
     }
     
 }
+
+-(void) datePickerCleared:(DatePickerViewController *) controller
+{
+    if(controller.tag == 1)
+    {
+        fromDate = nil;
+        fromDateDropdownCTL.label.text = [NSString stringWithString:@"From: "];
+    }
+    else if (controller.tag == 2)
+    {
+        toDate = nil;
+        toDateDropdownCTL.label.text = [NSString stringWithString:@"To: "];
+    }
+}
+
 
 
 @end

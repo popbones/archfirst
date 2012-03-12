@@ -68,9 +68,9 @@
 
 - (IBAction)clearBTNClicked:(id) sender
 {
-    if(delegate != nil&& [[self delegate] respondsToSelector:@selector(datePickerCleared)])
+    if(delegate != nil&& [[self delegate] respondsToSelector:@selector(datePickerCleared:)])
     {
-        [delegate datePickerCleared];
+        [delegate datePickerCleared:self];
     }
     [popOver dismissPopoverAnimated:YES];
 }
