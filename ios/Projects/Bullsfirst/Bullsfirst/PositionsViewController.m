@@ -57,13 +57,13 @@
         self.selectedAccount = account;
     }
     return self;
-
+    
 }
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
     BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
     
@@ -86,7 +86,7 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-
+    
     
 }
 
@@ -172,308 +172,313 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-    BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
-    BFPosition *position = [account.positions objectAtIndex:indexPath.row];
-
-    NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
-    [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
     
-    NSNumberFormatter *decemalFormatter = [[NSNumberFormatter alloc] init];  
-    [decemalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
-
-    UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
-    if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    if(brokerageAccounts.count > 0)
     {
-        UITableViewCell *cell;
-        [[NSBundle mainBundle] loadNibNamed:@"PositionLandscapeTableViewCell" owner:self options:nil];
-        cell = positionCell;
+        BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
+        BFPosition *position = [account.positions objectAtIndex:indexPath.row];
         
-        expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
-        [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
-        expand.indexPath = indexPath;
-        [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
-
-
-        UILabel *label;
-        label = (UILabel *)[cell viewWithTag:3];
-        label.text = position.instrumentSymbol;
+        NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];  
+        [formatter setNumberStyle:NSNumberFormatterCurrencyStyle];
         
-        if ([position.instrumentSymbol isEqualToString:@"CASH"] != YES) {
-            label = (UILabel *)[cell viewWithTag:4];
-            label.text = [decemalFormatter stringFromNumber:position.quantity];
-            
-            label = (UILabel *)[cell viewWithTag:5];
-            label.text = [formatter stringFromNumber:position.lastTrade.amount];
-            
-            label = (UILabel *)[cell viewWithTag:6];
-            label.text = [formatter stringFromNumber:position.marketValue.amount];
-
-            label = (UILabel *)[cell viewWithTag:7];
-            label.text = [formatter stringFromNumber:position.pricePaid.amount];
-            
-            label = (UILabel *)[cell viewWithTag:8];
-            label.text = [formatter stringFromNumber:position.totalCost.amount];
-            
-            label = (UILabel *)[cell viewWithTag:9];
-            label.text = [formatter stringFromNumber:position.gain.amount];
-            
-            label = (UILabel *)[cell viewWithTag:10];
-            label.text = [NSString stringWithFormat:@"%.2f%%", [position.gainPercent floatValue]];
-            
-            tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:11]; // trade button
-            [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
-            trade.position = position;
-            
-        } else {
-            label = (UILabel *)[cell viewWithTag:4];
-            label.text = @"";
-            
-            label = (UILabel *)[cell viewWithTag:5];
-            label.text = @"";
-            
-            label = (UILabel *)[cell viewWithTag:6];
-            label.text = [formatter stringFromNumber:position.marketValue.amount];
-            
-            label = (UILabel *)[cell viewWithTag:7];
-            label.text = @"";
-            
-            label = (UILabel *)[cell viewWithTag:8];
-            label.text = @"";
-            
-            label = (UILabel *)[cell viewWithTag:9];
-            label.text = @"";
-            
-            label = (UILabel *)[cell viewWithTag:10];
-            label.text = @"";
-            
-            tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:11]; // trade button
-            trade.hidden = YES;
+        NSNumberFormatter *decemalFormatter = [[NSNumberFormatter alloc] init];  
+        [decemalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        
+        UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+        {
+            UITableViewCell *cell;
+            [[NSBundle mainBundle] loadNibNamed:@"PositionLandscapeTableViewCell" owner:self options:nil];
+            cell = positionCell;
             
             expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
-            expand.hidden = YES;
-        }
-        
-        
-        NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
-        if (expand_Row != nil && [expand_Row boolValue] == YES) 
-        {
-            [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
-
-            CGRect frame = cell.frame;
-            cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[position.children count]));
+            [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
+            expand.indexPath = indexPath;
+            [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
+            
             
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:3];
-            CGRect nameFrame = label.frame;
+            label.text = position.instrumentSymbol;
             
-            label = (UILabel *)[cell viewWithTag:4];
-            CGRect quantityFrame = label.frame;
-            
-            label = (UILabel *)[cell viewWithTag:5];
-            CGRect lastTradeFrame = label.frame;
-            
-            label = (UILabel *)[cell viewWithTag:6];
-            CGRect marketValueFrame = label.frame;
-            
-            label = (UILabel *)[cell viewWithTag:7];
-            CGRect pricePaidFrame = label.frame;
-
-            label = (UILabel *)[cell viewWithTag:8];
-            CGRect totalCostFrame = label.frame;
-
-            label = (UILabel *)[cell viewWithTag:9];
-            CGRect qainFrame = label.frame;
-            
-            label = (UILabel *)[cell viewWithTag:10];
-            CGRect gainPercentFrame = label.frame;
-            
-            for (BFPosition *lot in position.children) {
-                nameFrame.origin.y += 44;
-                UILabel *label = [[UILabel alloc] initWithFrame:nameFrame];
-                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-                [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
-                [dateFormat setDateFormat:@"MM/dd/yyyy"];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:lot.lotCreationTime]];
-                label.textAlignment = UITextAlignmentLeft;
-                [cell addSubview:label];
-
-                quantityFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:quantityFrame];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [decemalFormatter stringFromNumber:lot.quantity];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
-
-                lastTradeFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:lastTradeFrame];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [formatter stringFromNumber:lot.lastTrade.amount];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
+            if ([position.instrumentSymbol isEqualToString:@"CASH"] != YES) {
+                label = (UILabel *)[cell viewWithTag:4];
+                label.text = [decemalFormatter stringFromNumber:position.quantity];
                 
-                marketValueFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:marketValueFrame];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [formatter stringFromNumber:lot.marketValue.amount];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
+                label = (UILabel *)[cell viewWithTag:5];
+                label.text = [formatter stringFromNumber:position.lastTrade.amount];
                 
-                pricePaidFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:pricePaidFrame];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [formatter stringFromNumber:lot.pricePaid.amount];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
-
-                totalCostFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:totalCostFrame];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [formatter stringFromNumber:lot.totalCost.amount];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
-
-                qainFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:qainFrame];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [formatter stringFromNumber:lot.gain.amount];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
+                label = (UILabel *)[cell viewWithTag:6];
+                label.text = [formatter stringFromNumber:position.marketValue.amount];
                 
-                gainPercentFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:gainPercentFrame];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [NSString stringWithFormat:@"%.2f%%", [lot.gainPercent floatValue]];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
+                label = (UILabel *)[cell viewWithTag:7];
+                label.text = [formatter stringFromNumber:position.pricePaid.amount];
+                
+                label = (UILabel *)[cell viewWithTag:8];
+                label.text = [formatter stringFromNumber:position.totalCost.amount];
+                
+                label = (UILabel *)[cell viewWithTag:9];
+                label.text = [formatter stringFromNumber:position.gain.amount];
+                
+                label = (UILabel *)[cell viewWithTag:10];
+                label.text = [NSString stringWithFormat:@"%.2f%%", [position.gainPercent floatValue]];
+                
+                tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:11]; // trade button
+                [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
+                trade.position = position;
+                
+            } else {
+                label = (UILabel *)[cell viewWithTag:4];
+                label.text = @"";
+                
+                label = (UILabel *)[cell viewWithTag:5];
+                label.text = @"";
+                
+                label = (UILabel *)[cell viewWithTag:6];
+                label.text = [formatter stringFromNumber:position.marketValue.amount];
+                
+                label = (UILabel *)[cell viewWithTag:7];
+                label.text = @"";
+                
+                label = (UILabel *)[cell viewWithTag:8];
+                label.text = @"";
+                
+                label = (UILabel *)[cell viewWithTag:9];
+                label.text = @"";
+                
+                label = (UILabel *)[cell viewWithTag:10];
+                label.text = @"";
+                
+                tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:11]; // trade button
+                trade.hidden = YES;
+                
+                expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
+                expand.hidden = YES;
             }
+            
+            
+            NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
+            if (expand_Row != nil && [expand_Row boolValue] == YES) 
+            {
+                [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
+                
+                CGRect frame = cell.frame;
+                cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[position.children count]));
+                
+                UILabel *label;
+                label = (UILabel *)[cell viewWithTag:3];
+                CGRect nameFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:4];
+                CGRect quantityFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:5];
+                CGRect lastTradeFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:6];
+                CGRect marketValueFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:7];
+                CGRect pricePaidFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:8];
+                CGRect totalCostFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:9];
+                CGRect qainFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:10];
+                CGRect gainPercentFrame = label.frame;
+                
+                for (BFPosition *lot in position.children) {
+                    nameFrame.origin.y += 44;
+                    UILabel *label = [[UILabel alloc] initWithFrame:nameFrame];
+                    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+                    [dateFormat setDateFormat:@"MM/dd/yyyy"];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:lot.lotCreationTime]];
+                    label.textAlignment = UITextAlignmentLeft;
+                    [cell addSubview:label];
+                    
+                    quantityFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:quantityFrame];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.text = [decemalFormatter stringFromNumber:lot.quantity];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                    
+                    lastTradeFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:lastTradeFrame];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.text = [formatter stringFromNumber:lot.lastTrade.amount];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                    
+                    marketValueFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:marketValueFrame];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.text = [formatter stringFromNumber:lot.marketValue.amount];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                    
+                    pricePaidFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:pricePaidFrame];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.text = [formatter stringFromNumber:lot.pricePaid.amount];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                    
+                    totalCostFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:totalCostFrame];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.text = [formatter stringFromNumber:lot.totalCost.amount];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                    
+                    qainFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:qainFrame];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.text = [formatter stringFromNumber:lot.gain.amount];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                    
+                    gainPercentFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:gainPercentFrame];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.text = [NSString stringWithFormat:@"%.2f%%", [lot.gainPercent floatValue]];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                }
+            }
+            UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
+            selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
+            cell.selectedBackgroundView = selected;
+            return cell;
         }
-        UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
-        selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
-        cell.selectedBackgroundView = selected;
-        return cell;
-    }
-    else
-    {
-        UITableViewCell *cell;
-        [[NSBundle mainBundle] loadNibNamed:@"PositionTableViewCell" owner:self options:nil];
-        cell = positionCell;
-        
-        expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
-        [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
-        expand.indexPath = indexPath;
-        [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
-        
-        UILabel *label;
-        label = (UILabel *)[cell viewWithTag:2];
-        label.text = position.instrumentSymbol;
-        if ([position.instrumentSymbol isEqualToString:@"CASH"] != YES) {
-            
-            label = (UILabel *)[cell viewWithTag:3];
-            label.text = [decemalFormatter stringFromNumber:position.quantity];
-            
-            label = (UILabel *)[cell viewWithTag:4];
-            label.text = [formatter stringFromNumber:position.marketValue.amount];
-            
-            label = (UILabel *)[cell viewWithTag:5];
-            label.text = [formatter stringFromNumber:position.gain.amount];
-            
-            label = (UILabel *)[cell viewWithTag:6];
-            label.text = [NSString stringWithFormat:@"%.2f%%", [position.gainPercent floatValue]];
-            
-            tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:7]; // trade button
-            [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
-            trade.position = position;
-
-        } else {
-            label = (UILabel *)[cell viewWithTag:3];
-            label.text = @"";
-            
-            label = (UILabel *)[cell viewWithTag:4];
-            label.text = [formatter stringFromNumber:position.marketValue.amount];
-
-            label = (UILabel *)[cell viewWithTag:5];
-            label.text = @"";
-            
-            label = (UILabel *)[cell viewWithTag:6];
-            label.text = @"";
-            
-            tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:7]; // trade button
-            trade.hidden = YES;
+        else
+        {
+            UITableViewCell *cell;
+            [[NSBundle mainBundle] loadNibNamed:@"PositionTableViewCell" owner:self options:nil];
+            cell = positionCell;
             
             expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
-            expand.hidden = YES;
-        }
- 
-        
-        NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
-        if (expand_Row != nil && [expand_Row boolValue] == YES) {
-            [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
-            CGRect frame = cell.frame;
-            cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[position.children count]));
+            [expand addTarget:self action:@selector(expandPosition:) forControlEvents:UIControlEventTouchUpInside];
+            expand.indexPath = indexPath;
+            [expand setImage:[UIImage imageNamed:@"Plus.png"] forState:UIControlStateNormal];
             
             UILabel *label;
             label = (UILabel *)[cell viewWithTag:2];
-            CGRect dateFrame = label.frame;
-
-            label = (UILabel *)[cell viewWithTag:3];
-            CGRect quantityFrame = label.frame;
-            
-            label = (UILabel *)[cell viewWithTag:4];
-            CGRect marketValueFrame = label.frame;
-            
-            label = (UILabel *)[cell viewWithTag:5];
-            CGRect qainFrame = label.frame;
-            
-            label = (UILabel *)[cell viewWithTag:6];
-            CGRect gainPercentFrame = label.frame;
-            
-            for (BFPosition *lot in position.children) {
-                dateFrame.origin.y += 44;
-                UILabel *label = [[UILabel alloc] initWithFrame:dateFrame];
-                NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
-                [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
-                [dateFormat setDateFormat:@"MM/dd/yyyy"];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:lot.lotCreationTime]];
-                label.textAlignment = UITextAlignmentLeft;
-                [cell addSubview:label];
-
-                quantityFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:quantityFrame];
-                label.text = [decemalFormatter stringFromNumber:lot.quantity];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
-
-                marketValueFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:marketValueFrame];
-                label.text = [formatter stringFromNumber:position.marketValue.amount];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
+            label.text = position.instrumentSymbol;
+            if ([position.instrumentSymbol isEqualToString:@"CASH"] != YES) {
                 
-                qainFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:qainFrame];
+                label = (UILabel *)[cell viewWithTag:3];
+                label.text = [decemalFormatter stringFromNumber:position.quantity];
+                
+                label = (UILabel *)[cell viewWithTag:4];
+                label.text = [formatter stringFromNumber:position.marketValue.amount];
+                
+                label = (UILabel *)[cell viewWithTag:5];
                 label.text = [formatter stringFromNumber:position.gain.amount];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
-
-                gainPercentFrame.origin.y += 44;
-                label = [[UILabel alloc] initWithFrame:gainPercentFrame];
-                label.text = [NSString stringWithFormat:@"%.2f%%", [lot.gainPercent floatValue]];
-                label.font = [UIFont systemFontOfSize:13.0];
-                label.textAlignment = UITextAlignmentRight;
-                [cell addSubview:label];
+                
+                label = (UILabel *)[cell viewWithTag:6];
+                label.text = [NSString stringWithFormat:@"%.2f%%", [position.gainPercent floatValue]];
+                
+                tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:7]; // trade button
+                [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
+                trade.position = position;
+                
+            } else {
+                label = (UILabel *)[cell viewWithTag:3];
+                label.text = @"";
+                
+                label = (UILabel *)[cell viewWithTag:4];
+                label.text = [formatter stringFromNumber:position.marketValue.amount];
+                
+                label = (UILabel *)[cell viewWithTag:5];
+                label.text = @"";
+                
+                label = (UILabel *)[cell viewWithTag:6];
+                label.text = @"";
+                
+                tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:7]; // trade button
+                trade.hidden = YES;
+                
+                expandPositionBTN *expand = (expandPositionBTN *)[cell viewWithTag:1]; // expand button
+                expand.hidden = YES;
             }
+            
+            
+            NSNumber *expand_Row = [expanedRowSet objectAtIndex:indexPath.row];
+            if (expand_Row != nil && [expand_Row boolValue] == YES) {
+                [expand setImage:[UIImage imageNamed:@"Minus.png"] forState:UIControlStateNormal];
+                CGRect frame = cell.frame;
+                cell.frame = CGRectMake(frame.origin.x, frame.origin.y, frame.size.width, 44*(1+[position.children count]));
+                
+                UILabel *label;
+                label = (UILabel *)[cell viewWithTag:2];
+                CGRect dateFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:3];
+                CGRect quantityFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:4];
+                CGRect marketValueFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:5];
+                CGRect qainFrame = label.frame;
+                
+                label = (UILabel *)[cell viewWithTag:6];
+                CGRect gainPercentFrame = label.frame;
+                
+                for (BFPosition *lot in position.children) {
+                    dateFrame.origin.y += 44;
+                    UILabel *label = [[UILabel alloc] initWithFrame:dateFrame];
+                    NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
+                    [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
+                    [dateFormat setDateFormat:@"MM/dd/yyyy"];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.text = [NSString stringWithFormat:@"%@", [dateFormat stringFromDate:lot.lotCreationTime]];
+                    label.textAlignment = UITextAlignmentLeft;
+                    [cell addSubview:label];
+                    
+                    quantityFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:quantityFrame];
+                    label.text = [decemalFormatter stringFromNumber:lot.quantity];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                    
+                    marketValueFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:marketValueFrame];
+                    label.text = [formatter stringFromNumber:position.marketValue.amount];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                    
+                    qainFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:qainFrame];
+                    label.text = [formatter stringFromNumber:position.gain.amount];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                    
+                    gainPercentFrame.origin.y += 44;
+                    label = [[UILabel alloc] initWithFrame:gainPercentFrame];
+                    label.text = [NSString stringWithFormat:@"%.2f%%", [lot.gainPercent floatValue]];
+                    label.font = [UIFont systemFontOfSize:13.0];
+                    label.textAlignment = UITextAlignmentRight;
+                    [cell addSubview:label];
+                }
+            }
+            UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
+            selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
+            cell.selectedBackgroundView = selected;
+            return cell;
         }
-        UIView *selected = [[UIView alloc] initWithFrame:cell.contentView.frame];
-        selected.backgroundColor=[UIColor colorWithRed:255/255.0 green:237/255.0 blue:184/255.0 alpha:1];
-        cell.selectedBackgroundView = selected;
-        return cell;
     }
+    return nil;
     
 }
 
