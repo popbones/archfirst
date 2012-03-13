@@ -137,11 +137,11 @@
         for (NSDictionary *execution in executionsPriceDic) {
             NSDictionary *priceDic = [execution objectForKey:@"price"];
             NSNumber *amount = [NSNumber numberWithFloat:[[priceDic valueForKey:@"amount"] floatValue]];
-            totalAmount += [amount floatValue];
             NSNumber *quantity = [NSNumber numberWithFloat:[[execution valueForKey:@"quantity"] floatValue]];
             totalQty += [quantity floatValue];
+            totalAmount += [amount floatValue]*[quantity floatValue];
         }
-        executionPrice = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:(totalAmount/totalQty)*totalQty] currency:@""];
+        executionPrice = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:(totalAmount/totalQty)] currency:@""];
     }
 
     return [[BFOrder alloc] initWithAccountID:accountID
