@@ -24,5 +24,7 @@
 @interface RootViewController : UITabBarController <UITabBarControllerDelegate>
 
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
+@property (strong, nonatomic) BullFirstWebServiceObject* instrumentRestServiceObject;
+@property (strong, nonatomic) BullFirstWebServiceObject* externAccountRestServiceObject;
 
 @end

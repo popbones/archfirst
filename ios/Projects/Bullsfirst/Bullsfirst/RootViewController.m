@@ -31,6 +31,8 @@
 #import "BFInstrument.h"
 @implementation RootViewController
 @synthesize restServiceObject;
+@synthesize instrumentRestServiceObject;
+@synthesize externAccountRestServiceObject;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -146,6 +148,7 @@
 {
     [[BFExternalAccountStore defaultStore] accountsFromJSONData:data];
 }
+
 #pragma mark - selectors for handling rest call callbacks for BFInstruments
 
 -(void)receivedDataInstruments:(NSData *)data
@@ -178,7 +181,7 @@
 
 -(void)userLogout:(NSNotification*)notification
 {
-    
+/*    
     if(self.selectedIndex==0)
     {
         UINavigationController *controller=(UINavigationController*)[self selectedViewController];
@@ -191,6 +194,7 @@
     {
         self.selectedIndex=0;
     }
+ */
     LoginViewController *controller = [[LoginViewController alloc] initWithNibName:@"LoginViewController" bundle:nil];
     [controller setModalTransitionStyle:UIModalTransitionStyleCrossDissolve];    
     [self presentModalViewController: controller animated:YES];
@@ -201,16 +205,26 @@
 -(void)userLogin:(NSNotification*)notification
 {
     NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/brokerage_accounts"];
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceived:) receiveDataSelector:@selector(receivedData:) successSelector:@selector(requestSucceeded:) errorSelector:@selector(requestFailed:)];
+    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self 
+                                                        responseSelector:@selector(responseReceived:) 
+                                                     receiveDataSelector:@selector(receivedData:) 
+                                                         successSelector:@selector(requestSucceeded:) 
+                                                           errorSelector:@selector(requestFailed:)];
 
     [restServiceObject getRequestWithURL:url];
-    restServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self responseSelector:@selector(responseReceivedExternalAccounts:) receiveDataSelector:@selector(receivedDataExternalAccounts:) successSelector:@selector(requestSucceededExternalAccounts:) errorSelector:@selector(requestFailedExternalAccounts:)];
-    url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/external_accounts"];
-    [restServiceObject getRequestWithURL:url];
     
-  restServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self                                            responseSelector:@selector(responseReceivedInstruments:)                                                       receiveDataSelector:@selector(receivedDataInstruments:)                                                           successSelector:@selector(requestSucceededInstruments:)                                                             errorSelector:@selector(requestFailedInstruments:)];
+    externAccountRestServiceObject = [[BullFirstWebServiceObject alloc]initWithObject:self 
+                                                                     responseSelector:@selector(responseReceivedExternalAccounts:) 
+                                                                  receiveDataSelector:@selector(receivedDataExternalAccounts:)
+                                                                      successSelector:@selector(requestSucceededExternalAccounts:) 
+                                                                        errorSelector:@selector(requestFailedExternalAccounts:)];
+    url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/external_accounts"];
+    [externAccountRestServiceObject getRequestWithURL:url];
+    
+    instrumentRestServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self                                            
+                                                                   responseSelector:@selector(responseReceivedInstruments:)                                                       receiveDataSelector:@selector(receivedDataInstruments:)                                                           successSelector:@selector(requestSucceededInstruments:)                                                             errorSelector:@selector(requestFailedInstruments:)];
     url = [NSURL URLWithString:@"http://archfirst.org/bfexch-javaee/rest/instruments"];
-    [restServiceObject getRequestWithURL:url];   
+    [instrumentRestServiceObject getRequestWithURL:url];
 }
 
  #pragma mark tabBarController delegate methods

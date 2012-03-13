@@ -87,7 +87,6 @@
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
     
-    
 }
 
 - (void)viewDidUnload
@@ -113,6 +112,11 @@
         NSMutableArray *brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
         if ([brokerageAccounts count] > 0) 
         {
+            BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
+            expanedRowSet = [[NSMutableArray alloc] init];
+            for (int i=0; i<[account.positions count];i++){
+                [expanedRowSet addObject:[NSNumber numberWithBool:NO]];
+            }
             [positionTBL reloadData];
         }
         return;
@@ -481,8 +485,23 @@
             cell.selectedBackgroundView = selected;
             return cell;
         }
+    } else {
+        UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
+        if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
+        {
+            UITableViewCell *cell;
+            [[NSBundle mainBundle] loadNibNamed:@"PositionLandscapeTableViewCell" owner:self options:nil];
+            cell = positionCell;
+            return cell;
+        }
+        else
+        {
+            UITableViewCell *cell;
+            [[NSBundle mainBundle] loadNibNamed:@"PositionTableViewCell" owner:self options:nil];
+            cell = positionCell;
+            return cell;
+        }        
     }
-    return nil;
     
 }
 
@@ -556,5 +575,6 @@
     controller.view.superview.bounds=CGRectMake(0, 0, 500,400);
     controller.view.frame=CGRectMake(0, 0, 500,400);
 }
+
 
 @end
