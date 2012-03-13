@@ -185,6 +185,10 @@
         NSNumberFormatter *decemalFormatter = [[NSNumberFormatter alloc] init];  
         [decemalFormatter setNumberStyle:NSNumberFormatterDecimalStyle];
         
+        NSNumberFormatter *perscentageFormatter = [[NSNumberFormatter alloc] init];  
+        [perscentageFormatter setNumberStyle:NSNumberFormatterPercentStyle];
+        [perscentageFormatter setMinimumFractionDigits:2];
+        
         UIInterfaceOrientation toInterfaceOrientation = [[UIApplication sharedApplication] statusBarOrientation];
         if(toInterfaceOrientation==UIInterfaceOrientationLandscapeLeft||toInterfaceOrientation==UIInterfaceOrientationLandscapeRight)
         {
@@ -222,7 +226,7 @@
                 label.text = [formatter stringFromNumber:position.gain.amount];
                 
                 label = (UILabel *)[cell viewWithTag:10];
-                label.text = [NSString stringWithFormat:@"%.2f%%", [position.gainPercent floatValue]];
+                label.text = [perscentageFormatter stringFromNumber:position.gainPercent];
                 
                 tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:11]; // trade button
                 [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
@@ -347,7 +351,7 @@
                     gainPercentFrame.origin.y += 44;
                     label = [[UILabel alloc] initWithFrame:gainPercentFrame];
                     label.font = [UIFont systemFontOfSize:13.0];
-                    label.text = [NSString stringWithFormat:@"%.2f%%", [lot.gainPercent floatValue]];
+                    label.text = [perscentageFormatter stringFromNumber:lot.gainPercent];
                     label.textAlignment = UITextAlignmentRight;
                     [cell addSubview:label];
                 }
@@ -383,7 +387,7 @@
                 label.text = [formatter stringFromNumber:position.gain.amount];
                 
                 label = (UILabel *)[cell viewWithTag:6];
-                label.text = [NSString stringWithFormat:@"%.2f%%", [position.gainPercent floatValue]];
+                label.text = [perscentageFormatter stringFromNumber:position.gainPercent];
                 
                 tradePositionBTN *trade = (tradePositionBTN *)[cell viewWithTag:7]; // trade button
                 [trade addTarget:self action:@selector(tradePosition:) forControlEvents:UIControlEventTouchUpInside];
@@ -466,7 +470,7 @@
                     
                     gainPercentFrame.origin.y += 44;
                     label = [[UILabel alloc] initWithFrame:gainPercentFrame];
-                    label.text = [NSString stringWithFormat:@"%.2f%%", [lot.gainPercent floatValue]];
+                    label.text = [perscentageFormatter stringFromNumber:lot.gainPercent];
                     label.font = [UIFont systemFontOfSize:13.0];
                     label.textAlignment = UITextAlignmentRight;
                     [cell addSubview:label];
