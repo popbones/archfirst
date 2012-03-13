@@ -78,7 +78,9 @@
 
 - (IBAction)clearBTNClicked:(id) sender
 {
-    [datePicker setDate:[NSDate date] animated:YES];
+    if (delegate != nil && [[self delegate] respondsToSelector:@selector(datePickerCleared:)])
+        [delegate datePickerCleared:self];
+    [popOver dismissPopoverAnimated:YES];
 }
 
 @end
