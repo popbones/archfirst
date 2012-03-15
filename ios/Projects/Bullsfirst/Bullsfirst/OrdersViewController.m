@@ -350,9 +350,7 @@
 {
     BFInstrument *instrument = controller.selectedInstrument;
     self.symbol.text = instrument.symbol;
-    if ([instrumentDropdown isPopoverVisible]) {
-        [instrumentDropdown dismissPopoverAnimated:YES];
-    } 
+    [self.symbol resignFirstResponder];
 }
 - (IBAction)dateDropdownClicked:(id)sender {
     DropDownControl *dropdownCTL = sender;
