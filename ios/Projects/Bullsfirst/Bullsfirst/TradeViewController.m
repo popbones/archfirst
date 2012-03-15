@@ -146,7 +146,7 @@
         NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfexch-javaee/rest/instruments"];        
         [restServiceObject getRequestWithURL:url];
     }
-    
+     [cusipText addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)viewDidUnload
@@ -473,13 +473,22 @@
         return [string isEqualToString:filtered];
         
     }
-    if (instrumentDropdown.popoverVisible == YES) {
-        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
-        [controller filterInstrumentsWithString:[textField.text stringByAppendingString:string]];
-    }
+   
     return YES;
 }
-
+-(void) textChanged:(UITextField*) textField
+{
+    if (instrumentDropdown.popoverVisible == YES) {
+        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
+        [controller filterInstrumentsWithString:textField.text];
+    }
+    else
+    {
+        [self showInstrumentDropdownMenu];
+        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
+        [controller filterInstrumentsWithString:textField.text];
+    }
+}
 #pragma mark - dropdown lifecycle
 
 - (void)selectionChanged:(DropdownViewController *)controller

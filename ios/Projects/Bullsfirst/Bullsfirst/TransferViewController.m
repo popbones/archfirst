@@ -107,7 +107,7 @@
     toAccountDropDownCTL.tag = 2;
     [toAccountDropDownView addSubview:toAccountDropDownCTL];
     rect=self.view.frame;
-    
+     [symbol addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
 }
 
 - (void)viewDidUnload
@@ -606,13 +606,22 @@
         return [string isEqualToString:filtered];
 
     }
-    if (instrumentDropdown.popoverVisible == YES) {
-        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
-        [controller filterInstrumentsWithString:[textField.text stringByAppendingString:string]];
-    }
+    
     return YES;
 }
-
+-(void) textChanged:(UITextField*) textField
+{
+    if (instrumentDropdown.popoverVisible == YES) {
+        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
+        [controller filterInstrumentsWithString:textField.text];
+    }
+    else
+    {
+        [self showInstrumentDropdownMenu];
+        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
+        [controller filterInstrumentsWithString:textField.text];
+    }
+}
 - (void)instrumentSelectionChanged:(InstrumentsDropdownViewController *)controller
 {
     BFInstrument *instrument = controller.selectedInstrument;
@@ -635,7 +644,6 @@
      isKeyBoardVisible=false;
     if (instrumentDropdown.popoverVisible == YES)
         [instrumentDropdown dismissPopoverAnimated:YES];
-
-    
+   
 }
 @end

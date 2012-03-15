@@ -32,7 +32,7 @@
 @synthesize applyBTN;
 @synthesize orderStatusLabel;
 @synthesize orderId;
-@synthesize symbod;
+@synthesize symbol;
 @synthesize orderTBL;
 @synthesize orderTableViewCell;
 @synthesize orderFilterView;
@@ -59,7 +59,7 @@
 @synthesize orderStatusDropdownCTL;
 @synthesize expanedRowSet;
 @synthesize multiSelectdropdown;
-
+@synthesize instrumentDropdown;
 - (id)init
 {
     self = [super init];
@@ -144,9 +144,11 @@
     orderStatusDropdownCTL.tag = 5;
     orderStatusDropdownCTL.label.font = [UIFont systemFontOfSize:13];
     [orderStatusDropdownView addSubview:orderStatusDropdownCTL];
-    
+    symbol.delegate=self;
     [self resetBTNClicked:nil];
     [self applyBTNClicked:nil];
+    [symbol addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+
 }
 
 - (void)viewDidUnload
@@ -161,7 +163,7 @@
     [self setApplyBTN:nil];
     [self setOrderStatusLabel:nil];
     [self setOrderId:nil];
-    [self setSymbod:nil];
+    [self setSymbol:nil];
     [self setFromDateDropdownView:nil];
     [self setToDateDropdownView:nil];
     [self setAccountDropdownView:nil];
@@ -207,6 +209,16 @@
         rect=orderStatusDropdownView.frame;
         orderStatusDropdownView.frame = CGRectMake(287, rect.origin.y,rect.size.width, rect.size.height);
         orderTBL.tableHeaderView = portraitTitleBar;
+    }
+    if ([datedropdown isPopoverVisible]) {
+        [datedropdown dismissPopoverAnimated:NO];
+       
+    }
+    if ([dropdown isPopoverVisible]) {
+        [dropdown dismissPopoverAnimated:NO];
+    }
+    if ([multiSelectdropdown isPopoverVisible]) {
+        [multiSelectdropdown dismissPopoverAnimated:NO];
     }
     [orderTBL reloadData];    
 }
@@ -308,13 +320,40 @@
     [orderTBL reloadData];
 }
 
-
 - (IBAction)refreshBTNClicked:(id)sender { 
     [self applyBTNClicked:nil];
     //    NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfoms-javaee/rest/secure/orders"];
     //    [self.restServiceObject getRequestWithURL:url];    
 }
-
+- (void)showInstrumentDropdownMenu {
+    NSArray *instruments = [BFInstrument getAllInstruments];
+    if ([instruments count] < 1)
+        return;
+    
+    CGSize size = CGSizeMake(320, 220);
+    
+    if (!instrumentDropdown) {
+        InstrumentsDropdownViewController *controller = [[InstrumentsDropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+        
+        instrumentDropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+        controller.popOver = instrumentDropdown;
+        controller.instrumentDelegate = self;
+        [instrumentDropdown setPopoverContentSize:size];
+    }
+    if ([instrumentDropdown isPopoverVisible]) {
+        [instrumentDropdown dismissPopoverAnimated:YES];
+    } else {
+        [instrumentDropdown presentPopoverFromRect:self.symbol.frame  inView: self.orderFilterView permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+    }
+}
+- (void)instrumentSelectionChanged:(InstrumentsDropdownViewController *)controller
+{
+    BFInstrument *instrument = controller.selectedInstrument;
+    self.symbol.text = instrument.symbol;
+    if ([instrumentDropdown isPopoverVisible]) {
+        [instrumentDropdown dismissPopoverAnimated:YES];
+    } 
+}
 - (IBAction)dateDropdownClicked:(id)sender {
     DropDownControl *dropdownCTL = sender;
     
@@ -383,9 +422,9 @@
         }
     }
     
-    NSString *symbodParam = @"";
-    if ([symbod.text length]>0) {
-        symbodParam = [NSString stringWithFormat:@"&symbol=%@",[symbod.text uppercaseString]];
+    NSString *symbolParam = @"";
+    if ([symbol.text length]>0) {
+        symbolParam = [NSString stringWithFormat:@"&symbol=%@",[symbol.text uppercaseString]];
     }
     
     NSString *orderIdParam = @"";
@@ -415,7 +454,7 @@
         orderTypeParam = [NSString stringWithFormat:@"&statuses=%@",orderStatus];
     }
     
-    NSString *filter = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/orders?%@%@%@%@%@%@%@", fromDateParam, toDateParam, brokerageAccountIDParam, symbodParam, orderIdParam, orderTypeParam, orderStatusParam];
+    NSString *filter = [NSString stringWithFormat:@"http://archfirst.org/bfoms-javaee/rest/secure/orders?%@%@%@%@%@%@%@", fromDateParam, toDateParam, brokerageAccountIDParam, symbolParam, orderIdParam, orderTypeParam, orderStatusParam];
     BFDebugLog(@"filter = %@", filter);
     NSURL *url = [NSURL URLWithString:filter];
     [self.restServiceObject getRequestWithURL:url];    
@@ -487,7 +526,7 @@
             selections = [NSArray arrayWithObjects:@"All", @"PendingNew", @"New", @"PartiallyFilled", @"Filled", @"PendingCancel", @"Canceled", @"DoneForDay", nil];
             size = [@"PartiallyFilled" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
-            size.width += 20;
+            size.width += 70;
             
             break;
             
@@ -916,6 +955,28 @@
     }
 }
 
-
-
+-(void) textFieldDidBeginEditing:(UITextField *)textField
+{
+    activeTextField = textField;
+    
+    if (activeTextField == self.symbol)
+        [self showInstrumentDropdownMenu];
+    else {
+        if (instrumentDropdown.popoverVisible == YES)
+            [instrumentDropdown dismissPopoverAnimated:YES];
+    }
+}
+-(void) textChanged:(UITextField*) textField
+{
+    if (instrumentDropdown.popoverVisible == YES) {
+        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
+        [controller filterInstrumentsWithString:textField.text];
+    }
+    else
+    {
+        [self showInstrumentDropdownMenu];
+        InstrumentsDropdownViewController *controller = (InstrumentsDropdownViewController *) instrumentDropdown.contentViewController;
+        [controller filterInstrumentsWithString:textField.text];
+    }
+}
 @end

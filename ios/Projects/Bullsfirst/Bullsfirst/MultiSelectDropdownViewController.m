@@ -41,7 +41,6 @@
     UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
     
     NSString *selectedOption = [self.selections objectAtIndex:indexPath.row];
-    
     if (indexPath.row == 0) {
         if (cell.accessoryType == UITableViewCellAccessoryCheckmark) {
             cell.accessoryType = UITableViewCellAccessoryNone;

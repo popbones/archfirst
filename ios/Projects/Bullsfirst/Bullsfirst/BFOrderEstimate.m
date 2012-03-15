@@ -67,15 +67,14 @@
         thefees = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:[[priceDic valueForKey:@"amount"] floatValue]] currency:[priceDic valueForKey:@"currency"]];
     }
 
-    priceDic = [jsonObject valueForKey:@"fees"];
-    BFMoney *theRstimatedValueIncFee;
-    if (priceDic != nil && [priceDic count] > 0) {
-        theRstimatedValueIncFee = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:[[priceDic valueForKey:@"amount"] floatValue]] currency:[priceDic valueForKey:@"currency"]];
+    BFMoney *theEstimatedValueIncFee;
+    if (thefees.amount >0||theEstimatedValue.amount>0) {
+        theEstimatedValueIncFee = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:(theEstimatedValue.amount.floatValue+thefees.amount.floatValue)] currency:[priceDic valueForKey:@"currency"]];
     }
     BFOrderEstimate *estimate = [[BFOrderEstimate alloc] initWithEstimate:compliance 
                                                            estimatedValue:theEstimatedValue 
                                                                       fees:thefees
-                                                     estimatedValueIncFee:theRstimatedValueIncFee];
+                                                     estimatedValueIncFee:theEstimatedValueIncFee];
     
     return estimate;
 }

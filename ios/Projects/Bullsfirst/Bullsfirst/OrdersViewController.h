@@ -24,9 +24,10 @@
 #import "DatePickerViewController.h"
 #import "DropdownViewController.h"
 #import "DropDownControl.h"
-
-@interface OrdersViewController : TabViewController<DatePickerViewControllerDelegate, DropdownViewControllerDelegate> {
+#import "InstrumentsDropdownViewController.h"
+@interface OrdersViewController : TabViewController<DatePickerViewControllerDelegate, DropdownViewControllerDelegate,InstrumentsDropdownViewControllerDelegate,UITextFieldDelegate> {
     NSMutableArray *orders;
+    UITextField *activeTextField;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
@@ -45,7 +46,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *applyBTN;
 @property (strong, nonatomic) IBOutlet UILabel *orderStatusLabel;
 @property (strong, nonatomic) IBOutlet UITextField *orderId;
-@property (strong, nonatomic) IBOutlet UITextField *symbod;
+@property (strong, nonatomic) IBOutlet UITextField *symbol;
 
 @property (strong, nonatomic) UIPopoverController *datedropdown;
 @property (strong, nonatomic) UIPopoverController *dropdown;
@@ -71,7 +72,7 @@
 @property (retain, nonatomic) DropDownControl *orderDropdownCTL;
 @property (strong, nonatomic) IBOutlet UIView *orderStatusDropdownView;
 @property (retain, nonatomic) DropDownControl *orderStatusDropdownCTL;
-
+@property (strong, nonatomic) UIPopoverController *instrumentDropdown;
 @property (retain, nonatomic) NSMutableArray *expanedRowSet;
 
 @end

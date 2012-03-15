@@ -406,7 +406,9 @@
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
+   if(fromDate!=nil)
     fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
+    if(toDate!=nil)
     toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
     
    
@@ -521,18 +523,17 @@
 
 - (void)dateSelectionChanged:(DatePickerViewController *)controller
 {
+    NSDate* date = controller.datePicker.date;
     NSDateFormatter *dateFormat = [[NSDateFormatter alloc] init];
     [dateFormat setFormatterBehavior:NSDateFormatterBehavior10_4];
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     if(currentSelectedDateType == ToDate)
     {
-        toDate = controller.datePicker.date;
-        toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
+        toDateDropDownCTL.label.text = [date copy];
     }
     else
     {
-        fromDate = controller.datePicker.date;
-        fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
+        fromDateDropDownCTL.label.text =[date copy];
     }
 }
 
