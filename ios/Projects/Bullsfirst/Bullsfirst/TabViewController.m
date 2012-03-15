@@ -133,7 +133,8 @@
                                                           successSelector:@selector(requestSucceeded:) 
                                                             errorSelector:@selector(requestFailed:)];
 
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rotateDevice) name:@"DEVICE_ROTATE" object:nil];
+
 }
 
 - (void)viewDidUnload
@@ -144,6 +145,13 @@
     [super viewDidUnload];
 }
 
+- (void) rotateDevice
+{
+    [self willAnimateRotationToInterfaceOrientation:[[UIApplication sharedApplication] statusBarOrientation] duration:0.1];
+    if ([userPopOver isPopoverVisible]) {
+        [userPopOver dismissPopoverAnimated:NO];
+    } 
+}
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -151,29 +159,14 @@
         [self willAnimateRotationToInterfaceOrientation:interfaceOrientation duration:0.1];
     }
     
-   return YES;
+    return YES;
 }
 
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation 
-{
-    if ([userPopOver isPopoverVisible]) {
-        [userPopOver dismissPopoverAnimated:NO];
-        UIDeviceOrientation orientation= [[UIDevice currentDevice] orientation];
-
-        if(orientation==UIDeviceOrientationLandscapeLeft||orientation==UIDeviceOrientationLandscapeRight)
-        {
-            [userPopOver presentPopoverFromRect:CGRectMake(1015, -15, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:NO];
-        }
-        else
-        {
-            [userPopOver presentPopoverFromRect:CGRectMake(765, -15, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:NO];
-            
-        }
-    }
-}
 -(void) willAnimateRotationToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
 {
-    
+    if ([userPopOver isPopoverVisible]) {
+    [userPopOver dismissPopoverAnimated:NO];
+    } 
         
 }
 #pragma mark - selectors for handling rest call callbacks

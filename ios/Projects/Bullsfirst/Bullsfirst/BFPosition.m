@@ -102,12 +102,14 @@
                                                        gainPercent:theGainPercent
                                                           children:childrenArray];
 
+    BFDebugLog(@"DAta = %@", theDictionary);
     BFDebugLog(@"accountId = %@", theAccountID);
     BFDebugLog(@"accountName = %@", theAccountName);
     BFDebugLog(@"instrumentSymbol = %@", theInstrumentSymbol);
     BFDebugLog(@"instrumentName = %@", theInstrumentName);    
     BFDebugLog(@"quantity = %@", theQuantity);
     BFDebugLog(@"lotId = %@", theLotID);
+    BFDebugLog(@"gainPercent = %@", theGainPercent);
     BFDebugLog(@"lotCreationTime = %@", theLotCreationTime);
     
     return position;
