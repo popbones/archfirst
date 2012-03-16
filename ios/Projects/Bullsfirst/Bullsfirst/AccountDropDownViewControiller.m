@@ -113,9 +113,11 @@
     
     label = (UILabel *)[cell viewWithTag:2];
     label.text = [NSString stringWithString: account.name];
-    
+    NSNumberFormatter *formatter=[NSNumberFormatter new];
+    [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
     label = (UILabel *)[cell viewWithTag:3];
-    label.text = [NSString stringWithFormat:@"$%d", [account.cashPosition.amount intValue]];
+    NSString *cash = [formatter stringFromNumber:[NSNumber numberWithInteger:[account.cashPosition.amount intValue]]];
+    label.text= [NSString stringWithFormat:@"$%@",cash];
 
     return cell;
 }
