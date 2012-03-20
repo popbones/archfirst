@@ -42,10 +42,9 @@
 					<object class="IBUITableView" id="823959612">
 						<reference key="NSNextResponder" ref="282094370"/>
 						<int key="NSvFlags">274</int>
-						<string key="NSFrame">{{0, 90}, {768, 817}}</string>
+						<string key="NSFrame">{{0, 90}, {768, 821}}</string>
 						<reference key="NSSuperview" ref="282094370"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<object class="NSColor" key="IBUIBackgroundColor" id="532573832">
 							<int key="NSColorSpace">3</int>
 							<bytes key="NSWhite">MQA</bytes>
