@@ -529,12 +529,15 @@
     [dateFormat setDateFormat:@"yyyy-MM-dd"];
     if(currentSelectedDateType == ToDate)
     {
-        toDateDropDownCTL.label.text = [date copy];
+        toDateDropDownCTL.label.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:date]];
+        toDate = [date copy];
     }
     else
     {
-        fromDateDropDownCTL.label.text =[date copy];
+        fromDateDropDownCTL.label.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:date]];
+        fromDate = [date copy];
     }
+
 }
 
 -(void) datePickerCleared:(DatePickerViewController *) controller
