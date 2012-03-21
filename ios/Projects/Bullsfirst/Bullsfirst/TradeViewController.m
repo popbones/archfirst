@@ -70,52 +70,52 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-
+    
     [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
-
+    
     UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
-                     initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
+                                      initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancelBTNClicked:)];
     barButtonItem.style = UIBarButtonItemStyleBordered;
     self.navigationItem.rightBarButtonItem = barButtonItem;
-
+    
     barButtonItem = [[UIBarButtonItem alloc] init];
     barButtonItem.title = @"Edit Order";
 	self.navigationItem.backBarButtonItem = barButtonItem;
     self.navigationItem.title = @"Trade";
     self.view.backgroundColor = [UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
-
+    
     textFields = [NSArray arrayWithObjects:cusipText, quantity, limit, nil];
     order = [[BFOrder alloc] init];
     order.allOrNone = NO;
     order.term = [NSString stringWithString:@"Good for the day"];
-
+    
     accountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, accountDropDownView.frame.size.width, accountDropDownView.frame.size.height)
-                                                        target:self
-                                                        action:@selector(showAccountDropdownMenu:)];
+                                                         target:self
+                                                         action:@selector(showAccountDropdownMenu:)];
     accountDropDownCTL.label.text = @"Accounts";
     accountDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     accountDropDownCTL.tag = 1;
     [accountDropDownView addSubview:accountDropDownCTL];
-
+    
     actionDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, actionDropDownView.frame.size.width, actionDropDownView.frame.size.height)
-                                                         target:self
-                                                         action:@selector(showDropdown:)];
+                                                        target:self
+                                                        action:@selector(showDropdown:)];
     actionDropDownCTL.label.text = @"Action";
     actionDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     actionDropDownCTL.tag = 2;
     [actionDropDownView addSubview:actionDropDownCTL];
-
+    
     priceDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, priceDropDownView.frame.size.width, priceDropDownView.frame.size.height)
-                                                        target:self
-                                                        action:@selector(showDropdown:)];
+                                                       target:self
+                                                       action:@selector(showDropdown:)];
     priceDropDownCTL.label.text = @"Order Type";
     priceDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     priceDropDownCTL.tag = 3;
     [priceDropDownView addSubview:priceDropDownCTL];
     
     goodForDayDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, goodForDayDropDownView.frame.size.width, goodForDayDropDownView.frame.size.height)
-                                                       target:self
-                                                       action:@selector(showDropdown:)];
+                                                            target:self
+                                                            action:@selector(showDropdown:)];
     goodForDayDropDownCTL.label.text = order.term;
     goodForDayDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     goodForDayDropDownCTL.tag = 4;
@@ -134,20 +134,42 @@
     }
     
     self.limit.hidden = YES;
-
+    
     restServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self 
                                                          responseSelector:@selector(responseReceived:) 
                                                       receiveDataSelector:@selector(receivedData:) 
                                                           successSelector:@selector(requestSucceeded:) 
                                                             errorSelector:@selector(requestFailed:)];
-
+    
     NSArray *instruments = [BFInstrument getAllInstruments];
     if (instruments == nil) {
         NSURL *url = [NSURL URLWithString:@"http://archfirst.org/bfexch-javaee/rest/instruments"];        
         [restServiceObject getRequestWithURL:url];
     }
-     [cusipText addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+    [cusipText addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
+
+-(void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+}
+
+-(void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)viewDidUnload
 {
@@ -160,6 +182,9 @@
     [self setActionDropDownView:nil];
     [self setPriceDropDownView:nil];
     [self setGoodForDayDropDownView:nil];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -175,6 +200,8 @@
         [accountDropdown dismissPopoverAnimated:YES];
 	return YES;
 }
+
+
 
 #pragma mark - selectors for handling rest call callbacks
 
@@ -211,7 +238,7 @@
         return;
     
     CGSize size = CGSizeMake(320, 220);
-
+    
     if (!instrumentDropdown) {
         InstrumentsDropdownViewController *controller = [[InstrumentsDropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
         
@@ -285,7 +312,7 @@
             size = [@"Limited" sizeWithFont:[UIFont fontWithName:@"Helvetica" size:13]];
             size.height = [selections count] * 44;
             size.width += 20;
-
+            
             break;
             
         case 4:
@@ -298,10 +325,10 @@
         default:
             break;
     }
-
+    
     CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
     CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
-
+    
     if (!dropdown) {
         DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
         
@@ -353,7 +380,7 @@
         [alert show];
         return;
     }
-
+    
     if ([order.side length] < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Action" message:@"Need to chose an action." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -366,13 +393,13 @@
         return;
     }
     order.instrumentSymbol = [NSString stringWithString:self.cusipText.text];
-
+    
     if ([order.type length] < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Order" message:@"Need to chose an order type." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }
-
+    
     if ([self.quantity.text length] < 1) {
         UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Quanity" message:@"Need to enter a quantity." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
@@ -386,11 +413,11 @@
         return;
     }
     order.limitPrice = [BFMoney moneyWithAmount:[NSNumber numberWithFloat:[self.limit.text floatValue]] currency:@"USD"];
-
+    
     PreviewTradeViewController *controller = [[PreviewTradeViewController alloc] initWithNibName:@"PreviewTradeViewController" bundle:nil order:order];    
     [activeTextField resignFirstResponder];
     [self.navigationController pushViewController:controller animated:YES];
-
+    
 }
 
 #pragma mark - text field lifecycle
@@ -435,13 +462,13 @@
     // Set the active field. We' ll need that if we want to move properly
     // between our textfields.
     activeTextField = textField;
-    
-    if (activeTextField == self.cusipText)
-        [self showInstrumentDropdownMenu];
-    else {
-        if (instrumentDropdown.popoverVisible == YES)
-            [instrumentDropdown dismissPopoverAnimated:YES];
-    }
+//    
+//    if (activeTextField == self.cusipText)
+//        [self showInstrumentDropdownMenu];
+//    else {
+//        if (instrumentDropdown.popoverVisible == YES)
+//            [instrumentDropdown dismissPopoverAnimated:YES];
+//    }
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
@@ -473,7 +500,7 @@
         return [string isEqualToString:filtered];
         
     }
-   
+    
     return YES;
 }
 -(void) textChanged:(UITextField*) textField
@@ -547,4 +574,52 @@
     self.cusipText.text = instrument.symbol;
     [self nextBTNClicked:nil];
 }
+
+
+#pragma mark - keyboard events
+
+-(void) keyboardWillShow:(NSNotification*) notification
+{
+    if(activeTextField == self.cusipText)
+    {
+        if(instrumentDropdown.popoverVisible)
+        {
+            [instrumentDropdown dismissPopoverAnimated:YES];
+        }
+    }
+}
+
+-(void) keyboardDidShow:(NSNotification*) notification
+{
+    if(activeTextField == self.cusipText)
+    {
+        if(instrumentDropdown.popoverVisible == NO)
+        {
+            [self showInstrumentDropdownMenu]; 
+        }
+    }
+}
+
+-(void) keyboardWillHide:(NSNotification*) notification
+{
+    if(activeTextField == self.cusipText)
+    {
+        if(instrumentDropdown.popoverVisible)
+        {
+            [instrumentDropdown dismissPopoverAnimated:YES];
+        }
+    }
+}
+
+-(void) keyboardDidHide:(NSNotification*) notification
+{
+    if(activeTextField == self.cusipText)
+    {
+        if(instrumentDropdown.popoverVisible == NO)
+        {
+            [self showInstrumentDropdownMenu];
+        }
+    }
+}
+
 @end
