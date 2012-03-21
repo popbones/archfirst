@@ -28,6 +28,7 @@
 #import "BFConstants.h"
 #import "AppDelegate.h"
 #import "BFInstrument.h"
+#import "AccountDropDownViewControiller.h"
 @implementation TransferViewController
 @synthesize segmentedControl,restServiceObject,symbol,amount,quantity,pricePaid;
 @synthesize fromAccountDropDownCTL,toAccountDropDownCTL,dropdown,transferBTN;
@@ -351,121 +352,125 @@
     [self dismissModalViewControllerAnimated:YES];
     
 }
-#pragma mark - dropdown lifecycle
 
-- (void)selectionChanged:(DropdownViewController *)controller
+
+#pragma mark - DropDownViewController delegate methods
+
+-(void) accountSelectionChanged:(AccountDropDownViewControiller *)controller
 {
     NSArray *brokerageAccounts;
     switch (controller.tag) {
         case 1:
-            fromAccountDropDownCTL.label.text = controller.selected;
-             brokerageAccounts= [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-
-            if(controller.selectedIndex<=brokerageAccounts.count-1)
-            {
-            BFBrokerageAccount *account= [brokerageAccounts objectAtIndex:controller.selectedIndex];
-                fromAccountID=account.brokerageAccountID;            
-            }
-            else
-            {
-                 NSArray *externalAccounts = [[BFExternalAccountStore defaultStore] allExternalAccounts];
-                BFExternalAccount *account= [externalAccounts objectAtIndex:(controller.selectedIndex-brokerageAccounts.count)];
-                fromAccountID=account.externalAccountID;       
-            }
-            break;
-        
-        case 2:
-            toAccountDropDownCTL.label.text = controller.selected;
-            brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+            
+            brokerageAccounts= [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
             
             if(controller.selectedIndex<=brokerageAccounts.count-1)
             {
                 BFBrokerageAccount *account= [brokerageAccounts objectAtIndex:controller.selectedIndex];
-                toAccountID=account.brokerageAccountID;            
+                fromAccountID=account.brokerageAccountID; 
+                fromAccountDropDownCTL.label.text = account.name;
             }
             else
             {
                 NSArray *externalAccounts = [[BFExternalAccountStore defaultStore] allExternalAccounts];
                 BFExternalAccount *account= [externalAccounts objectAtIndex:(controller.selectedIndex-brokerageAccounts.count)];
-                toAccountID=account.externalAccountID;       
+                fromAccountID=account.externalAccountID; 
+                fromAccountDropDownCTL.label.text = account.name;
             }
             break;
-        default:
-            break;
-    }
-    
-}
-
-- (IBAction)showDropdown:(id)sender {
-     DropDownControl *dropdownCTL = (DropDownControl *)sender;
-    UIButton *button = sender;
-    NSArray *selections;
-    CGSize size;
-    switch (button.tag) {
-        case 1: {
-            NSMutableArray *accountName = [[NSMutableArray alloc] init];
-            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-            for (BFBrokerageAccount *account in brokerageAccounts) {
-                [accountName addObject:account.name];
-            }
-            NSArray *externalAccounts = [[BFExternalAccountStore defaultStore] allExternalAccounts];
-            for (BFExternalAccount *account in externalAccounts) {
-                [accountName addObject:account.name];
-            }
-            selections = [NSArray arrayWithArray:accountName];
-            size.height = [selections count] * 44;
-            if ([selections count] > 5) {
-                size.height = 220;
-            }
-            size.width = 320;
-            break;
-        }
             
         case 2:
-        {
-            NSMutableArray *accountName = [[NSMutableArray alloc] init];
-            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-            for (BFBrokerageAccount *account in brokerageAccounts) {
-                [accountName addObject:account.name];
+            brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+            
+            if(controller.selectedIndex<=brokerageAccounts.count-1)
+            {
+                BFBrokerageAccount *account= [brokerageAccounts objectAtIndex:controller.selectedIndex];
+                toAccountID=account.brokerageAccountID;
+                toAccountDropDownCTL.label.text = account.name;
             }
-            NSArray *externalAccounts = [[BFExternalAccountStore defaultStore] allExternalAccounts];
-            for (BFExternalAccount *account in externalAccounts) {
-                [accountName addObject:account.name];
+            else
+            {
+                NSArray *externalAccounts = [[BFExternalAccountStore defaultStore] allExternalAccounts];
+                BFExternalAccount *account= [externalAccounts objectAtIndex:(controller.selectedIndex-brokerageAccounts.count)];
+                toAccountID=account.externalAccountID; 
+                toAccountDropDownCTL.label.text = account.name;
             }
-            selections = [NSArray arrayWithArray:accountName];
-            size.height = [selections count] * 44;
-            if ([selections count] > 5) {
-                size.height = 220;
-            }
-            size.width = 320;
             break;
-        }
         default:
             break;
     }
+}
+
+
+- (IBAction)showDropdown:(id)sender {
+    DropDownControl* dropdownCTL = sender;
+    NSArray *selections;
+    CGSize size;
+    NSMutableArray *accountName = [[NSMutableArray alloc] init];
+    NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+    for (BFBrokerageAccount *account in brokerageAccounts) {
+        [accountName addObject:account];
+    }
+    NSArray *externalAccounts = [[BFExternalAccountStore defaultStore] allExternalAccounts];
+    for (BFExternalAccount *account in externalAccounts) {
+        [accountName addObject:account];
+    }
+    selections = [NSArray arrayWithArray:accountName];
+    size.height = [selections count] * 44;
+    if ([selections count] > 5) {
+        size.height = 220;
+    }
+    size.width = 320;
+    
     CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
     CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
-
+    
     if (!dropdown) {
-        DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
-        
+        AccountDropDownViewControiller *controller = [[AccountDropDownViewControiller alloc] initWithNibName:@"DropdownViewController" bundle:nil];
         dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
         controller.popOver = dropdown;
+        controller.tag = dropdownCTL.tag;
         controller.selections = selections;
-        controller.tag = button.tag;
-        controller.delegate = self;
+        controller.accountDelegate = self;
         [dropdown setPopoverContentSize:size];
     }
     if ([dropdown isPopoverVisible]) {
         [dropdown dismissPopoverAnimated:YES];
     } else {
         DropdownViewController *controller = (DropdownViewController *)dropdown.contentViewController;
-        controller.tag = button.tag;
         controller.selections = selections;
+        controller.tag = dropdownCTL.tag;
         [controller.selectionsTBL reloadData];
         [dropdown setPopoverContentSize:size];
         [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
     }
+
+    
+    
+    
+//    CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+//    CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
+//
+//    if (!dropdown) {
+//        DropdownViewController *controller = [[DropdownViewController alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+//        
+//        dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+//        controller.popOver = dropdown;
+//        controller.selections = selections;
+//        controller.tag = button.tag;
+//        controller.delegate = self;
+//        [dropdown setPopoverContentSize:size];
+//    }
+//    if ([dropdown isPopoverVisible]) {
+//        [dropdown dismissPopoverAnimated:YES];
+//    } else {
+//        DropdownViewController *controller = (DropdownViewController *)dropdown.contentViewController;
+//        controller.tag = button.tag;
+//        controller.selections = selections;
+//        [controller.selectionsTBL reloadData];
+//        [dropdown setPopoverContentSize:size];
+//        [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+//    }
 }
 - (IBAction)segmentedControlValueChanged:(id)sender
 {

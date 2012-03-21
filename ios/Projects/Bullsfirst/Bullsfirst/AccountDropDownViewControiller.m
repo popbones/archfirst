@@ -20,6 +20,7 @@
 
 #import "AccountDropDownViewControiller.h"
 #import "BFBrokerageAccount.h"
+#import "BFExternalAccount.h"
 #import "BFMoney.h"
 
 @implementation AccountDropDownViewControiller
@@ -107,6 +108,9 @@
     UILabel *label;
     
     
+    id temp = [super.selections objectAtIndex:indexPath.row];
+    if([temp isKindOfClass:[BFBrokerageAccount class]])
+    {
     BFBrokerageAccount *account = [super.selections objectAtIndex:indexPath.row];
     label = (UILabel *)[cell viewWithTag:1];
     label.text = [NSString stringWithFormat:@"%d", [account.brokerageAccountID intValue]];
@@ -118,6 +122,21 @@
     label = (UILabel *)[cell viewWithTag:3];
     NSString *cash = [formatter stringFromNumber:[NSNumber numberWithInteger:[account.cashPosition.amount intValue]]];
     label.text= [NSString stringWithFormat:@"$%@",cash];
+    }
+    else if([temp isKindOfClass:[BFExternalAccount class]])
+    {
+        BFExternalAccount *account = [super.selections objectAtIndex:indexPath.row];
+        label = (UILabel *)[cell viewWithTag:1];
+        label.text = [NSString stringWithFormat:@"%d", [account.accountNumber intValue]];
+        
+        label = (UILabel *)[cell viewWithTag:2];
+        label.text = [NSString stringWithString: account.name];
+        NSNumberFormatter *formatter=[NSNumberFormatter new];
+        [formatter setNumberStyle:NSNumberFormatterDecimalStyle];
+        label = (UILabel *)[cell viewWithTag:3];
+        label.text= [NSString stringWithString:@""];
+
+    }
 
     return cell;
 }
