@@ -28,6 +28,7 @@
 @interface OrdersViewController : TabViewController<DatePickerViewControllerDelegate, DropdownViewControllerDelegate,InstrumentsDropdownViewControllerDelegate,UITextFieldDelegate> {
     NSMutableArray *orders;
     UITextField *activeTextField;
+    int selectedAccountId;
 }
 
 @property (strong, nonatomic) IBOutlet UIView *portraitTitleBar;
@@ -54,7 +55,6 @@
 
 @property (retain, nonatomic) NSDate *fromDate;
 @property (retain, nonatomic) NSDate *toDate;
-@property (retain, nonatomic) NSString *accountSelected;
 @property (retain, nonatomic) NSString *orderType;
 @property (retain, nonatomic) NSString *orderStatus;
 

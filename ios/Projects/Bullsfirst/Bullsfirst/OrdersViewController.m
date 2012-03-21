@@ -43,7 +43,6 @@
 @synthesize dropdown;
 @synthesize fromDate;
 @synthesize toDate;
-@synthesize accountSelected;
 @synthesize orderType;
 @synthesize orderStatus;
 @synthesize cancelOrderServiceObject;
@@ -148,7 +147,9 @@
     [self resetBTNClicked:nil];
     [self applyBTNClicked:nil];
     [symbol addTarget:self action:@selector(textChanged:) forControlEvents:UIControlEventEditingChanged];
-
+    
+    selectedAccountId = -1;
+    
 }
 
 - (void)viewDidUnload
@@ -212,7 +213,7 @@
     }
     if ([datedropdown isPopoverVisible]) {
         [datedropdown dismissPopoverAnimated:NO];
-       
+        
     }
     if ([dropdown isPopoverVisible]) {
         [dropdown dismissPopoverAnimated:NO];
@@ -392,7 +393,7 @@
 - (IBAction)resetBTNClicked:(id)sender {
     fromDate = [NSDate date];
     toDate = [NSDate date];
-    accountSelected = @"All";
+    selectedAccountId = -1;
     orderType = @"All";
     orderStatus = @"All";
     
@@ -402,7 +403,7 @@
     
     fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@",[dateFormat stringFromDate:fromDate]];
     toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@",[dateFormat stringFromDate:toDate]];
-    accountDropdownCTL.label.text = [NSString stringWithFormat:@"Account: %@", accountSelected];
+    accountDropdownCTL.label.text = [NSString stringWithString:@"All Accounts"];
     orderDropdownCTL.label.text = [NSString stringWithFormat:@"Action: %@", orderType];
     orderStatusDropdownCTL.label.text = [NSString stringWithFormat:@"Order Status: %@", orderStatus];    
 }
@@ -410,14 +411,9 @@
 - (IBAction)applyBTNClicked:(id)sender {
     
     NSString *brokerageAccountIDParam = @"";
-    if ([accountSelected isEqualToString:@"All"] != YES) {
-        NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-        for (BFBrokerageAccount *account in brokerageAccounts) {
-            if ([accountSelected isEqualToString:account.name] == YES) {
-                brokerageAccountIDParam = [NSString stringWithFormat:@"&accountId=%d", [account.brokerageAccountID intValue]];
-                break;
-            }
-        }
+    if (selectedAccountId != -1) 
+    {
+        brokerageAccountIDParam = [NSString stringWithFormat:@"&accountId=%d", selectedAccountId];
     }
     
     NSString *symbolParam = @"";
@@ -464,18 +460,51 @@
     CGSize size;
     switch (dropdownCTL.tag) {
         case 3: {
-            NSMutableArray *accountName = [[NSMutableArray alloc] init];
+            //            NSMutableArray *accountName = [[NSMutableArray alloc] init];
+            //            NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
+            //            for (BFBrokerageAccount *account in brokerageAccounts) {
+            //                [accountName addObject:account.name];
+            //            }
+            //            selections = [NSArray arrayWithArray:accountName];
+            //            size.height = [selections count] * 44;
+            //            if ([selections count] > 5) {
+            //                size.height = 220;
+            //            }
+            //            size.width = 320;
+            //            break;
+            DropDownControl* dropdownCTL = sender;
+            NSArray *selections;
+            CGSize size;
             NSArray *brokerageAccounts = [[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-            for (BFBrokerageAccount *account in brokerageAccounts) {
-                [accountName addObject:account.name];
-            }
-            selections = [NSArray arrayWithArray:accountName];
+            selections = [NSArray arrayWithArray:brokerageAccounts];
             size.height = [selections count] * 44;
             if ([selections count] > 5) {
                 size.height = 220;
             }
             size.width = 320;
-            break;
+            
+            CGPoint origin = [self.view convertPoint:dropdownCTL.arrowRect.origin fromView:dropdownCTL];
+            CGRect dropdownRect = CGRectMake(origin.x, origin.y, dropdownCTL.arrowRect.size.width, dropdownCTL.arrowRect.size.height);
+            
+            if (!dropdown) {
+                AccountDropDownViewControiller *controller = [[AccountDropDownViewControiller alloc] initWithNibName:@"DropdownViewController" bundle:nil];
+                controller.allAccountsOption = YES;
+                dropdown = [[UIPopoverController alloc] initWithContentViewController:controller];
+                controller.popOver = dropdown;
+                controller.selections = selections;
+                controller.accountDelegate = self;
+                [dropdown setPopoverContentSize:size];
+            }
+            if ([dropdown isPopoverVisible]) {
+                [dropdown dismissPopoverAnimated:YES];
+            } else {
+                DropdownViewController *controller = (DropdownViewController *)dropdown.contentViewController;
+                controller.selections = selections;
+                [controller.selectionsTBL reloadData];
+                [dropdown setPopoverContentSize:size];
+                [dropdown presentPopoverFromRect: dropdownRect  inView: self.view permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+            }
+            return;
         }
             
         case 4:
@@ -868,19 +897,19 @@
             fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:date]];
             fromDate = [date copy];
             
-//            if (toDate == nil) {
-//                toDate = [fromDate copy];
-//                toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:toDate]];
-//            }
+            //            if (toDate == nil) {
+            //                toDate = [fromDate copy];
+            //                toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:toDate]];
+            //            }
             break;
             
         case 2:
             toDateDropdownCTL.label.text = [NSString stringWithFormat:@"To: %@", [dateFormat stringFromDate:date]];
             toDate = [date copy];;
-//            if (fromDate == nil) {
-//                fromDate = [toDate copy];
-//                fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:fromDate]];
-//            }
+            //            if (fromDate == nil) {
+            //                fromDate = [toDate copy];
+            //                fromDateDropdownCTL.label.text = [NSString stringWithFormat:@"From: %@", [dateFormat stringFromDate:fromDate]];
+            //            }
             break;
         default:
             break;
@@ -921,11 +950,6 @@
     if ([controller isKindOfClass:[DropdownViewController class]]){
         
         switch (controller.tag) {
-            case 3: {
-                accountDropdownCTL.label.text = [NSString stringWithFormat:@"Account: %@", controller.selected];
-                accountSelected = [NSString stringWithString:controller.selected];
-                break;
-            }
             case 4:
                 orderDropdownCTL.label.text = [NSString stringWithFormat:@"Action: %@", controller.selected];
                 orderType = [NSString stringWithString:controller.selected];
@@ -936,7 +960,22 @@
         }
         return;
     }
- 
+    
+}
+
+#pragma mark - DropDownViewController delegate methods
+
+-(void) accountSelectionChanged:(AccountDropDownViewControiller *)controller
+{
+    BFBrokerageAccount* brokerageAccount =  [[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts] objectAtIndex:controller.selectedIndex];
+    selectedAccountId = [brokerageAccount.brokerageAccountID intValue];
+    accountDropdownCTL.label.text = brokerageAccount.name;
+}
+
+- (void)allAccountsClicked:(AccountDropDownViewControiller*) controller
+{
+    selectedAccountId = -1;
+    accountDropdownCTL.label.text = @"All Accounts";
 }
 
 -(void) datePickerCleared:(DatePickerViewController *) controller
