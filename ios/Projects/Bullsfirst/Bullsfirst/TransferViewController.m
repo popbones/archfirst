@@ -167,14 +167,14 @@
 {
     if(fromAccountID==NULL)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"From Account" message:@"Need to chose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"From Account" message:@"Need to choose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }        
     if(toAccountID==NULL)
     {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"To Account" message:@"Need to chose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"To Account" message:@"Need to choose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }
@@ -240,14 +240,14 @@
     
     if(fromAccountID==NULL)
     {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"From Account" message:@"Need to chose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"From Account" message:@"Need to choose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }        
     if(toAccountID==NULL)
     {
         
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"To Account" message:@"Need to chose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"To Account" message:@"Need to choose an account." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }

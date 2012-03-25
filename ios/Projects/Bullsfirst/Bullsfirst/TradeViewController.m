@@ -92,7 +92,7 @@
     accountDropDownCTL = [[DropDownControl alloc] initWithFrame:CGRectMake(0, 0, accountDropDownView.frame.size.width, accountDropDownView.frame.size.height)
                                                          target:self
                                                          action:@selector(showAccountDropdownMenu:)];
-    accountDropDownCTL.label.text = @"Accounts";
+    accountDropDownCTL.label.text = @"Account";
     accountDropDownCTL.label.font = [UIFont systemFontOfSize:13.0];
     accountDropDownCTL.tag = 1;
     [accountDropDownView addSubview:accountDropDownCTL];
@@ -382,7 +382,7 @@
     }
     
     if ([order.side length] < 1) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Action" message:@"Need to chose an action." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Action" message:@"Need to choose an action." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }
@@ -395,7 +395,7 @@
     order.instrumentSymbol = [NSString stringWithString:self.cusipText.text];
     
     if ([order.type length] < 1) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Order" message:@"Need to chose an order type." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Order" message:@"Need to choose an order type." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }
@@ -408,7 +408,7 @@
     order.quantity = [NSNumber numberWithInt:[[NSString stringWithString:self.quantity.text] intValue]];
     
     if ([self.limit.text length] < 1 && [order.type isEqualToString:@"Limit"]) {
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Limited Price" message:@"Need to enter a limited price." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Limit Price" message:@"Need to enter a limit price." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alert show];
         return;
     }
