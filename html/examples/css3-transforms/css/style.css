@@ -1,0 +1,91 @@
+body {
+    font-family: "Arial";
+    font-size: 100%;
+}
+
+h1 {
+    font-size: 20px;
+}
+
+h2 {
+    font-size: 16px;
+    margin-top: 20px;
+    margin-bottom: 6px;
+}
+
+ul {
+    margin-top: 0px;
+    margin-left: 10px;
+    padding-left: 10px;
+}
+
+img {
+    margin: 5px 0px;
+}
+
+.container {
+	margin: 50px auto;
+	width: 670px;
+}
+
+.image-panel {
+    width: 200px;
+    margin: 0 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.rotate {
+    transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg); /* Safari and Chrome */
+    -webkit-transform: rotateY(180deg); /* Safari and Chrome */
+    transition: 1s;
+    -moz-transition: 1s; /* Firefox 4 */
+    -webkit-transition: 1s; /* Safari and Chrome */
+    -o-transition: 1s; /* Opera */
+}
+
+#browser-support {
+    border-spacing: 0;
+    width: 100%;
+}
+
+#browser-support thead tr {
+    height: 32px;
+}
+
+#browser-support tbody tr {
+    height: 28px;
+}
+
+#browser-support tr th,
+#browser-support tr td {
+    padding: 5px 10px 5px 10px;
+    width: 60px;
+}
+
+#browser-support tr .approach {
+    width: 120px;
+}
+
+#browser-support tr .check {
+    background: url('../img/check.png') no-repeat center;
+}
+
+#browser-support tr th {
+    border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    text-align: center;
+    color: White;
+    background-color: #8D97BA; /* fallback color */
+    background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#8D97BA), to(#677AB5));
+    background-image: -webkit-linear-gradient(top, #8D97BA, #677AB5);
+    background-image:    -moz-linear-gradient(top, #8D97BA, #677AB5);
+    background-image:     -ms-linear-gradient(top, #8D97BA, #677AB5);
+    background-image:      -o-linear-gradient(top, #8D97BA, #677AB5);
+}
+
+#browser-support tr td {
+    border-bottom: 1px solid #ccc;
+}

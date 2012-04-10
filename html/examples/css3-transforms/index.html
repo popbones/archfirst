@@ -1,0 +1,87 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>CSS3 Transforms</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/jquery-ui.min.js"></script>
+    <script src="js/jQueryRotate.2.2.js"></script>
+    <script src="js/jquery.flip.min.js"></script>
+    <script src="js/main.js"></script>
+</head>
+
+<body>
+    <div class="container">
+
+        <h1>Transforms using CSS3 and JavaScript</h1>
+        <div class="image-panel">
+            <img id="panel1" src="img/turbine.jpg" alt="turbine" />CSS3 Rotate
+        </div>
+        <div class="image-panel">
+            <img id="panel2" src="img/turbine.jpg" alt="turbine" />jQuery Rotate
+        </div>
+        <div class="image-panel">
+            <img id="panel3" src="img/turbine.jpg" alt="turbine" />jQuery Flip
+        </div>
+
+        <h2>Browser Support</h2>
+        <table id="browser-support">
+            <thead>
+                <tr>
+                    <th class="approach">Approach</th>
+                    <th>IE7</th>
+                    <th>IE8</th>
+                    <th>IE9</th>
+                    <th>Firefox</th>
+                    <th>Chrome</th>
+                    <th>Safari</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>CSS3 Rotate</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                </tr>
+                <tr>
+                    <td>jQuery Rotate</td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                </tr>
+                <tr>
+                    <td>jQuery Flip</td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                    <td class="check"></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Notes</h2>
+        <ul>
+            <li>Click on each image to trigger the transform.</li>
+            <li>Effect desired is 3D rotation around Y axis.</li>
+            <li>CSS3 Transform provides the desired effect exactly.</li>
+            <li>jQuery Rotate can only rotate on x-axis.</li>
+            <li>
+                jQuery Flip allows rotation on y-axis but the final image is same as the
+                starting image. So this approach required switching to the rotated image
+                before starting the animation.
+            </li>
+        </ul>
+    </div>
+</body>
+
+</html>
