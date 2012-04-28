@@ -25,5 +25,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *versionLabel;
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 - (IBAction)logoutBTNClicked:(id)sender;
+- (IBAction)gettingStartedBTNClicked:(id)sender;
 
 @end

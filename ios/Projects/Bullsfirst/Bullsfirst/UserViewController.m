@@ -49,7 +49,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    self.versionLabel.text = [NSString stringWithFormat:@"Bullsfirst v%@"
+    self.versionLabel.text = [NSString stringWithFormat:@"Bullsfirst Version %@"
                               , [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"]];
     self.view.backgroundColor=[UIColor colorWithRed:225.0/255.0 green:225.0/255.0 blue:225.0/255.0 alpha:1];
 }
@@ -79,5 +79,10 @@
 - (IBAction)logoutBTNClicked:(id)sender {
     [self.popOver dismissPopoverAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"USER_LOGOUT" object:nil];
+}
+
+- (IBAction)gettingStartedBTNClicked:(id)sender {
+    [self.popOver dismissPopoverAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"GETTING_START" object:nil];
 }
 @end

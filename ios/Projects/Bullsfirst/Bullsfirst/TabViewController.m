@@ -208,7 +208,6 @@
 {
     if (!userPopOver) {
         UserViewController *controller = [[UserViewController alloc] initWithNibName:@"UserViewController" bundle:nil];
-        CGRect frame = controller.view.frame;
          UINavigationController *container=[[UINavigationController alloc]initWithRootViewController:controller];
        // container.navigationBar.backgroundColor=[UIColor colorWithRed:0.0 green:0 blue:0 alpha:1];
         [container.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
@@ -216,7 +215,7 @@
         
         controller.popOver = userPopOver;
         controller.title=@"Settings";
-        [userPopOver setPopoverContentSize:frame.size];
+        [userPopOver setPopoverContentSize:CGSizeMake(220, 220)];
     }
     if ([userPopOver isPopoverVisible]) {
         [userPopOver dismissPopoverAnimated:YES];
