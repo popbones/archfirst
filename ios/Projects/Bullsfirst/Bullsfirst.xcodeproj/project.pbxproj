@@ -99,6 +99,8 @@
 		54C2965D15095EFA004530D5 /* Minus.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C2965B15095EFA004530D5 /* Minus.png */; };
 		54C2965E15095EFA004530D5 /* Plus.png in Resources */ = {isa = PBXBuildFile; fileRef = 54C2965C15095EFA004530D5 /* Plus.png */; };
 		54CA9308150E46B90095E839 /* MultiSelectDropdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54CA9307150E46B80095E839 /* MultiSelectDropdownViewController.m */; };
+		54EED4EA154B794D00ADF68F /* ChartViewBack-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EED4E8154B794D00ADF68F /* ChartViewBack-PushDown.png */; };
+		54EED4EB154B794D00ADF68F /* ChartViewBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EED4E9154B794D00ADF68F /* ChartViewBack.png */; };
 		952B7A5914FBA61C005B3C98 /* BFExternalAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */; };
 		952B7A5C14FBABD5005B3C98 /* BFExternalAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */; };
 		952B7A8014FCF1D4005B3C98 /* AddExternalAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */; };
@@ -346,6 +348,8 @@
 		54C2965C15095EFA004530D5 /* Plus.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Plus.png; sourceTree = "<group>"; };
 		54CA9306150E46B70095E839 /* MultiSelectDropdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MultiSelectDropdownViewController.h; sourceTree = "<group>"; };
 		54CA9307150E46B80095E839 /* MultiSelectDropdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MultiSelectDropdownViewController.m; sourceTree = "<group>"; };
+		54EED4E8154B794D00ADF68F /* ChartViewBack-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ChartViewBack-PushDown.png"; sourceTree = "<group>"; };
+		54EED4E9154B794D00ADF68F /* ChartViewBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChartViewBack.png; sourceTree = "<group>"; };
 		952B7A5714FBA61B005B3C98 /* BFExternalAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccount.h; sourceTree = "<group>"; };
 		952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExternalAccount.m; sourceTree = "<group>"; };
 		952B7A5A14FBABD5005B3C98 /* BFExternalAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccountStore.h; sourceTree = "<group>"; };
@@ -577,6 +581,8 @@
 		00DFF9171480A8D7001A4641 /* images */ = {
 			isa = PBXGroup;
 			children = (
+				54EED4E8154B794D00ADF68F /* ChartViewBack-PushDown.png */,
+				54EED4E9154B794D00ADF68F /* ChartViewBack.png */,
 				95D6DCEF150E15F4004AEC63 /* SegmentedControl_Divider.png */,
 				AC055DCB150A1CD0000C2870 /* Transactions-FilterBar-Background.jpg */,
 				95D6DCCD150A0F44004AEC63 /* AccountDivider-Background.jpg */,
@@ -1156,6 +1162,8 @@
 				95D6DCD8150A0F44004AEC63 /* Reset.png in Resources */,
 				AC055DCC150A1CD0000C2870 /* Transactions-FilterBar-Background.jpg in Resources */,
 				95D6DCF0150E15F5004AEC63 /* SegmentedControl_Divider.png in Resources */,
+				54EED4EA154B794D00ADF68F /* ChartViewBack-PushDown.png in Resources */,
+				54EED4EB154B794D00ADF68F /* ChartViewBack.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
