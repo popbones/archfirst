@@ -61,6 +61,8 @@
 		54012A2F15011B14008D38BD /* BFInstrument.m in Sources */ = {isa = PBXBuildFile; fileRef = 54012A2E15011B14008D38BD /* BFInstrument.m */; };
 		54012A32150127DA008D38BD /* InstrumentsDropdownViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 54012A31150127D8008D38BD /* InstrumentsDropdownViewController.m */; };
 		54012A3415012989008D38BD /* InstrumentDropDownTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 54012A3315012987008D38BD /* InstrumentDropDownTableCell.xib */; };
+		5408793C154C9590001C494B /* GettingStartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5408793A154C9590001C494B /* GettingStartViewController.m */; };
+		5408793D154C9590001C494B /* GettingStartViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5408793B154C9590001C494B /* GettingStartViewController.xib */; };
 		543840FA15065FE6001D6598 /* PlaceOrder-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 543840F815065FE6001D6598 /* PlaceOrder-PushDown.png */; };
 		543840FB15065FE6001D6598 /* PlaceOrder.png in Resources */ = {isa = PBXBuildFile; fileRef = 543840F915065FE6001D6598 /* PlaceOrder.png */; };
 		5438411C15066F9C001D6598 /* BFMarketPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5438411B15066F9C001D6598 /* BFMarketPrice.m */; };
@@ -295,6 +297,9 @@
 		54012A30150127D7008D38BD /* InstrumentsDropdownViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InstrumentsDropdownViewController.h; sourceTree = "<group>"; };
 		54012A31150127D8008D38BD /* InstrumentsDropdownViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InstrumentsDropdownViewController.m; sourceTree = "<group>"; };
 		54012A3315012987008D38BD /* InstrumentDropDownTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InstrumentDropDownTableCell.xib; sourceTree = "<group>"; };
+		54087939154C9590001C494B /* GettingStartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GettingStartViewController.h; sourceTree = "<group>"; };
+		5408793A154C9590001C494B /* GettingStartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GettingStartViewController.m; sourceTree = "<group>"; };
+		5408793B154C9590001C494B /* GettingStartViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GettingStartViewController.xib; sourceTree = "<group>"; };
 		543840F815065FE6001D6598 /* PlaceOrder-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlaceOrder-PushDown.png"; sourceTree = "<group>"; };
 		543840F915065FE6001D6598 /* PlaceOrder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceOrder.png; sourceTree = "<group>"; };
 		5438411A15066F9C001D6598 /* BFMarketPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMarketPrice.h; sourceTree = "<group>"; };
@@ -873,6 +878,9 @@
 				54B78AEA14EC4652002FF1AC /* UserViewController.h */,
 				54B78AEB14EC4654002FF1AC /* UserViewController.m */,
 				54B78AEC14EC4655002FF1AC /* UserViewController.xib */,
+				54087939154C9590001C494B /* GettingStartViewController.h */,
+				5408793A154C9590001C494B /* GettingStartViewController.m */,
+				5408793B154C9590001C494B /* GettingStartViewController.xib */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -1172,6 +1180,7 @@
 				54EED4EB154B794D00ADF68F /* ChartViewBack.png in Resources */,
 				54EED4EE154B7C5200ADF68F /* GettingStarted-PushDown.png in Resources */,
 				54EED4EF154B7C5200ADF68F /* GettingStarted.png in Resources */,
+				5408793D154C9590001C494B /* GettingStartViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1236,6 +1245,7 @@
 				5438411F1506764F001D6598 /* BFOrderEstimate.m in Sources */,
 				54C2964A15095441004530D5 /* UINavigationController+KeyboardDismiss.m in Sources */,
 				54CA9308150E46B90095E839 /* MultiSelectDropdownViewController.m in Sources */,
+				5408793C154C9590001C494B /* GettingStartViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
