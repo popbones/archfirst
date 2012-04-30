@@ -35,5 +35,6 @@
 @property (strong, nonatomic) BullFirstWebServiceObject* restServiceObject;
 
 @property (strong, nonatomic) UIPopoverController *userPopOver;
+@property (strong, nonatomic) UIPopoverController *gettingStartPopOver;
 
 @end

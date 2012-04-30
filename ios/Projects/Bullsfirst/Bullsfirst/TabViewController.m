@@ -24,12 +24,15 @@
 #import "UserViewController.h"
 #import "AddAccountViewController.h"
 #import "AccountsViewController.h"
+#import "GettingStartViewController.h"
+
 
 @implementation TabViewController
 @synthesize portraitTitleBar;
 @synthesize landscrapeTitleBar;
 @synthesize restServiceObject;
 @synthesize userPopOver;
+@synthesize gettingStartPopOver;
 
 - (id)init
 {
@@ -134,6 +137,7 @@
                                                             errorSelector:@selector(requestFailed:)];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rotateDevice) name:@"DEVICE_ROTATE" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGettingStart) name:@"GETTING_START" object:nil];
 
 }
 
@@ -143,6 +147,33 @@
     [self setLandscrapeTitleBar:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"DEVICE_ROTATE" object:nil];
     [super viewDidUnload];
+}
+
+- (void) showGettingStart
+{
+    if (!gettingStartPopOver) {
+        GettingStartViewController *controller = [[GettingStartViewController alloc] initWithNibName:@"GettingStartViewController" bundle:nil];
+        UINavigationController *container=[[UINavigationController alloc]initWithRootViewController:controller];
+        // container.navigationBar.backgroundColor=[UIColor colorWithRed:0.0 green:0 blue:0 alpha:1];
+        [container.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
+        gettingStartPopOver = [[UIPopoverController alloc] initWithContentViewController:container];
+        
+        [gettingStartPopOver setPopoverContentSize:CGSizeMake(220, 220)];
+    }
+    if ([gettingStartPopOver isPopoverVisible]) {
+        [gettingStartPopOver dismissPopoverAnimated:YES];
+    } else {
+        UIDeviceOrientation orientation= [[UIDevice currentDevice] orientation];
+        if(orientation==UIDeviceOrientationLandscapeLeft||orientation==UIDeviceOrientationLandscapeRight)
+        {
+            [gettingStartPopOver presentPopoverFromRect:CGRectMake(512, 100, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+        }
+        else
+        {
+            [gettingStartPopOver presentPopoverFromRect:CGRectMake(378, 100, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
+            
+        }
+    }
 }
 
 - (void) rotateDevice
