@@ -55,12 +55,12 @@
 }
 
 - (IBAction)swipeRightGesture:(id)sender {
-    pageControl.currentPage += 1;
+    pageControl.currentPage -= 1;
     [self changePage:pageControl];
 }
 
 - (IBAction)swipeLeftGesture:(id)sender {
-    pageControl.currentPage -= 1;
+    pageControl.currentPage += 1;
     [self changePage:pageControl];
 }
 

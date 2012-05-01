@@ -156,7 +156,7 @@
     [controller setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     
     [self presentModalViewController:controller animated:YES];
-    controller.view.superview.bounds=CGRectMake(0, 0, 560,480);
+    controller.view.superview.bounds=CGRectMake(0, 0, 600,480);
 }
 
 - (void) rotateDevice
