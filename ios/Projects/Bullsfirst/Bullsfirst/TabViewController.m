@@ -32,7 +32,6 @@
 @synthesize landscrapeTitleBar;
 @synthesize restServiceObject;
 @synthesize userPopOver;
-@synthesize gettingStartPopOver;
 
 - (id)init
 {
@@ -151,29 +150,13 @@
 
 - (void) showGettingStart
 {
-    if (!gettingStartPopOver) {
-        GettingStartViewController *controller = [[GettingStartViewController alloc] initWithNibName:@"GettingStartViewController" bundle:nil];
-        UINavigationController *container=[[UINavigationController alloc]initWithRootViewController:controller];
-        // container.navigationBar.backgroundColor=[UIColor colorWithRed:0.0 green:0 blue:0 alpha:1];
-        [container.navigationBar setBackgroundImage:nil forBarMetrics:UIBarMetricsDefault];
-        gettingStartPopOver = [[UIPopoverController alloc] initWithContentViewController:container];
-        
-        [gettingStartPopOver setPopoverContentSize:CGSizeMake(220, 220)];
-    }
-    if ([gettingStartPopOver isPopoverVisible]) {
-        [gettingStartPopOver dismissPopoverAnimated:YES];
-    } else {
-        UIDeviceOrientation orientation= [[UIDevice currentDevice] orientation];
-        if(orientation==UIDeviceOrientationLandscapeLeft||orientation==UIDeviceOrientationLandscapeRight)
-        {
-            [gettingStartPopOver presentPopoverFromRect:CGRectMake(512, 100, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-        }
-        else
-        {
-            [gettingStartPopOver presentPopoverFromRect:CGRectMake(378, 100, 1, 1) inView:self.view  permittedArrowDirections:UIPopoverArrowDirectionUp animated:YES];
-            
-        }
-    }
+    GettingStartViewController *controller = [[GettingStartViewController alloc] initWithNibName:@"GettingStartViewController" bundle:nil];
+    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [self presentModalViewController:controller animated:YES];
+    controller.view.superview.bounds=CGRectMake(0, 0, 560,480);
 }
 
 - (void) rotateDevice

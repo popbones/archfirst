@@ -105,6 +105,17 @@
 		54EED4EB154B794D00ADF68F /* ChartViewBack.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EED4E9154B794D00ADF68F /* ChartViewBack.png */; };
 		54EED4EE154B7C5200ADF68F /* GettingStarted-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EED4EC154B7C5200ADF68F /* GettingStarted-PushDown.png */; };
 		54EED4EF154B7C5200ADF68F /* GettingStarted.png in Resources */ = {isa = PBXBuildFile; fileRef = 54EED4ED154B7C5200ADF68F /* GettingStarted.png */; };
+		54FE21A3154F577400F409B9 /* bullsfirst-GettingStarted-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE2198154F577400F409B9 /* bullsfirst-GettingStarted-1.png */; };
+		54FE21A4154F577400F409B9 /* bullsfirst-GettingStarted-10.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE2199154F577400F409B9 /* bullsfirst-GettingStarted-10.png */; };
+		54FE21A5154F577400F409B9 /* bullsfirst-GettingStarted-11.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE219A154F577400F409B9 /* bullsfirst-GettingStarted-11.png */; };
+		54FE21A6154F577400F409B9 /* bullsfirst-GettingStarted-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE219B154F577400F409B9 /* bullsfirst-GettingStarted-2.png */; };
+		54FE21A7154F577400F409B9 /* bullsfirst-GettingStarted-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE219C154F577400F409B9 /* bullsfirst-GettingStarted-3.png */; };
+		54FE21A8154F577400F409B9 /* bullsfirst-GettingStarted-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE219D154F577400F409B9 /* bullsfirst-GettingStarted-4.png */; };
+		54FE21A9154F577400F409B9 /* bullsfirst-GettingStarted-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE219E154F577400F409B9 /* bullsfirst-GettingStarted-5.png */; };
+		54FE21AA154F577400F409B9 /* bullsfirst-GettingStarted-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE219F154F577400F409B9 /* bullsfirst-GettingStarted-6.png */; };
+		54FE21AB154F577400F409B9 /* bullsfirst-GettingStarted-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE21A0154F577400F409B9 /* bullsfirst-GettingStarted-7.png */; };
+		54FE21AC154F577400F409B9 /* bullsfirst-GettingStarted-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE21A1154F577400F409B9 /* bullsfirst-GettingStarted-8.png */; };
+		54FE21AD154F577400F409B9 /* bullsfirst-GettingStarted-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 54FE21A2154F577400F409B9 /* bullsfirst-GettingStarted-9.png */; };
 		952B7A5914FBA61C005B3C98 /* BFExternalAccount.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */; };
 		952B7A5C14FBABD5005B3C98 /* BFExternalAccountStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A5B14FBABD5005B3C98 /* BFExternalAccountStore.m */; };
 		952B7A8014FCF1D4005B3C98 /* AddExternalAccountViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 952B7A7E14FCF1D3005B3C98 /* AddExternalAccountViewController.m */; };
@@ -359,6 +370,17 @@
 		54EED4E9154B794D00ADF68F /* ChartViewBack.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ChartViewBack.png; sourceTree = "<group>"; };
 		54EED4EC154B7C5200ADF68F /* GettingStarted-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "GettingStarted-PushDown.png"; sourceTree = "<group>"; };
 		54EED4ED154B7C5200ADF68F /* GettingStarted.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GettingStarted.png; sourceTree = "<group>"; };
+		54FE2198154F577400F409B9 /* bullsfirst-GettingStarted-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-1.png"; sourceTree = "<group>"; };
+		54FE2199154F577400F409B9 /* bullsfirst-GettingStarted-10.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-10.png"; sourceTree = "<group>"; };
+		54FE219A154F577400F409B9 /* bullsfirst-GettingStarted-11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-11.png"; sourceTree = "<group>"; };
+		54FE219B154F577400F409B9 /* bullsfirst-GettingStarted-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-2.png"; sourceTree = "<group>"; };
+		54FE219C154F577400F409B9 /* bullsfirst-GettingStarted-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-3.png"; sourceTree = "<group>"; };
+		54FE219D154F577400F409B9 /* bullsfirst-GettingStarted-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-4.png"; sourceTree = "<group>"; };
+		54FE219E154F577400F409B9 /* bullsfirst-GettingStarted-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-5.png"; sourceTree = "<group>"; };
+		54FE219F154F577400F409B9 /* bullsfirst-GettingStarted-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-6.png"; sourceTree = "<group>"; };
+		54FE21A0154F577400F409B9 /* bullsfirst-GettingStarted-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-7.png"; sourceTree = "<group>"; };
+		54FE21A1154F577400F409B9 /* bullsfirst-GettingStarted-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-8.png"; sourceTree = "<group>"; };
+		54FE21A2154F577400F409B9 /* bullsfirst-GettingStarted-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-GettingStarted-9.png"; sourceTree = "<group>"; };
 		952B7A5714FBA61B005B3C98 /* BFExternalAccount.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccount.h; sourceTree = "<group>"; };
 		952B7A5814FBA61C005B3C98 /* BFExternalAccount.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BFExternalAccount.m; sourceTree = "<group>"; };
 		952B7A5A14FBABD5005B3C98 /* BFExternalAccountStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFExternalAccountStore.h; sourceTree = "<group>"; };
@@ -565,6 +587,7 @@
 		00D3C424147C285D0067A768 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				54FE2197154F577400F409B9 /* Getting Started */,
 				00DFF9171480A8D7001A4641 /* images */,
 			);
 			name = Resources;
@@ -894,6 +917,24 @@
 			name = "UINavigationController+KeyboardDismiss";
 			sourceTree = "<group>";
 		};
+		54FE2197154F577400F409B9 /* Getting Started */ = {
+			isa = PBXGroup;
+			children = (
+				54FE2198154F577400F409B9 /* bullsfirst-GettingStarted-1.png */,
+				54FE2199154F577400F409B9 /* bullsfirst-GettingStarted-10.png */,
+				54FE219A154F577400F409B9 /* bullsfirst-GettingStarted-11.png */,
+				54FE219B154F577400F409B9 /* bullsfirst-GettingStarted-2.png */,
+				54FE219C154F577400F409B9 /* bullsfirst-GettingStarted-3.png */,
+				54FE219D154F577400F409B9 /* bullsfirst-GettingStarted-4.png */,
+				54FE219E154F577400F409B9 /* bullsfirst-GettingStarted-5.png */,
+				54FE219F154F577400F409B9 /* bullsfirst-GettingStarted-6.png */,
+				54FE21A0154F577400F409B9 /* bullsfirst-GettingStarted-7.png */,
+				54FE21A1154F577400F409B9 /* bullsfirst-GettingStarted-8.png */,
+				54FE21A2154F577400F409B9 /* bullsfirst-GettingStarted-9.png */,
+			);
+			path = "Getting Started";
+			sourceTree = "<group>";
+		};
 		952B7ADE14FF573F005B3C98 /* Transfer */ = {
 			isa = PBXGroup;
 			children = (
@@ -1181,6 +1222,17 @@
 				54EED4EE154B7C5200ADF68F /* GettingStarted-PushDown.png in Resources */,
 				54EED4EF154B7C5200ADF68F /* GettingStarted.png in Resources */,
 				5408793D154C9590001C494B /* GettingStartViewController.xib in Resources */,
+				54FE21A3154F577400F409B9 /* bullsfirst-GettingStarted-1.png in Resources */,
+				54FE21A4154F577400F409B9 /* bullsfirst-GettingStarted-10.png in Resources */,
+				54FE21A5154F577400F409B9 /* bullsfirst-GettingStarted-11.png in Resources */,
+				54FE21A6154F577400F409B9 /* bullsfirst-GettingStarted-2.png in Resources */,
+				54FE21A7154F577400F409B9 /* bullsfirst-GettingStarted-3.png in Resources */,
+				54FE21A8154F577400F409B9 /* bullsfirst-GettingStarted-4.png in Resources */,
+				54FE21A9154F577400F409B9 /* bullsfirst-GettingStarted-5.png in Resources */,
+				54FE21AA154F577400F409B9 /* bullsfirst-GettingStarted-6.png in Resources */,
+				54FE21AB154F577400F409B9 /* bullsfirst-GettingStarted-7.png in Resources */,
+				54FE21AC154F577400F409B9 /* bullsfirst-GettingStarted-8.png in Resources */,
+				54FE21AD154F577400F409B9 /* bullsfirst-GettingStarted-9.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

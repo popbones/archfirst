@@ -13,6 +13,10 @@
 @end
 
 @implementation GettingStartViewController
+@synthesize helpImageView;
+@synthesize pageControl;
+@synthesize navBar;
+@synthesize contentList;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -26,11 +30,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    [navBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
+
 }
 
 - (void)viewDidUnload
 {
+    [self setNavBar:nil];
+    [self setPageControl:nil];
+    [self setHelpImageView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -40,5 +48,27 @@
 {
 	return YES;
 }
+
+- (IBAction)doneButtonClicked:(id)sender
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+- (IBAction)swipeRightGesture:(id)sender {
+    pageControl.currentPage += 1;
+    [self changePage:pageControl];
+}
+
+- (IBAction)swipeLeftGesture:(id)sender {
+    pageControl.currentPage -= 1;
+    [self changePage:pageControl];
+}
+
+- (IBAction)changePage:(id)sender {
+    int page = pageControl.currentPage;
+    NSString *filename = [NSString stringWithFormat:@"bullsfirst-GettingStarted-%d.png", page+1];
+    helpImageView.image = [UIImage imageNamed:filename];
+}
+
 
 @end
