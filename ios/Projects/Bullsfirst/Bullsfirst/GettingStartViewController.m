@@ -16,7 +16,7 @@
 @synthesize helpImageView;
 @synthesize pageControl;
 @synthesize navBar;
-@synthesize contentList;
+@synthesize currentPage;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -31,7 +31,7 @@
 {
     [super viewDidLoad];
     [navBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
-
+    currentPage = 0;
 }
 
 - (void)viewDidUnload
@@ -54,20 +54,73 @@
     [self dismissModalViewControllerAnimated:YES];
 }
 
+
 - (IBAction)swipeRightGesture:(id)sender {
     pageControl.currentPage -= 1;
-    [self changePage:pageControl];
+    int page = pageControl.currentPage;
+    if (currentPage == page)
+        return;
+    
+    [UIView beginAnimations:@"pageChange" context:nil];
+    [UIView setAnimationDuration:0.5];
+    CGRect viewframe= helpImageView.frame;
+    viewframe.origin.x+=600;
+    helpImageView.frame = viewframe;
+    [UIView commitAnimations];
+    
+    viewframe.origin.x=-600;
+    helpImageView.frame = viewframe;
+    NSString *filename = [NSString stringWithFormat:@"bullsfirst-GettingStarted-%d.png", page+1];
+    helpImageView.image = [UIImage imageNamed:filename];
+    
+    [UIView beginAnimations:@"pageChange" context:nil];
+    [UIView setAnimationDuration:0.5];
+    viewframe= helpImageView.frame;
+    viewframe.origin.x+=600;
+    helpImageView.frame = viewframe;
+    [UIView commitAnimations];
+    
+    currentPage = page;
 }
 
 - (IBAction)swipeLeftGesture:(id)sender {
     pageControl.currentPage += 1;
-    [self changePage:pageControl];
+    int page = pageControl.currentPage;
+    if (currentPage == page)
+        return;
+    
+    [UIView beginAnimations:@"pageChange" context:nil];
+    [UIView setAnimationDuration:0.5];
+    CGRect viewframe= helpImageView.frame;
+    viewframe.origin.x-=600;
+    helpImageView.frame = viewframe;
+    [UIView commitAnimations];
+    
+    viewframe.origin.x=600;
+    helpImageView.frame = viewframe;
+    NSString *filename = [NSString stringWithFormat:@"bullsfirst-GettingStarted-%d.png", page+1];
+    helpImageView.image = [UIImage imageNamed:filename];
+    
+    [UIView beginAnimations:@"pageChange" context:nil];
+    [UIView setAnimationDuration:0.5];
+    viewframe= helpImageView.frame;
+    viewframe.origin.x-=600;
+    helpImageView.frame = viewframe;
+    [UIView commitAnimations];
+
+    currentPage = page;
 }
 
 - (IBAction)changePage:(id)sender {
     int page = pageControl.currentPage;
-    NSString *filename = [NSString stringWithFormat:@"bullsfirst-GettingStarted-%d.png", page+1];
-    helpImageView.image = [UIImage imageNamed:filename];
+    
+    if (page > currentPage) {
+        pageControl.currentPage -= 1;
+        [self swipeLeftGesture:sender];
+    } else {
+        pageControl.currentPage += 1;
+        [self swipeRightGesture:sender];
+    }
 }
 
 

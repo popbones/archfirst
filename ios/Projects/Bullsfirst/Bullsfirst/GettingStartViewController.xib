@@ -90,7 +90,7 @@
 						<array key="IBUIItems">
 							<object class="IBUINavigationItem" id="977297808">
 								<reference key="IBUINavigationBar" ref="80918157"/>
-								<string key="IBUITitle">Getting Start</string>
+								<string key="IBUITitle">Getting Started</string>
 								<object class="IBUIBarButtonItem" key="IBUIRightBarButtonItem" id="729270303">
 									<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 									<int key="IBUIStyle">1</int>
@@ -122,6 +122,7 @@
 						<object class="NSPSMatrix" key="NSFrameMatrix"/>
 						<string key="NSFrame">{{179, 444}, {242, 36}}</string>
 						<reference key="NSSuperview" ref="766721923"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<object class="NSColor" key="IBUIBackgroundColor">
 							<int key="NSColorSpace">3</int>
