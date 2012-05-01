@@ -85,4 +85,10 @@
     [self.popOver dismissPopoverAnimated:YES];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"GETTING_START" object:nil];
 }
+
+- (IBAction)launchArchFirstWebsite:(id)sender {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://archfirst.org/"]];
+
+}
 @end

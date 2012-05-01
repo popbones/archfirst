@@ -26,5 +26,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *usernameLabel;
 - (IBAction)logoutBTNClicked:(id)sender;
 - (IBAction)gettingStartedBTNClicked:(id)sender;
+- (IBAction)launchArchFirstWebsite:(id)sender;
 
 @end

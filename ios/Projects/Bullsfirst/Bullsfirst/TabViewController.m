@@ -229,7 +229,7 @@
         
         controller.popOver = userPopOver;
         controller.title=@"Settings";
-        [userPopOver setPopoverContentSize:CGSizeMake(220, 220)];
+        [userPopOver setPopoverContentSize:CGSizeMake(220, 250)];
     }
     if ([userPopOver isPopoverVisible]) {
         [userPopOver dismissPopoverAnimated:YES];
