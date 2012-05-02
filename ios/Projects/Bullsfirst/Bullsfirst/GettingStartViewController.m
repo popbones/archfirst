@@ -13,10 +13,11 @@
 @end
 
 @implementation GettingStartViewController
-@synthesize helpImageView;
+@synthesize scrollView;
 @synthesize pageControl;
 @synthesize navBar;
 @synthesize currentPage;
+@synthesize pageControlUsed;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,18 +28,33 @@
     return self;
 }
 
+#define kNumberOfPages 11
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [navBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
     currentPage = 0;
+    
+    scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * kNumberOfPages, scrollView.frame.size.height);
+    CGRect frame = scrollView.frame;
+
+    for (int page=0; page<kNumberOfPages; page++) {
+        frame.origin.x = frame.size.width * page;
+        frame.origin.y = 0;
+        UIImageView *imageView = [[UIImageView alloc] initWithFrame:frame];
+        NSString *filename = [NSString stringWithFormat:@"bullsfirst-GettingStarted-%d.png", page+1];
+        imageView.image = [UIImage imageNamed:filename];
+        [scrollView addSubview:imageView];
+    }
+
 }
 
 - (void)viewDidUnload
 {
     [self setNavBar:nil];
     [self setPageControl:nil];
-    [self setHelpImageView:nil];
+    [self setScrollView:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -49,78 +65,53 @@
 	return YES;
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)sender
+{
+    // We don't want a "feedback loop" between the UIPageControl and the scroll delegate in
+    // which a scroll event generated from the user hitting the page control triggers updates from
+    // the delegate method. We use a boolean to disable the delegate logic when the page control is used.
+    if (pageControlUsed)
+    {
+        // do nothing - the scroll was initiated from the page control, not the user dragging
+        return;
+    }
+	
+    // Switch the indicator when more than 50% of the previous/next page is visible
+    CGFloat pageWidth = scrollView.frame.size.width;
+    int page = floor((scrollView.contentOffset.x - pageWidth / 2) / pageWidth) + 1;
+    pageControl.currentPage = page;
+    
+}
+
+// At the begin of scroll dragging, reset the boolean used when scrolls originate from the UIPageControl
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView
+{
+    pageControlUsed = NO;
+}
+
+// At the end of scroll animation, reset the boolean used when scrolls originate from the UIPageControl
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView
+{
+    pageControlUsed = NO;
+}
+
 - (IBAction)doneButtonClicked:(id)sender
 {
     [self dismissModalViewControllerAnimated:YES];
 }
 
 
-- (IBAction)swipeRightGesture:(id)sender {
-    pageControl.currentPage -= 1;
-    int page = pageControl.currentPage;
-    if (currentPage == page)
-        return;
-    
-    [UIView beginAnimations:@"pageChange" context:nil];
-    [UIView setAnimationDuration:0.5];
-    CGRect viewframe= helpImageView.frame;
-    viewframe.origin.x+=600;
-    helpImageView.frame = viewframe;
-    [UIView commitAnimations];
-    
-    viewframe.origin.x=-600;
-    helpImageView.frame = viewframe;
-    NSString *filename = [NSString stringWithFormat:@"bullsfirst-GettingStarted-%d.png", page+1];
-    helpImageView.image = [UIImage imageNamed:filename];
-    
-    [UIView beginAnimations:@"pageChange" context:nil];
-    [UIView setAnimationDuration:0.5];
-    viewframe= helpImageView.frame;
-    viewframe.origin.x+=600;
-    helpImageView.frame = viewframe;
-    [UIView commitAnimations];
-    
-    currentPage = page;
-}
-
-- (IBAction)swipeLeftGesture:(id)sender {
-    pageControl.currentPage += 1;
-    int page = pageControl.currentPage;
-    if (currentPage == page)
-        return;
-    
-    [UIView beginAnimations:@"pageChange" context:nil];
-    [UIView setAnimationDuration:0.5];
-    CGRect viewframe= helpImageView.frame;
-    viewframe.origin.x-=600;
-    helpImageView.frame = viewframe;
-    [UIView commitAnimations];
-    
-    viewframe.origin.x=600;
-    helpImageView.frame = viewframe;
-    NSString *filename = [NSString stringWithFormat:@"bullsfirst-GettingStarted-%d.png", page+1];
-    helpImageView.image = [UIImage imageNamed:filename];
-    
-    [UIView beginAnimations:@"pageChange" context:nil];
-    [UIView setAnimationDuration:0.5];
-    viewframe= helpImageView.frame;
-    viewframe.origin.x-=600;
-    helpImageView.frame = viewframe;
-    [UIView commitAnimations];
-
-    currentPage = page;
-}
-
 - (IBAction)changePage:(id)sender {
     int page = pageControl.currentPage;
     
-    if (page > currentPage) {
-        pageControl.currentPage -= 1;
-        [self swipeLeftGesture:sender];
-    } else {
-        pageControl.currentPage += 1;
-        [self swipeRightGesture:sender];
-    }
+	// update the scroll view to the appropriate page
+    CGRect frame = scrollView.frame;
+    frame.origin.x = frame.size.width * page;
+    frame.origin.y = 0;
+    [scrollView scrollRectToVisible:frame animated:YES];
+    
+	// Set the boolean used when scrolls originate from the UIPageControl. See scrollViewDidScroll: above.
+    pageControlUsed = YES;
 }
 
 

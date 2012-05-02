@@ -11,12 +11,12 @@
 @interface GettingStartViewController : UIViewController 
 
 - (IBAction)doneButtonClicked:(id)sender;
-- (IBAction)swipeRightGesture:(id)sender;
-- (IBAction)swipeLeftGesture:(id)sender;
 - (IBAction)changePage:(id)sender;
 
-@property (weak, nonatomic) IBOutlet UIImageView *helpImageView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 @property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (assign, nonatomic) int currentPage;
+@property (assign, nonatomic) BOOL pageControlUsed;
+
 @end
