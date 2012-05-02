@@ -150,8 +150,10 @@
 
 - (void) showGettingStart
 {
-    GettingStartViewController *controller = [[GettingStartViewController alloc] initWithNibName:@"GettingStartViewController" bundle:nil];
+    GettingStartViewController *gettingStartController = [[GettingStartViewController alloc] initWithNibName:@"GettingStartViewController" bundle:nil];
     
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:gettingStartController];
+
     [controller setModalPresentationStyle:UIModalPresentationFormSheet];
     [controller setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
     

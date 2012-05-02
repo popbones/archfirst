@@ -15,7 +15,6 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 @property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-@property (weak, nonatomic) IBOutlet UINavigationBar *navBar;
 @property (assign, nonatomic) int currentPage;
 @property (assign, nonatomic) BOOL pageControlUsed;
 

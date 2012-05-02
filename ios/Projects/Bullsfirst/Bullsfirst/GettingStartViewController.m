@@ -15,7 +15,6 @@
 @implementation GettingStartViewController
 @synthesize scrollView;
 @synthesize pageControl;
-@synthesize navBar;
 @synthesize currentPage;
 @synthesize pageControlUsed;
 
@@ -33,7 +32,15 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [navBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
+    [self.navigationController.navigationBar setBackgroundImage:[UIImage imageNamed:@"ModalView_TitleBar_BackgroundGradient.jpg"] forBarMetrics:UIBarMetricsDefault];
+    
+    
+    UIBarButtonItem *barButtonItem = [[UIBarButtonItem alloc]
+                                      initWithTitle:@"Done" style:UIBarButtonItemStylePlain target:self action:@selector(doneButtonClicked:)];
+    barButtonItem.style = UIBarButtonItemStyleBordered;
+    self.navigationItem.rightBarButtonItem = barButtonItem;
+	self.navigationItem.title = @"Getting Started";
+
     currentPage = 0;
     
     scrollView.contentSize = CGSizeMake(scrollView.frame.size.width * kNumberOfPages, scrollView.frame.size.height);
@@ -52,7 +59,6 @@
 
 - (void)viewDidUnload
 {
-    [self setNavBar:nil];
     [self setPageControl:nil];
     [self setScrollView:nil];
     [super viewDidUnload];
