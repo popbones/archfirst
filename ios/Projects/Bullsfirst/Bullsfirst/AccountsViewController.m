@@ -278,15 +278,6 @@
     if([keyPath isEqualToString:@"chartTitle"])
     {
         chartTitle.text = [change objectForKey:NSKeyValueChangeNewKey];
-        if ([chartTitle.text isEqualToString:@"All Accounts"]) {
-            backBTN.hidden = YES;
-
-        } else {
-            backBTN.hidden = NO;
-
-        }
-        
-//        [chartTitle sizeToFit];
     }
     
 }
