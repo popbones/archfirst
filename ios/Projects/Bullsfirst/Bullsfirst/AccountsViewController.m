@@ -266,18 +266,26 @@
     }
     if([keyPath isEqualToString:@"currentChart"])
     {
-        if([[change objectForKey:NSKeyValueChangeNewKey] intValue] == AccountsChart)
+/*        if([[change objectForKey:NSKeyValueChangeNewKey] intValue] == AccountsChart)
         {
             backBTN.hidden = YES;
         }
         else
         {
             backBTN.hidden = NO;
-        }
+        }*/
     }
     if([keyPath isEqualToString:@"chartTitle"])
     {
         chartTitle.text = [change objectForKey:NSKeyValueChangeNewKey];
+        if ([chartTitle.text isEqualToString:@"All Accounts"]) {
+            backBTN.hidden = YES;
+
+        } else {
+            backBTN.hidden = NO;
+
+        }
+        
 //        [chartTitle sizeToFit];
     }
     
