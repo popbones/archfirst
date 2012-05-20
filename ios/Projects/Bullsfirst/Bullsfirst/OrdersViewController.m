@@ -99,6 +99,8 @@
     portraitTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     landscrapeTitleBar.backgroundColor=[UIColor colorWithRed:235/255.0 green:235/255.0 blue:235/255.0 alpha:1];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogin:) name:@"USER_LOGIN" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refreshBTNClicked:) name:@"TRADE_ORDER_SUBMITTED" object:nil];
     
     cancelOrderServiceObject = [[BullFirstWebServiceObject alloc] initWithObject:self 
@@ -301,6 +303,18 @@
 #pragma mark - KVO lifecycle
 
 -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+}
+
+#pragma mark MVC Delegate methods
+
+-(void)userLogout:(NSNotification*)notification
+{
+    [orders removeAllObjects];
+    [orderTBL reloadData];
+}
+
+-(void)userLogin:(NSNotification*)notification
 {
 }
 
