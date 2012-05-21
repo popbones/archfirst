@@ -47,8 +47,6 @@ Ext.define('Bullsfirst.GlobalConstants', {
     ExternalAccountDefaultAccountNumber: 12345678,
     DefaultTransferAmount: 100000,
     InvalidDateMsg: "'To' date cannot be before 'From' date",
-    AccountCreated: 'Congratulations!',
-    AccountReloginMsg: 'Account Created! Please login using your new account',
     TradeMessage: "We love to trade, and we hope you do too. Now you can do it with the latest trading platform from Bullsfirst.  We guarantee  a  0-second trade execution, and will give you a free popsicle if your trade doesn't go through in this time period. On a side note, we just bought a big freezer and 10,000 popsicles. Thankfully, we've hedged all popsicle expenses for the next two years! (Commodity experts say popsicles are on the rise).",
     CopyrightMessage: "This is a demo application. All data displayed is fictitious. Copyright @ 2010-2012 <a href='http://archfirst.org/' target='new'>Archfirst</a>",
 
@@ -56,6 +54,7 @@ Ext.define('Bullsfirst.GlobalConstants', {
     LoadingMessage: 'Please wait, Loading...',
     LoggingInMaskMessage: 'Please wait, Logging in...',
     CreatingUserMaskMessage: 'Please wait, Creating user...',
+    AccountCreatedMaskMessage: 'Account created! Loggin in...',
 
     //Errors:
     ErrorTitle: 'Error!',

@@ -55,6 +55,7 @@ Ext.define('Bullsfirst.view.trading.CreateExternalAccountView', {
                   {
                       xtype: 'numberfield',
                       name: 'routingNumber',
+                      hideTrigger: true,
                       margin: '5 5 5 8',
                       width: 250,
                       allowBlank: false,
@@ -64,6 +65,7 @@ Ext.define('Bullsfirst.view.trading.CreateExternalAccountView', {
                   {
                       xtype: 'numberfield',
                       name: 'accountNumber',
+                      hideTrigger: true,
                       margin: '5 5 8 8',
                       width: 250,
                       allowBlank: false,

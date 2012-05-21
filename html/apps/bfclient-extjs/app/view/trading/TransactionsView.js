@@ -155,13 +155,9 @@ Ext.define('Bullsfirst.view.trading.TransactionsView', {
                 {
                     header: 'Amount',
                     dataIndex: 'amount',
-                    flex: 1.5,
+                    flex: 2,
                     align: 'right',
                     renderer: Bullsfirst.extensions.Format.usMoney
-                },
-                {
-                    header: '',
-                    flex: 5
                 }
             ]
 

@@ -9,6 +9,7 @@
 .viewportCls, .mainLayoutStyle
 {
     background-color:#DDDDDD;
+    overflow: visible !important;
 }
 .logoPanelCls
 {
@@ -49,7 +50,7 @@
     font-family: Tahoma;
     font-size:20px;
     margin-left: 20px;
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 0px;
     text-align: center;
 }
@@ -67,7 +68,7 @@
 }
 .x-nlg .x-window-header-default-top-mc, .x-window-header-default-top
 {
-    background-color: #FDC977;
+    background-color: #E59921;
 }
 .chartPanelCls
 {
@@ -92,6 +93,16 @@
     margin-right: 3px;
     margin-bottom: 2px;
 }
+.x-form-display-field
+{
+    margin-top: -5px;
+}
+
+.x-grid-cell-treecolumn .x-grid-cell-inner
+{
+    margin-top: 3.7px;
+} 
+ 
 
 
 

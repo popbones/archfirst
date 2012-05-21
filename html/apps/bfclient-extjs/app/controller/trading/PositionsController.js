@@ -60,11 +60,14 @@ Ext.define('Bullsfirst.controller.trading.PositionsController', {
 
     init: function () {
         this.control({
-             'positionsview combo': {
+            'positionsview combo': {
                 'change': this.onPositionViewComboChange
             },
             'positionsview templatecolumn': {
                 'click': this.onActionColumnClick
+            },
+            'positionsview button': {
+                'click': this.onUpdateButtonClick
             }
         });
         this.callParent();
@@ -72,10 +75,12 @@ Ext.define('Bullsfirst.controller.trading.PositionsController', {
     onPositionViewComboChange: function onPositionViewComboChange(positionViewCombo, newValue, oldValue) {
         var tradingTabPanel = this.getTradingTabPanel();
         var positionsStore = this.getStore('PositionsTree');
-        if (newValue != oldValue) {
-            tradingTabPanel.selectedBrokerageAccount.setValue(this.getStore('BrokerageAccountSummaries').findRecord('id', newValue));
-            this.reloadPositions();
-        }
+        tradingTabPanel.selectedBrokerageAccount.setValue(this.getStore('BrokerageAccountSummaries').findRecord('id', newValue));
+        this.reloadPositions();
+
+    },
+    onUpdateButtonClick: function onUpdateButtonClick() {
+        this.reloadPositions();
     },
     onActionColumnClick: function onActionColumnClick(view, data, selectedIndex, selectedColumn, event, selectedRecord) {
         var tradeType = 'Buy';

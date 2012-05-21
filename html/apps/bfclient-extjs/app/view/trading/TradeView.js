@@ -127,6 +127,7 @@ Ext.define('Bullsfirst.view.trading.TradeView', {
             {
                 fieldLabel: 'Quantity',
                 xtype: 'numberfield',
+                hideTrigger: true,
                 name: 'quantity',
                 minValue: 1,
                 allowBlank: false

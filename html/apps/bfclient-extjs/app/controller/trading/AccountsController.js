@@ -65,6 +65,14 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
         {
             ref: 'AccountsViewGrid',
             selector: 'accountsview grid'
+        },
+        {
+            ref: 'LegendPanel',
+            selector: 'accountsview container[region=south]'
+        },
+        {
+            ref: 'TitlePanel',
+            selector: 'accountsview container[region=north]'
         }
     ],
 
@@ -93,6 +101,12 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
             },
             'accountsview templatecolumn[text=Actions]': {
                 'click': this.onEditAccountLinkClick
+            },
+            'accountsview container[region=south]': {
+                'afterrender': this.onLegendPanelAfterRender
+            },
+            'accountsview chart': {
+                'piesliceclick': this.onChartPieSliceClick
             }
         });
         this.callParent();
@@ -179,6 +193,85 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
                 }
             }
         }, this);
+    },
+    onLegendPanelAfterRender: function legendPanelAfterRender(legendPanel) {
+        EventAggregator.subscribeForever('brokerageaccountschartstoreloaded', function (brokerageAccountsChartStore) {
+            var brokerageAccountsStore = this.getStore('BrokerageAccountSummaries');
+            if (brokerageAccountsChartStore.count() == brokerageAccountsStore.count()) {
+                this.getTitlePanel().update('All Accounts');
+            }
+            if (brokerageAccountsChartStore.count() > 0) {
+                var legendItems = [];
+                var index = 0;
+                var smartChartTheme = Bullsfirst.extensions.SmartChartTheme;
+                brokerageAccountsChartStore.each(function (account) {
+                    var legendItem = Ext.create('Ext.draw.Component', {
+                        gradients: smartChartTheme.legendGradients,
+                        viewBox: false,
+                        items: [
+                            {
+                                type: 'rect',
+                                fill: smartChartTheme.legendColors[index],
+                                radius: 1,
+                                width: 10,
+                                height: 10,
+                                x: 5,
+                                y: 5
+                            },
+                            {
+                                type: 'text',
+                                fill: 'black',
+                                width: 10,
+                                height: 10,
+                                text: function () {
+                                    var name = account.get('name');
+                                    if (Ext.isEmpty(name)) {
+                                        name = account.get('instrumentSymbol');
+                                    }
+                                    return name;
+                                } (),
+                                x: 20,
+                                y: 10
+                            }
+                        ]
+                    });
+                    legendItems.push(legendItem);
+                    index++;
+                    if (index == smartChartTheme.legendGradients.length) {
+                        index = 0;
+                    }
+                });
+                legendPanel.removeAll();
+                legendPanel.add(legendItems);
+            }
+        }, this);
+    },
+    onChartPieSliceClick: function onChartPieSliceClick(pieslice) {
+        var selectedRecord = pieslice.storeItem;
+        var chartStore = this.getStore('BrokerageAccountChartSummaries');
+        var brokerageAccountsStore = this.getStore('BrokerageAccountSummaries');
+        var title = 'All Accounts';
+        chartStore.removeAll();
+
+        var selectedRecordId = selectedRecord.get('id');
+        var storeData;
+        if (selectedRecord.positions) {
+            var positionsStore = selectedRecord.positions();
+            if (positionsStore && positionsStore.count() > 0) {
+                storeData = positionsStore.getRange();
+                title = selectedRecord.get('name');
+            }
+            else {
+                storeData = brokerageAccountsStore.getRange();
+            }
+        }
+        else {
+            storeData = brokerageAccountsStore.getRange();
+        }
+        chartStore.add(storeData);
+        var titlePanel = this.getTitlePanel();
+        titlePanel.update(title);
+        EventAggregator.publish('brokerageaccountschartstoreloaded', chartStore);
     }
 }); 
 

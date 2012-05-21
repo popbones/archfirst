@@ -65,17 +65,20 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
             {
                 xtype: 'radiogroup',
                 maxWidth: 200,
+                nonresetable: true,
                 margin: '0 0 0 100',
                 items: [
                     {
                         boxLabel: 'Cash',
                         name: 'instrumentType',
+                        nonresetable: true,
                         margin: '0 5 1 20',
                         checked: true,
                         inputValue: '1'
                     },
                     {
                         boxLabel: 'Securities',
+                        nonresetable: true,
                         name: 'instrumentType',
                         margin: '0 5 1 20',
                         inputValue: '2'
@@ -86,6 +89,7 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
             {
                 xtype: 'combo',
                 fieldLabel: 'From',
+                nonresetable: true,
                 allowBlank: false,
                 plugins: ['loadmask'],
                 store: 'AllAccounts',
@@ -97,6 +101,7 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
             {
                 xtype: 'combo',
                 fieldLabel: 'To',
+                nonresetable: true,
                 plugins: ['loadmask'],
                 store: 'AllAccounts',
                 allowBlank: false,
@@ -125,10 +130,12 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
                         fieldLabel: 'Symbol',
                         name: 'symbol',
                         typeAhead: true,
+                        transferType: 'Securities',
                         plugins: ['loadmask'],
                         store: 'Instruments',
                         queryMode: 'local',
                         displayField: 'symbolFullName',
+                        hidden: true,
                         valueField: 'symbol',
                         flex: 1.47,
                         validator: this.hiddenFieldValidator
@@ -137,7 +144,9 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
                         xtype: 'displayfield',
                         flex: 1,
                         fieldLabel: 'Last Trade',
+                        transferType: 'Securities',
                         name: 'lastTrade',
+                        hidden: true,
                         labelWidth: 70,
                         margin: '0 0 0 10',
                         width: 300,
@@ -148,6 +157,7 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
             {
                 xtype: 'numberfield',
                 fieldLabel: 'Quantity',
+                hideTrigger:true,
                 name: 'quantity',
                 minValue: 1,
                 transferType: 'Securities',
@@ -156,6 +166,7 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
             },
             {
                 xtype: 'numberfield',
+                hideTrigger:true,
                 fieldLabel: 'Price Paid Per Share',
                 name: 'pricePaidPerShare',
                 minValue: 1,
@@ -165,6 +176,7 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
             },
             {
                 xtype: 'numberfield',
+                hideTrigger: true,
                 fieldLabel: 'Amount',
                 minValue: 1,
                 name: 'amount',

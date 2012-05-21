@@ -24,7 +24,7 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
     alias: 'widget.accountsview',
 
     //Configs
-   
+
     //Functions
     initComponent: function initAccountsViewComponents() {
         var viewConfig = {
@@ -57,15 +57,16 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
                 ui: 'footer',
                 margin: '5 0 5 0',
                 defaults: {
-                   minHeight: 20,
-                   margin: '5 0 5 0' 
+                    minHeight: 20,
+                    margin: '5 0 5 0'
                 },
                 padding: {
                     left: 2
                 },
                 items: [
                     {
-                        text: Bullsfirst.GlobalConstants.Update
+                        text: Bullsfirst.GlobalConstants.Update,
+                        itemId: 'UpdateAccountBtn'
                     },
                     {
                         xtype: 'tbspacer'
@@ -92,13 +93,14 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
         var gridPanelConfig = {
             xtype: 'grid',
             style: {
-               font: 20
+                font: 20
             },
+            margin: '0 5 0 0',
             bodyStyle: {
-              border: 0,
-              font: 20
+                border: 0,
+                font: 20
             },
-            flex: 1,
+            flex: 1.5,
             plugins: ['loadmask'],
             store: 'BrokerageAccountSummaries',
             columns: [
@@ -121,14 +123,14 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
                     dataIndex: 'marketValue',
                     flex: 2,
                     align: 'right',
-                    renderer: Ext.util.Format.usMoney 
+                    renderer: Ext.util.Format.usMoney
                 },
                 {
                     text: 'Cash',
                     dataIndex: 'cashPosition',
                     flex: 1.5,
                     align: 'right',
-                    renderer: Ext.util.Format.usMoney 
+                    renderer: Ext.util.Format.usMoney
                 },
                 {
                     xtype: 'templatecolumn',
@@ -136,7 +138,7 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
                     flex: 1,
                     align: 'center',
                     tpl: '<a href="#">Edit</a>'
-                    
+
                 }
             ]
 
@@ -145,6 +147,7 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
     },
     buildChartPanelConfig: function buildChartPanelConfig() {
         var brokerageSummariesStore = Ext.data.StoreManager.lookup('BrokerageAccountSummaries');
+        var brokerageSummariesChartStore = Ext.data.StoreManager.lookup('BrokerageAccountChartSummaries');
         var chartPanelConfig = {
             xtype: 'container',
             cls: 'chartPanelCls',
@@ -158,37 +161,63 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
                      html: 'All Accounts',
                      cls: 'chartTitleCls',
                      region: 'north',
-                     height: 60
+                     height: 20
                  },
                  {
                      xtype: 'chart',
+                     gradients: Bullsfirst.extensions.SmartChartTheme.createColorGradients(),
                      region: 'center',
+                     style: { cursor: 'pointer' },
+                     shadow: false,
                      animate: false,
-                     store: brokerageSummariesStore,
-                     theme: 'Base:gradients',
-                     legend: {
-                         position: 'right',
-                         autoScroll: true
-                     },
+                     store: brokerageSummariesChartStore,
+                     theme: 'SmartChartTheme',
                      series: [{
                          type: 'pie',
-                         angleField: 'cashPosition',
-                         showInLegend: true,
+                         angleField: 'marketValue',
+                         showInLegend: false,
+                         listeners: {
+                             itemmousedown: function (pieslice) {
+                                 var chart = pieslice.series.chart;
+                                 chart.fireEvent('piesliceclick', pieslice);
+                             }
+                         },
                          tips: {
                              trackMouse: true,
                              width: 140,
-                             height: 28,
+                             height: 50,
                              renderer: function (storeItem, item) {
                                  // calculate and display percentage on hover
                                  var total = 0;
-                                 brokerageSummariesStore.each(function (rec) {
-                                     total += rec.get('cashPosition');
+                                 var marketValue = storeItem.get('marketValue');
+                                 brokerageSummariesChartStore.each(function (rec) {
+                                     total += rec.get('marketValue');
                                  });
-                                 this.setTitle(storeItem.get('name') + ': ' + (storeItem.get('cashPosition') / total * 100) + '%');
+                                 var name = storeItem.get('name');
+                                 if (Ext.isEmpty(name)) {
+                                     name = storeItem.get('instrumentSymbol');
+                                 }
+                                 this.setTitle(name + ': </br>' +
+                                    Ext.util.Format.usMoney(marketValue) + '</br>' +
+                                    (marketValue / total * 100).toFixed(2) + '%');
                              }
                          }
                      }]
 
+                 },
+                 {
+                     xtype: 'container',
+                     margin: '8',
+                     region: 'south',
+                     autoScroll: true,
+                     layout: 'column',
+                     height: 100,
+                     defaults: {
+                         xtype: 'draw',
+                         viewBox: false,
+                         columnWidth: 0.5,
+                         maxHeight: 17
+                     }
                  }
 
              ]
@@ -196,4 +225,5 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
         };
         return chartPanelConfig;
     }
+
 });

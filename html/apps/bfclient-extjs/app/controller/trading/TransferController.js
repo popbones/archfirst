@@ -60,6 +60,10 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
             selector: 'transferview form'
         },
         {
+            ref: 'TransferFormButton',
+            selector: 'transferview submitbutton'
+        },
+        {
             ref: 'TransferFormSymbolContainer',
             selector: 'transferview container[transferType=Securities]',
         },
@@ -138,10 +142,14 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
     },
     onRadioFieldChange: function onRadioFieldChange(radioField, newValue, oldValue) {
         if (newValue != oldValue && newValue == true) {
+            var transferForm = this.getTransferForm().getForm();
             var symbolContainer = this.getTransferFormSymbolContainer();
             symbolContainer.setVisible(symbolContainer.transferType == radioField.boxLabel);
-            var transferFormFields = this.getTransferForm().getForm().getFields();
+            var transferFormFields = transferForm.getFields();
             transferFormFields.each(function (field) {
+                if (!field.nonresetable) {
+                    field.reset();
+                }
                 if (!Ext.isEmpty(field.transferType) && field.transferType != radioField.boxLabel) {
                     field.setVisible(false);
                 }
@@ -250,7 +258,6 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
             if (tradingTabPanel != null) {
                 tradingTabPanel.setActiveTab(this.getPositionsTab());
                 this.getPositionsViewCombo().setValue(brokerageAcct);
-                this.getController('Bullsfirst.controller.trading.PositionsController').reloadPositions();
             }
         }, this);
 

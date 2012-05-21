@@ -51,6 +51,14 @@ Ext.define('Bullsfirst.controller.login.LoginController', {
             selector: 'createaccountview textfield[name=username]'
         },
         {
+            ref: 'CreateAccountWindowPassword',
+            selector: 'createaccountview textfield[name=password]'
+        },
+        {
+            ref: 'LoginForm',
+            selector: 'loginview'
+        },
+        {
             ref: 'LoginUserNameField',
             selector: 'loginview textfield[name=username]'
         },
@@ -96,25 +104,8 @@ Ext.define('Bullsfirst.controller.login.LoginController', {
         }
         var userName = this.getLoginUserNameField().getValue();
         var password = this.getLoginPasswordField().getValue();
+        this.processLogin(userName, password, Bullsfirst.GlobalConstants.LoggingInMaskMessage);
 
-        //Save log in information for http basic authentication
-        this.updateUserStore(userName, password);
-
-        var loginMask = new Ext.LoadMask(loginButton.up('viewport'), { msg: Bullsfirst.GlobalConstants.LoggingInMaskMessage });
-        loginForm.mask = loginMask;
-        loginMask.show();
-        //submit login form
-        loginForm.submit({
-            method: 'GET',
-            scope: this,
-            headers: {
-                password: password
-            },
-            clientValidation: false,
-            url: Bullsfirst.GlobalConstants.BaseUrl + "/bfoms-javaee/rest/users/" + userName,
-            success: this.processLoggedInUser,
-            failure: this.processLoggedInUser
-        }, this);
     },
     onOpenAccountButtonClick: function onOpenAccountButtonClick(openAccountButton) {
         var createAccountForm = openAccountButton.up('form').getForm();
@@ -171,7 +162,7 @@ Ext.define('Bullsfirst.controller.login.LoginController', {
     onExternalAccountCreated: function (operation, createdBrokerageAccountId) {
         var createdExternalAccountId = JSON.parse(operation.response.responseText).id;
 
-        //sendt request to tranfer cash from external to brokerage account
+        //send request to tranfer cash from external to brokerage account
         var newTransferRequest = Ext.create('Bullsfirst.model.CashTransfer', {
             amount: Bullsfirst.GlobalConstants.DefaultTransferAmount,
             toAccountId: createdBrokerageAccountId
@@ -182,14 +173,37 @@ Ext.define('Bullsfirst.controller.login.LoginController', {
         transferController.processTransferRequest(newTransferRequest, fromAccount);
     },
     onTransferProcessed: function () {
-        //After new account is created, go back to the login view
-        Ext.Msg.alert(Bullsfirst.GlobalConstants.AccountCreated, Bullsfirst.GlobalConstants.AccountReloginMsg);
-        this.getLoginUserNameField().setValue(this.getCreateAccountWindowUserName().getValue());
+        //After new account is created, process login
+        var newUserName = this.getCreateAccountWindowUserName().getValue();
+        var newUserPassword = this.getCreateAccountWindowPassword().getValue();
         this.getCreateAccountWindow().close();
-
+        this.processLogin(newUserName, newUserPassword, Bullsfirst.GlobalConstants.AccountCreatedMaskMessage);
+        
     },
     onCancelButtonClick: function onCancelButtonClick(cancelButton) {
         cancelButton.up('window').close();
+    },
+    processLogin: function processLogin(userName, password, loginMessage) {
+        var loginForm = this.getLoginForm().getForm();
+
+        //Save log in information for http basic authentication
+        this.updateUserStore(userName, password);
+
+        var loginMask = new Ext.LoadMask(this.getLoginButton().up('viewport'), { msg: loginMessage });
+        loginForm.mask = loginMask;
+        loginMask.show();
+        //submit login form
+        loginForm.submit({
+            method: 'GET',
+            scope: this,
+            headers: {
+                password: password
+            },
+            clientValidation: false,
+            url: Bullsfirst.GlobalConstants.BaseUrl + "/bfoms-javaee/rest/users/" + userName,
+            success: this.processLoggedInUser,
+            failure: this.processLoggedInUser
+        }, this);
     },
     processLoggedInUser: function processLoggedInUser(form, action) {
         var me = this;

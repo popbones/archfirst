@@ -36,6 +36,7 @@ Ext.define('EventAggregator', {
         'brokerageaccountedited',
         'brokerageaccounteditError',
         'brokerageaccountsstoreloaded',
+        'brokerageaccountschartstoreloaded',
         'brokerageaccountsstoreloadError',
         'instrumentsstoreloaded',
         'instrumentsstoreloadError',

@@ -38,6 +38,7 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
         'User',
         'Position',
         'BrokerageAccountSummary',
+        'BrokerageAccountChartSummary',
         'BrokerageAccount',
         'TradeAction',
         'TradeOrderType',
@@ -49,6 +50,7 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
     stores: [
         'Positions',
         'BrokerageAccountSummaries',
+        'BrokerageAccountChartSummaries',
         'BrokerageAccounts',
         'TradeActions',
         'TradeOrderTypes',
@@ -104,23 +106,13 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
         this.callParent();
     },
     onTradingTabPanelBeforeRender: function onTradingTabPanelBeforeRender(tradingTabPanel) {
-        var positionsViewCombo = this.getPositionsViewCombo();
         tradingTabPanel.selectedBrokerageAccount = new Bullsfirst.extensions.SelectedBrokerageAccount();
         tradingTabPanel.selectedBrokerageAccount.addListener('change', this.onSelectedBrokerageAccountChange, this);
 
         //Show logged in user information
         this.getLoggedInUserNameField().setText(tradingTabPanel.loggedInUser.firstName + ' ' + tradingTabPanel.loggedInUser.lastName);
-        EventAggregator.subscribe('brokerageaccountsstoreloaded', function (brokerageAccountsStore) {
-            if (brokerageAccountsStore.count() > 0) {
-                var firstBrokerageAccountId = brokerageAccountsStore.first().get('id');
-                tradingTabPanel.selectedBrokerageAccount.setValue(firstBrokerageAccountId);
-                positionsViewCombo.on('render', function () {
-                    if (!positionsViewCombo.getValue()) {
-                        positionsViewCombo.setValue(firstBrokerageAccountId);
-                    }
-                });
-            }
-        }, this);
+        EventAggregator.subscribeForever('brokerageaccountsstoreloaded', this.onBrokerageAccountsStoreLoaded , this);
+        
         //Load brokerage accounts
         this.getStore('BrokerageAccountSummaries').load();
         this.getStore('Instruments').load();
@@ -130,6 +122,7 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
     },
     onSignOutLinkClick: function onSignOutLinkClick(signOutLink) {
         this.getController('login.LoginController').injectView(Ext.create('widget.mainContentPanel'));
+        EventAggregator.unsubscribe('brokerageaccountsstoreloaded', this.onBrokerageAccountsStoreLoaded , this);
     },
     onSelectedBrokerageAccountChange: function onSelectedBrokerageAccountChange(newValue) {
         //Selected brokerage account, now update all views
@@ -141,7 +134,27 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
         if (newTab != null) {
             newTab.fireEvent('activate', newTab);
         }
+    },
+    onBrokerageAccountsStoreLoaded: function (brokerageAccountsStore) {
+        var tradingTabPanel = this.getTradingTabPanel();
+        var positionsViewCombo = this.getPositionsViewCombo();
+
+        if (brokerageAccountsStore.count() > 0) {
+            var chartStore = this.getStore('BrokerageAccountChartSummaries');
+            chartStore.removeAll();
+            chartStore.add(brokerageAccountsStore.getRange());
+
+            EventAggregator.publish('brokerageaccountschartstoreloaded', chartStore);
+            var firstBrokerageAccountId = brokerageAccountsStore.first().get('id');
+            tradingTabPanel.selectedBrokerageAccount.setValue(firstBrokerageAccountId);
+            positionsViewCombo.on('render', function () {
+                if (!positionsViewCombo.getValue()) {
+                    positionsViewCombo.setValue(firstBrokerageAccountId);
+                }
+            });
+        }
     }
+    
 }); 
 
  
