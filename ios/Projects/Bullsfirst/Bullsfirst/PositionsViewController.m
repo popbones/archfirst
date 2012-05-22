@@ -86,7 +86,9 @@
     
     AppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     [appDelegate addObserver:self forKeyPath:@"accounts" options:NSKeyValueObservingOptionNew|NSKeyValueObservingOptionOld context:nil];
-    
+
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userLogout:) name:@"USER_LOGOUT" object:nil];
+
 }
 
 - (void)viewDidUnload
@@ -102,6 +104,13 @@
     [positionTBL reloadData];
 }
 
+#pragma mark MVC Delegate methods
+
+-(void)userLogout:(NSNotification*)notification
+{
+    self.selectedAccount = -1;
+}
+
 #pragma mark - KVO lifecycle
 
 
@@ -110,7 +119,7 @@
     if ([keyPath isEqualToString:@"accounts"]) 
     {
         NSMutableArray *brokerageAccounts = (NSMutableArray*)[[BFBrokerageAccountStore defaultStore] allBrokerageAccounts];
-        if ([brokerageAccounts count] > 0) 
+        if ([brokerageAccounts count] > 0 && selectedAccount > -1)
         {
             BFBrokerageAccount *account = [brokerageAccounts objectAtIndex:selectedAccount];
             expanedRowSet = [[NSMutableArray alloc] init];
