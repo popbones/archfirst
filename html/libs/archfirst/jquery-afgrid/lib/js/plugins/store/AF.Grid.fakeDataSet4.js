@@ -31,7 +31,7 @@
             }, {
                 label: "Title Released",
                 id: "colTitleReleased",
-                width: 80,
+                width: 100,
                 filterData: "",
                 groupBy: true           
             }, {
