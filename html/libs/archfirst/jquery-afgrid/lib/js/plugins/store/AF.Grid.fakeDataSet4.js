@@ -59,7 +59,7 @@
                 id: "colGenre",
                 width: 150,
                 groupBy: true,
-                filterData: AF.Grid.FakeLocalStore.getFilterData(2, rows)
+                filterData: AF.Grid.FakeLocalStore.getFilterData(5, rows)
             }];
         }
                 
