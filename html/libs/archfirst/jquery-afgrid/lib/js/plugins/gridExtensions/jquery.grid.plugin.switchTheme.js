@@ -1,19 +1,14 @@
 (function ($) {
 
+	var currentTheme = {};
+
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
-            THEME_SWITCHER: function ($afGrid, options, cachedafGridData) {
-
+            THEME_SWITCHER: function ($afGrid, options, cachedafGridData) {				
                 function load() {
-                    var currentTheme = {};
-                    $(".afGrid-switch-theme").delegate(".theme", "click", function () {
-                        var theme = $(this).attr("href").replace("#", ""),
-			    gridId;
-                        $.each($(this).closest(".afGrid-switch-theme").attr("class").split(" "), function (i, value) {
-                            if (value.indexOf("-afGrid-switch-theme") > -1) {
-                                gridId = value.split("-")[0];
-                            }
-                        });
+					var $themeSwitcher = $("." + options.id + "-afGrid-switch-theme");
+					$themeSwitcher.delegate(".theme", "click", function () {
+						var theme = $(this).attr("href").replace("#", ""), gridId = options.id;
                         if (currentTheme[gridId]) {
                             $("#" + gridId).removeClass("afGrid-" + currentTheme[gridId]);
                             $("." + gridId + "-afGrid-group-by").removeClass("afGrid-group-by-" + currentTheme[gridId]);
@@ -26,7 +21,8 @@
                 }
 
                 function destroy() {
-                    $(".afGrid-switch-theme").undelegate(".theme", "click");
+					$("." + options.id + "-afGrid-switch-theme").undelegate(".theme", "click");
+					$themeSwitcher = null;
                     options = null;
                 }
 
