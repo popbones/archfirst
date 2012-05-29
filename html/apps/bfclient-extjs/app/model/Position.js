@@ -46,7 +46,7 @@ Ext.define('Bullsfirst.model.Position', {
         {
             name: 'lastTrade',
             convert: function convertToAmount(value) {
-                if (Ext.isObject(value) && value.amount != undefined) {
+                if (Ext.isObject(value) && value.amount !== undefined) {
                     return value.amount;
                 }
                 return value;
@@ -55,7 +55,7 @@ Ext.define('Bullsfirst.model.Position', {
         {
             name: 'marketValue',
             convert: function convertToAmount(value, record) {
-                if (Ext.isObject(value) && value.amount != undefined) {
+                if (Ext.isObject(value) && value.amount !== undefined) {
                     return value.amount;
                 }
                 return value;
@@ -64,7 +64,7 @@ Ext.define('Bullsfirst.model.Position', {
         {
             name: 'pricePaid',
             convert: function convertToAmount(value) {
-                if (Ext.isObject(value) && value.amount != undefined) {
+                if (Ext.isObject(value) && value.amount !== undefined) {
                     return value.amount;
                 }
                 return value;
@@ -73,7 +73,7 @@ Ext.define('Bullsfirst.model.Position', {
         {
             name: 'totalCost',
             convert: function convertToAmount(value) {
-                if (Ext.isObject(value) && value.amount != undefined) {
+                if (Ext.isObject(value) && value.amount !== undefined) {
                     return value.amount;
                 }
                 return value;
@@ -82,7 +82,7 @@ Ext.define('Bullsfirst.model.Position', {
         {
             name: 'gain',
             convert: function convertToAmount(value) {
-                if (Ext.isObject(value) && value.amount != undefined) {
+                if (Ext.isObject(value) && value.amount !== undefined) {
                     return value.amount;
                 }
                 return value;
@@ -106,7 +106,7 @@ Ext.define('Bullsfirst.model.Position', {
             name: 'leaf',
             convert: function (value, record) {
                 var childNodes = record.get('children');
-                if (childNodes == null || childNodes.length == 0) {
+                if (childNodes === null || childNodes.length === 0) {
                     return true;
                 }
                 return false;
@@ -115,10 +115,9 @@ Ext.define('Bullsfirst.model.Position', {
         {
             name: 'buyAction',
             convert: function (value, record) {
-                if (record.get('leaf') == false) {
+                if (record.get('leaf') === false) {
                     return '<a href="#">Buy</a>';
-                }
-                else {
+                } else {
                     return ' ';
                 }
             }
@@ -126,10 +125,9 @@ Ext.define('Bullsfirst.model.Position', {
         {
             name: 'sellAction',
             convert: function (value, record) {
-                if (record.get('leaf') == false) {
+                if (record.get('leaf') === false) {
                     return '<a href="#">Sell</a>';
-                }
-                else {
+                } else {
                     return ' ';
                 }
             }

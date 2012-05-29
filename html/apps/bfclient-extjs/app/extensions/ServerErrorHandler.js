@@ -23,9 +23,10 @@ Ext.define('ServerErrorHandler', {
     singleton: true,
 
     SubscribeToAllErrors: function () {
+        var i = 0;
         var allServerEvents = EventAggregator.events;
-        for (var i = 0; i < allServerEvents.length; i++) {
-            if (allServerEvents[i].search('Error') == allServerEvents[i].length - 5) {
+        for (; i < allServerEvents.length; i++) {
+            if (allServerEvents[i].search('Error') === allServerEvents[i].length - 5) {
                 EventAggregator.subscribeForever(allServerEvents[i], ServerErrorHandler.handleError);
             }
         }
@@ -51,7 +52,6 @@ Ext.define('ServerErrorHandler', {
                     break;
                 default:
                     break;
-
             }
             return;
         }
@@ -61,13 +61,12 @@ Ext.define('ServerErrorHandler', {
             var errorMessage = '';
             if (!Ext.isEmpty(args.customError)) {
                 errorMessage = args.customError;
-            }
-            else {
+            } else {
                 if (args.response != null && !Ext.isEmpty(args.response.responseText)) {
                     try {
                         var errorDetail = JSON.parse(args.response.responseText);
                         if (!Ext.isEmpty(errorDetail) && !Ext.isEmpty(errorDetail.detail)) {
-                            errorMessage = errorDetail.detail
+                            errorMessage = errorDetail.detail;
                         }
                     } catch (e) {
 
@@ -75,7 +74,7 @@ Ext.define('ServerErrorHandler', {
 
                 }
             }
-            
+
             if (errorMessage == '') {
                 var operationError = args.getError();
                 if (operationError != null && !Ext.isEmpty(operationError.statusText)) {
@@ -85,8 +84,7 @@ Ext.define('ServerErrorHandler', {
 
             if (!Ext.isEmpty(errorMessage)) {
                 ServerErrorHandler.showErrorMessage(Ext.String.format(Bullsfirst.GlobalConstants.GeneralError, errorMessage));
-            }
-            else {
+            } else {
                 ServerErrorHandler.showErrorMessage(Bullsfirst.GlobalConstants.UnknownError);
             }
             return;

@@ -63,7 +63,7 @@ Ext.define('Bullsfirst.view.shared.MainContentPanel', {
                         maxWidth: 607,
                         margin: '5 0 0 10',
                         html: Bullsfirst.GlobalConstants.TradeMessage
-                   }
+                    }
                 ]
             },
             {
@@ -71,7 +71,7 @@ Ext.define('Bullsfirst.view.shared.MainContentPanel', {
                 margin: '0 0 0 40',
                 maxHeight: 165,
                 maxWidth: 195,
-                flex:1
+                flex: 1
             }
         ];
     }

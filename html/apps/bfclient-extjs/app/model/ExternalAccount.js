@@ -44,8 +44,8 @@ Ext.define('Bullsfirst.model.ExternalAccount', {
             name: 'fullname',
             persist: false,
             convert: function (value, record) {
-                return record.get('name') + ' - ' +
-                    +record.get('accountNumber') + '  (External)';
+                return record.get('name') + ' - ' 
+                    + record.get('accountNumber') + '  (External)';
             }
         }
     ],

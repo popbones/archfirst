@@ -23,29 +23,29 @@ Ext.define('Bullsfirst.model.TradeOrderEstimateRequest', {
     extend: 'Ext.data.Model',
 
     fields: [
-		 {
-		     name: 'brokerageAccountId',
-		     type: 'int'
-		 },
-         {
-             name: 'orderParams',
-             convert: function (value, record) {
-                 if (Ext.isObject(value)) {
-                     return {
-                         side: value.get('action'),
-                         symbol: value.get('symbol'),
-                         quantity: value.get('quantity'),
-                         type: value.get('orderType'),
-                         limitPrice: {
-                             amount: value.get('totalIncludingFees'),
-                             currency: 'USD'
-                         },
-                         term: value.get('term'),
-                         allOrNone: value.get('allOrNone')
-                     };
-                 }
-             }
-         }
+		{
+		    name: 'brokerageAccountId',
+		    type: 'int'
+		},
+        {
+            name: 'orderParams',
+            convert: function (value, record) {
+                if (Ext.isObject(value)) {
+                    return {
+                        side: value.get('action'),
+                        symbol: value.get('symbol'),
+                        quantity: value.get('quantity'),
+                        type: value.get('orderType'),
+                        limitPrice: {
+                            amount: value.get('totalIncludingFees'),
+                            currency: 'USD'
+                        },
+                        term: value.get('term'),
+                        allOrNone: value.get('allOrNone')
+                    };
+                }
+            }
+        }
     ],
    
     idProperty: 'brokerageAccountId',

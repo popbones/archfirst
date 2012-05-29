@@ -24,7 +24,7 @@ Ext.define('Bullsfirst.store.AllAccounts', {
     
     fields: [
 		
-    ] 		    
+    ]		    
 });
 
  

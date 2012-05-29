@@ -23,20 +23,20 @@ Ext.define('Bullsfirst.model.CashTransfer', {
     extend: 'Ext.data.Model',
 
     fields: [
-		 {
-		     name: 'amount',
-		     convert: function (value, record) {
-		         var amount = {
-		             amount: value,
-		             currency: 'USD'
-		         };
-		         return amount;
-		     }
-		 },
-         {
-             name: 'toAccountId',
-             type: 'int'
-         }
+		{
+		    name: 'amount',
+		    convert: function (value, record) {
+		        var amount = {
+		            amount: value,
+		            currency: 'USD'
+		        };
+		        return amount;
+		    }
+		},
+        {
+            name: 'toAccountId',
+            type: 'int'
+        }
     ],
     idProperty: 'toAccountId',
     proxy: {

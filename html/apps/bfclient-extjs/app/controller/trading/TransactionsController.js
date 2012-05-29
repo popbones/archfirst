@@ -73,11 +73,12 @@ Ext.define('Bullsfirst.controller.trading.TransactionsController', {
     },
     onTransactionsViewComboChange: function onTransactionsViewComboChange(transactionsViewCombo, newValue, oldValue) {
         //load transactions store when combo value is changed
-        if (newValue != oldValue && oldValue != null && oldValue != undefined) {
+        if (newValue !== oldValue && oldValue !== null && oldValue !== undefined) {
             this.processFilters();
         }
     },
     onTransactionsViewAfterRender: function onTransactionsViewAfterRender(transactionsView) {
+        this.getStore('Transactions').removeAll();
         this.processFilters();
     },
     onUpdateBtnClick: function onUpdateBtnClick(updateBtn) {
@@ -101,7 +102,7 @@ Ext.define('Bullsfirst.controller.trading.TransactionsController', {
             accountId: this.getTransactionsViewCombo().getValue(),
             fromDate: fromDateFilterValue == null ? '' : Ext.Date.format(fromDateFilterValue, 'Y-m-d'),
             toDate: toDateFilterValue == null ? '' : Ext.Date.format(toDateFilterValue, 'Y-m-d')
-        }
+        };
         this.loadTransactionsStore(filterParams);
     }
 }); 

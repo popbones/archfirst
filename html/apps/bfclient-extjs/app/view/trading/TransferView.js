@@ -109,7 +109,6 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
                 name: 'toAccountId',
                 displayField: 'fullname',
                 queryMode: 'local',
-                allowBlank: false,
                 valueField: 'id'
 
             },
@@ -157,7 +156,7 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
             {
                 xtype: 'numberfield',
                 fieldLabel: 'Quantity',
-                hideTrigger:true,
+                hideTrigger: true,
                 name: 'quantity',
                 minValue: 1,
                 transferType: 'Securities',
@@ -166,7 +165,7 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
             },
             {
                 xtype: 'numberfield',
-                hideTrigger:true,
+                hideTrigger: true,
                 fieldLabel: 'Price Paid Per Share',
                 name: 'pricePaidPerShare',
                 minValue: 1,
@@ -223,8 +222,7 @@ Ext.define('Bullsfirst.view.trading.TransferView', {
     hiddenFieldValidator: function (value) {
         if (this.isVisible() && Ext.isEmpty(value)) {
             return 'Please enter ' + this.fieldLabel.toLowerCase();
-        }
-        else {
+        } else {
             return true;
         }
     }

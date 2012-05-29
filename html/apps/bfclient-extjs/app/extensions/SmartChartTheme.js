@@ -62,8 +62,9 @@ Ext.define('Bullsfirst.extensions.SmartChartTheme', {
             var legendColors = [];
             var chartGradients = [];
             var legendGradients = [];
+            var i = 0;
 
-            for (var i = 0; i < this.lightColors.length; i++) {
+            for (; i < this.lightColors.length; i++) {
                 var chartGradient = {
                     id: 'smartChartColorId' + i,
                     angle: 225,
@@ -94,7 +95,7 @@ Ext.define('Bullsfirst.extensions.SmartChartTheme', {
 
                 legendGradients.push(legendGradient);
                 legendColors.push('url(#smartLegendColorId' + i + ')');
-            };
+            }
             this.chartColors = chartColors;
             this.chartGradients = chartGradients;
             this.legendColors = legendColors;
@@ -109,12 +110,8 @@ Ext.define('Bullsfirst.extensions.SmartChartTheme', {
             colors: Bullsfirst.extensions.SmartChartTheme.chartColors
         }, config)]);
     }
-
-
-
-},
-function () {
-    Ext.chart.theme['SmartChartTheme'] = (function () { return new Bullsfirst.extensions.SmartChartTheme(); });
+}, function () {
+    Ext.chart.theme.SmartChartTheme = function () { return new Bullsfirst.extensions.SmartChartTheme(); };
 });
 
  

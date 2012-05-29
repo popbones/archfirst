@@ -41,20 +41,19 @@ Ext.define('Bullsfirst.view.trading.EditBrokerageAccountView', {
     initComponent: function () {
         this.items = [
             {
-               xtype: 'smartform',
-               items: [
-                  {
-                    xtype: 'textfield',
-                    name: 'accountName',
-                    margin: '5',
-                    name: 'name',
-                    width: 250,
-                    allowBlank: false,
-                    fieldLabel: 'Account Name',
-                    labelAlign: 'top'
-                  }
-               ],
-               buttons: [
+                xtype: 'smartform',
+                items: [
+                    {
+                        xtype: 'textfield',
+                        margin: '5',
+                        name: 'name',
+                        width: 250,
+                        allowBlank: false,
+                        fieldLabel: 'Account Name',
+                        labelAlign: 'top'
+                    }
+                ],
+                buttons: [
                     {
                         text: 'OK',
                         minWidth: 70,
@@ -65,7 +64,7 @@ Ext.define('Bullsfirst.view.trading.EditBrokerageAccountView', {
                         text: 'Cancel',
                         itemId: 'CancelBtn'
                     }
-               ]
+                ]
             }
             
         ];

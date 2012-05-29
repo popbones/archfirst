@@ -43,37 +43,37 @@ Ext.define('Bullsfirst.view.trading.CreateExternalAccountView', {
             {
                 xtype: 'smartform',
                 items: [
-                  {
-                      xtype: 'textfield',
-                      name: 'name',
-                      margin: '5 5 5 8',
-                      width: 250,
-                      allowBlank: false,
-                      fieldLabel: 'Account Name',
-                      labelAlign: 'top'
-                  },
-                  {
-                      xtype: 'numberfield',
-                      name: 'routingNumber',
-                      hideTrigger: true,
-                      margin: '5 5 5 8',
-                      width: 250,
-                      allowBlank: false,
-                      fieldLabel: 'Routing Number',
-                      labelAlign: 'top'
-                  },
-                  {
-                      xtype: 'numberfield',
-                      name: 'accountNumber',
-                      hideTrigger: true,
-                      margin: '5 5 8 8',
-                      width: 250,
-                      allowBlank: false,
-                      fieldLabel: 'Account Number',
-                      labelAlign: 'top'
-                  }
+                    {
+                        xtype: 'textfield',
+                        name: 'name',
+                        margin: '5 5 5 8',
+                        width: 250,
+                        allowBlank: false,
+                        fieldLabel: 'Account Name',
+                        labelAlign: 'top'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        name: 'routingNumber',
+                        hideTrigger: true,
+                        margin: '5 5 5 8',
+                        width: 250,
+                        allowBlank: false,
+                        fieldLabel: 'Routing Number',
+                        labelAlign: 'top'
+                    },
+                    {
+                        xtype: 'numberfield',
+                        name: 'accountNumber',
+                        hideTrigger: true,
+                        margin: '5 5 8 8',
+                        width: 250,
+                        allowBlank: false,
+                        fieldLabel: 'Account Number',
+                        labelAlign: 'top'
+                    }
 
-               ],
+                ],
                 buttons: [
                     {
                         text: 'OK',
@@ -85,11 +85,10 @@ Ext.define('Bullsfirst.view.trading.CreateExternalAccountView', {
                         text: 'Cancel',
                         itemId: 'CancelBtn'
                     }
-               ]
+                ]
             }
 
         ];
-
         this.callParent();
     }
 });

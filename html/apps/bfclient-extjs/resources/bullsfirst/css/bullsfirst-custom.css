@@ -1,4 +1,8 @@
-﻿.x-border-layout-ct 
+﻿html
+{
+    overflow: hidden !important;
+}
+.x-border-layout-ct 
 {
     background-color: White;
 }
@@ -9,13 +13,6 @@
 .viewportCls, .mainLayoutStyle
 {
     background-color:#DDDDDD;
-    overflow: visible !important;
-}
-.logoPanelCls
-{
-    background-color: red;
-    border: none;
-   
 }
 .templateColumnCls
 {
@@ -48,9 +45,9 @@
 .chartTitleCls
 {
     font-family: Tahoma;
-    font-size:20px;
-    margin-left: 20px;
-    margin-top: 10px;
+    font-size:18px;
+    margin-left: 0px;
+    margin-top: 0px;
     margin-bottom: 0px;
     text-align: center;
 }
@@ -75,11 +72,10 @@
     border: 1px solid #C0C0C0;
     background-color:#FEFEFE;
 }
-.footerCls
+.footerCls .x-form-display-field
 {
-    font-family: Sans-Serif;
-    font-size: 93%;
-    border-bottom-style:
+   font: 11.2px tahoma, arial, verdana, sans-serif;
+   color: Gray;
 }
 .no-icon, .x-tree-elbow, .x-tree-lines .x-tree-elbow-line, .x-tree-lines .x-tree-elbow-end
 {

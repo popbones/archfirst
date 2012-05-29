@@ -33,7 +33,7 @@ Ext.define('Bullsfirst.extensions.SelectedBrokerageAccount', {
             this.listeners = listerners;
         }
 
-        this.callParent(arguments)
+        this.callParent(arguments);
     },
     setValue: function (value) {
         this.value = value;

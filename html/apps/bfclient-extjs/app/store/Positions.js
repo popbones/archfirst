@@ -22,7 +22,6 @@
 Ext.define('Bullsfirst.store.Positions', {
     extend: 'Ext.data.Store',
     model: 'Bullsfirst.model.Position'
-				    
 });
 
  

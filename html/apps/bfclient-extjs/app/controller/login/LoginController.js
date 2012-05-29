@@ -98,10 +98,14 @@ Ext.define('Bullsfirst.controller.login.LoginController', {
     },
     onLoginButtonClick: function onLoginButtonClick(loginButton) {
         var loginForm = loginButton.up('form').getForm();
+
+        //If form is invalid, throw error and disable login button
         if (loginForm.hasInvalidField()) {
             Ext.Msg.alert(Bullsfirst.GlobalConstants.ErrorTitle, Bullsfirst.GlobalConstants.InvalidForm);
-            submitButton.disable();
+            loginForm.disable();
         }
+
+        //Get entered user name and password and call processlogin
         var userName = this.getLoginUserNameField().getValue();
         var password = this.getLoginPasswordField().getValue();
         this.processLogin(userName, password, Bullsfirst.GlobalConstants.LoggingInMaskMessage);
@@ -124,10 +128,9 @@ Ext.define('Bullsfirst.controller.login.LoginController', {
         //Submit request to create user account
         userAccount.save({
             callback: function (record, operation, success) {
-                if (operation.wasSuccessful() == true) {
+                if (operation.wasSuccessful() === true) {
                     EventAggregator.publish('useraccountcreated', operation);
-                }
-                else {
+                } else {
                     EventAggregator.publish('useraccountcreationError', operation);
                     openAccountButton.enable();
                 }
@@ -178,7 +181,7 @@ Ext.define('Bullsfirst.controller.login.LoginController', {
         var newUserPassword = this.getCreateAccountWindowPassword().getValue();
         this.getCreateAccountWindow().close();
         this.processLogin(newUserName, newUserPassword, Bullsfirst.GlobalConstants.AccountCreatedMaskMessage);
-        
+
     },
     onCancelButtonClick: function onCancelButtonClick(cancelButton) {
         cancelButton.up('window').close();
@@ -213,10 +216,9 @@ Ext.define('Bullsfirst.controller.login.LoginController', {
             me.injectView(Ext.create('widget.tradingtabpanel', { loggedInUser: action.result }));
         }, this);
 
-        if (action.response.status == 200) {
+        if (action.response.status === 200) {
             EventAggregator.publish('userloggedin', action);
-        }
-        else {
+        } else {
             EventAggregator.publish('userloginError', action);
         }
     },

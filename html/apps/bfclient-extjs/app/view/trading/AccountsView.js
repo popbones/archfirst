@@ -95,12 +95,12 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
             style: {
                 font: 20
             },
-            margin: '0 5 0 0',
+            margin: '0 4 0 0',
             bodyStyle: {
                 border: 0,
                 font: 20
             },
-            flex: 1.5,
+            flex: 60,
             plugins: ['loadmask'],
             store: 'BrokerageAccountSummaries',
             columns: [
@@ -146,6 +146,7 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
         return gridPanelConfig;
     },
     buildChartPanelConfig: function buildChartPanelConfig() {
+        var maxRecords = Bullsfirst.GlobalConstants.PieMaxRecords;
         var brokerageSummariesStore = Ext.data.StoreManager.lookup('BrokerageAccountSummaries');
         var brokerageSummariesChartStore = Ext.data.StoreManager.lookup('BrokerageAccountChartSummaries');
         var chartPanelConfig = {
@@ -153,74 +154,82 @@ Ext.define('Bullsfirst.view.trading.AccountsView', {
             cls: 'chartPanelCls',
             plugins: ['loadmask'],
             store: brokerageSummariesStore,
-            flex: 1,
-            layout: 'border',
+            flex: 39.0625,
+            maxWidth: 370,
+            layout: {
+                type: 'vbox',
+                align: 'stretch'
+            },
             items: [
-                 {
-                     xtype: 'container',
-                     html: 'All Accounts',
-                     cls: 'chartTitleCls',
-                     region: 'north',
-                     height: 20
-                 },
-                 {
-                     xtype: 'chart',
-                     gradients: Bullsfirst.extensions.SmartChartTheme.createColorGradients(),
-                     region: 'center',
-                     style: { cursor: 'pointer' },
-                     shadow: false,
-                     animate: false,
-                     store: brokerageSummariesChartStore,
-                     theme: 'SmartChartTheme',
-                     series: [{
-                         type: 'pie',
-                         angleField: 'marketValue',
-                         showInLegend: false,
-                         listeners: {
-                             itemmousedown: function (pieslice) {
-                                 var chart = pieslice.series.chart;
-                                 chart.fireEvent('piesliceclick', pieslice);
-                             }
-                         },
-                         tips: {
-                             trackMouse: true,
-                             width: 140,
-                             height: 50,
-                             renderer: function (storeItem, item) {
-                                 // calculate and display percentage on hover
-                                 var total = 0;
-                                 var marketValue = storeItem.get('marketValue');
-                                 brokerageSummariesChartStore.each(function (rec) {
-                                     total += rec.get('marketValue');
-                                 });
-                                 var name = storeItem.get('name');
-                                 if (Ext.isEmpty(name)) {
-                                     name = storeItem.get('instrumentSymbol');
-                                 }
-                                 this.setTitle(name + ': </br>' +
+                {
+                    xtype: 'container',
+                    html: Bullsfirst.GlobalConstants.PieAllAccountsLabel,
+                    region: 'north',
+                    cls: 'chartTitleCls',
+                    flex: 5,
+                    maxHeight: 20
+                },
+                {
+                    xtype: 'chart',
+                    gradients: Bullsfirst.extensions.SmartChartTheme.createColorGradients(),
+                    flex: 60,
+                    minHeight: 215,
+                    style: { cursor: 'pointer' },
+                    shadow: false,
+                    animate: false,
+                    store: brokerageSummariesChartStore,
+                    theme: 'SmartChartTheme',
+                    series: [{
+                        type: 'pie',
+                        angleField: 'marketValue',
+                        showInLegend: false,
+                        style: {
+                           border: '1'
+                        },
+                        listeners: {
+                            itemmousedown: function (pieslice) {
+                                var chart = pieslice.series.chart;
+                                chart.fireEvent('piesliceclick', pieslice);
+                            }
+                        },
+                        tips: {
+                            trackMouse: true,
+                            width: 140,
+                            height: 50,
+                            renderer: function (storeItem, item) {
+                                // calculate and display percentage on hover
+                                var total = 0;
+                                var marketValue = storeItem.get('marketValue');
+                                brokerageSummariesChartStore.each(function (rec) {
+                                    total += rec.get('marketValue');
+                                });
+                                var name = storeItem.get('name');
+                                if (Ext.isEmpty(name)) {
+                                    name = storeItem.get('instrumentSymbol');
+                                }
+                                
+                                this.setTitle(name + ': </br>' +
                                     Ext.util.Format.usMoney(marketValue) + '</br>' +
                                     (marketValue / total * 100).toFixed(2) + '%');
-                             }
-                         }
-                     }]
+                            }
+                        }
+                    }]
 
-                 },
-                 {
-                     xtype: 'container',
-                     margin: '8',
-                     region: 'south',
-                     autoScroll: true,
-                     layout: 'column',
-                     height: 100,
-                     defaults: {
-                         xtype: 'draw',
-                         viewBox: false,
-                         columnWidth: 0.5,
-                         maxHeight: 17
-                     }
-                 }
-
-             ]
+                },
+                {
+                    xtype: 'container',
+                    margin: '1 10 1 25',
+                    region: 'south',
+                    autoScroll: true,
+                    layout: 'column',
+                    flex: 35,
+                    defaults: {
+                        xtype: 'draw',
+                        viewBox: false,
+                        columnWidth: 0.5
+                    }
+                }
+            ]
 
         };
         return chartPanelConfig;

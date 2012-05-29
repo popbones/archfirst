@@ -20,9 +20,8 @@
 * @author Vikas Goyal
 */
 Ext.define('Bullsfirst.store.BrokerageAccounts', {
-    extend: 'Ext.data.Store', 			 
-	model: 'Bullsfirst.model.BrokerageAccount'
-				    
+    extend: 'Ext.data.Store',
+    model: 'Bullsfirst.model.BrokerageAccount'
 });
 
  

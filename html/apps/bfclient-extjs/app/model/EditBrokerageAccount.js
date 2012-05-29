@@ -23,18 +23,18 @@ Ext.define('Bullsfirst.model.EditBrokerageAccount', {
     extend: 'Ext.data.Model',
 
     fields: [
-         {
-             name: 'name',
-             persist: false,
-             convert: function (value, record) {
-                  record.set('newName', value);
-                  return value;
-		     }
-         },
-		 {
-		     name: 'newName',
-		     type: 'string'
-		 }
+        {
+            name: 'name',
+            persist: false,
+            convert: function (value, record) {
+                record.set('newName', value);
+                return value;
+		    }
+        },
+		{
+		    name: 'newName',
+		    type: 'string'
+		}
     ],
     idProperty: 'newName',
     proxy: {

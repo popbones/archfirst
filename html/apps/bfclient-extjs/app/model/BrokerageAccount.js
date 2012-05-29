@@ -23,10 +23,10 @@ Ext.define('Bullsfirst.model.BrokerageAccount', {
     extend: 'Ext.data.Model',
 
     fields: [
-		 {
+		{
             name: 'accountName',
             type: 'string'
-		 }
+		}
     ],
     idProperty: 'accountName',
     proxy: {

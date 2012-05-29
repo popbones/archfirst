@@ -46,14 +46,12 @@ Ext.define('Bullsfirst.view.accounts.CreateAccountView', {
                 var form = field.up('smartform');
                 var siblingPasswordField = form.down('textfield[fieldLabel=' + field.siblingPasswordField + ']');
                 if (!Ext.isEmpty(field.rawValue) && !Ext.isEmpty(siblingPasswordField.rawValue)) {
-                    if (siblingPasswordField.rawValue != field.rawValue) {
+                    if (siblingPasswordField.rawValue !== field.rawValue) {
                         return false;
-                    }
-                    else {
+                    } else {
                         return true;
                     }
-                }
-                else {
+                } else {
                     return true;
                 }
             },
@@ -139,7 +137,7 @@ Ext.define('Bullsfirst.view.accounts.CreateAccountView', {
                     }
                 ]
             }
-        ]
+        ];
 
     }
 });

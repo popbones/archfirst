@@ -39,7 +39,7 @@ Ext.define('Bullsfirst.model.MarketPrice', {
         type: 'smartrest',
         appendId: true,
         url: Bullsfirst.GlobalConstants.BaseUrl + '/bfexch-javaee/rest/market_prices'
-   }
+    }
 });
 
  

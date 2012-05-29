@@ -45,15 +45,15 @@ Ext.define('Bullsfirst.view.accounts.LoginView', {
     },
     buildItems: function (panelConfig) {
         panelConfig.items = [
-             {
-                 xtype: 'textfield',
-                 name: 'username',
-                 allowBlank: false,
-                 fieldLabel: 'Username',
-                 //value: 'vikasgoyalgzs',
-                 blankText: 'Please enter your username',
-                 labelAlign: 'top'
-             },
+            {
+                xtype: 'textfield',
+                name: 'username',
+                allowBlank: false,
+                fieldLabel: 'Username',
+                //value: 'vikasgoyalgzs',
+                blankText: 'Please enter your username',
+                labelAlign: 'top'
+            },
             {
                 xtype: 'textfield',
                 name: 'password',

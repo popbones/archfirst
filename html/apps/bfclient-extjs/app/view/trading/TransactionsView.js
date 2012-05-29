@@ -26,7 +26,7 @@ Ext.define('Bullsfirst.view.trading.TransactionsView', {
     //Configs
 
 
-    //Functions                                /// <reference path="../../Model/" />
+    //Functions                               
 
     initComponent: function initPositionsViewComponents() {
         var viewConfig = {
@@ -125,11 +125,11 @@ Ext.define('Bullsfirst.view.trading.TransactionsView', {
     buildGridPanelConfig: function buildGridPanelConfig() {
         var gridPanelConfig = {
             xtype: 'grid',
+            autoScroll: true,
             plugins: ['loadmask'],
             bodyStyle: {
                 border: 0
             },
-            plugins: ['loadmask'],
             store: 'Transactions',
             flex: 1,
             columns: [

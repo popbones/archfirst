@@ -24,15 +24,14 @@ Ext.define('Bullsfirst.GlobalFunctions', {
 
     getAuthenticationHeader: function getAuthenticationHeader() {
         var loggedInUser = Ext.data.StoreManager.lookup('LoggedInUser').first();
-        var token = loggedInUser.get('username') + ':' + loggedInUser.get('password')
+        var token = loggedInUser.get('username') + ':' + loggedInUser.get('password');
         var hash = Base64.encode(token);
         return "Basic " + hash;
     },
     validateDate: function validateDate(fromDate, toDate) {
         if (toDate < fromDate) {
             return Bullsfirst.GlobalConstants.InvalidDateMsg;
-        }
-        else {
+        } else {
             return true;
         }
     },

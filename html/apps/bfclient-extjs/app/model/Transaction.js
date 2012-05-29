@@ -23,36 +23,36 @@ Ext.define('Bullsfirst.model.Transaction', {
     extend: 'Ext.data.Model',
 
     fields: [
-         {
-             name: 'accountId',
-             type: 'int'
-         },
-         {
-             name: 'accountName',
-             type: 'string'
-         },
-         {
-             name: 'transactionId',
-             type: 'int'
-         },
-         {
-             name: 'creationTime',
-             type: 'string'
-         },
-         {
-             name: 'type',
-             type: 'string'
-         },
-         {
-             name: 'description',
-             type: 'string'
-         },
-         {
-             name: 'amount',
-             convert: function (value, record) {
-                 return value.amount;
-             }
-         }
+        {
+            name: 'accountId',
+            type: 'int'
+        },
+        {
+            name: 'accountName',
+            type: 'string'
+        },
+        {
+            name: 'transactionId',
+            type: 'int'
+        },
+        {
+            name: 'creationTime',
+            type: 'string'
+        },
+        {
+            name: 'type',
+            type: 'string'
+        },
+        {
+            name: 'description',
+            type: 'string'
+        },
+        {
+            name: 'amount',
+            convert: function (value, record) {
+                return value.amount;
+            }
+        }
 
     ],
     idPropety: 'transactionId',

@@ -89,7 +89,7 @@ Ext.define('Bullsfirst.controller.trading.OrdersController', {
     },
     onOrdersViewComboChange: function onOrdersViewBeforeRender(ordersViewCombo, newValue, oldValue) {
         //load orders store when combo value is changed
-        if (newValue != oldValue && oldValue != null && oldValue != undefined) {
+        if (newValue !== oldValue && oldValue !== null && oldValue !== undefined) {
             this.processFilters();
         }
     },
@@ -112,7 +112,10 @@ Ext.define('Bullsfirst.controller.trading.OrdersController', {
             },
             clientValidation: false,
             timeout: 30,
-            url: Bullsfirst.GlobalConstants.BaseUrl + '/bfoms-javaee/rest/secure/orders/' + selectedOrderNumber + '/cancel'
+            url: Bullsfirst.GlobalConstants.BaseUrl +
+                '/bfoms-javaee/rest/secure/orders/' +
+                selectedOrderNumber +
+                '/cancel'
         }, this);
         cancelForm.getForm().doAction(submitActionWithNoResponse);
     },
@@ -132,10 +135,9 @@ Ext.define('Bullsfirst.controller.trading.OrdersController', {
         if (success) {
             //Reload orders store
             this.scope.processFilters();
-            EventAggregator.publish('ordercanceled')
-        }
-        else {
-            EventAggregator.publish('ordercancellationError')
+            EventAggregator.publish('ordercanceled');
+        } else {
+            EventAggregator.publish('ordercancellationError');
         }
     },
     clearChecks: function clearChecks(checkBoxGroup) {
@@ -146,8 +148,8 @@ Ext.define('Bullsfirst.controller.trading.OrdersController', {
     getFilteredChecks: function getFilteredChecks(checkBoxGroup) {
         var selectedChecks = '';
         checkBoxGroup.items.each(function (checkBoxItem) {
-            if (checkBoxItem.getValue() == true) {
-                if (selectedChecks != '') {
+            if (checkBoxItem.getValue() === true) {
+                if (selectedChecks !== '') {
                     selectedChecks += ',';
                 }
                 selectedChecks += checkBoxItem.boxLabel.split(' ').join('');
@@ -168,7 +170,7 @@ Ext.define('Bullsfirst.controller.trading.OrdersController', {
             toDate: toDateFilterValue == null ? '' : Ext.Date.format(toDateFilterValue, 'Y-m-d'),
             sides: sides,
             statuses: statuses
-        }
+        };
         this.loadOrdersStore(filterParams);
     },
     loadOrdersStore: function loadOrdersStore(params) {
@@ -178,31 +180,30 @@ Ext.define('Bullsfirst.controller.trading.OrdersController', {
         var ordersProxy = orderSummariesStore.proxy;
         ordersProxy.queryParams = params;
 
+        //After orders store is loaded, load tree store
         EventAggregator.subscribe('ordersstoreloaded', function (ordersStore) {
             if (ordersStore.count() > 0) {
+                var i, j;
                 orderSummriesTreeStore.autoLoad = true;
                 var orderModels = ordersStore.getRange();
-                var orders = new Array();
-                for (var i = 0; i < orderModels.length; i++) {
+                var orders = [];
+                for (i = 0; i < orderModels.length; i++) {
                     var executions = orderModels[i].get('executions');
                     if (executions && executions.length > 0) {
-                        for (var j = 0; j < executions.length; j++) {
+                        for (j = 0; j < executions.length; j++) {
                             executions[j].id = orderModels[i].get('id') + '/' + executions[j].id;
                         }
                     }
                     orders.push(orderModels[i].data);
                 }
                 orderSummriesTreeStore.proxy.data = { executions: orders };
-            }
-            else {
+            } else {
                 orderSummriesTreeStore.proxy.data = null;
             }
             orderSummriesTreeStore.load();
         });
         orderSummariesStore.load();
     }
-
-}); 
-
+});
  
 	

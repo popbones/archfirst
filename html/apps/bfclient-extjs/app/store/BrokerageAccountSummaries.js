@@ -23,7 +23,6 @@ Ext.define('Bullsfirst.store.BrokerageAccountSummaries', {
     extend: 'Bullsfirst.store.AbstractStore',
     model: 'Bullsfirst.model.BrokerageAccountSummary',
     alias: 'brokerageaccountsstore'
-    
 });
 
  

@@ -23,28 +23,28 @@ Ext.define('Bullsfirst.model.SecuritiesTransfer', {
     extend: 'Ext.data.Model',
 
     fields: [
-		 {
-		     name: 'symbol',
-             type: 'string'
-         },
-         {
-             name: 'quantity',
-             type: 'int'
-         },
-         {
-             name: 'pricePaidPerShare',
-             convert: function (value, record) {
-                 var amount = {
-                     amount: value,
-                     currency: 'USD'
-                 };
-                 return amount;
-             }
-         },
-         {
-             name: 'toAccountId',
-             type: 'int'
-         }
+		{
+		    name: 'symbol',
+            type: 'string'
+        },
+        {
+            name: 'quantity',
+            type: 'int'
+        },
+        {
+            name: 'pricePaidPerShare',
+            convert: function (value, record) {
+                var amount = {
+                    amount: value,
+                    currency: 'USD'
+                };
+                return amount;
+            }
+        },
+        {
+            name: 'toAccountId',
+            type: 'int'
+        }
     ],
     idProperty: 'toAccountId',
     proxy: {

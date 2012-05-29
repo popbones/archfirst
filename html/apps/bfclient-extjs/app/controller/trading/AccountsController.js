@@ -24,6 +24,7 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
 
     views: [
 		'trading.AccountsView',
+        'trading.LegendItem',
 		'accounts.CreateAccountView',
 		'trading.CreateBrokerageAccountView',
         'trading.EditBrokerageAccountView',
@@ -125,6 +126,7 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
     onUpdateAccountButtonClick: function onUpdateAccountButtonClick(updateAccountBtn) {
         //Reload brokerage account summary store
         this.getStore('BrokerageAccountSummaries').load();
+        this.getTitlePanel().update(Bullsfirst.GlobalConstants.PieAllAccountsLabel);
     },
     onCreateAccountOkButtonClick: function onCreateAccountOkButtonClick(okBtn) {
         okBtn.disable();
@@ -145,7 +147,8 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
         var brokerageAccount = Ext.create('Bullsfirst.model.EditBrokerageAccount');
         var accountProxy = brokerageAccount.getProxy();
         var templateUrl = accountProxy.url;
-        accountProxy.url = Ext.String.format(accountProxy.url, editBrokerageAccountForm.getForm().getRecord().get('id'));
+        var editRecord = editBrokerageAccountForm.getForm().getRecord();
+        accountProxy.url = Ext.String.format(accountProxy.url, editRecord.get('id'));
         editBrokerageAccountForm.getForm().updateRecord(brokerageAccount);
         EventAggregator.subscribe('brokerageaccountedited', function () {
             brokerageAccountsStore.load();
@@ -164,17 +167,18 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
         tradingTabPanel.setActiveTab(this.getPositionsTab());
     },
     createBrokerageAccount: function (brokerageAccountName) {
-        var brokerageAccount = Ext.create('Bullsfirst.model.BrokerageAccount', { accountName: brokerageAccountName }, this);
+        var brokerageAccount = Ext.create('Bullsfirst.model.BrokerageAccount', {
+            accountName: brokerageAccountName
+        }, this);
         brokerageAccount.phantom = true;
         brokerageAccount.save({
             action: 'create',
             scope: this,
             callback: function (record, operation, success) {
-                if (operation.wasSuccessful() == true) {
+                if (operation.wasSuccessful() === true) {
                     EventAggregator.publish('brokerageaccountcreated', operation);
-                }
-                else {
-                    EventAggregator.publish('brokerageaccountcreationError', operation)
+                } else {
+                    EventAggregator.publish('brokerageaccountcreationError', operation);
                 }
             }
         }, this);
@@ -185,11 +189,10 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
             action: 'create',
             scope: this,
             callback: function (record, operation, success) {
-                if (operation.wasSuccessful() == true) {
+                if (operation.wasSuccessful() === true) {
                     EventAggregator.publish('brokerageaccountedited');
-                }
-                else {
-                    EventAggregator.publish('brokerageaccounteditError', operation)
+                } else {
+                    EventAggregator.publish('brokerageaccounteditError', operation);
                 }
             }
         }, this);
@@ -197,50 +200,31 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
     onLegendPanelAfterRender: function legendPanelAfterRender(legendPanel) {
         EventAggregator.subscribeForever('brokerageaccountschartstoreloaded', function (brokerageAccountsChartStore) {
             var brokerageAccountsStore = this.getStore('BrokerageAccountSummaries');
-            if (brokerageAccountsChartStore.count() == brokerageAccountsStore.count()) {
-                this.getTitlePanel().update('All Accounts');
-            }
+            var titlePanel = this.getTitlePanel();
             if (brokerageAccountsChartStore.count() > 0) {
                 var legendItems = [];
                 var index = 0;
                 var smartChartTheme = Bullsfirst.extensions.SmartChartTheme;
+
+                //Iterate over chart store and create legend items
                 brokerageAccountsChartStore.each(function (account) {
-                    var legendItem = Ext.create('Ext.draw.Component', {
-                        gradients: smartChartTheme.legendGradients,
-                        viewBox: false,
-                        items: [
-                            {
-                                type: 'rect',
-                                fill: smartChartTheme.legendColors[index],
-                                radius: 1,
-                                width: 10,
-                                height: 10,
-                                x: 5,
-                                y: 5
-                            },
-                            {
-                                type: 'text',
-                                fill: 'black',
-                                width: 10,
-                                height: 10,
-                                text: function () {
-                                    var name = account.get('name');
-                                    if (Ext.isEmpty(name)) {
-                                        name = account.get('instrumentSymbol');
-                                    }
-                                    return name;
-                                } (),
-                                x: 20,
-                                y: 10
-                            }
-                        ]
+                    var legendText = account.get('name');
+                    if (Ext.isEmpty(legendText)) {
+                        legendText = account.get('instrumentSymbol');
+                    }
+                    var legendItem = Ext.create('Bullsfirst.view.trading.LegendItem', {
+                        legendText: legendText,
+                        colorIndex: index
                     });
+                    
                     legendItems.push(legendItem);
                     index++;
-                    if (index == smartChartTheme.legendGradients.length) {
+                    if (index === smartChartTheme.legendGradients.length) {
                         index = 0;
                     }
                 });
+
+                //Add legend items to the legend panel
                 legendPanel.removeAll();
                 legendPanel.add(legendItems);
             }
@@ -250,30 +234,35 @@ Ext.define('Bullsfirst.controller.trading.AccountsController', {
         var selectedRecord = pieslice.storeItem;
         var chartStore = this.getStore('BrokerageAccountChartSummaries');
         var brokerageAccountsStore = this.getStore('BrokerageAccountSummaries');
-        var title = 'All Accounts';
-        chartStore.removeAll();
+        var title = Bullsfirst.GlobalConstants.PieAllAccountsLabel;
 
-        var selectedRecordId = selectedRecord.get('id');
-        var storeData;
         if (selectedRecord.positions) {
-            var positionsStore = selectedRecord.positions();
-            if (positionsStore && positionsStore.count() > 0) {
-                storeData = positionsStore.getRange();
-                title = selectedRecord.get('name');
-            }
-            else {
+            title = selectedRecord.get('name');
+        }
+
+        //If "Other" record was selected, populate store with bottom records
+        if (selectedRecord.get('name') === Bullsfirst.GlobalConstants.PieOtherRecordName) {
+            storeData = chartStore.bottomRecords.getRange();
+        } else {
+            //If we are at the top level, drill down to the next level. If at the position level, go 
+            //back to the top level
+            if (selectedRecord.positions) {
+                var positionsStore = selectedRecord.positions();
+                if (positionsStore && positionsStore.count() > 0) {
+                    storeData = positionsStore.getRange();
+                } else {
+                    storeData = brokerageAccountsStore.getRange();
+                }
+            } else {
                 storeData = brokerageAccountsStore.getRange();
             }
         }
-        else {
-            storeData = brokerageAccountsStore.getRange();
-        }
+
+        //Clear the store and add the data
+        chartStore.removeAll();
         chartStore.add(storeData);
         var titlePanel = this.getTitlePanel();
         titlePanel.update(title);
         EventAggregator.publish('brokerageaccountschartstoreloaded', chartStore);
     }
 }); 
-
- 
-	

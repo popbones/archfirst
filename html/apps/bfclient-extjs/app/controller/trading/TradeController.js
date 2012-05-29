@@ -49,38 +49,38 @@ Ext.define('Bullsfirst.controller.trading.TradeController', {
     ],
 
     refs: [
-         {
-             ref: 'TradeViewCombo',
-             selector: 'tradeview combo'
-         },
-         {
-             ref: 'TradeForm',
-             selector: 'tradeview form'
-         },
-         {
-             ref: 'LastTradeField',
-             selector: 'tradeview displayfield[fieldLabel=Last Trade]'
-         },
-         {
-             ref: 'PreviewOrderWindow',
-             selector: 'previeworderview'
-         },
-         {
-             ref: 'PreviewOrderForm',
-             selector: 'previeworderview form'
-         },
-         {
-             ref: 'TradingTabPanel',
-             selector: 'tradingtabpanel'
-         },
-         {
-             ref: 'OrdersTab',
-             selector: 'tradingtabpanel component[title=Orders]'
-         },
-         {
-             ref: 'PositionsViewCombo',
-             selector: 'positionsview combo'
-         }
+        {
+            ref: 'TradeViewCombo',
+            selector: 'tradeview combo'
+        },
+        {
+            ref: 'TradeForm',
+            selector: 'tradeview form'
+        },
+        {
+            ref: 'LastTradeField',
+            selector: 'tradeview displayfield[fieldLabel=Last Trade]'
+        },
+        {
+            ref: 'PreviewOrderWindow',
+            selector: 'previeworderview'
+        },
+        {
+            ref: 'PreviewOrderForm',
+            selector: 'previeworderview form'
+        },
+        {
+            ref: 'TradingTabPanel',
+            selector: 'tradingtabpanel'
+        },
+        {
+            ref: 'OrdersTab',
+            selector: 'tradingtabpanel component[title=Orders]'
+        },
+        {
+            ref: 'PositionsViewCombo',
+            selector: 'positionsview combo'
+        }
     ],
 
     init: function () {
@@ -116,7 +116,7 @@ Ext.define('Bullsfirst.controller.trading.TradeController', {
     onTradeViewActivate: function onTradeViewActivate() {
         var instrumentsStore = this.getStore('Instruments');
         instrumentsStore.clearFilter();
-        if (instrumentsStore.count() == 0) {
+        if (instrumentsStore.count() === 0) {
             instrumentsStore.load();
         }
     },
@@ -138,8 +138,7 @@ Ext.define('Bullsfirst.controller.trading.TradeController', {
 
         var newTradeOrder = Ext.create('Bullsfirst.model.TradeOrder');
         var brokerageAccountId = this.getTradeViewCombo().getValue();
-        var lastTradeField = this.getLastTradeField().getValue();
-
+       
         tradeForm.getForm().updateRecord(newTradeOrder);
         //Create order estimate request
         var tradeOrderEstimateRequest = Ext.create('Bullsfirst.model.TradeOrderEstimateRequest',
@@ -150,7 +149,8 @@ Ext.define('Bullsfirst.controller.trading.TradeController', {
 
         EventAggregator.subscribe('orderestimatecreated', function (operation) {
             //If order estimate is recieved, update order request
-            var tradeOrderEstimate = Ext.ModelManager.create(JSON.parse(operation.response.responseText), 'Bullsfirst.model.TradeOrderEstimate');
+            var responseText = JSON.parse(operation.response.responseText);
+            var tradeOrderEstimate = Ext.ModelManager.create(responseText, 'Bullsfirst.model.TradeOrderEstimate');
             if (tradeOrderEstimate.get('compliance') == 'Compliant') {
                 tradeForm.getForm().updateRecord(newTradeOrder);
                 var lastTradeValue = this.getLastTradeField().getValue();
@@ -164,9 +164,8 @@ Ext.define('Bullsfirst.controller.trading.TradeController', {
                 var previewOrderWindow = Ext.create('widget.previeworderview');
                 previewOrderWindow.down('form').getForm().loadRecord(newTradeOrder);
                 previewOrderWindow.show();
-            }
-            else {
-                operation.customError = 'Order is not compliant:' + tradeOrderEstimate.get('compliance');
+            } else {
+                operation.customError = 'Order is not compliant: ' + tradeOrderEstimate.get('compliance');
                 EventAggregator.publish('tradeordercomplianceError', operation);
                 tradePreviewOrderBtn.enable();
             }
@@ -179,10 +178,9 @@ Ext.define('Bullsfirst.controller.trading.TradeController', {
             action: 'create',
             scope: this,
             callback: function (record, operation, success) {
-                if (operation.wasSuccessful() == true) {
+                if (operation.wasSuccessful() === true) {
                     EventAggregator.publish('orderestimatecreated', operation);
-                }
-                else {
+                } else {
                     EventAggregator.publish('orderestimatecreationError', operation);
                 }
             }
@@ -221,10 +219,9 @@ Ext.define('Bullsfirst.controller.trading.TradeController', {
             action: 'create',
             scope: this,
             callback: function (record, operation, success) {
-                if (operation.wasSuccessful() == true) {
+                if (operation.wasSuccessful() === true) {
                     EventAggregator.publish('ordercreated', operation);
-                }
-                else {
+                } else {
                     EventAggregator.publish('ordercreationError', operation);
                     previewOrderPlaceOrderBtn.enable();
                 }
@@ -245,13 +242,11 @@ Ext.define('Bullsfirst.controller.trading.TradeController', {
     onTradeSymbolComboChange: function onTradeSymbolComboChange(tradeSymbolCombo, newValue, oldValue) {
         if (this.getStore('Instruments').findExact('symbol', newValue) >= 0) {
             tradeSymbolCombo.setRawValue(newValue);
-        }
-        else {
+        } else {
             return;
         }
-        if (newValue != oldValue) {
+        if (newValue !== oldValue) {
             var marketPrice = this.getModel('MarketPrice');
-            var tradeForm = this.getTradeForm();
             EventAggregator.subscribe('marketpricerecieved', function (operation) {
                 var lastTradeField = this.getLastTradeField();
                 var recievedMarketPrice = operation.resultSet.records[0];
@@ -263,13 +258,11 @@ Ext.define('Bullsfirst.controller.trading.TradeController', {
             marketPrice.load(tradeSymbolCombo.getValue(), {
                 scope: this,
                 callback: function (record, operation) {
-                    if (operation.wasSuccessful() == true) {
+                    if (operation.wasSuccessful() === true) {
                         EventAggregator.publish('marketpricerecieved', operation);
+                    } else {
+                        EventAggregator.publish('marketpricerecieveError', operation);
                     }
-                    else {
-                        EventAggregator.publish('marketpricerecieveError', operation)
-                    }
-
                 }
             }, this);
         }

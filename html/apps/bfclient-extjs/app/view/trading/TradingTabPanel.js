@@ -98,39 +98,39 @@ Ext.define('Bullsfirst.view.trading.TradingTabPanel', {
                         flex: 1,
                         maxWidth: 130,
                         items: [
-                           {
-                               xtype: 'label',
-                               itemId: 'userName',
-                               text: '',
-                               margin: '4 5 0 0',
-                               flex: 1
-                           },
-                           {
-                               xtype: 'label',
-                               text: '|',
-                               flex: 0.1
-                           },
-                           {
-                               xtype: 'component',
-                               itemId: 'signOutLink',
-                               margin: '4 0 0 5',
-                               autoEl: { tag: 'a', href: '#', html: Bullsfirst.GlobalConstants.SignOut },
-                               flex: 1
-                           }
+                            {
+                                xtype: 'label',
+                                itemId: 'userName',
+                                text: '',
+                                margin: '4 5 0 0',
+                                flex: 1
+                            },
+                            {
+                                xtype: 'label',
+                                text: '|',
+                                flex: 0.1
+                            },
+                            {
+                                xtype: 'component',
+                                itemId: 'signOutLink',
+                                margin: '4 0 0 5',
+                                autoEl: { tag: 'a', href: '#', html: Bullsfirst.GlobalConstants.SignOut },
+                                flex: 1
+                            }
                         ]
                     }
                 ]
             }
-       );
+        );
     },
     buildButtons: function buildTradingTabPanelButtons(viewConfig) {
         viewConfig.buttons = undefined;
     },
     addTab: function addTab(tabTitle, tabXType) {
         return {
-             title: tabTitle,
-             layout: 'border',
-             items: [
+            title: tabTitle,
+            layout: 'border',
+            items: [
                 {
                     xtype: 'container',
                     html: tabTitle,

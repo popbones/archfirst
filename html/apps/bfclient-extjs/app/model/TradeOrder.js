@@ -23,54 +23,54 @@ Ext.define('Bullsfirst.model.TradeOrder', {
     extend: 'Ext.data.Model',
 
     fields: [
-		 {
-		     name: 'accountName',
-		     type: 'string'
-		 },
-         {
-             name: 'symbol',
-             type: 'string'
-         },
-         {
-             name: 'action',
-             type: 'string'
-         },
-         {
-             name: 'quantity',
-             type: 'int'
-         },
-         {
-             name: 'orderType',
-             type: 'string'
-         },
-         {
-             name: 'term',
-             type: 'string'
-         },
-         {
-             name: 'allOrNone',
-             type: 'bool'
-         },
-         {
-             name: 'lastTrade',
-             type: 'float'
-         },
-         {
-             name: 'estimatedValue',
-             type: 'float'
-         },
-         {
-             name: 'fees',
-             type: 'float'
-         },
-         {
-             name: 'totalIncludingFees',
-             type: 'float'
-         },
-         {
-             name: 'marketPrice',
-             type: 'object'
-         }
+		{
+		    name: 'accountName',
+		    type: 'string'
+		},
+        {
+            name: 'symbol',
+            type: 'string'
+        },
+        {
+            name: 'action',
+            type: 'string'
+        },
+        {
+            name: 'quantity',
+            type: 'int'
+        },
+        {
+            name: 'orderType',
+            type: 'string'
+        },
+        {
+            name: 'term',
+            type: 'string'
+        },
+        {
+            name: 'allOrNone',
+            type: 'bool'
+        },
+        {
+            name: 'lastTrade',
+            type: 'float'
+        },
+        {
+            name: 'estimatedValue',
+            type: 'float'
+        },
+        {
+            name: 'fees',
+            type: 'float'
+        },
+        {
+            name: 'totalIncludingFees',
+            type: 'float'
+        },
+        {
+            name: 'marketPrice',
+            type: 'object'
+        }
     ]
 });
 

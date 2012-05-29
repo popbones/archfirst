@@ -72,10 +72,10 @@ Ext.define('Bullsfirst.controller.trading.PositionsController', {
         });
         this.callParent();
     },
-    onPositionViewComboChange: function onPositionViewComboChange(positionViewCombo, newValue, oldValue) {
+    onPositionViewComboChange: function onPositionViewComboChange(positionViewCombo, newValue) {
         var tradingTabPanel = this.getTradingTabPanel();
-        var positionsStore = this.getStore('PositionsTree');
-        tradingTabPanel.selectedBrokerageAccount.setValue(this.getStore('BrokerageAccountSummaries').findRecord('id', newValue));
+        var brokerageAccountsStore = this.getStore('BrokerageAccountSummaries');
+        tradingTabPanel.selectedBrokerageAccount.setValue(brokerageAccountsStore.findRecord('id', newValue));
         this.reloadPositions();
 
     },
@@ -85,10 +85,9 @@ Ext.define('Bullsfirst.controller.trading.PositionsController', {
     onActionColumnClick: function onActionColumnClick(view, data, selectedIndex, selectedColumn, event, selectedRecord) {
         var tradeType = 'Buy';
         var positionsViewCombo = this.getPositionsViewCombo();
-        if (selectedColumn == 10) {
+        if (selectedColumn === 10) {
             tradeType = 'Sell';
         }
-        var positionsStore = this.getStore('PositionsTree');
         var tradingTabPanel = this.getTradingTabPanel();
         var tradeTab = this.getTradeTab();
         var tradeForm = tradeTab.down('form').getForm();
@@ -109,11 +108,12 @@ Ext.define('Bullsfirst.controller.trading.PositionsController', {
         tradingTabPanel.setActiveTab(tradeTab);
     },
     reloadPositions: function reloadPositions() {
+        var i = 0;
         var tradingTabPanel = this.getTradingTabPanel();
         var positionsStore = this.getStore('PositionsTree');
         var positionModels = tradingTabPanel.selectedBrokerageAccount.getValue().positions().getRange();
-        var positions = new Array();
-        for (var i = 0; i < positionModels.length; i++) {
+        var positions = [];
+        for (; i < positionModels.length; i++) {
             positions.push(Ext.clone(positionModels[i].data));
         }
         positionsStore.proxy.data = { children: positions };

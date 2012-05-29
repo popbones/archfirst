@@ -71,7 +71,7 @@ Ext.define('Bullsfirst.view.Viewport', {
                 type: 'vbox',
                 align: 'stretch'
             },
-            width: 970
+            width: 960
         };
         this.buildCenterColumnItems(centerColumnConfig);
         this.buildCenterColumnFooter(centerColumnConfig);
@@ -81,37 +81,45 @@ Ext.define('Bullsfirst.view.Viewport', {
         centerColumnConfig.items = [
             {
                 xtype: 'panel',
-                cls: 'logoPanelCls',
-                height: 99,
+                height: 120,
                 bodyStyle: {
                     background: '#B30000'
                 },
-                margin: '25 0 0 0',
-                dockedItems: [
-                     {
-                         xtype: 'toolbar',
-                         ui: 'logotoolbar',
-                         style: {
-                             border: 0
-                         },
-                         height: 95,
-                         items: [
-                             {
-                                 xtype: 'image',
-                                 src: 'resources/bullsfirst/images/logo.jpg'
-                             },
-                             {
-                                 xtype: 'tbfill'
-                             },
-                             {
-                                 xtype: 'image',
-                                 src: 'resources/bullsfirst/images/slogan.jpg',
-                                 margin: '0 -5 0 0'
-                             }
-                         ]
-                     }
+                layout: 'border',
+                defaults: {
+                    margin: '0 0 4 0'
+                },
+                items: [
+                    {
+                        region: 'west',
+                        width: 230,
+                        layout: 'fit',
+                        items: [
+                            {
+                                xtype: 'image',
+                                margin: '25 0 25 0',
+                                src: 'resources/bullsfirst/images/logo.jpg'
+                            }
+                        ]
+                    },
+                    {
+                        region: 'center'
+                    },
+                    {
+                        region: 'east',
+                        width: 420,
+                        layout: 'fit',
+                        items: [
+                            {
+                                xtype: 'image',
+                                margin: '26 0 0 0',
+                                src: 'resources/bullsfirst/images/slogan.jpg'
+                            }
+                        ]
+                    }
+                            
+                ]
 
-                 ]
             },
             {
                 xtype: 'mainContentPanel',

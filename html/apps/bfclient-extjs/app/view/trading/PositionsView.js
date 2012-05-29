@@ -109,15 +109,14 @@ Ext.define('Bullsfirst.view.trading.PositionsView', {
                     flex: 3,
                     dataIndex: 'instrumentName',
                     renderer: function (value, metadata, record) {
-                        if (record.get('leaf') == true) {
+                        if (record.get('leaf') === true) {
                             var lotCreationDate = record.get('lotCreationTime');
                             if (Ext.isEmpty(lotCreationDate)) {
                                 return record.get('instrumentName');
                             }
                             this.align = 'left';
                             return Bullsfirst.GlobalFunctions.formatDate(lotCreationDate);
-                        }
-                        else {
+                        } else {
                             return record.get('instrumentName');
                         }
                     }

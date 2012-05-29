@@ -23,7 +23,6 @@ Ext.define('Bullsfirst.store.ExternalAccounts', {
     extend: 'Bullsfirst.store.AbstractStore',
     model: 'Bullsfirst.model.ExternalAccount',
     alias: 'externalaccountsstore'
-				    
 });
 
  

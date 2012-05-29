@@ -121,7 +121,7 @@ Ext.define('Bullsfirst.view.trading.PreviewOrderView', {
                             }
                         ]
                     }
-               ],
+                ],
                 buttons: [
                     {
                         text: 'Edit Order',
@@ -131,11 +131,10 @@ Ext.define('Bullsfirst.view.trading.PreviewOrderView', {
                         text: 'Place Order',
                         itemId: 'PlaceOrderBtn'
                     }
-               ]
+                ]
             }
 
         ];
-
         this.callParent();
     }
 });

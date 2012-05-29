@@ -22,7 +22,6 @@
 Ext.define('Bullsfirst.store.MarketPrices', {
     extend: 'Ext.data.Store',
     model: 'Bullsfirst.model.MarketPrice'
-				    
 });
 
  

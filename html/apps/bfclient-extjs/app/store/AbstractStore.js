@@ -29,11 +29,10 @@ Ext.define('Bullsfirst.store.AbstractStore', {
     listeners: {
         load: function (store, records, success) {
             var eventName;
-            if (success == true) {
-                var eventName = store.alias + 'loaded'
-            }
-            else {
-                var eventName = store.alias + 'loadError'
+            if (success === true) {
+                eventName = store.alias + 'loaded';
+            } else {
+                eventName = store.alias + 'loadError';
             }
             EventAggregator.publish(eventName, store);
         }

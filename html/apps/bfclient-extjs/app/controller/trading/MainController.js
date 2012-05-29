@@ -38,7 +38,6 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
         'User',
         'Position',
         'BrokerageAccountSummary',
-        'BrokerageAccountChartSummary',
         'BrokerageAccount',
         'TradeAction',
         'TradeOrderType',
@@ -110,9 +109,11 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
         tradingTabPanel.selectedBrokerageAccount.addListener('change', this.onSelectedBrokerageAccountChange, this);
 
         //Show logged in user information
-        this.getLoggedInUserNameField().setText(tradingTabPanel.loggedInUser.firstName + ' ' + tradingTabPanel.loggedInUser.lastName);
-        EventAggregator.subscribeForever('brokerageaccountsstoreloaded', this.onBrokerageAccountsStoreLoaded , this);
-        
+        var firstName = tradingTabPanel.loggedInUser.firstName;
+        var lastName = tradingTabPanel.loggedInUser.lastName;
+        this.getLoggedInUserNameField().setText(firstName + ' ' + lastName);
+        EventAggregator.subscribeForever('brokerageaccountsstoreloaded', this.onBrokerageAccountsStoreLoaded, this);
+
         //Load brokerage accounts
         this.getStore('BrokerageAccountSummaries').load();
         this.getStore('Instruments').load();
@@ -122,7 +123,8 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
     },
     onSignOutLinkClick: function onSignOutLinkClick(signOutLink) {
         this.getController('login.LoginController').injectView(Ext.create('widget.mainContentPanel'));
-        EventAggregator.unsubscribe('brokerageaccountsstoreloaded', this.onBrokerageAccountsStoreLoaded , this);
+        EventAggregator.unsubscribe('brokerageaccountsstoreloaded', this.onBrokerageAccountsStoreLoaded, this);
+        this.clearStores();
     },
     onSelectedBrokerageAccountChange: function onSelectedBrokerageAccountChange(newValue) {
         //Selected brokerage account, now update all views
@@ -131,7 +133,7 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
         this.getTransactionsViewCombo().setValue(newValue);
     },
     onTabPanelTabChange: function onTabPanelTabChange(tabBar, newTab) {
-        if (newTab != null) {
+        if (newTab) {
             newTab.fireEvent('activate', newTab);
         }
     },
@@ -139,12 +141,16 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
         var tradingTabPanel = this.getTradingTabPanel();
         var positionsViewCombo = this.getPositionsViewCombo();
 
+        //After brokerage accounts are loaded, load chart store and set first account as the 
+        //default account
         if (brokerageAccountsStore.count() > 0) {
+            //Load chart store
             var chartStore = this.getStore('BrokerageAccountChartSummaries');
             chartStore.removeAll();
             chartStore.add(brokerageAccountsStore.getRange());
-
             EventAggregator.publish('brokerageaccountschartstoreloaded', chartStore);
+
+            //Set first account as the default account
             var firstBrokerageAccountId = brokerageAccountsStore.first().get('id');
             tradingTabPanel.selectedBrokerageAccount.setValue(firstBrokerageAccountId);
             positionsViewCombo.on('render', function () {
@@ -153,9 +159,14 @@ Ext.define('Bullsfirst.controller.trading.MainController', {
                 }
             });
         }
+    },
+    clearStores: function clearStores() {
+        Ext.data.StoreManager.lookup('TradeOrderSummariesTree').getRootNode().removeAll();
+        Ext.data.StoreManager.lookup('PositionsTree').getRootNode().removeAll();
+        Ext.data.StoreManager.lookup('Transactions').removeAll();
+        Ext.data.StoreManager.lookup('BrokerageAccountSummaries').removeAll();
+        Ext.data.StoreManager.lookup('BrokerageAccountChartSummaries').removeAll();
     }
-    
-}); 
 
- 
+});
 	

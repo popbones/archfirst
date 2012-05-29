@@ -66,10 +66,9 @@ Ext.define('Bullsfirst.model.TradeOrderSummary', {
         {
             name: 'action',
             convert: function (value, record) {
-                if (record != null && record.get('status') == 'New') {
+                if (record !== null && record.get('status') === 'New') {
                     return 'Cancel';
-                }
-                else {
+                } else {
                     return ' ';
                 }
             }
@@ -79,8 +78,7 @@ Ext.define('Bullsfirst.model.TradeOrderSummary', {
             convert: function (value, record) {
                 if (Ext.isObject(value)) {
                     return value.amount;
-                }
-                else {
+                } else {
                     return value;
                 }
 
@@ -100,7 +98,7 @@ Ext.define('Bullsfirst.model.TradeOrderSummary', {
             name: 'leaf',
             convert: function (value, record) {
                 var childNodes = record.get('executions');
-                if (childNodes == null || childNodes.length == 0) {
+                if (childNodes === null || childNodes.length === 0) {
                     return true;
                 }
                 return false;
@@ -113,15 +111,16 @@ Ext.define('Bullsfirst.model.TradeOrderSummary', {
         {
             name: 'executionPrice',
             convert: function (value, record) {
+                var i = 0;
                 var price = record.get('price');
-                if (price != null && price.amount != null) {
+                if (price !== null && price.amount !== null) {
                     return price.amount;
                 }
                 var executions = record.get('executions');
                 if (Ext.isArray(executions)) {
                     var totalPrice = 0;
-                    for (var i = 0; i < executions.length; i++) {
-                        if (executions[i].price != null && executions[i].price.amount != null) {
+                    for (; i < executions.length; i++) {
+                        if (executions[i].price !== null && executions[i].price.amount !== null) {
                             totalPrice += executions[i].price.amount;
                         }
                     }

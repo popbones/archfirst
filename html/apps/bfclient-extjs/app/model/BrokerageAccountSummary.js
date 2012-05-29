@@ -58,7 +58,7 @@ Ext.define('Bullsfirst.model.BrokerageAccountSummary', {
         {
             name: 'fullname',
             convert: function (value, record) {
-                return record.get('name') + ' - ' +
+                return record.get('name') + ' - '
                     + record.get('id') + ' - '
                     + Ext.util.Format.usMoney(record.get('cashPosition'));
             }

@@ -23,13 +23,13 @@ Ext.define('Bullsfirst.extensions.Format', {
     singleton: true,
     usMoney: function (value) {
         var formattedValue = Ext.util.Format.usMoney(value);
-        if (formattedValue == '$' || formattedValue == '$0.00') {
+        if (formattedValue === '$' || formattedValue === '$0.00') {
             return ' ';
         }
         return formattedValue;
     },
     quantity: function (value) {
-        if (value == 0) {
+        if (value === 0) {
             return ' ';
         }
         return value;

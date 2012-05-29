@@ -36,10 +36,10 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
     ],
 
     stores: [
-         'ExternalAccounts',
-         'BrokerageAccountSummaries',
-         'AllAccounts',
-         'Instruments'
+        'ExternalAccounts',
+        'BrokerageAccountSummaries',
+        'AllAccounts',
+        'Instruments'
     ],
 
     refs: [
@@ -65,7 +65,7 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
         },
         {
             ref: 'TransferFormSymbolContainer',
-            selector: 'transferview container[transferType=Securities]',
+            selector: 'transferview container[transferType=Securities]'
         },
         {
             ref: 'TransferFromAccountField',
@@ -141,19 +141,18 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
         cancelBtn.up('window').close();
     },
     onRadioFieldChange: function onRadioFieldChange(radioField, newValue, oldValue) {
-        if (newValue != oldValue && newValue == true) {
+        if (newValue !== oldValue && newValue === true) {
             var transferForm = this.getTransferForm().getForm();
             var symbolContainer = this.getTransferFormSymbolContainer();
-            symbolContainer.setVisible(symbolContainer.transferType == radioField.boxLabel);
+            symbolContainer.setVisible(symbolContainer.transferType === radioField.boxLabel);
             var transferFormFields = transferForm.getFields();
             transferFormFields.each(function (field) {
                 if (!field.nonresetable) {
                     field.reset();
                 }
-                if (!Ext.isEmpty(field.transferType) && field.transferType != radioField.boxLabel) {
+                if (!Ext.isEmpty(field.transferType) && field.transferType !== radioField.boxLabel) {
                     field.setVisible(false);
-                }
-                else {
+                } else {
                     field.setVisible(true);
                 }
             }, this);
@@ -173,13 +172,11 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
     onTransferSymbolComboChange: function onTransferSymbolComboChange(transferSymbolCombo, newValue, oldValue) {
         if (this.getStore('Instruments').findExact('symbol', newValue) >= 0) {
             transferSymbolCombo.setRawValue(newValue);
-        }
-        else {
+        } else {
             return;
         }
-        if (newValue != oldValue) {
+        if (newValue !== oldValue) {
             var marketPrice = this.getModel('MarketPrice');
-            var transferForm = this.getTransferForm();
             EventAggregator.subscribe('marketpricerecieved', function (operation) {
                 var lastTradeField = this.getLastTradeField();
                 var recievedMarketPrice = operation.resultSet.records[0];
@@ -191,13 +188,12 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
             marketPrice.load(transferSymbolCombo.getValue(), {
                 scope: this,
                 callback: function (record, operation) {
-                    if (operation.wasSuccessful() == true) {
+                    if (operation.wasSuccessful() === true) {
                         EventAggregator.publish('marketpricerecieved', operation);
+                    } else {
+                        EventAggregator.publish('marketpricerecieveError', operation);
                     }
-                    else {
-                        EventAggregator.publish('marketpricerecieveError', operation)
-                    }
-                 }
+                }
             }, this);
         }
     },
@@ -212,7 +208,6 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
                                 Ext.create('Bullsfirst.model.SecuritiesTransfer');
 
         var fromAccount = this.getTransferFromAccountField().getValue();
-        var toAccount = this.getTransferToAccountField().getValue();
         transferForm.getForm().updateRecord(newTransferRequest);
         this.processTransferRequest(newTransferRequest, fromAccount, transferBtn);
     },
@@ -229,18 +224,17 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
             action: 'create',
             scope: this,
             callback: function (record, operation, success) {
-                if (operation.wasSuccessful() == true) {
+                if (operation.wasSuccessful() === true) {
                     var accountInfomation = {
                         fromAccount: fromAccount,
                         toAccount: toAccount
                     };
                     EventAggregator.publish('transferprocessed', operation, accountInfomation);
-                }
-                else {
+                } else {
                     EventAggregator.publish('transferprocessError', operation);
-                }
-                if (transferBtn) {
-                    transferBtn.enable();
+                    if (transferBtn) {
+                        transferBtn.enable();
+                    }
                 }
             }
         }, this);
@@ -255,12 +249,17 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
             if (brokerageAcct == null) {
                 brokerageAcct = brokerageAccountsStore.getById(accountInformation.fromAccount);
             }
-            if (tradingTabPanel != null) {
+            var transferForm = this.getTransferForm();
+            if (transferForm) {
+                transferForm.getForm().reset();
+            }
+            if (tradingTabPanel) {
+                var positionsViewCombo = this.getPositionsViewCombo();
                 tradingTabPanel.setActiveTab(this.getPositionsTab());
-                this.getPositionsViewCombo().setValue(brokerageAcct);
+                positionsViewCombo.setValue(brokerageAcct);
+                positionsViewCombo.fireEvent('change', positionsViewCombo, brokerageAcct.get('id'));
             }
         }, this);
-
         this.loadAllStores();
 
     },
@@ -269,7 +268,7 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
         var externalAccountsStore = this.getStore('ExternalAccounts');
         var instrumentsStore = this.getStore('Instruments');
         var allAccountsStore = this.getStore('AllAccounts');
-        
+
         allAccountsStore.removeAll();
         brokerageAccountsStore.load();
 
@@ -280,7 +279,7 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
 
         externalAccountsStore.load();
         instrumentsStore.clearFilter();
-        if (instrumentsStore.count() == 0) {
+        if (instrumentsStore.count() === 0) {
             instrumentsStore.load();
         }
     },
@@ -292,11 +291,10 @@ Ext.define('Bullsfirst.controller.trading.TransferController', {
             action: 'create',
             scope: this,
             callback: function (record, operation, success) {
-                if (operation.wasSuccessful() == true) {
+                if (operation.wasSuccessful() === true) {
                     EventAggregator.publish('externalaccountcreated', operation);
-                }
-                else {
-                    EventAggregator.publish('externalaccountcreationError', operation)
+                } else {
+                    EventAggregator.publish('externalaccountcreationError', operation);
                 }
             }
         }, this);

@@ -21,15 +21,40 @@
 */
 Ext.define('Bullsfirst.store.BrokerageAccountChartSummaries', {
     extend: 'Bullsfirst.store.AbstractStore',
-    model: 'Bullsfirst.model.BrokerageAccountChartSummary',
     alias: 'brokerageaccountchartstore',
 
+    bottomRecords: null,
+
     sorters: [
-       {
-          property: 'marketValue',
-          direction: 'DESC'
-       }
-    ]
+        {
+            property: 'marketValue',
+            direction: 'DESC'
+        }
+    ],
+
+    add: function (records) {
+        var maxRecords = Bullsfirst.GlobalConstants.PieMaxRecords;
+        this.callParent(records);
+        var sortedRecords = this.getRange();
+        //if there are more than maxRecords, save others in bottomRecords and remove them from the store
+        if (sortedRecords.length > maxRecords) {
+            var topRecords = sortedRecords.slice(0, maxRecords);
+            var bottomRecods = sortedRecords.slice(maxRecords - 1);
+            this.bottomRecords = new Ext.util.AbstractMixedCollection();
+            this.bottomRecords.addAll(bottomRecods);
+
+            //Calculate total market value of the "Other" record
+            var otherRecord = new Bullsfirst.model.BrokerageAccountSummary();
+            var otherRecordMarketValue = this.bottomRecords.sum('marketValue', 'data');
+            otherRecord.set('name', Bullsfirst.GlobalConstants.PieOtherRecordName);
+            otherRecord.set('marketValue', { amount: otherRecordMarketValue });
+            
+            this.remove(bottomRecods);
+            this.insert(maxRecords - 1, [otherRecord]);
+            return topRecords;
+        }
+        return sortedRecords;
+    }
 
 });
 

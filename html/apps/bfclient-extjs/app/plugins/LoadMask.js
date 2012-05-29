@@ -27,8 +27,7 @@ Ext.define('Bullsfirst.plugins.LoadMask', {
         var store;
         if (component.remoteStore) {
             store = component.remoteStore;
-        }
-        else {
+        } else {
             if (component.store) {
                 store = component.store;
             }
