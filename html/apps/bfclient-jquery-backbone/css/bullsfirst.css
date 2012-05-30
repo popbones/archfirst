@@ -1,0 +1,274 @@
+﻿/* -----------------------------------------------------------------------------
+ * jQuery UI Overrides
+ * -------------------------------------------------------------------------- */
+/* Next two overrides to reduce button sizes */
+.ui-widget {
+    font-size: 12px !important;
+}
+
+.ui-button-text-only .ui-button-text {
+    padding: 2px 10px;
+}
+
+/* -----------------------------------------------------------------------------
+ * jQuery Validation Engine Overrides
+ * -------------------------------------------------------------------------- */
+/* Next two overrides change tooltips from red to gray */
+.formError .formErrorContent {
+	background: #393939;
+}
+
+.formError .formErrorArrow div {
+	background: #393939;
+}
+
+/* -----------------------------------------------------------------------------
+ * Primary Styles
+ * -------------------------------------------------------------------------- */
+p {
+    font-size:  14px;
+    margin: 6px 0;
+}
+
+h1 {
+    font-size: 24px;
+    margin-bottom: 12px;
+}
+
+h2 {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #600;
+}
+
+strong {
+    font-weight: bold;
+}
+
+/* -----------------------------------------------------------------------------
+ * General Purpose Classes
+ * -------------------------------------------------------------------------- */
+.nodisplay {
+    display:none;
+} 
+ 
+.left {
+    text-align: left;
+}
+
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.number {
+    text-align: right;
+}
+
+/* -----------------------------------------------------------------------------
+ * Form Styles
+ * -------------------------------------------------------------------------- */
+.formRow {
+    margin-top: 4px;
+}
+ 
+.tallFormRow {
+    margin-top: 10px;
+}
+
+.required {
+}
+
+/* Buttons */
+button, input[type="button"], input[type="reset"], input[type="submit"] {
+    margin-right: 4px;
+}
+ 
+/* Stretch fields */
+input.stretchInput, select.stretchSelect {
+    width: 100%;
+}
+
+/* Label on left and right-aligned */
+label.left {
+    float: left; 
+    width: 164px;
+    margin-right: 14px;
+    text-align: right; 
+}
+
+/* -----------------------------------------------------------------------------
+ * Main Container
+ * -------------------------------------------------------------------------- */
+.container {
+	width: 960px;
+	margin: auto;
+	position: relative;
+}
+
+/* -----------------------------------------------------------------------------
+ * Header
+ * -------------------------------------------------------------------------- */
+header {
+    background: url(../img/slogan.jpg) right bottom no-repeat;
+    height: 100px;
+    border-bottom: 4px solid #B30000;
+    position: relative;
+}
+
+header h1 {
+    background: url(../img/logo.jpg) no-repeat;
+	height: 62px;
+	position: absolute;
+	top: 0px;
+	width: 300px;
+	text-indent: -9999px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Footer
+ * -------------------------------------------------------------------------- */
+footer {
+    padding: 10px;
+    font-size: 93%; /* 12px */
+    line-height: normal;
+    color: #676767;
+    text-align: center;
+}
+
+/* -----------------------------------------------------------------------------
+ * Links on the tab control
+ * -------------------------------------------------------------------------- */
+.rightSideLinks {
+    position: absolute;
+    top: 11px;
+    right: 20px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Title Bar
+ * -------------------------------------------------------------------------- */
+.titleLeft {
+    float: left;
+    padding: 14px 20px;
+    font-size: 14px;
+}
+
+.titleLeft h1 {
+    margin: 0;
+}
+
+.titleRight {
+    float: right;
+    padding: 12px 20px;
+    font-size: 14px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Toolbar
+ * -------------------------------------------------------------------------- */
+.toolbar {
+    clear: both;
+    background-color: #e3e0e0;
+    margin: 0px 20px 20px 20px;
+}
+
+.toolbar button {
+    margin: 6px 0px 6px 10px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Full Width Content
+ * -------------------------------------------------------------------------- */
+.fullWidthContent {
+    clear: both;
+    padding: 0 20px 20px 20px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Home Page
+ * -------------------------------------------------------------------------- */
+#home_page {
+   position: relative;
+   margin-top: 16px;
+}
+
+#home_page .login {
+    width: 160px;
+    position: absolute;
+    right: 10px;	
+    top: 0px; 
+}
+
+#home_page .hero {
+    padding:190px 0 0 0px;
+	width:685px;
+	background:url(../img/homeGraphic.png) 105px 0 no-repeat; 
+}
+
+#home_page .hero h1 {
+	text-indent:-9999px;	 
+}
+ 
+/* -----------------------------------------------------------------------------
+ * Table Styles
+ * inspired by http://www.duoh.com/csstutorials/csstables/
+ * -------------------------------------------------------------------------- */
+table.zebra {
+    font-size: 12px;
+    vertical-align: middle;
+}
+
+table.zebra thead tr {
+    height: 32px;
+}
+
+table.zebra thead th {
+    font: bold 11px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+    color: #960;
+    border: 1px solid #ccc;
+    border-left: none;
+    border-right: none;
+    padding: 7px;
+    background: #fc3 url(../img/tableheaderbg.jpg) repeat-x;
+    vertical-align: middle;
+}
+
+table.zebra tr {
+    height: 28px;
+}
+
+table.zebra tr.alt {
+    background: #f0f0f0;
+    color: #000;
+}
+
+table.zebra td {
+    vertical-align: middle;
+    border-bottom: 1px solid #ccc;
+    padding: 7px;
+}
+
+td.plain {
+    border-bottom: none;
+}
+
+td.gain {
+    color: #690;
+}
+
+td.loss {
+    color: #c33;
+}
+
+td.total {
+    font-weight: bold;
+}

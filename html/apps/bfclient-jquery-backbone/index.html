@@ -1,0 +1,233 @@
+<!doctype html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Retail Trading Application">
+    <meta name="author" content="Archfirst">
+    <meta name="viewport" content="width=device-width">
+    <title>Bullsfirst</title>
+
+    <link rel="shortcut icon" href="img/favicon.gif">
+    <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/jquery-ui-1.8.20.custom.css">
+    <link rel="stylesheet" href="css/validationEngine.jquery-2.5.2.css">
+    <link rel="stylesheet" href="css/bullsfirst.css">
+    <script src="js/libs/modernizr-2.5.3.min.js"></script>
+</head>
+
+<body>
+    <!-- Container for holding all screen areas (header, content, footer) -->
+    <div class="container">
+        <header>
+            <h1>Bullsfirst</h1>
+        </header>
+
+        <!-- Main Content Area -->
+        <div id="main" role="main">
+    
+            <!-- Home Page -->
+            <div id="home_page" class="nodisplay">
+                <div class="hero">
+                    <h1>More results with Bullsfirst at the helm of your portfolio.</h1>
+                    <p>
+                        We love to trade, and we hope you do too. Now you can do it with the latest trading
+                        platform from Bullsfirst. We guarantee a 0-second trade execution, and will give
+                        you a free popsicle if your trade doesn't go through in this time period. On a side
+                        note, we just bought a big freezer and 10,000 popsicles. Thankfully, we've hedged
+                        all popsicle expenses for the next two years! (Commodity experts say popsicles are
+                        on the rise).
+                    </p>
+                </div>
+                <div class="login">
+                    <form id="loginForm" action="">
+                    <div class="formRow">
+                        <label for="l_username" class="required">Username</label>
+                        <input id="l_username" name="username" type="text" class="validate[required] stretchInput" />
+                    </div>
+                    <div class="formRow">
+                        <label for="l_password" class="required">Password</label>
+                        <input id="l_password" name="password" type="password" class="validate[required] stretchInput" />
+                    </div>
+                    <div class="tallFormRow">
+                        <button id="l_login" type="submit">Login</button>
+                    </div>
+                    </form>
+                    <div class="tallFormRow">
+                        <a id="l_open_account" href="#">Open an Account</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loggedin Page -->
+            <div id="loggedin_page" class="nodisplay">
+                <div id="tabs">
+                    <ul>
+                        <li><a href="#accounts_tab" class="current">Accounts</a></li>
+                        <li><a href="#positions_tab">Positions</a></li>
+                        <li><a href="#orders_tab">Orders</a></li>
+                        <li><a href="#transactions_tab">Transaction History</a></li>
+                    </ul>
+                    <div class="rightSideLinks">
+                        <span id="loggedin_username"></span> |
+                        <a id="signOutLink" href='#'>Sign Out</a>
+                    </div>
+
+                    <!-- Accounts Tab -->
+                    <div id="accounts_tab">
+                        <div class="titleLeft">
+                            <h1>Accounts</h1>
+                        </div>
+
+                        <div class="toolbar">
+                            <button id="act_update" type="button">Update</button>
+                            <button id="act_add_account" type="button">Add Account</button>
+                        </div>
+
+                        <div id="accounts_table" class="fullWidthContent">
+                            <table class="zebra">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Account #</th>
+                                        <th>Market Value</th>
+                                        <th>Cash</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Positions Tab -->
+                    <div id="positions_tab">
+                        <div class="titleLeft">
+                            <h1>Positions</h1>
+                        </div>
+
+                        <div class="fullWidthContent">
+                        </div>
+                    </div>
+
+                    <!-- Orders Tab -->
+                    <div id="orders_tab">
+                        <div class="titleLeft">
+                            <h1>Orders</h1>
+                        </div>
+
+                        <div class="fullWidthContent">
+                        </div>
+                    </div>
+
+                    <!-- Transactions Tab -->
+                    <div id="transactions_tab">
+                        <div class="titleLeft">
+                            <h1>Transaction History</h1>
+                        </div>
+
+                        <div class="fullWidthContent">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- end of #main -->
+
+        <!-- Open Account Dialog -->
+        <div id="open_account_dialog" title="Open an Account" class="nodisplay">
+            <form id="openAccountForm" action="">
+            <div class="formRow">
+                <label for="oa_firstname" class="required">First Name</label>
+                <input id="oa_firstname" name="firstName" type="text" class="validate[required,custom[onlyLetterSp]] stretchInput" placeholder="Enter your first name" required />
+            </div>
+            <div class="formRow">
+                <label for="oa_lastname" class="required">Last Name</label>
+                <input id="oa_lastname" name="lastName" type="text" class="validate[required,custom[onlyLetterSp]] stretchInput" placeholder="Enter your last name" required />
+            </div>
+            <div class="formRow">
+                <label for="oa_username" class="required">Username</label>
+                <input id="oa_username" name="username" type="text" class="validate[required] stretchInput" placeholder="Enter a username" required />
+            </div>
+            <div class="formRow">
+                <label for="oa_password" class="required">Password</label>
+                <input id="oa_password" name="password" type="password" class="validate[required] stretchInput" placeholder="Enter a password" required />
+            </div>
+            <div class="formRow">
+                <label for="oa_confirm_password" class="required">Confirm Password</label>
+                <input id="oa_confirm_password" name="confirmPassword" type="password" class="validate[required,equals[oa_password]] stretchInput" placeholder="Retype the password" required />
+            </div>
+            </form>
+        </div>
+
+        <!-- Add Account Dialog -->
+        <div id="add_account_dialog" title="Create New Account" class="nodisplay">
+            <form id="addAccountForm" action="">
+            <div class="formRow">
+                <label for="addacnt_name" class="required">Account Name</label>
+                <input id="addacnt_name" name="accountName" type="text" class="validate[required] stretchInput" placeholder="Enter account name" required />
+            </div>
+            </form>
+        </div>
+
+        <footer>
+            This is a demo application. All data displayed is fictitious.
+            Copyright &copy; 2010-2012 <a href="http://archfirst.org">Archfirst</a>.
+        </footer>
+    </div>
+    <!-- end of #container -->
+
+    <!-- Templates -->
+
+    <script id="accountTemplate" type="text/x-mustache-tmpl">
+        {{#account}}
+        <td class="left">
+            <a href="#accounts">{{name}}</a>
+        </td>
+        <td class="number">
+            <a href="#accounts">{{id}}</a>
+        </td>
+        <td class="number">
+            ${{marketValue.amount}}
+        </td>
+        <td class="number">
+            ${{cashPosition.amount}}
+        </td>
+        <td class="center">
+            {{#editPermission}}
+            <a href="#accounts">Edit</a>
+            {{/editPermission}}
+        </td>
+        {{/account}}
+    </script>
+
+    <!-- End of templates -->
+
+    <!-- JavaScript at the bottom for fast page loading -->
+    <!-- Scripts concatenated and minified via build script -->
+    <script src="js/libs/jquery-1.7.2.js"></script>
+    <script src="js/libs/jquery-ui-1.8.20.custom.min.js"></script>
+    <script src="js/libs/underscore-1.3.1.js"></script>
+    <script src="js/libs/backbone-0.9.2.js"></script>
+    <script src="js/libs/mustache-0.4.2.js"></script>
+    <script src="js/libs/jquery.validationEngine-2.5.2.js"></script>
+    <script src="js/libs/jquery.validationEngine-en-2.5.2.js"></script>
+    <!-- The two libraries below are needed to serialize forms -->
+    <script src="js/libs/form2object.js"></script>
+    <script defer src="js/libs/jquery.toObject.js"></script>
+    <!-- The two libraries below are needed to do base64 encoding of authentication header -->
+    <script src="js/libs/base64_encode.js"></script>
+    <script src="js/libs/utf8_encode.js"></script>
+    <!-- keep our scripts at the end -->
+    <script src="js/libs/plugins.js"></script>
+    <script data-main="js/main" src="js/require-1.0.7.min.js"></script>
+    <!-- end scripts -->
+</body>
+</html>
