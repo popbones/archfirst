@@ -32,6 +32,7 @@ p {
 
 h1 {
     font-size: 24px;
+    font-weight: normal;
     margin-bottom: 12px;
 }
 
@@ -158,7 +159,7 @@ footer {
  * -------------------------------------------------------------------------- */
 .titleLeft {
     float: left;
-    padding: 14px 20px;
+    padding-bottom: 10px;
     font-size: 14px;
 }
 
@@ -183,6 +184,14 @@ footer {
 
 .toolbar button {
     margin: 6px 0px 6px 10px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Toolbar Light
+ * -------------------------------------------------------------------------- */
+.toolbarLight {
+    clear: both;
+    margin-bottom: 10px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -218,6 +227,51 @@ footer {
 	text-indent:-9999px;	 
 }
  
+/* -----------------------------------------------------------------------------
+ * Accounts Tab
+ * -------------------------------------------------------------------------- */
+#account_tab_content {
+   position: relative;
+   padding-bottom: 20px;
+}
+
+#accounts_chart {
+    width: 350px;
+    position: absolute;
+    right: 0px;	
+    top: 0px;
+    border: 1px solid #ccc;
+    padding: 5px;
+}
+
+#accounts_table {
+	width: 550px;
+}
+
+.acnts_tbl_name {
+	width: 160px;
+	text-align: left;
+}
+
+.acnts_tbl_number {
+	width: 80px;
+	text-align: right;
+}
+
+.acnts_tbl_market_value {
+	width: 120px;
+	text-align: right;
+}
+
+.acnts_tbl_cash {
+	width: 120px;
+	text-align: right;
+}
+
+.acnts_tbl_actions {
+	width: 70px;
+}
+
 /* -----------------------------------------------------------------------------
  * Table Styles
  * inspired by http://www.duoh.com/csstutorials/csstables/

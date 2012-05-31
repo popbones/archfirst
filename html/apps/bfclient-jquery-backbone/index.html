@@ -84,25 +84,29 @@
                             <h1>Accounts</h1>
                         </div>
 
-                        <div class="toolbar">
+                        <div class="toolbarLight">
                             <button id="act_update" type="button">Update</button>
                             <button id="act_add_account" type="button">Add Account</button>
                         </div>
 
-                        <div id="accounts_table" class="fullWidthContent">
-                            <table class="zebra">
+                        <div id="account_tab_content">
+                            <table id="accounts_table" class="zebra">
                                 <thead>
                                     <tr>
-                                        <th>Name</th>
-                                        <th>Account #</th>
-                                        <th>Market Value</th>
-                                        <th>Cash</th>
-                                        <th>Actions</th>
+                                        <th class="acnts_tbl_name">Name</th>
+                                        <th class="acnts_tbl_number">Account #</th>
+                                        <th class="acnts_tbl_market_value">Market Value</th>
+                                        <th class="acnts_tbl_cash">Cash</th>
+                                        <th class="acnts_tbl_actions">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                 </tbody>
                             </table>
+
+                            <div id="accounts_chart">
+                            Chart goes here
+                            </div>
                         </div>
                     </div>
 
