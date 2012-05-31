@@ -1,11 +1,7 @@
 ﻿/* -----------------------------------------------------------------------------
  * jQuery UI Overrides
  * -------------------------------------------------------------------------- */
-/* Next two overrides to reduce button sizes */
-.ui-widget {
-    font-size: 12px !important;
-}
-
+/* Reduce button sizes */
 .ui-button-text-only .ui-button-text {
     padding: 2px 10px;
 }
