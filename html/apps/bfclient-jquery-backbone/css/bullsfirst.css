@@ -15,8 +15,11 @@
 .ui-state-hover.ui-button-text-only .ui-button-text,
 .ui-state-focus.ui-button-text-only .ui-button-text  {
     background-color: #b30000;
-    border-color: #b30000;
     color: #ffffff;
+}
+
+.ui-state-hover.ui-button  {
+    border-color: #b30000;
 }
 
 /* Change dialog header */
