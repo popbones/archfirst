@@ -6,6 +6,23 @@
     padding: 2px 10px;
 }
 
+/* Change button colors */
+.ui-state-default.ui-button-text-only .ui-button-text {
+    background-color: #E68B3D;
+    color: #ffffff;
+}
+
+.ui-state-hover.ui-button-text-only .ui-button-text,
+.ui-state-focus.ui-button-text-only .ui-button-text  {
+    background-color: #b30000;
+    border-color: #b30000;
+    color: #ffffff;
+}
+
+/* Change dialog header */
+.ui-dialog-titlebar.ui-widget-header { border: 1px solid #e68b3d; background: #e68b3d url(images/ui-bg_highlight-soft_25_e68b3d_1x100.png) 50% 50% repeat-x; color: #ffffff; font-weight: bold; }
+
+
 /* -----------------------------------------------------------------------------
  * jQuery Validation Engine Overrides
  * -------------------------------------------------------------------------- */
