@@ -19,8 +19,8 @@
  *
  * @author Naresh Bhatia
  */
-require(['bullsfirst/app/BullsfirstApp'],
-        function(BullsfirstApp) {
+require(['bullsfirst/app/AppRouter'],
+        function(AppRouter) {
 
     $(document).ready(function() {
         // Load Crockford's JSON library if browser does not have native support
@@ -34,7 +34,7 @@ require(['bullsfirst/app/BullsfirstApp'],
         $('input:submit, button').button();
 
         // Create the router
-        new BullsfirstApp();
+        new AppRouter();
 
         // Begin monitoring hashchange events and dispatching routes
         // Setting pushState to true tells Backbone to use the history API

@@ -15,7 +15,7 @@
  */
 
 /**
- * bullsfirst/app/BullsfirstApp
+ * bullsfirst/app/AppRouter
  *
  * @author Naresh Bhatia
  */
