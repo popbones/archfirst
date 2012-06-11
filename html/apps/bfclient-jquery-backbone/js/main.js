@@ -33,8 +33,11 @@ require(['bullsfirst/app/BullsfirstApp'],
         // Configure jQuery UI
         $('input:submit, button').button();
 
-        // Show the home page
+        // Create the router
         new BullsfirstApp();
-        Backbone.history.start();
+
+        // Begin monitoring hashchange events and dispatching routes
+        // Setting pushState to true tells Backbone to use the history API
+        Backbone.history.start({pushState: true, root: '/apps/bfclient-jquery-backbone/'});
     });
 });

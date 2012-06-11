@@ -44,16 +44,12 @@ define(['bullsfirst/framework/BackboneSyncOverride',
             new AddAccountDialog();
 
             // Subscribe to events
-            $.subscribe("UserLoggedInEvent", function() {
-                window.location.hash = 'user';
-            });
-            $.subscribe("UserLoggedOutEvent", function() {
-                window.location.hash = '';
-            });
-
-            // Start with home page
-            window.location.hash = '';
-            return this;
+            $.subscribe("UserLoggedInEvent", $.proxy(function() {
+                this.navigate('user', {trigger: true});
+            }, this));
+            $.subscribe("UserLoggedOutEvent", $.proxy(function() {
+                this.navigate('', {trigger: true});
+            }, this));
         },
 
         showHomePage: function() {
