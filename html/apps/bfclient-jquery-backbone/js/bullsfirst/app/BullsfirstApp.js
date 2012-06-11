@@ -17,61 +17,64 @@
 /**
  * bullsfirst/app/BullsfirstApp
  *
- * This class intentionally does not extend the Backbone router to prevent the user
- * from circumventing the loggedin state (which can be done by typing in the hash tags).
- *
  * @author Naresh Bhatia
  */
 define(['bullsfirst/framework/BackboneSyncOverride',
-        'bullsfirst/views/HomePage',
-        'bullsfirst/views/LoggedinPage',
         'bullsfirst/views/AddAccountDialog',
-        'bullsfirst/views/OpenAccountDialog'],
-       function(BackboneSyncOverride, HomePage, LoggedinPage, AddAccountDialog, OpenAccountDialog) {
+        'bullsfirst/views/HomePage',
+        'bullsfirst/views/OpenAccountDialog',
+        'bullsfirst/views/UserPage'],
+       function(BackboneSyncOverride, AddAccountDialog, HomePage, OpenAccountDialog, UserPage) {
+    return Backbone.Router.extend({
 
-    function BullsfirstApp() {
-        this.pages = {
-            'home': new HomePage(),
-            'loggedin': new LoggedinPage()
-        };
+        pages: {},
 
-        new OpenAccountDialog();
-        new AddAccountDialog();
-    }
+        routes: {
+            '': 'showHomePage',
+            'user': 'showUserPage'
+        },
 
-    BullsfirstApp.prototype.showHomePage = function() {
-        this.showPage(this.pages['home']);
-    }
+        initialize: function() {
+            this.pages = {
+                'home': new HomePage(),
+                'user': new UserPage()
+            };
 
-    BullsfirstApp.prototype.showLoggedinPage = function() {
-        this.showPage(this.pages['loggedin']);
-    }
+            new OpenAccountDialog();
+            new AddAccountDialog();
 
-    // TODO: Why is new page showing before hiding the previous page?
-    BullsfirstApp.prototype.showPage = function(page) {
-        $.when(this.hideAllPages()).then(
-            function() { return page.show(); });
-    }
+            // Subscribe to events
+            $.subscribe("UserLoggedInEvent", function() {
+                window.location.hash = 'user';
+            });
+            $.subscribe("UserLoggedOutEvent", function() {
+                window.location.hash = '';
+            });
 
-    // Calls page.hide() on each page and returns promises that are not null
-    BullsfirstApp.prototype.hideAllPages = function() {
-        return _.filter(
-            _.map(this.pages, function(page) { return page.hide(); }),
-            function (promise) { return promise != null });
-    }
+            // Start with home page
+            window.location.hash = '';
+            return this;
+        },
 
-    // Singleton instance of the app
-    var theApp = new BullsfirstApp();
+        showHomePage: function() {
+            this.showPage(this.pages['home']);
+        },
 
-    // Subscribe to events
-    $.subscribe("UserLoggedInEvent", function() {
-        theApp.showLoggedinPage();
+        showUserPage: function() {
+            this.showPage(this.pages['user']);
+        },
+
+        // TODO: Why is new page showing before hiding the previous page?
+        showPage: function(page) {
+            $.when(this.hideAllPages()).then(
+                function() { return page.show(); });
+        },
+
+        // Calls page.hide() on each page and returns promises that are not null
+        hideAllPages: function() {
+            return _.filter(
+                _.map(this.pages, function(page) { return page.hide(); }),
+                function (promise) { return promise != null });
+        }
     });
-    $.subscribe("UserLoggedOutEvent", function() {
-        theApp.showHomePage();
-    });
-
-    return {
-        getTheApp: function() { return theApp; }
-    }
 });

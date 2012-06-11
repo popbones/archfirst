@@ -15,7 +15,7 @@
  */
 
 /**
- * bullsfirst/views/LoggedinPage
+ * bullsfirst/views/UserPage
  *
  * @author Naresh Bhatia
  */

@@ -34,6 +34,7 @@ require(['bullsfirst/app/BullsfirstApp'],
         $('input:submit, button').button();
 
         // Show the home page
-        BullsfirstApp.getTheApp().showHomePage();
+        new BullsfirstApp();
+        Backbone.history.start();
     });
 });
