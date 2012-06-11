@@ -56,6 +56,10 @@ define(['bullsfirst/domain/BrokerageAccounts',
             _credentials.clear();
             _brokerageAccounts.reset();
             _externalAccounts.reset();
+        },
+
+        isUserLoggedIn: function() {
+            return _credentials.isInitialized();
         }
     };
 });

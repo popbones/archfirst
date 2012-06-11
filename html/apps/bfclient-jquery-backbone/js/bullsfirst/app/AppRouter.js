@@ -19,12 +19,13 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/BackboneSyncOverride',
+define(['bullsfirst/domain/UserContext',
+        'bullsfirst/framework/BackboneSyncOverride',
         'bullsfirst/views/AddAccountDialog',
         'bullsfirst/views/HomePage',
         'bullsfirst/views/OpenAccountDialog',
         'bullsfirst/views/UserPage'],
-       function(BackboneSyncOverride, AddAccountDialog, HomePage, OpenAccountDialog, UserPage) {
+       function(UserContext, BackboneSyncOverride, AddAccountDialog, HomePage, OpenAccountDialog, UserPage) {
     return Backbone.Router.extend({
 
         pages: {},
@@ -57,7 +58,14 @@ define(['bullsfirst/framework/BackboneSyncOverride',
         },
 
         showUserPage: function() {
-            this.showPage(this.pages['user']);
+            // show user page only if user is logged in
+            if (UserContext.isUserLoggedIn()) {
+                this.showPage(this.pages['user']);
+            }
+            else {
+                this.navigate('');
+                this.showPage(this.pages['home']);
+            }
         },
 
         // TODO: Why is new page showing before hiding the previous page?

@@ -38,8 +38,12 @@ define(function() {
     }
 
     Credentials.prototype.clear = function() {
-        this.username = null;
-        this.password = null;
+        this.username = undefined;
+        this.password = undefined;
+    }
+
+    Credentials.prototype.isInitialized = function() {
+        return (typeof this.username !== 'undefined' && typeof this.password !== 'undefined');
     }
 
     return Credentials;
