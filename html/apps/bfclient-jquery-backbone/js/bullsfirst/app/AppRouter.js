@@ -49,7 +49,9 @@ define(['bullsfirst/domain/UserContext',
                 this.navigate('user', {trigger: true});
             }, this));
             $.subscribe("UserLoggedOutEvent", $.proxy(function() {
-                this.navigate('', {trigger: true});
+                // Do a full page refresh to start from scratch
+                this.navigate('');
+                window.location.reload();
             }, this));
         },
 
