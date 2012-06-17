@@ -27,7 +27,7 @@ define(['bullsfirst/domain/UserContext',
         function(UserContext, Page, AccountsTabView, UsernameView) {
 
     return Page.extend({
-        el: '#loggedin_page',
+        el: '#user_page',
 
         events: {
             'click #signOutLink': 'logout'
