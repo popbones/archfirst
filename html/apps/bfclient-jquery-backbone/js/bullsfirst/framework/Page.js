@@ -39,6 +39,10 @@ define(function() {
                     this.$el.fadeIn('fast', dfd.resolve);
                 }, this))
             return deferred.promise();
+        },
+
+        isVisible: function() {
+            return this.$el.is(':visible');
         }
     });
 });

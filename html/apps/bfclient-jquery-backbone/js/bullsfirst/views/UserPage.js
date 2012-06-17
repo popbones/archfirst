@@ -35,7 +35,9 @@ define(['bullsfirst/domain/UserContext',
 
         initialize: function() {
             _.bindAll(this);  // bind all callbacks in this class to this
-            $("#tabs").tabs();
+            $("#tabs").tabs({
+                select: this.tabSelected
+            });
             new UsernameView({model: UserContext.getUser()});
             new AccountsTabView();
 
@@ -48,6 +50,10 @@ define(['bullsfirst/domain/UserContext',
         logout: function() {
             UserContext.reset();
             $.publish('UserLoggedOutEvent');
+        },
+
+        tabSelected: function(event, ui) {
+            $.publish('UserTabSelectedEvent', ui.index);
         }
     });
 });

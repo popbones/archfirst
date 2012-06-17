@@ -30,9 +30,11 @@ define(['bullsfirst/domain/UserContext',
 
         pages: {},
 
+        tabs: ['accounts', 'positions', 'orders', 'transactions'],
+
         routes: {
             '': 'showHomePage',
-            'user': 'showUserPage'
+            'user/:tab': 'showUserPage'
         },
 
         initialize: function() {
@@ -46,12 +48,15 @@ define(['bullsfirst/domain/UserContext',
 
             // Subscribe to events
             $.subscribe("UserLoggedInEvent", $.proxy(function() {
-                this.navigate('user', {trigger: true});
+                this.navigate('user/accounts', {trigger: true});
             }, this));
             $.subscribe("UserLoggedOutEvent", $.proxy(function() {
                 // Do a full page refresh to start from scratch
                 this.navigate('');
                 window.location.reload();
+            }, this));
+            $.subscribe('UserTabSelectedEvent', $.proxy(function() {
+                this.navigate('user/' + this.tabs[arguments[1]]);
             }, this));
         },
 
@@ -59,10 +64,18 @@ define(['bullsfirst/domain/UserContext',
             this.showPage(this.pages['home']);
         },
 
-        showUserPage: function() {
-            // show user page only if user is logged in
+        showUserPage: function(tab) {
+            // Show user page only if user is logged in
             if (UserContext.isUserLoggedIn()) {
-                this.showPage(this.pages['user']);
+                var context = this;
+                $.when(this.showPage(this.pages['user'])).then(
+                    function() {
+                        // Select the requested tab
+                        var tabIndex = context.tabs.indexOf(tab);
+                        if (tabIndex != -1) {
+                            $('#tabs').tabs('select', tabIndex);
+                        }
+                    });
             }
             else {
                 this.navigate('');
@@ -72,6 +85,8 @@ define(['bullsfirst/domain/UserContext',
 
         // TODO: Why is new page showing before hiding the previous page?
         showPage: function(page) {
+            if (page.isVisible()) return;
+
             $.when(this.hideAllPages()).then(
                 function() { return page.show(); });
         },
