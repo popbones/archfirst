@@ -54,6 +54,13 @@ define(['bullsfirst/domain/UserContext',
 
         tabSelected: function(event, ui) {
             $.publish('UserTabSelectedEvent', ui.index);
+
+            // Instead of tab control to change the selection automatically,
+            // we could stop this by calling event.preventDefault() and then
+            // letting the router select the tab manually. But this runs into
+            // recursion issues and the solution is needlessly complex.
+            // See detailed discussion here:
+            // http://forum.jquery.com/topic/selecting-tab-manually-on-a-click
         }
     });
 });
