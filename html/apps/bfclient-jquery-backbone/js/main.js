@@ -30,7 +30,7 @@ require(['bullsfirst/app/AppRouter'],
             nope: 'js/json2.js'
         });
 
-        // Configure jQuery UI
+        // All input:submit and button elements are jQuery UI buttons
         $('input:submit, button').button();
 
         // Create the router

@@ -56,6 +56,8 @@ define(['bullsfirst/domain/UserContext',
                 window.location.reload();
             }, this));
             $.subscribe('UserTabSelectedEvent', $.proxy(function() {
+                // Do not trigger a hashchange event, simply update the URL.
+                // jQuery UI automatically changes the tab content.
                 this.navigate('user/' + this.tabs[arguments[1]]);
             }, this));
         },
@@ -67,15 +69,13 @@ define(['bullsfirst/domain/UserContext',
         showUserPage: function(tab) {
             // Show user page only if user is logged in
             if (UserContext.isUserLoggedIn()) {
-                var context = this;
-                $.when(this.showPage(this.pages['user'])).then(
-                    function() {
-                        // Select the requested tab
-                        var tabIndex = context.tabs.indexOf(tab);
-                        if (tabIndex != -1) {
-                            $('#tabs').tabs('select', tabIndex);
-                        }
-                    });
+                this.showPage(this.pages['user']);
+
+                // Select the requested tab
+                var tabIndex = this.tabs.indexOf(tab);
+                if (tabIndex != -1) {
+                    $('#tabs').tabs('select', tabIndex);
+                }
             }
             else {
                 this.navigate('');
@@ -85,8 +85,10 @@ define(['bullsfirst/domain/UserContext',
 
         // TODO: Why is new page showing before hiding the previous page?
         showPage: function(page) {
+            // if page is already visible, do nothing
             if (page.isVisible()) return;
 
+            // else hide all pages and show the desired one
             $.when(this.hideAllPages()).then(
                 function() { return page.show(); });
         },
