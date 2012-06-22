@@ -67,10 +67,6 @@ define(['bullsfirst/domain/Credentials',
             'click #open_account_button': 'validateForm'
         },
 
-        initialize: function(){
-            _.bindAll(this);  // bind all callbacks in this class to this
-        },
-
         validateForm: function() {
             if ($('#openAccountForm').validationEngine('validate')) {
                 $('#open_account_dialog').dialog('close');
@@ -80,7 +76,7 @@ define(['bullsfirst/domain/Credentials',
 
         createUser: function() {
             UserService.createUser(
-                this.form2CreateUserRequest(), this.createUserDone, ErrorUtil.showError);
+                this.form2CreateUserRequest(), _.bind(this.createUserDone, this), ErrorUtil.showError);
         },
 
         createUserDone: function(data, textStatus, jqXHR) {
@@ -90,7 +86,7 @@ define(['bullsfirst/domain/Credentials',
 
             // Create brokerage account
             BrokerageAccountService.createBrokerageAccount(
-                'Brokerage Account 1', this.createBrokerageAccountDone, ErrorUtil.showError);
+                'Brokerage Account 1', _.bind(this.createBrokerageAccountDone, this), ErrorUtil.showError);
         },
 
         createBrokerageAccountDone: function(data, textStatus, jqXHR) {
@@ -101,7 +97,10 @@ define(['bullsfirst/domain/Credentials',
                 name: 'External Account 1', routingNumber: 022000248, accountNumber: 12345678
             });
             UserContext.getExternalAccounts().add(externalAccount);
-            externalAccount.save(null, {success: this.createExternalAccountDone, error: ErrorUtil.showBackboneError});
+            externalAccount.save(null, {
+                success: _.bind(this.createExternalAccountDone, this),
+                error: ErrorUtil.showBackboneError
+            });
         },
 
         // Note that Backbone sends different parameters to callbacks
@@ -110,7 +109,11 @@ define(['bullsfirst/domain/Credentials',
 
             // Transfer cash
             AccountService.transferCash(
-                this.externalAccountId, this.brokerageAccountId, 100000, this.transferCashDone, ErrorUtil.showError);
+                this.externalAccountId,
+                this.brokerageAccountId,
+                100000,
+                _.bind(this.transferCashDone, this),
+                ErrorUtil.showError);
         },
 
         transferCashDone: function(data, textStatus, jqXHR) {

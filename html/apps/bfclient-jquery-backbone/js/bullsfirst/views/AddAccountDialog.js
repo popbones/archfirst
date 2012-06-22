@@ -58,10 +58,6 @@ define(['bullsfirst/domain/UserContext',
             'click #add_account_button': 'validateForm'
         },
 
-        initialize: function(){
-            _.bindAll(this);  // bind all callbacks in this class to this
-        },
-
         validateForm: function() {
             if ($('#addAccountForm').validationEngine('validate')) {
                 $('#add_account_dialog').dialog('close');

@@ -24,8 +24,7 @@ define(function() {
         el: '#loggedin_username',
 
         initialize: function() {
-            _.bindAll(this);  // bind all callbacks in this class to this
-            this.model.bind('change', this.render);
+            this.model.on('change', this.render, this);
         },
 
         render: function() {

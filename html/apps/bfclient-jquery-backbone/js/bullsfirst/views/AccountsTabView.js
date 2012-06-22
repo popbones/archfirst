@@ -34,7 +34,6 @@ define(['bullsfirst/domain/UserContext',
         },
 
         initialize: function(options) {
-            _.bindAll(this);  // bind all callbacks in this class to this
             new AccountTableView({collection: UserContext.getBrokerageAccounts()});
         },
 

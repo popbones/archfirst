@@ -36,14 +36,13 @@ define(['bullsfirst/domain/Credentials',
         },
 
         initialize: function() {
-            _.bindAll(this);  // bind all callbacks in this class to this
             $("#loginForm").validationEngine();
         },
 
         loginFormSubmit: function() {
             if ($('#loginForm').validationEngine('validate')) {
                 UserService.getUser(
-                    this.form2Credentials(), this.loginDone, ErrorUtil.showError);
+                    this.form2Credentials(), _.bind(this.loginDone, this), ErrorUtil.showError);
             }
             return false;
         },

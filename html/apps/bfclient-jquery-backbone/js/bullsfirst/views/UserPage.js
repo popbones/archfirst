@@ -34,7 +34,6 @@ define(['bullsfirst/domain/UserContext',
         },
 
         initialize: function() {
-            _.bindAll(this);  // bind all callbacks in this class to this
             $("#tabs").tabs({
                 select: this.tabSelected
             });

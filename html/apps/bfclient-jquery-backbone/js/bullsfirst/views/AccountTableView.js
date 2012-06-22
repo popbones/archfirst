@@ -28,8 +28,7 @@ define(['bullsfirst/views/AccountView'
         el: '#accounts_table tbody',
 
         initialize: function(options) {
-            _.bindAll(this);  // bind all callbacks in this class to this
-            this.collection.bind('reset', this.render);
+            this.collection.bind('reset', this.render, this);
         },
 
         render: function() {
