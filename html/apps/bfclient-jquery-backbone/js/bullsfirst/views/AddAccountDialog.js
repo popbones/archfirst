@@ -55,7 +55,15 @@ define(['bullsfirst/domain/UserContext',
         el: $('#add_account_dialog').parent(),
 
         events: {
-            'click #add_account_button': 'validateForm'
+            'click #add_account_button': 'validateForm',
+            'keypress #add_account_dialog': 'checkEnterKey'
+        },
+
+        checkEnterKey: function(event) {
+           if (event.keyCode == $.ui.keyCode.ENTER) {
+               this.validateForm();
+               return false;
+           }
         },
 
         validateForm: function() {

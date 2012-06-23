@@ -64,7 +64,15 @@ define(['bullsfirst/domain/Credentials',
         el: $('#open_account_dialog').parent(),
 
         events: {
-            'click #open_account_button': 'validateForm'
+            'click #open_account_button': 'validateForm',
+            'keypress #open_account_dialog': 'checkEnterKey'
+        },
+
+        checkEnterKey: function(event) {
+           if (event.keyCode == $.ui.keyCode.ENTER) {
+               this.validateForm();
+               return false;
+           }
         },
 
         validateForm: function() {
