@@ -21,11 +21,12 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/BackboneSyncOverride',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/views/AddAccountDialog',
         'bullsfirst/views/HomePage',
         'bullsfirst/views/OpenAccountDialog',
         'bullsfirst/views/UserPage'],
-       function(UserContext, BackboneSyncOverride, AddAccountDialog, HomePage, OpenAccountDialog, UserPage) {
+       function(UserContext, BackboneSyncOverride, MessageBus, AddAccountDialog, HomePage, OpenAccountDialog, UserPage) {
     return Backbone.Router.extend({
 
         pages: {},
@@ -47,19 +48,19 @@ define(['bullsfirst/domain/UserContext',
             new AddAccountDialog();
 
             // Subscribe to events
-            $.subscribe("UserLoggedInEvent", $.proxy(function() {
+            MessageBus.on('UserLoggedInEvent', function() {
                 this.navigate('user/accounts', {trigger: true});
-            }, this));
-            $.subscribe("UserLoggedOutEvent", $.proxy(function() {
+            }, this);
+            MessageBus.on('UserLoggedOutEvent', function() {
                 // Do a full page refresh to start from scratch
                 this.navigate('');
                 window.location.reload();
-            }, this));
-            $.subscribe('UserTabSelectedEvent', $.proxy(function() {
+            }, this);
+            MessageBus.on('UserTabSelectedEvent', function(tabIndex) {
                 // Do not trigger a hashchange event, simply update the URL.
                 // jQuery UI automatically changes the tab content.
-                this.navigate('user/' + this.tabs[arguments[1]]);
-            }, this));
+                this.navigate('user/' + this.tabs[tabIndex]);
+            }, this);
         },
 
         showHomePage: function() {

@@ -25,11 +25,12 @@ define(['bullsfirst/domain/Credentials',
         'bullsfirst/domain/User',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/services/AccountService',
         'bullsfirst/services/BrokerageAccountService',
         'bullsfirst/services/UserService'
         ],
-        function(Credentials, ExternalAccount, ExternalAccounts, User, UserContext, ErrorUtil, AccountService, BrokerageAccountService, UserService) {
+        function(Credentials, ExternalAccount, ExternalAccounts, User, UserContext, ErrorUtil, MessageBus, AccountService, BrokerageAccountService, UserService) {
 
     // Configure the dialog
     $('#open_account_dialog').dialog({
@@ -126,7 +127,7 @@ define(['bullsfirst/domain/Credentials',
 
         transferCashDone: function(data, textStatus, jqXHR) {
             // TODO: Erase the form
-            $.publish('UserLoggedInEvent');
+            MessageBus.trigger('UserLoggedInEvent');
         },
 
         // ------------------------------------------------------------

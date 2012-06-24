@@ -20,11 +20,12 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
         'bullsfirst/views/AccountsTabView',
         'bullsfirst/views/UsernameView'
         ],
-        function(UserContext, Page, AccountsTabView, UsernameView) {
+        function(UserContext, MessageBus, Page, AccountsTabView, UsernameView) {
 
     return Page.extend({
         el: '#user_page',
@@ -41,18 +42,18 @@ define(['bullsfirst/domain/UserContext',
             new AccountsTabView();
 
             // Subscribe to events
-            $.subscribe("UserLoggedInEvent", function() {
+            MessageBus.on('UserLoggedInEvent', function() {
                 UserContext.getBrokerageAccounts().fetch();
             });
         },
 
         logout: function() {
             UserContext.reset();
-            $.publish('UserLoggedOutEvent');
+            MessageBus.trigger('UserLoggedOutEvent');
         },
 
         tabSelected: function(event, ui) {
-            $.publish('UserTabSelectedEvent', ui.index);
+            MessageBus.trigger('UserTabSelectedEvent', ui.index);
 
             // Instead of tab control to change the selection automatically,
             // we could stop this by calling event.preventDefault() and then
