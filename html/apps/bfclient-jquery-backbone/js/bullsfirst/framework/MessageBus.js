@@ -34,12 +34,8 @@ define(function() {
             _messageBus.off(events, callback, context);
         },
 
-        trigger: function(event, argument) {
-            _messageBus.trigger(event, argument);
-        },
-
-        trigger_NOT_WORKING: function(events) {
-            _messageBus.trigger(events);
+        trigger: function(events) {
+            _messageBus.trigger.apply(_messageBus, arguments);
         }
     }
 });
