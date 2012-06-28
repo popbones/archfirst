@@ -60,6 +60,7 @@ define(['bullsfirst/domain/UserContext',
         },
 
         open: function() {
+            $('#addacnt_name').val('');
             $('#add_account_dialog').dialog('open');
         },
 
