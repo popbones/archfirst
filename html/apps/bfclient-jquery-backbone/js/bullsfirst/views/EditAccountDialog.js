@@ -15,18 +15,18 @@
  */
 
 /**
- * bullsfirst/views/AddAccountDialog
+ * bullsfirst/views/EditAccountDialog
  *
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
-        'bullsfirst/services/BrokerageAccountService'
+        'bullsfirst/services/AccountService'
         ],
-        function(UserContext, ErrorUtil, BrokerageAccountService) {
+        function(UserContext, ErrorUtil, AccountService) {
 
     // Configure the dialog
-    $('#add_account_dialog').dialog({
+    $('#edit_account_dialog').dialog({
         autoOpen: false,
         width: 250,
         modal: true,
@@ -34,7 +34,7 @@ define(['bullsfirst/domain/UserContext',
         buttons: [
             {
                 text: 'OK',
-                id: 'add_account_button'
+                id: 'edit_account_button'
             },
             {
                 text: 'Cancel',
@@ -42,25 +42,27 @@ define(['bullsfirst/domain/UserContext',
             }],
 
         open: function(event, ui) {
-            $('#addAccountForm').validationEngine();
+            $('#editAccountForm').validationEngine();
         },
 
         close: function(event, ui) {
-            $('#addAccountForm').validationEngine('hideAll');
+            $('#editAccountForm').validationEngine('hideAll');
         }
     });
 
     return Backbone.View.extend({
         // Defining el this way is required for the click event to be recognized
-        el: $('#add_account_dialog').parent(),
+        el: $('#edit_account_dialog').parent(),
 
         events: {
-            'click #add_account_button': 'validateForm',
-            'keypress #add_account_dialog': 'checkEnterKey'
+            'click #edit_account_button': 'validateForm',
+            'keypress #edit_account_dialog': 'checkEnterKey'
         },
 
-        open: function() {
-            $('#add_account_dialog').dialog('open');
+        open: function(model) {
+            this.model = model;
+            $('#editacnt_name').val(this.model.get('name'));
+            $('#edit_account_dialog').dialog('open');
         },
 
         checkEnterKey: function(event) {
@@ -71,16 +73,16 @@ define(['bullsfirst/domain/UserContext',
         },
 
         validateForm: function() {
-            if ($('#addAccountForm').validationEngine('validate')) {
-                $('#add_account_dialog').dialog('close');
+            if ($('#editAccountForm').validationEngine('validate')) {
+                $('#edit_account_dialog').dialog('close');
 
-                // Create brokerage account
-                BrokerageAccountService.createBrokerageAccount(
-                    $('#addacnt_name').val(), this.createBrokerageAccountDone, ErrorUtil.showError);
+                // Change name of brokerage account
+                AccountService.changeName(
+                    this.model.id, $('#editacnt_name').val(), this.changeNameDone, ErrorUtil.showError);
             }
         },
 
-        createBrokerageAccountDone: function(data, textStatus, jqXHR) {
+        changeNameDone: function(data, textStatus, jqXHR) {
             UserContext.getBrokerageAccounts().fetch();
         }
     });

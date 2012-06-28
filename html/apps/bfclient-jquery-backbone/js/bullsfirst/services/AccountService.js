@@ -30,6 +30,19 @@ define(['bullsfirst/domain/UserContext',
     var _url = '/bfoms-javaee/rest/secure/accounts';
 
     return {
+        changeName: function(accountId, newName, doneCallbacks, failCallbacks) {
+            $.ajax({
+                url: _url + '/' + accountId + '/change_name',
+                type: 'POST',
+                beforeSend: function(xhr) {
+                    AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
+                },
+                contentType: 'application/json',
+                data: '{ "newName": "' + newName + '" }'
+            })
+            .then(doneCallbacks, failCallbacks);
+        },
+
         transferCash: function(fromAccountId, toAccountId, amount, doneCallbacks, failCallbacks) {
             $.ajax({
                 url: _url + '/' + fromAccountId + '/transfer_cash',

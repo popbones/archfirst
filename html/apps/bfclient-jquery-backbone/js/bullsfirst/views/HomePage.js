@@ -25,22 +25,23 @@ define(['bullsfirst/domain/Credentials',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
-        'bullsfirst/services/UserService'
+        'bullsfirst/services/UserService',
+        'bullsfirst/views/OpenAccountDialog'
         ],
-        function(Credentials, User, UserContext, ErrorUtil, MessageBus, Page, UserService) {
+        function(Credentials, User, UserContext, ErrorUtil, MessageBus, Page, UserService, OpenAccountDialog) {
     return Page.extend({
         el: '#home_page',
 
         events: {
-            'submit #loginForm': 'loginFormSubmit',
-            'click #l_open_account': 'showOpenAccountDialog'
+            'submit #loginForm': 'login',
+            'click #l_open_account': 'openAccount'
         },
 
         initialize: function() {
             $("#loginForm").validationEngine();
         },
 
-        loginFormSubmit: function() {
+        login: function() {
             if ($('#loginForm').validationEngine('validate')) {
                 UserService.getUser(
                     this.form2Credentials(), _.bind(this.loginDone, this), ErrorUtil.showError);
@@ -57,8 +58,11 @@ define(['bullsfirst/domain/Credentials',
             MessageBus.trigger('UserLoggedInEvent');
         },
 
-        showOpenAccountDialog: function() {
-            $('#open_account_dialog').dialog('open');
+        openAccount: function() {
+            if (!this.openAccountDialog) {
+                this.openAccountDialog = new OpenAccountDialog();
+            }
+            this.openAccountDialog.open();
             return false;
         },
 

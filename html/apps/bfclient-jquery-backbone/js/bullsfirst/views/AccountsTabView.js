@@ -20,9 +20,10 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
-        'bullsfirst/views/AccountTableView'
+        'bullsfirst/views/AccountTableView',
+        'bullsfirst/views/AddAccountDialog'
         ],
-        function(UserContext, AccountTableView) {
+        function(UserContext, AccountTableView, AddAccountDialog) {
 
     return Backbone.View.extend({
 
@@ -42,7 +43,10 @@ define(['bullsfirst/domain/UserContext',
         },
 
         addAccount: function() {
-            $('#add_account_dialog').dialog('open');
+            if (!this.addAccountDialog) {
+                this.addAccountDialog = new AddAccountDialog();
+            }
+            this.addAccountDialog.open();
             return false;
         }
     });

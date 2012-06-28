@@ -69,6 +69,10 @@ define(['bullsfirst/domain/Credentials',
             'keypress #open_account_dialog': 'checkEnterKey'
         },
 
+        open: function() {
+            $('#open_account_dialog').dialog('open');
+        },
+
         checkEnterKey: function(event) {
            if (event.keyCode == $.ui.keyCode.ENTER) {
                this.validateForm();

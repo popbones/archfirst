@@ -181,6 +181,16 @@
             </form>
         </div>
 
+        <!-- Edit Account Dialog -->
+        <div id="edit_account_dialog" title="Edit Account" class="nodisplay">
+            <form id="editAccountForm" action="">
+            <div class="formRow">
+                <label for="editacnt_name" class="required">Account Name</label>
+                <input id="editacnt_name" name="accountName" type="text" class="validate[required] stretchInput" placeholder="Enter account name" required />
+            </div>
+            </form>
+        </div>
+
         <footer>
             This is a demo application. All data displayed is fictitious.
             Copyright &copy; 2010-2012 <a href="http://archfirst.org">Archfirst</a>.
@@ -206,7 +216,7 @@
         </td>
         <td class="center">
             {{#editPermission}}
-            <a href="#accounts">Edit</a>
+            <a href="#" class="act_edit_account">Edit</a>
             {{/editPermission}}
         </td>
         {{/account}}

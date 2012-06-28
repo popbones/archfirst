@@ -25,6 +25,16 @@
 /* Change dialog header */
 .ui-dialog-titlebar.ui-widget-header { border: 1px solid #e68b3d; background: #e68b3d url(images/ui-bg_highlight-soft_25_e68b3d_1x100.png) 50% 50% repeat-x; color: #ffffff; font-weight: bold; }
 
+/* Override jQuert UI link colors to be the same as those defined in style.css */
+.ui-widget-content a:link, .ui-widget-content a:visited {
+    color: Maroon;
+    text-decoration: none;
+    border-bottom: none 1px Maroon;
+}
+
+.ui-widget-content a:hover, .ui-widget-content a:active {
+    color: #d00;
+}
 
 /* -----------------------------------------------------------------------------
  * jQuery Validation Engine Overrides

@@ -21,12 +21,11 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/BackboneSyncOverride',
+        'bullsfirst/framework/BackboneViewExtension',
         'bullsfirst/framework/MessageBus',
-        'bullsfirst/views/AddAccountDialog',
         'bullsfirst/views/HomePage',
-        'bullsfirst/views/OpenAccountDialog',
         'bullsfirst/views/UserPage'],
-       function(UserContext, BackboneSyncOverride, MessageBus, AddAccountDialog, HomePage, OpenAccountDialog, UserPage) {
+       function(UserContext, BackboneSyncOverride, BackboneViewExtension, MessageBus, HomePage, UserPage) {
     return Backbone.Router.extend({
 
         pages: {},
@@ -43,9 +42,6 @@ define(['bullsfirst/domain/UserContext',
                 'home': new HomePage(),
                 'user': new UserPage()
             };
-
-            new OpenAccountDialog();
-            new AddAccountDialog();
 
             // Subscribe to events
             MessageBus.on('UserLoggedInEvent', function() {

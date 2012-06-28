@@ -19,14 +19,21 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/BrokerageAccount'
+define(['bullsfirst/domain/BrokerageAccount',
+        'bullsfirst/views/EditAccountDialog'
         ],
-        function(BrokerageAccount) {
+        function(BrokerageAccount, EditAccountDialog) {
+
+    var editAccountDialog = null;
 
     return Backbone.View.extend({
 
         model: BrokerageAccount,
         tagName: 'tr',
+
+        events: {
+            'click .act_edit_account': 'editAccount'
+        },
 
         render: function() {
             var hash = {
@@ -34,6 +41,14 @@ define(['bullsfirst/domain/BrokerageAccount'
             }
             $(this.el).html(Mustache.to_html($('#accountTemplate').html(), hash));
             return this;
+        },
+
+        editAccount: function() {
+            if (!editAccountDialog) {
+                editAccountDialog = new EditAccountDialog();
+            }
+            editAccountDialog.open(this.model);
+            return false;
         }
     });
 });
