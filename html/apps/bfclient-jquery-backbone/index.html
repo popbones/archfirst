@@ -150,23 +150,38 @@
             <form id="openAccountForm" action="">
             <div class="formRow">
                 <label for="oa_firstname" class="required">First Name</label>
-                <input id="oa_firstname" name="firstName" type="text" class="validate[required,custom[onlyLetterSp]] stretchInput" placeholder="Enter your first name" required />
+                <input
+                    id="oa_firstname" name="firstName" type="text"
+                    class="validate[required,custom[onlyLetterSp]] stretchInput"
+                    placeholder="Enter your first name" required />
             </div>
             <div class="formRow">
                 <label for="oa_lastname" class="required">Last Name</label>
-                <input id="oa_lastname" name="lastName" type="text" class="validate[required,custom[onlyLetterSp]] stretchInput" placeholder="Enter your last name" required />
+                <input
+                    id="oa_lastname" name="lastName" type="text"
+                    class="validate[required,custom[onlyLetterSp]] stretchInput"
+                    placeholder="Enter your last name" required />
             </div>
             <div class="formRow">
                 <label for="oa_username" class="required">Username</label>
-                <input id="oa_username" name="username" type="text" class="validate[required] stretchInput" placeholder="Enter a username" required />
+                <input
+                    id="oa_username" name="username" type="text"
+                    class="validate[required] stretchInput"
+                    placeholder="Enter a username" required />
             </div>
             <div class="formRow">
                 <label for="oa_password" class="required">Password</label>
-                <input id="oa_password" name="password" type="password" class="validate[required] stretchInput" placeholder="Enter a password" required />
+                <input
+                    id="oa_password" name="password" type="password"
+                    class="validate[required] stretchInput"
+                    placeholder="Enter a password" required />
             </div>
             <div class="formRow">
                 <label for="oa_confirm_password" class="required">Confirm Password</label>
-                <input id="oa_confirm_password" name="confirmPassword" type="password" class="validate[required,equals[oa_password]] stretchInput" placeholder="Retype the password" required />
+                <input
+                    id="oa_confirm_password" name="confirmPassword" type="password"
+                    class="validate[required,equals[oa_password]] stretchInput"
+                    placeholder="Retype the password" required />
             </div>
             </form>
         </div>
@@ -176,7 +191,10 @@
             <form id="addAccountForm" action="">
             <div class="formRow">
                 <label for="addacnt_name" class="required">Account Name</label>
-                <input id="addacnt_name" name="accountName" type="text" class="validate[required] stretchInput" placeholder="Enter account name" required />
+                <input
+                    id="addacnt_name" name="accountName" type="text"
+                    class="validate[required] stretchInput"
+                    placeholder="Enter account name" required />
             </div>
             </form>
         </div>
@@ -186,7 +204,10 @@
             <form id="editAccountForm" action="">
             <div class="formRow">
                 <label for="editacnt_name" class="required">Account Name</label>
-                <input id="editacnt_name" name="accountName" type="text" class="validate[required] stretchInput" placeholder="Enter account name" required />
+                <input
+                    id="editacnt_name" name="accountName" type="text"
+                    class="validate[required] stretchInput"
+                    placeholder="Enter account name" required />
             </div>
             </form>
         </div>
@@ -206,7 +227,7 @@
             <a href="#accounts">{{name}}</a>
         </td>
         <td class="number">
-            <a href="#accounts">{{id}}</a>
+            {{id}}
         </td>
         <td class="number">
             ${{marketValue.amount}}

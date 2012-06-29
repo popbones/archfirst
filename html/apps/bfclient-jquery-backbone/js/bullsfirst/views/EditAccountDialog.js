@@ -61,7 +61,10 @@ define(['bullsfirst/domain/UserContext',
 
         open: function(model) {
             this.model = model;
-            $('#editacnt_name').val(this.model.get('name'));
+
+            // Initialize the name field and select the entire text
+            $('#editacnt_name').val(this.model.get('name')).focus(function() { $(this).select() });
+
             $('#edit_account_dialog').dialog('open');
         },
 

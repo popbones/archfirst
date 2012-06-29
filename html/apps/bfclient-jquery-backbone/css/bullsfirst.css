@@ -324,11 +324,11 @@ table.zebra thead th {
 
 table.zebra tr {
     height: 28px;
+    color: #000;
 }
 
 table.zebra tr.alt {
     background: #f0f0f0;
-    color: #000;
 }
 
 table.zebra td {
