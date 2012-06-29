@@ -20,9 +20,11 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/BrokerageAccount',
+        'bullsfirst/domain/UserContext',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/views/EditAccountDialog'
         ],
-        function(BrokerageAccount, EditAccountDialog) {
+        function(BrokerageAccount, UserContext, MessageBus, EditAccountDialog) {
 
     var editAccountDialog = null;
 
@@ -32,6 +34,7 @@ define(['bullsfirst/domain/BrokerageAccount',
         tagName: 'tr',
 
         events: {
+            'click .act_select_account': 'selectAccount',
             'click .act_edit_account': 'editAccount'
         },
 
@@ -41,6 +44,15 @@ define(['bullsfirst/domain/BrokerageAccount',
             }
             $(this.el).html(Mustache.to_html($('#accountTemplate').html(), hash));
             return this;
+        },
+
+        selectAccount: function() {
+            UserContext.setSelectedAccount(this.model);
+
+            // Switch to positions tab
+            MessageBus.trigger('UserTabSelectionRequest', 1);
+
+            return false;
         },
 
         editAccount: function() {

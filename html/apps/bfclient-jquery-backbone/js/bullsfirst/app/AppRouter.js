@@ -57,6 +57,10 @@ define(['bullsfirst/domain/UserContext',
                 // jQuery UI automatically changes the tab content.
                 this.navigate('user/' + this.tabs[tabIndex]);
             }, this);
+            MessageBus.on('UserTabSelectionRequest', function(tabIndex) {
+                // In this case, do trigger a hashchange event
+                this.navigate('user/' + this.tabs[tabIndex], {trigger: true});
+            }, this);
         },
 
         showHomePage: function() {

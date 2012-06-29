@@ -24,24 +24,28 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/BrokerageAccounts',
+define(['bullsfirst/domain/BrokerageAccount',
+        'bullsfirst/domain/BrokerageAccounts',
         'bullsfirst/domain/Credentials',
         'bullsfirst/domain/ExternalAccounts',
-        'bullsfirst/domain/User'
+        'bullsfirst/domain/User',
+        'bullsfirst/framework/MessageBus'
         ],
-        function(BrokerageAccounts, Credentials, ExternalAccounts, User) {
+        function(BrokerageAccount, BrokerageAccounts, Credentials, ExternalAccounts, User, MessageBus) {
 
     // Module level variables act as singletons
     var _user = new User();
     var _credentials = new Credentials();
     var _brokerageAccounts = new BrokerageAccounts();
     var _externalAccounts = new ExternalAccounts();
+    var _selectedAccount = null;
 
     return {
         getUser: function() { return _user; },
         getCredentials: function() { return _credentials; },
         getBrokerageAccounts: function() { return _brokerageAccounts; },
         getExternalAccounts: function() { return _externalAccounts; },
+        getSelectedAccount: function() { return _selectedAccount; },
 
         initUser: function(attributes) {
             _user.set(attributes);
@@ -51,11 +55,18 @@ define(['bullsfirst/domain/BrokerageAccounts',
             _credentials.set(attributes);
         },
 
+        setSelectedAccount: function(account) {
+            _selectedAccount = account;
+            MessageBus.trigger('SelectedAccountChanged', _selectedAccount);
+            console.log('SelectedAccountChanged: ' + _selectedAccount.get('name'));
+        },
+
         reset: function() {
             _user.clear();
             _credentials.clear();
             _brokerageAccounts.reset();
             _externalAccounts.reset();
+            _selectedAccount = null;
         },
 
         isUserLoggedIn: function() {

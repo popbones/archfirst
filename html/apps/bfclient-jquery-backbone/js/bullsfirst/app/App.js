@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,22 +15,20 @@
  */
 
 /**
- * Application Entry Point
+ * bullsfirst/app/App
+ *
+ * Singleton application object.
  *
  * @author Naresh Bhatia
  */
-require(['bullsfirst/app/App'],
-        function(App) {
+define(['bullsfirst/app/AppRouter'
+        ],
+        function(AppRouter) {
 
-    $(document).ready(function() {
-        // Load Crockford's JSON library if browser does not have native support
-        // TODO: This is not working in IE7!!
-        Modernizr.load({
-            test: window.JSON,
-            nope: 'js/json2.js'
-        });
+    // Create the router
+    var _appRouter = new AppRouter();
 
-        // All input:submit and button elements are jQuery UI buttons
-        $('input:submit, button').button();
-    });
+    // Begin monitoring hashchange events and dispatching routes
+    // Setting pushState to true tells Backbone to use the history API
+    Backbone.history.start({pushState: true, root: '/apps/bfclient-jquery-backbone/'});
 });
