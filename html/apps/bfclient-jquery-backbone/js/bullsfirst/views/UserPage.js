@@ -23,9 +23,10 @@ define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
         'bullsfirst/views/AccountsTabView',
+        'bullsfirst/views/PositionsTabView',
         'bullsfirst/views/UsernameView'
         ],
-        function(UserContext, MessageBus, Page, AccountsTabView, UsernameView) {
+        function(UserContext, MessageBus, Page, AccountsTabView, PositionsTabView, UsernameView) {
 
     return Page.extend({
         el: '#user_page',
@@ -40,6 +41,7 @@ define(['bullsfirst/domain/UserContext',
             });
             new UsernameView({model: UserContext.getUser()});
             new AccountsTabView();
+            new PositionsTabView();
 
             // Subscribe to events
             MessageBus.on('UserLoggedInEvent', function() {

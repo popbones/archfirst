@@ -29,7 +29,21 @@
  *
  * @author Naresh Bhatia
  */
-define(function() {
+define(['bullsfirst/domain/Position',
+        'bullsfirst/domain/Positions'
+        ],
+        function(Position, Positions) {
+
     return Backbone.Model.extend({
+
+        // Parse positions into a backbone collection
+        parse: function(response) {
+            var positions = new Positions();
+            response.positions.forEach(function(rawPosition) {
+                positions.add(new Position(rawPosition));
+            }, this);
+            response.positions = positions;
+            return response;
+        }
     });
 });

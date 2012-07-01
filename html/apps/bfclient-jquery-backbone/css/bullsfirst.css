@@ -257,7 +257,7 @@ footer {
  * Accounts Tab
  * -------------------------------------------------------------------------- */
 #account_tab_content {
-   position: relative;
+   position: relative;  /* pushes chart inside the account tab */
    padding-bottom: 20px;
 }
 
@@ -299,11 +299,77 @@ footer {
 }
 
 /* -----------------------------------------------------------------------------
+ * Positions Tab
+ * -------------------------------------------------------------------------- */
+#positions_tab_content {
+   padding-bottom: 20px;
+}
+
+#positions_table {
+	width: 916px;
+}
+
+.pos_tbl_expand_collapse {
+	width: 30px;
+	text-align: center;
+}
+
+.pos_tbl_name {
+	width: 130px;
+	text-align: left;
+}
+
+.pos_tbl_symbol {
+	width: 55px;
+	text-align: center;
+}
+
+.pos_tbl_quantity {
+	width: 60px;
+	text-align: right;
+}
+
+.pos_tbl_last_trade {
+	width: 75px;
+	text-align: right;
+}
+
+.pos_tbl_market_value {
+	width: 110px;
+	text-align: right;
+}
+
+.pos_tbl_price_paid {
+	width: 75px;
+	text-align: right;
+}
+
+.pos_tbl_total_cost {
+	width: 110px;
+	text-align: right;
+}
+
+.pos_tbl_gain {
+	width: 110px;
+	text-align: right;
+}
+
+.pos_tbl_gain_percent {
+	width: 80px;
+	text-align: right;
+}
+
+.pos_tbl_actions {
+	width: 60px;
+	text-align: center;
+}
+
+/* -----------------------------------------------------------------------------
  * Table Styles
  * inspired by http://www.duoh.com/csstutorials/csstables/
  * -------------------------------------------------------------------------- */
 table.zebra {
-    font-size: 12px;
+    font: 12px "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
     vertical-align: middle;
 }
 

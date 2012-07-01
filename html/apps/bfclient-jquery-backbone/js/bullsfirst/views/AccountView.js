@@ -21,10 +21,11 @@
  */
 define(['bullsfirst/domain/BrokerageAccount',
         'bullsfirst/domain/UserContext',
+        'bullsfirst/framework/Formatter',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/EditAccountDialog'
         ],
-        function(BrokerageAccount, UserContext, MessageBus, EditAccountDialog) {
+        function(BrokerageAccount, UserContext, Formatter, MessageBus, EditAccountDialog) {
 
     var editAccountDialog = null;
 
@@ -39,8 +40,14 @@ define(['bullsfirst/domain/BrokerageAccount',
         },
 
         render: function() {
+            // Format account values for display 
+            var account = this.model.toJSON()  // returns a copy of the model's attributes
+            account.marketValueFormatted = Formatter.formatMoney(account.marketValue);
+            account.cashPositionFormatted = Formatter.formatMoney(account.cashPosition);
+
+            // Render using template
             var hash = {
-                account: this.model.toJSON()  // returns a copy of the model's attributes 
+                account: account
             }
             $(this.el).html(Mustache.to_html($('#accountTemplate').html(), hash));
             return this;

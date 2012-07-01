@@ -116,7 +116,30 @@
                             <h1>Positions</h1>
                         </div>
 
-                        <div class="fullWidthContent">
+                        <div class="toolbarLight">
+                            <button id="pos_update" type="button">Update</button>
+                        </div>
+
+                        <div id="positions_tab_content">
+                            <table id="positions_table" class="zebra">
+                                <thead>
+                                    <tr>
+                                        <th class="pos_tbl_expand_collapse"></th>
+                                        <th class="pos_tbl_name">Name</th>
+                                        <th class="pos_tbl_symbol">Symbol</th>
+                                        <th class="pos_tbl_quantity">Quantity</th>
+                                        <th class="pos_tbl_last_trade">Last Trade</th>
+                                        <th class="pos_tbl_market_value">Market Value</th>
+                                        <th class="pos_tbl_price_paid">Price Paid</th>
+                                        <th class="pos_tbl_total_cost">Total Cost</th>
+                                        <th class="pos_tbl_gain">Gain</th>
+                                        <th class="pos_tbl_gain_percent">Gain %</th>
+                                        <th class="pos_tbl_actions">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
 
@@ -230,10 +253,10 @@
             {{id}}
         </td>
         <td class="number">
-            ${{marketValue.amount}}
+            {{marketValueFormatted}}
         </td>
         <td class="number">
-            ${{cashPosition.amount}}
+            {{cashPositionFormatted}}
         </td>
         <td class="center">
             {{#editPermission}}
@@ -241,6 +264,44 @@
             {{/editPermission}}
         </td>
         {{/account}}
+    </script>
+
+    <script id="positionTemplate" type="text/x-mustache-tmpl">
+        {{#position}}
+        <td>
+        </td>
+        <td class="left">
+            {{instrumentName}}
+        </td>
+        <td class="center">
+            {{instrumentSymbol}}
+        </td>
+        <td class="number">
+            {{quantity}}
+        </td>
+        <td class="number">
+            {{lastTradeFormatted}}
+        </td>
+        <td class="number">
+            {{marketValueFormatted}}
+        </td>
+        <td class="number">
+            {{pricePaidFormatted}}
+        </td>
+        <td class="number">
+            {{totalCostFormatted}}
+        </td>
+        <td class="number">
+            {{gainFormatted}}
+        </td>
+        <td class="number">
+            {{gainPercentFormatted}}
+        </td>
+        <td class="center">
+            <a href="#" class="pos_trade_account">Buy</a>
+            <a href="#" class="pos_trade_account">Sell</a>
+        </td>
+        {{/position}}
     </script>
 
     <!-- End of templates -->
@@ -260,6 +321,8 @@
     <!-- The two libraries below are needed to do base64 encoding of authentication header -->
     <script src="js/libs/base64_encode.js"></script>
     <script src="js/libs/utf8_encode.js"></script>
+    <!-- Enables formatting and parsing of dates and numbers similar to SimpleDateFormat and NumberFormat APIs -->
+    <script src="js/libs/jquery.format-1.2.min.js"></script>
     <!-- keep our scripts at the end -->
     <script src="js/libs/plugins.js"></script>
     <script data-main="js/main" src="js/require-1.0.7.min.js"></script>

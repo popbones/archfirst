@@ -58,7 +58,6 @@ define(['bullsfirst/domain/BrokerageAccount',
         setSelectedAccount: function(account) {
             _selectedAccount = account;
             MessageBus.trigger('SelectedAccountChanged', _selectedAccount);
-            console.log('SelectedAccountChanged: ' + _selectedAccount.get('name'));
         },
 
         reset: function() {
