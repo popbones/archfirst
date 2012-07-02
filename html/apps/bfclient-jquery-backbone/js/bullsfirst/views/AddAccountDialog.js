@@ -82,7 +82,7 @@ define(['bullsfirst/domain/UserContext',
         },
 
         createBrokerageAccountDone: function(data, textStatus, jqXHR) {
-            UserContext.getBrokerageAccounts().fetch();
+            UserContext.updateAccounts();
         }
     });
 });

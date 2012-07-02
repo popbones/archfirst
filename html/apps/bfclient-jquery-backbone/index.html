@@ -116,6 +116,11 @@
                             <h1>Positions</h1>
                         </div>
 
+                        <div class="titleRight">
+                            <select id="postab_account_selector">
+                            </select>
+                        </div>
+
                         <div class="toolbarLight">
                             <button id="pos_update" type="button">Update</button>
                         </div>
@@ -263,6 +268,12 @@
             <a href="#" class="act_edit_account">Edit</a>
             {{/editPermission}}
         </td>
+        {{/account}}
+    </script>
+
+    <script id="accountSelectorTemplate" type="text/x-mustache-tmpl">
+        {{#account}}
+        <option value="{{id}}">{{name}} - {{cashPositionFormatted}}</option>
         {{/account}}
     </script>
 

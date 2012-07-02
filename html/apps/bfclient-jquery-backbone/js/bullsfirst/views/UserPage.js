@@ -45,7 +45,7 @@ define(['bullsfirst/domain/UserContext',
 
             // Subscribe to events
             MessageBus.on('UserLoggedInEvent', function() {
-                UserContext.getBrokerageAccounts().fetch();
+                UserContext.updateAccounts();
             });
         },
 

@@ -20,9 +20,10 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
+        'bullsfirst/views/AccountSelectorView',
         'bullsfirst/views/PositionTableView'
         ],
-        function(UserContext, PositionTableView) {
+        function(UserContext, AccountSelectorView, PositionTableView) {
 
     return Backbone.View.extend({
 
@@ -33,11 +34,15 @@ define(['bullsfirst/domain/UserContext',
         },
 
         initialize: function(options) {
-            new PositionTableView({collection: UserContext.getBrokerageAccounts()});
+            new AccountSelectorView({
+                el: '#postab_account_selector',
+                collection: UserContext.getBrokerageAccounts()
+            });
+            new PositionTableView();
         },
 
         updatePositions: function() {
-            UserContext.getBrokerageAccounts().fetch();
+            UserContext.updateAccounts();
         }
     });
 });

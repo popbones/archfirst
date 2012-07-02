@@ -29,9 +29,10 @@ define(['bullsfirst/domain/BrokerageAccount',
         'bullsfirst/domain/Credentials',
         'bullsfirst/domain/ExternalAccounts',
         'bullsfirst/domain/User',
+        'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/MessageBus'
         ],
-        function(BrokerageAccount, BrokerageAccounts, Credentials, ExternalAccounts, User, MessageBus) {
+        function(BrokerageAccount, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, MessageBus) {
 
     // Module level variables act as singletons
     var _user = new User();
@@ -60,12 +61,36 @@ define(['bullsfirst/domain/BrokerageAccount',
             MessageBus.trigger('SelectedAccountChanged', _selectedAccount);
         },
 
+        setSelectedAccountId: function(accountId) {
+            this.setSelectedAccount(_brokerageAccounts.get(accountId));
+        },
+
         reset: function() {
             _user.clear();
             _credentials.clear();
             _brokerageAccounts.reset();
             _externalAccounts.reset();
             _selectedAccount = null;
+        },
+
+        updateAccounts: function() {
+            _brokerageAccounts.fetch({
+                success: _.bind(this._restoreSelectedAccount, this),
+                error: ErrorUtil.showBackboneError
+            });
+        },
+
+        // Restore currently selected account with a new instance
+        // fetched as part of the _brokerageAccounts collection
+        _restoreSelectedAccount: function() {
+            if (_selectedAccount)
+            {
+                this.setSelectedAccount(_brokerageAccounts.get(_selectedAccount.id));
+            }
+            if (_selectedAccount === null && _brokerageAccounts.length != 0)
+            {
+                this.setSelectedAccount(_brokerageAccounts.at(0));
+            }
         },
 
         isUserLoggedIn: function() {

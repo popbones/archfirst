@@ -39,7 +39,7 @@ define(['bullsfirst/domain/UserContext',
         },
 
         updateAccounts: function() {
-            UserContext.getBrokerageAccounts().fetch();
+            UserContext.updateAccounts();
         },
 
         addAccount: function() {
