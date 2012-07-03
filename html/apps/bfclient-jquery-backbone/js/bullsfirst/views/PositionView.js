@@ -27,18 +27,23 @@ define(['bullsfirst/domain/Position',
 
     return Backbone.View.extend({
 
-        model: Position,
         tagName: 'tr',
 
         render: function() {
             // Format position values for display 
             var position = this.model.toJSON()  // returns a copy of the model's attributes
+            position.lotCreationTimeFormatted = Formatter.formatMoment2Date(moment(position.lotCreationTime));
             position.marketValueFormatted = Formatter.formatMoney(position.marketValue);
             position.lastTradeFormatted = Formatter.formatMoney(position.lastTrade);
             position.pricePaidFormatted = Formatter.formatMoney(position.pricePaid);
             position.totalCostFormatted = Formatter.formatMoney(position.totalCost);
             position.gainFormatted = Formatter.formatMoney(position.gain);
             position.gainPercentFormatted = Formatter.formatPercent(position.gainPercent);
+
+            // Set up flags for conditionals
+            position.isInstrumentPosition = typeof position.lotId === 'undefined';
+            position.isLot = !position.isInstrumentPosition
+            position.isTradable = position.isInstrumentPosition && position.instrumentSymbol !== 'CASH';
 
             // Render using template
             var hash = {

@@ -25,7 +25,7 @@ define(function() {
 
     return {
         formatMoney: function(money) {
-            if ((typeof money === "undefined") || (money === null)) {
+            if ((typeof money === 'undefined') || (money === null)) {
                 return "";
             }
             else {
@@ -36,13 +36,22 @@ define(function() {
         // Formats a fraction as a percentage.
         // For example formatPercent(0.25) = "25.00%"
         formatPercent: function(fraction, digits) {
-            if ((typeof fraction === "undefined") || (fraction === null)) {
+            if ((typeof fraction === 'undefined') || (fraction === null)) {
                 return "";
             }
             else {
-                if (typeof digits === "undefined")
+                if (typeof digits === 'undefined')
                     digits = 2;
                 return (fraction * 100).toFixed(digits) + '%';
+            }
+        },
+
+        formatMoment2Date: function(m) {
+            if ((typeof m === 'undefined') || (m === null)) {
+                return "";
+            }
+            else {
+                return m.format('MM/DD/YYYY');
             }
         }
     };

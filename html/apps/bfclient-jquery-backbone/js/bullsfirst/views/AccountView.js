@@ -31,7 +31,6 @@ define(['bullsfirst/domain/BrokerageAccount',
 
     return Backbone.View.extend({
 
-        model: BrokerageAccount,
         tagName: 'tr',
 
         events: {

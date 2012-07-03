@@ -301,13 +301,8 @@ footer {
 	width: 916px;
 }
 
-.pos_tbl_expand_collapse {
-	width: 30px;
-	text-align: center;
-}
-
 .pos_tbl_name {
-	width: 130px;
+	width: 160px;
 	text-align: left;
 }
 

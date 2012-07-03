@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/jquery-ui-1.8.20.custom.css">
     <link rel="stylesheet" href="css/validationEngine.jquery-2.5.2.css">
+    <link rel="stylesheet" href="css/jquery.treeTable-2.3.0.css">
     <link rel="stylesheet" href="css/bullsfirst.css">
     <script src="js/libs/modernizr-2.5.3.min.js"></script>
 </head>
@@ -129,7 +130,6 @@
                             <table id="positions_table" class="zebra">
                                 <thead>
                                     <tr>
-                                        <th class="pos_tbl_expand_collapse"></th>
                                         <th class="pos_tbl_name">Name</th>
                                         <th class="pos_tbl_symbol">Symbol</th>
                                         <th class="pos_tbl_quantity">Quantity</th>
@@ -167,7 +167,6 @@
                             <table id="orders_table" class="zebra">
                                 <thead>
                                     <tr>
-                                        <th class="ord_tbl_expand_collapse"></th>
                                         <th class="ord_tbl_name">Name</th>
                                     </tr>
                                 </thead>
@@ -196,7 +195,6 @@
                             <table id="txn_table" class="zebra">
                                 <thead>
                                     <tr>
-                                        <th class="txn_tbl_expand_collapse"></th>
                                         <th class="txn_tbl_name">Name</th>
                                     </tr>
                                 </thead>
@@ -317,10 +315,13 @@
 
     <script id="positionTemplate" type="text/x-mustache-tmpl">
         {{#position}}
-        <td>
-        </td>
         <td class="left">
-            {{instrumentName}}
+            {{#isInstrumentPosition}}
+                {{instrumentName}}
+            {{/isInstrumentPosition}}
+            {{#isLot}}
+                {{lotCreationTimeFormatted}}
+            {{/isLot}}
         </td>
         <td class="center">
             {{instrumentSymbol}}
@@ -347,8 +348,10 @@
             {{gainPercentFormatted}}
         </td>
         <td class="center">
+            {{#isTradable}}
             <a href="#" class="pos_trade_account">Buy</a>
             <a href="#" class="pos_trade_account">Sell</a>
+            {{/isTradable}}
         </td>
         {{/position}}
     </script>
@@ -372,6 +375,10 @@
     <script src="js/libs/utf8_encode.js"></script>
     <!-- Enables formatting and parsing of dates and numbers similar to SimpleDateFormat and NumberFormat APIs -->
     <script src="js/libs/jquery.format-1.2.min.js"></script>
+    <!-- Date library -->
+    <script src="js/libs/moment-1.6.2.min.js"></script>
+    <!-- jQuery TreeTable -->
+    <script src="js/libs/jquery.treeTable-2.3.0.min.js"></script>
     <!-- keep our scripts at the end -->
     <script src="js/libs/plugins.js"></script>
     <script data-main="js/main" src="js/require-1.0.7.min.js"></script>

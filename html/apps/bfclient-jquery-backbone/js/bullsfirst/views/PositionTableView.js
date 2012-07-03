@@ -43,14 +43,36 @@ define(['bullsfirst/framework/MessageBus',
 
             // Add new rows from positions collection. Pass this object as context
             this.collection.each(function(position, i) {
-                var view = new PositionView({model: position});
+                var positionId = 'position-' + position.get('instrumentSymbol');
+                var view = new PositionView({
+                    model: position,
+                    id: positionId,
+                    className: (i % 2) ? "" : "alt"
+                });
                 this.$el.append(view.render().el);
+
+                // Add rows for children
+                var children = position.get('children');
+                if (children) {
+                    this._renderChildren(children, positionId);
+                }
             }, this);
 
-            // Stripe the rows
-            this.$el.find('tr:odd').addClass('alt');
+            // Display as TreeTable
+            $("#positions_table").treeTable();
 
             return this;
+        },
+
+        _renderChildren: function(children, positionId) {
+            children.each(function(child, i) {
+                var view = new PositionView({
+                    model: child,
+                    id: 'lot-' + child.get('lotId'),
+                    className: 'child-of-' + positionId
+                });
+                this.$el.append(view.render().el);
+            }, this);
         }
     });
 });

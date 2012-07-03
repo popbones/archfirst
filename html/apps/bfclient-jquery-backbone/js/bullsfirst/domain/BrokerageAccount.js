@@ -38,12 +38,22 @@ define(['bullsfirst/domain/Position',
 
         // Parse positions into a backbone collection
         parse: function(response) {
-            var positions = new Positions();
-            response.positions.forEach(function(rawPosition) {
-                positions.add(new Position(rawPosition));
-            }, this);
-            response.positions = positions;
+            response.positions = this.positionArrayToCollection(response.positions);
             return response;
+        },
+
+        positionArrayToCollection: function(positionArray) {
+
+            var positionCollection = new Positions();
+
+            positionArray.forEach(function(rawPosition) {
+                if (typeof rawPosition.children !== 'undefined') {
+                    rawPosition.children = this.positionArrayToCollection(rawPosition.children);
+                };
+                positionCollection.add(new Position(rawPosition));
+            }, this);
+
+            return positionCollection;
         }
     });
 });

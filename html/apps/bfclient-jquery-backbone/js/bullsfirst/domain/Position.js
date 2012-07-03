@@ -22,6 +22,8 @@
  *   accountName: String
  *   instrumentSymbol: String
  *   instrumentName: String
+ *   lotId: int
+ *   lotCreationTime: Date
  *   quantity: int
  *   marketValue: Money
  *   lastTrade: Money
