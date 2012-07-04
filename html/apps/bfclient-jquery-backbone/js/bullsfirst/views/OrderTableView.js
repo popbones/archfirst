@@ -15,22 +15,17 @@
  */
 
 /**
- * bullsfirst/views/OrdersTabView
+ * bullsfirst/views/OrderTableView
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/views/OrderFilterView',
-        'bullsfirst/views/OrderTableView'
+define([
         ],
-        function(OrderFilterView, OrderTableView) {
+        function() {
 
     return Backbone.View.extend({
 
-        el: '#orders_tab',
+        el: '#orders_table tbody',
 
-        initialize: function(options) {
-            new OrderFilterView();
-            new OrderTableView();
-        }
     });
 });

@@ -119,6 +119,11 @@ button, input[type="button"], input[type="reset"], input[type="submit"] {
     margin-right: 4px;
 }
  
+/* Checkboxes */
+input[type="checkbox"], input[type="radio"] {
+    margin-left: 6px;
+}
+ 
 /* Stretch fields */
 input.stretchInput, select.stretchSelect {
     width: 100%;
@@ -205,11 +210,32 @@ footer {
 .toolbar {
     clear: both;
     background-color: #e3e0e0;
-    margin-bottom: 10px;
+    padding: 0px 10px;
 }
 
-.toolbar button {
-    margin: 6px 0px 6px 10px;
+.toolbarRow {
+    padding: 6px 0;
+}
+
+.toolbarRowRight {
+    float: right;
+    padding: 6px 0;
+}
+
+.toolbar .first {
+    margin-left: 0;
+}
+
+.toolbar label {
+    margin-left: 12px;
+}
+
+.toolbarTextField {
+    width: 60px;
+}
+
+.toolbarDateField {
+    width: 75px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -349,6 +375,22 @@ footer {
 .pos_tbl_actions {
 	width: 60px;
 	text-align: center;
+}
+
+/* -----------------------------------------------------------------------------
+ * Orders Tab
+ * -------------------------------------------------------------------------- */
+#orders_tab_content {
+   padding-bottom: 20px;
+}
+
+#orders_table {
+	width: 916px;
+}
+
+.ord_tbl_name {
+	width: 160px;
+	text-align: left;
 }
 
 /* -----------------------------------------------------------------------------

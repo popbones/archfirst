@@ -29,10 +29,6 @@ define(['bullsfirst/domain/UserContext',
         el: '#transactions_tab',
 
         initialize: function(options) {
-            new AccountSelectorView({
-                el: '#txn_tab_account_selector',
-                collection: UserContext.getBrokerageAccounts()
-            });
         }
     });
 });

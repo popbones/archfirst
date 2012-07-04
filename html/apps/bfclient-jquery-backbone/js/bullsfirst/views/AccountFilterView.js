@@ -15,56 +15,38 @@
  */
 
 /**
- * bullsfirst/views/AccountSelectorView
+ * bullsfirst/views/AccountFilterView
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
-        'bullsfirst/framework/Formatter',
-        'bullsfirst/framework/MessageBus'
+define(['bullsfirst/domain/UserContext'
         ],
-        function(UserContext, Formatter, MessageBus) {
+        function(UserContext) {
 
     return Backbone.View.extend({
 
-        events: {
-            'change': 'setSelectedAccount'
-        },
-
         initialize: function(options) {
             this.collection.bind('reset', this.render, this);
-
-            // Subscribe to events
-            MessageBus.on('SelectedAccountChanged', function(selectedAccount) {
-                this.$el.val(selectedAccount.id);
-            }, this);
-        },
-
-        setSelectedAccount: function(event) {
-            UserContext.setSelectedAccountId(event.target.value);
-            return false;
         },
 
         render: function() {
             // Take out entries that might be sitting in the dropdown
             this.$el.empty();
 
+            // Add placeholder entry
+            this.$el.append('<option value="">All Accounts</option>');
+
             // Add new entries from accounts collection. Pass this object as context
             this.collection.each(function(accountModel, i) {
                 // Format account values for display 
                 var account = accountModel.toJSON()  // returns a copy of the model's attributes
-                account.cashPositionFormatted = Formatter.formatMoney(account.cashPosition);
 
                 // Render using template
                 var hash = {
                     account: account
                 }
-                this.$el.append(Mustache.to_html($('#accountSelectorTemplate').html(), hash));
+                this.$el.append(Mustache.to_html($('#accountFilterTemplate').html(), hash));
             }, this);
-
-            // Select the selected account
-            if (UserContext.getSelectedAccount())
-                this.$el.val(UserContext.getSelectedAccount().id);
 
             return this;
         }

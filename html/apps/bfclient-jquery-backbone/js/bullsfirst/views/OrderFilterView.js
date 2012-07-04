@@ -15,22 +15,35 @@
  */
 
 /**
- * bullsfirst/views/OrdersTabView
+ * bullsfirst/views/OrderFilterView
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/views/OrderFilterView',
-        'bullsfirst/views/OrderTableView'
+define(['bullsfirst/domain/UserContext',
+        'bullsfirst/views/AccountFilterView'
         ],
-        function(OrderFilterView, OrderTableView) {
+        function(UserContext, AccountFilterView) {
 
     return Backbone.View.extend({
 
-        el: '#orders_tab',
+        el: '#ordfltForm',
+
+        events: {
+            'click #orders_update': 'updateOrders'
+        },
 
         initialize: function(options) {
-            new OrderFilterView();
-            new OrderTableView();
+            new AccountFilterView({
+                el: '#ordflt_accountId',
+                collection: UserContext.getBrokerageAccounts()
+            });
+            $('#ordflt_fromDate').datepicker();
+            $('#ordflt_toDate').datepicker();
+        },
+
+        updateOrders: function() {
+            var formObject = this.$el.toObject();
+            console.log(formObject);
         }
     });
 });

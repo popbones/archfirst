@@ -154,13 +154,60 @@
                             <h1>Orders</h1>
                         </div>
 
-                        <div class="titleRight">
-                            <select id="orders_tab_account_selector">
-                            </select>
-                        </div>
+                        <div class="toolbar">
+                            <form id="ordfltForm" action="">
+                            <div class="toolbarRowRight">
+                                <button id="orders_update" type="button">Update</button>
+                                <button id="ordflt_reset" type="button">Reset Filter</button>
+                            </div>
 
-                        <div class="toolbarLight">
-                            <button id="orders_update" type="button">Update</button>
+                            <div class="toolbarRow">
+                                <label for="ordflt_accountId" class="first">Account</label>
+                                <select id="ordflt_accountId" name="accountId">
+                                </select>
+
+                                <label for="ordflt_orderId">Order #</label>
+                                <input
+                                    id="ordflt_orderId" name="orderId" type="text"
+                                    class="toolbarTextField validate[integer]" />
+
+                                <label for="ordflt_symbol">Symbol</label>
+                                <input
+                                    id="ordflt_symbol" name="symbol" type="text"
+                                    class="toolbarTextField" />
+
+                                <label for="ordflt_fromDate">From</label>
+                                <input
+                                    id="ordflt_fromDate" name="fromDate" type="text"
+                                    class="toolbarDateField" />
+
+                                <label for="ordflt_toDate">To</label>
+                                <input
+                                    id="ordflt_toDate" name="toDate" type="text"
+                                    class="toolbarDateField" />
+                            </div>
+
+                            <div class="toolbarRow">
+                                <label class="first">Order Action</label>
+                                <input
+                                    id="ordflt_actionBuy" name="sides[]" type="checkbox" value="Buy" /> Buy
+                                <input
+                                    id="ordflt_actionSell" name="sides[]" type="checkbox" value="Sell" /> Sell
+
+                                <label>Order Status</label>
+                                <input
+                                    id="ordflt_statusNew" name="statuses[]" type="checkbox" value="New" /> New
+                                <input
+                                    id="ordflt_statusPartiallyFilled" name="statuses[]" type="checkbox" value="PartiallyFilled" /> Partially Filled
+                                <input
+                                    id="ordflt_statusFilled" name="statuses[]" type="checkbox" value="Filled" /> Filled
+                                <input
+                                    id="ordflt_statusCanceled" name="statuses[]" type="checkbox" value="Canceled" /> Canceled
+                                <input
+                                    id="ordflt_statusDoneForDay" name="statuses[]" type="checkbox" value="DoneForDay" /> DoneForDay
+                            </div>
+
+                            </form>
                         </div>
 
                         <div id="orders_tab_content">
@@ -180,11 +227,6 @@
                     <div id="transactions_tab">
                         <div class="titleLeft">
                             <h1>Transaction History</h1>
-                        </div>
-
-                        <div class="titleRight">
-                            <select id="txn_tab_account_selector">
-                            </select>
                         </div>
 
                         <div class="toolbarLight">
@@ -310,6 +352,12 @@
     <script id="accountSelectorTemplate" type="text/x-mustache-tmpl">
         {{#account}}
         <option value="{{id}}">{{name}} - {{cashPositionFormatted}}</option>
+        {{/account}}
+    </script>
+
+    <script id="accountFilterTemplate" type="text/x-mustache-tmpl">
+        {{#account}}
+        <option value="{{id}}">{{name}}</option>
         {{/account}}
     </script>
 
