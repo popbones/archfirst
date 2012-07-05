@@ -29,7 +29,8 @@ define(['bullsfirst/domain/UserContext',
         el: '#ordfltForm',
 
         events: {
-            'click #orders_update': 'updateOrders'
+            'click #orders_update': 'updateOrders',
+            'click #ordflt_reset': 'resetFilter'
         },
 
         initialize: function(options) {
@@ -39,11 +40,20 @@ define(['bullsfirst/domain/UserContext',
             });
             $('#ordflt_fromDate').datepicker();
             $('#ordflt_toDate').datepicker();
+            this.resetFilter();
         },
 
         updateOrders: function() {
             var formObject = this.$el.toObject();
             console.log(formObject);
+        },
+
+        resetFilter: function() {
+           this.$el.find('#ordflt_accountId').val('');
+           this.$el.find('input').val('');
+           this.$el.find('input:checkbox').prop('checked', false);
+           $('#ordflt_fromDate').datepicker('setDate', new Date());
+           $('#ordflt_toDate').datepicker('setDate', new Date());
         }
     });
 });
