@@ -77,11 +77,11 @@
         var $j = jQuery.noConflict();
         
         $j(function() {
-            var grid1 = new AF.Grid({
+            var gridCB = new AF.Grid({
                 dataSource: new AF.Grid.FakeLocalStore(AF.Grid.fakeDataCB),
-                id:"grid1"
+                id:"gridCB"
             });
-            grid1.load();
+            gridCB.load();
             setTimeout(function() {
                     $j("a.theme-brown").click();
             },100);
@@ -92,7 +92,7 @@
 
 <body>
     <div id="mainContainer">
-        <div class="afGrid-switch-theme grid1-afGrid-switch-theme">
+        <div class="afGrid-switch-theme gridCB-afGrid-switch-theme">
             <span class="">Switch theme:</span>
             <a class="theme theme-brown" href="#brown"></a>
             <a class="theme theme-default" href="#default"></a>
@@ -100,12 +100,12 @@
             <a class="theme theme-grey" href="#grey"></a>
         </div>
 
-        <div class="grid1-afGrid-group-by afGrid-group-by">
+        <div class="gridCB-afGrid-group-by afGrid-group-by">
             <p class="empty-message">Drop columns here to group by</p>
             <div class="groups"></div>
         </div>
 
-        <div id="grid1"></div>
+        <div id="gridCB"></div>
     </div>
 </body>
 </html>
