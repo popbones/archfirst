@@ -21,7 +21,12 @@
 (function ($) {
 
     var fakeDataStoreRows, fakeDataStoreColumns;
-
+    
+    var DataType = {
+        NUMBER: "NUMBER",
+        TEXT: "TEXT"
+    };
+    
     AF.Grid.FakeLocalStore = function (dataset) {
 
         function fetchRows(requestData, onSuccess) {
@@ -224,17 +229,24 @@
             multiColumnSorting(fakeDataStoreRows, sortOrder, sortDirection);
         }
 
-        function multiColumnSorting(TheArr, order, direction) {
-
+        function getColumnType(columnIndex) {           
+            if (columnIndex!==undefined) {
+                return DataType[fakeDataStoreColumns[columnIndex].renderer];
+            }
+            return undefined;
+        }
+        
+        function multiColumnSorting(TheArr, columnIndexInOrder, direction) {
 
             function sortMulti(objA, objB, n) {
                 n = n || 0;
                 var a = objA.data,
                     b = objB.data,
-                    swap = swapValues(order[n], a, b);
-                if ((order[n] === undefined) || (swap !== 0)) {
+                    columnType = getColumnType(columnIndexInOrder[n]),
+                    swap = swapValues(columnIndexInOrder[n], a, b, columnType);                                
+                if ((columnIndexInOrder[n] === undefined) || (swap !== 0)) {
                     return swap * direction[n];
-                } else if (n < order.length) {
+                } else if (n < columnIndexInOrder.length) {
                     return sortMulti(objA, objB, ++n);
                 } else {
                     return null;
@@ -243,18 +255,17 @@
 
             TheArr.sort(sortMulti);
 
-            function swapValues(colIndex, a, b) {
-                var swap = 0;
-                if (isNaN(a[colIndex] - b[colIndex])) {
-                    if ((isNaN(a[colIndex])) && (isNaN(b[colIndex]))) {
-                        swap = (b[colIndex] < a[colIndex]) - (a[colIndex] < b[colIndex]);
-                    } else {
-                        swap = (isNaN(a[colIndex]) ? 1 : -1);
-                    }
-                } else {
-                    swap = (a[colIndex] - b[colIndex]);
+            function swapValues(colIndex, a, b, columnType) {
+                var valA = a[colIndex];
+                var valB = b[colIndex];
+                if (columnType===DataType.NUMBER) {
+                    valA = isNaN(valA) ? valA.replace(/,/g, "") : valA;
+                    valB = isNaN(valB) ? valB.replace(/,/g, "") : valB;
+                    valA = valA + 0;
+                    valB = valB + 0;
+                    return valA === valB ? 0 : (valA - valB < 0 ? -1 : 1);
                 }
-                return swap;
+                return valA === valB ? 0 : (valA < valB ? -1 : 1);
             }
         }
 
