@@ -38,7 +38,7 @@ define(['bullsfirst/framework/MessageBus',
         },
 
         render: function() {
-            // take out rows that might be sitting in the table
+            // Take out rows that might be sitting in the table
             this.$el.empty();
 
             // Add new rows from positions collection. Pass this object as context

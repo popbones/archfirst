@@ -40,7 +40,7 @@ define(['bullsfirst/domain/BrokerageAccount',
 
         render: function() {
             // Format account values for display 
-            var account = this.model.toJSON()  // returns a copy of the model's attributes
+            var account = this.model.toJSON();  // returns a copy of the model's attributes
             account.marketValueFormatted = Formatter.formatMoney(account.marketValue);
             account.cashPositionFormatted = Formatter.formatMoney(account.cashPosition);
 

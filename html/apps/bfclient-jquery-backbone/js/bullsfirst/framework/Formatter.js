@@ -53,6 +53,15 @@ define(function() {
             else {
                 return m.format('MM/DD/YYYY');
             }
+        },
+
+        formatMoment2DateTime: function(m) {
+            if ((typeof m === 'undefined') || (m === null)) {
+                return "";
+            }
+            else {
+                return m.format('MM/DD/YYYY hh:mm:ss A');
+            }
         }
     };
 });

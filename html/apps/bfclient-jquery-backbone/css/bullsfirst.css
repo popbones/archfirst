@@ -388,9 +388,59 @@ footer {
 	width: 916px;
 }
 
-.ord_tbl_name {
-	width: 160px;
-	text-align: left;
+.ord_tbl_creation_time {
+	width: 180px;
+	text-align: center;
+}
+
+.ord_tbl_account {
+	width: 170px;
+	text-align: center;
+}
+
+.ord_tbl_id {
+	width: 50px;
+	text-align: center;
+}
+
+.ord_tbl_type {
+	width: 50px;
+	text-align: center;
+}
+
+.ord_tbl_action {
+	width: 50px;
+	text-align: center;
+}
+
+.ord_tbl_symbol {
+	width: 50px;
+	text-align: center;
+}
+
+.ord_tbl_quantity {
+	width: 70px;
+	text-align: center;
+}
+
+.ord_tbl_limitPrice {
+	width: 80px;
+	text-align: center;
+}
+
+.ord_tbl_executionPrice {
+	width: 80px;
+	text-align: center;
+}
+
+.ord_tbl_status {
+	width: 86px;
+	text-align: center;
+}
+
+.ord_tbl_actions {
+	width: 50px;
+	text-align: center;
 }
 
 /* -----------------------------------------------------------------------------

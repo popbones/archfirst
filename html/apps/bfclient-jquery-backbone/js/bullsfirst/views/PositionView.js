@@ -31,7 +31,7 @@ define(['bullsfirst/domain/Position',
 
         render: function() {
             // Format position values for display 
-            var position = this.model.toJSON()  // returns a copy of the model's attributes
+            var position = this.model.toJSON();  // returns a copy of the model's attributes
             position.lotCreationTimeFormatted = Formatter.formatMoment2Date(moment(position.lotCreationTime));
             position.marketValueFormatted = Formatter.formatMoney(position.marketValue);
             position.lastTradeFormatted = Formatter.formatMoney(position.lastTrade);

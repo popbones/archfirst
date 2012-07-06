@@ -19,13 +19,64 @@
  *
  * @author Naresh Bhatia
  */
-define([
+define(['bullsfirst/domain/Orders',
+        'bullsfirst/framework/MessageBus',
+        'bullsfirst/views/ExecutionView',
+        'bullsfirst/views/OrderView'
         ],
-        function() {
+        function(Orders, MessageBus, ExecutionView, OrderView) {
 
     return Backbone.View.extend({
 
         el: '#orders_table tbody',
 
+        collection: new Orders(),
+
+        initialize: function() {
+            this.collection.bind('reset', this.render, this);
+
+            // Subscribe to events
+            MessageBus.on('OrderFilterChanged', function(filterCriteria) {
+                this.collection.fetch();
+            }, this);
+        },
+
+        render: function() {
+            // Take out rows that might be sitting in the table
+            this.$el.empty();
+
+            // Add new rows from orders collection. Pass this object as context
+            this.collection.each(function(order, i) {
+                var orderId = 'order-' + order.get('id');
+                var view = new OrderView({
+                    model: order,
+                    id: orderId,
+                    className: (i % 2) ? "" : "alt"
+                });
+                this.$el.append(view.render().el);
+
+                // Add rows for executions
+                var executions = order.get('executions');
+                if (executions && executions.length > 0) {
+                    this._renderExecutions(executions, orderId);
+                }
+            }, this);
+
+            // Display as TreeTable
+            $("#orders_table").treeTable();
+
+            return this;
+        },
+
+        _renderExecutions: function(executions, orderId) {
+            executions.forEach(function(execution) {
+                var view = new ExecutionView({
+                    model: execution,
+                    id: 'execution-' + execution.id,
+                    className: 'child-of-' + orderId
+                });
+                this.$el.append(view.render().el);
+            }, this);
+        }
     });
 });

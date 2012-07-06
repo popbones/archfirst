@@ -214,7 +214,17 @@
                             <table id="orders_table" class="zebra">
                                 <thead>
                                     <tr>
-                                        <th class="ord_tbl_name">Name</th>
+                                        <th class="ord_tbl_creation_time">Creation Time</th>
+                                        <th class="ord_tbl_account">Account</th>
+                                        <th class="ord_tbl_id">Order #</th>
+                                        <th class="ord_tbl_type">Type</th>
+                                        <th class="ord_tbl_action">Action</th>
+                                        <th class="ord_tbl_symbol">Symbol</th>
+                                        <th class="ord_tbl_quantity">Quantity</th>
+                                        <th class="ord_tbl_limitPrice">Limit Price</th>
+                                        <th class="ord_tbl_executionPrice">Execution Price</th>
+                                        <th class="ord_tbl_status">Status</th>
+                                        <th class="ord_tbl_actions">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -402,6 +412,68 @@
             {{/isTradable}}
         </td>
         {{/position}}
+    </script>
+
+    <script id="orderTemplate" type="text/x-mustache-tmpl">
+        {{#order}}
+        <td class="left">
+            {{creationTimeFormatted}}
+        </td>
+        <td class="left">
+            {{accountName}}
+        </td>
+        <td class="number">
+            {{id}}
+        </td>
+        <td class="center">
+            {{type}}
+        </td>
+        <td class="center">
+            {{side}}
+        </td>
+        <td class="center">
+            {{symbol}}
+        </td>
+        <td class="number">
+            {{quantity}}
+        </td>
+        <td class="number">
+            {{limitPriceFormatted}}
+        </td>
+        <td class="number">
+            {{executionPriceFormatted}}
+        </td>
+        <td class="center">
+            {{status}}
+        </td>
+        <td class="center">
+            {{#isActive}}
+            <a href="#" class="orders_table_cancel">Cancel</a>
+            {{/isActive}}
+        </td>
+        {{/order}}
+    </script>
+
+    <script id="executionTemplate" type="text/x-mustache-tmpl">
+        {{#execution}}
+        <td class="left">
+            {{creationTimeFormatted}}
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td class="number">
+            {{quantity}}
+        </td>
+        <td></td>
+        <td class="number">
+            {{priceFormatted}}
+        </td>
+        <td></td>
+        <td></td>
+        {{/execution}}
     </script>
 
     <!-- End of templates -->

@@ -19,10 +19,12 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
+define(['bullsfirst/domain/Orders',
+        'bullsfirst/domain/UserContext',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/views/AccountFilterView'
         ],
-        function(UserContext, AccountFilterView) {
+        function(Orders, UserContext, MessageBus, AccountFilterView) {
 
     return Backbone.View.extend({
 
@@ -44,8 +46,7 @@ define(['bullsfirst/domain/UserContext',
         },
 
         updateOrders: function() {
-            var formObject = this.$el.toObject();
-            console.log(formObject);
+            MessageBus.trigger('OrderFilterChanged', this.$el.toObject());
         },
 
         resetFilter: function() {
