@@ -110,7 +110,7 @@
                                 addRow = false;
                             }
                         } else {
-                            if (row.data[index].toLowerCase().indexOf(filterValues[i].toLowerCase()) < 0) {
+                            if ((row.data[index]+"").toLowerCase().indexOf((filterValues[i]+"").toLowerCase()) < 0) {
                                 addRow = false;
                             }
                         }
