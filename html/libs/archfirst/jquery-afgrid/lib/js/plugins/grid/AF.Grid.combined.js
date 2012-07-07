@@ -315,10 +315,12 @@
                 rowsAndGroup = null;
                 $rows.undelegate().unbind().remove();
                 $rows = null;
-                $afGrid.unbind($.afGrid.adjustRowWidth);
+                removeColumnDraggable($afGrid);
+				$afGrid.unbind($.afGrid.adjustRowWidth);
                 $afGrid.unbind($.afGrid.destroy).unbind($.afGrid.appendRows).undelegate(".group .group-header", "click");
                 $afGrid.undelegate(".afGrid-rows .row", "click").undelegate(".afGrid-rows .row", "mouseenter").undelegate(".afGrid-rows .row", "mouseleave").empty();
-                options = null;
+                $afGrid.data("afGridColumnDraggable", false);
+				options = null;
                 $afGrid = null;
                 cachedafGridData = null;
             }
@@ -378,9 +380,11 @@
 				updateColumnWidth(options);
 				rowsAndGroup = renderRowsAndGroups(options, cachedafGridData);
 				var $newRows = rowsAndGroup.$rowsMainContainer;
+				var oldScrollLeft = $rows[0].scrollLeft;
 				$rows.unbind("scroll.afGrid");
 				$rows.replaceWith($newRows);
 				$rows = $newRows;
+				$rows[0].scrollLeft = oldScrollLeft;
 				$rows.bind("scroll.afGrid", function() {
 					onafGridScroll($head, $rows, options);
 				});
@@ -441,14 +445,22 @@
 	}
 
     function makeColumnDraggable($afGrid) {
-        $.fn.draggable && $afGrid.find(".afGrid-heading .cell").draggable({
-            helper: function (event) {
-                return getHelper(event, $afGrid.attr("class"));
-            },
-            revert: false,
-            cancel: ".resize-handle",
-            appendTo: "body"
-        });
+		if (!$afGrid.data("afGridColumnDraggable")) {
+			$.fn.draggable && $afGrid.find(".afGrid-heading .cell").draggable({
+				helper: function (event) {
+					return getHelper(event, $afGrid.attr("class"));
+				},
+				revert: false,
+				cancel: ".resize-handle",
+				appendTo: "body"
+			});
+			$afGrid.data("afGridColumnDraggable", true);
+		}
+    }
+
+    function removeColumnDraggable($afGrid) {
+		$.fn.draggable && $afGrid.find(".afGrid-heading .cell").draggable("destroy");
+		$afGrid.removeData("afGridColumnDraggable");
     }
 
     function getHelper(event, cssClass) {

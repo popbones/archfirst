@@ -160,9 +160,11 @@
 				updateColumnWidth(options);
 				rowsAndGroup = renderRowsAndGroups(options, cachedafGridData);
 				var $newRows = rowsAndGroup.$rowsMainContainer;
+				var oldScrollLeft = $rows[0].scrollLeft;
 				$rows.unbind("scroll.afGrid");
 				$rows.replaceWith($newRows);
 				$rows = $newRows;
+				$rows[0].scrollLeft = oldScrollLeft;
 				$rows.bind("scroll.afGrid", function() {
 					onafGridScroll($head, $rows, options);
 				});
