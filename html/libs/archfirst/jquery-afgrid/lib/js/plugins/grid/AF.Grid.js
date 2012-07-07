@@ -200,6 +200,7 @@
 			//	$afGrid.trigger($.afGrid.datasetChange, [data]);
 			//} else {
 				$afGrid = $(options.afGridSelector);
+				$afGrid.trigger($.afGrid.destroy);
 				$afGrid.afGrid(afGridData);
 			//}
         }

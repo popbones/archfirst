@@ -196,12 +196,13 @@
 
         function renderData(data) {
             var afGridData = $.extend(options, data);
-            if ($afGrid) {
-				$afGrid.trigger($.afGrid.datasetChange, [data]);
-			} else {
+            //if ($afGrid) {
+			//	$afGrid.trigger($.afGrid.datasetChange, [data]);
+			//} else {
 				$afGrid = $(options.afGridSelector);
+				$afGrid.trigger($.afGrid.destroy);
 				$afGrid.afGrid(afGridData);
-			}
+			//}
         }
 
         function addNewRows(newData) {
@@ -374,7 +375,7 @@
 
             $afGrid.trigger($.afGrid.renderingComplete);
 			
-			$afGrid.unbind($.afGrid.datasetChange).bind($.afGrid.datasetChange, function(event, data) {
+			/*$afGrid.unbind($.afGrid.datasetChange).bind($.afGrid.datasetChange, function(event, data) {
 				options = $.extend(options, data);
 				updateColumnHashMap(options);
 				updateColumnWidth(options);
@@ -392,7 +393,7 @@
 				countOfLoadedRows = options.rows.length;
 				updateCountLabel($afGrid, options, countOfLoadedRows);
 				callMethodOnPlugins(plugins, "datasetChange", options);					
-			});
+			});*/
 			
         });
 
@@ -1021,8 +1022,12 @@ if (!String.hasOwnProperty("supplant")) {
                     if (lastFilter) {
                         $afGrid.bind($.afGrid.renderingComplete, function () {
                             var $filter = $("#" + lastFilter);
-                            if ($filter.hasClass("select-filter") || $filter.hasClass("input-filter")) {
-								$("#" + lastFilter).focus();
+							var $lastFilter = $("#" + lastFilter);
+                            if ($filter.hasClass("select-filter")) {
+								$lastFilter.focus();
+							} else if ($filter.hasClass("input-filter")) {
+								$lastFilter.focus();
+								createSelection($lastFilter[0], $lastFilter.val().length);
                             }
                         });
                     }
@@ -1051,6 +1056,22 @@ if (!String.hasOwnProperty("supplant")) {
         }
     });
 
+    function createSelection(field, start, end) {
+		end = end===undefined ? start : end;
+        if( field.createTextRange ) {
+            var selRange = field.createTextRange();
+            selRange.collapse(true);
+            selRange.moveStart('character', start);
+            selRange.moveEnd('character', end);
+            selRange.select();
+        } else if( field.setSelectionRange ) {
+            field.setSelectionRange(start, end);
+        } else if( field.selectionStart ) {
+            field.selectionStart = start;
+            field.selectionEnd = end;
+        }
+    }  
+	
 	function renderFilters(options) {
         return options.headingRowsRenderer(options.columns, {
             container: "<div class='afGrid-filter'></div>",
