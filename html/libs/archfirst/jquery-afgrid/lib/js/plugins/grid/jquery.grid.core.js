@@ -154,7 +154,7 @@
 
             $afGrid.trigger($.afGrid.renderingComplete);
 			
-			$afGrid.unbind($.afGrid.datasetChange).bind($.afGrid.datasetChange, function(event, data) {
+			/*$afGrid.unbind($.afGrid.datasetChange).bind($.afGrid.datasetChange, function(event, data) {
 				options = $.extend(options, data);
 				updateColumnHashMap(options);
 				updateColumnWidth(options);
@@ -172,7 +172,7 @@
 				countOfLoadedRows = options.rows.length;
 				updateCountLabel($afGrid, options, countOfLoadedRows);
 				callMethodOnPlugins(plugins, "datasetChange", options);					
-			});
+			});*/
 			
         });
 

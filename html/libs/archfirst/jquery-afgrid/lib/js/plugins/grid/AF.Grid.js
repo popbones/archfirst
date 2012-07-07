@@ -196,12 +196,12 @@
 
         function renderData(data) {
             var afGridData = $.extend(options, data);
-            if ($afGrid) {
-				$afGrid.trigger($.afGrid.datasetChange, [data]);
-			} else {
+            //if ($afGrid) {
+			//	$afGrid.trigger($.afGrid.datasetChange, [data]);
+			//} else {
 				$afGrid = $(options.afGridSelector);
 				$afGrid.afGrid(afGridData);
-			}
+			//}
         }
 
         function addNewRows(newData) {
