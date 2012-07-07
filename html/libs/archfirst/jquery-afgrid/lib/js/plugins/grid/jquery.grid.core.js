@@ -81,8 +81,11 @@
                 }));
             }
 
+			$rows[0].scrollLeft = $afGrid.data("lastScrollPos");
+
             $rows.bind("scroll.afGrid", function() {
 				onafGridScroll($head, $rows, options);
+				$afGrid.data("lastScrollPos", $rows[0].scrollLeft);
 			});
 
             function destroy() {
@@ -187,12 +190,13 @@
 	}
 	
 	function onafGridScroll($head, $rows, options) {
+		var eleRow = $rows[0];
 		$head.css({
-			marginLeft: -1 * $rows[0].scrollLeft
+			marginLeft: -1 * eleRow.scrollLeft
 		});
 		clearTimeout(scrollBottomTimer);
 		scrollBottomTimer = setTimeout(function () {
-			var scrolled = ($rows[0].scrollHeight - $rows.scrollTop()),
+			var scrolled = (eleRow.scrollHeight - $rows.scrollTop()),
 				containerHeight = $rows.outerHeight();
 			if ((scrolled <= (containerHeight - 17)) || (scrolled <= (containerHeight))) {
 				options.onScrollToBottom();
