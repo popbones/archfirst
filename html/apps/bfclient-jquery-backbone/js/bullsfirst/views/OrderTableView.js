@@ -37,7 +37,7 @@ define(['bullsfirst/domain/Orders',
 
             // Subscribe to events
             MessageBus.on('OrderFilterChanged', function(filterCriteria) {
-                this.collection.fetch();
+                this.collection.fetch({data: filterCriteria});
             }, this);
         },
 

@@ -36,17 +36,31 @@ define(['bullsfirst/domain/Orders',
         },
 
         initialize: function(options) {
+            // Create account filter view within the order filter
             new AccountFilterView({
                 el: '#ordflt_accountId',
                 collection: UserContext.getBrokerageAccounts()
             });
+
+            // Create date pickers
             $('#ordflt_fromDate').datepicker();
             $('#ordflt_toDate').datepicker();
+
             this.resetFilter();
         },
 
         updateOrders: function() {
-            MessageBus.trigger('OrderFilterChanged', this.$el.toObject());
+            // Process filter criteria to server format
+            var filterCriteria = this.$el.toObject();
+            if (filterCriteria.fromDate) {
+                filterCriteria.fromDate = moment($('#ordflt_fromDate').datepicker('getDate')).format('YYYY-MM-DD');
+            }
+            if (filterCriteria.toDate) {
+                filterCriteria.toDate = moment($('#ordflt_toDate').datepicker('getDate')).format('YYYY-MM-DD');
+            }
+
+            // Send OrderFilterChanged message with filter criteria
+            MessageBus.trigger('OrderFilterChanged', filterCriteria);
         },
 
         resetFilter: function() {
