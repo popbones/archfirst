@@ -23,7 +23,6 @@
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
             columnReorder: function ($afGrid, options) {
-
                 options = $.extend({
                     canReorderColumn: true,
                     onColumnReorder: $.noop
@@ -33,9 +32,9 @@
                     $(this).removeClass("reorder");
                     var columnIdToMove = ui.draggable.attr("id").split("_")[1],
                         columnIdToMoveAfter = $(this).attr("id").split("_")[1],
-                        newColumnOrder = [];
-                    $.each(options.columns, function (i, column) {
-                        if (column.id !== columnIdToMove) {
+                        newColumnOrder = [];                    
+					$.each(options.columns, function (i, column) {
+						if (column.id !== columnIdToMove) {
                             newColumnOrder.push(column.id);
                         }
                         if (column.id === columnIdToMoveAfter) {
@@ -64,10 +63,18 @@
                     options = null;
                     $.fn.droppable && $afGrid.find(".afGrid-heading .cell").droppable("destroy");
                 }
-
+				
+				function datasetChange(newOptions) {
+					if (!options.canReorderColumn) {
+                        return;
+                    }
+					options = $.extend(options, newOptions);
+				}
+				
                 return {
                     load: load,
-                    destroy: destroy
+                    destroy: destroy,
+					datasetChange: datasetChange
                 };
             }
         }

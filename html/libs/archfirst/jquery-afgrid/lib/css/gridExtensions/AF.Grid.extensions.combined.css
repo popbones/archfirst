@@ -16,8 +16,11 @@
     display: block;
 }.date {
     color: #0099ff;
-	display: inline-block;
+    display: inline-block;
     padding: 4px 0 5px;
+	width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }.afGrid .afGrid-rows .button {
 	height: auto;
 	font-size: 10px;
@@ -52,4 +55,8 @@
 
 .afGrid-switch-theme .theme-grey {
 	background-color: #C5C5C4;
+}
+
+.afGrid-switch-theme .theme-yellow {
+	background-color: #ffcc33;
 }

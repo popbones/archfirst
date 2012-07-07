@@ -30,12 +30,12 @@
             canGroup: true,
             groupsPlaceHolder: "." + options.id + "-afGrid-group-by",
             columnWidthOverride: null,
-	    rowsToLoad: 20,
+			rowsToLoad: 20,
             afGridSelector: "#" + options.id,
             onRowClick: onRowClick,
-	    onSort: onSortBy,
+			onSort: onSortBy,
             onGroupChange: onGroupBy,
-	    onGroupReorder: onGroupReorder,
+			onGroupReorder: onGroupReorder,
             onFilter: onFilterBy,
             onColumnReorder: onColumnReorder,
             onColumnResize: onColumnResize,
@@ -47,23 +47,23 @@
         var $afGrid;
         
         var store = options.dataSource,
-	    loadedRows = 0,
+			loadedRows = 0,
             totalRows = 0,
-	    rowsToLoad = 0,
+			rowsToLoad = 0,
             columnData = null,
             afGridCurrentStateData = {};
         
         function render(data) {
-            columnData = data.columns;
-            totalRows = data.totalRows;
-            loadedRows = data.rows.length;
-            rowsToLoad = data.rowsToLoad || options.rowsToLoad;
-            data.columnWidthOverride = afGridCurrentStateData.columnWidthOverride;
-            renderData(data);
-            afGridCurrentStateData.columnOrder = $.map(data.columns, function (column) {
-                return column.id;
-            });
-            saveStateOfCurrentGrid();
+			columnData = data.columns;
+			totalRows = data.totalRows;
+			loadedRows = data.rows.length;
+			rowsToLoad = data.rowsToLoad || options.rowsToLoad;
+			data.columnWidthOverride = afGridCurrentStateData.columnWidthOverride;
+			renderData(data);
+			afGridCurrentStateData.columnOrder = $.map(data.columns, function (column) {
+				return column.id;
+			});
+			saveStateOfCurrentGrid();
         }
 
         function saveStateOfCurrentGrid() {
@@ -78,8 +78,8 @@
                     callback(JSON.parse(data));
                 });
             } else {
-		callback({});
-	    }
+				callback({});
+			}
         }
 
         function fetchRowsIncrementally() {
@@ -91,10 +91,10 @@
                 loadFrom: loadedRows + 1,
                 count: rowsToLoad
             });
-	    store.fetchRows(requestData, onRecieveOfNewRows);
+			store.fetchRows(requestData, onReceiveOfNewRows);
         }
 
-        function onRecieveOfNewRows(newRows) {
+        function onReceiveOfNewRows(newRows) {
             loadedRows += newRows.rows.length;
             addNewRows(newRows);
         }
@@ -135,7 +135,7 @@
         function onSortBy(columnId, direction) {
             afGridCurrentStateData.sortByColumn = columnId;
             afGridCurrentStateData.sortByDirection = direction;
-	    store.sortBy(afGridCurrentStateData, render);
+			store.sortBy(afGridCurrentStateData, render);
         }
 
         function onColumnReorder(newColumnOrder) {
@@ -154,8 +154,8 @@
                 }
                 afGridCurrentStateData.groupByColumns = newGroupByColumns;
             }
-            afGridCurrentStateData.columnOrder = newColumnOrder;
-	    store.reorderColumn(afGridCurrentStateData, render);
+			afGridCurrentStateData.columnOrder = newColumnOrder;
+			store.reorderColumn(afGridCurrentStateData, render);
         }
 
         function getColumnById(columnId) {
@@ -197,15 +197,15 @@
         function renderData(data) {
             var afGridData = $.extend(options, data);
             if ($afGrid) {
-                $afGrid.trigger($.afGrid.destroy);
-                $afGrid = null;
-            }
-            $afGrid = $(options.afGridSelector);
-            $afGrid.afGrid(afGridData);
+				$afGrid.trigger($.afGrid.datasetChange, [data]);
+			} else {
+				$afGrid = $(options.afGridSelector);
+				$afGrid.afGrid(afGridData);
+			}
         }
 
         function addNewRows(newData) {
-            $afGrid.trigger($.afGrid.appendRows, [newData.rows]);
+            $afGrid.trigger($.afGrid.appendRows, [newData.rows, afGridCurrentStateData.columnWidthOverride]);
         }
 
 	function getDefaultOptions() {
@@ -214,7 +214,7 @@
 	
         return {
             load: load,
-	    getDefaultOptions: getDefaultOptions
+			getDefaultOptions: getDefaultOptions
         };
     };
     

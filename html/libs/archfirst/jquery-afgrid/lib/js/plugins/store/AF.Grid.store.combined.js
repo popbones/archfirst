@@ -21,7 +21,12 @@
 (function ($) {
 
     var fakeDataStoreRows, fakeDataStoreColumns;
-
+    
+    var DataType = {
+        NUMBER: "NUMBER",
+        TEXT: "TEXT"
+    };
+    
     AF.Grid.FakeLocalStore = function (dataset) {
 
         function fetchRows(requestData, onSuccess) {
@@ -105,7 +110,7 @@
                                 addRow = false;
                             }
                         } else {
-                            if (row.data[index].toLowerCase().indexOf(filterValues[i].toLowerCase()) < 0) {
+                            if ((row.data[index]+"").toLowerCase().indexOf((filterValues[i]+"").toLowerCase()) < 0) {
                                 addRow = false;
                             }
                         }
@@ -167,7 +172,7 @@
         function asyncCallback(callback, dummyResponseData) {
             setTimeout(function () {
                 callback(dummyResponseData);
-            }, 100);
+            }, 50);
         }
 
         function reorderData(columnOrder) {
@@ -224,17 +229,24 @@
             multiColumnSorting(fakeDataStoreRows, sortOrder, sortDirection);
         }
 
-        function multiColumnSorting(TheArr, order, direction) {
-
+        function getColumnType(columnIndex) {           
+            if (columnIndex!==undefined) {
+                return DataType[fakeDataStoreColumns[columnIndex].renderer];
+            }
+            return undefined;
+        }
+        
+        function multiColumnSorting(TheArr, columnIndexInOrder, direction) {
 
             function sortMulti(objA, objB, n) {
                 n = n || 0;
                 var a = objA.data,
                     b = objB.data,
-                    swap = swapValues(order[n], a, b);
-                if ((order[n] === undefined) || (swap !== 0)) {
+                    columnType = getColumnType(columnIndexInOrder[n]),
+                    swap = swapValues(columnIndexInOrder[n], a, b, columnType);                                
+                if ((columnIndexInOrder[n] === undefined) || (swap !== 0)) {
                     return swap * direction[n];
-                } else if (n < order.length) {
+                } else if (n < columnIndexInOrder.length) {
                     return sortMulti(objA, objB, ++n);
                 } else {
                     return null;
@@ -243,18 +255,17 @@
 
             TheArr.sort(sortMulti);
 
-            function swapValues(colIndex, a, b) {
-                var swap = 0;
-                if (isNaN(a[colIndex] - b[colIndex])) {
-                    if ((isNaN(a[colIndex])) && (isNaN(b[colIndex]))) {
-                        swap = (b[colIndex] < a[colIndex]) - (a[colIndex] < b[colIndex]);
-                    } else {
-                        swap = (isNaN(a[colIndex]) ? 1 : -1);
-                    }
-                } else {
-                    swap = (a[colIndex] - b[colIndex]);
+            function swapValues(colIndex, a, b, columnType) {
+                var valA = a[colIndex];
+                var valB = b[colIndex];
+                if (columnType===DataType.NUMBER) {
+                    valA = isNaN(valA) ? valA.replace(/,/g, "") : valA;
+                    valB = isNaN(valB) ? valB.replace(/,/g, "") : valB;
+                    valA = valA + 0;
+                    valB = valB + 0;
+                    return valA === valB ? 0 : (valA - valB < 0 ? -1 : 1);
                 }
-                return swap;
+                return valA === valB ? 0 : (valA < valB ? -1 : 1);
             }
         }
 
@@ -838,12 +849,14 @@
                 label: "Title Name",
                 id: "colTitleName",
                 width: 150,
-                filterData: ""
+                filterData: "",
+                groupBy: true
             }, {
                 label: "Title Released",
                 id: "colTitleReleased",
-                width: 80,
-                filterData: ""           
+                width: 100,
+                filterData: "",
+                groupBy: true           
             }, {
                 label: "Artist Name",
                 id: "colName",
@@ -869,7 +882,7 @@
                 id: "colGenre",
                 width: 150,
                 groupBy: true,
-                filterData: AF.Grid.FakeLocalStore.getFilterData(2, rows)
+                filterData: AF.Grid.FakeLocalStore.getFilterData(5, rows)
             }];
         }
                 

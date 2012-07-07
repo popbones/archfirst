@@ -27,7 +27,7 @@
                 options = $.extend({
                     canResizeColumn: true,
                     onColumnResize: $.noop,
-                    minColumnWidth: 100,
+                    minColumnWidth: 30,
                     maxColumnWidth: 700
                 }, options);
 
@@ -40,17 +40,17 @@
                     var $headingCells = $afGrid.find(".afGrid-heading .cell");
                     $headingCells.each(function () {
                         var $cell = $(this),
-			    $resizeHandle = $("<span class='resize-handle'></span>");
+						$resizeHandle = $("<span class='resize-handle'></span>");
                         $resizeHandle.bind("click", function () {
                             return false;
                         });
 
                         $resizeHandle.bind("mousedown", function (event) {
                             var columnId = $(this).parents(".cell").eq(0).attr("id").split("_")[1],
-				posX,
-				originalWidth,
-				$guide,
-				newWidth;
+								posX,
+								originalWidth,
+								$guide,
+								newWidth;
                             $guide = $("<div class='resize-guide'></div>");
                             $guide.css({
                                 height: $afGrid.height(),
@@ -70,9 +70,9 @@
                                 } else {
                                     
                                 }
-				$guide.css({
-				    left: $resizeHandle.offset().left + $resizeHandle.width()
-				});
+								$guide.css({
+									left: $resizeHandle.offset().left + $resizeHandle.width()
+								});
                                 $cell.width(newWidth);
                                 options.columns[options.columnsHashMap[columnId]].width = newWidth;
                                 return false;
@@ -86,7 +86,7 @@
                                 $afGrid.find(".afGrid-rows ." + columnId).width(newWidth);
                                 $afGrid.find(".afGrid-filter ." + columnId).width(newWidth);
                                 options.onColumnResize(columnId, originalWidth, newWidth);
-				$afGrid.trigger($.afGrid.adjustRowWidth);
+								$afGrid.trigger($.afGrid.adjustRowWidth);
                                 return false;
                             });
                             return false;

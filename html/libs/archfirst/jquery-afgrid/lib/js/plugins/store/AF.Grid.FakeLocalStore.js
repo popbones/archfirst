@@ -172,7 +172,7 @@
         function asyncCallback(callback, dummyResponseData) {
             setTimeout(function () {
                 callback(dummyResponseData);
-            }, 100);
+            }, 50);
         }
 
         function reorderData(columnOrder) {

@@ -119,6 +119,7 @@
                         removeColumnFromGroup($j(this).parents(".cell").eq(0).attr("id").split("_")[1]);
                         return false;
                     });
+
                     renderGroups(options.columns, options.groupBy);
 
                     $.fn.droppable && $groupsMainContainer.droppable({
@@ -153,10 +154,21 @@
                     currentGroupColumnIds = null;
                     options = null;
                 }
-
+				
+				function datasetChange(newOptions) {
+					if (!options.canGroup) {
+                        return;
+                    }
+					$groupsMainContainer = $(options.groupsPlaceHolder);
+					destroy();
+					options = $.extend(options, newOptions);
+					load();
+				}
+				
                 return {
                     load: load,
-                    destroy: destroy
+                    destroy: destroy,
+					datasetChange: datasetChange
                 };
             }
         }

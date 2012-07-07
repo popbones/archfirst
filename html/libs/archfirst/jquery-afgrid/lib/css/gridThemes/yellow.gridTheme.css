@@ -60,7 +60,7 @@
 
 /*afGrid.Date.css*/
 .afGrid-yellow .date {
-    color: #0099ff;
+    color: #9e0b0e;
 }
 
 /*afGridColumnReorder.css*/
@@ -123,6 +123,6 @@
 }
 
 .afGrid-group-by-yellow.ui-state-highlight {
-	background-color: #D7D6D6;
+	background-color: #E5E5E5;
 	background-image: none;
 }

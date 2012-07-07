@@ -42,6 +42,8 @@
     background: url(images/defaultTheme/afGrid_header_bg.png) repeat-x;
     display: inline-block;
     position: relative;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 html* .afGrid .afGrid-heading .cell {
@@ -78,6 +80,7 @@ html* .afGrid .afGrid-heading .cell {
     display: inline-block;
     vertical-align: middle;
     margin-top: 4px;
+	text-overflow: ellipsis;
 }
 
 html* .afGrid .row .cell {
@@ -147,6 +150,10 @@ html* .afGrid .group .cell {
     text-align: right;
     padding: 2px 5px 2px 0;
 
+}
+
+.NUMBER {
+    text-align: right;
 }.afGrid .afGrid-heading .reorder {
 	border-right-color: #8FC65B;
 	border-right-width: 5px;
@@ -177,7 +184,7 @@ html* .afGrid .group .cell {
     display: none;
     width: 12px;
     height: 16px;
-    right: 10px;
+    right: 2px;
     top: 4px;
     position: absolute;
 }
