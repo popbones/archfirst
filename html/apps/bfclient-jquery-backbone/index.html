@@ -239,15 +239,41 @@
                             <h1>Transaction History</h1>
                         </div>
 
-                        <div class="toolbarLight">
-                            <button id="txn_update" type="button">Update</button>
+                        <div class="toolbar">
+                            <form id="txnfltForm" action="#">
+                            <div class="toolbarRowRight">
+                                <button id="txn_update" type="button">Update</button>
+                                <button id="txnflt_reset" type="button">Reset Filter</button>
+                            </div>
+
+                            <div class="toolbarRow">
+                                <label for="txnflt_accountId" class="first">Account</label>
+                                <select id="txnflt_accountId" name="accountId">
+                                </select>
+
+                                <label for="txnflt_fromDate">From</label>
+                                <input
+                                    id="txnflt_fromDate" name="fromDate" type="text"
+                                    class="toolbarDateField" />
+
+                                <label for="txnflt_toDate">To</label>
+                                <input
+                                    id="txnflt_toDate" name="toDate" type="text"
+                                    class="toolbarDateField" />
+                            </div>
+
+                            </form>
                         </div>
 
                         <div id="txn_tab_content">
                             <table id="txn_table" class="zebra">
                                 <thead>
                                     <tr>
-                                        <th class="txn_tbl_name">Name</th>
+                                        <th class="txn_tbl_creation_time">Creation Time</th>
+                                        <th class="txn_tbl_account">Account</th>
+                                        <th class="txn_tbl_type">Type</th>
+                                        <th class="txn_tbl_description">Description</th>
+                                        <th class="txn_tbl_amount">Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>

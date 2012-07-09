@@ -20,13 +20,31 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/Order',
-        'bullsfirst/framework/Formatter'
+        'bullsfirst/services/OrderService',
+        'bullsfirst/framework/ErrorUtil',
+        'bullsfirst/framework/Formatter',
+        'bullsfirst/framework/MessageBus'
         ],
-        function(Order, Formatter) {
+        function(Order, OrderService, ErrorUtil, Formatter, MessageBus) {
 
     return Backbone.View.extend({
 
         tagName: 'tr',
+
+        events: {
+            'click .orders_table_cancel': 'cancelOrder'
+        },
+
+        cancelOrder: function() {
+            OrderService.cancelOrder(
+                this.model.id, this.cancelOrderDone, ErrorUtil.showError);
+        },
+
+        cancelOrderDone: function(data, textStatus, jqXHR) {
+            // TODO: Ideally this should simply require updating the current order,
+            // but the server does not support fetching a single order.
+            MessageBus.trigger('UpdateOrders');
+        },
 
         render: function() {
             // Format order values for display 

@@ -47,6 +47,11 @@ define(['bullsfirst/domain/Orders',
             $('#ordflt_toDate').datepicker();
 
             this.resetFilter();
+
+            // Subscribe to events
+            MessageBus.on('UpdateOrders', function() {
+                this.updateOrders();
+            }, this);
         },
 
         updateOrders: function() {

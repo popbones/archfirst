@@ -444,6 +444,42 @@ footer {
 }
 
 /* -----------------------------------------------------------------------------
+ * Transactions Tab
+ * -------------------------------------------------------------------------- */
+#txn_tab_content {
+   padding-bottom: 20px;
+}
+
+#txn_table {
+	width: 916px;
+}
+
+.txn_tbl_creation_time {
+	width: 180px;
+	text-align: center;
+}
+
+.txn_tbl_account {
+	width: 170px;
+	text-align: center;
+}
+
+.txn_tbl_type {
+	width: 60px;
+	text-align: center;
+}
+
+.txn_tbl_description {
+	width: 406px;
+	text-align: left;
+}
+
+.txn_tbl_amount {
+	width: 100px;
+	text-align: center;
+}
+
+/* -----------------------------------------------------------------------------
  * Table Styles
  * inspired by http://www.duoh.com/csstutorials/csstables/
  * -------------------------------------------------------------------------- */
