@@ -15,7 +15,7 @@
  */
 
 /**
- * bullsfirst/views/OrderFilterView
+ * bullsfirst/views/TransactionFilterView
  *
  * @author Naresh Bhatia
  */
@@ -27,59 +27,45 @@ define(['bullsfirst/domain/UserContext',
 
     return Backbone.View.extend({
 
-        el: '#ordfltForm',
+        el: '#txnfltForm',
 
         events: {
-            'click #orders_update': 'updateOrders',
-            'click #ordflt_reset': 'resetFilter'
+            'click #txn_update': 'updateTransactions',
+            'click #txnflt_reset': 'resetFilter'
         },
 
         initialize: function(options) {
-            // Create account filter view within the order filter
+            // Create account filter view within the transaction filter
             new AccountFilterView({
-                el: '#ordflt_accountId',
+                el: '#txnflt_accountId',
                 collection: UserContext.getBrokerageAccounts()
             });
 
             // Create date pickers
-            $('#ordflt_fromDate').datepicker();
-            $('#ordflt_toDate').datepicker();
+            $('#txnflt_fromDate').datepicker();
+            $('#txnflt_toDate').datepicker();
 
             this.resetFilter();
-
-            // Subscribe to events
-            MessageBus.on('UpdateOrders', function() {
-                this.updateOrders();
-            }, this);
         },
 
-        updateOrders: function() {
+        updateTransactions: function() {
             // Process filter criteria to server format
             var filterCriteria = this.$el.toObject();
             if (filterCriteria.fromDate) {
-                filterCriteria.fromDate = moment($('#ordflt_fromDate').datepicker('getDate')).format('YYYY-MM-DD');
+                filterCriteria.fromDate = moment($('#txnflt_fromDate').datepicker('getDate')).format('YYYY-MM-DD');
             }
             if (filterCriteria.toDate) {
-                filterCriteria.toDate = moment($('#ordflt_toDate').datepicker('getDate')).format('YYYY-MM-DD');
-            }
-            if (filterCriteria.sides) {
-                filterCriteria.sides = filterCriteria.sides.join(",");
-            }
-            if (filterCriteria.statuses) {
-                filterCriteria.statuses = filterCriteria.statuses.join(",");
+                filterCriteria.toDate = moment($('#txnflt_toDate').datepicker('getDate')).format('YYYY-MM-DD');
             }
 
             // Send OrderFilterChanged message with filter criteria
-            MessageBus.trigger('OrderFilterChanged', filterCriteria);
+            MessageBus.trigger('TransactionFilterChanged', filterCriteria);
         },
 
         resetFilter: function() {
-           this.$el.find('#ordflt_accountId').val('');
-           this.$el.find('#ordflt_orderId').val('');
-           this.$el.find('#ordflt_symbol').val('');
-           this.$el.find('#ordflt_fromDate').datepicker('setDate', new Date());
-           this.$el.find('#ordflt_toDate').datepicker('setDate', new Date());
-           this.$el.find('input:checkbox').prop('checked', false);
+           this.$el.find('#txnflt_accountId').val('');
+           this.$el.find('#txnflt_fromDate').datepicker('setDate', new Date());
+           this.$el.find('#txnflt_toDate').datepicker('setDate', new Date());
         }
     });
 });

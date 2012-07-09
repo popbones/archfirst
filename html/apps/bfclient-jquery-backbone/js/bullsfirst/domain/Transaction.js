@@ -15,22 +15,20 @@
  */
 
 /**
- * bullsfirst/views/TransactionsTabView
+ * bullsfirst/domain/Transaction
+ *
+ * Attributes:
+ *   accountId: int
+ *   accountName: String
+ *   transactionId: int,
+ *   creationTime: Date
+ *   type: String,
+ *   description: String
+ *   amount: Money
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/views/TransactionFilterView',
-        'bullsfirst/views/TransactionTableView'
-        ],
-        function(TransactionFilterView, TransactionTableView) {
-
-    return Backbone.View.extend({
-
-        el: '#transactions_tab',
-
-        initialize: function(options) {
-            new TransactionFilterView();
-            new TransactionTableView();
-        }
+define(function() {
+    return Backbone.Model.extend({
     });
 });

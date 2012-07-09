@@ -15,22 +15,15 @@
  */
 
 /**
- * bullsfirst/views/TransactionsTabView
+ * bullsfirst/domain/Transactions
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/views/TransactionFilterView',
-        'bullsfirst/views/TransactionTableView'
-        ],
-        function(TransactionFilterView, TransactionTableView) {
+define(['bullsfirst/domain/Transaction'],
+        function(Transaction) {
 
-    return Backbone.View.extend({
-
-        el: '#transactions_tab',
-
-        initialize: function(options) {
-            new TransactionFilterView();
-            new TransactionTableView();
-        }
+    return Backbone.Collection.extend({
+        model: Transaction,
+        url: '/bfoms-javaee/rest/secure/transactions'
     });
 });

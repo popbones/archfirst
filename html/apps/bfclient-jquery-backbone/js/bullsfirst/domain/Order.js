@@ -35,9 +35,7 @@
  *
  * @author Naresh Bhatia
  */
-define([
-        ],
-        function() {
+define(function() {
 
     return Backbone.Model.extend({
 
