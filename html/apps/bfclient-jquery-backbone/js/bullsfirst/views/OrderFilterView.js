@@ -58,6 +58,12 @@ define(['bullsfirst/domain/Orders',
             if (filterCriteria.toDate) {
                 filterCriteria.toDate = moment($('#ordflt_toDate').datepicker('getDate')).format('YYYY-MM-DD');
             }
+            if (filterCriteria.sides) {
+                filterCriteria.sides = filterCriteria.sides.join(",");
+            }
+            if (filterCriteria.statuses) {
+                filterCriteria.statuses = filterCriteria.statuses.join(",");
+            }
 
             // Send OrderFilterChanged message with filter criteria
             MessageBus.trigger('OrderFilterChanged', filterCriteria);
@@ -65,10 +71,11 @@ define(['bullsfirst/domain/Orders',
 
         resetFilter: function() {
            this.$el.find('#ordflt_accountId').val('');
-           this.$el.find('input').val('');
+           this.$el.find('#ordflt_orderId').val('');
+           this.$el.find('#ordflt_symbol').val('');
+           this.$el.find('#ordflt_fromDate').datepicker('setDate', new Date());
+           this.$el.find('#ordflt_toDate').datepicker('setDate', new Date());
            this.$el.find('input:checkbox').prop('checked', false);
-           $('#ordflt_fromDate').datepicker('setDate', new Date());
-           $('#ordflt_toDate').datepicker('setDate', new Date());
         }
     });
 });
