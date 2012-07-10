@@ -250,8 +250,8 @@ footer {
  * Home Page
  * -------------------------------------------------------------------------- */
 #home_page {
-   position: relative;
-   margin-top: 16px;
+    position: relative;
+    margin-top: 16px;
 }
 
 #home_page .login {
@@ -272,13 +272,18 @@ footer {
 }
  
 /* -----------------------------------------------------------------------------
- * Accounts Tab
+ * User Page
  * -------------------------------------------------------------------------- */
-#account_tab_content {
-   position: relative;  /* pushes chart inside the account tab */
-   padding-bottom: 20px;
+.tab_content {
+    clear: both;
+    position: relative;  /* pushes right side content like charts inside the tab */
+    padding-bottom: 20px;
 }
 
+
+/* -----------------------------------------------------------------------------
+ * Accounts Tab
+ * -------------------------------------------------------------------------- */
 #accounts_chart {
     width: 350px;
     position: absolute;
@@ -319,10 +324,6 @@ footer {
 /* -----------------------------------------------------------------------------
  * Positions Tab
  * -------------------------------------------------------------------------- */
-#positions_tab_content {
-   padding-bottom: 20px;
-}
-
 #positions_table {
 	width: 916px;
 }
@@ -380,10 +381,6 @@ footer {
 /* -----------------------------------------------------------------------------
  * Orders Tab
  * -------------------------------------------------------------------------- */
-#orders_tab_content {
-   padding-bottom: 20px;
-}
-
 #orders_table {
 	width: 916px;
 }
@@ -446,10 +443,6 @@ footer {
 /* -----------------------------------------------------------------------------
  * Transactions Tab
  * -------------------------------------------------------------------------- */
-#txn_tab_content {
-   padding-bottom: 20px;
-}
-
 #txn_table {
 	width: 916px;
 }

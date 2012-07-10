@@ -73,6 +73,8 @@
                         <li><a href="#positions_tab">Positions</a></li>
                         <li><a href="#orders_tab">Orders</a></li>
                         <li><a href="#transactions_tab">Transaction History</a></li>
+                        <li><a href="#trade_tab">Trade</a></li>
+                        <li><a href="#transfer_tab">Transfer</a></li>
                     </ul>
                     <div class="rightSideLinks">
                         <span id="loggedin_username"></span> |
@@ -90,7 +92,7 @@
                             <button id="act_add_account" type="button">Add Account</button>
                         </div>
 
-                        <div id="account_tab_content">
+                        <div class="tab_content">
                             <table id="accounts_table" class="zebra">
                                 <thead>
                                     <tr>
@@ -126,7 +128,7 @@
                             <button id="pos_update" type="button">Update</button>
                         </div>
 
-                        <div id="positions_tab_content">
+                        <div class="tab_content">
                             <table id="positions_table" class="zebra">
                                 <thead>
                                     <tr>
@@ -210,7 +212,7 @@
                             </form>
                         </div>
 
-                        <div id="orders_tab_content">
+                        <div class="tab_content">
                             <table id="orders_table" class="zebra">
                                 <thead>
                                     <tr>
@@ -265,7 +267,7 @@
                             </form>
                         </div>
 
-                        <div id="txn_tab_content">
+                        <div class="tab_content">
                             <table id="txn_table" class="zebra">
                                 <thead>
                                     <tr>
@@ -281,6 +283,80 @@
                             </table>
                         </div>
                     </div>
+
+                    <!-- Trade Tab -->
+                    <div id="trade_tab">
+                        <div class="titleLeft">
+                            <h1>Trade</h1>
+                        </div>
+
+                        <div class="tab_content">
+                            <form id="tradeForm">
+                                <ol>
+                                    <li>
+                                        <label for=tradeForm_account>Account</label>
+                                        <select id=tradeForm_account name=brokerageAccountId>
+                                        </select>
+                                    </li>
+
+                                    <li>
+                                        <label for=tradeForm_symbol>Symbol</label>
+                                        <input class="validate[required]" type=text name=symbol id=tradeForm_symbol required>
+                                    </li>
+
+                                    <li>
+                                        <label for=tradeForm_action>Action</label>
+                                        <select id=tradeForm_action name=side>
+                                            <option value=Buy>Buy</option>
+                                            <option value=Sell>Sell</option>
+                                        </select>
+                                    </li>            
+
+                                    <li>
+                                        <label for=tradeForm_quantity>Quantity</label>
+                                        <input class="validate[required,integer]" type=text name=quantity id=tradeForm_quantity required>
+                                    </li>
+
+                                    <li>
+                                        <label for=tradeForm_orderType>Order Type</label>
+                                        <select id=tradeForm_orderType name=type>
+                                            <option value=Market>Market</option>
+                                            <option value=Limit>Limit</option>
+                                        </select>
+                                    </li>            
+
+                                    <li>
+                                        <label for=tradeForm_limitPrice>Limit Price</label>
+                                        <input class="validate[number]" type=text name=limitPrice id=tradeForm_limitPrice>
+                                    </li>
+
+                                    <li>
+                                        <label for=tradeForm_term>Term</label>
+                                        <select id=tradeForm_term name=term>
+                                            <option value=GoodForTheDay>Good For The Day</option>
+                                            <option value=GoodTilCanceled>Good Til Canceled</option>
+                                        </select>
+                                    </li>            
+
+                                    <li>
+                                        <input type=checkbox name=allOrNone id=tradeForm_allOrNone> All-or-none
+                                    </li>
+
+                                    <li>
+                                        <button id=tradeForm_previewOrder type=submit>Preview Order</button>
+                                    </li>
+                                </ol>
+                            </form>
+                        </div>
+                    </div>
+
+                    <!-- Transfer Tab -->
+                    <div id="transfer_tab">
+                        <div class="titleLeft">
+                            <h1>Transfer</h1>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
