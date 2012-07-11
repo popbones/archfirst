@@ -30,7 +30,7 @@ define(['bullsfirst/domain/UserContext',
 
         pages: {},
 
-        tabs: ['accounts', 'positions', 'orders', 'transactions'],
+        tabs: ['accounts', 'positions', 'orders', 'transactions', 'trade', 'transfer'],
 
         routes: {
             '': 'showHomePage',

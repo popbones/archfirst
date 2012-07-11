@@ -171,7 +171,7 @@
                                 <label for="ordflt_orderId">Order #</label>
                                 <input
                                     id="ordflt_orderId" name="orderId" type="text"
-                                    class="toolbarTextField validate[integer]" />
+                                    class="toolbarTextField validate[custom[integer]]" />
 
                                 <label for="ordflt_symbol">Symbol</label>
                                 <input
@@ -291,22 +291,22 @@
                         </div>
 
                         <div class="tab_content">
-                            <form id="tradeForm">
+                            <form id="tradeForm" action="#">
                                 <ol>
                                     <li>
-                                        <label for=tradeForm_account>Account</label>
-                                        <select id=tradeForm_account name=brokerageAccountId>
+                                        <label for=tradeForm_account_selector>Account</label>
+                                        <select id=tradeForm_account_selector name=brokerageAccountId>
                                         </select>
                                     </li>
 
                                     <li>
                                         <label for=tradeForm_symbol>Symbol</label>
-                                        <input class="validate[required]" type=text name=symbol id=tradeForm_symbol required>
+                                        <input class="validate[required]" type=text name=orderParams.symbol id=tradeForm_symbol required>
                                     </li>
 
                                     <li>
                                         <label for=tradeForm_action>Action</label>
-                                        <select id=tradeForm_action name=side>
+                                        <select id=tradeForm_action name=orderParams.side>
                                             <option value=Buy>Buy</option>
                                             <option value=Sell>Sell</option>
                                         </select>
@@ -314,32 +314,34 @@
 
                                     <li>
                                         <label for=tradeForm_quantity>Quantity</label>
-                                        <input class="validate[required,integer]" type=text name=quantity id=tradeForm_quantity required>
+                                        <input class="validate[required,custom[integer]]" type=text name=orderParams.quantity id=tradeForm_quantity required>
                                     </li>
 
                                     <li>
                                         <label for=tradeForm_orderType>Order Type</label>
-                                        <select id=tradeForm_orderType name=type>
+                                        <select id=tradeForm_orderType name=orderParams.type>
                                             <option value=Market>Market</option>
                                             <option value=Limit>Limit</option>
                                         </select>
                                     </li>            
 
-                                    <li>
+                                    <li id=tradeForm_limitPriceItem class=nodisplay>
                                         <label for=tradeForm_limitPrice>Limit Price</label>
-                                        <input class="validate[number]" type=text name=limitPrice id=tradeForm_limitPrice>
+                                        <input class="validate[custom[number]]" type=text name=orderParams.limitPrice.amount id=tradeForm_limitPrice>
+                                        <input class=nodisplay type=text name=orderParams.limitPrice.currency id=tradeForm_limitPrice_currency value=USD>
                                     </li>
 
                                     <li>
                                         <label for=tradeForm_term>Term</label>
-                                        <select id=tradeForm_term name=term>
+                                        <select id=tradeForm_term name=orderParams.term>
                                             <option value=GoodForTheDay>Good For The Day</option>
                                             <option value=GoodTilCanceled>Good Til Canceled</option>
                                         </select>
                                     </li>            
 
                                     <li>
-                                        <input type=checkbox name=allOrNone id=tradeForm_allOrNone> All-or-none
+                                        <label for=tradeForm_allOrNone>&nbsp;</label>
+                                        <input type=checkbox name=orderParams.allOrNone id=tradeForm_allOrNone value=true> All-or-none
                                     </li>
 
                                     <li>

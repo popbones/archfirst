@@ -15,13 +15,9 @@
  */
 
 /**
- * bullsfirst/services/OrderService
+ * bullsfirst/services/OrderEstimateService
  *
- * Proxy for Order resource on the server. This module was created seperately
- * (instead of adding it to the Order model), because it was difficult to
- * retrofit this functionality into Backbone's CRUD mechanism. For example, to create
- * a Order we need to send brokerageAccountId and orderParams to the server which are
- * not the exact attributes of an Order.
+ * Proxy for OrderEstimate resource on the server.
  *
  * @author Naresh Bhatia
  */
@@ -31,13 +27,13 @@ define(['bullsfirst/domain/UserContext',
         function(UserContext, AjaxUtil) {
 
     // Module level variables act as singletons
-    var _url = '/bfoms-javaee/rest/secure/orders';
+    var _url = '/bfoms-javaee/rest/secure/order_estimates';
 
     return {
-        // orderRequest: see http://archfirst.org/books/bullsfirst-rest-service#orders
+        // orderRequest: see http://archfirst.org/books/bullsfirst-rest-service#order_estimates
         // doneCallbacks: a function, or array of functions, called when the Deferred is resolved
         // failCallbacks: a function, or array of functions, called when the Deferred is rejected
-        createOrder: function(orderRequest, doneCallbacks, failCallbacks) {
+        createOrderEstimate: function(orderRequest, doneCallbacks, failCallbacks) {
             $.ajax({
                 url: _url,
                 type: 'POST',
@@ -46,21 +42,6 @@ define(['bullsfirst/domain/UserContext',
                 },
                 contentType: 'application/json',
                 data: JSON.stringify(orderRequest, null, '\t')
-            })
-            .then(doneCallbacks, failCallbacks);
-        },
-
-        // orderId: id of order to cancel
-        // doneCallbacks: a function, or array of functions, called when the Deferred is resolved
-        // failCallbacks: a function, or array of functions, called when the Deferred is rejected
-        cancelOrder: function(orderId, doneCallbacks, failCallbacks) {
-            $.ajax({
-                url: _url + '/' + orderId + '/cancel',
-                type: 'POST',
-                beforeSend: function(xhr) {
-                    AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
-                },
-                contentType: 'application/json'
             })
             .then(doneCallbacks, failCallbacks);
         }

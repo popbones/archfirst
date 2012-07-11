@@ -47,6 +47,8 @@ define(['bullsfirst/domain/UserContext',
 
             this.resetFilter();
 
+            this.$el.validationEngine();
+
             // Subscribe to events
             MessageBus.on('UpdateOrders', function() {
                 this.updateOrders();

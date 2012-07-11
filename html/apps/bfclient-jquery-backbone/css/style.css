@@ -89,6 +89,8 @@ button::-moz-focus-inner, input::-moz-focus-inner { border: 0; padding: 0; }
 textarea { overflow: auto; vertical-align: top; resize: vertical; }
 input:valid, textarea:valid {  }
 input:invalid, textarea:invalid { background-color: #f0dddd; }
+/* Change box-sizing model for input/select so they behave the same - this allows their widths to be the same */
+input:not([type="radio"]):not([type="checkbox"]), select { box-sizing:content-box; -ms-box-sizing:content-box; -moz-box-sizing:content-box; -webkit-box-sizing:content-box; }
 
 /* -----------------------------------------------------------------------------
  * Tables

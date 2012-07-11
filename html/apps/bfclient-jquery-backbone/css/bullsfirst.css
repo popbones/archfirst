@@ -41,11 +41,11 @@
  * -------------------------------------------------------------------------- */
 /* Next two overrides change tooltips from red to gray */
 .formError .formErrorContent {
-	background: #393939;
+    background: #393939;
 }
 
 .formError .formErrorArrow div {
-	background: #393939;
+    background: #393939;
 }
 
 /* -----------------------------------------------------------------------------
@@ -141,9 +141,9 @@ label.left {
  * Main Container
  * -------------------------------------------------------------------------- */
 .container {
-	width: 960px;
-	margin: auto;
-	position: relative;
+    width: 960px;
+    margin: auto;
+    position: relative;
 }
 
 /* -----------------------------------------------------------------------------
@@ -158,11 +158,11 @@ header {
 
 header h1 {
     background: url(../img/logo.jpg) no-repeat;
-	height: 62px;
-	position: absolute;
-	top: 0px;
-	width: 300px;
-	text-indent: -9999px;
+    height: 62px;
+    position: absolute;
+    top: 0px;
+    width: 300px;
+    text-indent: -9999px;
 }
 
 /* -----------------------------------------------------------------------------
@@ -257,18 +257,18 @@ footer {
 #home_page .login {
     width: 160px;
     position: absolute;
-    right: 10px;	
+    right: 10px;    
     top: 0px; 
 }
 
 #home_page .hero {
     padding:190px 0 0 0px;
-	width:685px;
-	background:url(../img/homeGraphic.png) 105px 0 no-repeat; 
+    width:685px;
+    background:url(../img/homeGraphic.png) 105px 0 no-repeat; 
 }
 
 #home_page .hero h1 {
-	text-indent:-9999px;	 
+    text-indent:-9999px;     
 }
  
 /* -----------------------------------------------------------------------------
@@ -287,189 +287,251 @@ footer {
 #accounts_chart {
     width: 350px;
     position: absolute;
-    right: 0px;	
+    right: 0px;    
     top: 0px;
     border: 1px solid #ccc;
     padding: 5px;
 }
 
 #accounts_table {
-	width: 550px;
+    width: 550px;
 }
 
 .acnts_tbl_name {
-	width: 160px;
-	text-align: left;
+    width: 160px;
+    text-align: left;
 }
 
 .acnts_tbl_number {
-	width: 80px;
-	text-align: right;
+    width: 80px;
+    text-align: right;
 }
 
 .acnts_tbl_market_value {
-	width: 120px;
-	text-align: right;
+    width: 120px;
+    text-align: right;
 }
 
 .acnts_tbl_cash {
-	width: 120px;
-	text-align: right;
+    width: 120px;
+    text-align: right;
 }
 
 .acnts_tbl_actions {
-	width: 70px;
+    width: 70px;
 }
 
 /* -----------------------------------------------------------------------------
  * Positions Tab
  * -------------------------------------------------------------------------- */
 #positions_table {
-	width: 916px;
+    width: 916px;
 }
 
 .pos_tbl_name {
-	width: 160px;
-	text-align: left;
+    width: 160px;
+    text-align: left;
 }
 
 .pos_tbl_symbol {
-	width: 55px;
-	text-align: center;
+    width: 55px;
+    text-align: center;
 }
 
 .pos_tbl_quantity {
-	width: 60px;
-	text-align: right;
+    width: 60px;
+    text-align: right;
 }
 
 .pos_tbl_last_trade {
-	width: 75px;
-	text-align: right;
+    width: 75px;
+    text-align: right;
 }
 
 .pos_tbl_market_value {
-	width: 110px;
-	text-align: right;
+    width: 110px;
+    text-align: right;
 }
 
 .pos_tbl_price_paid {
-	width: 75px;
-	text-align: right;
+    width: 75px;
+    text-align: right;
 }
 
 .pos_tbl_total_cost {
-	width: 110px;
-	text-align: right;
+    width: 110px;
+    text-align: right;
 }
 
 .pos_tbl_gain {
-	width: 110px;
-	text-align: right;
+    width: 110px;
+    text-align: right;
 }
 
 .pos_tbl_gain_percent {
-	width: 80px;
-	text-align: right;
+    width: 80px;
+    text-align: right;
 }
 
 .pos_tbl_actions {
-	width: 60px;
-	text-align: center;
+    width: 60px;
+    text-align: center;
 }
 
 /* -----------------------------------------------------------------------------
  * Orders Tab
  * -------------------------------------------------------------------------- */
 #orders_table {
-	width: 916px;
+    width: 916px;
 }
 
 .ord_tbl_creation_time {
-	width: 180px;
-	text-align: center;
+    width: 180px;
+    text-align: center;
 }
 
 .ord_tbl_account {
-	width: 170px;
-	text-align: center;
+    width: 170px;
+    text-align: center;
 }
 
 .ord_tbl_id {
-	width: 50px;
-	text-align: center;
+    width: 50px;
+    text-align: center;
 }
 
 .ord_tbl_type {
-	width: 50px;
-	text-align: center;
+    width: 50px;
+    text-align: center;
 }
 
 .ord_tbl_action {
-	width: 50px;
-	text-align: center;
+    width: 50px;
+    text-align: center;
 }
 
 .ord_tbl_symbol {
-	width: 50px;
-	text-align: center;
+    width: 50px;
+    text-align: center;
 }
 
 .ord_tbl_quantity {
-	width: 70px;
-	text-align: center;
+    width: 70px;
+    text-align: center;
 }
 
 .ord_tbl_limitPrice {
-	width: 80px;
-	text-align: center;
+    width: 80px;
+    text-align: center;
 }
 
 .ord_tbl_executionPrice {
-	width: 80px;
-	text-align: center;
+    width: 80px;
+    text-align: center;
 }
 
 .ord_tbl_status {
-	width: 86px;
-	text-align: center;
+    width: 86px;
+    text-align: center;
 }
 
 .ord_tbl_actions {
-	width: 50px;
-	text-align: center;
+    width: 50px;
+    text-align: center;
 }
 
 /* -----------------------------------------------------------------------------
  * Transactions Tab
  * -------------------------------------------------------------------------- */
 #txn_table {
-	width: 916px;
+    width: 916px;
 }
 
 .txn_tbl_creation_time {
-	width: 180px;
-	text-align: center;
+    width: 180px;
+    text-align: center;
 }
 
 .txn_tbl_account {
-	width: 170px;
-	text-align: center;
+    width: 170px;
+    text-align: center;
 }
 
 .txn_tbl_type {
-	width: 60px;
-	text-align: center;
+    width: 60px;
+    text-align: center;
 }
 
 .txn_tbl_description {
-	width: 406px;
-	text-align: left;
+    width: 406px;
+    text-align: left;
 }
 
 .txn_tbl_amount {
-	width: 100px;
-	text-align: center;
+    width: 100px;
+    text-align: center;
+}
+
+/* -----------------------------------------------------------------------------
+ * Trade Tab
+ * -------------------------------------------------------------------------- */
+/* Form styles based on http://24ways.org/2009/have-a-field-day-with-html5-forms/ */
+form#tradeForm {
+    background: #a0a0a0;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 20px;
+    width: 400px;
+}
+
+form#tradeForm ol {
+    padding: 0;
+}
+
+form#tradeForm ol li {
+    background: #b9cf6a;
+    background: rgba(255,255,255,.3);
+    border-color: #e3ebc3;
+    border-color: rgba(255,255,255,.6);
+    border-style: solid;
+    border-width: 2px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    line-height: 30px;
+    list-style: none;
+    padding: 5px 10px;
+    margin-bottom: 2px;
+}
+
+form#tradeForm label {
+    float: left;
+    width: 110px;
+}
+
+form#tradeForm input:not([type=checkbox]),
+form#tradeForm select {
+    background: #ffffff;
+    border: none;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    font: italic 13px Georgia, "Times New Roman", Times, serif;
+    outline: none;
+    padding: 5px;
+    width: 250px;
+}
+
+form#tradeForm input:not([type=submit]):focus {
+    background: #eaeaea;
+}
+
+/* Center the button */
+form#tradeForm button {
+    display: block;
+    margin: auto;
 }
 
 /* -----------------------------------------------------------------------------
