@@ -21,25 +21,26 @@
  *
  * @author Naresh Bhatia
  */
-define(function() {
+define(['bullsfirst/framework/AlertUtil'],
+        function(AlertUtil) {
 
     return {
         showError: function(jqXHR, textStatus, errorThrown) {
             if (jqXHR.getResponseHeader('Content-Type') == 'application/json') {
-                alert('Error: ' + JSON.parse(jqXHR.responseText).detail);
+                AlertUtil.showError(JSON.parse(jqXHR.responseText).detail);
             }
             else {
-                alert('Error: ' + jqXHR.status + ' - ' + jqXHR.statusText);
+                AlertUtil.showError(jqXHR.status + ' - ' + jqXHR.statusText);
             }
         },
 
         // Note that Backbone sends different parameters to callbacks
         showBackboneError: function(model, jqXHR) {
             if (jqXHR.getResponseHeader('Content-Type') == 'application/json') {
-                alert('Error: ' + JSON.parse(jqXHR.responseText).detail);
+                AlertUtil.showError(JSON.parse(jqXHR.responseText).detail);
             }
             else {
-                alert('Error: ' + jqXHR.status + ' - ' + jqXHR.statusText);
+                AlertUtil.showError(jqXHR.status + ' - ' + jqXHR.statusText);
             }
         }
     };
