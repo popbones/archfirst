@@ -20,8 +20,10 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
-        'bullsfirst/framework/Formatter'],
-        function(UserContext, Formatter) {
+        'bullsfirst/framework/ErrorUtil',
+        'bullsfirst/framework/Formatter',
+        'bullsfirst/services/OrderService'],
+        function(UserContext, ErrorUtil, Formatter, OrderService) {
 
     // Configure the dialog
     $('#preview_order_dialog').dialog({
@@ -49,17 +51,27 @@ define(['bullsfirst/domain/UserContext',
             'keypress #preview_order_dialog': 'checkEnterKey'
         },
 
-        open: function(summary, estimate, marketPrice) {
+        open: function(orderRequest, estimate, marketPrice) {
+            this.orderRequest = orderRequest;
+
             // Format values for display
             estimate.lastTradeFormatted = Formatter.formatMoney(marketPrice.get('price'));
             estimate.estimatedValueFormatted = Formatter.formatMoney(estimate.estimatedValue);
             estimate.feesFormatted = Formatter.formatMoney(estimate.fees);
-            estimate.estimatedValueInclFeesFormatted = Formatter.formatMoney(estimate.estimatedValueInclFees);
+            estimate.estimatedValueInclFeesFormatted =
+                Formatter.formatMoney(estimate.estimatedValueInclFees);
 
-            summary.accountName = UserContext.getBrokerageAccount(summary.brokerageAccountId).get('name');
-
-            summary.orderParams.isLimitOrder = (summary.orderParams.type === 'Limit');
-            summary.orderParams.limitPriceFormatted = Formatter.formatMoney(summary.orderParams.limitPrice);
+            var summary = {
+                accountName: UserContext.getBrokerageAccount(orderRequest.brokerageAccountId).get('name'),
+                symbol: orderRequest.orderParams.symbol,
+                side: orderRequest.orderParams.side,
+                quantity: orderRequest.orderParams.quantity,
+                type: orderRequest.orderParams.type,
+                isLimitOrder: orderRequest.orderParams.type === 'Limit',
+                limitPriceFormatted: Formatter.formatMoney(orderRequest.orderParams.limitPrice),
+                term: orderRequest.orderParams.term,
+                allOrNone: orderRequest.orderParams.allOrNone,
+            };
 
             // Render using template
             var hash = {
@@ -82,12 +94,11 @@ define(['bullsfirst/domain/UserContext',
             $('#preview_order_dialog').dialog('close');
 
             // Create brokerage account
-            // BrokerageAccountService.createBrokerageAccount(
-            //    $('#addacnt_name').val(), this.createBrokerageAccountDone, ErrorUtil.showError);
+            OrderService.createOrder(
+                this.orderRequest, _.bind(this.createOrderDone, this), ErrorUtil.showError);
         },
 
-        // createBrokerageAccountDone: function(data, textStatus, jqXHR) {
-        //    UserContext.updateAccounts();
-        // }
+        createOrderDone: function(data, textStatus, jqXHR) {
+        }
     });
 });

@@ -328,7 +328,7 @@
 
                                     <li id=tradeForm_limitPriceItem class=nodisplay>
                                         <label for=tradeForm_limitPrice>Limit Price</label>
-                                        <input class="validate[custom[number]]" type=text name=orderParams.limitPrice.amount id=tradeForm_limitPrice>
+                                        <input class="validate[funcCall[checkLimitOrder],custom[number]]" type=text name=orderParams.limitPrice.amount id=tradeForm_limitPrice>
                                         <input class=nodisplay type=text name=orderParams.limitPrice.currency id=tradeForm_limitPrice_currency value=USD>
                                     </li>
 
@@ -644,39 +644,39 @@
 
                 <li>
                     <label>Symbol:</label>
-                    <span>{{orderParams.symbol}}</span>
+                    <span>{{symbol}}</span>
                 </li>
 
                 <li>
                     <label>Action:</label>
-                    <span>{{orderParams.side}}</span>
+                    <span>{{side}}</span>
                 </li>            
 
                 <li>
                     <label>Quantity:</label>
-                    <span>{{orderParams.quantity}}</span>
+                    <span>{{quantity}}</span>
                 </li>
 
                 <li>
                     <label>Order Type:</label>
-                    <span>{{orderParams.type}}</span>
+                    <span>{{type}}</span>
                 </li>            
 
-                {{#orderParams.isLimitOrder}}
+                {{#isLimitOrder}}
                 <li>
                     <label>Limit Price:</label>
-                    <span>{{orderParams.limitPriceFormatted}}</span>
+                    <span>{{limitPriceFormatted}}</span>
                 </li>
-                {{/orderParams.isLimitOrder}}
+                {{/isLimitOrder}}
 
                 <li>
                     <label>Term:</label>
-                    <span>{{orderParams.term}}</span>
+                    <span>{{term}}</span>
                 </li>            
 
                 <li>
                     <label>All-or-none:</label>
-                    <span>{{orderParams.allOrNone}}</span>
+                    <span>{{allOrNone}}</span>
                 </li>
             </ol>
             {{/summary}}
