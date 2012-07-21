@@ -19,12 +19,16 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
+define(['bullsfirst/domain/MarketPrice',
+        'bullsfirst/domain/UserContext',
+        'bullsfirst/framework/AlertUtil',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/services/OrderEstimateService',
-        'bullsfirst/views/AccountSelectorView'
+        'bullsfirst/views/AccountSelectorView',
+        'bullsfirst/views/LastTradeView',
+        'bullsfirst/views/PreviewOrderDialog'
         ],
-        function(UserContext, ErrorUtil, OrderEstimateService, AccountSelectorView) {
+        function(MarketPrice, UserContext, AlertUtil, ErrorUtil, OrderEstimateService, AccountSelectorView, LastTradeView, PreviewOrderDialog) {
 
     return Backbone.View.extend({
 
@@ -33,7 +37,8 @@ define(['bullsfirst/domain/UserContext',
         events: {
             'submit #tradeForm': 'validateForm',
             'keypress #trade_tab': 'checkEnterKey',
-            'change #tradeForm_orderType': 'orderTypeChanged'
+            'change #tradeForm_orderType': 'orderTypeChanged',
+            'change #tradeForm_symbol': 'symbolChanged'
         },
 
         initialize: function(options) {
@@ -55,26 +60,35 @@ define(['bullsfirst/domain/UserContext',
         validateForm: function() {
             if ($('#tradeForm').validationEngine('validate')) {
 
-                var orderRequest = $('#tradeForm').toObject();
+                this.orderRequest = $('#tradeForm').toObject();
 
                 // For Market orders, make sure there is no limit price
-                if (orderRequest.orderParams.type === 'Market') {
-                    delete orderRequest.orderParams.limitPrice;
+                if (this.orderRequest.orderParams.type === 'Market') {
+                    delete this.orderRequest.orderParams.limitPrice;
                 }
 
                 // Make sure allOrNone is defined
-                if (typeof orderRequest.orderParams.allOrNone === 'undefined') {
-                    orderRequest.orderParams.allOrNone = 'false';
+                if (typeof this.orderRequest.orderParams.allOrNone === 'undefined') {
+                    this.orderRequest.orderParams.allOrNone = 'false';
                 }
 
                 OrderEstimateService.createOrderEstimate(
-                    orderRequest, _.bind(this.createOrderEstimateDone, this), ErrorUtil.showError);
+                    this.orderRequest, _.bind(this.createOrderEstimateDone, this), ErrorUtil.showError);
             }
             return false;
         },
 
         createOrderEstimateDone: function(data, textStatus, jqXHR) {
-            console.log(data);
+            if (data.compliance === 'Compliant') {
+                if (!this.previewOrderDialog) {
+                    this.previewOrderDialog = new PreviewOrderDialog();
+                }
+                this.previewOrderDialog.open(this.orderRequest, data, this.marketPrice);
+                return false;
+            }
+            else {
+                AlertUtil.showError(data.compliance);
+            }
         },
 
         orderTypeChanged: function(event) {
@@ -84,6 +98,19 @@ define(['bullsfirst/domain/UserContext',
             else {
                 $('#tradeForm_limitPriceItem').show('fast');
             }
-        }
+        },
+
+        symbolChanged: function(event) {
+            var symbol = event.target.value;
+            this.marketPrice = new MarketPrice({symbol: symbol});
+            this.marketPrice.fetch({
+                success: _.bind(this._marketPriceFetched, this),
+                error: ErrorUtil.showBackboneError
+            });
+        },
+
+        _marketPriceFetched: function() {
+            new LastTradeView({model: this.marketPrice}).render();
+        } 
     });
 });

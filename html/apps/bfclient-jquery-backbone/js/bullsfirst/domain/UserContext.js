@@ -48,6 +48,9 @@ define(['bullsfirst/domain/BrokerageAccount',
         getExternalAccounts: function() { return _externalAccounts; },
         getSelectedAccount: function() { return _selectedAccount; },
 
+        getBrokerageAccount: function(id) { return _brokerageAccounts.get(id); },
+
+
         initUser: function(attributes) {
             _user.set(attributes);
         },

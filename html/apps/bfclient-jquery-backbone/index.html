@@ -302,6 +302,7 @@
                                     <li>
                                         <label for=tradeForm_symbol>Symbol</label>
                                         <input class="validate[required]" type=text name=orderParams.symbol id=tradeForm_symbol required>
+                                        <span id=tradeForm_lastTrade></span>
                                     </li>
 
                                     <li>
@@ -430,6 +431,10 @@
                     placeholder="Enter account name" required />
             </div>
             </form>
+        </div>
+
+        <!-- Preview Order Dialog -->
+        <div id="preview_order_dialog" title="Preview Order" class="nodisplay">
         </div>
 
         <footer>
@@ -598,6 +603,84 @@
             {{amountFormatted}}
         </td>
         {{/transaction}}
+    </script>
+
+    <script id="previewOrderTemplate" type="text/x-mustache-tmpl">
+        <div id="preview_order_dialog_estimate" class="summary">
+            <h1>Estimate</h1>
+            {{#estimate}}
+            <ol>
+                <li>
+                    <label>Last Trade:</label>
+                    <span>{{lastTradeFormatted}}</span>
+                </li>
+
+                <li>
+                    <label>Estimated Value:</label>
+                    <span>{{estimatedValueFormatted}}</span>
+                </li>
+
+                <li>
+                    <label>Fees:</label>
+                    <span>{{feesFormatted}}</span>
+                </li>            
+
+                <li>
+                    <label>Total Including Fees:</label>
+                    <span>{{estimatedValueInclFeesFormatted}}</span>
+                </li>
+            </ol>
+            {{/estimate}}
+        </div>
+
+        <div class="summary">
+            <h1>Order Summary</h1>
+            {{#summary}}
+            <ol>
+                <li>
+                    <label>Account:</label>
+                    <span>{{accountName}}</span>
+                </li>
+
+                <li>
+                    <label>Symbol:</label>
+                    <span>{{orderParams.symbol}}</span>
+                </li>
+
+                <li>
+                    <label>Action:</label>
+                    <span>{{orderParams.side}}</span>
+                </li>            
+
+                <li>
+                    <label>Quantity:</label>
+                    <span>{{orderParams.quantity}}</span>
+                </li>
+
+                <li>
+                    <label>Order Type:</label>
+                    <span>{{orderParams.type}}</span>
+                </li>            
+
+                {{#orderParams.isLimitOrder}}
+                <li>
+                    <label>Limit Price:</label>
+                    <span>{{orderParams.limitPriceFormatted}}</span>
+                </li>
+                {{/orderParams.isLimitOrder}}
+
+                <li>
+                    <label>Term:</label>
+                    <span>{{orderParams.term}}</span>
+                </li>            
+
+                <li>
+                    <label>All-or-none:</label>
+                    <span>{{orderParams.allOrNone}}</span>
+                </li>
+            </ol>
+            {{/summary}}
+        </div>
     </script>
 
     <!-- End of templates -->

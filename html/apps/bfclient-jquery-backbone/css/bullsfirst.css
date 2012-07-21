@@ -503,6 +503,14 @@ form#tradeForm ol li {
     list-style: none;
     padding: 5px 10px;
     margin-bottom: 2px;
+    /* allows absolute positioning of children (specifically "Last Trade" */
+    position: relative;
+}
+
+#tradeForm_lastTrade {
+    position: absolute;
+    left: 430px;
+    width: 200px;
 }
 
 form#tradeForm label {
@@ -532,6 +540,41 @@ form#tradeForm input:not([type=submit]):focus {
 form#tradeForm button {
     display: block;
     margin: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Summary section in label-value format
+ * -------------------------------------------------------------------------- */
+.summary h1 {
+    padding: 0;
+    margin-bottom: 6px;
+}
+
+.summary ol {
+    padding: 0;
+    margin: 6px 0;
+}
+
+.summary ol li {
+    list-style: none;
+    padding: 2px 0px;
+    margin-bottom: 2px;
+}
+
+.summary label {
+    float: left;
+    width: 100px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Preview Order Dialog (customizations for estimate summary)
+ * -------------------------------------------------------------------------- */
+#preview_order_dialog_estimate {
+    float: right;
+}
+
+#preview_order_dialog_estimate.summary label {
+    width: 125px;
 }
 
 /* -----------------------------------------------------------------------------
