@@ -22,8 +22,9 @@
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/Formatter',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/services/OrderService'],
-        function(UserContext, ErrorUtil, Formatter, OrderService) {
+        function(UserContext, ErrorUtil, Formatter, MessageBus, OrderService) {
 
     // Configure the dialog
     $('#preview_order_dialog').dialog({
@@ -99,6 +100,9 @@ define(['bullsfirst/domain/UserContext',
         },
 
         createOrderDone: function(data, textStatus, jqXHR) {
+            // Show the order
+            MessageBus.trigger('UpdateOrders');
+            MessageBus.trigger('UserTabSelectionRequest', 'orders');
         }
     });
 });

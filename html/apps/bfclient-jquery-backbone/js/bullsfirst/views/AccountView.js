@@ -56,7 +56,7 @@ define(['bullsfirst/domain/BrokerageAccount',
             UserContext.setSelectedAccount(this.model);
 
             // Switch to positions tab
-            MessageBus.trigger('UserTabSelectionRequest', 1);
+            MessageBus.trigger('UserTabSelectionRequest', 'accounts');
 
             return false;
         },
