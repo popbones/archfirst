@@ -473,10 +473,10 @@ footer {
 }
 
 /* -----------------------------------------------------------------------------
- * Trade Tab
+ * Bullsfirst Form
  * -------------------------------------------------------------------------- */
 /* Form styles based on http://24ways.org/2009/have-a-field-day-with-html5-forms/ */
-form#tradeForm {
+form.bfForm {
     background: #a0a0a0;
     -moz-border-radius: 5px;
     -webkit-border-radius: 5px;
@@ -485,11 +485,11 @@ form#tradeForm {
     width: 400px;
 }
 
-form#tradeForm ol {
+form.bfForm ol {
     padding: 0;
 }
 
-form#tradeForm ol li {
+form.bfForm ol li {
     background: #b9cf6a;
     background: rgba(255,255,255,.3);
     border-color: #e3ebc3;
@@ -507,19 +507,13 @@ form#tradeForm ol li {
     position: relative;
 }
 
-#tradeForm_lastTrade {
-    position: absolute;
-    left: 430px;
-    width: 200px;
-}
-
-form#tradeForm label {
+form.bfForm label {
     float: left;
     width: 110px;
 }
 
-form#tradeForm input:not([type=checkbox]),
-form#tradeForm select {
+form.bfForm input:not([type=checkbox]),
+form.bfForm select {
     background: #ffffff;
     border: none;
     -moz-border-radius: 3px;
@@ -532,14 +526,23 @@ form#tradeForm select {
     width: 250px;
 }
 
-form#tradeForm input:not([type=submit]):focus {
+form.bfForm input:not([type=submit]):focus {
     background: #eaeaea;
 }
 
 /* Center the button */
-form#tradeForm button {
+form.bfForm button {
     display: block;
     margin: auto;
+}
+
+/* -----------------------------------------------------------------------------
+ * Trade Tab
+ * -------------------------------------------------------------------------- */
+#tradeForm_lastTrade {
+    position: absolute;
+    left: 430px;
+    width: 200px;
 }
 
 /* -----------------------------------------------------------------------------

@@ -291,7 +291,7 @@
                         </div>
 
                         <div class="tab_content">
-                            <form id="tradeForm" action="#">
+                            <form id="tradeForm" class="bfForm" action="#">
                                 <ol>
                                     <li>
                                         <label for=tradeForm_account_selector>Account</label>
@@ -357,6 +357,28 @@
                     <div id="transfer_tab">
                         <div class="titleLeft">
                             <h1>Transfer</h1>
+                        </div>
+
+                        <div class="tab_content">
+                            <form id="transferForm" class="bfForm" action="#">
+                                <ol>
+                                    <li>
+                                        <label for=transferForm_transferKind>&nbsp;</label>
+                                        <input type=radio name=transferKind value=cash> Cash
+                                    </li>
+
+                                    <li>
+                                        <label for=transferForm_from>From</label>
+                                        <select id=transferForm_from name=brokerageAccountId>
+                                        </select>
+                                    </li>
+
+
+                                    <li>
+                                        <button id=transferForm_transfer type=submit>Transfer</button>
+                                    </li>
+                                </ol>
+                            </form>
                         </div>
                     </div>
 
