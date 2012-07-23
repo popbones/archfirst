@@ -22,9 +22,8 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
-        'bullsfirst/framework/AjaxUtil'
-        ],
-        function(UserContext, AjaxUtil) {
+        'bullsfirst/framework/AjaxUtil'],
+       function(UserContext, AjaxUtil) {
 
     Backbone._sync = Backbone.sync;
 

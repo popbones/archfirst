@@ -21,9 +21,8 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/AccountSelectorView',
-        'bullsfirst/views/PositionTableView'
-        ],
-        function(UserContext, AccountSelectorView, PositionTableView) {
+        'bullsfirst/views/PositionTableView'],
+       function(UserContext, AccountSelectorView, PositionTableView) {
 
     return Backbone.View.extend({
 

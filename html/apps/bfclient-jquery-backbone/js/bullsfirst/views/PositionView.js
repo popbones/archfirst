@@ -21,9 +21,8 @@
  */
 define(['bullsfirst/domain/Position',
         'bullsfirst/domain/UserContext',
-        'bullsfirst/framework/Formatter'
-        ],
-        function(Position, UserContext, Formatter) {
+        'bullsfirst/framework/Formatter'],
+       function(Position, UserContext, Formatter) {
 
     return Backbone.View.extend({
 

@@ -23,9 +23,8 @@ define(['bullsfirst/domain/Order',
         'bullsfirst/services/OrderService',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/Formatter',
-        'bullsfirst/framework/MessageBus'
-        ],
-        function(Order, OrderService, ErrorUtil, Formatter, MessageBus) {
+        'bullsfirst/framework/MessageBus'],
+       function(Order, OrderService, ErrorUtil, Formatter, MessageBus) {
 
     return Backbone.View.extend({
 

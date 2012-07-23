@@ -20,7 +20,7 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/ExternalAccount'],
-        function(ExternalAccount) {
+       function(ExternalAccount) {
 
     return Backbone.Collection.extend({
         model: ExternalAccount,

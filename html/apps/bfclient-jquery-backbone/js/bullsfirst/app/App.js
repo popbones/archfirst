@@ -21,9 +21,8 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/app/AppRouter'
-        ],
-        function(AppRouter) {
+define(['bullsfirst/app/AppRouter'],
+       function(AppRouter) {
 
     // Create the router
     var _appRouter = new AppRouter();

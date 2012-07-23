@@ -21,9 +21,8 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
-        'bullsfirst/framework/MessageBus'
-        ],
-        function(UserContext, Formatter, MessageBus) {
+        'bullsfirst/framework/MessageBus'],
+       function(UserContext, Formatter, MessageBus) {
 
     return Backbone.View.extend({
 

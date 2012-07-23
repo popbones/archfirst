@@ -22,9 +22,8 @@
 define(['bullsfirst/domain/Orders',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/views/ExecutionView',
-        'bullsfirst/views/OrderView'
-        ],
-        function(Orders, MessageBus, ExecutionView, OrderView) {
+        'bullsfirst/views/OrderView'],
+       function(Orders, MessageBus, ExecutionView, OrderView) {
 
     return Backbone.View.extend({
 

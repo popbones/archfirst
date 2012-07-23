@@ -26,9 +26,8 @@ define(['bullsfirst/domain/MarketPrice',
         'bullsfirst/services/OrderEstimateService',
         'bullsfirst/views/AccountSelectorView',
         'bullsfirst/views/LastTradeView',
-        'bullsfirst/views/PreviewOrderDialog'
-        ],
-        function(MarketPrice, UserContext, AlertUtil, ErrorUtil, OrderEstimateService, AccountSelectorView, LastTradeView, PreviewOrderDialog) {
+        'bullsfirst/views/PreviewOrderDialog'],
+       function(MarketPrice, UserContext, AlertUtil, ErrorUtil, OrderEstimateService, AccountSelectorView, LastTradeView, PreviewOrderDialog) {
 
     return Backbone.View.extend({
 

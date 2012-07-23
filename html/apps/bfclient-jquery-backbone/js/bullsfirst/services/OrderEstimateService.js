@@ -22,9 +22,8 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
-        'bullsfirst/framework/AjaxUtil'
-        ],
-        function(UserContext, AjaxUtil) {
+        'bullsfirst/framework/AjaxUtil'],
+       function(UserContext, AjaxUtil) {
 
     // Module level variables act as singletons
     var _url = '/bfoms-javaee/rest/secure/order_estimates';

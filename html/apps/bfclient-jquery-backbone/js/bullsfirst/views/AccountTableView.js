@@ -19,9 +19,8 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/views/AccountView'
-        ],
-        function(AccountView) {
+define(['bullsfirst/views/AccountView'],
+       function(AccountView) {
 
     return Backbone.View.extend({
 

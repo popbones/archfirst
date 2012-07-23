@@ -21,9 +21,8 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/AccountTableView',
-        'bullsfirst/views/AddAccountDialog'
-        ],
-        function(UserContext, AccountTableView, AddAccountDialog) {
+        'bullsfirst/views/AddAccountDialog'],
+       function(UserContext, AccountTableView, AddAccountDialog) {
 
     return Backbone.View.extend({
 

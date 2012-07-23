@@ -30,9 +30,8 @@ define(['bullsfirst/domain/BrokerageAccount',
         'bullsfirst/domain/ExternalAccounts',
         'bullsfirst/domain/User',
         'bullsfirst/framework/ErrorUtil',
-        'bullsfirst/framework/MessageBus'
-        ],
-        function(BrokerageAccount, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, MessageBus) {
+        'bullsfirst/framework/MessageBus'],
+       function(BrokerageAccount, BrokerageAccounts, Credentials, ExternalAccounts, User, ErrorUtil, MessageBus) {
 
     // Module level variables act as singletons
     var _user = new User();

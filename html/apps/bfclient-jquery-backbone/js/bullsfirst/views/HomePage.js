@@ -26,9 +26,8 @@ define(['bullsfirst/domain/Credentials',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/framework/Page',
         'bullsfirst/services/UserService',
-        'bullsfirst/views/OpenAccountDialog'
-        ],
-        function(Credentials, User, UserContext, ErrorUtil, MessageBus, Page, UserService, OpenAccountDialog) {
+        'bullsfirst/views/OpenAccountDialog'],
+       function(Credentials, User, UserContext, ErrorUtil, MessageBus, Page, UserService, OpenAccountDialog) {
     return Page.extend({
         el: '#home_page',
 

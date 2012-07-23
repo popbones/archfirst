@@ -30,9 +30,8 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/Position',
-        'bullsfirst/domain/Positions'
-        ],
-        function(Position, Positions) {
+        'bullsfirst/domain/Positions'],
+       function(Position, Positions) {
 
     return Backbone.Model.extend({
 

@@ -20,7 +20,7 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/Position'],
-        function(Position) {
+       function(Position) {
 
     return Backbone.Collection.extend({
         model: Position

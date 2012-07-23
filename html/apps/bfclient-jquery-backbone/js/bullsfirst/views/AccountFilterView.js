@@ -19,9 +19,8 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext'
-        ],
-        function(UserContext) {
+define(['bullsfirst/domain/UserContext'],
+       function(UserContext) {
 
     return Backbone.View.extend({
 

@@ -24,7 +24,7 @@ define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/services/OrderService'],
-        function(UserContext, ErrorUtil, Formatter, MessageBus, OrderService) {
+       function(UserContext, ErrorUtil, Formatter, MessageBus, OrderService) {
 
     // Configure the dialog
     $('#preview_order_dialog').dialog({

@@ -19,9 +19,8 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/Formatter'
-        ],
-        function(Formatter) {
+define(['bullsfirst/framework/Formatter'],
+       function(Formatter) {
 
     return Backbone.View.extend({
 

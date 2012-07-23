@@ -21,9 +21,8 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
-        'bullsfirst/services/AccountService'
-        ],
-        function(UserContext, ErrorUtil, AccountService) {
+        'bullsfirst/services/AccountService'],
+       function(UserContext, ErrorUtil, AccountService) {
 
     // Configure the dialog
     $('#edit_account_dialog').dialog({

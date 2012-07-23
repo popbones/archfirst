@@ -28,9 +28,8 @@ define(['bullsfirst/domain/Credentials',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/services/AccountService',
         'bullsfirst/services/BrokerageAccountService',
-        'bullsfirst/services/UserService'
-        ],
-        function(Credentials, ExternalAccount, ExternalAccounts, User, UserContext, ErrorUtil, MessageBus, AccountService, BrokerageAccountService, UserService) {
+        'bullsfirst/services/UserService'],
+       function(Credentials, ExternalAccount, ExternalAccounts, User, UserContext, ErrorUtil, MessageBus, AccountService, BrokerageAccountService, UserService) {
 
     // Configure the dialog
     $('#open_account_dialog').dialog({

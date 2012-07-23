@@ -21,9 +21,8 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/MessageBus',
-        'bullsfirst/views/AccountFilterView'
-        ],
-        function(UserContext, MessageBus, AccountFilterView) {
+        'bullsfirst/views/AccountFilterView'],
+       function(UserContext, MessageBus, AccountFilterView) {
 
     return Backbone.View.extend({
 

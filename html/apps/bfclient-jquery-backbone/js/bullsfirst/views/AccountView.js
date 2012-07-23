@@ -23,9 +23,8 @@ define(['bullsfirst/domain/BrokerageAccount',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
         'bullsfirst/framework/MessageBus',
-        'bullsfirst/views/EditAccountDialog'
-        ],
-        function(BrokerageAccount, UserContext, Formatter, MessageBus, EditAccountDialog) {
+        'bullsfirst/views/EditAccountDialog'],
+       function(BrokerageAccount, UserContext, Formatter, MessageBus, EditAccountDialog) {
 
     var editAccountDialog = null;
 

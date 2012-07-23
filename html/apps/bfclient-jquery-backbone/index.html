@@ -361,18 +361,45 @@
 
                         <div class="tab_content">
                             <form id="transferForm" class="bfForm" action="#">
+                                <p id=transferForm_transferKind>
+                                    <input type=radio name=transferKind value=cash> Cash
+                                    <input type=radio name=transferKind value=securities> Securities
+                                </p>
+
                                 <ol>
                                     <li>
-                                        <label for=transferForm_transferKind>&nbsp;</label>
-                                        <input type=radio name=transferKind value=cash> Cash
-                                    </li>
-
-                                    <li>
                                         <label for=transferForm_from>From</label>
-                                        <select id=transferForm_from name=brokerageAccountId>
+                                        <select id=transferForm_from name=fromAccountId>
                                         </select>
                                     </li>
 
+                                    <li>
+                                        <label for=transferForm_to>To</label>
+                                        <select id=transferForm_to name=toAccountId>
+                                        </select>
+                                    </li>
+
+                                    <li class=transferForm_cashItem>
+                                        <label for=transferForm_amount>Amount</label>
+                                        <input class="validate[custom[number]]" type=text name=amount.amount id=transferForm_amount>
+                                        <input class=nodisplay type=text name=amount.currency id=transferForm_amount_currency value=USD>
+                                    </li>
+
+                                    <li class=transferForm_securitiesItem>
+                                        <label for=transferForm_symbol>Symbol</label>
+                                        <input type=text name=symbol id=transferForm_symbol>
+                                    </li>
+
+                                    <li class=transferForm_securitiesItem>
+                                        <label for=transferForm_quantity>Quantity</label>
+                                        <input class="validate[custom[integer]]" type=text name=quantity id=transferForm_quantity>
+                                    </li>
+
+                                    <li class=transferForm_securitiesItem>
+                                        <label for=transferForm_pricePaidPerShare>Price Paid/Share</label>
+                                        <input class="validate[custom[number]]" type=text name=pricePaidPerShare.amount id=transferForm_pricePaidPerShare>
+                                        <input class=nodisplay type=text name=pricePaidPerShare.currency id=transferForm_pricePaidPerShare_currency value=USD>
+                                    </li>
 
                                     <li>
                                         <button id=transferForm_transfer type=submit>Transfer</button>

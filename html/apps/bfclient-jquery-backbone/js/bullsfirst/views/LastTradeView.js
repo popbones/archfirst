@@ -20,7 +20,7 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/framework/Formatter'],
-        function(Formatter) {
+       function(Formatter) {
 
     return Backbone.View.extend({
         el: '#tradeForm_lastTrade',

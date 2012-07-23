@@ -20,7 +20,7 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/BrokerageAccount'],
-        function(BrokerageAccount) {
+       function(BrokerageAccount) {
 
     return Backbone.Collection.extend({
         model: BrokerageAccount,

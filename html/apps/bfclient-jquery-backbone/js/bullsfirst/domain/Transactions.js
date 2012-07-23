@@ -20,7 +20,7 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/Transaction'],
-        function(Transaction) {
+       function(Transaction) {
 
     return Backbone.Collection.extend({
         model: Transaction,

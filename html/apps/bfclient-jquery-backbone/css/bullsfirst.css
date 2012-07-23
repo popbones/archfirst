@@ -512,7 +512,7 @@ form.bfForm label {
     width: 110px;
 }
 
-form.bfForm input:not([type=checkbox]),
+form.bfForm input:not([type=checkbox]):not([type=radio]),
 form.bfForm select {
     background: #ffffff;
     border: none;
@@ -543,6 +543,13 @@ form.bfForm button {
     position: absolute;
     left: 430px;
     width: 200px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Transfer Tab
+ * -------------------------------------------------------------------------- */
+#transferForm_transferKind {
+    text-align: center;
 }
 
 /* -----------------------------------------------------------------------------

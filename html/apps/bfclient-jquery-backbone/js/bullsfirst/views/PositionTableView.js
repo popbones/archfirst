@@ -20,9 +20,8 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/framework/MessageBus',
-        'bullsfirst/views/PositionView'
-        ],
-        function(MessageBus, PositionView) {
+        'bullsfirst/views/PositionView'],
+       function(MessageBus, PositionView) {
 
     return Backbone.View.extend({
 

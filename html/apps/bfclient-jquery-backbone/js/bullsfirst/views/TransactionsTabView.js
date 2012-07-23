@@ -20,9 +20,8 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/views/TransactionFilterView',
-        'bullsfirst/views/TransactionTableView'
-        ],
-        function(TransactionFilterView, TransactionTableView) {
+        'bullsfirst/views/TransactionTableView'],
+       function(TransactionFilterView, TransactionTableView) {
 
     return Backbone.View.extend({
 

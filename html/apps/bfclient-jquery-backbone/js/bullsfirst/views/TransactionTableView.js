@@ -21,9 +21,8 @@
  */
 define(['bullsfirst/domain/Transactions',
         'bullsfirst/framework/MessageBus',
-        'bullsfirst/views/TransactionView'
-        ],
-        function(Transactions, MessageBus, TransactionView) {
+        'bullsfirst/views/TransactionView'],
+       function(Transactions, MessageBus, TransactionView) {
 
     return Backbone.View.extend({
 

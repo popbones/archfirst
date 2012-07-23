@@ -21,9 +21,8 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
-        'bullsfirst/services/BrokerageAccountService'
-        ],
-        function(UserContext, ErrorUtil, BrokerageAccountService) {
+        'bullsfirst/services/BrokerageAccountService'],
+       function(UserContext, ErrorUtil, BrokerageAccountService) {
 
     // Configure the dialog
     $('#add_account_dialog').dialog({

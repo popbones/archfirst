@@ -20,9 +20,8 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/views/OrderFilterView',
-        'bullsfirst/views/OrderTableView'
-        ],
-        function(OrderFilterView, OrderTableView) {
+        'bullsfirst/views/OrderTableView'],
+       function(OrderFilterView, OrderTableView) {
 
     return Backbone.View.extend({
 

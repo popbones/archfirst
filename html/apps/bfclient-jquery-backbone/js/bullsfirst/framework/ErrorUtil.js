@@ -22,7 +22,7 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/framework/AlertUtil'],
-        function(AlertUtil) {
+       function(AlertUtil) {
 
     return {
         showError: function(jqXHR, textStatus, errorThrown) {
