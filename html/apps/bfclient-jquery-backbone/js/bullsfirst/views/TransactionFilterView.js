@@ -45,6 +45,11 @@ define(['bullsfirst/domain/UserContext',
             $('#txnflt_toDate').datepicker();
 
             this.resetFilter();
+
+            // Subscribe to events
+            MessageBus.on('UpdateTransactions', function() {
+                this.updateTransactions();
+            }, this);
         },
 
         updateTransactions: function() {

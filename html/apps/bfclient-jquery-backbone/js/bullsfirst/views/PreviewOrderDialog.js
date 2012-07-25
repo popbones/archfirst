@@ -96,10 +96,10 @@ define(['bullsfirst/domain/UserContext',
 
             // Create brokerage account
             OrderService.createOrder(
-                this.orderRequest, _.bind(this.createOrderDone, this), ErrorUtil.showError);
+                this.orderRequest, _.bind(this.placeOrderDone, this), ErrorUtil.showError);
         },
 
-        createOrderDone: function(data, textStatus, jqXHR) {
+        placeOrderDone: function(data, textStatus, jqXHR) {
             // Show the order
             MessageBus.trigger('UpdateOrders');
             MessageBus.trigger('UserTabSelectionRequest', 'orders');

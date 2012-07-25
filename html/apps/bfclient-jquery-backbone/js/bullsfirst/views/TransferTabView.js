@@ -19,8 +19,12 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext'],
-       function(UserContext) {
+define(['bullsfirst/domain/UserContext',
+        'bullsfirst/framework/ErrorUtil',
+        'bullsfirst/framework/MessageBus',
+        'bullsfirst/services/AccountService',
+        'bullsfirst/views/MixedAccountSelectorView'],
+       function(UserContext, ErrorUtil, MessageBus, AccountService, MixedAccountSelectorView) {
 
     return Backbone.View.extend({
 
@@ -33,6 +37,16 @@ define(['bullsfirst/domain/UserContext'],
         },
 
         initialize: function(options) {
+            new MixedAccountSelectorView({
+                el: '#transferForm_from',
+                collection: UserContext.getBaseAccounts()
+            });
+
+            new MixedAccountSelectorView({
+                el: '#transferForm_to',
+                collection: UserContext.getBaseAccounts()
+            });
+
             $('#transferForm_transferKind input:radio[name=transferKind]')[0].checked = true;
             this.showCashItemsImmediate();
 
@@ -47,11 +61,29 @@ define(['bullsfirst/domain/UserContext'],
         },
 
         validateForm: function() {
+            // TODO: Do proper validation
             if ($('#transferForm').validationEngine('validate')) {
-
-                this.transferRequest = $('#transferForm').toObject();
+                var formObject = $('#transferForm').toObject();
+                (formObject.transferKind === 'cash') ? this.transferCash(formObject) : this.transferSecurities(formObject);
             }
             return false;
+        },
+
+        transferCash: function(formObject) {
+            AccountService.transferCash(
+                formObject.fromAccountId,
+                { amount: formObject.amount, toAccountId: formObject.toAccountId },
+                _.bind(this.transferDone, this),
+                ErrorUtil.showError);
+        },
+
+        transferSecurities: function(formObject) {
+        },
+
+        transferDone: function() {
+            // Show the transaction
+            MessageBus.trigger('UpdateTransactions');
+            MessageBus.trigger('UserTabSelectionRequest', 'transactions');
         },
 
         transferKindChanged: function(event) {

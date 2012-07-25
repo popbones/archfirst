@@ -529,6 +529,12 @@
         {{/account}}
     </script>
 
+    <script id="mixedAccountSelectorTemplate" type="text/x-mustache-tmpl">
+        {{#account}}
+        <option value="{{id}}">{{displayString}}</option>
+        {{/account}}
+    </script>
+
     <script id="positionTemplate" type="text/x-mustache-tmpl">
         {{#position}}
         <td class="left">

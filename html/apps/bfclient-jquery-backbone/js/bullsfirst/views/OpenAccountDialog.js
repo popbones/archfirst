@@ -122,8 +122,7 @@ define(['bullsfirst/domain/Credentials',
             // Transfer cash
             AccountService.transferCash(
                 this.externalAccountId,
-                this.brokerageAccountId,
-                100000,
+                { amount: {amount: 100000, currency: 'USD'}, toAccountId: this.brokerageAccountId },
                 _.bind(this.transferCashDone, this),
                 ErrorUtil.showError);
         },
