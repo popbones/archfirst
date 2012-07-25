@@ -53,6 +53,19 @@ define(['bullsfirst/domain/UserContext',
                 data: JSON.stringify(transferCashRequest, null, '\t')
             })
             .then(doneCallbacks, failCallbacks);
+        },
+
+        transferSecurities: function(fromAccountId, transferSecuritiesRequest, doneCallbacks, failCallbacks) {
+            $.ajax({
+                url: _url + '/' + fromAccountId + '/transfer_securities',
+                type: 'POST',
+                beforeSend: function(xhr) {
+                    AjaxUtil.setAuthorizationHeader(xhr, UserContext.getCredentials());
+                },
+                contentType: 'application/json',
+                data: JSON.stringify(transferSecuritiesRequest, null, '\t')
+            })
+            .then(doneCallbacks, failCallbacks);
         }
     };
 });

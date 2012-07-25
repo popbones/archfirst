@@ -78,9 +78,22 @@ define(['bullsfirst/domain/UserContext',
         },
 
         transferSecurities: function(formObject) {
+            AccountService.transferSecurities(
+                formObject.fromAccountId,
+                {
+                    symbol: formObject.symbol,
+                    quantity: formObject.quantity,
+                    pricePaidPerShare: formObject.pricePaidPerShare,
+                    toAccountId: formObject.toAccountId
+                },
+                _.bind(this.transferDone, this),
+                ErrorUtil.showError);
         },
 
         transferDone: function() {
+            // Update Accounts
+            UserContext.updateAccounts();
+
             // Show the transaction
             MessageBus.trigger('UpdateTransactions');
             MessageBus.trigger('UserTabSelectionRequest', 'transactions');
