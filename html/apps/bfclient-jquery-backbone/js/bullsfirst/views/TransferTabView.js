@@ -61,7 +61,6 @@ define(['bullsfirst/domain/UserContext',
         },
 
         validateForm: function() {
-            // TODO: Do proper validation
             if ($('#transferForm').validationEngine('validate')) {
                 var formObject = $('#transferForm').toObject();
                 (formObject.transferKind === 'cash') ? this.transferCash(formObject) : this.transferSecurities(formObject);

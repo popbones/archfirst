@@ -48,11 +48,11 @@
                 <div class="login">
                     <form id="loginForm" action="#">
                     <div class="formRow">
-                        <label for="l_username" class="required">Username</label>
+                        <label for="l_username">Username</label>
                         <input id="l_username" name="username" type="text" class="validate[required] stretchInput" />
                     </div>
                     <div class="formRow">
-                        <label for="l_password" class="required">Password</label>
+                        <label for="l_password">Password</label>
                         <input id="l_password" name="password" type="password" class="validate[required] stretchInput" />
                     </div>
                     <div class="tallFormRow">
@@ -328,7 +328,7 @@
 
                                     <li id=tradeForm_limitPriceItem class=nodisplay>
                                         <label for=tradeForm_limitPrice>Limit Price</label>
-                                        <input class="validate[funcCall[checkLimitOrder],custom[number]]" type=text name=orderParams.limitPrice.amount id=tradeForm_limitPrice>
+                                        <input class="validate[required,custom[number]]" type=text name=orderParams.limitPrice.amount id=tradeForm_limitPrice>
                                         <input class=nodisplay type=text name=orderParams.limitPrice.currency id=tradeForm_limitPrice_currency value=USD>
                                     </li>
 
@@ -381,23 +381,23 @@
 
                                     <li class=transferForm_cashItem>
                                         <label for=transferForm_amount>Amount</label>
-                                        <input class="validate[custom[number]]" type=text name=amount.amount id=transferForm_amount>
+                                        <input class="validate[required,custom[number]]" type=text name=amount.amount id=transferForm_amount>
                                         <input class=nodisplay type=text name=amount.currency id=transferForm_amount_currency value=USD>
                                     </li>
 
                                     <li class=transferForm_securitiesItem>
                                         <label for=transferForm_symbol>Symbol</label>
-                                        <input type=text name=symbol id=transferForm_symbol>
+                                        <input class="validate[required]" type=text name=symbol id=transferForm_symbol>
                                     </li>
 
                                     <li class=transferForm_securitiesItem>
                                         <label for=transferForm_quantity>Quantity</label>
-                                        <input class="validate[custom[integer]]" type=text name=quantity id=transferForm_quantity>
+                                        <input class="validate[required,custom[integer]]" type=text name=quantity id=transferForm_quantity>
                                     </li>
 
                                     <li class=transferForm_securitiesItem>
                                         <label for=transferForm_pricePaidPerShare>Price Paid/Share</label>
-                                        <input class="validate[custom[number]]" type=text name=pricePaidPerShare.amount id=transferForm_pricePaidPerShare>
+                                        <input class="validate[required,custom[number]]" type=text name=pricePaidPerShare.amount id=transferForm_pricePaidPerShare>
                                         <input class=nodisplay type=text name=pricePaidPerShare.currency id=transferForm_pricePaidPerShare_currency value=USD>
                                     </li>
 
@@ -419,35 +419,35 @@
         <div id="open_account_dialog" title="Open an Account" class="nodisplay">
             <form id="openAccountForm" action="#">
             <div class="formRow">
-                <label for="oa_firstname" class="required">First Name</label>
+                <label for="oa_firstname">First Name</label>
                 <input
                     id="oa_firstname" name="firstName" type="text"
                     class="validate[required,custom[onlyLetterSp]] stretchInput"
                     placeholder="Enter your first name" required />
             </div>
             <div class="formRow">
-                <label for="oa_lastname" class="required">Last Name</label>
+                <label for="oa_lastname">Last Name</label>
                 <input
                     id="oa_lastname" name="lastName" type="text"
                     class="validate[required,custom[onlyLetterSp]] stretchInput"
                     placeholder="Enter your last name" required />
             </div>
             <div class="formRow">
-                <label for="oa_username" class="required">Username</label>
+                <label for="oa_username">Username</label>
                 <input
                     id="oa_username" name="username" type="text"
                     class="validate[required] stretchInput"
                     placeholder="Enter a username" required />
             </div>
             <div class="formRow">
-                <label for="oa_password" class="required">Password</label>
+                <label for="oa_password">Password</label>
                 <input
                     id="oa_password" name="password" type="password"
                     class="validate[required] stretchInput"
                     placeholder="Enter a password" required />
             </div>
             <div class="formRow">
-                <label for="oa_confirm_password" class="required">Confirm Password</label>
+                <label for="oa_confirm_password">Confirm Password</label>
                 <input
                     id="oa_confirm_password" name="confirmPassword" type="password"
                     class="validate[required,equals[oa_password]] stretchInput"
@@ -460,7 +460,7 @@
         <div id="add_account_dialog" title="Create New Account" class="nodisplay">
             <form id="addAccountForm" action="#">
             <div class="formRow">
-                <label for="addacnt_name" class="required">Account Name</label>
+                <label for="addacnt_name">Account Name</label>
                 <input
                     id="addacnt_name" name="accountName" type="text"
                     class="validate[required] stretchInput"
@@ -473,7 +473,7 @@
         <div id="edit_account_dialog" title="Edit Account" class="nodisplay">
             <form id="editAccountForm" action="#">
             <div class="formRow">
-                <label for="editacnt_name" class="required">Account Name</label>
+                <label for="editacnt_name">Account Name</label>
                 <input
                     id="editacnt_name" name="accountName" type="text"
                     class="validate[required] stretchInput"

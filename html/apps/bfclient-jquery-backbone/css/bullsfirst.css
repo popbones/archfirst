@@ -111,9 +111,6 @@ strong {
     margin-top: 10px;
 }
 
-.required {
-}
-
 /* Buttons */
 button, input[type="button"], input[type="reset"], input[type="submit"] {
     margin-right: 4px;
