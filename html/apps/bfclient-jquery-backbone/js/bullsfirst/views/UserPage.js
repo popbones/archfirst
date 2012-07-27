@@ -21,7 +21,9 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/MessageBus',
+        'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/Page',
+        'bullsfirst/services/InstrumentService',
         'bullsfirst/views/AccountsTabView',
         'bullsfirst/views/OrdersTabView',
         'bullsfirst/views/PositionsTabView',
@@ -29,7 +31,7 @@ define(['bullsfirst/domain/UserContext',
         'bullsfirst/views/TransactionsTabView',
         'bullsfirst/views/TransferTabView',
         'bullsfirst/views/UsernameView'],
-       function(UserContext, MessageBus, Page, AccountsTabView, OrdersTabView, PositionsTabView, TradeTabView, TransactionsTabView, TransferTabView, UsernameView) {
+       function(UserContext, MessageBus, ErrorUtil, Page, InstrumentService, AccountsTabView, OrdersTabView, PositionsTabView, TradeTabView, TransactionsTabView, TransferTabView, UsernameView) {
 
     return Page.extend({
         el: '#user_page',
@@ -50,10 +52,28 @@ define(['bullsfirst/domain/UserContext',
             new TradeTabView();
             new TransferTabView();
 
+            // Initialize symbol Autocomplete widgets.
+            // This is done in one central place because of quirks in jQuery UI Autocomplete widget,
+            // which expects all local data at initialization time
+            InstrumentService.getInstruments(this._initSymbolAutocompletes, ErrorUtil.showError);
+
             // Subscribe to events
             MessageBus.on('UserLoggedInEvent', function() {
                 UserContext.updateAccounts();
             });
+        },
+
+        _initSymbolAutocompletes: function(data, textStatus, jqXHR) {
+            var instruments = $.map(data, function(instrument) {
+                    return {
+                        label: instrument.symbol + ' (' + instrument.name + ')',
+                        value: instrument.symbol
+                    }
+                });
+
+            $('#ordflt_symbol').autocomplete({ source: instruments });
+            $('#tradeForm_symbol').autocomplete({ source: instruments });
+            $('#transferForm_symbol').autocomplete({ source: instruments });
         },
 
         logout: function() {

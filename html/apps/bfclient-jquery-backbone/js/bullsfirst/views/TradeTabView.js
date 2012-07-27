@@ -37,7 +37,7 @@ define(['bullsfirst/domain/MarketPrice',
             'submit #tradeForm': 'validateForm',
             'keypress #trade_tab': 'checkEnterKey',
             'change #tradeForm_orderType': 'orderTypeChanged',
-            'change #tradeForm_symbol': 'symbolChanged'
+            'autocompletechange #tradeForm_symbol': 'symbolChanged'
         },
 
         initialize: function(options) {
