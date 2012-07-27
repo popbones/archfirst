@@ -21,12 +21,27 @@
  */
 define(['bullsfirst/domain/Position',
         'bullsfirst/domain/UserContext',
-        'bullsfirst/framework/Formatter'],
-       function(Position, UserContext, Formatter) {
+        'bullsfirst/framework/Formatter',
+        'bullsfirst/framework/MessageBus'],
+       function(Position, UserContext, Formatter, MessageBus) {
 
     return Backbone.View.extend({
 
         tagName: 'tr',
+
+        events: {
+            'click .pos_trade': 'requestTrade'
+        },
+
+        requestTrade: function(event) {
+            MessageBus.trigger('TradeRequest', {
+                action: $(event.target).data('action'),
+                quantity: this.model.get('quantity'),
+                symbol: this.model.get('instrumentSymbol')
+            });
+
+            return false;
+        },
 
         render: function() {
             // Format position values for display 

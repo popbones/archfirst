@@ -23,11 +23,12 @@ define(['bullsfirst/domain/MarketPrice',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/AlertUtil',
         'bullsfirst/framework/ErrorUtil',
+        'bullsfirst/framework/MessageBus',
         'bullsfirst/services/OrderEstimateService',
         'bullsfirst/views/AccountSelectorView',
         'bullsfirst/views/LastTradeView',
         'bullsfirst/views/PreviewOrderDialog'],
-       function(MarketPrice, UserContext, AlertUtil, ErrorUtil, OrderEstimateService, AccountSelectorView, LastTradeView, PreviewOrderDialog) {
+       function(MarketPrice, UserContext, AlertUtil, ErrorUtil, MessageBus, OrderEstimateService, AccountSelectorView, LastTradeView, PreviewOrderDialog) {
 
     return Backbone.View.extend({
 
@@ -47,6 +48,16 @@ define(['bullsfirst/domain/MarketPrice',
             });
 
             $('#tradeForm').validationEngine();
+
+            // Subscribe to events
+            MessageBus.on('TradeRequest', function(request) {
+                $('#tradeForm_symbol').val(request.symbol);
+                $('#tradeForm_action').val(request.action);
+                $('#tradeForm_quantity').val(request.quantity);
+                this._fetchMarketPrice(request.symbol);
+
+                MessageBus.trigger('UserTabSelectionRequest', 'trade');
+            }, this);
         },
 
         checkEnterKey: function(event) {
@@ -100,7 +111,10 @@ define(['bullsfirst/domain/MarketPrice',
         },
 
         symbolChanged: function(event) {
-            var symbol = event.target.value;
+            this._fetchMarketPrice(event.target.value);
+        },
+
+        _fetchMarketPrice: function(symbol) {
             this.marketPrice = new MarketPrice({symbol: symbol});
             this.marketPrice.fetch({
                 success: _.bind(this._marketPriceFetched, this),
