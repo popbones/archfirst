@@ -23,8 +23,6 @@ define(['bullsfirst/framework/Formatter'],
        function(Formatter) {
 
     return Backbone.View.extend({
-        el: '#tradeForm_lastTrade',
-
         render: function() {
             this.$el.html(
                 'Last Trade ' + ' ' +

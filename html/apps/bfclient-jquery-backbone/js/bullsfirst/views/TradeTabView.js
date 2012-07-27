@@ -109,7 +109,10 @@ define(['bullsfirst/domain/MarketPrice',
         },
 
         _marketPriceFetched: function() {
-            new LastTradeView({model: this.marketPrice}).render();
-        } 
+            new LastTradeView({
+                el: '#tradeForm_lastTrade',
+                model: this.marketPrice
+            }).render();
+        }
     });
 });

@@ -19,12 +19,14 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext',
+define(['bullsfirst/domain/MarketPrice',
+        'bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/services/AccountService',
+        'bullsfirst/views/LastTradeView',
         'bullsfirst/views/MixedAccountSelectorView'],
-       function(UserContext, ErrorUtil, MessageBus, AccountService, MixedAccountSelectorView) {
+       function(MarketPrice, UserContext, ErrorUtil, MessageBus, AccountService, LastTradeView, MixedAccountSelectorView) {
 
     return Backbone.View.extend({
 
@@ -33,7 +35,8 @@ define(['bullsfirst/domain/UserContext',
         events: {
             'submit #transferForm': 'validateForm',
             'keypress #transfer_tab': 'checkEnterKey',
-            'change #transferForm_transferKind input:radio[name=transferKind]': 'transferKindChanged'
+            'change #transferForm_transferKind input:radio[name=transferKind]': 'transferKindChanged',
+            'autocompletechange #transferForm_symbol': 'symbolChanged'
         },
 
         initialize: function(options) {
@@ -100,6 +103,22 @@ define(['bullsfirst/domain/UserContext',
 
         transferKindChanged: function(event) {
             (event.target.value === 'cash') ? this.showCashItems() : this.showSecuritiesItems();
+        },
+
+        symbolChanged: function(event) {
+            var symbol = event.target.value;
+            this.marketPrice = new MarketPrice({symbol: symbol});
+            this.marketPrice.fetch({
+                success: _.bind(this._marketPriceFetched, this),
+                error: ErrorUtil.showBackboneError
+            });
+        },
+
+        _marketPriceFetched: function() {
+            new LastTradeView({
+                el: '#transferForm_lastTrade',
+                model: this.marketPrice
+            }).render();
         },
 
         // show('fast') amd hide('fast) does not work from initialize()
