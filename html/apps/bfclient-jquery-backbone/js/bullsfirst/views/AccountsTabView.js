@@ -20,9 +20,10 @@
  * @author Naresh Bhatia
  */
 define(['bullsfirst/domain/UserContext',
+        'bullsfirst/views/AccountChartView',
         'bullsfirst/views/AccountTableView',
         'bullsfirst/views/AddAccountDialog'],
-       function(UserContext, AccountTableView, AddAccountDialog) {
+       function(UserContext, AccountChartView, AccountTableView, AddAccountDialog) {
 
     return Backbone.View.extend({
 
@@ -35,6 +36,7 @@ define(['bullsfirst/domain/UserContext',
 
         initialize: function(options) {
             new AccountTableView({collection: UserContext.getBrokerageAccounts()});
+            new AccountChartView({collection: UserContext.getBrokerageAccounts()});
         },
 
         updateAccounts: function() {
