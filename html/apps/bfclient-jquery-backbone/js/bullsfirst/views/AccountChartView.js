@@ -21,6 +21,10 @@
  */
 define(function() {
 
+    var accounts_title = 'All Accounts';
+    var accounts_subtitle = 'Click on an account to view positions';
+    var positions_subtitle = 'Click on the chart to return to all accounts';
+
     return Backbone.View.extend({
 
         el: '#accounts_chart',
@@ -30,58 +34,85 @@ define(function() {
         },
 
         render: function() {
-            new Highcharts.Chart({
+            var context = this;
+
+            // Convert accounts collection to a structure understood by the Highcharts
+            this.accounts = this.collection.map(function(account) {
+                return {
+                    name: account.get('name'),
+                    y: account.get('marketValue').amount,
+                    positions: account.get('positions').map(function(position) {
+                        return {
+                            name: position.get('instrumentSymbol'),
+                            y: position.get('marketValue').amount
+                        }
+                    })
+                };
+            });
+
+            var chart = new Highcharts.Chart({
                 chart: {
                     renderTo: 'accounts_chart',
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
                     plotShadow: false
                 },
+                title: {
+                    text: accounts_title
+                },
+                subtitle: {
+                    text: accounts_subtitle
+                },
                 credits: {
                     enabled: false
                 },
-                title: {
-                    text: 'All Accounts'
-                },
-                legend: {
-                    enabled: false,
-                    y: 50
-                },
                 tooltip: {
                     formatter: function() {
-                        return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                        return this.point.name + '<br/>' + this.percentage.toFixed(1) +' %';
                     }
                 },
                 plotOptions: {
                     pie: {
-                        allowPointSelect: true,
                         cursor: 'pointer',
                         dataLabels: {
-                            enabled: true,
-                            color: '#000000',
-                            connectorColor: '#000000',
-                            formatter: function() {
-                                return '<b>'+ this.point.name +'</b>: '+ this.percentage +' %';
+                            enabled: false
+                        },
+                        showInLegend: true,
+                        point: {
+                            events: {
+                                click: function(event) {
+                                    // Positions exist only at the account level
+                                    var positions = this.positions;
+                                    var name = this.name;
+                                    chart.series[0].remove();  // 'this' is now destroyed, don't use it
+                                    if (positions) {  // drill down
+                                        chart.setTitle({text: name}, {text: positions_subtitle});
+                                        chart.addSeries({
+                                            type: 'pie',
+                                            name: name,
+                                            data: positions
+                                        });
+                                    }
+                                    else {  // restore
+                                        chart.setTitle({text: accounts_title}, {text: accounts_subtitle});
+                                        chart.addSeries({
+                                            type: 'pie',
+                                            name: accounts_title,
+                                            data: context.accounts
+                                        });
+                                    }
+                                }
                             }
                         }
                     }
                 },
+                legend: {
+                    itemWidth: 160
+                },
                 series: [{
                     type: 'pie',
-                    name: 'Browser share',
-                    data: [
-                        ['Firefox',   45.0],
-                        ['IE',       26.8],
-                        {
-                            name: 'Chrome',
-                            y: 12.8,
-                            sliced: true,
-                            selected: true
-                        },
-                        ['Safari',    8.5],
-                        ['Opera',     6.2],
-                        ['Others',   0.7]
-                    ]
+                    name: 'All Accounts',
+                    data: context.accounts
                 }]
             });
 

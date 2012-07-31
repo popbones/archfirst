@@ -46,7 +46,7 @@
                     </p>
                 </div>
                 <div class="login">
-                    <form id="loginForm" action="#">
+                    <form id="loginForm" action="">
                     <div class="formRow">
                         <label for="l_username">Username</label>
                         <input id="l_username" name="username" type="text" class="validate[required] stretchInput" />
@@ -78,7 +78,7 @@
                     </ul>
                     <div class="rightSideLinks">
                         <span id="loggedin_username"></span> |
-                        <a id="signOutLink" href='#'>Sign Out</a>
+                        <a id="signOutLink" href=''>Sign Out</a>
                     </div>
 
                     <!-- Accounts Tab -->
@@ -156,7 +156,7 @@
                         </div>
 
                         <div class="toolbar">
-                            <form id="ordfltForm" action="#">
+                            <form id="ordfltForm" action="">
                             <div class="toolbarRowRight">
                                 <button id="orders_update" type="button">Update</button>
                                 <button id="ordflt_reset" type="button">Reset Filter</button>
@@ -241,7 +241,7 @@
                         </div>
 
                         <div class="toolbar">
-                            <form id="txnfltForm" action="#">
+                            <form id="txnfltForm" action="">
                             <div class="toolbarRowRight">
                                 <button id="txn_update" type="button">Update</button>
                                 <button id="txnflt_reset" type="button">Reset Filter</button>
@@ -290,7 +290,7 @@
                         </div>
 
                         <div class="tab_content">
-                            <form id="tradeForm" class="bfForm" action="#">
+                            <form id="tradeForm" class="bfForm" action="">
                                 <ol>
                                     <li>
                                         <label for=tradeForm_account_selector>Account</label>
@@ -359,7 +359,7 @@
                         </div>
 
                         <div class="tab_content">
-                            <form id="transferForm" class="bfForm" action="#">
+                            <form id="transferForm" class="bfForm" action="">
                                 <p id=transferForm_transferKind>
                                     <input type=radio name=transferKind value=cash class="required"> Cash
                                     <input type=radio name=transferKind value=securities> Securities
@@ -417,7 +417,7 @@
 
         <!-- Open Account Dialog -->
         <div id="open_account_dialog" title="Open an Account" class="nodisplay">
-            <form id="openAccountForm" action="#">
+            <form id="openAccountForm" action="">
             <div class="formRow">
                 <label for="oa_firstname">First Name</label>
                 <input
@@ -458,7 +458,7 @@
 
         <!-- Add Account Dialog -->
         <div id="add_account_dialog" title="Create New Account" class="nodisplay">
-            <form id="addAccountForm" action="#">
+            <form id="addAccountForm" action="">
             <div class="formRow">
                 <label for="addacnt_name">Account Name</label>
                 <input
@@ -471,7 +471,7 @@
 
         <!-- Edit Account Dialog -->
         <div id="edit_account_dialog" title="Edit Account" class="nodisplay">
-            <form id="editAccountForm" action="#">
+            <form id="editAccountForm" action="">
             <div class="formRow">
                 <label for="editacnt_name">Account Name</label>
                 <input
@@ -765,6 +765,7 @@
     <script src="js/libs/jquery.alerts.js"></script>
     <!-- Highcharts -->
     <script src="js/libs/highcharts-2.2.5.js"></script>
+    <script src="js/libs/highcharts-2.2.5-exporting.js"></script>
     <!-- keep our scripts at the end -->
     <script src="js/libs/plugins.js"></script>
     <script data-main="js/main" src="js/require-1.0.7.min.js"></script>
