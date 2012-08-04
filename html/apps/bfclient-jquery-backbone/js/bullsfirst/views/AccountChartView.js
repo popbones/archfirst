@@ -24,6 +24,18 @@ define(function() {
     var accounts_title = 'All Accounts';
     var accounts_subtitle = 'Click on an account to view positions';
     var positions_subtitle = 'Click on the chart to return to all accounts';
+    var colors = [
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#fde79c'], [1, '#f6bc0c']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#b9d6f7'], [1, '#284b70']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#fbb7b5'], [1, '#702828']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#b8c0ac'], [1, '#5f7143']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#a9a3bd'], [1, '#382c6c']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#98c1dc'], [1, '#0271ae']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#9dc2b3'], [1, '#1d7554']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#b1a1b1'], [1, '#50224f']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#c1c0ae'], [1, '#706e41']] },
+        { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#adbdc0'], [1, '#446a73']] }
+    ];
 
     return Backbone.View.extend({
 
@@ -49,6 +61,26 @@ define(function() {
                     })
                 };
             });
+
+            // Sort accounts by descending market value and assign colors
+            this.accounts = _.sortBy(this.accounts, function(account) { return -account.y; }) ;
+            if (this.accounts.length > 10) {
+                this._truncateSeries(this.accounts);
+                this.accounts[9].positions =
+                    [{name: 'Miscellaneous', y: this.accounts[9].y}]
+            }
+            _.each(this.accounts, function(account, index) {
+                account.color = colors[index % 10];
+                account.positions = _.sortBy(account.positions, function(position) {
+                    return -position.y;
+                }) ;
+                if (account.positions.length > 10) {
+                    this._truncateSeries(account.positions);
+                }
+                _.each(account.positions, function(position, index) {
+                    position.color = colors[index % 10];
+                });
+            }, this);
 
             var chart = new Highcharts.Chart({
                 chart: {
@@ -78,6 +110,7 @@ define(function() {
                             enabled: false
                         },
                         showInLegend: true,
+                        shadow: false,
                         point: {
                             events: {
                                 click: function(event) {
@@ -117,6 +150,16 @@ define(function() {
             });
 
             return this;
+        },
+
+        /* Truncates the series to 10 points */
+        _truncateSeries: function(series) {
+            var elementsToRemove = series.length - 10;
+            for (i=elementsToRemove; i>0; i--) {
+                var point = series.pop();
+                series[9].y += point.y;
+            }
+            series[9].name = 'Other';
         }
     });
 });
