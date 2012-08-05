@@ -24,6 +24,7 @@ define(function() {
     var accounts_title = 'All Accounts';
     var accounts_subtitle = 'Click on an account to view positions';
     var positions_subtitle = 'Click on the chart to return to all accounts';
+    var MAX_POINTS = 10;
     var colors = [
         { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#fde79c'], [1, '#f6bc0c']] },
         { radialGradient: {cx: 0, cy: 0, r: 1}, stops: [[0, '#b9d6f7'], [1, '#284b70']] },
@@ -64,21 +65,21 @@ define(function() {
 
             // Sort accounts by descending market value and assign colors
             this.accounts = _.sortBy(this.accounts, function(account) { return -account.y; }) ;
-            if (this.accounts.length > 10) {
+            if (this.accounts.length > MAX_POINTS) {
                 this._truncateSeries(this.accounts);
-                this.accounts[9].positions =
-                    [{name: 'Miscellaneous', y: this.accounts[9].y}]
+                this.accounts[MAX_POINTS-1].positions =
+                    [{name: 'Miscellaneous', y: this.accounts[MAX_POINTS-1].y}]
             }
             _.each(this.accounts, function(account, index) {
-                account.color = colors[index % 10];
+                account.color = colors[index % MAX_POINTS];
                 account.positions = _.sortBy(account.positions, function(position) {
                     return -position.y;
                 }) ;
-                if (account.positions.length > 10) {
+                if (account.positions.length > MAX_POINTS) {
                     this._truncateSeries(account.positions);
                 }
                 _.each(account.positions, function(position, index) {
-                    position.color = colors[index % 10];
+                    position.color = colors[index % MAX_POINTS];
                 });
             }, this);
 
@@ -154,12 +155,12 @@ define(function() {
 
         /* Truncates the series to 10 points */
         _truncateSeries: function(series) {
-            var elementsToRemove = series.length - 10;
+            var elementsToRemove = series.length - MAX_POINTS;
             for (i=elementsToRemove; i>0; i--) {
                 var point = series.pop();
-                series[9].y += point.y;
+                series[MAX_POINTS-1].y += point.y;
             }
-            series[9].name = 'Other';
+            series[MAX_POINTS-1].name = 'Other';
         }
     });
 });
