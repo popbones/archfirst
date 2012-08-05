@@ -24,9 +24,10 @@ define(['bullsfirst/domain/MarketPrice',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/MessageBus',
         'bullsfirst/services/AccountService',
+        'bullsfirst/views/AddExternalAccountDialog',
         'bullsfirst/views/LastTradeView',
         'bullsfirst/views/MixedAccountSelectorView'],
-       function(MarketPrice, UserContext, ErrorUtil, MessageBus, AccountService, LastTradeView, MixedAccountSelectorView) {
+       function(MarketPrice, UserContext, ErrorUtil, MessageBus, AccountService, AddExternalAccountDialog, LastTradeView, MixedAccountSelectorView) {
 
     return Backbone.View.extend({
 
@@ -36,7 +37,8 @@ define(['bullsfirst/domain/MarketPrice',
             'submit #transferForm': 'validateForm',
             'keypress #transfer_tab': 'checkEnterKey',
             'change #transferForm_transferKind input:radio[name=transferKind]': 'transferKindChanged',
-            'autocompletechange #transferForm_symbol': 'symbolChanged'
+            'autocompletechange #transferForm_symbol': 'symbolChanged',
+            'click #transfer_add_external_account': 'addExternalAccount'
         },
 
         initialize: function(options) {
@@ -119,6 +121,14 @@ define(['bullsfirst/domain/MarketPrice',
                 el: '#transferForm_lastTrade',
                 model: this.marketPrice
             }).render();
+        },
+
+        addExternalAccount: function() {
+            if (!this.addExternalAccountDialog) {
+                this.addExternalAccountDialog = new AddExternalAccountDialog();
+            }
+            this.addExternalAccountDialog.open();
+            return false;
         },
 
         // show('fast') amd hide('fast) does not work from initialize()

@@ -406,6 +406,10 @@
                                     </li>
                                 </ol>
                             </form>
+
+                            <div class="tallFormRow">
+                                <a id="transfer_add_external_account" href="#">Add an external account...</a>
+                            </div>
                         </div>
                     </div>
 
@@ -484,6 +488,33 @@
 
         <!-- Preview Order Dialog -->
         <div id="preview_order_dialog" title="Preview Order" class="nodisplay">
+        </div>
+
+        <!-- Add External Account Dialog -->
+        <div id="add_external_account_dialog" title="Add External Account" class="nodisplay">
+            <form id="addExternalAccountForm" action="">
+            <div class="formRow">
+                <label for="addextacnt_name">Account Name</label>
+                <input
+                    id="addextacnt_name" name="name" type="text"
+                    class="validate[required] stretchInput"
+                    placeholder="Enter account name" required />
+            </div>
+            <div class="formRow">
+                <label for="addextacnt_rountingNumber">Routing Number</label>
+                <input
+                    id="addextacnt_rountingNumber" name="routingNumber" type="text"
+                    class="validate[required] stretchInput"
+                    placeholder="Enter routing number" required />
+            </div>
+            <div class="formRow">
+                <label for="addextacnt_accountNumber">Account Number</label>
+                <input
+                    id="addextacnt_accountNumber" name="accountNumber" type="text"
+                    class="validate[required] stretchInput"
+                    placeholder="Enter account number" required />
+            </div>
+            </form>
         </div>
 
         <footer>
