@@ -381,7 +381,7 @@ footer {
 }
 
 .ord_tbl_creation_time {
-    width: 180px;
+    width: 200px;
     text-align: center;
 }
 
@@ -411,7 +411,7 @@ footer {
 }
 
 .ord_tbl_quantity {
-    width: 70px;
+    width: 60px;
     text-align: center;
 }
 
@@ -431,7 +431,7 @@ footer {
 }
 
 .ord_tbl_actions {
-    width: 50px;
+    width: 40px;
     text-align: center;
 }
 
