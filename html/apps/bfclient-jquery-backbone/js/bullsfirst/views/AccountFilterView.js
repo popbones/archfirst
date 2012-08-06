@@ -19,8 +19,9 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext'],
-       function(UserContext) {
+define(['bullsfirst/domain/UserContext',
+        'text!bullsfirst/templates/account-filter.tpl'],
+       function(UserContext, accountFilterTemplate) {
 
     return Backbone.View.extend({
 
@@ -44,7 +45,7 @@ define(['bullsfirst/domain/UserContext'],
                 var hash = {
                     account: account
                 }
-                this.$el.append(Mustache.to_html($('#accountFilterTemplate').html(), hash));
+                this.$el.append(Mustache.to_html(accountFilterTemplate, hash));
             }, this);
 
             return this;

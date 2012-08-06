@@ -21,8 +21,9 @@
  */
 define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
-        'bullsfirst/framework/MessageBus'],
-       function(UserContext, Formatter, MessageBus) {
+        'bullsfirst/framework/MessageBus',
+        'text!bullsfirst/templates/account-selector.tpl'],
+       function(UserContext, Formatter, MessageBus, accountSelectorTemplate) {
 
     return Backbone.View.extend({
 
@@ -58,7 +59,7 @@ define(['bullsfirst/domain/UserContext',
                 var hash = {
                     account: account
                 }
-                this.$el.append(Mustache.to_html($('#accountSelectorTemplate').html(), hash));
+                this.$el.append(Mustache.to_html(accountSelectorTemplate, hash));
             }, this);
 
             // Select the selected account

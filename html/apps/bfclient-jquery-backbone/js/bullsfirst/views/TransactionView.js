@@ -19,8 +19,9 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/framework/Formatter'],
-       function(Formatter) {
+define(['bullsfirst/framework/Formatter',
+        'text!bullsfirst/templates/transaction.tpl'],
+       function(Formatter, transactionTemplate) {
 
     return Backbone.View.extend({
 
@@ -36,7 +37,7 @@ define(['bullsfirst/framework/Formatter'],
             var hash = {
                 transaction: transaction
             }
-            $(this.el).html(Mustache.to_html($('#transactionTemplate').html(), hash));
+            $(this.el).html(Mustache.to_html(transactionTemplate, hash));
             return this;
         }
     });

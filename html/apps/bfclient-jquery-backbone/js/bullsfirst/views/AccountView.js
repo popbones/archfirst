@@ -23,8 +23,9 @@ define(['bullsfirst/domain/BrokerageAccount',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
         'bullsfirst/framework/MessageBus',
-        'bullsfirst/views/EditAccountDialog'],
-       function(BrokerageAccount, UserContext, Formatter, MessageBus, EditAccountDialog) {
+        'bullsfirst/views/EditAccountDialog',
+        'text!bullsfirst/templates/account.tpl'],
+       function(BrokerageAccount, UserContext, Formatter, MessageBus, EditAccountDialog, accountTemplate) {
 
     var editAccountDialog = null;
 
@@ -47,7 +48,7 @@ define(['bullsfirst/domain/BrokerageAccount',
             var hash = {
                 account: account
             }
-            $(this.el).html(Mustache.to_html($('#accountTemplate').html(), hash));
+            $(this.el).html(Mustache.to_html(accountTemplate, hash));
             return this;
         },
 

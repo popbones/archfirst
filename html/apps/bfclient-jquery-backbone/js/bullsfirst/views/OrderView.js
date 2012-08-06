@@ -23,8 +23,9 @@ define(['bullsfirst/domain/Order',
         'bullsfirst/services/OrderService',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/Formatter',
-        'bullsfirst/framework/MessageBus'],
-       function(Order, OrderService, ErrorUtil, Formatter, MessageBus) {
+        'bullsfirst/framework/MessageBus',
+        'text!bullsfirst/templates/order.tpl'],
+       function(Order, OrderService, ErrorUtil, Formatter, MessageBus, orderTemplate) {
 
     return Backbone.View.extend({
 
@@ -56,7 +57,7 @@ define(['bullsfirst/domain/Order',
             var hash = {
                 order: order
             }
-            $(this.el).html(Mustache.to_html($('#orderTemplate').html(), hash));
+            $(this.el).html(Mustache.to_html(orderTemplate, hash));
             return this;
         }
     });

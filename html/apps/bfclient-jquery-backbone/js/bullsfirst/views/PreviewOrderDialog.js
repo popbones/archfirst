@@ -23,8 +23,9 @@ define(['bullsfirst/domain/UserContext',
         'bullsfirst/framework/ErrorUtil',
         'bullsfirst/framework/Formatter',
         'bullsfirst/framework/MessageBus',
-        'bullsfirst/services/OrderService'],
-       function(UserContext, ErrorUtil, Formatter, MessageBus, OrderService) {
+        'bullsfirst/services/OrderService',
+        'text!bullsfirst/templates/preview-order.tpl'],
+       function(UserContext, ErrorUtil, Formatter, MessageBus, OrderService, previewOrderTemplate) {
 
     // Configure the dialog
     $('#preview_order_dialog').dialog({
@@ -79,7 +80,7 @@ define(['bullsfirst/domain/UserContext',
                 summary: summary,
                 estimate: estimate
             }
-            $('#preview_order_dialog').html(Mustache.to_html($('#previewOrderTemplate').html(), hash));
+            $('#preview_order_dialog').html(Mustache.to_html(previewOrderTemplate, hash));
 
             $('#preview_order_dialog').dialog('open');
         },

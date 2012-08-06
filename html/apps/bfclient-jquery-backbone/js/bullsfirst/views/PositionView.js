@@ -22,8 +22,9 @@
 define(['bullsfirst/domain/Position',
         'bullsfirst/domain/UserContext',
         'bullsfirst/framework/Formatter',
-        'bullsfirst/framework/MessageBus'],
-       function(Position, UserContext, Formatter, MessageBus) {
+        'bullsfirst/framework/MessageBus',
+        'text!bullsfirst/templates/position.tpl'],
+       function(Position, UserContext, Formatter, MessageBus, positionTemplate) {
 
     return Backbone.View.extend({
 
@@ -63,7 +64,7 @@ define(['bullsfirst/domain/Position',
             var hash = {
                 position: position
             }
-            $(this.el).html(Mustache.to_html($('#positionTemplate').html(), hash));
+            $(this.el).html(Mustache.to_html(positionTemplate, hash));
             return this;
         }
     });

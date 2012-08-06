@@ -19,8 +19,9 @@
  *
  * @author Naresh Bhatia
  */
-define(['bullsfirst/domain/UserContext'],
-       function(UserContext) {
+define(['bullsfirst/domain/UserContext',
+        'text!bullsfirst/templates/mixed-account-selector.tpl'],
+       function(UserContext, mixedAccountSelectorTemplate) {
 
     return Backbone.View.extend({
 
@@ -37,7 +38,7 @@ define(['bullsfirst/domain/UserContext'],
                 var hash = {
                     account: accountModel.toJSON()
                 }
-                this.$el.append(Mustache.to_html($('#mixedAccountSelectorTemplate').html(), hash));
+                this.$el.append(Mustache.to_html(mixedAccountSelectorTemplate, hash));
             }, this);
 
             return this;
