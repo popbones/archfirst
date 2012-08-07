@@ -88,7 +88,8 @@ define(function() {
                     renderTo: 'accounts_chart',
                     plotBackgroundColor: null,
                     plotBorderWidth: null,
-                    plotShadow: false
+                    plotShadow: false,
+                    height: 450
                 },
                 title: {
                     text: accounts_title
@@ -112,6 +113,7 @@ define(function() {
                         },
                         showInLegend: true,
                         shadow: false,
+                        size: '90%',
                         point: {
                             events: {
                                 click: function(event) {
