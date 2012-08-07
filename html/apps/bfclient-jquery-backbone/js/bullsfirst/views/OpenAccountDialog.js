@@ -106,7 +106,7 @@ define(['bullsfirst/domain/Credentials',
 
             // Create external account
             var externalAccount = new ExternalAccount({
-                name: 'External Account 1', routingNumber: 022000248, accountNumber: 12345678
+                name: 'External Account 1', routingNumber: '022000248', accountNumber: '12345678'
             });
             UserContext.getExternalAccounts().add(externalAccount);
             externalAccount.save(null, {
