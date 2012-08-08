@@ -72,7 +72,7 @@ define(['bullsfirst/domain/UserContext',
                 isLimitOrder: orderRequest.orderParams.type === 'Limit',
                 limitPriceFormatted: Formatter.formatMoney(orderRequest.orderParams.limitPrice),
                 term: orderRequest.orderParams.term,
-                allOrNone: orderRequest.orderParams.allOrNone,
+                allOrNone: orderRequest.orderParams.allOrNone
             };
 
             // Render using template
