@@ -24,6 +24,11 @@
 define(['bullsfirst/app/AppRouter'],
        function(AppRouter) {
 
+    // Set default timeout for AJAX requests to 20 seconds
+    // This should be done before instantiating the AppRouter,
+    // because the initialization sequence fires AJAX requests
+    $.ajaxSetup({timeout: 20000});
+
     // Create the router
     var _appRouter = new AppRouter();
 

@@ -57,7 +57,8 @@ define(['bullsfirst/domain/UserContext',
             this.orderRequest = orderRequest;
 
             // Format values for display
-            estimate.lastTradeFormatted = Formatter.formatMoney(marketPrice.get('price'));
+            // Protect against marketPrice being undefined which happens if instruments are not loaded
+            estimate.lastTradeFormatted = (typeof marketPrice === 'undefined') ? 'Unknown' : Formatter.formatMoney(marketPrice.get('price'));
             estimate.estimatedValueFormatted = Formatter.formatMoney(estimate.estimatedValue);
             estimate.feesFormatted = Formatter.formatMoney(estimate.fees);
             estimate.estimatedValueInclFeesFormatted =
