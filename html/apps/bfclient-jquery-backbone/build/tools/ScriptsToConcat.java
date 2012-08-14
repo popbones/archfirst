@@ -1,6 +1,7 @@
 // HTML5 boilerplate scripts parser
 // Daniel Holth <dholth@fastmail.fm.com>, 2012
 // Public Domain. http://creativecommons.org/publicdomain/zero/1.0/
+// Modified by Naresh Bhatia for different comment block
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,7 +15,7 @@ import javax.swing.text.html.parser.ParserDelegator;
 
 /**
  * Parse an HTML file, printing the src attribute of all scripts
- * between magic <!-- scripts concatenated --> and <!-- end scripts --> comments.
+ * between magic <!-- //-beg- concatenate scripts --> and <!-- //-end- concatenate scripts --> comments.
  */
 public class ScriptsToConcat extends ParserCallback {
     private boolean emitting = false;
@@ -22,10 +23,9 @@ public class ScriptsToConcat extends ParserCallback {
     @Override
     public void handleComment(char[] arg0, int arg1) {
         String text = new String(arg0);
-        if(text.startsWith(" scripts concatenated ")) {
+        if(text.indexOf("//-beg- concatenate scripts") >= 0) {
             emitting = true;
-        } else if (text.startsWith(" end scripts ") ||
-                   text.startsWith(" end concatenated and minified scripts")) {
+        } else if (text.indexOf("//-end- concatenate scripts") >= 0) {
             emitting = false;
         }
     }

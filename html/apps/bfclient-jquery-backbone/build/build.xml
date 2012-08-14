@@ -109,7 +109,7 @@
   <!-- ******************************************************************* -->
   <target name="fixPageFiles">
     <replaceregexp
-        match="&lt;!-- scripts concatenated and minified via build script --&gt;.*&lt;!-- end scripts --&gt;"
+        match="&lt;!-- //-beg- concatenate scripts --&gt;.*&lt;!-- //-end- concatenate scripts --&gt;"
         replace="&lt;script src=&quot;js/libs/libs.js&quot;&gt;&lt;/script&gt;"
         flags="gs">
       <fileset dir="${intermediate.dir}" includes="${page-files-to-be-fixed}" />
