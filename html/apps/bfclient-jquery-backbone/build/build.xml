@@ -51,8 +51,8 @@
     <copy todir="${publish.dir}">
       <fileset dir="${intermediate.dir}" includes="${root-files-to-be-copied}"/>
     </copy>
-    <copy todir="${publish.dir}/css">
-      <fileset dir="${app.home}/css" />
+    <copy todir="${publish.dir}/css/images">
+      <fileset dir="${app.home}/css/images" />
     </copy>
     <copy todir="${publish.dir}/img">
       <fileset dir="${app.home}/img" />
@@ -63,7 +63,7 @@
   </target>
 
   <!-- ******************************************************************* -->
-  <!-- Concatenate 3rd Party libraries                                     -->
+  <!-- Compile Java files                                               -->
   <!-- ******************************************************************* -->
   <target name="compile">
     <javac
@@ -73,18 +73,57 @@
       includeantruntime="false" />
   </target>
 
+  <!-- ******************************************************************* -->
+  <!-- Concatenate CSS files                                               -->
+  <!-- ******************************************************************* -->
+  <target name="concatCss" depends="compile">
+
+    <!-- Collect css filenames to a property called "cssToConcat" -->
+    <exec executable="java" outputproperty="cssToConcat">
+      <arg value="-classpath" />
+      <arg value="${basedir}/tools" />
+      <arg value="FindAttribute" />
+      <arg value="${app.home}/index.html" />
+      <arg value="concatenate_css" />
+      <arg value="link" />
+      <arg value="href" />
+    </exec>
+    <echo message="${cssToConcat}" />
+
+    <!-- Concatenate css to intermediate/css/main.css -->
+    <!-- overwrite=no here means not to overwrite if the target is newer than the sources -->
+    <!-- Filter out byte order marks (see http://stackoverflow.com/questions/2742735/get-ant-concat-to-ignore-boms) -->
+    <concat encoding="UTF-8" outputencoding="UTF-8"
+            destfile="${intermediate.dir}/css/main.css" overwrite="no">
+      <filelist dir="${app.home}/" files="${cssToConcat}" />
+      <filterchain>
+        <deletecharacters chars="&#xFEFF;" />
+      </filterchain>
+    </concat>
+
+    <!-- Minify to publish/css/main.css -->
+<!-- ********* TODO: Replace copy task with minify *************** -->
+    <copy file="${intermediate.dir}/css/main.css" todir="${publish.dir}/css"/>
+  </target>
+
+  <!-- ******************************************************************* -->
+  <!-- Concatenate 3rd party libraries                                     -->
+  <!-- ******************************************************************* -->
   <target name="concatLibs" depends="compile">
 
     <!-- Collect library filenames to a property called "scriptsToConcat" -->
     <exec executable="java" outputproperty="scriptsToConcat">
       <arg value="-classpath" />
       <arg value="${basedir}/tools" />
-      <arg value="ScriptsToConcat" />
+      <arg value="FindAttribute" />
       <arg value="${app.home}/index.html" />
+      <arg value="concatenate_scripts" />
+      <arg value="script" />
+      <arg value="src" />
     </exec>
     <echo message="${scriptsToConcat}" />
 
-    <!-- Concatenate scripts to intermediate/js/libs.js -->
+    <!-- Concatenate scripts to intermediate/js/libs/libs.js -->
     <!-- overwrite=no here means not to overwrite if the target is newer than the sources -->
     <!-- Filter out byte order marks (see http://stackoverflow.com/questions/2742735/get-ant-concat-to-ignore-boms) -->
     <concat encoding="UTF-8" outputencoding="UTF-8"
@@ -109,7 +148,14 @@
   <!-- ******************************************************************* -->
   <target name="fixPageFiles">
     <replaceregexp
-        match="&lt;!-- //-beg- concatenate scripts --&gt;.*&lt;!-- //-end- concatenate scripts --&gt;"
+        match="&lt;!-- //-beg- concatenate_css --&gt;.*&lt;!-- //-end- concatenate_css --&gt;"
+        replace="&lt;link rel=&quot;stylesheet&quot; href=&quot;css&quot;main.css&quot;&gt;"
+        flags="gs">
+      <fileset dir="${intermediate.dir}" includes="${page-files-to-be-fixed}" />
+    </replaceregexp>
+
+    <replaceregexp
+        match="&lt;!-- //-beg- concatenate_scripts --&gt;.*&lt;!-- //-end- concatenate_scripts --&gt;"
         replace="&lt;script src=&quot;js/libs/libs.js&quot;&gt;&lt;/script&gt;"
         flags="gs">
       <fileset dir="${intermediate.dir}" includes="${page-files-to-be-fixed}" />
@@ -135,7 +181,7 @@
   <!-- ********************************************************************* -->
   <!-- build                                                                 -->
   <!-- ********************************************************************* -->
-  <target name="build" depends="make-directories, copy-to-intermediate, concatLibs, fixPageFiles, runRjs, copy-to-publish"
+  <target name="build" depends="make-directories, copy-to-intermediate, concatCss, concatLibs, fixPageFiles, runRjs, copy-to-publish"
     description="builds this project">
   </target>
 
