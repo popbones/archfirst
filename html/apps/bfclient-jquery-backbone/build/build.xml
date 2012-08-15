@@ -8,8 +8,10 @@
   <property name="app.home" location=".." />
   <property name="intermediate.dir" location="${app.home}/intermediate" />
   <property name="publish.dir" location="${app.home}/publish" />
+  <property name="tools.dir" location="${basedir}/tools" />
   <property name="root-files-to-be-copied" value=".htaccess, 404.html, crossdomain.xml, index.html, robots.txt" />
   <property name="page-files-to-be-fixed" value="index.html" />
+  <property name="tool.yuicompressor" value="yuicompressor-2.4.7.jar" />
 
   <!-- ******************************************************************* -->
   <!-- Clean                                                               -->
@@ -63,13 +65,13 @@
   </target>
 
   <!-- ******************************************************************* -->
-  <!-- Compile Java files                                               -->
+  <!-- Compile Java files                                                  -->
   <!-- ******************************************************************* -->
   <target name="compile">
     <javac
       fork="true"
-      srcdir="${basedir}/tools"
-      destdir="${basedir}/tools"
+      srcdir="${tools.dir}"
+      destdir="${tools.dir}"
       includeantruntime="false" />
   </target>
 
@@ -81,7 +83,7 @@
     <!-- Collect css filenames to a property called "cssToConcat" -->
     <exec executable="java" outputproperty="cssToConcat">
       <arg value="-classpath" />
-      <arg value="${basedir}/tools" />
+      <arg value="${tools.dir}" />
       <arg value="FindAttribute" />
       <arg value="${app.home}/index.html" />
       <arg value="concatenate_css" />
@@ -101,9 +103,14 @@
       </filterchain>
     </concat>
 
-    <!-- Minify to publish/css/main.css -->
-<!-- ********* TODO: Replace copy task with minify *************** -->
-    <copy file="${intermediate.dir}/css/main.css" todir="${publish.dir}/css"/>
+    <!-- Compress to publish/css/main.css -->
+    <exec executable="java">
+      <arg value="-jar" />
+      <arg value="${tools.dir}/${tool.yuicompressor}" />
+      <arg value="${intermediate.dir}/css/main.css" />
+      <arg value="-o" />
+      <arg value="${publish.dir}/css/main.css" />
+    </exec>
   </target>
 
   <!-- ******************************************************************* -->
@@ -114,7 +121,7 @@
     <!-- Collect library filenames to a property called "scriptsToConcat" -->
     <exec executable="java" outputproperty="scriptsToConcat">
       <arg value="-classpath" />
-      <arg value="${basedir}/tools" />
+      <arg value="${tools.dir}" />
       <arg value="FindAttribute" />
       <arg value="${app.home}/index.html" />
       <arg value="concatenate_scripts" />
@@ -149,7 +156,7 @@
   <target name="fixPageFiles">
     <replaceregexp
         match="&lt;!-- //-beg- concatenate_css --&gt;.*&lt;!-- //-end- concatenate_css --&gt;"
-        replace="&lt;link rel=&quot;stylesheet&quot; href=&quot;css&quot;main.css&quot;&gt;"
+        replace="&lt;link rel=&quot;stylesheet&quot; href=&quot;css/main.css&quot;&gt;"
         flags="gs">
       <fileset dir="${intermediate.dir}" includes="${page-files-to-be-fixed}" />
     </replaceregexp>
