@@ -1,4 +1,8 @@
-html {
+html, body, div, h1 {
+    margin: 0;
+    padding: 0;
+    border: 0;
+	font: inherit;
 }
 
 body {
@@ -8,5 +12,31 @@ body {
 
 h1 {
     font-size: 32px;
-    margin-bottom: 18px;
+    margin: 18px 0;
+}
+
+nav ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+nav ul li {
+    display: inline;
+}
+
+nav ul li a {
+    text-decoration: none;
+    padding: .2em 1em;
+    color: #fff;
+    background-color: #036;
+}
+
+nav ul li a:hover {
+    color: #fff;
+    background-color: #369;
+}
+
+.nodisplay {
+    display: none;
 }
