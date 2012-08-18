@@ -7,12 +7,6 @@ $(document).ready(function() {
             'profile': 'showProfilePage'
         },
 
-        initialize: function () {
-            // Start with home view
-            window.location.hash = '';
-            return this;
-        },
-
         showHomePage: function () {
             $('#home').show();
             $('#profile').hide();
@@ -30,5 +24,5 @@ $(document).ready(function() {
         appRouter.navigate($(this).data('route'), {trigger: true});
     });
 
-    Backbone.history.start({pushState: true, root: '/examples/backbone-router/'});
+    Backbone.history.start({root: '/examples/backbone-router/'});
 });
