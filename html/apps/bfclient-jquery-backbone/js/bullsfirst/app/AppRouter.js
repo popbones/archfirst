@@ -32,6 +32,8 @@ define(['bullsfirst/domain/UserContext',
 
         tabs: ['accounts', 'positions', 'orders', 'transactions', 'trade', 'transfer'],
 
+        startTab: 'accounts',
+
         routes: {
             '': 'showHomePage',
             'user/:tab': 'showUserPage'
@@ -45,7 +47,7 @@ define(['bullsfirst/domain/UserContext',
 
             // Subscribe to events
             MessageBus.on('UserLoggedInEvent', function() {
-                this.navigate('user/accounts', {trigger: true});
+                this.navigate('user/' + this.startTab, {trigger: true});
             }, this);
             MessageBus.on('UserLoggedOutEvent', function() {
                 // Do a full page refresh to start from scratch
@@ -79,6 +81,8 @@ define(['bullsfirst/domain/UserContext',
                 }
             }
             else {
+                // happens when user enters a bookmarked URL
+                this.startTab = tab;
                 this.navigate('');
                 this.showPage(this.pages['home']);
             }
