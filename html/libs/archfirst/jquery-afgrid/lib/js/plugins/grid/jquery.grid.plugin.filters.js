@@ -20,7 +20,7 @@
 
 (function ($) {
 
-    var filtersContainer,
+    var filtersContainer = {},
 	filtersLastVal = {};
     
     $.afGrid = $.extend(true, $.afGrid, {
