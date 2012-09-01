@@ -64,7 +64,7 @@
             onRowClick: $.noop,
             onScrollToBottom: $.noop,
             columnWidthOverride: null,
-            headingRowRenderer: renderHeadingRow,
+            headingRowElementsRenderer: headingRowElementsRenderer,
             makeColumnDraggable: makeColumnDraggable,
             showTotalRows: true,
             totalRowLabelTemplate: TOTAL_ROW_LABEL_TEMPLATE,
@@ -99,6 +99,7 @@
                 $afGrid = $table;
             }*/
             var cachedafGridData = {},
+                $head,
                 rowsAndGroup = renderRowsAndGroups(options, cachedafGridData),
                 $rows = rowsAndGroup.$rowsMainContainer,
                 countOfLoadedRows = options.rows.length,
@@ -107,10 +108,10 @@
             if ($afGrid.hasClass("afGrid-initialized")) {
                 $rows = $afGrid.find(".afGrid-rows").empty().append($rows.children());
                 rowsAndGroup.$rowsMainContainer = $rows;
+                $head = $afGrid.find(".afGrid-head");
             } else {
-                $head = renderHeading(options).wrap(HEADING_ROW_CONTAINER_TEMPLATE).parent(),
-                $afGridHeadingAndRows = $head.add($rows);
-                $afGrid.addClass("afGrid").empty().append($afGridHeadingAndRows);
+                $head = renderHeading(options).wrap(HEADING_ROW_CONTAINER_TEMPLATE).parent();
+                $afGrid.addClass("afGrid").empty().append($head.add($rows));
                 if (options.showTotalRows) {
                     $afGrid.append(options.totalRowLabelTemplate.supplant({
                         totalRows: "",
@@ -281,7 +282,7 @@
     }
 
     function renderHeading(options) {
-        return options.headingRowRenderer(options.columns, {
+        return options.headingRowElementsRenderer(options.columns, {
             container: HEADING_ROW_TEMPLATE,
             cell: options.headingRowCellTemplate,
             cellContent: function (column) {
@@ -293,24 +294,8 @@
             }
         });
     }
-
-	function updateHeading($head, options) {
-		var $headRows = $head.find(">div"); 
-		$headRows.each(function() {
-			var $headRow = $(this);
-			var $cells = $headRow.find(".cell");
-			$.each(options.columns, function(i, column) {
-				$cells = $headRow.find(".cell");
-				var $columnToMove = $headRow.find(".cell[id*="+column.id+"]");
-				if ($columnToMove[0] != $cells[i]) {
-					$columnToMove.insertBefore($cells.eq(i));
-				}
-			});
-			
-		});
-	}
 	
-    function renderHeadingRow(columns, template) {
+    function headingRowElementsRenderer(columns, template) {
         var $row = $(template.container),
             colCount = columns.length;
         $.each(columns, function (i, column) {

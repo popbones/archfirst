@@ -20,7 +20,8 @@
 
 (function ($) {
 
-    var filtersLastVal = {};
+    var filtersContainer,
+	filtersLastVal = {};
     
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
@@ -30,7 +31,7 @@
                     canFilter: true,
                     filterBy: null,
                     typeSearchDelay: 600,
-                    headingRowRenderer: $.noop,
+                    headingRowElementsRenderer: $.noop,
                     onFilter: $.noop
                 }, options);
 
@@ -85,6 +86,7 @@
 
                 function load() {
                     if (!options.canFilter || $afGrid.hasClass("afGrid-initialized")) {
+			$filters = filtersContainer[options.id];
                         return;
                     }
 
@@ -105,6 +107,8 @@
 			filtersLastVal[options.id][$ele.attr("id")] = $ele.val();
 		    });
 
+		    filtersContainer[options.id] = $filters;
+		    
                     forEachCustomFilter($filters, function ($filter, type) {
                         $.afGrid.filter[type].init($filter, onFilterChange);
                     });
@@ -150,10 +154,9 @@
                 }
 
                 function destroy() {
-		    $filters = $filters || $();
-                    $filters.find(".select-filter,.input-filter").unbind("change.filter").unbind("keyup.filter").unbind("focus.filter");
+                    delete filtersContainer[options.id];
+		    $filters.find(".select-filter,.input-filter").unbind("change.filter").unbind("keyup.filter").unbind("focus.filter");
                     $.fn.multiselect && $filters.find(".select-filter").multiselect("destroy");
-                    //delete filtersLastVal[options.id];
 		    forEachCustomFilter($filters, function ($filter, type) {
                         $.afGrid.filter[type].destroy($filter);
                     });
@@ -171,7 +174,7 @@
     }); 
 	
     function renderFilters(options) {
-        return options.headingRowRenderer(options.columns, {
+        return options.headingRowElementsRenderer(options.columns, {
             container: "<div class='afGrid-filter'></div>",
             cell: "<span class='cell {columnId} {cssClass}' id='{id}'>{value}</span>",
             cellContent: function (column) {

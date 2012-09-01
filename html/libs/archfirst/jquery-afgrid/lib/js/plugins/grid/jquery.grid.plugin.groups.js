@@ -20,6 +20,8 @@
 
 (function ($) {
 
+    var groupContainers = {};
+    
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
             groups: function ($afGrid, options) {
@@ -114,7 +116,8 @@
 
                 function load() {
                     if (!options.canGroup || $afGrid.hasClass("afGrid-initialized")) {
-                        return;
+                        $groupsMainContainer = groupContainers[options.id];
+			return;
                     }
 
                     $afGrid.undelegate(".group .group-header", "click").delegate(".group .group-header", "click", onGroupExpandCollapse);
@@ -122,7 +125,7 @@
                         removeColumnFromGroup($j(this).parents(".cell").eq(0).attr("id").split("_")[1]);
                         return false;
                     });
-
+		    groupContainers[options.id] = $groupsMainContainer;
                     renderGroups(options.columns, options.groupBy);
 
                     $.fn.droppable && $groupsMainContainer.droppable({
@@ -149,10 +152,10 @@
                 }
 
                 function destroy() {
-		    $groupsMainContainer = $groupsMainContainer || $();
                     $.fn.droppable && $groupsMainContainer.droppable("destroy");
                     $.fn.droppable &&  $.fn.draggable && $groupsMainContainer.find(".cell").droppable("destroy").draggable("destroy");
-                    $groupsMainContainer.undelegate("a.remove", "click.groups");
+                    delete groupContainers[options.id];
+		    $groupsMainContainer.undelegate("a.remove", "click.groups");
                     $groupsMainContainer.find(".groups").empty();
                     $groupsMainContainer = null;
                     currentGroupColumnIds = null;
