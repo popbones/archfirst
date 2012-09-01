@@ -34,7 +34,7 @@
                 var columns = options.columns;
 
                 function load() {
-                    if (!options.canResizeColumn) {
+                    if (!options.canResizeColumn || $afGrid.hasClass("afGrid-initialized")) {
                         return;
                     }
                     var $headingCells = $afGrid.find(".afGrid-heading .cell");

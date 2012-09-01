@@ -69,6 +69,7 @@
                     var newGroupColumnIds = $j.grep(currentGroupColumnIds, function (id, i) {
                         return id !== columnId;
                     });
+		    $afGrid.removeClass("afGrid-initialized");			
                     options.onGroupChange(newGroupColumnIds);
                 }
 
@@ -79,7 +80,8 @@
                     }
                     currentGroupColumnIds.push(columnId);
                     setTimeout(function () {
-                        options.onGroupChange(currentGroupColumnIds);
+			$afGrid.removeClass("afGrid-initialized");			
+			options.onGroupChange(currentGroupColumnIds);
                     }, 10);
                     return true;
                 }
@@ -106,11 +108,12 @@
                             newGroupOrder.push(groupIdToMove);
                         }
                     });
+		    $afGrid.removeClass("afGrid-initialized");			
                     options.onGroupReorder(newGroupOrder);
                 }
 
                 function load() {
-                    if (!options.canGroup) {
+                    if (!options.canGroup || $afGrid.hasClass("afGrid-initialized")) {
                         return;
                     }
 
@@ -146,6 +149,7 @@
                 }
 
                 function destroy() {
+		    $groupsMainContainer = $groupsMainContainer || $();
                     $.fn.droppable && $groupsMainContainer.droppable("destroy");
                     $.fn.droppable &&  $.fn.draggable && $groupsMainContainer.find(".cell").droppable("destroy").draggable("destroy");
                     $groupsMainContainer.undelegate("a.remove", "click.groups");
@@ -155,20 +159,9 @@
                     options = null;
                 }
 				
-				function datasetChange(newOptions) {
-					if (!options.canGroup) {
-                        return;
-                    }
-					$groupsMainContainer = $(options.groupsPlaceHolder);
-					destroy();
-					options = $.extend(options, newOptions);
-					load();
-				}
-				
                 return {
                     load: load,
-                    destroy: destroy,
-					datasetChange: datasetChange
+                    destroy: destroy
                 };
             }
         }

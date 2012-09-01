@@ -41,11 +41,12 @@
                             newColumnOrder.push(columnIdToMove);
                         }
                     });
+		    $afGrid.removeClass("afGrid-initialized");			
                     options.onColumnReorder(newColumnOrder);
                 }
 
                 function load() {
-                    if (!options.canReorderColumn) {
+                    if (!options.canReorderColumn || $afGrid.hasClass("afGrid-initialized")) {
                         return;
                     }
 
@@ -64,17 +65,9 @@
                     $.fn.droppable && $afGrid.find(".afGrid-heading .cell").droppable("destroy");
                 }
 				
-				function datasetChange(newOptions) {
-					if (!options.canReorderColumn) {
-                        return;
-                    }
-					options = $.extend(options, newOptions);
-				}
-				
                 return {
                     load: load,
-                    destroy: destroy,
-					datasetChange: datasetChange
+                    destroy: destroy
                 };
             }
         }

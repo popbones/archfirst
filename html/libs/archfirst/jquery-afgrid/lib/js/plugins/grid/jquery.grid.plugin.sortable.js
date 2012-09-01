@@ -55,7 +55,7 @@
                 }
 
                 function load() {
-                    if (!options.canSort) {
+                    if (!options.canSort || $afGrid.hasClass("afGrid-initialized")) {
                         return;
                     }
 

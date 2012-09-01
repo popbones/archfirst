@@ -196,14 +196,9 @@
 
         function renderData(data) {
             var afGridData = $.extend(options, data);
-            //if ($afGrid) {
-			//	$afGrid.trigger($.afGrid.datasetChange, [data]);
-			//} else {
-				$afGrid = $(options.afGridSelector);
-				$afGrid.trigger($.afGrid.destroy);
-				$afGrid.afGrid(afGridData);
-			//}
-        }
+            $afGrid = $(options.afGridSelector);
+	    $afGrid.afGrid(afGridData);
+	}
 
         function addNewRows(newData) {
             $afGrid.trigger($.afGrid.appendRows, [newData.rows, afGridCurrentStateData.columnWidthOverride]);
@@ -215,7 +210,7 @@
 	
         return {
             load: load,
-			getDefaultOptions: getDefaultOptions
+	    getDefaultOptions: getDefaultOptions
         };
     };
     

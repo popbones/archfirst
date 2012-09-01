@@ -20,6 +20,8 @@
 
 (function ($) {
 
+    var filtersLastVal = {};
+    
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
             filters: function ($afGrid, options) {
@@ -27,16 +29,14 @@
                 options = $.extend({
                     canFilter: true,
                     filterBy: null,
-                    typeSearchDelay: 1500,
-                    headingRowsRenderer: $.noop,
+                    typeSearchDelay: 600,
+                    headingRowRenderer: $.noop,
                     onFilter: $.noop
                 }, options);
-
 
                 var $filters;
 
                 function onFilterChange() {
-                    $afGrid.data("lastFilter", $(this).attr("id"));
                     if ($filters) {
                         if ($(this).hasClass("select-filter") && !$(this).hasClass("filter-changed")) {
                             return;
@@ -84,24 +84,28 @@
                 }
 
                 function load() {
-
-                    if (!options.canFilter) {
+                    if (!options.canFilter || $afGrid.hasClass("afGrid-initialized")) {
                         return;
                     }
 
                     $filters = renderFilters(options);
-
-                    var typeSearchDelayTimer = null,
-                        lastFilter;
-
-                    $filters.find(".input-filter").bind("change.filter", onFilterChange).bind("keyup.filter", function () {
-                        var ele = this;
-                        window.clearTimeout(typeSearchDelayTimer);
-                        typeSearchDelayTimer = window.setTimeout(function () {
-                            onFilterChange.call(ele);
-                            typeSearchDelayTimer = null;
-                        }, options.typeSearchDelay);
-                    });
+		    
+                    var typeSearchDelayTimer = null;
+		    
+		    $filters.find(".input-filter")
+			.bind("change.filter", onFilterChange)
+			.bind("keyup.filter", function (event) {
+			    var $ele = $(this);
+			    if(filtersLastVal[options.id] && filtersLastVal[options.id][$ele.attr("id")]!==$ele.val() && filtersLastVal[options.id][$ele.attr("id")]!==undefined) {
+				window.clearTimeout(typeSearchDelayTimer);
+				typeSearchDelayTimer = window.setTimeout(function () {
+				    onFilterChange.call($ele[0]);
+				    typeSearchDelayTimer = null;
+				}, options.typeSearchDelay);
+			    }
+			    filtersLastVal[options.id] = filtersLastVal[options.id] || {};
+			    filtersLastVal[options.id][$ele.attr("id")] = $ele.val();
+			});
 
                     forEachCustomFilter($filters, function ($filter, type) {
                         $.afGrid.filter[type].init($filter, onFilterChange);
@@ -141,20 +145,6 @@
                     });
 
                     $afGrid.find(".afGrid-head").append(getFilters());
-
-                    lastFilter = $afGrid.data("lastFilter");
-                    if (lastFilter) {
-                        $afGrid.bind($.afGrid.renderingComplete, function () {
-                            var $filter = $("#" + lastFilter);
-							var $lastFilter = $("#" + lastFilter);
-                            if ($filter.hasClass("select-filter")) {
-								$lastFilter.focus();
-							} else if ($filter.hasClass("input-filter")) {
-								$lastFilter.focus();
-								createSelection($lastFilter[0], $lastFilter.val().length);
-                            }
-                        });
-                    }
                 }
 
                 function onMutliSelectChange() {
@@ -162,9 +152,11 @@
                 }
 
                 function destroy() {
-                    $filters.find(".select-filter,.input-filter").unbind("change.filter");
+		    $filters = $filters || $();
+                    $filters.find(".select-filter,.input-filter").unbind("change.filter").unbind("keyup.filter").unbind("focus.filter");
                     $.fn.multiselect && $filters.find(".select-filter").multiselect("destroy");
-                    forEachCustomFilter($filters, function ($filter, type) {
+                    //delete filtersLastVal[options.id];
+		    forEachCustomFilter($filters, function ($filter, type) {
                         $.afGrid.filter[type].destroy($filter);
                     });
                     $filters.empty();
@@ -178,26 +170,10 @@
                 };
             }
         }
-    });
-
-    function createSelection(field, start, end) {
-		end = end===undefined ? start : end;
-        if( field.createTextRange ) {
-            var selRange = field.createTextRange();
-            selRange.collapse(true);
-            selRange.moveStart('character', start);
-            selRange.moveEnd('character', end);
-            selRange.select();
-        } else if( field.setSelectionRange ) {
-            field.setSelectionRange(start, end);
-        } else if( field.selectionStart ) {
-            field.selectionStart = start;
-            field.selectionEnd = end;
-        }
-    }  
+    }); 
 	
-	function renderFilters(options) {
-        return options.headingRowsRenderer(options.columns, {
+    function renderFilters(options) {
+        return options.headingRowRenderer(options.columns, {
             container: "<div class='afGrid-filter'></div>",
             cell: "<span class='cell {columnId} {cssClass}' id='{id}'>{value}</span>",
             cellContent: function (column) {
