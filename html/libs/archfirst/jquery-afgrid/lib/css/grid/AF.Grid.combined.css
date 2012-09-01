@@ -29,8 +29,9 @@
 
 .afGrid .afGrid-rows {
     width: 100%;
-	overflow: auto;
+    overflow: auto;
     height: 240px;
+    display: block;
 }
 
 .afGrid .afGrid-heading .cell {

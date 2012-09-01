@@ -196,14 +196,9 @@
 
         function renderData(data) {
             var afGridData = $.extend(options, data);
-            //if ($afGrid) {
-			//	$afGrid.trigger($.afGrid.datasetChange, [data]);
-			//} else {
-				$afGrid = $(options.afGridSelector);
-				$afGrid.trigger($.afGrid.destroy);
-				$afGrid.afGrid(afGridData);
-			//}
-        }
+            $afGrid = $(options.afGridSelector);
+	    $afGrid.afGrid(afGridData);
+	}
 
         function addNewRows(newData) {
             $afGrid.trigger($.afGrid.appendRows, [newData.rows, afGridCurrentStateData.columnWidthOverride]);
@@ -215,7 +210,7 @@
 	
         return {
             load: load,
-			getDefaultOptions: getDefaultOptions
+	    getDefaultOptions: getDefaultOptions
         };
     };
     
@@ -243,7 +238,6 @@
 
     $.afGrid = $.extend($.afGrid, {
         appendRows: "afGrid-append-rows",
-        datasetChange: "afGrid-datasetChange-rows",
         destroy: "afGrid-destroy",
         renderingComplete: "afGrid-rendering-complete",
         adjustRowWidth: "afGrid-adjust-row-width"
@@ -251,8 +245,30 @@
 
     $.afGrid.plugin = $.afGrid.plugin || {};
 
-	var scrollBottomTimer;
-	
+    var scrollBottomTimer;
+
+    var TOTAL_ROW_LABEL_TEMPLATE = "<div class='total-row-count'>Showing {loadedRows} of {totalRows}</div>",
+        GROUP_CONTAINER_WRAPPER_TEMPLATE = "<div></div>",
+        HEADING_ROW_TEMPLATE = "<div class='afGrid-heading'></div>",
+        HEADING_ROW_COLUMN_HELPER_TEMPLATE = "<div class='{cssClass} column-helper'></div>",
+        HEADING_ROW_CONTAINER_TEMPLATE = "<div class='afGrid-head'></div>",
+        HEADING_ROW_CELL_TEMPLATE = "<div class='cell {cssClass}' id='{id}'>{value}<span class='sort-arrow'></span></div>",
+        GROUP_HEADING_TEMPLATE = "<div class='group level{level}'><div class='group-header'><span class='open-close-indicator'>-</span>{value}</div></div>",
+        ROW_TEMPLATE = "<div class='row level{level}' id='{id}'></div>",
+        CELL_TEMPLATE = "<div class='cell {columnId} {cssClass}'>{value}</div>",
+        ROWS_CONTAINER_TEMPLATE = "<div class='afGrid-rows'></div>";
+    
+    //var TOTAL_ROW_LABEL_TEMPLATE = "<div class='total-row-count'>Showing {loadedRows} of {totalRows}</div>",
+    //    GROUP_CONTAINER_WRAPPER_TEMPLATE = "<table><tbody><tr></tr><tbody></table>",
+    //    HEADING_ROW_TEMPLATE = "<tr class='afGrid-heading'></tr>",
+    //    HEADING_ROW_COLUMN_HELPER_TEMPLATE = "<div class='{cssClass} column-helper'></div>",
+    //    HEADING_ROW_CONTAINER_TEMPLATE = "<thead class='afGrid-head'></thead>",
+    //    HEADING_ROW_CELL_TEMPLATE = "<td class='cell {cssClass}' id='{id}'>{value}<span class='sort-arrow'></span></td>",
+    //    GROUP_HEADING_TEMPLATE = "<table class='group level{level}'><tboby><tr class='group-header'><table><tr><td><span class='open-close-indicator'>-</span>{value}</td></tr></table></tbody></table>",
+    //    ROW_TEMPLATE = "<tr class='row level{level}' id='{id}'></tr>",
+    //    CELL_TEMPLATE = "<td class='cell {columnId} {cssClass}'>{value}</td>",
+    //    ROWS_CONTAINER_TEMPLATE = "<tbody class='afGrid-rows'></tbody>";
+
     $.fn.afGrid = function (options) {
 
         options = $.extend({
@@ -264,50 +280,70 @@
             onRowClick: $.noop,
             onScrollToBottom: $.noop,
             columnWidthOverride: null,
-            headingRowsRenderer: renderHeadingRow,
+            headingRowElementsRenderer: headingRowElementsRenderer,
             makeColumnDraggable: makeColumnDraggable,
             showTotalRows: true,
-            totalRowLabelTemplate: "<div class='total-row-count'>Showing {loadedRows} of {totalRows}</div>"
+            totalRowLabelTemplate: TOTAL_ROW_LABEL_TEMPLATE,
+            headingRowCellTemplate: HEADING_ROW_CELL_TEMPLATE
         }, options);
 
         var plugins = {},
             addedRows = [];
 
-		updateColumnHashMap(options);
-		updateColumnWidth(options);
+        updateColumnHashMap(options);
+        updateColumnWidth(options);
 
         if (!options.id) {
             throw "You need to provide id for the afGrid";
         }
 
         return this.each(function () {
+            var $afGrid = $(this);
+            if (!$afGrid.hasClass("afGrid-initialized")) {
+                $afGrid.trigger($.afGrid.destroy);
+                $afGrid = $(this);
+            }
+            /*if (this.tagName!=="TABLE") {
+                var prop = {
+                    id: $afGrid.attr("id"),
+                    class: $afGrid.attr("class"),
+                    cellSpacing: 0,
+                    cellPadding: 0
+                };
+                var $table = $("<table></table>").attr(prop);
+                $afGrid.replaceWith($table);
+                $afGrid = $table;
+            }*/
             var cachedafGridData = {},
-                $afGrid = $(this),
-                $head = renderHeading(options).wrap("<div class='afGrid-head'></div>").parent(),
+                $head,
                 rowsAndGroup = renderRowsAndGroups(options, cachedafGridData),
                 $rows = rowsAndGroup.$rowsMainContainer,
-                $afGridHeadingAndRows = $head.add($rows),
                 countOfLoadedRows = options.rows.length,
                 rowWidth;
-
-			$afGrid.addClass("afGrid").empty().append($afGridHeadingAndRows);
+            
+            if ($afGrid.hasClass("afGrid-initialized")) {
+                $rows = $afGrid.find(".afGrid-rows").empty().append($rows.children());
+                rowsAndGroup.$rowsMainContainer = $rows;
+                $head = $afGrid.find(".afGrid-head");
+            } else {
+                $head = renderHeading(options).wrap(HEADING_ROW_CONTAINER_TEMPLATE).parent();
+                $afGrid.addClass("afGrid").empty().append($head.add($rows));
+                if (options.showTotalRows) {
+                    $afGrid.append(options.totalRowLabelTemplate.supplant({
+                        totalRows: "",
+                        loadedRows: ""
+                    }));
+                }
+                $rows.bind("scroll.afGrid", function() {
+                    onafGridScroll($head, $rows, options);
+                    $afGrid.data("lastScrollPos", $rows[0].scrollLeft);
+                });
+            }
             
             //Fix for the grid width issue
             adjustRowWidth($afGrid);
-            
-            if (options.showTotalRows) {
-                $afGrid.append(options.totalRowLabelTemplate.supplant({
-                    totalRows: "",
-                    loadedRows: ""
-                }));
-            }
 
-			$rows[0].scrollLeft = $afGrid.data("lastScrollPos");
-
-            $rows.bind("scroll.afGrid", function() {
-				onafGridScroll($head, $rows, options);
-				$afGrid.data("lastScrollPos", $rows[0].scrollLeft);
-			});
+	    $rows[0].scrollLeft = $afGrid.data("lastScrollPos");
 
             function destroy() {
                 callMethodOnPlugins(plugins, "destroy", options);					
@@ -320,23 +356,29 @@
                 $rows.undelegate().unbind().remove();
                 $rows = null;
                 removeColumnDraggable($afGrid);
-				$afGrid.unbind($.afGrid.adjustRowWidth);
-                $afGrid.unbind($.afGrid.destroy).unbind($.afGrid.appendRows).undelegate(".group .group-header", "click");
-                $afGrid.undelegate(".afGrid-rows .row", "click").undelegate(".afGrid-rows .row", "mouseenter").undelegate(".afGrid-rows .row", "mouseleave").empty();
+		$afGrid
+                    .unbind($.afGrid.adjustRowWidth)
+                    .unbind($.afGrid.destroy)
+                    .unbind($.afGrid.appendRows)
+                    .undelegate(".group .group-header", "click")
+                    .undelegate(".afGrid-rows .row", "click")
+                    .undelegate(".afGrid-rows .row", "mouseenter")
+                    .undelegate(".afGrid-rows .row", "mouseleave")
+                    .empty();
                 $afGrid.data("afGridColumnDraggable", false);
-				options = null;
+		options = null;
                 $afGrid = null;
                 cachedafGridData = null;
             }
-            $afGrid.bind($.afGrid.destroy, destroy);
+            $afGrid.unbind($.afGrid.destroy).bind($.afGrid.destroy, destroy);
 
             function onRowAppend(event, newRows, columnWidthOverride) {
                 addedRows = $.merge(addedRows, newRows);
                 countOfLoadedRows += newRows.length;
                 updateCountLabel($afGrid, options, countOfLoadedRows);
                 options.columnWidthOverride = columnWidthOverride;
-				updateColumnWidth(options);				
-				var totalRows = $afGrid.find(".afGrid-rows .row").length,
+    		updateColumnWidth(options);				
+                var totalRows = $afGrid.find(".afGrid-rows .row").length,
                     $groupContainers = rowsAndGroup.lastGroupInformation.$groupContainers,
                     currentGroupValues = rowsAndGroup.lastGroupInformation.currentGroupValues,
                     $rowsMainContainer = rowsAndGroup.$rowsMainContainer,
@@ -372,82 +414,63 @@
             updateCountLabel($afGrid, options, countOfLoadedRows);
 
             $.each($.afGrid.plugin, function (key, plugin) {
-				plugins[key] = plugin($afGrid, options, cachedafGridData);
+                plugins[key] = plugin($afGrid, options, cachedafGridData);
                 plugins[key].load();
             });
 
+            $afGrid.addClass("afGrid-initialized");
             $afGrid.trigger($.afGrid.renderingComplete);
-			
-			/*$afGrid.unbind($.afGrid.datasetChange).bind($.afGrid.datasetChange, function(event, data) {
-				options = $.extend(options, data);
-				updateColumnHashMap(options);
-				updateColumnWidth(options);
-				rowsAndGroup = renderRowsAndGroups(options, cachedafGridData);
-				var $newRows = rowsAndGroup.$rowsMainContainer;
-				var oldScrollLeft = $rows[0].scrollLeft;
-				$rows.unbind("scroll.afGrid");
-				$rows.replaceWith($newRows);
-				$rows = $newRows;
-				$rows[0].scrollLeft = oldScrollLeft;
-				$rows.bind("scroll.afGrid", function() {
-					onafGridScroll($head, $rows, options);
-				});
-				updateHeading($head, options);
-				countOfLoadedRows = options.rows.length;
-				updateCountLabel($afGrid, options, countOfLoadedRows);
-				callMethodOnPlugins(plugins, "datasetChange", options);					
-			});*/
-			
+						
         });
 
     };
 
-	function callMethodOnPlugins(plugins, methodName, options) {
-		$.each(plugins, function (key, plugin) {					
-			if (plugin[methodName]) {
-				plugin[methodName](options);
-			}
-		});		
-	}
-	
-	function onafGridScroll($head, $rows, options) {
-		var eleRow = $rows[0];
-		$head.css({
-			marginLeft: -1 * eleRow.scrollLeft
-		});
-		clearTimeout(scrollBottomTimer);
-		scrollBottomTimer = setTimeout(function () {
-			var scrolled = (eleRow.scrollHeight - $rows.scrollTop()),
-				containerHeight = $rows.outerHeight();
-			if ((scrolled <= (containerHeight - 17)) || (scrolled <= (containerHeight))) {
-				options.onScrollToBottom();
-			}
-		}, 100);
-	}
-		
-	function updateCountLabel($afGrid, options, countOfLoadedRows) {
-		if (options.showTotalRows) {
-			$afGrid.find(".total-row-count").replaceWith(options.totalRowLabelTemplate.supplant({
-				totalRows: options.totalRows,
-				loadedRows: countOfLoadedRows
-			}));
-		}
-	}
-			
-	function updateColumnWidth(options) {
-		if (options.columnWidthOverride) {
-			$.each(options.columnWidthOverride, function (columnId, width) {
-				options.columns[options.columnsHashMap[columnId]].width = width;
-			});
-		}
-	}
+    function callMethodOnPlugins(plugins, methodName, options) {
+            $.each(plugins, function (key, plugin) {					
+                    if (plugin[methodName]) {
+                            plugin[methodName](options);
+                    }
+            });		
+    }
+    
+    function onafGridScroll($head, $rows, options) {
+            var eleRow = $rows[0];
+            $head.css({
+                marginLeft: -1 * eleRow.scrollLeft
+            });
+            clearTimeout(scrollBottomTimer);
+            scrollBottomTimer = setTimeout(function () {
+                var scrolled = (eleRow.scrollHeight - $rows.scrollTop()),
+                        containerHeight = $rows.outerHeight();
+                if ((scrolled <= (containerHeight - 17)) || (scrolled <= (containerHeight))) {
+                        options.onScrollToBottom();
+                }
+            }, 100);
+    }
+            
+    function updateCountLabel($afGrid, options, countOfLoadedRows) {
+            if (options.showTotalRows) {
+                    $afGrid.find(".total-row-count").replaceWith(options.totalRowLabelTemplate.supplant({
+                            totalRows: options.totalRows,
+                            loadedRows: countOfLoadedRows
+                    }));
+            }
+    }
+                    
+    function updateColumnWidth(options) {
+            if (options.columnWidthOverride) {
+                    $.each(options.columnWidthOverride, function (columnId, width) {
+                            options.columns[options.columnsHashMap[columnId]].width = width;
+                    });
+            }
+    }
 
-	function updateColumnHashMap(options) {
-		options.columnsHashMap = {};
-		$.each(options.columns, function (i, column) {
-			options.columnsHashMap[column.id] = i;
-		});
-	}
+    function updateColumnHashMap(options) {
+            options.columnsHashMap = {};
+            $.each(options.columns, function (i, column) {
+                    options.columnsHashMap[column.id] = i;
+            });
+    }
 
     function makeColumnDraggable($afGrid) {
 		if (!$afGrid.data("afGridColumnDraggable")) {
@@ -469,15 +492,15 @@
     }
 
     function getHelper(event, cssClass) {
-        return $(event.currentTarget).clone(false).wrap("<div class='afGrid-heading'></div>").parent().wrap("<div class='{cssClass} column-helper'></div>".supplant({
+        return $(event.currentTarget).clone(false).wrap(HEADING_ROW_TEMPLATE).parent().wrap(HEADING_ROW_COLUMN_HELPER_TEMPLATE.supplant({
             cssClass: cssClass
         })).parent().css("width", "auto");
     }
 
     function renderHeading(options) {
-        return renderHeadingRow(options.columns, {
-            container: "<div class='afGrid-heading'></div>",
-            cell: "<div class='cell {cssClass}' id='{id}'>{value}<span class='sort-arrow'></span></div>",
+        return options.headingRowElementsRenderer(options.columns, {
+            container: HEADING_ROW_TEMPLATE,
+            cell: options.headingRowCellTemplate,
             cellContent: function (column) {
                 return {
                     value: column.label,
@@ -487,24 +510,8 @@
             }
         });
     }
-
-	function updateHeading($head, options) {
-		var $headRows = $head.find(">div"); 
-		$headRows.each(function() {
-			var $headRow = $(this);
-			var $cells = $headRow.find(".cell");
-			$.each(options.columns, function(i, column) {
-				$cells = $headRow.find(".cell");
-				var $columnToMove = $headRow.find(".cell[id*="+column.id+"]");
-				if ($columnToMove[0] != $cells[i]) {
-					$columnToMove.insertBefore($cells.eq(i));
-				}
-			});
-			
-		});
-	}
 	
-    function renderHeadingRow(columns, template) {
+    function headingRowElementsRenderer(columns, template) {
         var $row = $(template.container),
             colCount = columns.length;
         $.each(columns, function (i, column) {
@@ -523,7 +530,7 @@
     }
 
     function renderRowsAndGroups(options, cachedafGridData) {
-        var $rowsMainContainer = $("<div class='afGrid-rows'></div>"),
+        var $rowsMainContainer = $(ROWS_CONTAINER_TEMPLATE),
             lastGroupInformation = addRows(options.id, options.rows, options.columns, options.groupBy, $rowsMainContainer, null, [], false, cachedafGridData);
         return {
             $rowsMainContainer: $rowsMainContainer,
@@ -536,7 +543,7 @@
         if (columns[n].renderer) {
             cellContent = $.afGrid.renderer[columns[n].renderer](cellContent);
         }
-        return $("<div class='group level{level}'><div class='group-header'><span class='open-close-indicator'>-</span>{value}</div></div>".supplant({
+        return $(GROUP_HEADING_TEMPLATE.supplant({
             value: cellContent,
             level: n
         }));
@@ -548,7 +555,7 @@
             $groupContainers = [];
             for (n = 0, l = groups.length; n < l; n += 1) {
                 $groupContainers[n] = getGroupContainer(n, currentValues, columns);
-                $wrapper = $("<div></div>");
+                $wrapper = $(GROUP_CONTAINER_WRAPPER_TEMPLATE);
                 if (n !== 0) {
                     $wrapper.append(getCell(columns[n - 1], ""));
                 }
@@ -559,7 +566,7 @@
         } else {
             for (n = level, l = groups.length; n < l; n += 1) {
                 $groupContainers[n] = getGroupContainer(n, currentValues, columns);
-                $wrapper = $("<div></div>");
+                $wrapper = $(GROUP_CONTAINER_WRAPPER_TEMPLATE);
                 if (n === 0) {
                     $wrapper.append($groupContainers[n]);
                     $placeHolder.append($wrapper);
@@ -623,7 +630,7 @@
     function getNewRow(tableId, rowId, row, groupLength, columns) {
         rowId = row.id;
         var rowData = rowId ? row.data : row,
-            $row = $("<div class='row level{level}' id='{id}'></div>".supplant({
+            $row = $(ROW_TEMPLATE.supplant({
                 level: groupLength,
                 id: tableId + "DataRow_" + rowId
             })),
@@ -644,7 +651,7 @@
     }
 
     function getCell(column, value) {
-        var $cell = $("<div class='cell {columnId} {cssClass}'>{value}</div>".supplant({
+        var $cell = $(CELL_TEMPLATE.supplant({
             value: value,
             columnId: column.id,
             cssClass: column.renderer || ""
@@ -717,11 +724,12 @@ if (!String.hasOwnProperty("supplant")) {
                             newColumnOrder.push(columnIdToMove);
                         }
                     });
+		    $afGrid.removeClass("afGrid-initialized");			
                     options.onColumnReorder(newColumnOrder);
                 }
 
                 function load() {
-                    if (!options.canReorderColumn) {
+                    if (!options.canReorderColumn || $afGrid.hasClass("afGrid-initialized")) {
                         return;
                     }
 
@@ -740,17 +748,9 @@ if (!String.hasOwnProperty("supplant")) {
                     $.fn.droppable && $afGrid.find(".afGrid-heading .cell").droppable("destroy");
                 }
 				
-				function datasetChange(newOptions) {
-					if (!options.canReorderColumn) {
-                        return;
-                    }
-					options = $.extend(options, newOptions);
-				}
-				
                 return {
                     load: load,
-                    destroy: destroy,
-					datasetChange: datasetChange
+                    destroy: destroy
                 };
             }
         }
@@ -800,7 +800,7 @@ if (!String.hasOwnProperty("supplant")) {
                 var columns = options.columns;
 
                 function load() {
-                    if (!options.canResizeColumn) {
+                    if (!options.canResizeColumn || $afGrid.hasClass("afGrid-initialized")) {
                         return;
                     }
                     var $headingCells = $afGrid.find(".afGrid-heading .cell");
@@ -833,12 +833,10 @@ if (!String.hasOwnProperty("supplant")) {
                                     newWidth = options.minColumnWidth;
                                 } else if (newWidth >= options.maxColumnWidth) {
                                     newWidth = options.maxColumnWidth;
-                                } else {
-                                    
                                 }
-								$guide.css({
-									left: $resizeHandle.offset().left + $resizeHandle.width()
-								});
+				$guide.css({
+					left: $resizeHandle.offset().left + $resizeHandle.width()
+				});
                                 $cell.width(newWidth);
                                 options.columns[options.columnsHashMap[columnId]].width = newWidth;
                                 return false;
@@ -900,6 +898,9 @@ if (!String.hasOwnProperty("supplant")) {
 
 (function ($) {
 
+    var filtersContainer = {},
+	filtersLastVal = {};
+    
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
             filters: function ($afGrid, options) {
@@ -907,16 +908,14 @@ if (!String.hasOwnProperty("supplant")) {
                 options = $.extend({
                     canFilter: true,
                     filterBy: null,
-                    typeSearchDelay: 1500,
-                    headingRowsRenderer: $.noop,
+                    typeSearchDelay: 600,
+                    headingRowElementsRenderer: $.noop,
                     onFilter: $.noop
                 }, options);
-
 
                 var $filters;
 
                 function onFilterChange() {
-                    $afGrid.data("lastFilter", $(this).attr("id"));
                     if ($filters) {
                         if ($(this).hasClass("select-filter") && !$(this).hasClass("filter-changed")) {
                             return;
@@ -964,25 +963,30 @@ if (!String.hasOwnProperty("supplant")) {
                 }
 
                 function load() {
-
-                    if (!options.canFilter) {
+                    if (!options.canFilter || $afGrid.hasClass("afGrid-initialized")) {
+			$filters = filtersContainer[options.id];
                         return;
                     }
 
                     $filters = renderFilters(options);
+		    
+                    var typeSearchDelayTimer = null;
+		    
+		    $filters.find(".input-filter").bind("change.filter", onFilterChange).bind("keyup.filter", function (event) {
+			var $ele = $(this);
+			if(filtersLastVal[options.id] && filtersLastVal[options.id][$ele.attr("id")]!==$ele.val() && filtersLastVal[options.id][$ele.attr("id")]!==undefined) {
+			    window.clearTimeout(typeSearchDelayTimer);
+			    typeSearchDelayTimer = window.setTimeout(function () {
+				onFilterChange.call($ele[0]);
+				typeSearchDelayTimer = null;
+			    }, options.typeSearchDelay);
+			}
+			filtersLastVal[options.id] = filtersLastVal[options.id] || {};
+			filtersLastVal[options.id][$ele.attr("id")] = $ele.val();
+		    });
 
-                    var typeSearchDelayTimer = null,
-                        lastFilter;
-
-                    $filters.find(".input-filter").bind("change.filter", onFilterChange).bind("keyup.filter", function () {
-                        var ele = this;
-                        window.clearTimeout(typeSearchDelayTimer);
-                        typeSearchDelayTimer = window.setTimeout(function () {
-                            onFilterChange.call(ele);
-                            typeSearchDelayTimer = null;
-                        }, options.typeSearchDelay);
-                    });
-
+		    filtersContainer[options.id] = $filters;
+		    
                     forEachCustomFilter($filters, function ($filter, type) {
                         $.afGrid.filter[type].init($filter, onFilterChange);
                     });
@@ -1021,20 +1025,6 @@ if (!String.hasOwnProperty("supplant")) {
                     });
 
                     $afGrid.find(".afGrid-head").append(getFilters());
-
-                    lastFilter = $afGrid.data("lastFilter");
-                    if (lastFilter) {
-                        $afGrid.bind($.afGrid.renderingComplete, function () {
-                            var $filter = $("#" + lastFilter);
-							var $lastFilter = $("#" + lastFilter);
-                            if ($filter.hasClass("select-filter")) {
-								$lastFilter.focus();
-							} else if ($filter.hasClass("input-filter")) {
-								$lastFilter.focus();
-								createSelection($lastFilter[0], $lastFilter.val().length);
-                            }
-                        });
-                    }
                 }
 
                 function onMutliSelectChange() {
@@ -1042,9 +1032,10 @@ if (!String.hasOwnProperty("supplant")) {
                 }
 
                 function destroy() {
-                    $filters.find(".select-filter,.input-filter").unbind("change.filter");
+                    delete filtersContainer[options.id];
+		    $filters.find(".select-filter,.input-filter").unbind("change.filter").unbind("keyup.filter").unbind("focus.filter");
                     $.fn.multiselect && $filters.find(".select-filter").multiselect("destroy");
-                    forEachCustomFilter($filters, function ($filter, type) {
+		    forEachCustomFilter($filters, function ($filter, type) {
                         $.afGrid.filter[type].destroy($filter);
                     });
                     $filters.empty();
@@ -1058,26 +1049,10 @@ if (!String.hasOwnProperty("supplant")) {
                 };
             }
         }
-    });
-
-    function createSelection(field, start, end) {
-		end = end===undefined ? start : end;
-        if( field.createTextRange ) {
-            var selRange = field.createTextRange();
-            selRange.collapse(true);
-            selRange.moveStart('character', start);
-            selRange.moveEnd('character', end);
-            selRange.select();
-        } else if( field.setSelectionRange ) {
-            field.setSelectionRange(start, end);
-        } else if( field.selectionStart ) {
-            field.selectionStart = start;
-            field.selectionEnd = end;
-        }
-    }  
+    }); 
 	
-	function renderFilters(options) {
-        return options.headingRowsRenderer(options.columns, {
+    function renderFilters(options) {
+        return options.headingRowElementsRenderer(options.columns, {
             container: "<div class='afGrid-filter'></div>",
             cell: "<span class='cell {columnId} {cssClass}' id='{id}'>{value}</span>",
             cellContent: function (column) {
@@ -1162,6 +1137,8 @@ if (!String.hasOwnProperty("supplant")) {
 
 (function ($) {
 
+    var groupContainers = {};
+    
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
             groups: function ($afGrid, options) {
@@ -1211,6 +1188,7 @@ if (!String.hasOwnProperty("supplant")) {
                     var newGroupColumnIds = $j.grep(currentGroupColumnIds, function (id, i) {
                         return id !== columnId;
                     });
+		    $afGrid.removeClass("afGrid-initialized");			
                     options.onGroupChange(newGroupColumnIds);
                 }
 
@@ -1221,7 +1199,8 @@ if (!String.hasOwnProperty("supplant")) {
                     }
                     currentGroupColumnIds.push(columnId);
                     setTimeout(function () {
-                        options.onGroupChange(currentGroupColumnIds);
+			$afGrid.removeClass("afGrid-initialized");			
+			options.onGroupChange(currentGroupColumnIds);
                     }, 10);
                     return true;
                 }
@@ -1248,12 +1227,14 @@ if (!String.hasOwnProperty("supplant")) {
                             newGroupOrder.push(groupIdToMove);
                         }
                     });
+		    $afGrid.removeClass("afGrid-initialized");			
                     options.onGroupReorder(newGroupOrder);
                 }
 
                 function load() {
-                    if (!options.canGroup) {
-                        return;
+                    if (!options.canGroup || $afGrid.hasClass("afGrid-initialized")) {
+                        $groupsMainContainer = groupContainers[options.id];
+			return;
                     }
 
                     $afGrid.undelegate(".group .group-header", "click").delegate(".group .group-header", "click", onGroupExpandCollapse);
@@ -1261,7 +1242,7 @@ if (!String.hasOwnProperty("supplant")) {
                         removeColumnFromGroup($j(this).parents(".cell").eq(0).attr("id").split("_")[1]);
                         return false;
                     });
-
+		    groupContainers[options.id] = $groupsMainContainer;
                     renderGroups(options.columns, options.groupBy);
 
                     $.fn.droppable && $groupsMainContainer.droppable({
@@ -1290,27 +1271,17 @@ if (!String.hasOwnProperty("supplant")) {
                 function destroy() {
                     $.fn.droppable && $groupsMainContainer.droppable("destroy");
                     $.fn.droppable &&  $.fn.draggable && $groupsMainContainer.find(".cell").droppable("destroy").draggable("destroy");
-                    $groupsMainContainer.undelegate("a.remove", "click.groups");
+                    delete groupContainers[options.id];
+		    $groupsMainContainer.undelegate("a.remove", "click.groups");
                     $groupsMainContainer.find(".groups").empty();
                     $groupsMainContainer = null;
                     currentGroupColumnIds = null;
                     options = null;
                 }
 				
-				function datasetChange(newOptions) {
-					if (!options.canGroup) {
-                        return;
-                    }
-					$groupsMainContainer = $(options.groupsPlaceHolder);
-					destroy();
-					options = $.extend(options, newOptions);
-					load();
-				}
-				
                 return {
                     load: load,
-                    destroy: destroy,
-					datasetChange: datasetChange
+                    destroy: destroy
                 };
             }
         }
@@ -1388,7 +1359,7 @@ if (!String.hasOwnProperty("supplant")) {
                 }
 
                 function load() {
-                    if (!options.canSort) {
+                    if (!options.canSort || $afGrid.hasClass("afGrid-initialized")) {
                         return;
                     }
 
