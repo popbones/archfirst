@@ -156,8 +156,6 @@
             $afGrid.unbind($.afGrid.destroy).bind($.afGrid.destroy, destroy);
 
             function onRowAppend(event, newRows, columnWidthOverride) {
-                
-                console.log("onRowAppend", newRows, $rows)
                 addedRows = $.merge(addedRows, newRows);
                 countOfLoadedRows += newRows.length;
                 updateCountLabel($afGrid, options, countOfLoadedRows);

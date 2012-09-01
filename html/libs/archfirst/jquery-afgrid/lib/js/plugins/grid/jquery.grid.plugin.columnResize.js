@@ -67,12 +67,10 @@
                                     newWidth = options.minColumnWidth;
                                 } else if (newWidth >= options.maxColumnWidth) {
                                     newWidth = options.maxColumnWidth;
-                                } else {
-                                    
                                 }
-								$guide.css({
-									left: $resizeHandle.offset().left + $resizeHandle.width()
-								});
+				$guide.css({
+					left: $resizeHandle.offset().left + $resizeHandle.width()
+				});
                                 $cell.width(newWidth);
                                 options.columns[options.columnsHashMap[columnId]].width = newWidth;
                                 return false;

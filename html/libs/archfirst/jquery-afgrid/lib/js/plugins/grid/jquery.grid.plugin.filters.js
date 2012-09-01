@@ -92,20 +92,18 @@
 		    
                     var typeSearchDelayTimer = null;
 		    
-		    $filters.find(".input-filter")
-			.bind("change.filter", onFilterChange)
-			.bind("keyup.filter", function (event) {
-			    var $ele = $(this);
-			    if(filtersLastVal[options.id] && filtersLastVal[options.id][$ele.attr("id")]!==$ele.val() && filtersLastVal[options.id][$ele.attr("id")]!==undefined) {
-				window.clearTimeout(typeSearchDelayTimer);
-				typeSearchDelayTimer = window.setTimeout(function () {
-				    onFilterChange.call($ele[0]);
-				    typeSearchDelayTimer = null;
-				}, options.typeSearchDelay);
-			    }
-			    filtersLastVal[options.id] = filtersLastVal[options.id] || {};
-			    filtersLastVal[options.id][$ele.attr("id")] = $ele.val();
-			});
+		    $filters.find(".input-filter").bind("change.filter", onFilterChange).bind("keyup.filter", function (event) {
+			var $ele = $(this);
+			if(filtersLastVal[options.id] && filtersLastVal[options.id][$ele.attr("id")]!==$ele.val() && filtersLastVal[options.id][$ele.attr("id")]!==undefined) {
+			    window.clearTimeout(typeSearchDelayTimer);
+			    typeSearchDelayTimer = window.setTimeout(function () {
+				onFilterChange.call($ele[0]);
+				typeSearchDelayTimer = null;
+			    }, options.typeSearchDelay);
+			}
+			filtersLastVal[options.id] = filtersLastVal[options.id] || {};
+			filtersLastVal[options.id][$ele.attr("id")] = $ele.val();
+		    });
 
                     forEachCustomFilter($filters, function ($filter, type) {
                         $.afGrid.filter[type].init($filter, onFilterChange);
