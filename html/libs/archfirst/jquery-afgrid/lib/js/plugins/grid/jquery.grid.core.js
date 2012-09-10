@@ -367,6 +367,7 @@
     function addRows(tableId, rows, columns, groups, $rowMainContainer, $groupContainers, currentGroupValues, isStartEven, cachedafGridData, rowWidth) {
         var groupsLength = groups && groups.length;
         $.each(rows, function (i, row) {
+            row.id = row.id || tableId+"Row"+i;
             var rowId = row.id,
                 rowData = rowId ? row.data : row,
                 $rowContainer = $rowMainContainer,

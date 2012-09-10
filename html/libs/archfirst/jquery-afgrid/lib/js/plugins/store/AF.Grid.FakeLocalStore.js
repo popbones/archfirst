@@ -56,7 +56,9 @@
 
         function callAction(actionType, data, callback) {
             fakeDataStoreColumns = $.extend(true, [], dataset.columns);
+            dataset.rows = getTransformedRowsIfJSON(dataset.rows, getColumnOrder(fakeDataStoreColumns));
             fakeDataStoreRows = getFilteredRows($.extend(true, [], dataset.rows), data.filterColumns, data.filterValues);
+
             setupDataAsPerState(data);
             var dummyResponseData = getDummyResponseFromRequestData(data);
 
@@ -93,7 +95,32 @@
             }
 
             asyncCallback(callback, dummyResponseData);
-        };
+        }
+
+        function getTransformedRowsIfJSON(rows, columnOrder) {
+            if (rows && rows[0] && (!rows[0].data && !$.isArray(rows[0]))) {
+                var transformedRows = [];
+                for (var n= 0,l=rows.length; n<l; n++) {
+                    var row = rows[n];
+                    transformedRows[transformedRows.length] = {
+                        data: ($.map(columnOrder, function(column){
+                            return row[column];
+                        }))
+                    }
+                }
+                return transformedRows;
+            } else {
+                return rows;
+            }
+        }
+
+        function getColumnOrder(columns) {
+            var columnsOrder = [];
+            $.each(columns, function(i, column) {
+                columnsOrder[columnsOrder.length] = column.id;
+            });
+            return columnsOrder;
+        }
 
         function getFilteredRows(dataRows, filterColumns, filterValues) {
             var rows = [],
@@ -186,9 +213,8 @@
             });
             fakeDataStoreColumns = dummydataWithNewOrder.columns;
             $.each(fakeDataStoreRows, function (i, row) {
-                var newDataRow = [],
-                    n = 0;
-                for (n = 0, l = row.data.length; n < l; n++) {
+                var newDataRow = [];
+                for (var n = 0, l = row.data.length; n < l; n++) {
                     newDataRow[n] = row.data[newOrder[n]];
                 }
                 row.data = newDataRow;
@@ -304,15 +330,23 @@
             sortBy: sortBy,
             reorderColumn: reorderColumn
         }
-    }
+    };
     
-    AF.Grid.FakeLocalStore.getFilterData = function (columnIndex, rows) {
+    AF.Grid.FakeLocalStore.getFilterData = function (columnIdentifier, rows) {
         var filterData = [];
-        $.each(rows, function (i, row) {
-            if (filterData.indexOf(row.data[columnIndex]) < 0) {
-                filterData.push(row.data[columnIndex]);
-            }
-        });
+        if (typeof columnIdentifier === "string") {
+            $.each(rows, function (i, row) {
+                if (filterData.indexOf(row[columnIdentifier]) < 0) {
+                    filterData.push(row[columnIdentifier]);
+                }
+            });
+        } else {
+            $.each(rows, function (i, row) {
+                if (filterData.indexOf(row.data[columnIdentifier]) < 0) {
+                    filterData.push(row.data[columnIdentifier]);
+                }
+            });
+        }
         return filterData;
     };
     
