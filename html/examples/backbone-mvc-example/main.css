@@ -1,0 +1,52 @@
+html, body, div, h1, h2 {
+    border: 0;
+    font: inherit;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Verdana, Helvetica, sans-serif;
+    padding: 18px;
+}
+
+h1 {
+    font-size: 24px;
+    font-weight: normal;
+}
+
+h2 {
+    margin: 16px 0 10px 0;
+    font-size: 18px;
+    font-weight: normal;
+}
+
+h2.viewHeading {
+    margin-top: 30px;
+}
+
+#rSlider, #gSlider, #bSlider {
+    margin-top: 10px;
+    width: 300px;
+}
+
+#tile {
+    background-image: none;
+    height: 100px;
+    width: 120px;
+}
+
+#tileText {
+    width: 120px;
+    text-align: center;
+    font-family: monospace;
+    font-size: 20px;
+    margin-top: 6px;
+}
+
+#rSlider .ui-slider-range { background: #ef2929; }
+#rSlider .ui-slider-handle { border-color: #ef2929; }
+#gSlider .ui-slider-range { background: #8ae234; }
+#gSlider .ui-slider-handle { border-color: #8ae234; }
+#bSlider .ui-slider-range { background: #729fcf; }
+#bSlider .ui-slider-handle { border-color: #729fcf; }
