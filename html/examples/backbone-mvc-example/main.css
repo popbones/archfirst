@@ -33,15 +33,16 @@ h2.viewHeading {
 #tile {
     background-image: none;
     height: 100px;
+    margin-left: 90px;
     width: 120px;
 }
 
 #tileText {
-    width: 120px;
-    text-align: center;
+    margin: 6px 0 0 90px;
     font-family: monospace;
     font-size: 20px;
-    margin-top: 6px;
+    text-align: center;
+    width: 120px;
 }
 
 #rSlider .ui-slider-range { background: #ef2929; }
