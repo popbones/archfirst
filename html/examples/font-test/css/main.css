@@ -1,12 +1,12 @@
-﻿html, body, div, h1 {
-    border: 0;
-    font: normal normal 12px/18px monospace;
-    margin: 0;
-    padding: 0;
+﻿/* Change font-family to something drastic so we remember to change it everytime */
+body {
+    font: normal normal 16px/1.4  monospace;
+    padding: 18px;
 }
 
-body {
-    padding: 18px;
+h1 {
+    font-size: 16px;
+    margin: 16px 0 0 0;
 }
 
 div {
@@ -17,68 +17,22 @@ div.narrow {
 	width: 300px;
 }
 
-.aller h1 {
-    font: normal bold 16px  Aller;
-    margin: 15px 0 2px 0;
+.aller {
+    font-family: Aller;
 }
 
-.aller a {
-    font: normal normal 14px  Aller;
+.arial {
+    font-family: Arial;
 }
 
-.aller-normal {
-    font: normal normal 12px  Aller;
+.italic {
+    font-style: italic;
 }
 
-.aller-italic {
-    font: italic normal 12px  Aller;
+.bold {
+    font-weight: bold;
 }
 
-.aller-bold {
-    font: normal bold 12px  Aller;
-}
-
-.aller-bold-italic {
-    font: italic bold 12px  Aller;
-}
-
-.aller-light {
-    font: normal 200 12px  Aller;
-}
-
-.aller-light-italic {
-    font: italic 200 12px  Aller;
-}
-
-.arial h1 {
-    font: normal bold 16px  Arial;
-    margin: 15px 0 2px 0;
-}
-
-.arial a {
-    font: normal normal 14px  Arial;
-}
-
-.arial-normal {
-    font: normal normal 12px  Arial;
-}
-
-.arial-italic {
-    font: italic normal 12px  Arial;
-}
-
-.arial-bold {
-    font: normal bold 12px  Arial;
-}
-
-.arial-bold-italic {
-    font: italic bold 12px  Arial;
-}
-
-.arial-light {
-    font: normal 200 12px  Arial;
-}
-
-.arial-light-italic {
-    font: italic 200 12px  Arial;
+.light {
+    font-weight: 200;
 }
