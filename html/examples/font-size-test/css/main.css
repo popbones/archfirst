@@ -9,6 +9,26 @@ p {
     margin: 0;
 }
 
+h1 {
+    font-size: 16px;
+    margin-bottom: 0px;
+}
+
 #device-info {
     font-size: 12px;
+}
+
+.panel {
+    background-color: #CCCCCC;
+    height: 96px;
+    line-height: 96px;
+    margin-top: 5px;
+}
+
+.point-72 {
+    font-size: 72pt;
+}
+
+.pixel-96 {
+    font-size: 96px;
 }
