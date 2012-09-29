@@ -24,10 +24,9 @@ require(['bullsfirst/app/App'],
 
     $(document).ready(function() {
         // Load Crockford's JSON library if browser does not have native support
-        // TODO: This is not working in IE7!!
         Modernizr.load({
             test: window.JSON,
-            nope: 'js/json2.js'
+            nope: 'js/libs/json2.js'
         });
 
         // All input:submit and button elements are jQuery UI buttons

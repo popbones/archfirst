@@ -33,6 +33,5 @@ define(['bullsfirst/app/AppRouter'],
     var _appRouter = new AppRouter();
 
     // Begin monitoring hashchange events and dispatching routes
-    // Setting pushState to true tells Backbone to use the history API
-    Backbone.history.start({root: '/apps/bfclient-jquery-backbone/'});
+    Backbone.history.start();
 });
