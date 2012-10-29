@@ -1,0 +1,34 @@
+body {
+    font: normal normal 13px/1.4 sans-serif;
+    padding: 16px;
+}
+
+h1 {
+    font-size: 16px;
+    margin: 0 0 6px 0;
+}
+
+h2 {
+    font-size: 13px;
+    margin: 12px 0 0 0;
+}
+
+h3 {
+    font: normal normal 13px/13px sans-serif;
+    margin: 4px 0;
+}
+
+.tile-bgclr-transition {
+    background-color: #f6bc0c;
+    height: 60px;
+    width: 60px;
+    -webkit-transition: background-color 1s;
+    -moz-transition: background-color 1s;
+    -o-transition: background-color 1s;
+    -ms-transition: background-color 1s;
+    transition: background-color 1s;
+}
+
+.tile-bgclr-transition:hover {
+    background-color: #9E2B00;
+}

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CSS3 Transitions</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <h1>CSS3 Transitions</h1>
+    <p>
+        CSS3 Transitions allow property changes in CSS values to occur smoothly
+        over a specified duration. The properties that can be animated are listed
+        <a href="http://dev.w3.org/csswg/css3-transitions/#animatable-properties" target="_blank">here</a>.
+    </p>
+    <p>
+        By implication, CSS3 Transitions can only be used to change CSS property
+        values. Don't confuse these transitions with <em>page</em> transitions
+        that are common in modern mobile applications.
+    </p>
+
+	<h2>Instantaneous Property Change (without CSS Transition)</h2>
+    <h3>Property: background-color</h3>
+    <div class="tile"></div>
+
+	<h2>Transition on hover</h2>
+    <h3>Property: background-color</h3>
+    <h3>Duration: 1s</h3>
+    <div class="tile-bgclr-transition"></div>
+
+	<h2>Transition on activation (mouse click)</h2>
+    <h3>Property: background-color</h3>
+    <h3>Duration: 1s</h3>
+    <div class="tile-bgclr-transition-active"></div>
+
+	<h2>Transition on hover</h2>
+    <h3>Property: width</h3>
+    <h3>Duration: 1s</h3>
+    <div class="tile-width-transition"></div>
+
+	<h2>Transition using JavaScript</h2>
+    <h3>Property: width</h3>
+    <h3>Duration: 1s</h3>
+    <div class="tile-using-js"></div>
+    <input id="transition-button" type="button" value="Trigger Transition">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+    <script>
+        $(function() {  
+            $("#transition-button").click(function() {  
+                $(".tile-using-js").toggleClass("tile-using-js-wide");  
+            });  
+        });  
+    </script>
+</body>
+</html>
