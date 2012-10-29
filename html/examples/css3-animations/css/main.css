@@ -6,29 +6,58 @@ body {
 h1 {
     font-size: 16px;
     margin: 0 0 6px 0;
+    text-align: center;
 }
 
-h2 {
-    font-size: 13px;
-    margin: 12px 0 0 0;
+#wrapper {
+    width: 600px;
+    height: 400px;
+    margin: 10px auto;
+    
+    position: relative;
+    border: 3px solid #9E2B00
 }
 
-h3 {
-    font: normal normal 13px/13px sans-serif;
-    margin: 4px 0;
+/*
+    At 5 second animation speed, Chrome and Firefox shows a slightly
+    chopped up circle. This effect can be reduced by introducing a
+    gradual rotation from 0 to 360 degrees using "transform: rotate(Xdeg)"
+    at each keyframe, where X = 0/90/180/270/360.
+*/
+/* Safari and Chrome */
+@-webkit-keyframes bounce-the-ball {
+    0%   { left: 0;   top: 0;   }
+    25%  { left: 20%; top: 85%; }
+    50%  { left: 45%; top: 0;   }
+    75%  { left: 70%; top: 85%; }
+    100% { left: 90%; top: 0;   }
 }
 
-.tile-bgclr-transition {
-    background-color: #f6bc0c;
-    height: 60px;
+/* Firefox and IE10 */
+@keyframes bounce-the-ball {
+    0%   { left: 0;   top: 0;   }
+    25%  { left: 20%; top: 85%; }
+    50%  { left: 45%; top: 0;   }
+    75%  { left: 70%; top: 85%; }
+    100% { left: 90%; top: 0;   }
+}
+
+#ball {
     width: 60px;
-    -webkit-transition: background-color 1s;
-    -moz-transition: background-color 1s;
-    -o-transition: background-color 1s;
-    -ms-transition: background-color 1s;
-    transition: background-color 1s;
-}
+    height: 60px;
+    background-color: #f6bc0c;
+    position: absolute;
 
-.tile-bgclr-transition:hover {
-    background-color: #9E2B00;
+    /* make it a circle */
+    border-radius: 30px;
+    
+
+    /* animate it */
+    /* Safari and Chrome */
+    -webkit-animation: bounce-the-ball linear 5s infinite;
+    -webkit-animation-direction: alternate;
+
+    /* Firefox and IE10 */
+    animation: bounce-the-ball linear 5s infinite;
+    animation-direction: alternate;
 }
