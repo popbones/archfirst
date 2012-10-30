@@ -36,13 +36,15 @@ img {
 }
 
 .rotate {
-    transform: rotateY(180deg);
-    -moz-transform: rotateY(180deg); /* Safari and Chrome */
-    -webkit-transform: rotateY(180deg); /* Safari and Chrome */
-    transition: 1s;
-    -moz-transition: 1s; /* Firefox 4 */
-    -webkit-transition: 1s; /* Safari and Chrome */
-    -o-transition: 1s; /* Opera */
+    -webkit-transform: rotateY(180deg);
+       -moz-transform: rotateY(180deg);
+         -o-transform: rotateY(180deg);
+            transform: rotateY(180deg);
+
+    -webkit-transition: 1s;
+       -moz-transition: 1s;
+         -o-transition: 1s;
+            transition: 1s;
 }
 
 #browser-support {

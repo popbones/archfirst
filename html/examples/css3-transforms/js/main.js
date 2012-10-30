@@ -1,7 +1,7 @@
 $(document).ready(function() {
 
     $('#panel1').on('click', function(e) {
-        $(this).addClass("rotate");
+        $(this).toggleClass("rotate");
     });
 
     $('#panel2').rotate({ 

@@ -1,0 +1,123 @@
+﻿body {
+    font: normal normal 16px Arial;
+}
+
+p {
+    font-size: 40px;
+    margin: 100px 0 0 0;
+}
+
+.nodisplay {
+    display: none;
+}
+
+#wrapper {
+    position: relative;
+    width: 480px;
+    height: 240px;
+    overflow: hidden;
+}
+
+.page {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+#page1 {
+    background-color: #003366;
+    color: #FFFFFF;
+}
+
+#page2 {
+    background-color: #F6BC0C;
+    color: #000000;
+}
+
+/* -----------------------------------------------------------------------------
+ * Slide in from left
+ * -------------------------------------------------------------------------- */
+.slide-in-from-left {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+
+    -webkit-animation: slide-in-from-left linear 0.5s;
+            animation: slide-in-from-left linear 0.5s;
+}
+
+@-webkit-keyframes slide-in-from-left {
+    from { -webkit-transform: translateX(-100%); }
+    to   { -webkit-transform: translateX(0); }
+}
+
+@keyframes slide-in-from-left {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(0); }
+}
+
+/* -----------------------------------------------------------------------------
+ * Slide in from right
+ * -------------------------------------------------------------------------- */
+.slide-in-from-right {
+     /* without backface-visibility set to hidden, the
+        page is not visible after the animation is over */
+    -webkit-backface-visibility: hidden;
+     /* force hardware acceleration using a 3D transform */
+    -webkit-transform: translateZ(0);
+
+    -webkit-animation: slide-in-from-right linear 0.5s;
+            animation: slide-in-from-right linear 0.5s;
+}
+
+@-webkit-keyframes slide-in-from-right {
+    from { -webkit-transform: translateX(100%); }
+    to   { -webkit-transform: translateX(0); }
+}
+
+@keyframes slide-in-from-right {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+}
+
+/* -----------------------------------------------------------------------------
+ * Slide out to left
+ * -------------------------------------------------------------------------- */
+.slide-out-to-left {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+
+    -webkit-animation: slide-out-to-left linear 0.5s;
+            animation: slide-out-to-left linear 0.5s;
+}
+
+@-webkit-keyframes slide-out-to-left {
+    from { -webkit-transform: translateX(0); }
+    to   { -webkit-transform: translateX(-100%); }
+}
+
+@keyframes slide-out-to-left {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-100%); }
+}
+
+/* -----------------------------------------------------------------------------
+ * Slide out to right
+ * -------------------------------------------------------------------------- */
+.slide-out-to-right {
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+
+    -webkit-animation: slide-out-to-right linear 0.5s;
+            animation: slide-out-to-right linear 0.5s;
+}
+
+@-webkit-keyframes slide-out-to-right {
+    from { -webkit-transform: translateX(0); }
+    to   { -webkit-transform: translateX(100%); }
+}
+
+@keyframes slide-out-to-right {
+    from { transform: translateX(0); }
+    to   { transform: translateX(100%); }
+}
