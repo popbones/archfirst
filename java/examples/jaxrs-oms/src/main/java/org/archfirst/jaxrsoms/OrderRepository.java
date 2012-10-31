@@ -29,8 +29,8 @@ public class OrderRepository {
     private static Map<Integer, Order> orders = new HashMap<Integer, Order>();
     
     public static void persist(Order order) {
-        order.id = nextId++;
-        orders.put(order.id, order);
+        order.setId(nextId++);
+        orders.put(order.getId(), order);
     }
     
     public static Order find(int id) {

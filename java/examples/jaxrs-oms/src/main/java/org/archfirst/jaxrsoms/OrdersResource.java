@@ -39,12 +39,12 @@ public class OrdersResource {
     @POST
     public Response createOrder(OrderParams params) {
         
-        Order order = new Order(params.side, params.symbol, params.quantity);
+        Order order = new Order(params.getSide(), params.getSymbol(), params.getQuantity());
         OrderRepository.persist(order);
-        order.self = uriInfo.getAbsolutePathBuilder()
-            .path(String.valueOf(order.id))
-            .build();
+        order.setSelf(uriInfo.getAbsolutePathBuilder()
+            .path(String.valueOf(order.getId()))
+            .build());
 
-        return Response.created(order.self).entity(order).build();
+        return Response.created(order.getSelf()).entity(order).build();
     }
 }
