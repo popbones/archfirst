@@ -15,7 +15,9 @@
  */
 package org.archfirst.jaxrsoms;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,8 +34,33 @@ public class OrderRepository {
         order.setId(nextId++);
         orders.put(order.getId(), order);
     }
+        
+    /**
+     * Returns all orders
+     * @param symbol - optional, if specified, returns orders for the specified security
+     */
+    public static List<Order> findOrders(String symbol) {
+        List<Order> orderList;
+        if (symbol == null) {
+            orderList = new ArrayList<Order>(orders.values());
+        }
+        else {
+            orderList = new ArrayList<Order>();
+            for (Order order: orders.values()) {
+                if (order.getSymbol().equalsIgnoreCase(symbol)) {
+                    orderList.add(order);
+                }
+            }
+        }
+        
+        return orderList;
+    }
     
     public static Order find(int id) {
         return orders.get(id);
+    }
+    
+    public static Order delete(int id) {
+        return orders.remove(id);
     }
 }
