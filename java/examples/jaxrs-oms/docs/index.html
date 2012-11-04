@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>OMS RESTful API</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+    <h1>OMS RESTful API</h1>
+
+    <p>
+        The Order Management System (OMS) is an example of a simple RESTful API
+        implemented using JAX-RS and JSON. We also demonstrate how such an API
+        could be consumed by a Web application using the
+            <a href="http://backbonejs.org" target="_blank">Backbone.js</a>
+        library.
+
+        This simple OMS exposes only one entity called <em>Order</em>, which
+        exposes the following attributes:
+    </p>
+
+    <ul>
+        <li>id - a unique identifier</li>
+        <li>side - "Buy" or "Sell"</li>
+        <li>symbol - identifier of the security being bought or sold</li>
+        <li>quantity - quantity being bought or sold</li>
+        <li>self - URI to access this order over http</li>
+    </ul>
+
+    <p>
+        The RESTful API for the OMS provides CRUD (Create/Read/Update/Delete)
+        methods for the Order entity:
+    </p>
+
+    <ul>
+        <li><a href="#create">Create (HTTP POST)</a></li>
+        <li><a href="#read">Read (HTTP GET)</a></li>
+        <li><a href="#update">Update (HTTP PUT)</a></li>
+        <li><a href="#delete">Delete (HTTP DELETE)</a></li>
+    </ul>
+
+<h2><a name="create">Create (HTTP POST)</a></h2>
+<h3>Create Order</h3>
+<h4>Request</h4>
+<pre>
+POST http://localhost:8080/jaxrs-oms/rest/orders HTTP/1.1
+Content-Type: application/json
+
+{
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": 1000
+}
+</pre>
+
+<h4>Response</h4>
+<pre>
+HTTP/1.1 201 Created
+Location: http://localhost:8080/jaxrs-oms/rest/orders/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": 1000,
+    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
+}
+</pre>
+
+<h2><a name="read">Read (HTTP GET)</a></h2>
+<h3>Get a single order</h3>
+<h4>Request</h4>
+<pre>
+GET http://localhost:8080/jaxrs-oms/rest/orders/1 HTTP/1.1
+</pre>
+
+<h4>Response</h4>
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "id": 1,
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": 1000,
+    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
+}
+</pre>
+
+<h3>Get all orders</h3>
+<h4>Request</h4>
+<pre>
+GET http://localhost:8080/jaxrs-oms/rest/orders HTTP/1.1
+</pre>
+
+<h4>Response</h4>
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[{
+    "id": 1,
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": 1000,
+    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
+},
+{
+    "id": 2,
+    "symbol": "MSFT",
+    "side": "Buy",
+    "quantity": 500,
+    "self": "http://localhost:8080/jaxrs-oms/rest/orders/2"
+}]
+</pre>
+
+<h3>Get orders for the specified security</h3>
+<h4>Request</h4>
+<pre>
+GET http://localhost:8080/jaxrs-oms/rest/orders?symbol=AAPL HTTP/1.1
+</pre>
+
+<h4>Response</h4>
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+[{
+    "id": 1,
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": 1000,
+    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
+}]
+</pre>
+
+<h2><a name="update">Update (HTTP PUT)</a></h2>
+<h3>Update an order</h3>
+<p>
+    Assuming that changing only the quantitly field make any business sense,
+    we allow only this field to be changed through the RESTful API. While in
+    the example below, the entire object is sent in the HTTP request (as
+    suggested by the <em>classic</em> REST model), all attributes other than
+    quantity are ignored.
+</p>
+<h4>Request</h4>
+<pre>
+PUT http://localhost:8080/jaxrs-oms/rest/orders/1 HTTP/1.1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": 2000,
+    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
+}
+</pre>
+
+<h4>Response</h4>
+<pre>
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+    "id": 1,
+    "symbol": "AAPL",
+    "side": "Buy",
+    "quantity": 2000,
+    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
+}
+</pre>
+
+<p>
+    We actually prefer using the <a href="http://www.cqrsinfo.com" target="_blank">
+    Command Query Responsibility Segregation (CQRS)</a> pattern for the update usecase.
+    For example, the quantity could be updated using the following request (the response
+    is the same as above):
+</p>
+
+<h4>Request</h4>
+<pre>
+PUT http://localhost:8080/jaxrs-oms/rest/orders/1/change_quantity HTTP/1.1
+Content-Type: application/json
+
+{
+    "quantity": 2000
+}
+</pre>
+
+<h2><a name="delete">Delete (HTTP DELETE)</a></h2>
+<h3>Delete an order</h3>
+<h4>Request</h4>
+<pre>
+DELETE http://localhost:8080/jaxrs-oms/rest/orders/1 HTTP/1.1
+</pre>
+
+<h4>Response</h4>
+<pre>
+HTTP/1.1 200 OK
+</pre>
+
+</body>
+</html>

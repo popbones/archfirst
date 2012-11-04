@@ -1,127 +1,29 @@
-This example shows how to create and get orders using a RESTful API. We use
-JAX-RS and JSON to achieve this.
+This example shows how to implement a RESTful API using JAX-RS and JSON.
+We also demonstrate how such an API could be consumed by a Web application
+using the Backbone.js library (see http://backbonejs.org).
 
-Build the application as follows:
+The example implements a very simple Order Management System (OMS) with
+only one entity called Order. An Order has the following attributes:
+
+    id: a unique identifier
+    side: "Buy" or "Sell"
+    symbol: identifier of the security being bought or sold
+    quantity: quantity being bought or sold
+    self: URI to access this order over http
+
+The RESTful API is specified in the docs folder.
+
+Use Maven to build the application:
 
     > mvn clean package
 
-Execute the application as follows:
+Execute the application using the jetty plugin:
 
     > mvn jetty:run
 
-Create an order
-===============
-POST http://localhost:8080/jaxrs-oms/rest/orders HTTP/1.1
-Content-Type: application/json
+You could also drop the build application (target/jaxrs-oms.war) in
+a JavaEE compliant server such as Tomcat, JBoss AS or GlassFish.
 
-{
-    "symbol": "AAPL",
-    "side": "Buy",
-    "quantity": 1000
-}
+The front-end can now be accessed at the following URL:
 
-Response
---------
-HTTP/1.1 201 Created
-Location: http://localhost:8080/jaxrs-oms/rest/orders/1
-Content-Type: application/json
-
-{
-    "id": 1,
-    "symbol": "AAPL",
-    "side": "Buy",
-    "quantity": 1000,
-    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
-}
-
-Get a single order
-==================
-GET http://localhost:8080/jaxrs-oms/rest/orders/1 HTTP/1.1
-
-Response
---------
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-    "id": 1,
-    "symbol": "AAPL",
-    "side": "Buy",
-    "quantity": 1000,
-    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
-}
-
-Get all orders
-==============
-GET http://localhost:8080/jaxrs-oms/rest/orders HTTP/1.1
-
-Response
---------
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-[{
-    "id": 1,
-    "symbol": "AAPL",
-    "side": "Buy",
-    "quantity": 1000,
-    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
-},
-{
-    "id": 2,
-    "symbol": "MSFT",
-    "side": "Buy",
-    "quantity": 500,
-    "self": "http://localhost:8080/jaxrs-oms/rest/orders/2"
-}]
-
-Getting orders for the specified security
-=========================================
-GET http://localhost:8080/jaxrs-oms/rest/orders?symbol=AAPL HTTP/1.1
-
-Response
---------
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-[{
-    "id": 1,
-    "symbol": "AAPL",
-    "side": "Buy",
-    "quantity": 1000,
-    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
-}]
-
-Update an order
-===============
-PUT http://localhost:8080/jaxrs-oms/rest/orders/1 HTTP/1.1
-Content-Type: application/json
-
-{
-    "id": 1,
-    "symbol": "AAPL",
-    "side": "Buy",
-    "quantity": 2000,
-    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
-}
-
-Response
---------
-HTTP/1.1 200 OK
-Content-Type: application/json
-
-{
-    "id": 1,
-    "symbol": "AAPL",
-    "side": "Buy",
-    "quantity": 2000,
-    "self": "http://localhost:8080/jaxrs-oms/rest/orders/1"
-}
-
-Delete an order
-===============
-DELETE http://localhost:8080/jaxrs-oms/rest/orders/1 HTTP/1.1
-
-Response
---------
-HTTP/1.1 200 OK
+    http://localhost:8080/jaxrs-oms

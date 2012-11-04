@@ -1,0 +1,31 @@
+body {
+    font: normal normal 16px/24px Arial;
+    padding: 16px;
+    width: 600px;
+}
+
+p, h1, h2, h3, h4 {
+    margin: 0 0 6px 0;
+}
+
+pre {
+    font-size: 14px;
+    line-height: 18px;
+    margin: 0 0 12px 0;
+}
+
+h1 {
+    font: normal normal 24px Arial;
+}
+
+h2 {
+    font: normal normal 20px Arial;
+}
+
+h3 {
+    font: normal bold 16px Arial;
+}
+
+h4 {
+    font: italic normal 16px Arial;
+}
