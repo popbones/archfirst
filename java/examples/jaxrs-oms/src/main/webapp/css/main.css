@@ -1,0 +1,168 @@
+/**
+ * Copyright 2012 Archfirst
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+/**
+ * oms.css
+ * The styles in this file represent all basic styles for the OMS application.
+ */
+
+/* -----------------------------------------------------------------------------
+ * Primary Styles
+ * -------------------------------------------------------------------------- */
+body {
+    font: normal normal 16px/24px Arial;
+    padding: 16px;
+}
+
+h1 {
+    font: normal normal 24px/24px Arial;
+    margin: 0 0 10px 0;
+}
+
+img {
+    vertical-align: middle;
+}
+
+/* -----------------------------------------------------------------------------
+ * Buttons
+ * -------------------------------------------------------------------------- */
+a.button {
+    background-color: #F47513;
+    color: #FFFFFF;
+    display: block;
+    font-size: 12px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    text-decoration: none;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
+    transition: background-color 0.3s;
+    width: 105px;
+}
+
+a.button span  {
+    display: block;
+}
+
+a.button:hover {
+    background-color: #F36733;
+}
+
+a.button:active {
+    background-color: #7B2A0C;
+}
+
+.small-button {
+    border: 1px solid #FFFFFF;
+}
+
+.small-button:hover {
+    border: 1px solid #C0C0C0;
+}
+
+.small-button:active {
+    border: 1px solid #808080;
+}
+
+/* -----------------------------------------------------------------------------
+ * Toolbar
+ * -------------------------------------------------------------------------- */
+#tool-bar {
+    float: right;
+}
+
+#tool-bar fieldset,
+#tool-bar a.button {
+    float: left;
+}
+
+#tool-bar input {
+    float: left;
+    margin-right: 10px;
+}
+
+#tool-bar input {
+    width: 100px;
+}
+
+/* -----------------------------------------------------------------------------
+ * Tables
+ * -------------------------------------------------------------------------- */
+#order-table th, .oms-table td {
+    padding: 0;
+}
+
+#order-table thead th {
+    background-color: #8C8C8C;
+    color: #F8E5C9;
+    font: bold normal 14px/25px Arial;
+    height: 22px;
+}
+
+#order-table tbody td {
+    border-bottom: 1px solid #E5E5E5;
+    font: normal normal 16px/25px Arial;
+    height: 25px;
+}
+
+#order-table .id {
+    text-align: right;
+    width: 30px;
+}
+
+#order-table .side {
+    text-align: center;
+    width: 80px;
+}
+
+#order-table .symbol {
+    text-align: center;
+    width: 80px;
+}
+
+#order-table .quantity {
+    text-align: right;
+    width: 120px;
+}
+
+#order-table input.quantityField {
+    width: 80px;
+    text-align: right;
+}
+
+#order-table .actions {
+    text-align: center;
+    width: 100px;
+}
+
+/* Enable viewing of quantity in view mode */
+#order-table tbody td.quantity .view {
+    display: block;
+}
+#order-table tbody td.quantity .edit {
+    display: none;
+}
+
+/* Enable editing of quantity in edit mode */
+#order-table tbody td.quantity.editing .view {
+    display: none;
+}
+#order-table tbody td.quantity.editing .edit {
+    display: block;
+}

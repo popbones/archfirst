@@ -1,0 +1,22 @@
+﻿<td class="id">
+    {{id}}
+</td>
+<td class="side">
+    {{side}}
+</td>
+<td class="symbol">
+    {{symbol}}
+</td>
+<td class="quantity">
+    <div class="view">
+		{{quantity}}
+		<img class="small-button edit-quantity" src="img/edit-icon.png">
+	</div>
+	<div class="edit">
+		<input class="quantityField" type="text" value="{{quantity}}">
+		<img class="small-button save-quantity" src="img/save-icon.png">
+    </div>
+</td>
+<td class="actions">
+    <img class="small-button delete" src="img/delete-icon.png">
+</td>
