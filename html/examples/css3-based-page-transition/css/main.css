@@ -39,7 +39,10 @@ p {
  * Slide in from left
  * -------------------------------------------------------------------------- */
 .slide-in-from-left {
+     /* without backface-visibility set to hidden, the
+        page is not visible after the animation is over */
     -webkit-backface-visibility: hidden;
+     /* force hardware acceleration using a 3D transform */
     -webkit-transform: translateZ(0);
 
     -webkit-animation: slide-in-from-left linear 0.5s;
@@ -60,10 +63,7 @@ p {
  * Slide in from right
  * -------------------------------------------------------------------------- */
 .slide-in-from-right {
-     /* without backface-visibility set to hidden, the
-        page is not visible after the animation is over */
     -webkit-backface-visibility: hidden;
-     /* force hardware acceleration using a 3D transform */
     -webkit-transform: translateZ(0);
 
     -webkit-animation: slide-in-from-right linear 0.5s;
