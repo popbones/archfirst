@@ -13,7 +13,7 @@
 @end
 
 @implementation LearnToTradeViewController
-@synthesize pdf;
+@synthesize pdf, pageControl;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -40,7 +40,7 @@
     NSString *thePath = [[NSBundle mainBundle]
                          pathForResource:@"bullsfirst-LearntoTrade" ofType:@"pdf"];
     NSURL *url = [NSURL fileURLWithPath:thePath];    
-    pdf = [[PDFScrollView alloc] initWithFrame:CGRectMake(0, -40, 600,480)
+    pdf = [[PDFScrollView alloc] initWithFrame:CGRectMake(0, 0, 600,400)
                                            url:url];
     [self.view addSubview:pdf];
 
@@ -64,6 +64,7 @@
         if (pdf.currentPage < pdf.totalPage) {
             pdf.currentPage++;
             [pdf gotoPage:pdf.currentPage];
+            pageControl.currentPage = pdf.currentPage-1;
         }
     }
     
@@ -72,7 +73,18 @@
         if (pdf.currentPage > 1) {
             pdf.currentPage--;
             [pdf gotoPage:pdf.currentPage];
+            pageControl.currentPage = pdf.currentPage-1;
         }
     }
+}
+
+- (IBAction)pageControlChanged:(id)sender {
+    pdf.currentPage = pageControl.currentPage+1;
+    [pdf gotoPage:pdf.currentPage];
+}
+
+- (void)viewDidUnload {
+    [self setPageControl:nil];
+    [super viewDidUnload];
 }
 @end

@@ -12,8 +12,10 @@
 @interface LearnToTradeViewController : UIViewController
 
 @property (strong, nonatomic) PDFScrollView *pdf;
+@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
 
 - (IBAction)handleSwipe:(UISwipeGestureRecognizer *)recognizer;
+- (IBAction)pageControlChanged:(id)sender;
 
 
 @end
