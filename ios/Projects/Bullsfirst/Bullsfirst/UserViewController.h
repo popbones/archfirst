@@ -27,5 +27,6 @@
 - (IBAction)logoutBTNClicked:(id)sender;
 - (IBAction)gettingStartedBTNClicked:(id)sender;
 - (IBAction)launchArchFirstWebsite:(id)sender;
+- (IBAction)learnToTradeBTNClicked:(id)sender;
 
 @end

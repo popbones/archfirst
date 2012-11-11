@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <archive type="com.apple.InterfaceBuilder3.CocoaTouch.iPad.XIB" version="8.00">
 	<data>
-		<int key="IBDocument.SystemTarget">1280</int>
-		<string key="IBDocument.SystemVersion">11C74</string>
-		<string key="IBDocument.InterfaceBuilderVersion">1938</string>
-		<string key="IBDocument.AppKitVersion">1138.23</string>
-		<string key="IBDocument.HIToolboxVersion">567.00</string>
+		<int key="IBDocument.SystemTarget">1536</int>
+		<string key="IBDocument.SystemVersion">12C60</string>
+		<string key="IBDocument.InterfaceBuilderVersion">2843</string>
+		<string key="IBDocument.AppKitVersion">1187.34</string>
+		<string key="IBDocument.HIToolboxVersion">625.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.IBCocoaTouchPlugin</string>
-			<string key="NS.object.0">933</string>
+			<string key="NS.object.0">1929</string>
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>IBProxyObject</string>
+			<string>IBUIActivityIndicatorView</string>
+			<string>IBUIBarButtonItem</string>
 			<string>IBUIButton</string>
 			<string>IBUILabel</string>
-			<string>IBUIBarButtonItem</string>
-			<string>IBUIActivityIndicatorView</string>
-			<string>IBUITextField</string>
 			<string>IBUINavigationBar</string>
 			<string>IBUINavigationItem</string>
 			<string>IBUIScrollView</string>
+			<string>IBUITextField</string>
 			<string>IBUIView</string>
 		</array>
 		<array key="IBDocument.PluginDependencies">
@@ -251,7 +251,7 @@
 							<object class="IBUILabel" id="1059449330">
 								<reference key="NSNextResponder" ref="877711285"/>
 								<int key="NSvFlags">292</int>
-								<string key="NSFrame">{{65, 69}, {431, 21}}</string>
+								<string key="NSFrame">{{55, 69}, {465, 21}}</string>
 								<reference key="NSSuperview" ref="877711285"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="494302206"/>
@@ -260,10 +260,11 @@
 								<int key="IBUIContentMode">7</int>
 								<bool key="IBUIUserInteractionEnabled">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
-								<string key="IBUIText">Please don't enter real personal information, since this is just a demo.</string>
+								<string key="IBUIText">Please don't enter real personal information, since this is just for education.</string>
 								<object class="NSColor" key="IBUITextColor" id="82415962">
 									<int key="NSColorSpace">1</int>
 									<bytes key="NSRGB">MCAwIDAAA</bytes>
+									<string key="IBUIColorCocoaTouchKeyPath">darkTextColor</string>
 								</object>
 								<nil key="IBUIHighlightedColor"/>
 								<int key="IBUIBaselineAdjustment">1</int>
@@ -411,6 +412,7 @@
 								<string key="NSFrame">{{496, 7}, {57, 29}}</string>
 								<reference key="NSSuperview" ref="40172618"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<bool key="IBUIOpaque">NO</bool>
 								<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 								<int key="IBUIContentHorizontalAlignment">0</int>
@@ -981,6 +983,6 @@
 			<string key="OpenAccount-PushDown.png">{380, 48}</string>
 			<string key="OpenAccount.png">{380, 48}</string>
 		</dictionary>
-		<string key="IBCocoaTouchPluginVersion">933</string>
+		<string key="IBCocoaTouchPluginVersion">1929</string>
 	</data>
 </archive>

@@ -91,4 +91,9 @@
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://archfirst.org/"]];
 
 }
+
+- (IBAction)learnToTradeBTNClicked:(id)sender {
+    [self.popOver dismissPopoverAnimated:YES];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LEARN_TO_TRADE" object:nil];
+}
 @end

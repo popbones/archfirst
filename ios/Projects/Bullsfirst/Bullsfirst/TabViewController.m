@@ -25,7 +25,7 @@
 #import "AddAccountViewController.h"
 #import "AccountsViewController.h"
 #import "GettingStartViewController.h"
-
+#import "LearnToTradeViewController.h"
 
 @implementation TabViewController
 @synthesize portraitTitleBar;
@@ -137,6 +137,7 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(rotateDevice) name:@"DEVICE_ROTATE" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showGettingStart) name:@"GETTING_START" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(showLearnToTrade) name:@"LEARN_TO_TRADE" object:nil];
 
 }
 
@@ -160,6 +161,20 @@
     [self presentModalViewController:controller animated:YES];
     controller.view.superview.bounds=CGRectMake(0, 0, 600,480);
 }
+
+- (void) showLearnToTrade
+{
+    LearnToTradeViewController *learnToTradeViewController = [[LearnToTradeViewController alloc] initWithNibName:@"LearnToTradeViewController" bundle:nil];
+    
+    UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:learnToTradeViewController];
+    
+    [controller setModalPresentationStyle:UIModalPresentationFormSheet];
+    [controller setModalTransitionStyle:UIModalTransitionStyleCoverVertical];
+    
+    [self presentModalViewController:controller animated:YES];
+    controller.view.superview.bounds=CGRectMake(0, 0, 600,440);
+}
+
 
 - (void) rotateDevice
 {
@@ -231,7 +246,7 @@
         
         controller.popOver = userPopOver;
         controller.title=@"Settings";
-        [userPopOver setPopoverContentSize:CGSizeMake(220, 250)];
+        [userPopOver setPopoverContentSize:CGSizeMake(220, 300)];
     }
     if ([userPopOver isPopoverVisible]) {
         [userPopOver dismissPopoverAnimated:YES];
