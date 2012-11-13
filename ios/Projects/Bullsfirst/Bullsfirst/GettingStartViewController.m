@@ -55,6 +55,8 @@
         [scrollView addSubview:imageView];
     }
 
+    self.pageControl.numberOfPages = kNumberOfPages;
+
 }
 
 - (void)viewDidUnload

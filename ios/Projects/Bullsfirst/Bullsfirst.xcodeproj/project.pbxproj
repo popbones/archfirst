@@ -66,10 +66,15 @@
 		5437E504164F02E9004A56A5 /* LearntoTrade-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E502164F02E9004A56A5 /* LearntoTrade-PushDown.png */; };
 		5437E505164F02E9004A56A5 /* LearntoTrade.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E503164F02E9004A56A5 /* LearntoTrade.png */; };
 		5437E509164F04EF004A56A5 /* LearnToTradeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5437E507164F04EF004A56A5 /* LearnToTradeViewController.m */; };
-		5437E50A164F04EF004A56A5 /* LearnToTradeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5437E508164F04EF004A56A5 /* LearnToTradeViewController.xib */; };
-		5437E510164F420C004A56A5 /* bullsfirst-LearntoTrade.pdf in Resources */ = {isa = PBXBuildFile; fileRef = 5437E50F164F420C004A56A5 /* bullsfirst-LearntoTrade.pdf */; };
-		5437E522164F45B1004A56A5 /* PDFScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5437E521164F45B1004A56A5 /* PDFScrollView.m */; };
-		5437E525164F460A004A56A5 /* TiledPDFView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5437E524164F4609004A56A5 /* TiledPDFView.m */; };
+		5437E5631651C6A3004A56A5 /* bullsfirst-LearntoTrade-3.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E55A1651C6A3004A56A5 /* bullsfirst-LearntoTrade-3.png */; };
+		5437E5641651C6A3004A56A5 /* bullsfirst-LearntoTrade-1.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E55B1651C6A3004A56A5 /* bullsfirst-LearntoTrade-1.png */; };
+		5437E5651651C6A3004A56A5 /* bullsfirst-LearntoTrade-2.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E55C1651C6A3004A56A5 /* bullsfirst-LearntoTrade-2.png */; };
+		5437E5661651C6A3004A56A5 /* bullsfirst-LearntoTrade-4.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E55D1651C6A3004A56A5 /* bullsfirst-LearntoTrade-4.png */; };
+		5437E5671651C6A3004A56A5 /* bullsfirst-LearntoTrade-5.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E55E1651C6A3004A56A5 /* bullsfirst-LearntoTrade-5.png */; };
+		5437E5681651C6A3004A56A5 /* bullsfirst-LearntoTrade-6.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E55F1651C6A3004A56A5 /* bullsfirst-LearntoTrade-6.png */; };
+		5437E5691651C6A3004A56A5 /* bullsfirst-LearntoTrade-7.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E5601651C6A3004A56A5 /* bullsfirst-LearntoTrade-7.png */; };
+		5437E56A1651C6A3004A56A5 /* bullsfirst-LearntoTrade-8.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E5611651C6A3004A56A5 /* bullsfirst-LearntoTrade-8.png */; };
+		5437E56B1651C6A3004A56A5 /* bullsfirst-LearntoTrade-9.png in Resources */ = {isa = PBXBuildFile; fileRef = 5437E5621651C6A3004A56A5 /* bullsfirst-LearntoTrade-9.png */; };
 		543840FA15065FE6001D6598 /* PlaceOrder-PushDown.png in Resources */ = {isa = PBXBuildFile; fileRef = 543840F815065FE6001D6598 /* PlaceOrder-PushDown.png */; };
 		543840FB15065FE6001D6598 /* PlaceOrder.png in Resources */ = {isa = PBXBuildFile; fileRef = 543840F915065FE6001D6598 /* PlaceOrder.png */; };
 		5438411C15066F9C001D6598 /* BFMarketPrice.m in Sources */ = {isa = PBXBuildFile; fileRef = 5438411B15066F9C001D6598 /* BFMarketPrice.m */; };
@@ -322,12 +327,15 @@
 		5437E503164F02E9004A56A5 /* LearntoTrade.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LearntoTrade.png; sourceTree = "<group>"; };
 		5437E506164F04EF004A56A5 /* LearnToTradeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LearnToTradeViewController.h; sourceTree = "<group>"; };
 		5437E507164F04EF004A56A5 /* LearnToTradeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LearnToTradeViewController.m; sourceTree = "<group>"; };
-		5437E508164F04EF004A56A5 /* LearnToTradeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LearnToTradeViewController.xib; sourceTree = "<group>"; };
-		5437E50F164F420C004A56A5 /* bullsfirst-LearntoTrade.pdf */ = {isa = PBXFileReference; lastKnownFileType = image.pdf; path = "bullsfirst-LearntoTrade.pdf"; sourceTree = "<group>"; };
-		5437E520164F45B1004A56A5 /* PDFScrollView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PDFScrollView.h; sourceTree = "<group>"; };
-		5437E521164F45B1004A56A5 /* PDFScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PDFScrollView.m; sourceTree = "<group>"; };
-		5437E523164F4608004A56A5 /* TiledPDFView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TiledPDFView.h; sourceTree = "<group>"; };
-		5437E524164F4609004A56A5 /* TiledPDFView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TiledPDFView.m; sourceTree = "<group>"; };
+		5437E55A1651C6A3004A56A5 /* bullsfirst-LearntoTrade-3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-LearntoTrade-3.png"; sourceTree = "<group>"; };
+		5437E55B1651C6A3004A56A5 /* bullsfirst-LearntoTrade-1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-LearntoTrade-1.png"; sourceTree = "<group>"; };
+		5437E55C1651C6A3004A56A5 /* bullsfirst-LearntoTrade-2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-LearntoTrade-2.png"; sourceTree = "<group>"; };
+		5437E55D1651C6A3004A56A5 /* bullsfirst-LearntoTrade-4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-LearntoTrade-4.png"; sourceTree = "<group>"; };
+		5437E55E1651C6A3004A56A5 /* bullsfirst-LearntoTrade-5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-LearntoTrade-5.png"; sourceTree = "<group>"; };
+		5437E55F1651C6A3004A56A5 /* bullsfirst-LearntoTrade-6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-LearntoTrade-6.png"; sourceTree = "<group>"; };
+		5437E5601651C6A3004A56A5 /* bullsfirst-LearntoTrade-7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-LearntoTrade-7.png"; sourceTree = "<group>"; };
+		5437E5611651C6A3004A56A5 /* bullsfirst-LearntoTrade-8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-LearntoTrade-8.png"; sourceTree = "<group>"; };
+		5437E5621651C6A3004A56A5 /* bullsfirst-LearntoTrade-9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bullsfirst-LearntoTrade-9.png"; sourceTree = "<group>"; };
 		543840F815065FE6001D6598 /* PlaceOrder-PushDown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PlaceOrder-PushDown.png"; sourceTree = "<group>"; };
 		543840F915065FE6001D6598 /* PlaceOrder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PlaceOrder.png; sourceTree = "<group>"; };
 		5438411A15066F9C001D6598 /* BFMarketPrice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BFMarketPrice.h; sourceTree = "<group>"; };
@@ -604,7 +612,7 @@
 		00D3C424147C285D0067A768 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				5437E50F164F420C004A56A5 /* bullsfirst-LearntoTrade.pdf */,
+				5437E5591651C12F004A56A5 /* Learn-To_Trade */,
 				54FE2197154F577400F409B9 /* Getting Started */,
 				00DFF9171480A8D7001A4641 /* images */,
 			);
@@ -821,6 +829,22 @@
 			name = "Custom buttons";
 			sourceTree = "<group>";
 		};
+		5437E5591651C12F004A56A5 /* Learn-To_Trade */ = {
+			isa = PBXGroup;
+			children = (
+				5437E55A1651C6A3004A56A5 /* bullsfirst-LearntoTrade-3.png */,
+				5437E55B1651C6A3004A56A5 /* bullsfirst-LearntoTrade-1.png */,
+				5437E55C1651C6A3004A56A5 /* bullsfirst-LearntoTrade-2.png */,
+				5437E55D1651C6A3004A56A5 /* bullsfirst-LearntoTrade-4.png */,
+				5437E55E1651C6A3004A56A5 /* bullsfirst-LearntoTrade-5.png */,
+				5437E55F1651C6A3004A56A5 /* bullsfirst-LearntoTrade-6.png */,
+				5437E5601651C6A3004A56A5 /* bullsfirst-LearntoTrade-7.png */,
+				5437E5611651C6A3004A56A5 /* bullsfirst-LearntoTrade-8.png */,
+				5437E5621651C6A3004A56A5 /* bullsfirst-LearntoTrade-9.png */,
+			);
+			name = "Learn-To_Trade";
+			sourceTree = "<group>";
+		};
 		545C5E3214E45AEC003560C8 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -924,13 +948,8 @@
 				54087939154C9590001C494B /* GettingStartViewController.h */,
 				5408793A154C9590001C494B /* GettingStartViewController.m */,
 				5408793B154C9590001C494B /* GettingStartViewController.xib */,
-				5437E520164F45B1004A56A5 /* PDFScrollView.h */,
-				5437E521164F45B1004A56A5 /* PDFScrollView.m */,
-				5437E523164F4608004A56A5 /* TiledPDFView.h */,
-				5437E524164F4609004A56A5 /* TiledPDFView.m */,
 				5437E506164F04EF004A56A5 /* LearnToTradeViewController.h */,
 				5437E507164F04EF004A56A5 /* LearnToTradeViewController.m */,
-				5437E508164F04EF004A56A5 /* LearnToTradeViewController.xib */,
 			);
 			name = Forms;
 			sourceTree = "<group>";
@@ -1262,8 +1281,15 @@
 				54FE21AD154F577400F409B9 /* bullsfirst-GettingStarted-9.png in Resources */,
 				5437E504164F02E9004A56A5 /* LearntoTrade-PushDown.png in Resources */,
 				5437E505164F02E9004A56A5 /* LearntoTrade.png in Resources */,
-				5437E50A164F04EF004A56A5 /* LearnToTradeViewController.xib in Resources */,
-				5437E510164F420C004A56A5 /* bullsfirst-LearntoTrade.pdf in Resources */,
+				5437E5631651C6A3004A56A5 /* bullsfirst-LearntoTrade-3.png in Resources */,
+				5437E5641651C6A3004A56A5 /* bullsfirst-LearntoTrade-1.png in Resources */,
+				5437E5651651C6A3004A56A5 /* bullsfirst-LearntoTrade-2.png in Resources */,
+				5437E5661651C6A3004A56A5 /* bullsfirst-LearntoTrade-4.png in Resources */,
+				5437E5671651C6A3004A56A5 /* bullsfirst-LearntoTrade-5.png in Resources */,
+				5437E5681651C6A3004A56A5 /* bullsfirst-LearntoTrade-6.png in Resources */,
+				5437E5691651C6A3004A56A5 /* bullsfirst-LearntoTrade-7.png in Resources */,
+				5437E56A1651C6A3004A56A5 /* bullsfirst-LearntoTrade-8.png in Resources */,
+				5437E56B1651C6A3004A56A5 /* bullsfirst-LearntoTrade-9.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1330,8 +1356,6 @@
 				54CA9308150E46B90095E839 /* MultiSelectDropdownViewController.m in Sources */,
 				5408793C154C9590001C494B /* GettingStartViewController.m in Sources */,
 				5437E509164F04EF004A56A5 /* LearnToTradeViewController.m in Sources */,
-				5437E522164F45B1004A56A5 /* PDFScrollView.m in Sources */,
-				5437E525164F460A004A56A5 /* TiledPDFView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

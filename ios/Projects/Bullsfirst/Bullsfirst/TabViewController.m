@@ -164,7 +164,7 @@
 
 - (void) showLearnToTrade
 {
-    LearnToTradeViewController *learnToTradeViewController = [[LearnToTradeViewController alloc] initWithNibName:@"LearnToTradeViewController" bundle:nil];
+    LearnToTradeViewController *learnToTradeViewController = [[LearnToTradeViewController alloc] initWithNibName:@"GettingStartViewController" bundle:nil];
     
     UINavigationController *controller = [[UINavigationController alloc] initWithRootViewController:learnToTradeViewController];
     

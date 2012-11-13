@@ -7,15 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "PDFScrollView.h"
+#import "GettingStartViewController.h"
 
-@interface LearnToTradeViewController : UIViewController
-
-@property (strong, nonatomic) PDFScrollView *pdf;
-@property (weak, nonatomic) IBOutlet UIPageControl *pageControl;
-
-- (IBAction)handleSwipe:(UISwipeGestureRecognizer *)recognizer;
-- (IBAction)pageControlChanged:(id)sender;
-
+@interface LearnToTradeViewController : GettingStartViewController;
 
 @end
