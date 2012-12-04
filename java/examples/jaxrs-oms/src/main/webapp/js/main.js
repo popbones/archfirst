@@ -20,15 +20,13 @@
  * @author Naresh Bhatia
  */
 require(['oms/domain/Repository',
+         'oms/framework/BackboneViewExtension',
          'oms/views/OrderTableView',
          'oms/views/TemplateManager',
          'oms/views/ToolbarView'],
-        function(Repository, OrderTableView, TemplateManager, ToolbarView) {
+        function(Repository, BackboneViewExtension, OrderTableView, TemplateManager, ToolbarView) {
 
     $(document).ready(function() {
-        // Load and compile templates
-        TemplateManager.initialize();
-
         // Load and compile templates
         TemplateManager.initialize();
 

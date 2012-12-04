@@ -33,8 +33,13 @@ define(['oms/views/TemplateManager'],
         },
 
         initialize: function(options) {
-            this.model.on('change', this.handleChange, this);
+		    this.eventBinder = new Backbone.EventBinder();
+            this.eventBinder.bindTo(this.model, 'change', this.handleChange, this);
         },
+		
+		onClose: function() {
+		    this.eventBinder.unbindAll();
+		},
 
         handleEditQuantity: function() {
             this.$el.find('.quantity').addClass('editing');

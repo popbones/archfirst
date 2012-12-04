@@ -38,7 +38,7 @@ define(['oms/views/OrderView'],
         },
 
         handleDestroy: function(order) {
-            this.orderViews[order.id].remove();
+            this.orderViews[order.id].close();
             delete this.orderViews[order.id];
 
         },
@@ -48,11 +48,13 @@ define(['oms/views/OrderView'],
         },
 
         renderAll: function() {
-            // Take out rows that might be sitting in the table
-            this.$el.empty();
+            // Close existing child views
+            for (var orderId in this.orderViews) {
+                this.orderViews[orderId].close();
+            }
             this.orderViews = {};
 
-            // Create views for each account
+            // Create new views for each account
             this.collection.each(function(order, i) {
                 this.renderOrder(order);
             }, this);
