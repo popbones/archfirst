@@ -21,6 +21,7 @@
  */
 define(['oms/domain/Order'],
        function(Order) {
+    'use strict';
 
     return Backbone.Collection.extend({
         model: Order,

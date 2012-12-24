@@ -21,18 +21,19 @@
  */
 define(['text!oms/templates/order.txt'],
        function(orderTemplate) {
+    'use strict';
 
-    var templates;
+    var _templates;
 
     return {
         initialize: function() {
-            this.templates = {
+            _templates = {
                 'order': Handlebars.compile(orderTemplate)
             };
         },
 
         getTemplate: function(name) {
-            return this.templates[name];
+            return _templates[name];
         }
     };
 });

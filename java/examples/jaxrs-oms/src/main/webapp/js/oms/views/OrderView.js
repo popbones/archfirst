@@ -21,6 +21,7 @@
  */
 define(['oms/views/TemplateManager'],
        function(TemplateManager) {
+    'use strict';
 
     return Backbone.View.extend({
 
@@ -32,15 +33,10 @@ define(['oms/views/TemplateManager'],
             'click .delete': 'handleDeleteOrder'
         },
 
-        initialize: function(options) {
-		    this.eventBinder = new Backbone.EventBinder();
-            this.eventBinder.bindTo(this.model, 'change', this.handleChange, this);
+        initialize: function(/* options */) {
+            this.listenTo(this.model, 'change', this.handleChange);
         },
 		
-		onClose: function() {
-		    this.eventBinder.unbindAll();
-		},
-
         handleEditQuantity: function() {
             this.$el.find('.quantity').addClass('editing');
             this.$el.find('.quantityField').val(this.model.get('quantity')).focus();

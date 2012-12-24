@@ -23,6 +23,7 @@
  */
 define(['oms/domain/Orders'],
        function(Orders) {
+    'use strict';
 
     // Module level variables act as singletons
     var _orders = new Orders();
@@ -31,7 +32,7 @@ define(['oms/domain/Orders'],
         getOrders: function() { return _orders; },
 
         fetchOrders: function() {
-        	_orders.fetch();
+            _orders.fetch();
         }
     };
 });

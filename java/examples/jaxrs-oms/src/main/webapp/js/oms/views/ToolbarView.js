@@ -19,8 +19,8 @@
  *
  * @author Naresh Bhatia
  */
-define(['oms/domain/Order'],
-       function(Order) {
+define(function() {
+    'use strict';
 
     var _side = ['Buy', 'Sell'];
     var _securities = ['AAPL', 'ADBE', 'AMZN', 'CCE', 'CSCO', 'DELL', 'EBAY', 'GE', 'GOOG', 'MSFT'];
@@ -35,8 +35,8 @@ define(['oms/domain/Order'],
         handleCreateOrders: function() {
             var order;
             var numOrders = $('#num-trades').val();
-            if (numOrders <= 0) numOrders = 1;
-            for (i=0; i<numOrders; i++) {
+            if (numOrders <= 0) { numOrders = 1; }
+            for (var i=0; i<numOrders; i++) {
                 order = this.collection.create({
                     side: _side[Math.round(Math.random() * 2) % 2],
                     symbol: _securities[Math.round(Math.random() * 10) % 10],
@@ -48,7 +48,7 @@ define(['oms/domain/Order'],
 
         handleUpdate: function() {
             var symbol = $('#symbol-filter').val();
-            if (symbol.length == 0) {
+            if (symbol.length === 0) {
                 this.collection.fetch();
             }
             else {

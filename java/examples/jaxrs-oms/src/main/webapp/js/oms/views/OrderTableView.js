@@ -21,13 +21,14 @@
  */
 define(['oms/views/OrderView'],
        function(OrderView) {
+    'use strict';
 
     return Backbone.View.extend({
 
         // map of orderId to OrderView
         orderViews: {},
 
-        initialize: function(options) {
+        initialize: function(/* options */) {
             this.collection.on('add', this.handleAdd, this);
             this.collection.on('destroy', this.handleDestroy, this);
             this.collection.on('reset', this.handleReset, this);
@@ -38,7 +39,7 @@ define(['oms/views/OrderView'],
         },
 
         handleDestroy: function(order) {
-            this.orderViews[order.id].close();
+            this.orderViews[order.id].remove();
             delete this.orderViews[order.id];
 
         },
@@ -48,14 +49,16 @@ define(['oms/views/OrderView'],
         },
 
         renderAll: function() {
-            // Close existing child views
+            // Remove existing child views
             for (var orderId in this.orderViews) {
-                this.orderViews[orderId].close();
+                if (this.orderViews.hasOwnProperty(orderId)) {
+                    this.orderViews[orderId].remove();
+                }
             }
             this.orderViews = {};
 
             // Create new views for each account
-            this.collection.each(function(order, i) {
+            this.collection.each(function(order) {
                 this.renderOrder(order);
             }, this);
 

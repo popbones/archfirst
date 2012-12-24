@@ -20,23 +20,23 @@
  * @author Naresh Bhatia
  */
 require(['oms/domain/Repository',
-         'oms/framework/BackboneViewExtension',
          'oms/views/OrderTableView',
          'oms/views/TemplateManager',
          'oms/views/ToolbarView'],
-        function(Repository, BackboneViewExtension, OrderTableView, TemplateManager, ToolbarView) {
-
+        function(Repository, OrderTableView, TemplateManager, ToolbarView) {
+    'use strict';
+        
     $(document).ready(function() {
         // Load and compile templates
         TemplateManager.initialize();
 
         new ToolbarView({
-        	el: $("#tool-bar"),
-        	collection: Repository.getOrders()
+            el: $('#tool-bar'),
+            collection: Repository.getOrders()
         });
         new OrderTableView({
-        	el: $("#order-table tbody"),
-        	collection: Repository.getOrders()
+            el: $('#order-table tbody'),
+            collection: Repository.getOrders()
         });
         Repository.fetchOrders();
     });
