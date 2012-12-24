@@ -57,7 +57,7 @@ define(['oms/views/OrderView'],
             }
             this.orderViews = {};
 
-            // Create new views for each account
+            // Create new views for each order
             this.collection.each(function(order) {
                 this.renderOrder(order);
             }, this);
