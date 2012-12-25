@@ -193,10 +193,21 @@ Content-Type: application/json
 </pre>
 
 <h2><a name="delete">Delete (HTTP DELETE)</a></h2>
-<h3>Delete an order</h3>
+<h3>Delete a single order</h3>
 <h4>Request</h4>
 <pre>
 DELETE http://localhost:8080/jaxrs-oms/rest/orders/1 HTTP/1.1
+</pre>
+
+<h4>Response</h4>
+<pre>
+HTTP/1.1 200 OK
+</pre>
+
+<h3>Delete all orders</h3>
+<h4>Request</h4>
+<pre>
+DELETE http://localhost:8080/jaxrs-oms/rest/orders HTTP/1.1
 </pre>
 
 <h4>Response</h4>

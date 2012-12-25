@@ -87,6 +87,12 @@ public class OrderResource {
     }
 
     @DELETE
+    public Response deleteAllOrders() {
+        OrderRepository.deleteAll();
+        return Response.ok().build();
+    }
+
+    @DELETE
     @Path("{id}")
     public Response deleteOrder(@PathParam("id") int id) {
         Order order = OrderRepository.delete(id);

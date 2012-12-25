@@ -63,4 +63,8 @@ public class OrderRepository {
     public static Order delete(int id) {
         return orders.remove(id);
     }
+    
+    public static void deleteAll() {
+        orders.clear();
+    }
 }

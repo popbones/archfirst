@@ -19,7 +19,7 @@
  *
  * @author Naresh Bhatia
  */
-define(['text!oms/templates/order.txt'],
+define(['text!oms/templates/order.html'],
        function(orderTemplate) {
     'use strict';
 
