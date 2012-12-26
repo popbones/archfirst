@@ -9,39 +9,36 @@
 
 <body>
     <div id="tool-bar">
-        <form>
-            <fieldset>
-                <legend>Create Orders</legend>
-                <input id="num-trades" type="text" placeholder="# of orders">
-                <a id="create-orders-button" class="button" href="#">
-                    <img src="img/create-orders-icon.png" alt="Create" />
-                    Create
-                </a>
-            </fieldset>
-            <fieldset>
-                <legend>Update Orders</legend>
-                <input id="symbol-filter" type="text" placeholder="Symbol">
-                <a id="update-button" class="button" href="#">
-                    <img src="img/update-icon.png" alt="Update" />
-                    Update
-                </a>
-            </fieldset>
-        </form>
+        <div class="command-form">
+            <input id="num-trades" type="text" placeholder="# of orders">
+            <button id="create-button">Create Orders</button>
+        </div>
+
+        <div class="command-form">
+            <input id="symbol-filter" type="text" placeholder="Symbol">
+            <button id="update-button">Update Orders</button>
+        </div>
+
+        <div class="command-form">
+            <button id="delete-button">Delete Orders</button>
+        </div>
     </div>
-    <h1>Orders</h1>
-    <table id="order-table" class="oms-table">
-        <thead>
-            <tr>
-                <th class="id">ID</th>
-                <th class="side">ACTION</th>
-                <th class="symbol">SYMBOL</th>
-                <th class="quantity">QUANTITY</th>
-                <th class="actions">ACTIONS</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
+
+    <div id="main">
+        <table id="order-table" class="oms-table">
+            <thead>
+                <tr>
+                    <th class="id">ID</th>
+                    <th class="side">ACTION</th>
+                    <th class="symbol">SYMBOL</th>
+                    <th class="quantity">QUANTITY</th>
+                    <th class="actions">ACTIONS</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
 
     <script src="js/vendor/jquery-1.8.0.js"></script>
     <script src="js/vendor/underscore-1.4.3.js"></script>

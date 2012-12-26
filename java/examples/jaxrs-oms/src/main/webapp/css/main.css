@@ -36,70 +36,20 @@ img {
     vertical-align: middle;
 }
 
-/* -----------------------------------------------------------------------------
- * Buttons
- * -------------------------------------------------------------------------- */
-a.button {
-    background-color: #F47513;
-    color: #FFFFFF;
-    display: block;
-    font-size: 12px;
-    height: 25px;
-    line-height: 25px;
-    text-align: center;
-    text-decoration: none;
-    -webkit-transition: background-color 0.3s;
-    -moz-transition: background-color 0.3s;
-    -o-transition: background-color 0.3s;
-    -ms-transition: background-color 0.3s;
-    transition: background-color 0.3s;
-    width: 105px;
-}
-
-a.button span  {
-    display: block;
-}
-
-a.button:hover {
-    background-color: #F36733;
-}
-
-a.button:active {
-    background-color: #7B2A0C;
-}
-
-.small-button {
-    border: 1px solid #FFFFFF;
-}
-
-.small-button:hover {
-    border: 1px solid #C0C0C0;
-}
-
-.small-button:active {
-    border: 1px solid #808080;
-}
-
-/* -----------------------------------------------------------------------------
- * Toolbar
- * -------------------------------------------------------------------------- */
-#tool-bar {
-    float: right;
-}
-
-#tool-bar fieldset,
-#tool-bar a.button {
-    float: left;
-}
-
-#tool-bar input {
-    float: left;
-    margin-right: 10px;
-}
-
-#tool-bar input {
+input {
     width: 100px;
 }
+
+button {
+    width: 150px;
+}
+
+.command-form {
+    margin-bottom: 10px;
+    text-align: right;
+    width: 260px;
+}
+
 
 /* -----------------------------------------------------------------------------
  * Tables

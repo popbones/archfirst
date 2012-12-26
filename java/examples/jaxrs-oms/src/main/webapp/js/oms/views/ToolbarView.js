@@ -28,11 +28,12 @@ define(function() {
     return Backbone.View.extend({
 
         events: {
-            'click #create-orders-button': 'handleCreateOrders',
-            'click #update-button': 'handleUpdate'
+            'click #create-button': 'handleCreate',
+            'click #update-button': 'handleUpdate',
+            'click #delete-button': 'handleDelete'
         },
 
-        handleCreateOrders: function() {
+        handleCreate: function() {
             var order;
             var numOrders = $('#num-trades').val();
             if (numOrders <= 0) { numOrders = 1; }
@@ -55,6 +56,17 @@ define(function() {
                 this.collection.fetch({data: {symbol: symbol}});
             }
             return false;
+        },
+
+        handleDelete: function() {
+            $.ajax({
+                url: this.collection.url,
+                type: 'DELETE',
+                context: this,
+                success: function() {
+                    this.collection.fetch();
+                }
+            });
         }
     });
 });
