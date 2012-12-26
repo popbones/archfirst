@@ -25,6 +25,6 @@ define(['oms/domain/Order'],
 
     return Backbone.Collection.extend({
         model: Order,
-        url: '/jaxrs-oms/rest/orders'
+        url: '/rest/orders'
     });
 });

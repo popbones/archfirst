@@ -23,6 +23,9 @@ define(['oms/views/TemplateManager'],
        function(TemplateManager) {
     'use strict';
 
+    var KEY_CODE_ENTER  = 13,
+        KEY_CODE_ESCAPE = 27;
+
     return Backbone.View.extend({
 
         tagName: 'tr',
@@ -30,7 +33,8 @@ define(['oms/views/TemplateManager'],
         events: {
             'click .edit-quantity': 'handleEditQuantity',
             'click .save-quantity': 'handleSaveQuantity',
-            'click .delete': 'handleDeleteOrder'
+            'click .delete': 'handleDeleteOrder',
+            'keydown .quantityField': 'handleKeyDownOnQuantity' /* keypress for Escape is not detected on chrome */
         },
 
         initialize: function(/* options */) {
@@ -44,7 +48,7 @@ define(['oms/views/TemplateManager'],
         },
 
         handleSaveQuantity: function() {
-            this.$el.find('.quantity').removeClass('editing');
+            this.stopEditing();
             this.model.save(
                 {quantity: this.$el.find('.quantityField').val()},
                 {wait: true});
@@ -55,8 +59,25 @@ define(['oms/views/TemplateManager'],
             this.model.destroy({wait: true});
         },
 
+        handleKeyDownOnQuantity: function(event) {
+            if (event.keyCode === KEY_CODE_ENTER) {
+                this.handleSaveQuantity();
+                return false;
+            }
+            else if (event.keyCode === KEY_CODE_ESCAPE) {
+                this.stopEditing();
+                return false;
+            }
+
+            // If not one of the keycodes above, let the event bubble up for the input box
+        },
+
         handleChange: function() {
             this.render();
+        },
+
+        stopEditing: function() {
+            this.$el.find('.quantity').removeClass('editing');
         },
 
         render: function() {
