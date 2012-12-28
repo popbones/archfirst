@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Archfirst
+ * Copyright 2011-2013 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,8 @@
  */
 
 (function ($) {
+    "use strict";
+
     $.statePersistToCookie = $.cookie && {
         load: function (key, callback) {
             callback($.cookie(key));

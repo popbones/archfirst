@@ -1,0 +1,90 @@
+<project name="ccp" default="package" basedir=".\..">
+
+    <property name="jsSource" value="${basedir}\lib\js"/>
+    <property name="jsLibSource" value="${basedir}\lib\external"/>
+    <property name="cssSource" value="${basedir}\lib\css"/>
+    <property name="cssLibSource" value="${basedir}\lib\external"/>
+    <property name="outputDir" value="${basedir}\out"/>
+
+    <taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
+        <classpath>
+            <pathelement path="${basedir}\build\jars\YUIAnt.jar"/>
+            <pathelement path="${basedir}\build\jars\yuicompressor-2.4.7.jar"/>
+            <pathelement path="${basedir}\build\jars\js.jar"/>
+        </classpath>
+    </taskdef>
+
+    <target name="package" depends="clean, compile-merge-and-minify-css, merge-and-minify-js, copy-external-lib, update-css-image-urls">
+    </target>
+
+    <target name="clean">
+        <delete dir="${outputDir}"/>
+    </target>
+
+    <target name="merge-and-minify-js">
+        <sequential>
+            <echo message="BEGIN: JS OPTIMIZATION"/>
+            <concat destfile="${outputDir}\js\afGrid.js" fixlastline="true">
+                <union>
+                    <fileset dir="${jsSource}" casesensitive="false" includes="plugins/grid/AF.Grid.js"/>
+                    <fileset dir="${jsSource}" casesensitive="false" includes="plugins/grid/jquery.grid.core.js"/>
+                    <fileset dir="${jsSource}" casesensitive="false" includes="plugins/grid/**/*.js"/>
+                    <fileset dir="${jsSource}" casesensitive="false" includes="plugins/gridExtensions/**/*.js"/>
+                    <fileset dir="${jsSource}" casesensitive="false" includes="modules/**/*.js"/>
+                </union>
+            </concat>
+            <copy file="${outputDir}\js\afGrid.js" tofile="${outputDir}\js\afGrid.min.js"/>
+            <yuicompress linebreak="300"
+                         warn="false"
+                         munge="yes"
+                         preserveallsemicolons="true"
+                         outputfolder="${outputDir}\js">
+                <fileset dir="${outputDir}\js">
+                    <include name="afGrid.min.js"/>
+                </fileset>
+            </yuicompress>
+            <echo message="END: JS OPTIMIZATION"/>
+        </sequential>
+    </target>
+
+    <target name="compile-merge-and-minify-css">
+        <sequential>
+            <echo message="BEGIN: CSS OPTIMIZATION"/>
+            <concat destfile="${outputDir}\css\afGrid.css" fixlastline="true">
+                <union>
+                    <fileset dir="${cssSource}" casesensitive="false" includes="grid/grid.core.css"/>
+                    <fileset dir="${cssSource}" casesensitive="false" includes="grid/**/*.css"/>
+                    <fileset dir="${cssSource}" casesensitive="false" includes="gridExtensions/**/*.css"/>
+                </union>
+            </concat>
+            <copy file="${outputDir}\css\afGrid.css" tofile="${outputDir}\css\afGrid.min.css"/>
+            <yuicompress linebreak="300" warn="false" munge="yes" preserveallsemicolons="true"
+                         outputfolder="${outputDir}\css">
+                <fileset dir="${outputDir}\css" >
+                    <include name="afGrid.min.css" />
+                </fileset>
+            </yuicompress>
+            <echo message="END: CSS OPTIMIZATION"/>
+        </sequential>
+    </target>
+
+    <target name="copy-external-lib">
+        <mkdir dir="${outputDir}\external"/>
+        <copy todir="${outputDir}\external">
+            <fileset dir="${basedir}\lib\external"/>
+        </copy>
+        <copy todir="${outputDir}\images">
+            <fileset dir="${basedir}\lib\images"/>
+        </copy>
+    </target>
+
+    <target name="update-css-image-urls">
+        <replaceregexp file="${outputDir}\css\afGrid.min.css"
+                       match="\.\.\/\.\.\/images\/"
+                       byline="true"
+                       flags="gs"
+                       replace="./../images/"/>
+    </target>
+
+
+</project>

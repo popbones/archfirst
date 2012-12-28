@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Archfirst
+ * Copyright 2011-2013 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@
  */
 
 (function ($) {
+    "use strict";
 
     $.afGrid = $.extend(true, $.afGrid, {
         plugin: {
             sortable: function ($afGrid, options) {
 
                 options = $.extend({
-                    canSort: true,
+                    isGridSortable: true,
                     sortBy: null,
                     onSort: $.noop
                 }, options);
@@ -35,12 +36,17 @@
                     DESC: "desc"
                 };
 
-                function onColumnSort() {
-                    var $cell = $(this),
-						columnId = this.id.split("_")[1],
-						direction;
-                    
-					$afGrid.find(".afGrid-heading .cell.sortable-column").not($cell).removeClass("asc desc").removeData("direction");
+                function onColumnSort(event) {
+                    var $cell = $(event.currentTarget),
+                        columnId = $.afGrid.getElementId(event.currentTarget.id),
+                        direction;
+
+                    $afGrid
+                        .find(".afGrid-heading .sortable-column")
+                        .not($cell)
+                        .removeClass("asc desc")
+                        .removeData("direction");
+
                     direction = $cell.data("direction");
                     if (!direction) {
                         direction = SortDirection.ASC;
@@ -54,8 +60,8 @@
                     options.onSort(columnId, direction);
                 }
 
-                function load() {
-                    if (!options.canSort || $afGrid.hasClass("afGrid-initialized")) {
+                function load(helper) {
+                    if (!options.isGridSortable) {
                         return;
                     }
 
@@ -66,24 +72,39 @@
                     }
 
                     $.each(options.columns, function (index, column) {
-                        if (column.sortable !== false) {
-                            $afGrid.find("#" + options.id + "Col_" + column.id).addClass("sortable-column");
+                        if ($.afGrid.renderer[column.type] && $.afGrid.renderer[column.type].headerSortArrow) {
+                            var headerSortArrow = $.afGrid.renderer[column.type].headerSortArrow;
+                            if (headerSortArrow) {
+                                headerSortArrow($afGrid, column, options.columns, helper.getColumnElementById(column.id, options));
+                            }
+                        } else {
+                            if (column.isSortable !== false) {
+                                helper.getColumnElementById(column.id, options)
+                                    .append("<span class='sort-arrow'></span>")
+                                    .addClass("sortable-column");
+                            }
                         }
                     });
 
-                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "click").delegate(".afGrid-heading .cell.sortable-column", "click", onColumnSort);
-                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseenter").delegate(".afGrid-heading .cell.sortable-column", "mouseenter", function () {
-                        $(this).addClass("sort-hover");
-                    });
-                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseleave").delegate(".afGrid-heading .cell", "mouseleave", function () {
-                        $(this).removeClass("sort-hover");
-                    });
+                    undelegate($afGrid);
+                    $afGrid
+                        .delegate(".afGrid-heading .sortable-column", "click", onColumnSort)
+                        .delegate(".afGrid-heading .sortable-column", "mouseenter", function () {
+                            $(this).addClass("sort-hover");
+                        })
+                        .delegate(".afGrid-heading .sortable-column", "mouseleave", function () {
+                            $(this).removeClass("sort-hover");
+                        });
+                }
+
+                function undelegate($afGrid) {
+                    $afGrid.undelegate(".afGrid-heading .sortable-column", "click");
+                    $afGrid.undelegate(".afGrid-heading .sortable-column", "mouseleave");
+                    $afGrid.undelegate(".afGrid-heading .sortable-column", "mouseenter");
                 }
 
                 function destroy() {
-                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "click");
-                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseleave");
-                    $afGrid.undelegate(".afGrid-heading .cell.sortable-column", "mouseenter");
+                    undelegate($afGrid);
                     options = null;
                 }
 

@@ -1,5 +1,5 @@
 /**
- * Copyright 2011 Archfirst
+ * Copyright 2011-2013 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,57 +19,79 @@
  */
 
 (function ($) {
+    "use strict";
 
     window.AF = window.AF || {};
+
     AF.Grid = function (options) {
 
-	var defaultOptions = {
+        var defaultOptions = {
             id: null,
             dataSource: null,
             statePersist: $.statePersistToCookie,
-            canGroup: true,
+            isGridGroupable: true,
+            isGridSortable: true,
             groupsPlaceHolder: "." + options.id + "-afGrid-group-by",
             columnWidthOverride: null,
-			rowsToLoad: 20,
+            pageSize: null,
             afGridSelector: "#" + options.id,
-            onRowClick: onRowClick,
-			onSort: onSortBy,
+            onRowClick: $.noop,
+            onSort: onSortBy,
             onGroupChange: onGroupBy,
-			onGroupReorder: onGroupReorder,
+            onGroupReorder: onGroupReorder,
             onFilter: onFilterBy,
             onColumnReorder: onColumnReorder,
             onColumnResize: onColumnResize,
-            onScrollToBottom: fetchRowsIncrementally
+            onScrollToBottom: fetchRowsIncrementally,
+            onStateChange: $.noop,
+            onReset: resetAndRefresh,
+            onRefresh: refresh,
+            groupBy: [],
+            clientCache: false
         };
-	
+
         options = $.extend(true, {}, defaultOptions, options);
-        
-        var $afGrid;
-        
-        var store = options.dataSource,
-			loadedRows = 0,
+
+        var $afGrid = $();
+
+        var store = new AF.Grid.DataStore(options.dataSource, options.clientCache),
+            loadedRows = 0,
             totalRows = 0,
-			rowsToLoad = 0,
+            pageSize = 0,
             columnData = null,
-            afGridCurrentStateData = {};
-        
+            afGridCurrentStateData;
+
         function render(data) {
-			columnData = data.columns;
-			totalRows = data.totalRows;
-			loadedRows = data.rows.length;
-			rowsToLoad = data.rowsToLoad || options.rowsToLoad;
-			data.columnWidthOverride = afGridCurrentStateData.columnWidthOverride;
-			renderData(data);
-			afGridCurrentStateData.columnOrder = $.map(data.columns, function (column) {
-				return column.id;
-			});
-			saveStateOfCurrentGrid();
+            columnData = data.columns;
+            totalRows = data.totalRows;
+            loadedRows = data.rows.length;
+            pageSize = data.pageSize || options.pageSize;
+            data.columnWidthOverride = data.columnWidthOverride || afGridCurrentStateData.columnWidthOverride;
+            if (data.groupBy && data.groupBy.length) {
+                data.groupBy = $.map(data.groupBy, function (column) {
+                    return column.id;
+                });
+            }
+            if (data.sortBy && data.sortBy.length) {
+                data.sortBy = {
+                    column: data.sortBy[0].id,
+                    direction: data.sortBy[0].direction
+                };
+            }
+            renderData(data);
+            afGridCurrentStateData.columnOrder = $.map(data.columns, function (column) {
+                return column.id;
+            });
+            afGridCurrentStateData.hiddenColumns = data.hiddenColumns;
+            saveStateOfCurrentGrid();
+            $afGrid.trigger($.afGrid.hideLoading);
         }
 
         function saveStateOfCurrentGrid() {
             if (options.statePersist) {
                 options.statePersist.save("afGridState_" + options.id, JSON.stringify(afGridCurrentStateData));
             }
+            options.onStateChange(afGridCurrentStateData);
         }
 
         function getCurrentState(callback) {
@@ -78,44 +100,44 @@
                     callback(JSON.parse(data));
                 });
             } else {
-				callback({});
-			}
+                callback({});
+            }
         }
 
         function fetchRowsIncrementally() {
             //This can be fetched from the serve
-            if (loadedRows + 1 >= totalRows) {
+            if (loadedRows >= totalRows) {
                 return;
             }
             var requestData = $.extend({}, afGridCurrentStateData, {
-                loadFrom: loadedRows + 1,
-                count: rowsToLoad
+                pageOffset: loadedRows + 1,
+                pageSize: pageSize
             });
-			store.fetchRows(requestData, onReceiveOfNewRows);
+            $afGrid.trigger($.afGrid.showLoading);
+            store.fetchRows(requestData, onReceiveOfNewRows);
         }
 
         function onReceiveOfNewRows(newRows) {
+            afGridCurrentStateData = afGridCurrentStateData || {};
             loadedRows += newRows.rows.length;
             addNewRows(newRows);
+            $afGrid.trigger($.afGrid.hideLoading);
         }
 
         function onReceiveOfData(data) {
+            afGridCurrentStateData = afGridCurrentStateData || {};
+            afGridCurrentStateData.pageSize = options.pageSize = data.pageSize || afGridCurrentStateData.pageSize;
             render(data);
         }
 
         function onFilterBy(filters) {
-            //converting filters json to a format that will be easier to post and retrieve, to and from the server 
-            afGridCurrentStateData.filterColumns = [];
-            afGridCurrentStateData.filterValues = [];
-            $.each(filters, function (i, filter) {
-                afGridCurrentStateData.filterColumns.push(filter.id);
-                afGridCurrentStateData.filterValues.push(filter.value);
-            });
+            afGridCurrentStateData.filterBy = filters;
+            $afGrid.trigger($.afGrid.showLoading);
             store.filter(afGridCurrentStateData, render);
         }
 
         function onGroupBy(columnIds) {
-            var newColumnOrder, requestData;
+            var newColumnOrder;
             if (afGridCurrentStateData.columnOrder) {
                 newColumnOrder = [];
                 $.each(columnIds, function (i, value) {
@@ -128,34 +150,48 @@
                 });
                 afGridCurrentStateData.columnOrder = newColumnOrder;
             }
-            afGridCurrentStateData.groupByColumns = columnIds.length ? columnIds : [];
+            afGridCurrentStateData.groupBy = columnIds.length ? $.map(columnIds, function (columnId) {
+                return {
+                    id: columnId,
+                    direction: "desc"
+                };
+            }) : [];
+            $afGrid.trigger($.afGrid.showLoading);
             store.groupBy(afGridCurrentStateData, render);
         }
 
         function onSortBy(columnId, direction) {
-            afGridCurrentStateData.sortByColumn = columnId;
-            afGridCurrentStateData.sortByDirection = direction;
-			store.sortBy(afGridCurrentStateData, render);
+            afGridCurrentStateData.sortBy = [
+                {
+                    id: columnId,
+                    direction: direction
+                }
+            ];
+            $afGrid.trigger($.afGrid.showLoading);
+            store.sortBy(afGridCurrentStateData, render);
         }
 
         function onColumnReorder(newColumnOrder) {
-            var groupByColumnsLength, newGroupByColumns, n, foundColumn, requestData;
+            var groupByColumnsLength, newGroupByColumns, n, foundColumn;
 
-            if (afGridCurrentStateData.groupByColumns) {
-                groupByColumnsLength = afGridCurrentStateData.groupByColumns.length;
+            if (afGridCurrentStateData.groupBy && afGridCurrentStateData.groupBy.length) {
+                groupByColumnsLength = afGridCurrentStateData.groupBy.length;
                 newGroupByColumns = [];
                 for (n = 0; n < groupByColumnsLength; n += 1) {
                     foundColumn = getColumnById(newColumnOrder[n]);
-                    if (foundColumn.column.groupBy) {
+                    if (foundColumn.column.isGroupable) {
                         newGroupByColumns.push(newColumnOrder[n]);
                     } else {
                         break;
                     }
                 }
-                afGridCurrentStateData.groupByColumns = newGroupByColumns;
+                afGridCurrentStateData.groupBy = $.map(newGroupByColumns, function (column) {
+                    return {id: column, direction: "desc"};
+                });
             }
-			afGridCurrentStateData.columnOrder = newColumnOrder;
-			store.reorderColumn(afGridCurrentStateData, render);
+            afGridCurrentStateData.columnOrder = newColumnOrder;
+            $afGrid.trigger($.afGrid.showLoading);
+            store.reorderColumn(afGridCurrentStateData, render);
         }
 
         function getColumnById(columnId) {
@@ -177,41 +213,95 @@
             onGroupBy(newGroupOrder);
         }
 
-        function onRowClick(rowId, rowData) {
-            alert("Row id received: " + rowId + " Row data: " + JSON.stringify(rowData));
-        }
-
+        //noinspection JSUnusedLocalSymbols
         function onColumnResize(columnId, oldWidth, newWidth) {
             afGridCurrentStateData.columnWidthOverride = afGridCurrentStateData.columnWidthOverride || {};
             afGridCurrentStateData.columnWidthOverride[columnId] = newWidth;
             saveStateOfCurrentGrid();
         }
 
-        function load() {
+        function load(overrideState) {
             getCurrentState(function (currentStateData) {
-                afGridCurrentStateData = currentStateData || {};
-		store.load(afGridCurrentStateData, onReceiveOfData);
+                afGridCurrentStateData = overrideState || currentStateData || {};
+                if (options.pageSize) {
+                    afGridCurrentStateData.pageSize = options.pageSize;
+                }
+                store.load(afGridCurrentStateData, onReceiveOfData);
             });
+        }
+
+        function destroy() {
+            gridViewRefresh();
+            if (store) {
+                store.destroy();
+                store = null;
+            }
+        }
+
+        function refresh() {
+            $afGrid.trigger($.afGrid.destroy);
+            $afGrid.removeClass("afGrid-initialized");
+            if (store) {
+                store.refresh(afGridCurrentStateData, onReceiveOfData);
+            }
+        }
+
+        function gridViewRefresh() {
+            if (options.statePersist) {
+                options.statePersist.save("afGridState_" + options.id, null);
+            }
+            afGridCurrentStateData = {};
+            afGridCurrentStateData.pageSize = options.pageSize;
+            $afGrid.trigger($.afGrid.destroy);
+            $afGrid.removeClass("afGrid-initialized");
+        }
+
+        function resetAndRefresh(overrideState) {
+            options.groupBy = [];
+            options.state = {};
+            options.columnWidthOverride = null;
+            options.sortBy = [];
+            options.filterBy = [];
+            gridViewRefresh();
+            afGridCurrentStateData = overrideState || null;
+            if (store) {
+                store.refresh(afGridCurrentStateData, onReceiveOfData);
+            }
+        }
+
+        function getSource() {
+            return options.dataSource;
+        }
+
+        function getCurrentMetaData() {
+            return store.getCurrentMetaData();
         }
 
         function renderData(data) {
             var afGridData = $.extend(options, data);
             $afGrid = $(options.afGridSelector);
-	    $afGrid.afGrid(afGridData);
-	}
+            $afGrid.afGrid(afGridData);
+        }
 
         function addNewRows(newData) {
             $afGrid.trigger($.afGrid.appendRows, [newData.rows, afGridCurrentStateData.columnWidthOverride]);
         }
 
-	function getDefaultOptions() {
-	    return defaultOptions;    
-	}
-	
-        return {
+        function getDefaultOptions() {
+            return defaultOptions;
+        }
+
+        return $.extend({}, AF.Grid.extension, {
             load: load,
-	    getDefaultOptions: getDefaultOptions
-        };
+            destroy: destroy,
+            refresh: refresh,
+            resetAndRefresh: resetAndRefresh,
+            getDefaultOptions: getDefaultOptions,
+            getCurrentMetaData: getCurrentMetaData,
+            getSource: getSource
+        });
     };
-    
+
+    AF.Grid.extension = {};
+
 }(jQuery));

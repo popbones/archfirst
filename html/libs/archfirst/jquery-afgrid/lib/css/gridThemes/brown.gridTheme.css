@@ -5,7 +5,7 @@
 
 .afGrid-brown .afGrid-heading,
 .afGrid-brown .afGrid-heading .cell  {
-    background-image: url(images/brownTheme/afGrid_header_bg.png);
+    background-image: url(../../images/brownTheme/afGrid_header_bg.png);
 }
 
 .afGrid-brown .afGrid-heading {
@@ -77,12 +77,12 @@
 .afGrid-brown .afGrid-heading .sort-hover,
 .afGrid-brown .afGrid-heading .desc,
 .afGrid-brown .afGrid-heading .asc {
-    background-image: url(images/brownTheme/afGrid_header_bg.png);
+    background-image: url(../../images/brownTheme/afGrid_header_bg.png);
 }
 
 .afGrid-brown .afGrid-heading .desc .sort-arrow,
 .afGrid-brown .afGrid-heading .asc .sort-arrow {
-    background-image: url(images/brownTheme/afGrid_arrows.png);
+    background-image: url(../../images/brownTheme/afGrid_arrows.png);
 }
 
 /*afGridFilter.css*/
@@ -91,13 +91,7 @@
     border-right: 1px solid #fff;
 }
 
-.afGrid-brown .afGrid-filter .cell .input-filter ,
-.afGrid-brown .afGrid-filter .cell .select-filter {
-    border: 1px solid #D3D3D3;
-}
-
-.afGrid-brown .afGrid-filter .cell .DATE-filter,
-.afGrid-brown .afGrid-filter .cell .DATERANGE-filter {
+.afGrid-brown .afGrid-filter .cell .afGrid-filter-control {
     border: 1px solid #D3D3D3;
 }
 
@@ -111,7 +105,7 @@
 .afGrid-group-by-brown .group-helper,
 .afGrid-group-by-brown .group-helper .arrow  {
 	color: #5B2F03;
-	background-image: url(images/brownTheme/afGrid_groups_sprite.png);
+	background-image: url(../../images/brownTheme/afGrid_groups_sprite.png);
 }
 
 .afGrid-group-by-brown .cell a.remove,

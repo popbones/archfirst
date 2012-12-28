@@ -1,0 +1,19 @@
+.afGrid .afGrid-filter .ui-multiselect {
+    width: 100%;
+}
+
+.afGrid .afGrid-filter .ui-multiselect span {
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: inline-block;
+}
+
+.afGrid .afGrid-filter .ui-multiselect span.ui-icon {
+    display: inline-block;
+    width: 16px;
+}
+
+.afGrid .afGrid-filter .ui-multiselect {
+    overflow: hidden;
+}

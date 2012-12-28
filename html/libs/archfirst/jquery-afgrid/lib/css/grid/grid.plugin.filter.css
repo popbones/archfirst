@@ -1,5 +1,6 @@
 .afGrid .afGrid-filter {
     white-space: nowrap;
+    zoom: 1;
 }
 
 .afGrid .afGrid-filter .cell {
@@ -7,22 +8,42 @@
     border-right: 1px solid #fff;
     padding: 8px 10px 8px 10px;
     display: inline-block;
+    zoom: 1;
 }
 
-.afGrid .afGrid-filter .cell .input-filter ,
-.afGrid .afGrid-filter .cell .select-filter {
+.afGrid .afGrid-filter .cell .afGrid-filter-control {
 	width: 100%;
     border: 1px solid #D3D3D3;
 }
 
-.afGrid .afGrid-filter .cell .input-filter {
+.afGrid .afGrid-filter .cell .FREE_TEXT-filter {
     line-height: 1.2em;
 }
 
-.afGrid .afGrid-filter .cell .DATE-filter,
-.afGrid .afGrid-filter .cell .DATERANGE-filter {
-    border: 1px solid #D3D3D3;
-    width: 100%;
+/*ui-multiselect*/
+.ui-multiselect span {
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+.ui-multiselect span.ui-icon {
+    position: static;
+}
+.ui-multiselect-menu {
+    font-size: 70%;
 }
 
+.ui-multiselect-checkboxes label input {
+    top: -1px;
+}
 
+.ui-multiselect-menu .ui-multiselect-all span,
+.ui-multiselect-menu .ui-multiselect-none span {
+    position: relative;
+    top: 3px;
+}
+
+.ui-multiselect-menu .ui-multiselect-all span.ui-icon,
+.ui-multiselect-menu .ui-multiselect-none span.ui-icon {
+    top: 0;
+}

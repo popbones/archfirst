@@ -1,7 +1,6 @@
-.date {
+.afGrid .date {
     color: #0099ff;
     display: inline-block;
-    padding: 4px 0 5px;
 	width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;

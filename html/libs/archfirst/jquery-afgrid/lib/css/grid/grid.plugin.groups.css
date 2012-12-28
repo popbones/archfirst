@@ -22,32 +22,32 @@
 }
 
 .afGrid-group-by  .cell {
-	background: url(images/defaultTheme/afGrid_groups_sprite.png) 0 -96px no-repeat;
+	background: url(../../images/defaultTheme/afGrid_groups_sprite.png) 0 -96px no-repeat;
 	padding-left: 5px;
 	display: inline-block;
     cursor: move;
 }
 
 .afGrid-group-by  .first  {
-	background: url(images/defaultTheme/afGrid_groups_sprite.png) no-repeat;
+	background: url(../../images/defaultTheme/afGrid_groups_sprite.png) no-repeat;
 	padding-left: 5px;
 	display: inline-block;
 }
 
 .afGrid-group-by  .cell .label {
-	background: url(images/defaultTheme/afGrid_groups_sprite.png) 0 -96px repeat-x;
+	background: url(../../images/defaultTheme/afGrid_groups_sprite.png) 0 -96px repeat-x;
 	display: inline-block;
 	line-height: 26px;
 }
 
 .afGrid-group-by  .cell .arrow {
-	background: url(images/defaultTheme/afGrid_groups_sprite.png) right -48px no-repeat;
+	background: url(../../images/defaultTheme/afGrid_groups_sprite.png) right -48px no-repeat;
 	display: inline-block;
 	padding-right: 16px;
 }
 
 .afGrid-group-by  .last .arrow {
-	background: url(images/defaultTheme/afGrid_groups_sprite.png) top right no-repeat;
+	background: url(../../images/defaultTheme/afGrid_groups_sprite.png) top right no-repeat;
 }
 
 .afGrid-group-by .cell a.remove,
@@ -60,11 +60,11 @@
 }
 
 .afGrid-group-by .group-helper {
-    background: url(images/defaultTheme/afGrid_groups_sprite.png) no-repeat;
+    background: url(../../images/defaultTheme/afGrid_groups_sprite.png) no-repeat;
 }
 
 .afGrid-group-by .group-helper .arrow {
-    background: url(images/defaultTheme/afGrid_groups_sprite.png) top right no-repeat;
+    background: url(../../images/defaultTheme/afGrid_groups_sprite.png) top right no-repeat;
 }
 
 .afGrid .group .open-close-indicator {
@@ -72,4 +72,15 @@
     margin-right: 5px;
     font-size: 100%;
     width: 5px;
+    line-height: 1.2em;
+}
+
+.afGrid .afGrid-heading .groupable-indicator {
+    display: inline-block;
+    position: absolute;
+    right: 1px;
+    top: 1px;
+    height: 5px;
+    width: 9px;
+    overflow: hidden;
 }

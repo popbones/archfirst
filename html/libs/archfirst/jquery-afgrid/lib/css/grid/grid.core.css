@@ -23,7 +23,7 @@
 }
 
 .afGrid .afGrid-heading {
-    background: url(images/defaultTheme/afGrid_header_bg.png) repeat-x;
+    background: url(../../images/defaultTheme/afGrid_header_bg.png) repeat-x;
 	border-bottom: 1px solid #ccc;
 }
 
@@ -34,20 +34,33 @@
     display: block;
 }
 
+.afGrid .afGrid-rows .row {
+    border: 0;
+}
+
+.afGrid .afGrid-rows .row .cell {
+    margin-top: 0;
+}
+
+.afGrid .row .cell {
+    line-height: 23px;
+    height: 23px;
+}
+
 .afGrid .afGrid-heading .cell {
     border-left: 1px solid #fff;
     border-right: 1px solid #ccc;
     font-weight: bold;
     padding: 8px 10px 8px 10px;
     color: #555;
-    background: url(images/defaultTheme/afGrid_header_bg.png) repeat-x;
+    background: url(../../images/defaultTheme/afGrid_header_bg.png) repeat-x;
     display: inline-block;
     position: relative;
 	text-overflow: ellipsis;
 	overflow: hidden;
 }
 
-html* .afGrid .afGrid-heading .cell {
+.ie7below .afGrid .afGrid-heading .cell {
 	display: inline;
 }
 
@@ -62,6 +75,7 @@ html* .afGrid .afGrid-heading .cell {
 
 .afGrid .afGrid-rows .row {
     border-bottom: 1px solid #EDEDED;
+    height: 22px;
 }
 
 .afGrid .afGrid-rows .row-first {
@@ -82,9 +96,10 @@ html* .afGrid .afGrid-heading .cell {
     vertical-align: middle;
     margin-top: 4px;
 	text-overflow: ellipsis;
+    line-height: 22px;
 }
 
-html* .afGrid .row .cell {
+.ie7below .afGrid .row .cell {
 	display: inline;
 }
 
@@ -112,7 +127,7 @@ html* .afGrid .row .cell {
 	display: inline-block;
 }
 
-html* .afGrid .group {
+.ie7below .afGrid .group {
 	display: inline;
 }
 
@@ -121,7 +136,7 @@ html* .afGrid .group {
 	padding: 0 10px 0 10px;
 }
 
-html* .afGrid .group .cell {
+.ie7below .afGrid .group .cell {
 	display: inline;
 }
 
@@ -129,17 +144,59 @@ html* .afGrid .group .cell {
     margin: 0;
     font-weight: bold;
     cursor: pointer;
-	padding: 5px 10px;
+    padding: 5px 10px;
     border-bottom: 1px solid #f8f8f8;
+}
+
+.afGrid .group-closed .row {
+    height: 0;
+    overflow: hidden;
+    border-bottom: 0;
+    visibility: hidden;
+}
+
+.afGrid .group-closed .group-data {
+    overflow: hidden;
+    border-bottom: 0;
+    height: 0;
+    animation: mymove 0.4s;
+    -moz-animation: mymove 0.4s;
+    -webkit-animation: mymove 0.4s;
+    -o-animation: mymove 0.4s;
+}
+
+@keyframes mymove {
+    from {height:100px;}
+    to {height:0;}
+}
+
+@-moz-keyframes mymove {
+    from {height:100px;}
+    to {height:0;}
+}
+
+@-webkit-keyframes mymove {
+    from {height:100px;}
+    to {height:0;}
+}
+
+@-o-keyframes mymove {
+    from {height:100px;}
+    to {height:0;}
 }
 
 .afGrid .group h3, .afGrid .row {
     height: 24px;
+    transition: height 0.4s;
+    -moz-transition: height 0.4s;
+    -webkit-transition: height 0.4s;
+    -o-transition: height 0.4s;
 }
 
 .column-helper {
     border: 0;
     font-family: Arial,serif;
+    z-index: 9999;
 }
 
 .column-helper .afGrid-heading {
@@ -150,9 +207,22 @@ html* .afGrid .group .cell {
     background-color: #eee;
     text-align: right;
     padding: 2px 5px 2px 0;
-
 }
 
-.NUMBER {
+.afGrid .loading-message {
+    display: none;
+    font-size: 85%;
+    background-color: #cc0000;
+    color: #fff;
+    position: absolute;
+    left: 50%;
+    width: 100px;
+    margin-left: -50px;
+    bottom: 0;
+    padding: 2px 4px;
+    text-align: center;
+}
+
+.NUMERIC {
     text-align: right;
 }

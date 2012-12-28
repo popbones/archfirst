@@ -1,4 +1,7 @@
-.afGrid .afGrid-heading .reorder {
-	border-right-color: #8FC65B;
-	border-right-width: 5px;
+.afGrid .afGrid-heading .reorder,
+.afGrid .afGrid-heading .reorder-right {
+    border-right: 5px solid #8FC65B;
+}
+.afGrid .afGrid-heading .reorder-left {
+    border-left: 5px solid #8FC65B;
 }
