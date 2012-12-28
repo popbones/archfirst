@@ -186,7 +186,7 @@
         function getFilters() {
             return [
                 {
-                    id: "colAn",
+                    id: "colAN",
                     type: "FREE_TEXT"
                 },
                 {
