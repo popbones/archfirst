@@ -1,4 +1,3 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
@@ -19,23 +18,16 @@
     <script type="text/javascript" src="js/jquery.grid.renderer.PERCENTAGE.js"></script>
     <script type="text/javascript" src="../lib/js/plugins/source/AF.Grid.FakeLocalSource.js"></script>
     <script type="text/javascript" src="js/AF.Grid.fakeDataMGE.js"></script>
-
-    <script type="text/javascript">
-	$(function() {
-	    var grid1 = new AF.Grid({
-		    dataSource: new AF.Grid.FakeLocalSource(AF.Grid.fakeDataMGE),
-		    id:"grid1"
-        });
-	    grid1.load();
-        $(window).bind("resize", function() {
-            $("#grid1").trigger($.afGrid.adjustRowWidth);
-        });
-	});
-    </script>
+    <script type="text/javascript" src="js/main.js"></script>
 </head>
 <body>
+    <header>
+        <h1>Archfirst | AFGrid</h1>
+    </header>
     <div id="mainContainer">
-        <div id="grid1" class="afGrid-sapient"></div>
+        <div id="lastSelectedPosition"></div>
+        <div id="mgeGrid" class="afGrid-sapient"></div>
+        <div id="layoutInfo">, Window Size: <span class="window-size">({windowWidth}, {windowHeight})</span></div>
     </div>
 </body>
 </html>

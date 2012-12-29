@@ -2,7 +2,19 @@
     text-align: right;
 }
 
+.gain,
+.gainPercent {
+    color: #F79F20;
+}
+
+.gain .negative,
+.gainPercent .negative {
+    color: #EF4623;
+}
+
 @media screen and (max-width: 499px) {
+    #layoutInfo:before { content: "Narrow Layout (0-499)"; }
+
     #mainContainer .afGrid .security,
     #mainContainer .afGrid .totalCost,
     #mainContainer .afGrid .gain {
@@ -15,8 +27,14 @@
 }
 
 @media screen and (min-width: 500px) and (max-width: 899px) {
-    #mainContainer .afGrid .pricePaid,
-    #mainContainer .afGrid .gainPercent {
+    #layoutInfo:before { content: "Medium Layout (500-899)"; }
+    #mainContainer .afGrid .security,
+    #mainContainer .afGrid .totalCost,
+    #mainContainer .afGrid .gain {
         display: none;
     }
+}
+
+@media screen and (min-width: 900px) {
+    #layoutInfo:before { content: "Wide Layout (900+)"; }
 }

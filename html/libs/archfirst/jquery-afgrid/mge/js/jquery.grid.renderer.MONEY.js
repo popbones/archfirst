@@ -3,9 +3,11 @@
 
     $.afGrid.renderer.MONEY = {
         cell: function (amount) {
-            return (amount >= 0) ?
-                '$ ' + $.format.number(amount, '#,##0.00') :
-                '($ ' + $.format.number(-amount, '#,##0.00') + ')';
+            if (amount >= 0) {
+                return "<span>$ " + $.format.number(amount, "#,##0.00") + "</span>";
+            } else {
+                return "<span class='negative'>($ " + $.format.number(-amount, "#,##0.00") + ")</span>";
+            }
         }
     };
 
