@@ -1,3 +1,25 @@
+#mgeGrid {
+    bottom: 20px;
+    top: 75px;
+    right: 10px;
+    left: 10px;
+    position: absolute;
+}
+
+#mgeGrid .afgrid-rows {
+    height: auto;
+    position: absolute;
+    top: 28px;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+
+#layoutInfo {
+    position: absolute;
+    bottom: 2px;
+}
+
 .MONEY, .PERCENTAGE {
     text-align: right;
 }

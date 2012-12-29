@@ -470,7 +470,7 @@
             if ((i + (isStartEven ? 1 : 0)) % 2 === 0) {
                 $row.addClass("even");
             }
-            if (i === 0) {
+            if (i === 0 && rowWidth === undefined) {
                 $row.addClass("row-first");
             }
             if (rowWidth) {

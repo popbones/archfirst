@@ -291,6 +291,7 @@
             isGridFilterable: false,
             isGridGroupable: false,
             isGridSortable: false,
+            showTotalRows: false,
 //            isGridColumnResizable: false,
             showToolbar: false,
             columns: getColumns(),
