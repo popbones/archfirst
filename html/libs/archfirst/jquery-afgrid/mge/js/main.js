@@ -5,7 +5,8 @@ $(function () {
     var grid1 = new AF.Grid({
         dataSource: new AF.Grid.FakeLocalSource(AF.Grid.fakeDataMGE),
         id: "mgeGrid",
-        onRowClick: onRowClick
+        onRowClick: onRowClick,
+        pageSize: 100
     });
     grid1.load();
     $(window).bind("resize", function () {
