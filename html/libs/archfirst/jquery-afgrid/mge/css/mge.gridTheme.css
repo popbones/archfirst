@@ -1,0 +1,148 @@
+/*afGrid.css*/
+.afGrid-mge {
+    border-color: #C5C5C4;
+}
+
+.afGrid-mge .afGrid-heading,
+.afGrid-mge .afGrid-heading .cell  {
+    background-image: none;
+}
+
+.afGrid-mge .afGrid-heading {
+    border-bottom-color: #ccc;
+    background: #949494;
+}
+
+.afGrid-mge .afGrid-heading .cell {
+    border-left-color: #949494;
+    border-right-color: #949494;
+    color: #fff;
+    background: #949494;
+    vertical-align: top;
+}
+
+.afGrid-mge .afGrid-rows .row {
+    border-bottom-color: #CCC;
+    border-bottom-width: 2px;
+    cursor: pointer;
+}
+
+.afGrid-mge .afGrid-rows .row-first {
+    border-top-color: #CCC;
+}
+
+.afGrid-mge .afGrid-rows .cell.spacer {
+    border-color: transparent;
+    background-color: transparent;
+}
+
+.afGrid-mge .afGrid-rows  .cell {
+    border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
+    margin-top: 0;
+    background-color: #fff;
+    height: 100%;
+}
+
+.afGrid-mge .afGrid-rows .even,
+.afGrid-mge .afGrid-rows .even .cell {
+    background-color: #FFF;
+}
+
+.afGrid-mge .afGrid-rows .even .cell {
+    border-color: #FFF;
+    border-right: 1px solid #fff;
+    border-left: 1px solid #fff;
+    border-top: 1px solid #fff;
+    background-color: #fff;
+}
+
+.afGrid-mge .afGrid-rows .row-hover {
+    background-color: #EBEBEB;
+}
+
+.afGrid-mge .afGrid-rows .row-hover .cell {
+    background-color: #EBEBEB;
+    border-right-color: #EBEBEB;
+	border-left-color: #EBEBEB;
+}
+
+.afGrid-mge .group .group-header {
+    border-bottom: 1px solid #f8f8f8;
+}
+
+.afGrid-mge .total-row-count {
+    background-color: #E8E8E8;
+}
+
+/*afGrid.Date.css*/
+.afGrid-mge .date {
+    color: #0099ff;
+}
+
+/*afGridColumnReorder.css*/
+.afGrid-mge .afGrid-heading .reorder {
+	border-right-color: #C5C5C4	;
+}
+
+/*afGridColumnResize.css*/
+.afGrid-mge .resize-guide {
+	background-color: #ccc;
+}
+
+/*afGridColumnSort.css*/
+.afGrid-mge .afGrid-heading .sort-hover,
+.afGrid-mge .afGrid-heading .desc,
+.afGrid-mge .afGrid-heading .asc {
+    background-image: url(../../images/sapientTheme/afGrid_header_bg.png);
+}
+
+.afGrid-mge .afGrid-heading .desc .sort-arrow,
+.afGrid-mge .afGrid-heading .asc .sort-arrow {
+    background-image: url(../../images/sapientTheme/afGrid_arrows.png);
+}
+
+/*afGridFilter.css*/
+.afGrid-mge .afGrid-filter .cell {
+	border-left: 1px solid #fff;
+    border-right: 1px solid #fff;
+}
+
+.afGrid-mge .afGrid-filter .cell .afGrid-filter-control {
+    border: 1px solid #D3D3D3;
+}
+
+
+/*afGridGroups.css*/
+.afGrid-group-by-sapient  .cell,
+.afGrid-group-by-sapient  .first,
+.afGrid-group-by-sapient  .cell .label,
+.afGrid-group-by-sapient  .cell .arrow,
+.afGrid-group-by-sapient  .last .arrow,
+.afGrid-group-by-sapient .group-helper,
+.afGrid-group-by-sapient .group-helper .arrow  {
+	color: #FFF;
+	background-image: url(../../images/sapientTheme/afGrid_groups_sprite.png);
+}
+
+.afGrid-group-by-sapient .cell a.remove,
+.afGrid-group-by-sapient .cell a.remove:link,
+.afGrid-group-by-sapient .cell a.remove:visited,
+.afGrid-group-by-sapient .cell a.remove:hover,
+.afGrid-group-by-sapient .cell a.remove:active {
+	color: #EAEAEA;
+}
+
+.afGrid-group-by-sapient.ui-state-highlight {
+	background-color: #D7D6D6;
+	background-image: none;
+}
+
+.afGrid-mge .groupable-indicator {
+    background: #AAA;
+}
+
+.afGrid-mge .sortable-column .sort-arrow {
+    background: url(../../images/sapientTheme/afGrid_sortable_icon.gif) right 5px no-repeat;
+}
