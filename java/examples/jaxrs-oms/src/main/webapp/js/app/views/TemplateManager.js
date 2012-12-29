@@ -15,20 +15,25 @@
  */
 
 /**
- * oms/domain/Order
- *
- * Attributes:
- *   id: int
- *   side: String
- *   symbol: String
- *   quantity: int
- *   self: String
+ * bullsfirst/views/TemplateManager
  *
  * @author Naresh Bhatia
  */
-define(function() {
-     'use strict';
+define(['text!app/templates/order.html'],
+       function(orderTemplate) {
+    'use strict';
 
-    return Backbone.Model.extend({
-    });
+    var _templates;
+
+    return {
+        initialize: function() {
+            _templates = {
+                'order': Handlebars.compile(orderTemplate)
+            };
+        },
+
+        getTemplate: function(name) {
+            return _templates[name];
+        }
+    };
 });

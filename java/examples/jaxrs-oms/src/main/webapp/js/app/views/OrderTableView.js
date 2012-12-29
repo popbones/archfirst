@@ -15,11 +15,11 @@
  */
 
 /**
- * oms/views/OrderTableView
+ * app/views/OrderTableView
  *
  * @author Naresh Bhatia
  */
-define(['oms/views/OrderView'],
+define(['app/views/OrderView'],
        function(OrderView) {
     'use strict';
 

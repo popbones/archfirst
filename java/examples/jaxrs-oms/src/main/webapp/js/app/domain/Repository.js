@@ -15,13 +15,13 @@
  */
 
 /**
- * oms/domain/Repository
+ * app/domain/Repository
  *
  * This is a singleton object which stores all models used by the application.
  *
  * @author Naresh Bhatia
  */
-define(['oms/domain/Orders'],
+define(['app/domain/Orders'],
        function(Orders) {
     'use strict';
 

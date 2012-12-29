@@ -15,7 +15,7 @@
  */
 
 /**
- * oms/views/ToolbarView
+ * app/views/ToolbarView
  *
  * @author Naresh Bhatia
  */

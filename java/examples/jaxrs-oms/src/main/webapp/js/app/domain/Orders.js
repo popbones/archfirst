@@ -15,25 +15,16 @@
  */
 
 /**
- * bullsfirst/views/TemplateManager
+ * app/domain/Orders
  *
  * @author Naresh Bhatia
  */
-define(['text!oms/templates/order.html'],
-       function(orderTemplate) {
+define(['app/domain/Order'],
+       function(Order) {
     'use strict';
 
-    var _templates;
-
-    return {
-        initialize: function() {
-            _templates = {
-                'order': Handlebars.compile(orderTemplate)
-            };
-        },
-
-        getTemplate: function(name) {
-            return _templates[name];
-        }
-    };
+    return Backbone.Collection.extend({
+        model: Order,
+        url: '/rest/orders'
+    });
 });

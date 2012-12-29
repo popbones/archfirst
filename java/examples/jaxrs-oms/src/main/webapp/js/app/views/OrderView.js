@@ -15,11 +15,11 @@
  */
 
 /**
- * oms/views/OrderView
+ * app/views/OrderView
  *
  * @author Naresh Bhatia
  */
-define(['oms/views/TemplateManager'],
+define(['app/views/TemplateManager'],
        function(TemplateManager) {
     'use strict';
 

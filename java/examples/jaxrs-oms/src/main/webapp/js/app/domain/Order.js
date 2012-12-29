@@ -15,16 +15,20 @@
  */
 
 /**
- * oms/domain/Orders
+ * app/domain/Order
+ *
+ * Attributes:
+ *   id: int
+ *   side: String
+ *   symbol: String
+ *   quantity: int
+ *   self: String
  *
  * @author Naresh Bhatia
  */
-define(['oms/domain/Order'],
-       function(Order) {
-    'use strict';
+define(function() {
+     'use strict';
 
-    return Backbone.Collection.extend({
-        model: Order,
-        url: '/rest/orders'
+    return Backbone.Model.extend({
     });
 });

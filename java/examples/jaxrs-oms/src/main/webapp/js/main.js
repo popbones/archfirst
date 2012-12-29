@@ -19,10 +19,10 @@
  *
  * @author Naresh Bhatia
  */
-require(['oms/domain/Repository',
-         'oms/views/OrderTableView',
-         'oms/views/TemplateManager',
-         'oms/views/ToolbarView'],
+require(['app/domain/Repository',
+         'app/views/OrderTableView',
+         'app/views/TemplateManager',
+         'app/views/ToolbarView'],
         function(Repository, OrderTableView, TemplateManager, ToolbarView) {
     'use strict';
         
