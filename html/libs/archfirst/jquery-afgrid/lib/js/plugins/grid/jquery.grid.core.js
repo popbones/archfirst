@@ -53,7 +53,7 @@
         HEADING_ROW_TEMPLATE = "<div class='afGrid-heading'></div>",
         HEADING_ROW_COLUMN_HELPER_TEMPLATE = "<div class='{cssClass} column-helper'></div>",
         HEADING_ROW_CONTAINER_TEMPLATE = "<div class='afGrid-head'></div>",
-        HEADING_ROW_CELL_TEMPLATE = "<div class='cell {cssClass}' id='{id}'><span class='label'>{value}</span></div>",
+        HEADING_ROW_CELL_TEMPLATE = "<div class='cell {columnId} {cssClass}' id='{id}'><span class='label'>{value}</span></div>",
         GROUP_HEADING_TEMPLATE = "<div class='group level{level}'><div class='group-header'><span class='open-close-indicator'>-</span>{value}</div></div>",
         ROW_TEMPLATE = "<div class='row level{level}' id='{id}'></div>",
         CELL_TEMPLATE = "<div class='cell {columnId} {cssClass} {spacerClass}'>{value}</div>",
@@ -354,7 +354,8 @@
                 return {
                     value: column.label,
                     id: options.id + "Col_" + column.id,
-                    cssClass: column.type || column.renderer || ""
+                    cssClass: column.type || column.renderer || "",
+                    columnId: column.id
                 };
             }
         }, options.id);

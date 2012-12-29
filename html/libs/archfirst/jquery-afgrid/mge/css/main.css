@@ -1,0 +1,22 @@
+.MONEY, .PERCENTAGE {
+    text-align: right;
+}
+
+@media screen and (max-width: 499px) {
+    #mainContainer .afGrid .security,
+    #mainContainer .afGrid .totalCost,
+    #mainContainer .afGrid .gain {
+        display: none;
+    }
+    #mainContainer .afGrid .pricePaid,
+    #mainContainer .afGrid .gainPercent {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 500px) and (max-width: 899px) {
+    #mainContainer .afGrid .pricePaid,
+    #mainContainer .afGrid .gainPercent {
+        display: none;
+    }
+}
