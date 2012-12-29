@@ -4,13 +4,18 @@ $(function () {
     var windowSizeTemplate;
     var grid1 = new AF.Grid({
         dataSource: new AF.Grid.FakeLocalSource(AF.Grid.fakeDataMGE),
-        id: "mgeGrid"
+        id: "mgeGrid",
+        onRowClick: onRowClick
     });
     grid1.load();
     $(window).bind("resize", function () {
         $("#mgeGrid").trigger($.afGrid.adjustRowWidth);
     });
-    $(window).bind("resize", windowSize);
+
+    function onRowClick(item) {
+        $("#lastSelectedPosition").html(item.security);
+    }
+
     function windowSize() {
         var win = $(window);
         var $windowSize = $('.window-size');
@@ -20,5 +25,6 @@ $(function () {
             windowHeight: win.height()
         }));
     }
+    $(window).bind("resize", windowSize);
     windowSize();
 });
