@@ -7,7 +7,7 @@ module.exports = function(grunt) {
     // ### jshint
     // JSHint options for the lint task
     jshint: {
-      all: ["src/main/webapp/js/main.js", "src/main/webapp/js/oms/**/*.js"],
+      all: ["src/main/webapp/js/main.js", "src/main/webapp/js/app/**/*.js", "src/main/webapp/js/framework/**/*.js"],
       options: {
         // Enforcing Options
         bitwise       : true,
@@ -67,7 +67,7 @@ module.exports = function(grunt) {
         couch         : false,
         devel         : false,
         dojo          : false,
-        jquery        : true,
+        jquery        : false,
         mootools      : false,
         node          : false,
         nonstandard   : false,
@@ -84,14 +84,8 @@ module.exports = function(grunt) {
         white         : false,
 
         globals: {
-          _: true,
-          define: true,
-          require: true,
-          base64_encode: true,
-          Backbone: true,
-          Handlebars: true,
-          Highcharts: true,
-          Modernizr: true
+            define: true,
+            require: true
         }
       }
     }

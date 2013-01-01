@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Copyright 2012 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,16 +15,30 @@
  */
 
 /**
- * app/domain/Orders
+ * framework/BaseStaticView
+ *
+ * A fixed view that uses a static template that needs no context or compilation
  *
  * @author Naresh Bhatia
  */
-define(['app/domain/Order'],
-       function(Order) {
-    'use strict';
+define(
+    [
+        'framework/BaseView'
+    ],
+    function(BaseView) {
+        'use strict';
 
-    return Backbone.Collection.extend({
-        model: Order,
-        url: '/rest/orders'
-    });
-});
+        return BaseView.extend({
+            // This method expects the derived class to supply a template.source
+            render: function() {
+                // Remove existing children
+                this.removeAllChildren();
+
+                this.$el.html(this.template.source);
+
+                this.postRender();
+                return this;
+            }
+        });
+    }
+);

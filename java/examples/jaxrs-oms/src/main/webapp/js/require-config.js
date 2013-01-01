@@ -13,12 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-/**
- * Application Entry Point
- *
- * @author Naresh Bhatia
- */
 require.config({
     // Initialize the application with the main application file
     deps: ['main'],
@@ -52,17 +46,3 @@ require.config({
         }
     }
 });
-
-require(
-    [
-        'app/domain/Repository',
-        'app/pages/orders/OrdersPage'
-    ],
-    function(Repository, OrdersPage) {
-        'use strict';
-
-        var ordersPage = new OrdersPage();
-        ordersPage.render().place('body');
-        Repository.fetchOrders();
-    }
-);

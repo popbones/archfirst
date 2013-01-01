@@ -15,7 +15,7 @@
  */
 
 /**
- * oms.css
+ * main.css
  * The styles in this file represent all basic styles for the OMS application.
  */
 
@@ -24,12 +24,17 @@
  * -------------------------------------------------------------------------- */
 body {
     font: normal normal 16px/24px Arial;
-    padding: 16px;
+}
+
+header {
+    background-color: #404040;
+    color: #ffffff;
+    height: 36px;
 }
 
 h1 {
-    font: normal normal 24px/24px Arial;
-    margin: 0 0 10px 0;
+    font: normal normal 20px/36px Arial;
+    margin: 0 0 0 10px;
 }
 
 img {
@@ -44,75 +49,79 @@ button {
     width: 150px;
 }
 
+.content {
+    margin: 10px;
+}
+
 .command-form {
     margin-bottom: 10px;
     text-align: right;
-    width: 260px;
+    width: 262px;
 }
 
 
 /* -----------------------------------------------------------------------------
  * Tables
  * -------------------------------------------------------------------------- */
-#order-table th, .oms-table td {
+.order-table th, .oms-table td {
     padding: 0;
 }
 
-#order-table thead th {
+.order-table thead th {
     background-color: #8C8C8C;
     color: #F8E5C9;
     font: bold normal 14px/25px Arial;
     height: 22px;
 }
 
-#order-table tbody td {
+.order-table tbody td {
     border-bottom: 1px solid #E5E5E5;
     font: normal normal 16px/25px Arial;
     height: 25px;
 }
 
-#order-table .id {
+.order-table .id {
     text-align: right;
     width: 30px;
 }
 
-#order-table .side {
+.order-table .side {
     text-align: center;
     width: 80px;
 }
 
-#order-table .symbol {
+.order-table .symbol {
     text-align: center;
     width: 80px;
 }
 
-#order-table .quantity {
+.order-table .quantity {
     text-align: right;
     width: 120px;
 }
 
-#order-table input.quantityField {
+.order-table input.quantityField {
     width: 80px;
     text-align: right;
 }
 
-#order-table .actions {
+.order-table .actions {
     text-align: center;
     width: 100px;
 }
 
 /* Enable viewing of quantity in view mode */
-#order-table tbody td.quantity .view {
+.order-table tbody td.quantity .view {
     display: block;
 }
-#order-table tbody td.quantity .edit {
+.order-table tbody td.quantity .edit {
     display: none;
 }
 
 /* Enable editing of quantity in edit mode */
-#order-table tbody td.quantity.editing .view {
+.order-table tbody td.quantity.editing .view {
     display: none;
 }
-#order-table tbody td.quantity.editing .edit {
+.order-table tbody td.quantity.editing .edit {
     display: block;
 }

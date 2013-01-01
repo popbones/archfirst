@@ -21,18 +21,22 @@
  *
  * @author Naresh Bhatia
  */
-define(['app/domain/Orders'],
-       function(Orders) {
-    'use strict';
+define(
+    [
+        'app/domain/OrderCollection'
+    ],
+    function(OrderCollection) {
+        'use strict';
 
-    // Module level variables act as singletons
-    var _orders = new Orders();
+        // Module level variables act as singletons
+        var _orderCollection = new OrderCollection();
 
-    return {
-        getOrders: function() { return _orders; },
+        return {
+            getOrderCollection: function() { return _orderCollection; },
 
-        fetchOrders: function() {
-            _orders.fetch();
-        }
-    };
-});
+            fetchOrders: function() {
+                _orderCollection.fetch();
+            }
+        };
+    }
+);
