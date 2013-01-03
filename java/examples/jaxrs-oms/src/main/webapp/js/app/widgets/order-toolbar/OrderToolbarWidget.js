@@ -42,14 +42,14 @@ define(
             },
 
             events: {
-                'click [data-button="create"]': 'handleCreate',
-                'click [data-button="update"]': 'handleUpdate',
-                'click [data-button="delete"]': 'handleDelete'
+                'click .js-create': 'handleCreate',
+                'click .js-update': 'handleUpdate',
+                'click .js-delete': 'handleDelete'
             },
 
             handleCreate: function() {
                 var order;
-                var numOrders = $('[data-input="num-trades"]').val();
+                var numOrders = $('.js-num-trades').val();
                 if (numOrders <= 0) { numOrders = 1; }
                 for (var i=0; i<numOrders; i++) {
                     order = this.collection.create({
@@ -62,7 +62,7 @@ define(
             },
 
             handleUpdate: function() {
-                var symbol = $('[data-input="symbol-filter"]').val();
+                var symbol = $('.js-symbol-filter').val();
                 if (symbol.length === 0) {
                     this.collection.fetch();
                 }
