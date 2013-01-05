@@ -60,17 +60,7 @@
         ROWS_CONTAINER_TEMPLATE = "<div class='afGrid-rows'><div class='afGrid-rows-content'></div></div>",
         LOADING_MESSAGE = "<div class='loading-message'>Loading...</div>";
 
-//    var TOTAL_ROW_LABEL_TEMPLATE = "<div class='total-row-count'>Showing {loadedRows} of {totalRows}</div>",
-//        GROUP_CONTAINER_WRAPPER_TEMPLATE = "<table class='group-data'></table>",
-//        HEADING_ROW_TEMPLATE = "<tr class='afGrid-heading'></tr>",
-//        HEADING_ROW_COLUMN_HELPER_TEMPLATE = "<div class='{cssClass} column-helper'></div>",
-//        HEADING_ROW_CONTAINER_TEMPLATE = "<thead class='afGrid-head'></thead>",
-//        HEADING_ROW_CELL_TEMPLATE = "<td class='cell {cssClass}' id='{id}'>{value}<span class='sort-arrow'></span></td>",
-//        GROUP_HEADING_TEMPLATE = "<tr class='group level{level}'><tboby><tr class='group-header'><table><tr><td><span class='open-close-indicator'>-</span>{value}</td></tr></table></tbody></tr>",
-//        ROW_TEMPLATE = "<tr class='row level{level}' id='{id}'></tr>",
-//        CELL_TEMPLATE = "<td class='cell {columnId} {cssClass}'>{value}</td>",
-//        ROWS_CONTAINER_TEMPLATE = "<table class='afGrid-rows'><tbody class='afGrid-rows-content'></tbody></table>",
-//        LOADING_MESSAGE = "<div class='loading-message'>Loading...</div>";
+    //var TOTAL_ROW_LABEL_TEMPLATE = "<div class='total-row-count'>Showing {loadedRows} of {totalRows}</div>",GROUP_CONTAINER_WRAPPER_TEMPLATE = "<table class='group-data'></table>",HEADING_ROW_TEMPLATE = "<tr class='afGrid-heading'></tr>",HEADING_ROW_COLUMN_HELPER_TEMPLATE = "<div class='{cssClass} column-helper'></div>",HEADING_ROW_CONTAINER_TEMPLATE = "<thead class='afGrid-head'></thead>",HEADING_ROW_CELL_TEMPLATE = "<td class='cell {cssClass}' id='{id}'>{value}<span class='sort-arrow'></span></td>",GROUP_HEADING_TEMPLATE = "<tr class='group level{level}'><tboby><tr class='group-header'><table><tr><td><span class='open-close-indicator'>-</span>{value}</td></tr></table></tbody></tr>",ROW_TEMPLATE = "<tr class='row level{level}' id='{id}'></tr>",CELL_TEMPLATE = "<td class='cell {columnId} {cssClass}'>{value}</td>",ROWS_CONTAINER_TEMPLATE = "<table class='afGrid-rows'><tbody class='afGrid-rows-content'></tbody></table>",LOADING_MESSAGE = "<div class='loading-message'>Loading...</div>";
 
     $.fn.afGrid = function (options) {
 
@@ -91,9 +81,6 @@
         var plugins = {},
             addedRows = [];
 
-        updateColumnHashMap(options);
-        updateColumnWidth(options);
-
         if (!(options.id && /^[a-zA-Z0-9]*$/.test(options.id))) {
             throw "You need to provide id for the afGrid and ensure that the id don't have any special characters in it.";
         }
@@ -104,20 +91,15 @@
                 $afGrid.trigger($.afGrid.destroy);
                 $afGrid = $(this);
             }
-//            if (this.tagName !== "TABLE") {
-//                var prop = {
-//                    id:$afGrid.attr("id"),
-//                    class:$afGrid.attr("class"),
-//                    cellSpacing:0,
-//                    cellPadding:0
-//                };
-//                var $table = $("<table></table>").attr(prop);
-//                $afGrid.replaceWith($table);
-//                $afGrid = $table;
-//            }
-            var cachedafGridData = {},
+
+            updateColumnHashMap(options);
+            updateColumnWidth(options);
+
+            //if (this.tagName !== "TABLE") {var prop = {id:$afGrid.attr("id"),class:$afGrid.attr("class"),cellSpacing:0,cellPadding:0};var $table = $("<table></table>").attr(prop);$afGrid.replaceWith($table);$afGrid = $table;}
+
+            var cachedGridData = {},
                 $head,
-                rowsAndGroup = renderRowsAndGroups(options, cachedafGridData),
+                rowsAndGroup = renderRowsAndGroups(options, cachedGridData),
                 $rows = rowsAndGroup.$rowsMainContainer,
                 countOfLoadedRows = options.rows.length,
                 rowWidth;
@@ -180,7 +162,7 @@
                 $afGrid.data("afGridColumnDraggable", false);
                 options = null;
                 $afGrid = null;
-                cachedafGridData = null;
+                cachedGridData = null;
             }
 
             $afGrid.unbind($.afGrid.destroy).bind($.afGrid.destroy, destroy);
@@ -196,7 +178,7 @@
                     currentGroupValues = rowsAndGroup.lastGroupInformation.currentGroupValues,
                     $rowsMainContainer = rowsAndGroup.$rowsMainContainer,
                     isStartRowEven = $rowsMainContainer.find(".row:last").hasClass("even");
-                rowsAndGroup.lastGroupInformation = addRows(options.id, newRows, options.columns, options.groupBy, $rowsMainContainer.find(".afGrid-rows-content"), $groupContainers, currentGroupValues, isStartRowEven, cachedafGridData, rowWidth);
+                rowsAndGroup.lastGroupInformation = addRows(options.id, newRows, options.columns, options.groupBy, $rowsMainContainer.find(".afGrid-rows-content"), $groupContainers, currentGroupValues, isStartRowEven, cachedGridData, rowWidth);
                 if ($afGrid.find(".afGrid-rows")[0].scrollHeight <= $afGrid.find(".afGrid-rows").height()) {
                     options.onScrollToBottom();
                 }
@@ -205,19 +187,11 @@
             $afGrid.unbind($.afGrid.appendRows).bind($.afGrid.appendRows, onRowAppend);
 
             function adjustRowWidth() {
-                var gridRowWidth = (function () {
-                    var width = 0;
-                    $head.find(".afGrid-heading .cell:visible").each(function () {
-                        width += $(this).outerWidth(true);
-                    });
-                    return width;
-                }());
-                $afGrid.find(".afGrid-rows-content").width(gridRowWidth).css({minHeight: 1, overflow: "hidden"});
-                rowWidth = 0;
-                $afGrid.find(".afGrid-heading .cell:visible").each(function () {
-                    rowWidth += $(this).outerWidth();
+                var gridRowWidth = 0;
+                $head.find(".afGrid-heading .cell:visible").each(function () {
+                    gridRowWidth += $(this).outerWidth(true);
                 });
-                $afGrid.find(".afGrid-rows .row").width(rowWidth);
+                $afGrid.find(".afGrid-rows-content").css({minHeight: 1, overflow: "hidden", width: gridRowWidth});
             }
 
             $afGrid.unbind($.afGrid.adjustRowWidth).bind($.afGrid.adjustRowWidth, adjustRowWidth);
@@ -226,14 +200,14 @@
                 $afGrid.undelegate(".afGrid-rows .row", "mouseenter").undelegate(".afGrid-rows .row", "mouseleave").delegate(".afGrid-rows .row", "mouseenter", function () {
                     $(this).addClass("row-hover");
                 }).delegate(".afGrid-rows .row", "mouseleave", function () {
-                    $(this).removeClass("row-hover");
-                });
+                        $(this).removeClass("row-hover");
+                    });
             }
 
             if (options.onRowClick) {
                 $afGrid.undelegate(".afGrid-rows .row", "click").delegate(".afGrid-rows .row", "click", function () {
                     var rowId = $.afGrid.getElementId($(this).attr("id"));
-                    options.onRowClick(cachedafGridData[rowId].orig || cachedafGridData[rowId], $(this));
+                    options.onRowClick(cachedGridData[rowId].orig || cachedGridData[rowId], $(this));
                 });
             }
 
@@ -247,11 +221,11 @@
                 if ($afGrid.hasClass("afGrid-initialized")) {
                     plugins[key] = gridPluginMap[options.id][key];
                     if (plugins[key].update) {
-                        plugins[key].update(cachedafGridData);
+                        plugins[key].update(cachedGridData);
                     }
                 } else {
                     gridPluginMap[options.id] = gridPluginMap[options.id] || {};
-                    gridPluginMap[options.id][key] = plugins[key] = plugin($afGrid, options, cachedafGridData);
+                    gridPluginMap[options.id][key] = plugins[key] = plugin($afGrid, options, cachedGridData);
                     plugins[key].load(helper);
                 }
             });
@@ -511,7 +485,7 @@
 
     function getCell(column, value, spacerClass, isLastCell) {
         var $cell = $(CELL_TEMPLATE.supplant({
-            value: value,
+            value: value || "&nbsp;",
             columnId: column.id,
             cssClass: (column.type || column.renderer || "") + (isLastCell ? " last" : ""),
             spacerClass: spacerClass || ""

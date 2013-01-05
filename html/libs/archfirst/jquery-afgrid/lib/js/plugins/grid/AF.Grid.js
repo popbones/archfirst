@@ -127,6 +127,7 @@
         function onReceiveOfData(data) {
             afGridCurrentStateData = afGridCurrentStateData || {};
             afGridCurrentStateData.pageSize = options.pageSize = data.pageSize || afGridCurrentStateData.pageSize;
+            afGridCurrentStateData = $.extend(true, afGridCurrentStateData, data.state);
             render(data);
         }
 
@@ -151,8 +152,10 @@
                 afGridCurrentStateData.columnOrder = newColumnOrder;
             }
             afGridCurrentStateData.groupBy = columnIds.length ? $.map(columnIds, function (columnId) {
+                var column = getColumnById(columnId).column;
                 return {
                     id: columnId,
+                    type: column.type || column.renderer || null,
                     direction: "desc"
                 };
             }) : [];
@@ -161,9 +164,11 @@
         }
 
         function onSortBy(columnId, direction) {
+            var column = getColumnById(columnId).column;
             afGridCurrentStateData.sortBy = [
                 {
                     id: columnId,
+                    type: column.type || column.renderer || null,
                     direction: direction
                 }
             ];
@@ -291,12 +296,17 @@
             return defaultOptions;
         }
 
+        function getCurrentOptions() {
+            return $.extend({}, options);
+        }
+
         return $.extend({}, AF.Grid.extension, {
             load: load,
             destroy: destroy,
             refresh: refresh,
             resetAndRefresh: resetAndRefresh,
             getDefaultOptions: getDefaultOptions,
+            getCurrentOptions: getCurrentOptions,
             getCurrentMetaData: getCurrentMetaData,
             getSource: getSource
         });
