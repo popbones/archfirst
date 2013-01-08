@@ -16,26 +16,31 @@
 
 /**
  * framework/BaseView
+ *
  * Based on: https://github.com/rmurphey/srchr-demo/blob/master/app/views/base.js
+ * License:  https://github.com/rmurphey/srchr-demo/blob/master/LICENSE.md
  *
  * This is a view base class built on top of the default Backbone.View; it
  * provides a set of rendering, binding, and lifecycle methods that tend to
  * be useful in Backbone applications. As part lifecycle methods, it provides
  * the facility to maintain a set of child views, especially to avoid zombies.
  *
- * This view has been further extended to specialize the render method.
- * To use this view, you should call the 'extend' method of the appropriate
- * sub-class just like you would extend the normal 'Backbone.View'.
+ * To use this view, you should call its 'extend' method just like you would
+ * extend the normal 'Backbone.View'.
  *
  * @author Naresh Bhatia
  */
 define(
     [
         'backbone',
+        'handlebars',
         'jquery'
     ],
-    function(Backbone, $) {
+    function(Backbone, Handlebars, $) {
         'use strict';
+
+        // Global template cache
+        var _templates = {};
 
         return Backbone.View.extend({
             // Map of ids to child views
@@ -60,6 +65,29 @@ define(
                 this.childViews = {};
             },
 
+            // This method expects the derived class to supply a template.name and
+            // a template.source
+            render: function() {
+                var template = this.getTemplate(),
+                    context = this.model ? this.model.toJSON() : {};
+
+                // Remove existing children
+                this.removeAllChildren();
+
+                this.$el.html(template(context));
+
+                this.postRender();
+                return this;
+            },
+
+            getTemplate: function() {
+                if (!_templates[this.template.name]) {
+                    _templates[this.template.name] = Handlebars.compile(this.template.source);
+                }
+
+                return _templates[this.template.name];
+            },
+            
             // Once the view has been rendered, it still needs to be placed in the
             // document. The 'place' method allows you to specify a destination for
             // the view; this destination can either be a jQuery object, a DOM node,

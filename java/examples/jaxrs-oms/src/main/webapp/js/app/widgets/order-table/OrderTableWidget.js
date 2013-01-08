@@ -23,13 +23,13 @@ define(
     [
         'app/widgets/order-table/OrderView',
         'backbone',
-        'framework/BaseStaticView',
+        'framework/BaseView',
         'text!app/widgets/order-table/OrderTableTemplate.html'
     ],
-    function(OrderView, Backbone, BaseStaticView, OrderTableTemplate) {
+    function(OrderView, Backbone, BaseView, OrderTableTemplate) {
         'use strict';
 
-        return BaseStaticView.extend({
+        return BaseView.extend({
             // Make this view a <section> in the DOM
             tagName: 'table',
 

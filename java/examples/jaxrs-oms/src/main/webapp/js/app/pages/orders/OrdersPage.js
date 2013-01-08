@@ -25,13 +25,13 @@ define(
         'app/widgets/order-toolbar/OrderToolbarWidget',
         'backbone',
         'app/domain/Repository',
-        'framework/BaseStaticView',
+        'framework/BaseView',
         'text!app/pages/orders/OrdersPageTemplate.html'
     ],
-    function(OrderTableWidget, OrderToolbarWidget, Backbone, Repository, BaseStaticView, OrdersPageTemplate) {
+    function(OrderTableWidget, OrderToolbarWidget, Backbone, Repository, BaseView, OrdersPageTemplate) {
         'use strict';
 
-        return BaseStaticView.extend({
+        return BaseView.extend({
             // Make this view a <section> in the DOM
             tagName: 'section',
 

@@ -22,17 +22,17 @@
 define(
     [
         'backbone',
-        'framework/BaseStaticView',
+        'framework/BaseView',
         'jquery',
         'text!app/widgets/order-toolbar/OrderToolbarTemplate.html'
     ],
-    function(Backbone, BaseStaticView, $, OrderToolbarTemplate) {
+    function(Backbone, BaseView, $, OrderToolbarTemplate) {
         'use strict';
 
         var _side = ['Buy', 'Sell'];
         var _securities = ['AAPL', 'ADBE', 'AMZN', 'CCE', 'CSCO', 'DELL', 'EBAY', 'GE', 'GOOG', 'MSFT'];
 
-        return BaseStaticView.extend({
+        return BaseView.extend({
             // Give a class to the view
             className: 'order-toolbar',
 

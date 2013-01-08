@@ -21,16 +21,16 @@
  */
 define(
     [
-        'framework/BaseDynamicView',
+        'framework/BaseView',
         'text!app/widgets/order-table/OrderTemplate.html'
     ],
-    function(BaseDynamicView, OrderTemplate) {
+    function(BaseView, OrderTemplate) {
         'use strict';
 
         var KEY_CODE_ENTER  = 13,
             KEY_CODE_ESCAPE = 27;
 
-        return BaseDynamicView.extend({
+        return BaseView.extend({
 
             tagName: 'tr',
 
