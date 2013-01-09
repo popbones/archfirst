@@ -87,10 +87,6 @@
 
         return this.each(function () {
             var $afGrid = $(this);
-            if (!$afGrid.hasClass("afGrid-initialized")) {
-                $afGrid.trigger($.afGrid.destroy);
-                $afGrid = $(this);
-            }
 
             updateColumnHashMap(options);
             updateColumnWidth(options);
@@ -109,6 +105,7 @@
                 rowsAndGroup.$rowsMainContainer = $rows;
                 $head = $afGrid.find(".afGrid-head");
             } else {
+                $afGrid.trigger($.afGrid.destroy);
                 $head = renderHeading($afGrid, options).wrap(HEADING_ROW_CONTAINER_TEMPLATE).parent();
                 $afGrid.addClass("afGrid").empty().append($head.add($rows));
                 if (options.showTotalRows) {
@@ -200,8 +197,8 @@
                 $afGrid.undelegate(".afGrid-rows .row", "mouseenter").undelegate(".afGrid-rows .row", "mouseleave").delegate(".afGrid-rows .row", "mouseenter", function () {
                     $(this).addClass("row-hover");
                 }).delegate(".afGrid-rows .row", "mouseleave", function () {
-                        $(this).removeClass("row-hover");
-                    });
+                    $(this).removeClass("row-hover");
+                });
             }
 
             if (options.onRowClick) {
