@@ -33,6 +33,10 @@
     cursor: move;
 }
 
+.afGrid-group-by.ui-state-highlight-hover .cell {
+    cursor: default;
+}
+
 .afGrid-group-by  .first  {
 	background: url(../../images/defaultTheme/afGrid_groups_sprite.png) no-repeat;
 	padding-left: 5px;
