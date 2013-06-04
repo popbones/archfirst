@@ -133,8 +133,12 @@
 }
 
 .afGrid-group-by-sapient.ui-state-highlight {
-	background-color: #D7D6D6;
-	background-image: none;
+    background: #D7D6D6 none;
+}
+
+.afGrid-group-by-sapient.ui-state-highlight-hover {
+    background: #716f72 none;
+    border:1px dashed red;
 }
 
 .afGrid-sapient .groupable-indicator {

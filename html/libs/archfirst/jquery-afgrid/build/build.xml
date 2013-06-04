@@ -52,6 +52,7 @@
             <echo message="BEGIN: CSS OPTIMIZATION"/>
             <concat destfile="${outputDir}\css\afGrid.css" fixlastline="true">
                 <union>
+                    <fileset dir="${cssSource}" casesensitive="false" includes="jqueryUI/*.css"/>
                     <fileset dir="${cssSource}" casesensitive="false" includes="grid/grid.core.css"/>
                     <fileset dir="${cssSource}" casesensitive="false" includes="grid/**/*.css"/>
                     <fileset dir="${cssSource}" casesensitive="false" includes="gridExtensions/**/*.css"/>

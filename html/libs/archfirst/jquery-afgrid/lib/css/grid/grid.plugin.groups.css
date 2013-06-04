@@ -8,7 +8,7 @@
 }
 
 .afGrid-group-by.ui-state-highlight-hover {
-    background-color: #000;
+    background: #000 none;
     border: 1px dashed #f00;
 }
 

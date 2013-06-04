@@ -15,10 +15,6 @@
     <link rel="stylesheet" type="text/css" href="min/afGrid.min.css" />
 
     <!--themes css files-->
-    <link rel="stylesheet" type="text/css" href="lib/css/gridThemes/blue.gridTheme.css" />
-    <link rel="stylesheet" type="text/css" href="lib/css/gridThemes/brown.gridTheme.css" />
-    <link rel="stylesheet" type="text/css" href="lib/css/gridThemes/grey.gridTheme.css" />
-    <link rel="stylesheet" type="text/css" href="lib/css/gridThemes/yellow.gridTheme.css" />
     <link rel="stylesheet" type="text/css" href="lib/css/gridThemes/sapient.gridTheme.css" />
 
     <!--required by the plug-in-->
@@ -52,9 +48,6 @@
 //                ,pageSize: 200
             });
             gridCB.load();
-            setTimeout(function() {
-                $j("a.theme-sapient").click();
-            },100);
         });
         //]]>
     </script>
@@ -62,21 +55,10 @@
 
 <body>
     <div id="mainContainer">
-        <div class="afGrid-switch-theme gridCB-afGrid-switch-theme">
-            <span class="">Switch theme:</span>
-            <a class="theme theme-brown" href="#brown"></a>
-            <a class="theme theme-default" href="#default"></a>
-            <a class="theme theme-blue" href="#blue"></a>
-            <a class="theme theme-grey" href="#grey"></a>
-            <a class="theme theme-yellow" href="#yellow"></a>
-            <a class="theme theme-sapient" href="#sapient"></a>
-        </div>
-
-        <div class="gridCB-afGrid-group-by afGrid-group-by">
+        <div class="gridCB-afGrid-group-by afGrid-group-by afGrid-group-by-sapient">
             <p class="empty-message">Drop columns here to group by</p>
             <div class="groups"></div>
         </div>
-
         <div id="gridCB" class="afGrid-sapient"></div>
     </div>
 </body>
