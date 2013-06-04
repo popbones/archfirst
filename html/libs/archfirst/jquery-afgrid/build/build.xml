@@ -1,9 +1,7 @@
 <project name="ccp" default="package" basedir=".\..">
 
-    <property name="jsSource" value="${basedir}\lib\js"/>
-    <property name="jsLibSource" value="${basedir}\lib\external"/>
-    <property name="cssSource" value="${basedir}\lib\css"/>
-    <property name="cssLibSource" value="${basedir}\lib\external"/>
+    <property name="libSource" value="${basedir}\lib"/>
+    <property name="vendorLibSource" value="${basedir}\lib\external"/>
     <property name="outputDir" value="${basedir}\out"/>
 
     <taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
@@ -26,11 +24,15 @@
             <echo message="BEGIN: JS OPTIMIZATION"/>
             <concat destfile="${outputDir}\js\afGrid.js" fixlastline="true">
                 <union>
-                    <fileset dir="${jsSource}" casesensitive="false" includes="plugins/grid/AF.Grid.js"/>
-                    <fileset dir="${jsSource}" casesensitive="false" includes="plugins/grid/jquery.grid.core.js"/>
-                    <fileset dir="${jsSource}" casesensitive="false" includes="plugins/grid/**/*.js"/>
-                    <fileset dir="${jsSource}" casesensitive="false" includes="plugins/gridExtensions/**/*.js"/>
-                    <fileset dir="${jsSource}" casesensitive="false" includes="modules/**/*.js"/>
+                    <!--<fileset dir="${vendorLibSource}\js" casesensitive="false" includes="jquery.js"/>-->
+                    <!--<fileset dir="${vendorLibSource}\js" casesensitive="false" includes="jquery-ui-*.js"/>-->
+                    <!--<fileset dir="${vendorLibSource}\js" casesensitive="false" includes="*.js"/>-->
+
+                    <fileset dir="${libSource}\js" casesensitive="false" includes="plugins/grid/AF.Grid.js"/>
+                    <fileset dir="${libSource}\js" casesensitive="false" includes="plugins/grid/jquery.grid.core.js"/>
+                    <fileset dir="${libSource}\js" casesensitive="false" includes="plugins/grid/**/*.js"/>
+                    <fileset dir="${libSource}\js" casesensitive="false" includes="plugins/gridExtensions/**/*.js"/>
+                    <fileset dir="${libSource}\js" casesensitive="false" includes="modules/**/*.js"/>
                 </union>
             </concat>
             <copy file="${outputDir}\js\afGrid.js" tofile="${outputDir}\js\afGrid.min.js"/>
@@ -52,10 +54,13 @@
             <echo message="BEGIN: CSS OPTIMIZATION"/>
             <concat destfile="${outputDir}\css\afGrid.css" fixlastline="true">
                 <union>
-                    <fileset dir="${cssSource}" casesensitive="false" includes="jqueryUI/*.css"/>
-                    <fileset dir="${cssSource}" casesensitive="false" includes="grid/grid.core.css"/>
-                    <fileset dir="${cssSource}" casesensitive="false" includes="grid/**/*.css"/>
-                    <fileset dir="${cssSource}" casesensitive="false" includes="gridExtensions/**/*.css"/>
+                    <!--<fileset dir="${vendorLibSource}\css" casesensitive="false" includes="jquery-ui-*.css"/>-->
+                    <!--<fileset dir="${vendorLibSource}\css" casesensitive="false" includes="*.css"/>-->
+
+                    <fileset dir="${libSource}\css" casesensitive="false" includes="jqueryUI/*.css"/>
+                    <fileset dir="${libSource}\css" casesensitive="false" includes="grid/grid.core.css"/>
+                    <fileset dir="${libSource}\css" casesensitive="false" includes="grid/**/*.css"/>
+                    <fileset dir="${libSource}\css" casesensitive="false" includes="gridExtensions/**/*.css"/>
                 </union>
             </concat>
             <copy file="${outputDir}\css\afGrid.css" tofile="${outputDir}\css\afGrid.min.css"/>
