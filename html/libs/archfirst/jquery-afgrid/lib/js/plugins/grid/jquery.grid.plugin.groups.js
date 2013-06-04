@@ -159,7 +159,8 @@
                             drop: onColumnGroupingDrop,
                             accept: "#" + options.id + " .groupable-column",
                             activeClass: "ui-state-highlight",
-                            tolerance: "pointer"
+                            tolerance: "touch",
+                            hoverClass: "ui-state-highlight-hover"
                         });
                         $groupsMainContainer.find(".cell").droppable({
                             accept: ".groups .cell",

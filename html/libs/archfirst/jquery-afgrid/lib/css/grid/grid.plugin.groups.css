@@ -7,6 +7,11 @@
 	font-family: inherit;
 }
 
+.afGrid-group-by.ui-state-highlight-hover {
+    background-color: #000;
+    border: 1px dashed #f00;
+}
+
 .afGrid-group-by {
     width: 90%;
     border: 1px solid transparent;
