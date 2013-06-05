@@ -277,7 +277,9 @@
     function updateColumnWidth(options) {
         if (options.columnWidthOverride) {
             $.each(options.columnWidthOverride, function (columnId, width) {
-                options.columns[options.columnsHashMap[columnId]].width = width;
+                if (options.columnsHashMap[columnId]) {
+                    options.columns[options.columnsHashMap[columnId]].width = width;
+                }
             });
         }
     }
