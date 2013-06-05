@@ -46,6 +46,7 @@
             onStateChange: $.noop,
             onReset: resetAndRefresh,
             onRefresh: refresh,
+            onGridDataLoaded: $.noop,
             groupBy: [],
             clientCache: false
         };
@@ -236,6 +237,7 @@
         }
 
         function destroy() {
+            $afGrid.unbind($.afGrid.renderingComplete);
             gridViewRefresh();
             if (store) {
                 store.destroy();
@@ -285,6 +287,7 @@
         function renderData(data) {
             var afGridData = $.extend(options, data);
             $afGrid = $(options.afGridSelector);
+            $afGrid.bind($.afGrid.renderingComplete, options.onGridDataLoaded);
             $afGrid.afGrid(afGridData);
         }
 
