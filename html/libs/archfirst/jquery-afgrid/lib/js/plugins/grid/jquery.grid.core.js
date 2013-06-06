@@ -21,12 +21,13 @@
 (function ($) {
     "use strict";
 
-    if (!$.browser) {
-        $.browser = {
-            msie: navigator && navigator.appName.indexOf("Microsoft")>-1,
-            version: navigator.appVersion
-        }
-    }
+	if (!$.browser) {
+		var browserVersion = /MSIE(.*?);/.exec(navigator.appVersion);
+		$.browser = {
+			msie: navigator && navigator.appName.indexOf("Microsoft")>-1,
+			version: browserVersion && browserVersion[1]
+		}
+	}
 
     if ($.browser.msie && parseInt($.browser.version.slice(0, 1), 10) <= 7 && document.documentMode !== 8) {
         $("html").addClass("ie7below");
