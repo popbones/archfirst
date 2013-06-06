@@ -29,7 +29,7 @@
 		}
 	}
 
-    if ($.browser.msie && parseInt($.browser.version.slice(0, 1), 10) <= 7 && document.documentMode !== 8) {
+    if ($.browser.msie && parseInt($.browser.version, 10) <= 7 && document.documentMode !== 8) {
         $("html").addClass("ie7below");
     }
 
