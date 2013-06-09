@@ -3,7 +3,7 @@
 
     $.afGrid.renderer.NUMERIC = {
         cell: function (data) {
-            return data;
+            return data ? data.toFixed(2) : "";
         },
         comparator: function (valA, valB) {
             valA = Number(String(valA).replace(/,/g, ""));

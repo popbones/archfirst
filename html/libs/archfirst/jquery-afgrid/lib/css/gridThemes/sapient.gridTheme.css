@@ -40,7 +40,6 @@
     border-top: 1px solid #e9eaeb;
     margin-top: 0;
     background-color: #d0d1d3;
-    height: 100%;
 }
 
 .afGrid-sapient .afGrid-rows .even,
@@ -62,12 +61,6 @@
 
 .afGrid-sapient .afGrid-rows .row-hover .cell {
     background-color: #EBEBEB;
-    border-right-color: #EBEBEB;
-	border-left-color: #EBEBEB;
-}
-
-.afGrid-sapient .group .group-header {
-    border-bottom: 1px solid #f8f8f8;
 }
 
 .afGrid-sapient .total-row-count {

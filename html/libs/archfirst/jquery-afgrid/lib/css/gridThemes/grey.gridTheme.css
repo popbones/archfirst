@@ -13,8 +13,6 @@
 }
 
 .afGrid-grey .afGrid-heading .cell {
-    border-left-color: transparent;
-    border-right-color: #fff;
     color: #555;
 }
 
@@ -27,17 +25,9 @@
     border-top-color: #EDEDED;
 }
 
-.afGrid-grey .afGrid-rows  .cell {
-    border-color: #F9F9F9;
-}
-
 .afGrid-grey .afGrid-rows .even,
 .afGrid-grey .afGrid-rows .even .cell {
     background-color: #FFF;
-}
-
-.afGrid-grey .afGrid-rows .even .cell {
-    border-color: #FFF;
 }
 
 .afGrid-grey .afGrid-rows .row-hover {
@@ -46,8 +36,6 @@
 
 .afGrid-grey .afGrid-rows .row-hover .cell {
     background-color: #EBEBEB;
-    border-right-color: #EBEBEB;
-	border-left-color: #EBEBEB;
 }
 
 .afGrid-grey .group .group-header {

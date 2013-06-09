@@ -13,8 +13,6 @@
 }
 
 .afGrid-brown .afGrid-heading .cell {
-    border-left-color: transparent;
-    border-right-color: #C6B3A3;
     color: #555;
 }
 
@@ -27,17 +25,9 @@
     border-top-color: #EDEDED;
 }
 
-.afGrid-brown .afGrid-rows  .cell {
-    border-color: #FFFCF8;
-}
-
 .afGrid-brown .afGrid-rows .even,
 .afGrid-brown .afGrid-rows .even .cell {
     background-color: #FCF7EE;
-}
-
-.afGrid-brown .afGrid-rows .even .cell {
-    border-color: #FCF7EE;
 }
 
 .afGrid-brown .afGrid-rows .row-hover {
@@ -46,8 +36,6 @@
 
 .afGrid-brown .afGrid-rows .row-hover .cell {
     background-color: #F8E5C4;
-    border-right-color: #F8E5C4;
-	border-left-color: #F8E5C4;
 }
 
 .afGrid-brown .group .group-header {
@@ -60,7 +48,7 @@
 
 /*afGrid.Date.css*/
 .afGrid-brown .date {
-    color: #0099ff;
+    color: #b85146;
 }
 
 /*afGridColumnReorder.css*/

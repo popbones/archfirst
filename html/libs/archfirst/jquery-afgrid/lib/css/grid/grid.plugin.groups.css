@@ -8,7 +8,7 @@
 }
 
 .afGrid-group-by.ui-state-highlight-hover {
-    background: #000 none;
+    background: #e8e8e8 none;
     border: 1px dashed #f00;
 }
 
@@ -76,12 +76,95 @@
     background: url(../../images/defaultTheme/afGrid_groups_sprite.png) top right no-repeat;
 }
 
+/*Group styles for the grid*/
+.afGrid .group {
+	white-space: nowrap;
+	display: inline-block;
+}
+
+.ie7below .afGrid .group {
+	display: inline;
+}
+
+.afGrid .group .cell {
+	display: inline-block;
+	padding: 0 10px 0 10px;
+	border-right: 1px solid transparent;
+	border-left: 1px solid transparent;
+}
+
+.ie7below .afGrid .group .cell {
+	display: inline;
+}
+
+.afGrid .group .group-header {
+	margin: 0;
+	font-weight: bold;
+	cursor: pointer;
+	padding: 0 10px 0 0;
+	position: relative;
+}
+
+.afGrid .group .details-in-first-column {
+	border-bottom: 1px solid #aaa;
+}
+
+.afGrid .group-data .group .group-header .cell {
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.afGrid .group-data .group .details-in-first-column .cell {
+	border-color: transparent;
+	overflow: visible;
+	text-overflow: clip;
+}
+
+.afGrid .group .details-in-first-column .first-cell-in-group {
+	position: relative;
+}
+
+.afGrid .group-closed .row,
+.afGrid .group-closed .group-data {
+	height: 0;
+	overflow: hidden;
+	border-bottom: 0;
+}
+
+.afGrid .group-closed-complete .row,
+.afGrid .group-closed-complete .group-data {
+	display: none;
+}
+
+.afGrid .group h3, .afGrid .row {
+	height: 22px;
+	transition: height 0.2s;
+	-moz-transition: height 0.2s;
+	-webkit-transition: height 0.2s;
+	-o-transition: height 0.2s;
+}
+
+.afGrid .afGrid-rows .group .row-first {
+	border-top: 0;
+}
+
+.afGrid .afGrid-rows .group .spacer {
+	vertical-align: top;
+}
+
 .afGrid .group .open-close-indicator {
-    display: inline-block;
-    margin-right: 5px;
-    font-size: 100%;
-    width: 5px;
-    line-height: 1.2em;
+	display: inline-block;
+	font-size: 100%;
+	width: 5px;
+	line-height: 1.2em;
+	position: absolute;
+	z-index: 1;
+	vertical-align: top;
+	top: 4px;
+	left: 3px;
+	height: 5px;
+	color: #fff;
+	font-weight: bold;
 }
 
 .afGrid .afGrid-heading .groupable-indicator {

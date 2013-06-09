@@ -27,10 +27,6 @@
     border-top-color: #EDEDED;
 }
 
-.afGrid-yellow .afGrid-rows  .cell {
-    border-color: #F9F9F9;
-}
-
 .afGrid-yellow .afGrid-rows .even,
 .afGrid-yellow .afGrid-rows .even .cell {
     background-color: #FFF;

@@ -18,6 +18,10 @@
     color: #555;
 }
 
+.afGrid-blue .afGrid-rows {
+	background: #B8D2D6;
+}
+
 .afGrid-blue .afGrid-rows .row {
     border-bottom-color: #EDEDED;
     background-color: #F8FDFF;
@@ -28,7 +32,7 @@
 }
 
 .afGrid-blue .afGrid-rows  .cell {
-    border-color: #FFF;
+    border-color: transparent;
 }
 
 .afGrid-blue .afGrid-rows .even,

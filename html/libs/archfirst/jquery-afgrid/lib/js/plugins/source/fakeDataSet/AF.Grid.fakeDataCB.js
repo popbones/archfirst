@@ -123,7 +123,7 @@
         var rows = (function () {
             var rows = [], n;
 
-            for (n = 0; n < 200; n++) {
+            for (n = 0; n < 250; n++) {
                 rows[rows.length] = {
                     "id": n + 1,
                     "colStatus": ["Cleared", "Pending"][Math.round(Math.random())],
@@ -154,7 +154,92 @@
 //            },
             columns: getColumns(),
             filters: getFilters(),
-            rows: rows
+            rows: rows,
+	        detailsInFirstColumnOnly: false,
+	        groupDetails: [
+		        {
+			        "refLabel": "Cleared",
+			        "colNotional": 3000000,
+			        "colMTM": 20000000,
+			        "groupDetails": [
+				        {
+					        "refLabel": "CME",
+					        "colNotional": 200000,
+					        "colMTM": 300000,
+					        "groupDetails": [
+						        {
+							        "refLabel": "Buy",
+							        "colNotional": 200000,
+							        "colMTM": 300000
+						        },
+						        {
+							        "refLabel": "Sell",
+							        "colNotional": 100000,
+							        "colMTM": 100000
+						        }
+					        ]
+				        },
+				        {
+					        "refLabel": "LCH",
+					        "colNotional": 100000,
+					        "colMTM": 100000,
+					        "groupDetails": [
+						        {
+							        "refLabel": "Buy",
+							        "colNotional": 200000,
+							        "colMTM": 300000
+						        },
+						        {
+							        "refLabel": "Sell",
+							        "colNotional": 100000,
+							        "colMTM": 100000
+						        }
+					        ]
+				        }
+			        ]
+		        },
+		        {
+			        "refLabel": "Pending",
+			        "colNotional": 3000000,
+			        "colMTM": 20000000,
+			        "groupDetails": [
+				        {
+					        "refLabel": "CME",
+					        "colNotional": 200000,
+					        "colMTM": 300000,
+					        "groupDetails": [
+						        {
+							        "refLabel": "Buy",
+							        "colNotional": 200000,
+							        "colMTM": 300000
+						        },
+						        {
+							        "refLabel": "Sell",
+							        "colNotional": 100000,
+							        "colMTM": 100000
+						        }
+					        ]
+				        },
+				        {
+					        "refLabel": "LCH",
+					        "colNotional": 100000,
+					        "colMTM": 100000,
+					        "groupDetails": [
+						        {
+							        "refLabel": "Buy",
+							        "colNotional": 200000,
+							        "colMTM": 300000
+						        },
+						        {
+							        "refLabel": "Sell",
+							        "colNotional": 100000,
+							        "colMTM": 100000
+						        }
+					        ]
+				        }
+			        ]
+		        }
+	        ]
         };
 
     }());

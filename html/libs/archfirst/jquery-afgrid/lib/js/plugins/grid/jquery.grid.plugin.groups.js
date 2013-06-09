@@ -92,11 +92,23 @@
 
                 function onGroupExpandCollapse(event) {
                     var $ele = $(event.currentTarget),
-                        currentState = !$ele.data("state");
-                    $ele.data("state", currentState);
-                    $ele.find(".open-close-indicator").html(currentState ? "+" : "-");
-                    $ele.removeClass("open close").addClass(currentState ? "close" : "open");
-                    $ele.parents(".group").eq(0)[currentState ? "addClass" : "removeClass"]("group-closed");
+                        isGroupOpen = !$ele.data("state");
+                    $ele.data("state", isGroupOpen);
+                    $ele.find(".open-close-indicator").html(isGroupOpen ? "+" : "-");
+                    $ele.removeClass("open close").addClass(isGroupOpen ? "close" : "open");
+	                var $group = $ele.parents(".group").eq(0);
+
+	                if (isGroupOpen) {
+		                $group.addClass("group-closed");
+		                setTimeout(function() {
+			                $group.addClass("group-closed-complete");
+		                }, 300);
+	                } else {
+		                $group.removeClass("group-closed-complete");
+		                setTimeout(function() {
+			                $group.removeClass("group-closed");
+		                }, 10);
+	                }
 
                     setTimeout(function () {
                         //BEGIN: Fix for IE8 incremental load when group is collapsed and more data is needed
