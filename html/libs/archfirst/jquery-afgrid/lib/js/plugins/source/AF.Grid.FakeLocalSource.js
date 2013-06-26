@@ -66,7 +66,7 @@
                 AF.Grid.DataStore.utils.sortData(stateData, fakeDataStoreColumns, fakeDataStoreRows, true);
             }
             var dummyResponseData = {};
-            var pageSize = (requestData.pageSize || 25);
+            var pageSize = (requestData.pageSize || dataset.pageSize || 25);
             if (actionType === "fetchRows") {
                 dummyResponseData = {
                     rows: AF.Grid.DataStore.utils.getRows(stateData.pageOffset - 1, pageSize, fakeDataStoreRows)

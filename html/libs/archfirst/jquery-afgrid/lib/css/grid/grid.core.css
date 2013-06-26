@@ -85,6 +85,13 @@
     border-top: 1px solid #EDEDED;
 }
 
+.afGrid .afGrid-rows .cell {
+    transition: all 0.5s;
+    -moz-transition: all 0.5s;
+    -webkit-transition: all 0.5s;
+    -o-transition: all 0.5s;
+}
+
 .afGrid .afGrid-rows .even,
 .afGrid .afGrid-rows .even .cell {
     background-color: #F7F7F7;

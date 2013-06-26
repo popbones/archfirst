@@ -46,6 +46,19 @@
     background-color: #E8E8E8;
 }
 
+/*Real-time data*/
+.afGrid-grey .afGrid-rows .updated-cell.positive,
+.afGrid-grey .afGrid-rows .even .updated-cell.positive {
+    background-color: #a0d800;
+    color: #000;
+}
+
+.afGrid-grey .afGrid-rows .updated-cell.negative,
+.afGrid-grey .afGrid-rows .even .updated-cell.negative {
+    background-color: #d8361d;
+    color: #ffeae4;
+}
+
 /*afGrid.Date.css*/
 .afGrid-grey .date {
     color: #0099ff;

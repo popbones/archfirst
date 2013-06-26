@@ -58,8 +58,25 @@
     border-bottom: 1px solid #f8f8f8;
 }
 
+.afGrid-blue .group .open-close-indicator {
+    color: #202f5b;
+}
+
 .afGrid-blue .total-row-count {
     background-color: #A7CBDE;
+}
+
+/*Real-time data*/
+.afGrid-blue .afGrid-rows .updated-cell.positive,
+.afGrid-blue .afGrid-rows .even .updated-cell.positive {
+    background-color: #3b3f65;
+    color: #FFF;
+}
+
+.afGrid-blue .afGrid-rows .updated-cell.negative,
+.afGrid-blue .afGrid-rows .even .updated-cell.negative {
+    background-color: #ffe170;
+    color: #F00;
 }
 
 /*afGrid.Date.css*/

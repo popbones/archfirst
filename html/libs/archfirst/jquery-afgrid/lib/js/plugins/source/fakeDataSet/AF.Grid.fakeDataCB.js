@@ -155,7 +155,7 @@
             columns: getColumns(),
             filters: getFilters(),
             rows: rows,
-	        detailsInFirstColumnOnly: false,
+	        groupDetailsInFirstColumnOnly: false,
 	        groupDetails: [
 		        {
 			        "refLabel": "Cleared",

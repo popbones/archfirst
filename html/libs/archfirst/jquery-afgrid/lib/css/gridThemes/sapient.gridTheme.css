@@ -14,8 +14,8 @@
 }
 
 .afGrid-sapient .afGrid-heading .cell {
-    border-left-color: #fff;
-    border-right-color: #ccc;
+    border-right-color: #c8c9ca;
+    border-left-color: #e9eaeb;
     color: #fff;
     background: #949494;
     vertical-align: top;
@@ -35,9 +35,9 @@
 }
 
 .afGrid-sapient .afGrid-rows  .cell {
-    border-right: 1px solid #c8c9ca;
-    border-left: 1px solid #e9eaeb;
-    border-top: 1px solid #e9eaeb;
+    border-right-color: #c8c9ca;
+    border-left-color: #e9eaeb;
+    border-top-color: #e9eaeb;
     margin-top: 0;
     background-color: #d0d1d3;
 }
@@ -48,10 +48,10 @@
 }
 
 .afGrid-sapient .afGrid-rows .even .cell {
-    border-color: #FFF;
-    border-right: 1px solid #cfd0d1;
-    border-left: 1px solid #e9eaeb;
-    border-top: 1px solid #e9eaeb;
+    border-bottom-color: #FFF;
+    border-right-color: #cfd0d1;
+    border-left-color: #e9eaeb;
+    border-top-color: #e9eaeb;
     background-color: #dbdcde;
 }
 
@@ -65,6 +65,29 @@
 
 .afGrid-sapient .total-row-count {
     background-color: #E8E8E8;
+}
+
+/*Real-time data*/
+.afGrid-sapient .afGrid-rows .positive,
+.afGrid-sapient .afGrid-rows .even .positive {
+    background-color: rgba(173, 210, 176, 0.14);
+}
+
+.afGrid-sapient .afGrid-rows .negative,
+.afGrid-sapient .afGrid-rows .even .negative {
+    background-color: rgba(255, 228, 234, 0.28);
+}
+
+.afGrid-sapient .afGrid-rows .updated-cell.positive,
+.afGrid-sapient .afGrid-rows .even .updated-cell.positive {
+    background-color: #22651f;
+    color: #FFF;
+}
+
+.afGrid-sapient .afGrid-rows .updated-cell.negative,
+.afGrid-sapient .afGrid-rows .even .updated-cell.negative {
+    background-color: #c23232;
+    color: #FFF;
 }
 
 /*afGrid.Date.css*/
@@ -131,6 +154,7 @@
 
 .afGrid-group-by-sapient.ui-state-highlight-hover {
     background: #716f72 none;
+    color: #cfcfcf;
     border:1px dashed red;
 }
 

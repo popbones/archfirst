@@ -25,6 +25,10 @@
     border-top-color: #EDEDED;
 }
 
+.afGrid-brown .afGrid-rows .cell {
+    background-color: #fff0e0;
+}
+
 .afGrid-brown .afGrid-rows .even,
 .afGrid-brown .afGrid-rows .even .cell {
     background-color: #FCF7EE;
@@ -42,8 +46,25 @@
     border-bottom: 1px solid #f8f8f8;
 }
 
+.afGrid-brown .group .open-close-indicator {
+    color: #5b0f0b;
+}
+
 .afGrid-brown .total-row-count {
     background-color: #F2E9E1;
+}
+
+/*Real-time data*/
+.afGrid-brown .afGrid-rows .updated-cell.positive,
+.afGrid-brown .afGrid-rows .even .updated-cell.positive {
+    background-color: #a0d800;
+    color: #000;
+}
+
+.afGrid-brown .afGrid-rows .updated-cell.negative,
+.afGrid-brown .afGrid-rows .even .updated-cell.negative {
+    background-color: #d8361d;
+    color: #ffeae4;
 }
 
 /*afGrid.Date.css*/

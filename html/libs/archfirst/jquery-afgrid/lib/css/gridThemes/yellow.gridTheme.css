@@ -13,8 +13,7 @@
 }
 
 .afGrid-yellow .afGrid-heading .cell {
-    border-left-color: transparent;
-    border-right-color: #ffeebc;
+    border-right-color: #e0b972;
     color: #555;
 }
 
@@ -27,13 +26,17 @@
     border-top-color: #EDEDED;
 }
 
+.afGrid-yellow .afGrid-rows .cell {
+    background-color: #f6e7c4;
+    border-right-color: #e0b972;
+}
+
 .afGrid-yellow .afGrid-rows .even,
 .afGrid-yellow .afGrid-rows .even .cell {
-    background-color: #FFF;
+    background-color: #ffd87a;
 }
 
 .afGrid-yellow .afGrid-rows .even .cell {
-    border-color: #FFF;
 }
 
 .afGrid-yellow .afGrid-rows .row-hover {
@@ -42,16 +45,31 @@
 
 .afGrid-yellow .afGrid-rows .row-hover .cell {
     background-color: #EBEBEB;
-    border-right-color: #EBEBEB;
-	border-left-color: #EBEBEB;
 }
 
 .afGrid-yellow .group .group-header {
     border-bottom: 1px solid #f8f8f8;
 }
 
+.afGrid-yellow .group .open-close-indicator {
+    color: #9b8840;
+}
+
 .afGrid-yellow .total-row-count {
     background-color: #E8E8E8;
+}
+
+/*Real-time data*/
+.afGrid-yellow .afGrid-rows .updated-cell.positive,
+.afGrid-yellow .afGrid-rows .even .updated-cell.positive {
+    background-color: #a0d800;
+    color: #000;
+}
+
+.afGrid-yellow .afGrid-rows .updated-cell.negative,
+.afGrid-yellow .afGrid-rows .even .updated-cell.negative {
+    background-color: #d8361d;
+    color: #ffeae4;
 }
 
 /*afGrid.Date.css*/

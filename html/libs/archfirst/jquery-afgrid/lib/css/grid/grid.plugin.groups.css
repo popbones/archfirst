@@ -125,10 +125,9 @@
 }
 
 .afGrid .group-closed .row,
-.afGrid .group-closed .group-data {
+.afGrid .group-closed .group-header-row {
 	height: 0;
 	overflow: hidden;
-	border-bottom: 0;
 }
 
 .afGrid .group-closed-complete .row,
@@ -136,7 +135,9 @@
 	display: none;
 }
 
-.afGrid .group h3, .afGrid .row {
+.afGrid .row,
+.afGrid .group-header-row,
+.afGrid .group-closed .close {
 	height: 22px;
 	transition: height 0.2s;
 	-moz-transition: height 0.2s;
@@ -150,6 +151,8 @@
 
 .afGrid .afGrid-rows .group .spacer {
 	vertical-align: top;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .afGrid .group .open-close-indicator {

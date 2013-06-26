@@ -70,6 +70,9 @@
 
 //    var TOTAL_ROW_LABEL_TEMPLATE = "<div class='total-row-count'>Showing {loadedRows} of {totalRows}</div>",GROUP_CONTAINER_WRAPPER_TEMPLATE = "<table class='group-data'></table>",HEADING_ROW_TEMPLATE = "<tr class='afGrid-heading'></tr>",HEADING_ROW_COLUMN_HELPER_TEMPLATE = "<div class='{cssClass} column-helper'></div>",HEADING_ROW_CONTAINER_TEMPLATE = "<thead class='afGrid-head'></thead>",HEADING_ROW_CELL_TEMPLATE = "<td class='cell {cssClass}' id='{id}'>{value}<span class='sort-arrow'></span></td>",GROUP_HEADING_TEMPLATE = "<tr class='group level{level}'><tboby><tr class='group-header'><table><tr><td><span class='open-close-indicator'>-</span>{value}</td></tr></table></tbody></tr>",ROW_TEMPLATE = "<tr class='row level{level}' id='{id}'></tr>",CELL_TEMPLATE = "<td class='cell {columnId} {cssClass}'>{value}</td>",ROWS_CONTAINER_TEMPLATE = "<table class='afGrid-rows'><tbody class='afGrid-rows-content'></tbody></table>",LOADING_MESSAGE = "<div class='loading-message'>Loading...</div>";
 
+    var DATA_ROW_KEY = "DataRow_";
+    var HEADER_COL_KEY = "Col_";
+
 	$.fn.afGrid = function (options) {
 
 		options = $.extend({
@@ -83,7 +86,7 @@
 			makeColumnDraggable: makeColumnDraggable,
 			showTotalRows: true,
 			groupDetails: null,
-			detailsInFirstColumnOnly: false,
+			groupDetailsInFirstColumnOnly: true,
 			totalRowLabelTemplate: TOTAL_ROW_LABEL_TEMPLATE,
 			loadingMessage: LOADING_MESSAGE
 		}, options);
@@ -192,7 +195,10 @@
 			updateCountLabel($afGrid, options, countOfLoadedRows);
 
 			var helper = {
-				getColumnElementById: getColumnElementById
+				getColumnElementById: getColumnElementById,
+                getRowElementById: getRowElementById,
+                getColumnById: getColumnById,
+                getCellContent: getCellContent
 			};
 
 			$.each($.afGrid.plugin, function (key, plugin) {
@@ -258,7 +264,7 @@
 			rowWidth: rowWidth,
 			groupDetails: groupDetails,
 			areFetchedRows: true,
-			detailsInFirstColumnOnly: options.detailsInFirstColumnOnly
+			groupDetailsInFirstColumnOnly: options.groupDetailsInFirstColumnOnly
 		});
 		if ($afGrid.find(".afGrid-rows")[0].scrollHeight <= $afGrid.find(".afGrid-rows").height()) {
 			options.onScrollToBottom();
@@ -316,8 +322,12 @@
 		});
 	}
 
+	function getRowElementById(rowId, options) {
+		return $("#" + options.id + DATA_ROW_KEY + rowId);
+	}
+
 	function getColumnElementById(columnId, options) {
-		return $("#" + options.id + "Col_" + columnId);
+		return $("#" + options.id + HEADER_COL_KEY + columnId);
 	}
 
 	function makeColumnDraggable($afGrid) {
@@ -356,9 +366,9 @@
 			container: HEADING_ROW_TEMPLATE,
 			cell: HEADING_ROW_CELL_TEMPLATE,
 			cellContent: function (column) {
-				return {
+                return {
 					value: column.label,
-					id: options.id + "Col_" + column.id,
+					id: options.id + HEADER_COL_KEY + column.id,
 					cssClass: column.type || column.renderer || "",
 					columnId: column.id
 				};
@@ -403,7 +413,7 @@
 				rowWidth: null,
 				groupDetails: groupDetails,
 				areFetchedRows: false,
-				detailsInFirstColumnOnly: options.detailsInFirstColumnOnly
+				groupDetailsInFirstColumnOnly: options.groupDetailsInFirstColumnOnly
 			});
 		return {
 			$rowsMainContainer: $rowsMainContainer,
@@ -441,7 +451,7 @@
 			$.each(groupDetail, function (key, value) {
 				var column = getColumnById(key, columns);
 				if (column) {
-					groupDetailText[groupDetailText.length] = column.label + ": " + $.afGrid.renderer[column.type || column.renderer].cell(value, column)
+					groupDetailText[groupDetailText.length] = column.label + ": " + getCellContent(value, column);
 				}
 			});
 			return "[" + groupDetailText.join(", ") + "]";
@@ -455,39 +465,33 @@
 			$groupContainers = parameters.$groupContainers,
 			groupDetails = parameters.groupDetails,
 			currentGroupValues = parameters.currentGroupValues,
-			cellContent, cellRenderer, $row = $(),
-			detailInFirstColumnOnly = parameters.detailsInFirstColumnOnly,
+			cellContent, $row = $(),
+			groupDetailInFirstColumnOnly = parameters.groupDetailsInFirstColumnOnly,
 			groupDetail;
-		if (groupDetails) {
+		if (groupDetails && groupDetails.length) {
 			groupDetail = getCurrentGroupDetail(currentGroupValues, groupDetails, n);
 		}
 		for (var n1 = n; n1 < columns.length; n1++) {
 			cellContent = "";
 			var column = columns[n1];
 			if (n1 === n) {
-				if (detailInFirstColumnOnly) {
+				if (groupDetailInFirstColumnOnly) {
 					var groupDetailText = "";
-					cellContent = currentGroupValues[n];
-					if (groupDetails) {
-						cellContent = groupDetail.label || currentGroupValues[n];
-						groupDetailText = getGroupDetailText(currentGroupValues, groupDetails, n, columns)
-					}
-					cellRenderer = (columns[n].type || columns[n].renderer);
-					if (cellRenderer) {
-						cellContent = $.afGrid.renderer[cellRenderer].cell(cellContent, columns[n]);
-					}
-					if (groupDetails) {
-						cellContent = cellContent + " " + groupDetailText;
-					}
+					if (groupDetails && groupDetails.length) {
+                        if (groupDetail.label) {
+                            cellContent = groupDetail.label;
+                        } else {
+                            groupDetailText = getGroupDetailText(currentGroupValues, groupDetails, n, columns);
+                            cellContent = getCellContent(currentGroupValues[n], columns[n]) + " " + groupDetailText;
+                        }
+					} else {
+                        cellContent = getCellContent(currentGroupValues[n], columns[n]);
+                    }
 				} else {
-					cellContent = (groupDetail && groupDetail.label) || currentGroupValues[n];
+					cellContent = (groupDetail && groupDetail.label) || getCellContent(currentGroupValues[n], column);
 				}
-			} else if (!detailInFirstColumnOnly && groupDetail && groupDetail[column.id]) {
-				cellContent = groupDetail && groupDetail[column.id];
-			}
-			cellRenderer = (column.type || column.renderer);
-			if (cellRenderer) {
-				cellContent = $.afGrid.renderer[cellRenderer].cell(cellContent, column);
+			} else if (!groupDetailInFirstColumnOnly && groupDetail && groupDetail[column.id]) {
+				cellContent = groupDetail && getCellContent(groupDetail[column.id], column);
 			}
 			var $cell = getCell(column, cellContent, "");
 			if (n1 === n) {
@@ -495,12 +499,12 @@
 			}
 			$row = $row.add($cell)
 		}
-		$groupContainers[n].find(".group-header").append($row).addClass(detailInFirstColumnOnly ? "details-in-first-column" : "");
+		$groupContainers[n].find(".group-header").append($row).addClass(groupDetailInFirstColumnOnly ? "details-in-first-column" : "");
 	}
 
-	function renderAndGetContainerForFirstLoad($groupContainers, n, currentGroupValues, columns, groupDetails, $wrapper, parameters, $placeHolder) {
+	function renderAndGetContainerForFirstLoad($groupContainers, n, columns, $placeHolder) {
 		$groupContainers[n] = $(GROUP_HEADING_TEMPLATE.supplant({ level: n }));
-		$wrapper = $(GROUP_CONTAINER_WRAPPER_TEMPLATE);
+		var $wrapper = $(GROUP_CONTAINER_WRAPPER_TEMPLATE);
 		if (n !== 0) {
 			$wrapper.append(getCell(columns[n - 1], "", "spacer"));
 		}
@@ -510,9 +514,9 @@
 		return {$wrapper: $wrapper, $placeHolder: $placeHolder};
 	}
 
-	function renderAndGetContainerForFetchedRows($groupContainers, n, currentGroupValues, columns, groupDetails, $wrapper, parameters, $placeHolder) {
+	function renderAndGetContainerForFetchedRows($groupContainers, n, columns, $placeHolder) {
 		$groupContainers[n] = $(GROUP_HEADING_TEMPLATE.supplant({ level: n }));
-		$wrapper = $(GROUP_CONTAINER_WRAPPER_TEMPLATE);
+		var $wrapper = $(GROUP_CONTAINER_WRAPPER_TEMPLATE);
 		if (n === 0) {
 			$wrapper.append($groupContainers[n]);
 			$placeHolder.append($wrapper);
@@ -542,7 +546,7 @@
 			methodToCall = renderAndGetContainerForFetchedRows;
 		}
 		for (n = start, l = groups.length; n < l; n += 1) {
-			var containers = methodToCall($groupContainers, n, currentGroupValues, columns, groupDetails, $wrapper, parameters, $placeHolder);
+			var containers = methodToCall($groupContainers, n, columns, $placeHolder);
 			$wrapper = containers.$wrapper;
 			$placeHolder = containers.$placeHolder;
 			renderGroupDetail({
@@ -551,7 +555,7 @@
 				$groupContainers: $groupContainers,
 				groupDetails: groupDetails,
 				currentGroupValues: currentGroupValues,
-				detailsInFirstColumnOnly: parameters.detailsInFirstColumnOnly
+				groupDetailsInFirstColumnOnly: parameters.groupDetailsInFirstColumnOnly
 			});
 		}
 		return $groupContainers;
@@ -594,7 +598,7 @@
 						$groupContainers: $groupContainers,
 						columns: columns,
 						groupDetails: groupDetails,
-						detailsInFirstColumnOnly: parameters.detailsInFirstColumnOnly
+						groupDetailsInFirstColumnOnly: parameters.groupDetailsInFirstColumnOnly
 					});
 				} else {
 					$.each(groups, function (index) {
@@ -611,7 +615,7 @@
 								$groupContainers: $groupContainers,
 								columns: columns,
 								groupDetails: groupDetails,
-								detailsInFirstColumnOnly: parameters.detailsInFirstColumnOnly
+								groupDetailsInFirstColumnOnly: parameters.groupDetailsInFirstColumnOnly
 							});
 						}
 					});
@@ -637,25 +641,28 @@
 		};
 	}
 
-	function getNewRow(tableId, row, groupLength, columns) {
+    function getCellContent(cellContent, column, columnIndex, row) {
+        var cellRenderer = (column.type || column.renderer);
+        if (cellRenderer) {
+            cellContent = $.afGrid.renderer[cellRenderer].cell(cellContent, column, columnIndex, row);
+        }
+        return cellContent;
+    }
+
+    function getNewRow(tableId, row, groupLength, columns) {
 		var rowId = row.id;
-		var rowData = rowId ? row.data : row,
+        var rowData = rowId ? row.data : row,
 			$row = $(ROW_TEMPLATE.supplant({
 				level: groupLength,
-				id: tableId + "DataRow_" + rowId
+				id: tableId + DATA_ROW_KEY + rowId
 			})),
 			previousColumn = columns[groupLength - 1];
-		var n, l, cellContent;
+		var n, l;
 		if (previousColumn) {
 			$row.append(getCell(previousColumn, ""));
 		}
 		for (n = groupLength, l = rowData.length; n < l; n += 1) {
-			cellContent = rowData[n];
-			var cellRenderer = (columns[n].type || columns[n].renderer);
-			if (cellRenderer) {
-				cellContent = $.afGrid.renderer[cellRenderer].cell(cellContent, columns[n], n, row);
-			}
-			$row.append(getCell(columns[n], cellContent, null, n === (l - 1)));
+            $row.append(getCell(columns[n], getCellContent(rowData[n], columns[n], n, row), null, n === (l - 1)));
 		}
 		return $row;
 	}
