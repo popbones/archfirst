@@ -1,5 +1,8 @@
 (function($) {
 
+    var isStarted = false;
+    var updateTimer;
+
     $(function () {
         var gridCB = new AF.Grid({
             dataSource: new AF.Grid.FakeLocalSource(AF.Grid.fakeData.liveDataSample),
@@ -16,9 +19,8 @@
         if (location.hash.indexOf("child")<0) {
             $(document).on("keydown", function(event) {
                 if (event.keyCode === 83) {
-                    updateRowData();
-                } else {
-                    window.clearTimeout(updateTimer);
+                    isStarted = !isStarted;
+                    isStarted ? updateRowData() : window.clearTimeout(updateTimer);
                 }
             });
         } else {
@@ -37,8 +39,6 @@
         }
     }
 
-
-    var updateTimer;
     function updateRowData() {
         var data = JSON.parse($.cookie("data"));
         if (location.hash.indexOf("child")<0) {
