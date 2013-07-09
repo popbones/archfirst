@@ -34,6 +34,12 @@
     background-color: #FCF7EE;
 }
 
+.afGrid-brown .group-header  .cell,
+.afGrid-brown .group-header .even,
+.afGrid-brown .group-header .even .cell {
+    background-color: #e6cab4;
+}
+
 .afGrid-brown .afGrid-rows .row-hover {
     background-color: #F8E5C4;
 }

@@ -47,6 +47,13 @@
     background-color: #FFF;
 }
 
+.afGrid-sapient .group-header  .cell,
+.afGrid-sapient .group-header .even,
+.afGrid-sapient .group-header .even .cell {
+    background-color: #acacac;
+}
+
+
 .afGrid-sapient .afGrid-rows .even .cell {
     border-bottom-color: #FFF;
     border-right-color: #cfd0d1;
