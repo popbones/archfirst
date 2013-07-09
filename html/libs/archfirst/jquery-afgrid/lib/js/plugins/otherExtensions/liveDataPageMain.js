@@ -65,7 +65,7 @@
             $.cookie("data",JSON.stringify(data));
         }
         updateRow(data);
-        updateTimer = window.setTimeout(updateRowData, 200);
+        updateTimer = window.setTimeout(updateRowData, 100);
     }
 
 }(jQuery));

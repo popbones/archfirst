@@ -47,6 +47,16 @@
 }
 
 /*Real-time data*/
+.afGrid-grey .afGrid-rows .positive,
+.afGrid-grey .afGrid-rows .even .positive {
+    color: #7ea800;
+}
+
+.afGrid-grey .afGrid-rows .negative,
+.afGrid-grey .afGrid-rows .even .negative {
+    color: #d8361d;
+}
+
 .afGrid-grey .afGrid-rows .updated-cell.positive,
 .afGrid-grey .afGrid-rows .even .updated-cell.positive {
     background-color: #a0d800;
