@@ -3,6 +3,7 @@
     <property name="libSource" value="${basedir}\lib"/>
     <property name="vendorLibSource" value="${basedir}\lib\external"/>
     <property name="outputDir" value="${basedir}\out"/>
+    <property name="distDir" value="${basedir}\dist"/>
 
     <taskdef name="yuicompress" classname="com.yahoo.platform.yui.compressor.YUICompressTask">
         <classpath>
@@ -12,7 +13,7 @@
         </classpath>
     </taskdef>
 
-    <target name="package" depends="clean, compile-merge-and-minify-css, merge-and-minify-js, copy-external-lib, update-css-image-urls">
+    <target name="package" depends="clean, compile-merge-and-minify-css, merge-and-minify-js, copy-external-lib, copy-output-to-dist, update-css-image-urls">
     </target>
 
     <target name="clean">
@@ -84,12 +85,21 @@
         </copy>
     </target>
 
+    <target name="copy-output-to-dist">
+        <copy file="${outputDir}\css\afGrid.css" tofile="${distDir}\afGrid.css"/>
+        <copy file="${outputDir}\css\afGrid.min.css" tofile="${distDir}\afGrid.min.css"/>
+        <copy file="${outputDir}\js\afGrid.js" tofile="${distDir}\afGrid.js"/>
+        <copy file="${outputDir}\js\afGrid.min.js" tofile="${distDir}\afGrid.min.js"/>
+    </target>
+
     <target name="update-css-image-urls">
-        <replaceregexp file="${outputDir}\css\afGrid.min.css"
-                       match="\.\.\/\.\.\/images\/"
+        <replaceregexp match="\.\.\/\.\.\/images\/"
                        byline="true"
                        flags="gs"
-                       replace="./../images/"/>
+                       replace="./../lib/images/">
+            <fileset dir="${outputDir}" includes="**/*.css"/>
+            <fileset dir="${distDir}" includes="**/*.css"/>
+        </replaceregexp>
     </target>
 
 
