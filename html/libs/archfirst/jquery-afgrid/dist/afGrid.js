@@ -1,4 +1,4 @@
-/**
+/*!
  * Copyright 2011-2013 Archfirst
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-/**
+/*!
  * @author Manish Shanker
- * @revision $Revision$
- * @date $LastChangedDate$
+ * @revision $Rev$
+ * @date $Date$
  */
 
 (function ($) {
