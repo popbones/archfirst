@@ -4,9 +4,12 @@ var App = {};
 
     var isStarted = false;
     var updateTimer;
+    var webSocketService;
 
     $(function () {
-        var webSocketService = new App.WebSocketService();
+        webSocketService = new App.WebSocketService({
+            onTick: updateRow
+        });
 
         webSocketService.connect();
 
@@ -34,9 +37,6 @@ var App = {};
         } else {
             updateRowData();
         }
-
-        $.cookie && $.cookie("data", null);
-
     });
 
 
@@ -48,9 +48,8 @@ var App = {};
     }
 
     function updateRowData() {
-        var data = JSON.parse($.cookie("data"));
         if (location.hash.indexOf("child")<0) {
-            data = {};
+            var data = {};
             data.id = 1+Math.floor(Math.random()*9);
             randomData(data, "colBid");
             randomData(data, "colAsk");
@@ -64,13 +63,7 @@ var App = {};
             if (Math.round(Math.random()*2)>1) {
                 data.colMax = (30 + (Math.random() * 30));
             }
-//            if (Math.round(Math.random()*2)>1) {
-//                data.colAskSize = Math.floor(Math.random() * 40000);
-//            }
-//            if (Math.round(Math.random()*2)>1) {
-//                data.colBidSize = Math.floor(Math.random() * 40000);
-//            }
-            $.cookie && $.cookie("data",JSON.stringify(data));
+            webSocketService.publish(data);
         }
         updateRow(data);
         updateTimer = window.setTimeout(updateRowData, 100);
@@ -82,8 +75,9 @@ var App = {};
 
 
 (function() {
-    App.WebSocketService = function() {
+    App.WebSocketService = function(options) {
 
+        var topicProducer, topicConsumer;
         var MY_WEBSOCKET_URL = "ws://tutorial.kaazing.com/jms";
         var TOPIC_NAME = "/topic/afGridTickUpdate";
 
@@ -103,7 +97,7 @@ var App = {};
         var wsUrl;
 
         var sending = false;
-        var sliderQueue = [];
+        var messageQueue = [];
 
         var WEBSOCKET_URL = MY_WEBSOCKET_URL;
 
@@ -114,8 +108,7 @@ var App = {};
         var handleTopicMessage = function(message) {
             if (message.getStringProperty(MESSAGE_PROPERTIES.userId) != userId) {
                 console.log("Message received: " + message.getText());
-                $("#slider").val(message.getText());
-                $("#pic").width(message.getText());
+                options.onTick(JSON.parse(message.getText());
             }
         };
 
@@ -127,24 +120,23 @@ var App = {};
             console.log("Message sent: " + message.getText());
         };
 
-        var sliderChange = function(sliderValue) {
-            console.log("Slider changed: " + sliderValue);
-            $("#pic").width(sliderValue);
+        var sendUpdate = function(message) {
             if (!sending) {
                 sending = true;
-                doSend(session.createTextMessage(sliderValue));
+                doSend(session.createTextMessage(JSON.stringify(message)));
             }
             else {
-                sliderQueue.push(sliderValue);
-                console.log("Busy sending, pushing to slider queue: " + sliderValue);
+                messageQueue.push(JSON.stringify(message));
+                console.log("Busy sending, pushing to queue: " + message);
             }
         };
+
         var sendFromQueue = function() {
-            if (sliderQueue.length > 0) {
-                console.log("Sending last element from queue: " + sliderQueue[sliderQueue.length-1]);
-                var msg = sliderQueue[sliderQueue.length-1];
-                sliderQueue = [];
+            if (messageQueue.length > 0) {
+                console.log("Sending last element from queue: " + messageQueue[messageQueue.length-1]);
+                var msg = messageQueue.splice(0,1);
                 doSend(session.createTextMessage(msg));
+                sendFromQueue();
             }
             else {
                 sending = false;
@@ -185,7 +177,8 @@ var App = {};
         };
 
         return {
-            connect: doConnect
+            connect: doConnect,
+            publish: sendUpdate
         };
     };
 
