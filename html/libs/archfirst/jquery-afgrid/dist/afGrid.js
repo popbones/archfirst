@@ -16,8 +16,8 @@
 
 /**
  * @author Manish Shanker
- * @revision $Rev$
- * @date $Date$
+ * @revision $Revision$
+ * @date $LastChangedDate$
  */
 
 (function ($) {
