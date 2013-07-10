@@ -108,7 +108,7 @@ var App = {};
         var handleTopicMessage = function(message) {
             if (message.getStringProperty(MESSAGE_PROPERTIES.userId) != userId) {
                 console.log("Message received: " + message.getText());
-                options.onTick(JSON.parse(message.getText());
+                options.onTick(JSON.parse(message.getText()));
             }
         };
 
