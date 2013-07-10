@@ -66,7 +66,7 @@ var App = {};
             webSocketService.publish(data);
         }
         updateRow(data);
-        updateTimer = window.setTimeout(updateRowData, 100);
+        updateTimer = window.setTimeout(updateRowData, 2000);
     }
 
 }(jQuery));
