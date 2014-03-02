@@ -1,12 +1,6 @@
 $(document).ready(function() {
 
-    var AppRouter = Backbone.Router.extend({
-        routes: {
-            '': 'showHomePage',
-            'home': 'showHomePage',
-            'profile': 'showProfilePage'
-        },
-
+    var Controller = {
         showHomePage: function () {
             $('#home').show();
             $('#profile').hide();
@@ -16,13 +10,26 @@ $(document).ready(function() {
             $('#home').hide();
             $('#profile').show();
         }
+    }
+
+    var AppRouter = Backbone.Router.extend({
+        routes: {
+            'home': 'showHomePage',
+            'profile': 'showProfilePage'
+        },
+        
+        showHomePage: function() {
+            Controller.showHomePage();
+        },
+        
+        showProfilePage: function() {
+            Controller.showProfilePage();
+        }
     });
 
     var appRouter = new AppRouter();
 
-    $('nav ul li a').on('click', function(event) {
-        appRouter.navigate($(this).data('route'), {trigger: true});
-    });
-
-    Backbone.history.start({root: '/examples/backbone-router/'});
+    Backbone.history.start();
+    Backbone.history.navigate("home");
+    Controller.showHomePage();
 });
